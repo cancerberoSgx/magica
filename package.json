@@ -1,0 +1,77 @@
+{
+  "name": "magica",
+  "version": "0.0.9",
+  "description": "ImageMagick for browser and Node.js, easy setup, high level API and Command Line Interface",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "bin": {
+    "magica": "bin/magica.js"
+  },
+  "scripts": {
+    "test": "npm run build && ava --serial",
+    "test-js": "exit 0; npm run build && npx ava ./dist/test/*Test.js --serial",
+    "test-watch": "ava -w",
+    "prepare": "npm run build",
+    "performance": "npx ts-node -T test/performance/perf1.ts",
+    "test-worker": "npm run build && cp dist/src/imageMagick/compiled/magick.wasm dist && parcel serve test-browser/webWorker/index.html",
+    "test-debug": "node --inspect-brk node_modules/ava/cli.js --serial",
+    "test-browser": "npx ava test-browser/*Test.ts",
+    "browser-sample": "rm -rf dist && mkdir -p dist && npm run build && cp dist/src/imageMagick/compiled/magick.wasm dist && parcel serve test-browser/testBrowser.html",
+    "clean": "rm -rf tmp* dist",
+    "build": "npm run clean && npx tsc && npm run copy",
+    "copy": "rm -rf dist/src/imageMagick/compiled && cp -r src/imageMagick/compiled dist/src/imageMagick/compiled",
+    "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
+    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\" \"test-browser/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
+    "lint": "npm run organizeImports && npm run format",
+    "docs": "npm run docs-readme-toc",
+    "docs-readme-toc": "npx markdown-toc README.md -i",
+    "all": "npm run clean && npm run lint && npm run build && npm run test && npm run test-js && npm run test-browser && npm run docs",
+    "all-publish": "npm run all && npm version patch && npm publish"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cross-fetch": "^3.0.4",
+    "glob": "^7.1.4",
+    "minimist": "^1.2.0",
+    "misc-utils-of-mine-generic": "^0.2.12"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.10",
+    "@types/puppeteer": "^1.12.4",
+    "ava": "^2.1.0",
+    "file-type": "^12.0.0",
+    "markdown-toc": "^1.2.0",
+    "parcel": "^1.12.3",
+    "puppeteer": "^1.18.1",
+    "ts-morph": "^3.0.0",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.2"
+  },
+  "keywords": [
+    "ImageMagick",
+    "emscripten",
+    "browser",
+    "node.js",
+    "API",
+    "CLI",
+    "Command Line",
+    "image processing",
+    "image format",
+    "image",
+    "library",
+    "typescript"
+  ],
+  "author": {
+    "name": "Sebastian Gurin",
+    "email": "sebastigurin@gmail.com",
+    "url": "http://sgurin.com"
+  },
+  "homepage": "https://www.npmjs.com/package/magica",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cancerberoSgx/magica.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cancerberoSgx/magica"
+  }
+}
