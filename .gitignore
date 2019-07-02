@@ -11,3 +11,4 @@ coverage
 test-browser-outdir
 tmp*
 working_tmp
+bkps

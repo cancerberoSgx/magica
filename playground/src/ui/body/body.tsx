@@ -17,7 +17,6 @@ export class Body extends AbstractComponent {
           </Grid.Column>
           <Grid.Column floated='right' width={8}>
             <Output />
-
           </Grid.Column>
         </Grid>
       </Segment>)
