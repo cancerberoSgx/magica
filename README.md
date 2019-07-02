@@ -20,6 +20,10 @@ Easy to setup and use, ImageMagick Node.js and Browser API and Command Line Inte
 
 <!-- tocstop -->
 
+## Playground & demos
+
+ * [Magica Playground](https://cancerberosgx.github.io/demos/magica/playground/) (WIP)
+ 
 ## Summary
 
  * Easy/Quickly setup of WASM-ImageMagick on node.js

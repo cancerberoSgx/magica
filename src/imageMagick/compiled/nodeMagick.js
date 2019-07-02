@@ -1,19 +1,12 @@
 // @ts-nocheck
 
 const { magickLoaded, pushStdout, pushStderr, getOptions } = require('../magickLoaded')
+const {isNode} = require('misc-utils-of-mine-generic')
 
 const { nodeFsLocalRoot, emscriptenNodeFsRoot, debug, disableNodeFs } = getOptions()
 
 Module = typeof Module === 'undefined' ? {} : Module
 
-function isNode(){
-  return typeof process !== 'undefined' &&
-  typeof module !== 'undefined' &&
-  typeof module.exports !== 'undefined' &&
-  (typeof document !== 'undefined' ? document.nodeType !== 9 : false) &&
-  typeof module === 'object' &&
-  !!module.exports
-}
 Object.assign(Module, {
   noInitialRun: true,  // tell wasm runner to not execute application
   print: function (text) {
