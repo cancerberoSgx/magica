@@ -1,0 +1,51 @@
+{
+  "name": "magica-playground",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf dist docs",
+    "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
+    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json  --dontAsk ",
+    "lint": "npm run organizeImports && npm run format",
+    "start": "npm run copy && npx parcel serve src/index.html -d docs --no-source-maps",
+    "build-dev-no-maps": "npm run copy &&export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-content-hash  --no-source-maps",
+    "build-dev": "export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-source-maps --no-content-hash",
+    "copy": "mkdir -p docs; cp node_modules/magica/dist/src/imageMagick/compiled/magick.wasm docs",
+    "build": "npm run clean && npx tsc && npm run build-only && rm -rf ../../demos/docs/magica/playground && mkdir -p ../../demos/docs/magica/playground &&  mv docs/* ../../demos/docs/magica/playground/",
+    "build-only": "npm run copy && export NODE_ENV=production && node --max-old-space-size=5000 node_modules/parcel/bin/cli.js build src/index.html -d docs --no-content-hash --detailed-report  --no-source-maps --public-url './'",
+    "all": "npm run clean && npm run lint && npm run build"
+  },
+  "keywords": [
+    "typescript",
+    "ast",
+    "query",
+    "astq"
+  ],
+  "author": "Sebastián Gurin",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^12.0.7",
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
+    "babel-polyfill": "^6.26.0",
+    "http-server": "^0.11.1",
+    "parcel": "^1.12.3",
+    "ts-refactor": "0.0.6",
+    "typescript": "^3.5.1"
+  },
+  "dependencies": {
+    "magica": "file:..",
+    "misc-utils-of-mine-generic": "^0.2.8",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.87.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cancerberoSgx/magica.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cancerberoSgx/magica"
+  }
+}

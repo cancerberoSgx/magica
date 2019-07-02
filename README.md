@@ -108,8 +108,8 @@ import {main} from 'magica'
     command: 'convert bar.gif -scale 150% -rotate 45 foo.png',
     inputFiles: [ 'static/img/bar.gif' ]
   })
-  const dataUrl = btoa(String.fromCharCode(...result.outputFiles[0].content))
-  document.getElementById('img-foo').src = `data:image/png;base64,${dataUrl}`
+  const dataUrl = `data:image/png;base64,${btoa(String.fromCharCode(...result.outputFiles[0].content))}`
+  document.getElementById('img-foo').src = dataUrl
 })()
 ```
 
