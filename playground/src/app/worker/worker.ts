@@ -1,4 +1,6 @@
+import 'babel-polyfill'
 import { main } from 'magica';
+
 
 self.onmessage = async e=>{
   if(!e.data.magicaId){

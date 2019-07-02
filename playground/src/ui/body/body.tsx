@@ -4,6 +4,7 @@ import { Grid, Segment } from 'semantic-ui-react'
 import { AbstractComponent } from '../component'
 import { Command } from './command'
 import { Output } from './output';
+import { InputFiles } from './inputFiles';
 
 export class Body extends AbstractComponent {
   render() {
@@ -12,10 +13,11 @@ export class Body extends AbstractComponent {
         <Grid>
           <Grid.Column floated='left' width={8}>          
          <Command/>
+         <InputFiles/>
           </Grid.Column>
           <Grid.Column floated='right' width={8}>
           <Output/>
-                asasdasds
+               
           </Grid.Column>
         </Grid>
       </Segment>)

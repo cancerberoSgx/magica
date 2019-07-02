@@ -1,12 +1,9 @@
 import { Example, examples } from "./examples"
-import { Result, main } from 'magica';
-import { toDataUrl } from '../ui/common/uiUtil';
+import { Result, main, File } from 'magica';
 
 export interface State {
-    // outputDataUrl?: string
     example: Example
-  // logs: string[];
-  // error?: Error | ParserError | ParserError[] | undefined;
+  inputFiles: File[]
   examples: Example[];
   result: Result
 }
@@ -20,10 +17,9 @@ export interface ParserError {
 
 export async function getInitialState(): Promise<State> {
   const result =  await main({command: examples[0].command})
-  // debugger
   return {
     example: examples[0],
-    // outputDataUrl:toDataUrl(result.outputFiles[0]),
+    inputFiles: [],
     examples,
     result
   }

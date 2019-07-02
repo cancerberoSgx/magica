@@ -34,7 +34,7 @@
     "typescript": "^3.5.2"
   },
   "dependencies": {
-    "magica": "0.1.0",
+    "magica": "file:..",
     "misc-utils-of-mine-generic": "^0.2.12",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

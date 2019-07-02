@@ -12,6 +12,7 @@ export class Command extends AbstractComponent {
     return <Segment>
       <Header>{this.state.example.name}</Header>
       <TextArea value={this.state.example.command} onChange={e=>this.setState({example: {...this.state.example, command: e.currentTarget.value}})}></TextArea>
+      <br/>
       <Button onClick={e=>{
         main(this.state.example)
       }}>Execute</Button>
