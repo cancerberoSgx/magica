@@ -21,10 +21,10 @@ export const examples: Example[] = [
 identify FVKBIJ7.png
 `.trim(),
     description: '',
-  inputFiles: ['https://i.imgur.com/FVKBIJ7.png']
+    inputFiles: ['https://i.imgur.com/FVKBIJ7.png']
   },
 
-  
+
 
   {
     name: 'gif wave swirl gif',
@@ -32,9 +32,9 @@ identify FVKBIJ7.png
 convert -swirl 123 -wave 14x95 -scale 74% -rotate 15 -background transparent cfE0WWk.gif foo22.gif 
 `.trim(),
     description: 'perform a series of complex effects over an animated gif which results in another animated transformed gif.',
-  inputFiles: ['https://i.imgur.com/cfE0WWk.gif']
+    inputFiles: ['https://i.imgur.com/cfE0WWk.gif']
   },
-  
+
 
 
 ]

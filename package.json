@@ -33,7 +33,7 @@
     "cross-fetch": "^3.0.4",
     "glob": "^7.1.4",
     "minimist": "^1.2.0",
-    "misc-utils-of-mine-generic": "^0.2.13"
+    "misc-utils-of-mine-generic": "^0.2.14"
   },
   "devDependencies": {
     "@types/node": "^12.0.10",

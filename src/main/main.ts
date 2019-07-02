@@ -1,9 +1,9 @@
 import { existsSync } from 'fs'
-import { isNode, notUndefined, objectKeys, serial } from 'misc-utils-of-mine-generic'
+import { isNode, objectKeys, serial } from 'misc-utils-of-mine-generic'
 import { File } from '../file'
 import { magickLoaded } from '../imageMagick/magickLoaded'
 import { getOptions, setOptions } from '../options'
-import { NativeOptions, Options, Result } from '../types'
+import { Options, Result } from '../types'
 import { listFilesRecursively, ls } from '../util/lsR'
 import { mkdirp } from '../util/mkdirp'
 import { rmRf } from '../util/rmRf'
@@ -13,15 +13,14 @@ import { processCommand } from './command'
 export async function main(o: Partial<Options>): Promise<Result> {
   // set options that user might given
   objectKeys(getOptions())
-    .map(k => o[k])
-    .filter<any>(notUndefined)
-    .forEach((k: keyof NativeOptions) => setOptions({ [k]: o[k] }))
+    .filter(k => !!o[k])
+    .forEach(k => setOptions({ [k]: o[k] }))
 
-  const { emscriptenNodeFsRoot } = getOptions()
+  const { emscriptenNodeFsRoot, debug } = getOptions()
   const { FS, main } = await magickLoaded
-
-  FS.chdir(emscriptenNodeFsRoot)
+  debug && console.log('main call given options: ', o)
   const files = await resolveInputFiles(o)
+  FS.chdir(emscriptenNodeFsRoot)
   files.forEach(f => {
     const dirName = getFileDir(f.name)
     if (dirName.trim()) {
@@ -50,6 +49,18 @@ export async function main(o: Partial<Options>): Promise<Result> {
 }
 
 async function resolveInputFiles(o: Partial<Options>) {
-  return await serial((o.inputFiles || []).map(f => async () => typeof f === 'string' ? (isNode() && existsSync(f) ? await File.fromFile(f) : await File.fromUrl(f)) : f))
+  return await serial((o.inputFiles || []).map(f => async () => {
+    if (typeof f === 'string') {
+      if (isNode() && existsSync(f)) {
+        return await File.fromFile(f)
+      }
+      else {
+        return await File.fromUrl(f)
+      }
+    }
+    else {
+      return f
+    }
+  }))
 }
 

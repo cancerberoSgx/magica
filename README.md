@@ -6,6 +6,7 @@ Easy to setup and use, ImageMagick Node.js and Browser API and Command Line Inte
 
 <!-- toc -->
 
+- [Playground & demos](#playground--demos)
 - [Summary](#summary)
 - [Why](#why)
 - [Install](#install)

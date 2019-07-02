@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { File } from 'magica';
-import { getFileExtension } from 'misc-utils-of-mine-generic';
+import { File } from 'magica'
+import { getFileExtension } from 'misc-utils-of-mine-generic'
 
 export function width() {
   return document.body.clientWidth

@@ -1,17 +1,16 @@
 import * as React from 'react'
 import { Dropdown, Menu, Modal } from 'semantic-ui-react'
-// import { selectExample, selectLanguage } from '../../app/dispatchers'
 import { examples } from '../../app/examples'
 import { AbstractComponent } from '../component'
 import { About } from './about'
-import { setExample } from '../../app/dispatcher';
+import { setExample } from '../../app/dispatcher'
 
 export class Header extends AbstractComponent {
   render() {
     return <Menu>
       <Dropdown item icons="file code outline" text={`"${this.state.example.name}"`}  >
         <Dropdown.Menu>
-          {examples.map(example => <Dropdown.Item onClick={e=>setExample(example)}>{example.name}</Dropdown.Item>)}
+          {examples.map(example => <Dropdown.Item onClick={e => setExample(example)}>{example.name}</Dropdown.Item>)}
         </Dropdown.Menu>
       </Dropdown>
       <Menu.Menu position="right">
