@@ -29,7 +29,7 @@ interface BaseOptions {
   debug?: boolean
 }
 
-export interface MainOptions extends NativeOptions {
+export interface Options extends NativeOptions {
   noRemove?: boolean
   /**
    * An ImageMagick command, for example: `['convert', 'foo/bar.png', '-scale', '50%', 'out.gif']`
@@ -49,11 +49,11 @@ export interface MainOptions extends NativeOptions {
   // noRemoveOutputFiles?: boolean
 }
 
-export interface MainResult extends NativeResult {
+export interface Result extends NativeResult {
   outputFiles: File[]
 }
 
-export interface CliOptions extends MainOptions {
+export interface CliOptions extends Options {
   help?: boolean
   input: string[]
 }

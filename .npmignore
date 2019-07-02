@@ -1,8 +1,6 @@
 /node_modules
 *.log
-/doc-assets
 /tmp
-/spec
 /src
 /.gitignore
 /.npmignore
@@ -17,6 +15,8 @@ formatCodeSettings.json
 coverage
 test-browser-outdir
 guitarra
+dist/test
+dist/test-browser
 test
 .cache
 .travis
@@ -31,8 +31,6 @@ ts-ast
 guides-probes-backups
 test-browser
 .travis.yml
-playground
-tmp.json
 .DS_Store
 /tmp*
 .cache

@@ -1,16 +1,16 @@
 import { existsSync } from 'fs'
 import { isNode, notUndefined, objectKeys, serial } from 'misc-utils-of-mine-generic'
-import { InputFile } from '../file'
+import { File } from '../file'
 import { magickLoaded } from '../imageMagick/magickLoaded'
 import { getOptions, setOptions } from '../options'
-import { MainOptions, MainResult, NativeOptions } from '../types'
+import { NativeOptions, Options, Result } from '../types'
 import { listFilesRecursively, ls } from '../util/lsR'
 import { mkdirp } from '../util/mkdirp'
 import { rmRf } from '../util/rmRf'
 import { getFileDir } from '../util/util'
 import { processCommand } from './command'
 
-export async function main(o: Partial<MainOptions>): Promise<MainResult> {
+export async function main(o: Partial<Options>): Promise<Result> {
   // set options that user might given
   objectKeys(getOptions())
     .map(k => o[k])
@@ -49,7 +49,7 @@ export async function main(o: Partial<MainOptions>): Promise<MainResult> {
   }
 }
 
-async function resolveInputFiles(o: Partial<MainOptions>) {
-  return await serial((o.inputFiles || []).map(f => async () => typeof f === 'string' ? (isNode() && existsSync(f) ? await InputFile.fromFile(f) : await InputFile.fromUrl(f)) : f))
+async function resolveInputFiles(o: Partial<Options>) {
+  return await serial((o.inputFiles || []).map(f => async () => typeof f === 'string' ? (isNode() && existsSync(f) ? await File.fromFile(f) : await File.fromUrl(f)) : f))
 }
 

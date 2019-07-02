@@ -144,10 +144,10 @@ Options are the same for the command line and the API:
 - [ ] an easy to use API for web-workers
 - [ ] web worker example passing files (verify transferable/shared array buffers/optimal)
 - [ ] Option for Node.js users to work/mount current directory - the tool should not write input files - they should be already there
-- [ ] test from a real-app - check missing exported APIs - npm install usability
-  - [ ] playground
 - [ ] scripts/generateImEnumd.ts we should execute our CLI to extract 
 - [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
+- [x] test from a real-app - check missing exported APIs - npm install usability
+- [x] playground
 - [x] webworker example & recipe (see test-browser/webWorker)
 - [x] format tests
 - [x] Performance tests (can we measure also memory consumption?)

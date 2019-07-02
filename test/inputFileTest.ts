@@ -1,6 +1,6 @@
 import test from 'ava'
 import fetch from 'cross-fetch'
-import { InputFile } from '../src/file'
+import { File } from '../src/file'
 import { main } from '../src/main/main'
 import fileType = require('file-type')
 
@@ -22,7 +22,7 @@ test('InputFile.fromUrl', async t => {
   const url = 'https://cancerberosgx.github.io/demos/geometrizejs-cli/bridge.jpg'
   const result = await main({
     command: ['identify', 'bridge.jpg'],
-    inputFiles: [await InputFile.fromUrl(url)]
+    inputFiles: [await File.fromUrl(url)]
   })
   t.deepEqual(result.stdout.join(''), 'bridge.jpg JPEG 500x333 500x333+0+0 8-bit sRGB 35527B 0.000u 0:00.000')
   t.deepEqual(result.stderr, [])
@@ -32,7 +32,7 @@ test('InputFile.fromUrl', async t => {
 test('InputFile.fromFile', async t => {
   let result = await main({
     command: ['convert', 'chala.tiff', '-scale', '200%', 'bigger.tiff'],
-    inputFiles: [await InputFile.fromFile('test/assets/chala.tiff')],
+    inputFiles: [await File.fromFile('test/assets/chala.tiff')],
     debug: true
   })
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'tif', mime: 'image/tiff' })
@@ -50,7 +50,7 @@ test('InputFile.fromFile', async t => {
 test('accept array buffer view', async t => {
   let result = await main({
     command: ['convert', 'chala.tiff', '-scale', '200%', 'bigger.tiff'],
-    inputFiles: [await InputFile.fromFile('test/assets/chala.tiff')],
+    inputFiles: [await File.fromFile('test/assets/chala.tiff')],
     debug: true
   })
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'tif', mime: 'image/tiff' })
