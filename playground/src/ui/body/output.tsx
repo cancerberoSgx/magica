@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { Button, Checkbox, List, Popup, Segment, TextArea, Header } from 'semantic-ui-react'
-import { AbstractComponent } from '../component'
 import { toDataUrl } from 'magica'
+import * as React from 'react'
+import { Header, Segment, TextArea } from 'semantic-ui-react'
+import { AbstractComponent } from '../common/component'
 
 export class Output extends AbstractComponent {
   render() {

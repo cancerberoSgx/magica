@@ -1,10 +1,9 @@
-import { asArray, notUndefined } from 'misc-utils-of-mine-generic'
 import * as React from 'react'
 import { Grid, Segment } from 'semantic-ui-react'
-import { AbstractComponent } from '../component'
+import { AbstractComponent } from '../common/component'
 import { Command } from './command'
-import { Output } from './output'
 import { InputFiles } from './inputFiles'
+import { Output } from './output'
 
 export class Body extends AbstractComponent {
   render() {

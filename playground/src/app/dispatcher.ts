@@ -1,8 +1,8 @@
-import { Options, File } from 'magica'
-import { callMain } from './workerAccess'
-import { getStore } from './store'
-import { notSame, notSameNotFalsy, serial, sleep } from 'misc-utils-of-mine-generic'
+import { File, Options } from 'magica'
+import { serial, sleep } from 'misc-utils-of-mine-generic'
 import { Example } from './examples'
+import { getStore } from './store'
+import { callMain } from './workerAccess'
 
 export async function main(o: Partial<Options>) {
   const result = await callMain({ ...o, debug: true, inputFiles: getStore().getState().inputFiles })

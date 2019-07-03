@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { Dropdown, Menu, Modal } from 'semantic-ui-react'
-import { examples } from '../../app/examples'
-import { AbstractComponent } from '../component'
+import { setExample } from '../app/dispatcher'
+import { examples } from '../app/examples'
 import { About } from './about'
-import { setExample } from '../../app/dispatcher'
+import { AbstractComponent } from './common/component'
 
 export class Header extends AbstractComponent {
   render() {

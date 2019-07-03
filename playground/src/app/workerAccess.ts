@@ -1,6 +1,5 @@
 import { Options, Result } from 'magica'
-import { unique, Deferred } from 'misc-utils-of-mine-generic'
-import { setOptions } from '../../../dist/src/options'
+import { Deferred, unique } from 'misc-utils-of-mine-generic'
 
 let pending: { magicaId: string, deferred: Deferred<Result | undefined> }[] = []
 

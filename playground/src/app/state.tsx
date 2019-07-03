@@ -1,5 +1,5 @@
+import { File, main, Result } from 'magica'
 import { Example, examples } from "./examples"
-import { Result, main, File } from 'magica'
 
 export interface State {
   example: Example

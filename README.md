@@ -27,15 +27,10 @@ Easy to setup and use, ImageMagick Node.js and Browser API and Command Line Inte
  
 ## Summary
 
- * Easy/Quickly setup of WASM-ImageMagick on node.js
- * JavaScript API and command line interface.
- * Based on [wasm-imagemagick](https://github.com/KnicKnic/WASM-ImageMagick) from which includes binaries so no setup is needed further than `npm install`.
-
-## Why
-
-I really need a node.js command line interface quickly so That's is why I'm doing this. 
-
-Don't want to be responsible of compiling .wasm, so I use wasm-imagemagick files directly. `src/imageMagick/compiled/` can be generated from that project executing `npm run test-node`
+ * JavaScript API for Node.js and Browser
+ Command line interface which supports simple straightforwards translation between ImageMagick utilities command line interface (like `convert` command).
+ * Easy/Quick setup, no emscripten build needed.
+ * Includes ImageMagick emscripten binaries from [wasm-imagemagick](https://github.com/KnicKnic/WASM-ImageMagick) so no build is necessary. Just `npm install` and you are ready to go.
 
 ## Install
 
@@ -139,12 +134,26 @@ Options are the same for the command line and the API:
  * `--debug?: boolean`:
  * `disableNodeFs?: boolean`: (node.js only) Don't use system's filesystem in Node.js but memory filesystem (just like in the browser). This could be faster if read/write many images but consumes more memory.
 
-## TODO
+## Why
+
+ * I really need a 100% JavaScript node.js API and CLI which [wasm-imagemagick](https://github.com/KnicKnic/WASM-ImageMagick) currently doesn't provides. 
+ * I contributed in [wasm-imagemagick](https://github.com/KnicKnic/WASM-ImageMagick)'s JavaScript API (for browser only) and I wanted to revisit:
+  * Support node.js without having two separate distribution or using different technologies / APIs.
+  * Although the principles of the API are the same, this project aims to simplifies some parts of it.
+  * Clearly de couple the wasm build process and its internal details from the user API assuming a well known, simple API (see below).
+  * Although currently [wasm-imagemagick](https://github.com/KnicKnic/WASM-ImageMagick) is the most mature (and I would working) ImageMagick emscripten port, there are other initiatives which could support more features or have better performance. This library is designed to easily support these emscripten wasm "binaries" without big changes (or even switch between them)
+ * Don't want to be responsible of compiling .wasm, so this project includes and uses wasm-imagemagick files directly. `src/imageMagick/compiled/` can be generated from that project executing `npm run test-node`.
+ * [wasm-imagemagick](https://github.com/KnicKnic/WASM-ImageMagick), [Magick.Native](https://github.com/dlemstra/Magick.Native/) and possibly others perform an complex task of porting ImageMagick to JavaScript which is not a trivial task, involving several C++ libraries (with alternatives). For example they should test if png, jpeg, and all Imagemagick transformations and combinations work OK. 
+  * I believe the end user API should be built on top of this, in an independent project that assumes only a simple ImageMagick API is supported. Currently this API is the **Command Line interface of ImageMagick command line utilities like `convert`, `ìdentify`, `mogrify`, etc**. (Notice that is not the C/C++ API like MagickCore, MagickWand, etc, but the Command line interface of utilities like `convert` which IMO covers 99% of use cases and is easy to use (compared to the C/C++ APIs).
+  * If a ImageMagick emscripten port supports this ImageMagick utilities Command line interface, then it should be automatically used by this project. (just replacing the .wasm should be enough)
+  * I wanted have tests in Node.js and Browser and a easy/scalable framework for that.
+
+## TODO / Road map
 
 - [ ] npm run test-js fails
 - [ ] support multiple line string commands like in src/main/command.ts
   - [ ] support IM command quoted arguments
-- [ ] mkdir-p for output files
+- [ ] verify mkdir-p for output files
 - [ ] because options are global - sending commands concurrently could fail. Solution: queue or instance options
 - [ ] an easy to use API for web-workers
 - [ ] web worker example passing files (verify transferable/shared array buffers/optimal)

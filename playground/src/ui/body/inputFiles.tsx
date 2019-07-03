@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { Button, Checkbox, List, Popup, Segment, TextArea, Header, Input } from 'semantic-ui-react'
-import { AbstractComponent } from '../component'
+import { Header, Input, List, Segment } from 'semantic-ui-react'
 import { loadImageFromUrl } from '../../app/dispatcher'
+import { AbstractComponent } from '../common/component'
 
 export class InputFiles extends AbstractComponent {
   render() {
