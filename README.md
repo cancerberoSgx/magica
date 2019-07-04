@@ -150,16 +150,20 @@ Options are the same for the command line and the API:
 
 ## TODO / Road map
 
-- [ ] npm run test-js fails
+- [ ] fix npm run test-js
+- [ ] consume input image from stream and support stdin . same for output / stdout
 - [ ] support multiple line string commands like in src/main/command.ts
   - [ ] support IM command quoted arguments
 - [ ] verify mkdir-p for output files
 - [ ] because options are global - sending commands concurrently could fail. Solution: queue or instance options
 - [ ] an easy to use API for web-workers
-- [ ] web worker example passing files (verify transferable/shared array buffers/optimal)
-- [ ] Option for Node.js users to work/mount current directory - the tool should not write input files - they should be already there
+- [ ] verify web worker  passing files is optimal (verify transferable/shared array buffers/optimal)
+- [ ] Option for Node.js users to work/mount current directory - the tool should not copy input files just use them since are present in mount root ems
+- [ ] how high level scripts like test/probes/sketcher.ts can be integrated ? different project ?
 - [ ] scripts/generateImEnumd.ts we should execute our CLI to extract 
 - [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
+- [x] imageCompare()
+- [x] extractImageInfo()
 - [x] test from a real-app - check missing exported APIs - npm install usability
 - [x] playground
 - [x] webworker example & recipe (see test-browser/webWorker)
@@ -172,3 +176,7 @@ Options are the same for the command line and the API:
 - [x] CLI
 - [x] CLI tests
 - [x] Input file from url
+
+### Ideas
+
+- [ ] drawing svg. is not documented and seems the official way is doing it using mvg. But... what if we convert all shapes to paths, use svgo to reduce the number to (even single ) path and use draw to draw them. syntax seems to be compatible... This way we should have yet another method of rasterize a svg, but this time to any format. I wonder what the speed is compared to other rasterize methods, if we target .ma

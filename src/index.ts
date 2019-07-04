@@ -3,3 +3,4 @@ export { toDataUrl } from './image/html'
 export { magickLoaded } from './imageMagick/magickLoaded' // don't remove me - i'm important for tests
 export { main } from './main/main'
 export { Options, Result } from './types'
+export * from './image/imageInfo'

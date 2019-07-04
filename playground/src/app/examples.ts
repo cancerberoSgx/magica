@@ -46,4 +46,22 @@ identify FVKBIJ7.png
     inputFiles: ['https://cancerberosgx.github.io/demos/magica/images/parrots_orig.png']
   },
 
+  {
+    name: 'Animation in one command',
+    command: `convert parrots_orig.png -scale 50% -virtual-pixel mirror ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) rotate_norma2l.gif`,
+    description: 'Generates several intermediate output files incrementing rotation and with all of them a final .gif. Uses +clone and parenthesis',
+    inputFiles: ['https://cancerberosgx.github.io/demos/magica/images/parrots_orig.png']
+  },
+
+
 ]
+
+
+convert rose: -virtual-pixel black ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) rotate_normal.gif
+
+
+convert rose:  -virtual-pixel black -distort SRT '20'  rotate_normal.png
+
+convert parrots_orig.png  -resize 40% ( +clone -virtual-pixel white +distort SRT 30 +repage ) ( +clone -virtual-pixel white +distort SRT 30 +repage ) ( +clone -virtual-pixel white +distort SRT 30 +repage ) ( +clone -virtual-pixel white +distort SRT 30 +repage ) ( +clone -virtual-pixel white +distort SRT 30 +repage ) ( +clone -virtual-pixel white +distort SRT 30 +repage )  ppp.gif
+
+convert parrots_orig.png  -resize 40% ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 )  ppp.gif
