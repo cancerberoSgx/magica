@@ -11,7 +11,7 @@ import { getFileDir } from '../util/util'
 import { processCommand } from './command'
 
 export async function main(o: Partial<Options>): Promise<Result> {
-  // set options that user might given
+  // set global options that user might given
   objectKeys(getOptions())
     .filter(k => !!o[k])
     .forEach(k => setOptions({ [k]: o[k] }))

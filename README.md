@@ -163,6 +163,8 @@ Options are the same for the command line and the API:
 - [ ] how high level scripts like test/probes/sketcher.ts can be integrated ? different project ?
 - [ ] scripts/generateImEnumd.ts we should execute our CLI to extract 
 - [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
+- [ ] adapt executeVirtualCommand from wasm-imagemagick own branch
+- [ ] adapt executeCommandPreprocessor and command template preprocessor from wasm-imagemagick own branch
 - [x] imagePixelColor()
 - [x] imageCompare()
 - [x] extractImageInfo()

@@ -10,8 +10,8 @@ export async function imageCompare(img1: File, img2: File, fuzz: number = 0.015)
 }
 
 async function imageCompareNumber(img1: File, img2: File): Promise<number> {
-  const result = await main({    
-inputFiles: [img1, img2], command: ['convert', img1.name, img2.name, '-resize', '256x256^!', '-metric', 'RMSE', '-format', '%[distortion]', '-compare', 'info:info.txt'],
+  const result = await main({
+    inputFiles: [img1, img2], command: ['convert', img1.name, img2.name, '-resize', '256x256^!', '-metric', 'RMSE', '-format', '%[distortion]', '-compare', 'info:info.txt'],
   })
   const n = File.toString(result.outputFiles[0])
   return parseFloat(n)
