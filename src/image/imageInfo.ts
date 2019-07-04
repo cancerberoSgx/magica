@@ -1,6 +1,6 @@
 import { equal } from 'assert'
+import { File } from '../file'
 import { main } from '../main/main'
-import { File } from '../types'
 
 /**
  * Execute `convert $IMG info.json` to extract image metadata. Returns the parsed info.json file contents
@@ -9,7 +9,7 @@ import { File } from '../types'
 export async function imageInfo(img: File): Promise<ExtractInfoResult[]> {
   const r = await main({ inputFiles: [img], command: ['convert', img.name, 'imgInfo.json'] })
   equal(r.outputFiles.length, 1)
-  const s = String.fromCharCode.apply(null, r.outputFiles[0].content as any)
+  const s = File.toString(r.outputFiles[0])
   const obj = JSON.parse(s)
   return obj
 }
@@ -147,12 +147,10 @@ interface ExtractInfoResultProperties {
   signature?: string
 }
 
-// interface ExtractInfoResult8bim2 {
-//   length?: number
+// interface ExtractInfoResult8bim2 {length?: number
 // }
 
-// interface ExtractInfoResultProfiles {
-// '8bim'?: ExtractInfoResult8bim2
+// interface ExtractInfoResultProfiles {'8bim'?: ExtractInfoResult8bim2
 // }
 type ExtractInfoResultProfiles = any
 interface ExtractInfoResultImage {
