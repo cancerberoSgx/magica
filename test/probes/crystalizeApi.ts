@@ -1,6 +1,6 @@
-import { randomIntBetween } from 'misc-utils-of-mine-generic';
-import { File, main } from '../../src';
-import { imageInfo } from '../../src/image/imageInfo';
+import { randomIntBetween } from 'misc-utils-of-mine-generic'
+import { File, main } from '../../src'
+import { imageInfo } from '../../src/image/imageInfo'
 
 interface Options {
   outfile: string
@@ -64,7 +64,7 @@ export async function crystallize(o: Options) {
 
   let RANDOM = randomIntBetween(0, 32767)
   // for ((i=0; i<number; i++)); do
-  for (let i = 0; i < number; i++) {
+  for (let i = 0;i < number;i++) {
     let x, y
     // if [ "$seed" = "" ]; then
     // else

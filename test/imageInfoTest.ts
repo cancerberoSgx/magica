@@ -1,13 +1,13 @@
 import test from 'ava'
-import { imageInfo } from '../src/image/imageInfo';
-import { File } from '../src';
-import { setObjectProperty } from 'misc-utils-of-mine-generic';
+import { setObjectProperty } from 'misc-utils-of-mine-generic'
+import { File } from '../src'
+import { imageInfo } from '../src/image/imageInfo'
 
-test('extractInfo', async t => {
-  function process(o:any){
-    setObjectProperty(o , '0.image.properties.date:create', null)
-    setObjectProperty(o , '0.image.properties.date:modify', null)
-  return o
+test('should extract image info', async t => {
+  function process(o: any) {
+    setObjectProperty(o, '0.image.properties.date:create', null)
+    setObjectProperty(o, '0.image.properties.date:modify', null)
+    return o
   }
   const i = await imageInfo(await File.fromFile('test/assets/n.png'))
   t.deepEqual(process(i), process(o))

@@ -141,7 +141,7 @@ interface ExtractInfoResultPageGeometry {
 }
 
 interface ExtractInfoResultProperties {
-  [n:string]:any
+  [n: string]: any
   'date:create'?: string
   'date:modify'?: string
   signature?: string
@@ -152,7 +152,7 @@ interface ExtractInfoResultProperties {
 // }
 
 // interface ExtractInfoResultProfiles {
-  // '8bim'?: ExtractInfoResult8bim2
+// '8bim'?: ExtractInfoResult8bim2
 // }
 type ExtractInfoResultProfiles = any
 interface ExtractInfoResultImage {
