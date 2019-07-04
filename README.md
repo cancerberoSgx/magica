@@ -163,6 +163,7 @@ Options are the same for the command line and the API:
 - [ ] how high level scripts like test/probes/sketcher.ts can be integrated ? different project ?
 - [ ] scripts/generateImEnumd.ts we should execute our CLI to extract 
 - [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
+- [x] imagePixelColor()
 - [x] imageCompare()
 - [x] extractImageInfo()
 - [x] test from a real-app - check missing exported APIs - npm install usability
