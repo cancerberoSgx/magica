@@ -8,7 +8,6 @@ Easy to setup and use, ImageMagick Node.js and Browser API and Command Line Inte
 
 - [Playground & demos](#playground--demos)
 - [Summary](#summary)
-- [Why](#why)
 - [Install](#install)
   * [Browser setup](#browser-setup)
 - [Command line](#command-line)
@@ -17,7 +16,9 @@ Easy to setup and use, ImageMagick Node.js and Browser API and Command Line Inte
   * [Browser](#browser)
     + [Web Worker](#web-worker)
 - [Options](#options)
-- [TODO](#todo)
+- [Why](#why)
+- [TODO / Road map](#todo--road-map)
+  * [Ideas](#ideas)
 
 <!-- tocstop -->
 
