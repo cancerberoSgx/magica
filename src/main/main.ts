@@ -19,7 +19,7 @@ export async function main(o: Partial<Options>): Promise<Result> {
   const { emscriptenNodeFsRoot, debug } = getOptions()
   const { FS, main } = await magickLoaded
   debug && console.log('main call given options: ', o)
-  const files = await resolveInputFiles(o)
+  const files = await File.resolveOptions(o)
   FS.chdir(emscriptenNodeFsRoot)
   files.forEach(f => {
     const dirName = getFileDir(f.name)
@@ -47,20 +47,3 @@ export async function main(o: Partial<Options>): Promise<Result> {
     outputFiles
   }
 }
-
-async function resolveInputFiles(o: Partial<Options>) {
-  return await serial((o.inputFiles || []).map(f => async () => {
-    if (typeof f === 'string') {
-      if (isNode() && existsSync(f)) {
-        return await File.fromFile(f)
-      }
-      else {
-        return await File.fromUrl(f)
-      }
-    }
-    else {
-      return f
-    }
-  }))
-}
-

@@ -8,7 +8,6 @@ export default async function f(){
     command: 'convert chala.tiff -rotate 45 output.bmp',
     inputFiles: [await File.fromUrl('chala.tiff')]
   })
-//  log(inspect(result));  
   assertIncludes(result.outputFiles[0].name, 'output.bmp')
   assertEquals(result.outputFiles.map(f=>basename(f.name)), ['output.bmp'])
   assertEquals(result.error, undefined)

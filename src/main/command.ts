@@ -1,23 +1,6 @@
-import { notUndefined, flat } from 'misc-utils-of-mine-generic';
-
-// export function processCommand(command: string | string[]) {
-//   if (typeof command !== 'string') {
-//     return command
-//   }
-//   return command.split(/\s+/g) // TODO: support quoted args
-// }
-
-export type Command = string[]
-
-// export interface ExecuteConfig {
-//   inputFiles?: MagickInputFile[]
-//   /**
-//    */
-//   commands: ExecuteCommand
-// }
+import { notUndefined, flat, checkThrow } from 'misc-utils-of-mine-generic';
 
 /**
- *
  * Commands could have the following syntaxes:
  *  * array form like `[['convert', 'foo.png', 'bar.gif'], ['identify', 'bar.gif']]`
  *  * just one array: `['convert', 'foo.png', 'bar.gif']`
@@ -49,7 +32,7 @@ export type Command = string[]
  *
  * If you need to escape arguments like file names with spaces, use single quotes `'`, like the output file in the previous example `'star inward.gif'`
  */
-export type ExecuteCommand = Command[] | Command | string
+// export type Script = string
 
 
 
@@ -69,30 +52,16 @@ export function processCommand(command: string | string[]) {
   if (typeof command !== 'string') {
     return command
   }
-  return command.split(/\s+/g) // TODO: support quoted args
+ return  checkThrow<string[]>( cliToArrayOne(command), 'Cannot create a command array from given string '+command)
+  // return command.split(/\s+/g) // TODO: support quoted args
 }
-
-// export function combinations<T>(arr: T[], fn: (a: T, b: T) => Promise<any>): Promise<any> {
-//   const promises:Promise<any>[] = []
-//   arr.forEach(f1 => {
-//     arr.
-//       filter((f2, i, subarr) => i > subarr.indexOf(f1))
-//       .forEach(f2 => promises.push(fn(f1, f2)))
-//   })
-//   return Promise.all(promises)
-// }
-
-
-// import { Command } from '..'
-// import { ExecuteCommand } from '../execute'
-// import { flat, isArrayOfStrings, isArrayOfArrayOfStrings } from './misc'
 
 /**
  * Generates a valid command line command from given `string[]` command. Works with a single command.
  */
-function arrayToCliOne(command: Command): string {
+export function arrayToCliOne(command: string[]): string {
   return command
-    .map(c => c + '')
+    // .map(c => c + '')
 
     // if it contain spaces
     .map(c => (c.trim().match(/\s/)) ? `'${c}'` : c)
@@ -108,15 +77,15 @@ function arrayToCliOne(command: Command): string {
  * commands by separating  them with new lines and support comand splitting in new lines using `\`.
  * See {@link ExecuteCommand} for more information.
  */
-export function arrayToCli(command: Command | Command[]): string {
-  const cmd = typeof command[0] === 'string' ? [command as Command] : command as Command[]
+export function arrayToCli(command: string[] | string[][]): string {
+  const cmd = typeof command[0] === 'string' ? [command as string[]] : command as string[][]
   return cmd.map(arrayToCliOne).join('\n')
 }
 
 /**
  * Generates a command in the form of array of strings, compatible with {@link call} from given command line string . The string must contain only one command (no newlines).
  */
-export function cliToArrayOne(cliCommand: string): Command|undefined {
+function cliToArrayOne(cliCommand: string): string[]|undefined {
   if (cliCommand.trim().startsWith('#')) {
     return undefined
   }
@@ -155,14 +124,14 @@ export function cliToArrayOne(cliCommand: string): Command|undefined {
  * This works for strings containing multiple commands in different lines. and also respect `\` character for continue the same
  * command in a new line. See {@link ExecuteCommand} for more information.
  */
-export function cliToArray(cliCommand: string): Command[] {
+export function cliToArray(cliCommand: string): string[][] {
   const lines = cliCommand.split('\n')
     .map(s => s.trim())
     .map(cliToArrayOne)
     .filter(notUndefined)
     .filter(a => a.length) 
   const result = []
-  let currentCommand: Command = []
+  let currentCommand: string[] = []
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]
     if (line[line.length - 1] !== '\\') {
@@ -177,26 +146,54 @@ export function cliToArray(cliCommand: string): Command[] {
   return result
 }
 
-/**
- * Makes sure that given {@link ExecuteCommand}, in whatever syntax, is transformed to the form `string[][]` that is compatible with {@link call}
- */
-export function asCommand(c: ExecuteCommand): Command[]  {
-  if (!c) {return []}
-  if (typeof c === 'string') { return asCommand([c]) }
-  if (!c[0]) { return [] }
-  if (isArrayOfStrings(c)) {
-    return flat(c.map(cliToArray))
-  }
-  if (isArrayOfArrayOfStrings(c)) {
-    // this means that the command is already a valid Command. This means that Execute Commands cannot be [['convert a'], ['convert b']]
-    return c as Command[]
-  }else {
-    throw new Error('Could not build Command from '+c)
-  }
+// /**
+//  * Makes sure that given {@link ExecuteCommand}, in whatever syntax, is transformed to the form `string[][]` that is compatible with {@link call}
+//  */
+// function asCommand(c: string|string[]): string[][]  {
+//   if (!c) {return []}
+//   if (typeof c === 'string') { return asCommand([c]) }
+//   if (!c[0]) { return [] }
+//   if (isArrayOfStrings(c)) {
+//     return flat(c.map(cliToArray))
+//   }
+//   if (isArrayOfArrayOfStrings(c)) {
+//     // this means that the command is already a valid Command. This means that Execute Commands cannot be [['convert a'], ['convert b']]
+//     return c as string[][]
+//   }else {
+//     throw new Error('Could not build Command from '+c)
+//   }
 
-}
+// }
 
-export function unquote(s: string): string {
-  s = s.startsWith('\'') ? s.substring(1, s.length) : s
-  return s.endsWith('\'') ? s.substring(0, s.length - 1) : s
-}
+// function unquote(s: string): string {
+//   s = s.startsWith('\'') ? s.substring(1, s.length) : s
+//   return s.endsWith('\'') ? s.substring(0, s.length - 1) : s
+// }
+
+
+// export function processCommand(command: string | string[]) {
+//   if (typeof command !== 'string') {
+//     return command
+//   }
+//   return command.split(/\s+/g) // TODO: support quoted args
+// }
+// export interface ExecuteConfig {
+//   inputFiles?: MagickInputFile[]
+//   /**
+//    */
+//   commands: ExecuteCommand
+// }
+// export function combinations<T>(arr: T[], fn: (a: T, b: T) => Promise<any>): Promise<any> {
+//   const promises:Promise<any>[] = []
+//   arr.forEach(f1 => {
+//     arr.
+//       filter((f2, i, subarr) => i > subarr.indexOf(f1))
+//       .forEach(f2 => promises.push(fn(f1, f2)))
+//   })
+//   return Promise.all(promises)
+// }
+
+
+// import { Command } from '..'
+// import { ExecuteCommand } from '../execute'
+// import { flat, isArrayOfStrings, isArrayOfArrayOfStrings } from './misc'
