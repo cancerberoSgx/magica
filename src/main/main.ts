@@ -31,7 +31,7 @@ export async function main(o: Partial<Options>): Promise<Result> {
 
   const beforeTree = listFilesRecursively(emscriptenNodeFsRoot, FS)
 
-  let returnValue = main(processCommand(o.command!))
+  const returnValue = main(processCommand(o.command!))
 
   const afterTree = listFilesRecursively(emscriptenNodeFsRoot, FS)
 

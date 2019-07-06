@@ -2,6 +2,7 @@ import fetch from 'cross-fetch'
 import { readFileSync, existsSync } from 'fs'
 import { basename, getFileNameFromUrl, isNode, serial } from 'misc-utils-of-mine-generic'
 import { File as IFile, Options } from './types'
+import { ok } from 'assert';
 
 export class File implements IFile {
   public content: IFile['content']
@@ -37,6 +38,7 @@ export class File implements IFile {
       }
     }
     else {
+      ok(ArrayBuffer.isView(f.content))
       return f
     }
   }))

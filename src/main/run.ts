@@ -3,6 +3,7 @@ import { cliToArray, arrayToCliOne } from './command';
 import { RemoveProperties, PropertyOptional, asArray, serial } from 'misc-utils-of-mine-generic';
 import { main } from './main';
 import { File } from '../file';
+import { getOption } from '../options';
 
 /**
  * Has a signature compatible with main, but if `script` is given instead of `command` option then it's interpreted as a sequence of commands that are executed serially using [[main]]
@@ -18,13 +19,24 @@ import { File } from '../file';
  * @returns the result of each command execution
  */
 export async function run(o: RunOptions) {
+  const emscriptenNodeFsRoot = getOption('emscriptenNodeFsRoot')
   const commands = resolveRunCommands(o);
   const finalResult: RunResult = { results: [], commands, outputFiles: [], stderr: [], stdout: [], error: undefined, returnValue: undefined }
   let inputFiles = await File.resolveOptions(o)
-  await serial(commands.map(command => async () => {
-    const result = await main({ ...o, command, inputFiles })
-    inputFiles = inputFiles.filter(f => !result.outputFiles.find(f2 => f2.name === f.name)).concat(result.outputFiles)
+  await serial(commands.map((command, i) => async () => {
+    try {      
+      const mainOptions = { ...o, command, inputFiles }
+      // console.log({...mainOptions, inputFiles: mainOptions.inputFiles.map(f=>f.name)})
+    const result = await main(mainOptions)
+    // console.log(result.stdout, result.stderr);     
+    result.outputFiles = result.outputFiles.map(f=>({...f, name: f.name.startsWith(emscriptenNodeFsRoot) ? f.name.substring(emscriptenNodeFsRoot.length+1) : f.name}))
+    inputFiles = [...inputFiles.filter(f => !result.outputFiles.find(f2 => f2.name === f.name)), 
+      ...result.outputFiles]
     finalResult.results.push(result)
+    } catch (error) {
+      console.error('Error on '+i+'th command', error);
+      
+    }
   }))
   const r: RunResult = {
     ...finalResult,
@@ -34,7 +46,6 @@ export async function run(o: RunOptions) {
   }
   return r
 }
-
 
 function resolveRunCommands(o: RunOptions) {
   if ((!o.script || !o.script.length) && (!o.command || !o.command.length)) {
@@ -47,9 +58,6 @@ function resolveRunCommands(o: RunOptions) {
   else {
     script = arrayToCliOne(asArray(o.command!));
   }
-  // const script = (asArray(o.script).join(' ')||asArray(o.command||'').join(' ')).trim()
-  // if(!script){
-  // }
   const commands = cliToArray(script);
   return commands;
 }

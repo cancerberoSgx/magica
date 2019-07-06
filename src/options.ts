@@ -10,8 +10,8 @@ let options: Required<NativeOptions> = {
 export function getOptions() {
   return options
 }
-export function getOption(k: keyof NativeOptions) {
-  return options[k] || undefined
+export function getOption<K extends keyof NativeOptions> (k:K): NativeOptions[K] {
+  return options[k]
 }
 export function setOptions(o: Partial<NativeOptions>) {
   options = { ...options, ...o }
