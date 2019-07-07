@@ -151,20 +151,26 @@ Options are the same for the command line and the API:
 
 ## TODO / Road map
 
+- [ ] performance tests in the browser
+- [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
 - [ ] fix npm run test-js
-- [ ] consume input image from stream and support stdin . same for output / stdout
-- [ ] support multiple line string commands like in src/main/command.ts
   - [ ] support IM command quoted arguments
 - [ ] verify mkdir-p for output files
 - [ ] because options are global - sending commands concurrently could fail. Solution: queue or instance options
 - [ ] an easy to use API for web-workers
 - [ ] verify web worker  passing files is optimal (verify transferable/shared array buffers/optimal)
-- [ ] Option for Node.js users to work/mount current directory - the tool should not copy input files just use them since are present in mount root ems
-- [ ] how high level scripts like test/probes/sketcher.ts can be integrated ? different project ?
-- [ ] scripts/generateImEnumd.ts we should execute our CLI to extract 
+- [ ] how high level scripts DDD can be integrated ? different project ?
+- [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
 - [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
+- [?] Option for Node.js users to work/mount current directory - the tool should not copy input files just use them since are present in mount root ems
 - [ ] adapt executeVirtualCommand from wasm-imagemagick own branch
 - [ ] adapt executeCommandPreprocessor and command template preprocessor from wasm-imagemagick own branch
+- [x] imageBuiltIn() to get all IM built-in images like rose:)
+- [x] run() script like executions uses main to run several commands feeding from previous output supporting syntax sugar
+  - [ ] fix issue with long operations and add more tests
+  - [x] support multiple line string commands like in src/main/command.ts
+- [x] rich command syntax (src/main/command)
+  - [x] end porting tests
 - [x] imagePixelColor()
 - [x] imageCompare()
 - [x] extractImageInfo()
