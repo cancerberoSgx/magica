@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/cancerberoSgx/magica.svg?branch=master)](https://travis-ci.org/cancerberoSgx/magica) 
+[![Coverage Status](https://coveralls.io/repos/github/cancerberoSgx/magica/badge.svg?branch=master)](https://coveralls.io/github/cancerberoSgx/magica?branch=master)
+
 # Magica
 
 Easy to setup and use, ImageMagick Node.js and Browser API and Command Line Interface. 
@@ -163,8 +166,9 @@ Options are the same for the command line and the API:
 - [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
 - [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
 - [?] Option for Node.js users to work/mount current directory - the tool should not copy input files just use them since are present in mount root ems
-- [x] travis
-- [x] coverage
+- [ ] travis
+- [ ] coverage
+- [ ] apidocs
 - [ ] adapt executeVirtualCommand from wasm-imagemagick own branch
 - [ ] adapt executeCommandPreprocessor and command template preprocessor from wasm-imagemagick own branch
 - [x] imageBuiltIn() to get all IM built-in images like rose:)

@@ -5,6 +5,6 @@ export { imageInfo } from './image/imageInfo'
 export { imagePixelColor } from './image/pixel'
 export { magickLoaded } from './imageMagick/magickLoaded' // don't remove me - i'm important for tests
 export { main } from './main/main'
-// export {File as IFile} from './types'
+export {imageBuiltIn} from './image/imageBuiltIn'
 export { run } from './main/run'
 export * from './types'
