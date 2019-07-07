@@ -1,5 +1,5 @@
 // import test from 'ava'
-import { run } from '../../src/main/run';
+import { run } from '../../src/main/run'
 
 // test('should run a single command with comments, spaces and command break line', async t => {
 //   const result = await run({
@@ -25,23 +25,23 @@ import { run } from '../../src/main/run';
 // })
 
 // test('should provide output images as input images to next command', async t => {
-  try {
-    (async ()=>{
-      const result = await run({
-        script: `
+try {
+  (async () => {
+    const result = await run({
+      script: `
         convert n.png -scale 50% 1.jpg
         convert 1.jpg -scale 50% 2.tiff
-        `, 
-        inputFiles: ['test/assets/n.png']
-      })
-    })()
-    // t.deepEqual(result.outputFiles.map(f=>f.name), ['2.tiff'])
-    // t.deepEqual(result.results.map(f=>f.outputFiles.map(f=>f.name)), [['1.jpg'],['2.tiff']])
-    // t.true(true)
-  } catch (error) {
-    console.log(error);
-    
-  }
+        `,
+      inputFiles: ['test/assets/n.png']
+    })
+  })()
+  // t.deepEqual(result.outputFiles.map(f=>f.name), ['2.tiff'])
+  // t.deepEqual(result.results.map(f=>f.outputFiles.map(f=>f.name)), [['1.jpg'],['2.tiff']])
+  // t.true(true)
+} catch (error) {
+  console.log(error)
+
+}
 
 // })
 

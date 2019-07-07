@@ -6,10 +6,10 @@ import { main } from '../main/main'
  * Execute `convert $IMG info.json` to extract image metadata. Returns the parsed info.json file contents
  * @param img could be a string in case you want to extract information of built in images like `rose:`
  */
-export async function imageInfo(img: File|string): Promise<ExtractInfoResult[]> {
-  const r = await main({ 
-    inputFiles: [...typeof img==='string' ? [] : [img]], 
-    command: ['convert', typeof img==='string' ? img : img.name, 'imgInfo.json'] 
+export async function imageInfo(img: File | string): Promise<ExtractInfoResult[]> {
+  const r = await main({
+    inputFiles: [...typeof img === 'string' ? [] : [img]],
+    command: ['convert', typeof img === 'string' ? img : img.name, 'imgInfo.json']
   })
   equal(r.outputFiles.length, 1)
   const s = File.toString(r.outputFiles[0])

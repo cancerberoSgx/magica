@@ -1,27 +1,26 @@
 import pMap from 'p-map'
-import { File } from '..';
-import { imageInfo } from './imageInfo';
-import { main } from '../main/main';
-import { enumKeys } from 'misc-utils-of-mine-generic';
+import { File } from '..'
+import { main } from '../main/main'
+import { imageInfo } from './imageInfo'
 
 let builtInImages: File[]
 // export enum imageBuiltInNames {'rose:'='rose:', 'logo:'='logo:', 'wizard:'='wizard:', 'granite:'='granite:', 'netscape:'='netscape:'}
-type images = 'rose:'|'logo:'|'wizard:'|'granite:'|'netscape:'
-const names: images[] = ['rose:', 'logo:','wizard:','granite:','netscape:']
+type images = 'rose:' | 'logo:' | 'wizard:' | 'granite:' | 'netscape:'
+const names: images[] = ['rose:', 'logo:', 'wizard:', 'granite:', 'netscape:']
 /**
  * Gets ImageMagick built-in images like `rose:`, `logo:`, etc in the form of {@link File}s. 
  * @param builtIn if given it will resolve with with an array contianing only that image 
  */
 export async function imageBuiltIn(builtIn?: images): Promise<File[]> {
-  if (! builtInImages) {
+  if (!builtInImages) {
     builtInImages = await pMap(names, async name => { // TODO: see if we can just use serial
       const info = await imageInfo(name)
-      const {outputFiles} = await main({command: `convert ${name} ${`output1.${info[0].image!.format!.toLowerCase()}`}`, inputFiles: []} )
+      const { outputFiles } = await main({ command: `convert ${name} ${`output1.${info[0].image!.format!.toLowerCase()}`}`, inputFiles: [] })
       outputFiles[0].name = name
       return outputFiles[0]
     })
   }
-  return builtIn ? builtInImages.filter(i=>i.name===builtIn) : builtInImages
+  return builtIn ? builtInImages.filter(i => i.name === builtIn) : builtInImages
 }
 
 // /**

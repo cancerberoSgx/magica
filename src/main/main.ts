@@ -1,5 +1,4 @@
-import { existsSync } from 'fs'
-import { isNode, objectKeys, serial } from 'misc-utils-of-mine-generic'
+import { objectKeys } from 'misc-utils-of-mine-generic'
 import { File } from '../file'
 import { magickLoaded } from '../imageMagick/magickLoaded'
 import { getOptions, setOptions } from '../options'

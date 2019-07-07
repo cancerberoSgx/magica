@@ -1,8 +1,8 @@
-import test from 'ava';
-import { arrayToCli } from '../src/main/command';
+import test from 'ava'
+import { arrayToCli } from '../src/main/command'
 
 test('arrayToCli should support simple commands', async t => {
-  t.deepEqual(arrayToCli(['convert', 'foo.png', '-sharpen', '10x8', 'bar.gif']),'convert foo.png -sharpen 10x8 bar.gif')
+  t.deepEqual(arrayToCli(['convert', 'foo.png', '-sharpen', '10x8', 'bar.gif']), 'convert foo.png -sharpen 10x8 bar.gif')
 
 })
 
@@ -65,15 +65,15 @@ test('arrayToCli should quote arguments with spaces', async t => {
 //       // expect(cliToArray(` 
 //       // identify -format %wx%h\\n
 //       // `).map(s=>s+'')).toEqual(['identify', '-format', '%wx%h\n'])
-      
+
 //       console.log(cliToArray(` 
 //       identify -format %wx%h\\n
 //       `));
-      
+
 //     //   // expect(cliToArray(` 
 //     //   // identify -format '%wx%h\n'
 //     //   // `)).toBe([])
-      
+
 //     //   // expect(cliToArray(` 
 //     //   // convert logo: -resize \`identify -format %wx%h\\n rose:\` out1.png
 //     //   // `)).toBe([])

@@ -1,8 +1,8 @@
+import { ok } from 'assert'
 import fetch from 'cross-fetch'
-import { readFileSync, existsSync } from 'fs'
+import { existsSync, readFileSync } from 'fs'
 import { basename, getFileNameFromUrl, isNode, serial } from 'misc-utils-of-mine-generic'
 import { File as IFile, Options } from './types'
-import { ok } from 'assert';
 
 export class File implements IFile {
   public content: IFile['content']
@@ -27,22 +27,22 @@ export class File implements IFile {
     return String.fromCharCode.apply(null, f.content as any)
   }
 
- static  async   resolveOptions(o: Partial<Options>) {
-  return await serial((o.inputFiles || []).map(f => async () => {
-    if (typeof f === 'string') {
-      if (isNode() && existsSync(f)) {
-        return await File.fromFile(f)
+  static async   resolveOptions(o: Partial<Options>) {
+    return await serial((o.inputFiles || []).map(f => async () => {
+      if (typeof f === 'string') {
+        if (isNode() && existsSync(f)) {
+          return await File.fromFile(f)
+        }
+        else {
+          return await File.fromUrl(f)
+        }
       }
       else {
-        return await File.fromUrl(f)
+        ok(ArrayBuffer.isView(f.content))
+        return f
       }
-    }
-    else {
-      ok(ArrayBuffer.isView(f.content))
-      return f
-    }
-  }))
-}
+    }))
+  }
 
 }
 

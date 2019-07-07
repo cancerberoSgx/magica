@@ -1,4 +1,4 @@
-import { notUndefined, flat, checkThrow } from 'misc-utils-of-mine-generic';
+import { checkThrow, notUndefined } from 'misc-utils-of-mine-generic'
 
 /**
  * Commands could have the following syntaxes:
@@ -52,7 +52,7 @@ export function processCommand(command: string | string[]) {
   if (typeof command !== 'string') {
     return command
   }
- return  checkThrow<string[]>( cliToArrayOne(command), 'Cannot create a command array from given string '+command)
+  return checkThrow<string[]>(cliToArrayOne(command), 'Cannot create a command array from given string ' + command)
   // return command.split(/\s+/g) // TODO: support quoted args
 }
 
@@ -85,13 +85,13 @@ export function arrayToCli(command: string[] | string[][]): string {
 /**
  * Generates a command in the form of array of strings, compatible with {@link call} from given command line string . The string must contain only one command (no newlines).
  */
-function cliToArrayOne(cliCommand: string): string[]|undefined {
+function cliToArrayOne(cliCommand: string): string[] | undefined {
   if (cliCommand.trim().startsWith('#')) {
     return undefined
   }
   let inString = false
   const spaceIndexes = [0]
-  for (let index = 0; index < cliCommand.length; index++) {
+  for (let index = 0;index < cliCommand.length;index++) {
     const c = cliCommand[index]
     if (c.match(/[ ]/im) && !inString) {
       spaceIndexes.push(index)
@@ -113,8 +113,8 @@ function cliToArrayOne(cliCommand: string): string[]|undefined {
     //  unescape parenthesis
     .map(s => s === `\\(` ? `(` : s === `\\)` ? `)` : s)
 
-    .map(s=>s.replace(/\\n/g, '\n')) // so `%w\\n` is transformed to `%w\n' - we cant have new lines because of cliToArray split('\n') - so user must escape it and here we unescape
-    // .map(s=>s)
+    .map(s => s.replace(/\\n/g, '\n')) // so `%w\\n` is transformed to `%w\n' - we cant have new lines because of cliToArray split('\n') - so user must escape it and here we unescape
+  // .map(s=>s)
   // debugger1
   return command
 }
@@ -129,10 +129,10 @@ export function cliToArray(cliCommand: string): string[][] {
     .map(s => s.trim())
     .map(cliToArrayOne)
     .filter(notUndefined)
-    .filter(a => a.length) 
+    .filter(a => a.length)
   const result = []
   let currentCommand: string[] = []
-  for (let i = 0; i < lines.length; i++) {
+  for (let i = 0;i < lines.length;i++) {
     const line = lines[i]
     if (line[line.length - 1] !== '\\') {
       currentCommand = currentCommand.concat(line)

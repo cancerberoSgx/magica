@@ -1,7 +1,7 @@
-import { main } from '../main/main';
+import { main } from '../main/main'
 
 export async function getConfigureFolders(): Promise<string[]> {
-  const result = await main({command: `convert -debug configure rose: info:`})
+  const result = await main({ command: `convert -debug configure rose: info:` })
   const contains = `Searching for configure file:`
   const folders = result.stderr
     .filter(line => line.includes(contains))
