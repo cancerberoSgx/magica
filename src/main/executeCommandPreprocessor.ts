@@ -1,5 +1,5 @@
-import { RunOptions } from '../types'
 import template from 'lodash.template'
+import { RunOptions } from '../types'
 
 export interface CommandPreprocessor {
   name: string,

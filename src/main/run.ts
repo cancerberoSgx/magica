@@ -1,7 +1,7 @@
 import { asArray, serial } from 'misc-utils-of-mine-generic'
 import { File } from '../file'
 import { getOption } from '../options'
-import { RunOptions, RunResult, Result } from '../types'
+import { Result, RunOptions, RunResult } from '../types'
 import { arrayToCliOne, cliToArray } from './command'
 import { _preprocessCommand } from './executeCommandPreprocessor'
 import { main } from './main'
@@ -29,7 +29,7 @@ export async function run(o: RunOptions) {
   await serial(commands.map((command, i) => async () => {
     try {
       const mainOptions = { ...o, command, inputFiles }
-      let result:Result
+      let result: Result
       result = await main(mainOptions)
       result.outputFiles = result.outputFiles.map(f => ({ ...f, name: f.name.startsWith(emscriptenNodeFsRoot) ? f.name.substring(emscriptenNodeFsRoot.length + 1) : f.name }))
       inputFiles = [...inputFiles.filter(f => !result.outputFiles.find(f2 => f2.name === f.name)),

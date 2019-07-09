@@ -16,7 +16,7 @@
 
 ▸ **run**(`o`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<RunResult>`*
 
-*Defined in [main/run.ts:24](https://github.com/cancerberoSgx/magica/blob/825f829/src/main/run.ts#L24)*
+*Defined in [main/run.ts:24](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/main/run.ts#L24)*
 
 Has a signature compatible with main, but if `script` is given instead of `command` option then it's
 interpreted as a sequence of commands that are executed serially using [main](../interfaces/_imagemagick_magickloaded_.main.md#main)

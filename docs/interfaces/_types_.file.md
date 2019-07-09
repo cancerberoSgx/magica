@@ -25,7 +25,7 @@
 
 • **content**: *`ArrayBufferView`*
 
-*Defined in [types.ts:5](https://github.com/cancerberoSgx/magica/blob/825f829/src/types.ts#L5)*
+*Defined in [types.ts:5](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/types.ts#L5)*
 
 ___
 
@@ -33,4 +33,4 @@ ___
 
 • **name**: *string*
 
-*Defined in [types.ts:4](https://github.com/cancerberoSgx/magica/blob/825f829/src/types.ts#L4)*
+*Defined in [types.ts:4](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/types.ts#L4)*

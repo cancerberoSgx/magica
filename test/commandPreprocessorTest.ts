@@ -1,7 +1,7 @@
 import test from 'ava'
+import template from 'lodash.template'
 import { File } from '../src'
 import { run } from '../src/main/run'
-import template from 'lodash.template'
 
 test('script template', async t => {
   const result = await run({
@@ -35,15 +35,15 @@ test('template test', async t => {
     <%= name %>
     # c3
     `
-    const expected = `
+  const expected = `
     # c1
     identify \\
     # c2
     seba
     # c3
     `
-    const r = template(t2)
-    const s = r( { name: 'seba' })
+  const r = template(t2)
+  const s = r({ name: 'seba' })
   t.deepEqual(s, expected)
 })
 

@@ -5,7 +5,7 @@ export { imageCompare } from './image/imageCompare'
 export { imageInfo } from './image/imageInfo'
 export { imagePixelColor } from './image/pixel'
 export { magickLoaded } from './imageMagick/magickLoaded' // don't remove me - i'm important for tests
+export { registerCommandPreprocessor } from './main/executeCommandPreprocessor'
 export { main } from './main/main'
 export { run } from './main/run'
 export * from './types'
-export {registerCommandPreprocessor} from './main/executeCommandPreprocessor'
