@@ -1,6 +1,6 @@
 {
   "name": "magica",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "ImageMagick for browser and Node.js, easy setup, high level API and Command Line Interface, sing wasm-imagemagick emscripten output",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
