@@ -1,22 +1,24 @@
 import { asArray, serial } from 'misc-utils-of-mine-generic'
 import { File } from '../file'
 import { getOption } from '../options'
-import { RunOptions, RunResult } from '../types'
+import { RunOptions, RunResult, Result } from '../types'
 import { arrayToCliOne, cliToArray } from './command'
 import { _preprocessCommand } from './executeCommandPreprocessor'
 import { main } from './main'
 
 /**
- * Has a signature compatible with main, but if `script` is given instead of `command` option then it's interpreted as a sequence of commands that are executed serially using [[main]]
- * 
- * The output files of command N are added as input files for command n+1 replacing files with the same name. This way users can write script-like behavior for complex tasks that require more than one command to be implemented. 
- * 
- * Also it supports shell script comments (lines starting with `#` are ignored) and breaking a single command in multiple lines using `\`. 
- * 
+ * Has a signature compatible with main, but if `script` is given instead of `command` option then it's
+ * interpreted as a sequence of commands that are executed serially using [[main]]
+ *
+ * The output files of command N are added as input files for command n+1 replacing files with the same name.
+ * This way users can write script-like behavior for complex tasks that require more than one command to be
+ * implemented. 
+ *
+ * Also it supports shell script comments (lines starting with `#` are ignored) and breaking a single command
+ * in multiple lines using `\`. 
+ *
  * See [[RunOptions.script]] option.
- *  
- * TODO: also supports command preprocessing API (for example command template) and virtual commands API (built in like cat, ls, substitution, variable, built in virtual commands).
- * 
+ *
  * @returns the result of each command execution
  */
 export async function run(o: RunOptions) {
@@ -27,7 +29,8 @@ export async function run(o: RunOptions) {
   await serial(commands.map((command, i) => async () => {
     try {
       const mainOptions = { ...o, command, inputFiles }
-      const result = await main(mainOptions)
+      let result:Result
+      result = await main(mainOptions)
       result.outputFiles = result.outputFiles.map(f => ({ ...f, name: f.name.startsWith(emscriptenNodeFsRoot) ? f.name.substring(emscriptenNodeFsRoot.length + 1) : f.name }))
       inputFiles = [...inputFiles.filter(f => !result.outputFiles.find(f2 => f2.name === f.name)),
       ...result.outputFiles]

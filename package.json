@@ -25,7 +25,7 @@
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\" \"test-browser/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
     "lint": "npm run organizeImports && npm run format",
     "docs": "npm run docs-readme-toc && npm run docs-api",
-    "docs-api": "rm -rf docs && typedoc --mode modules --ignoreCompilerErrors --theme markdown --out docs src/index.ts ",
+    "docs-api": "rm -rf docs && typedoc  --ignoreCompilerErrors --theme markdown --out docs --readme none --excludeNotExported src/index.ts ",
     "docs-readme-toc": "npx markdown-toc README.md -i",
     "all": "npm run clean && npm run lint && npm run build && npm run test && npm run test-js && npm run test-browser && npm run docs",
     "all-publish": "npm run all && npm version patch && npm publish"

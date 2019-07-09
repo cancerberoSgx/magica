@@ -33,6 +33,7 @@ test-browser
 .travis.yml
 .DS_Store
 /tmp*
+docs
 .cache
 test-browser
 test-browser-outdir

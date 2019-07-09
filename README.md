@@ -138,6 +138,13 @@ Options are the same for the command line and the API:
  * `--debug?: boolean`:
  * `disableNodeFs?: boolean`: (node.js only) Don't use system's filesystem in Node.js but memory filesystem (just like in the browser). This could be faster if read/write many images but consumes more memory.
 
+## Reference API
+
+* ["main/main"](docs/modules/_main_main_.md)
+* ["main/run"](docs/modules/_main_run_.md)
+* ["types"](docs/modules/_types_.md)
+* ["options"](docs/modules/_options_.md)
+
 ## Why
 
  * I really need a 100% JavaScript node.js API and CLI which [wasm-imagemagick](https://github.com/KnicKnic/WASM-ImageMagick) currently doesn't provides. 
@@ -165,8 +172,9 @@ Options are the same for the command line and the API:
 - [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
 - [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
 - [ ] adapt executeVirtualCommand from wasm-imagemagick own branch
-- [ ] apidocs
+- [ ] document run script and supported syntax
 - [ ] document command preprocessor and script template
+- [x] apidocs
 - [?] Option for Node.js users to work/mount current directory - the tool should not copy input files just use them since are present in mount root ems
 - [?] how high level scripts DDD can be integrated ? different project ?
 - [x] adapt executeCommandPreprocessor and command template preprocessor from wasm-imagemagick own branch

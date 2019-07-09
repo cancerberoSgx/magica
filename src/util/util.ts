@@ -20,3 +20,7 @@ export function isDir(f: string, FS: FS) {
 export function isFile(f: string, FS: FS) {
   return FS.isFile(FS.stat(f).mode)
 }
+
+// export function values<T>(object: { [k: string]: T }): T[] {
+//   return Object.keys(object).map(name => object[name])
+// }
