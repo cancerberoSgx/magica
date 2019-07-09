@@ -158,16 +158,17 @@ Options are the same for the command line and the API:
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
 - [ ] fix npm run test-js  
 - [ ] verify support IM command quoted arguments
-- [ ] verify mkdir-p for output files
+- [ ] verify mkdir -p for output files
 - [ ] because options are global - sending commands concurrently could fail. Solution: queue or instance options
 - [ ] an easy to use API for web-workers
 - [ ] verify web worker  passing files is optimal (verify transferable/shared array buffers/optimal)
-- [ ] how high level scripts DDD can be integrated ? different project ?
 - [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
 - [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
 - [ ] adapt executeVirtualCommand from wasm-imagemagick own branch
 - [ ] apidocs
+- [ ] document command preprocessor and script template
 - [?] Option for Node.js users to work/mount current directory - the tool should not copy input files just use them since are present in mount root ems
+- [?] how high level scripts DDD can be integrated ? different project ?
 - [x] adapt executeCommandPreprocessor and command template preprocessor from wasm-imagemagick own branch
 - [x] travis
 - [x] coverage
