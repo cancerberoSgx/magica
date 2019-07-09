@@ -156,8 +156,8 @@ Options are the same for the command line and the API:
 
 - [ ] performance tests in the browser
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
-- [ ] fix npm run test-js
-  - [ ] support IM command quoted arguments
+- [ ] fix npm run test-js  
+- [ ] verify support IM command quoted arguments
 - [ ] verify mkdir-p for output files
 - [ ] because options are global - sending commands concurrently could fail. Solution: queue or instance options
 - [ ] an easy to use API for web-workers
@@ -166,9 +166,9 @@ Options are the same for the command line and the API:
 - [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
 - [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
 - [ ] adapt executeVirtualCommand from wasm-imagemagick own branch
-- [ ] adapt executeCommandPreprocessor and command template preprocessor from wasm-imagemagick own branch
 - [ ] apidocs
 - [?] Option for Node.js users to work/mount current directory - the tool should not copy input files just use them since are present in mount root ems
+- [x] adapt executeCommandPreprocessor and command template preprocessor from wasm-imagemagick own branch
 - [x] travis
 - [x] coverage
 - [x] imageBuiltIn() to get all IM built-in images like rose:)

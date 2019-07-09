@@ -3,6 +3,7 @@ import { File } from '../file'
 import { getOption } from '../options'
 import { RunOptions, RunResult } from '../types'
 import { arrayToCliOne, cliToArray } from './command'
+import { _preprocessCommand } from './executeCommandPreprocessor'
 import { main } from './main'
 
 /**
@@ -33,7 +34,6 @@ export async function run(o: RunOptions) {
       finalResult.results.push(result)
     } catch (error) {
       console.error('Error on ' + i + 'th command', error);
-
     }
   }))
   const r: RunResult = {
@@ -49,6 +49,7 @@ function resolveRunCommands(o: RunOptions) {
   if ((!o.script || !o.script.length) && (!o.command || !o.command.length)) {
     throw new Error('No script or command given')
   }
+  o = _preprocessCommand(o)
   let script: string
   if (o.script && o.script.length) {
     script = asArray(o.script).join('\n')
@@ -59,7 +60,3 @@ function resolveRunCommands(o: RunOptions) {
   const commands = cliToArray(script)
   return commands
 }
-//TODO shortcut signature - the wildcards could be implemented with command preprocessor
-// var firstOutputFile = await runShortcut(`convert $1 $2 -compose foo.tiff`, File.fromUrl('dynamic/so/we/dont/the/filename.png'), File.fromUrl(sameAsPrevious))
-
-// os just using template and pasing input files in context

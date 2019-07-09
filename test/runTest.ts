@@ -40,7 +40,6 @@ test('should provide output images as input images to next command', async t => 
 
 test('should provide output images as input images to next command, tiff repage error', async t => {
   const result = await run({
-    // debug: true,
     script: `
       convert n.png -scale 50% 1.jpg
       convert 1.jpg -rotate 133 +repage 2.tiff

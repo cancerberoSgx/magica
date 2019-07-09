@@ -8,3 +8,4 @@ export { magickLoaded } from './imageMagick/magickLoaded' // don't remove me - i
 export { main } from './main/main'
 export { run } from './main/run'
 export * from './types'
+export {registerCommandPreprocessor} from './main/executeCommandPreprocessor'
