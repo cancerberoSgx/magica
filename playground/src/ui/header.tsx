@@ -13,6 +13,7 @@ export class Header extends AbstractComponent {
           {examples.map(example => <Dropdown.Item onClick={e => setExample(example)}>{example.name}</Dropdown.Item>)}
         </Dropdown.Menu>
       </Dropdown>
+      <Menu.Item>{this.state.working?<div style={{color: 'red'}}>WORKING</div>:'IDLE'}</Menu.Item>
       <Menu.Menu position="right">
         <Modal trigger={<Menu.Item as='a' icon="help">About</Menu.Item>}>
           <Modal.Header>About</Modal.Header>

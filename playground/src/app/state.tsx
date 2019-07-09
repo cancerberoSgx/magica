@@ -6,6 +6,7 @@ export interface State {
   inputFiles: File[]
   examples: Example[];
   result: Result
+  working: boolean
 }
 
 export interface ParserError {
@@ -21,6 +22,7 @@ export async function getInitialState(): Promise<State> {
     example: examples[0],
     inputFiles: [],
     examples,
-    result
+    result,
+    working: false
   }
 }

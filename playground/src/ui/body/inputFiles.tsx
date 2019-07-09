@@ -1,3 +1,4 @@
+import FileSaver from 'file-saver'
 import * as React from 'react'
 import { Header, Input, List, Segment } from 'semantic-ui-react'
 import { loadImageFromUrl } from '../../app/dispatcher'
@@ -15,7 +16,10 @@ export class InputFiles extends AbstractComponent {
         {this.state.inputFiles.map(f =>
           <List.Item>
             <List.Content>
-              <List.Header as='a'>{f.name}</List.Header>
+              <List.Header><a href="" onClick={e => {
+                var blob = new Blob([f.content])
+                FileSaver.saveAs(blob, f.name)
+              }}>{f.name}</a></List.Header>
               <List.Description as='a'>{f.content.byteLength} bytes</List.Description>
             </List.Content>
           </List.Item>

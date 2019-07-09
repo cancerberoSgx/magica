@@ -57,11 +57,11 @@ identify FVKBIJ7.png
 ]
 
 
-convert rose: -virtual-pixel black ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) rotate_normal.gif
+// convert rose: -virtual-pixel black ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) ( +clone -distort SRT 22.5 ) rotate_normal.gif
 
 
-convert rose:  -virtual-pixel black -distort SRT '20'  rotate_normal.png
+// convert rose:  -virtual-pixel black -distort SRT '20'  rotate_normal.png
 
-convert parrots_orig.png  -resize 40% ( +clone -virtual-pixel white +distort SRT 30 +repage ) ( +clone -virtual-pixel white +distort SRT 30 +repage ) ( +clone -virtual-pixel white +distort SRT 30 +repage ) ( +clone -virtual-pixel white +distort SRT 30 +repage ) ( +clone -virtual-pixel white +distort SRT 30 +repage ) ( +clone -virtual-pixel white +distort SRT 30 +repage )  ppp.gif
+// convert parrots_orig.png  -resize 40% ( +clone -virtual-pixel white +distort SRT 30 +repage ) ( +clone -virtual-pixel white +distort SRT 30 +repage ) ( +clone -virtual-pixel white +distort SRT 30 +repage ) ( +clone -virtual-pixel white +distort SRT 30 +repage ) ( +clone -virtual-pixel white +distort SRT 30 +repage ) ( +clone -virtual-pixel white +distort SRT 30 +repage )  ppp.gif
 
-convert parrots_orig.png  -resize 40% ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 )  ppp.gif
+// convert parrots_orig.png  -resize 40% ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 )  ppp.gif

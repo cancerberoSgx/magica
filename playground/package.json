@@ -24,22 +24,24 @@
   "author": "Sebastián Gurin",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^12.0.10",
-    "@types/react": "^16.8.22",
+    "@types/file-saver": "^2.0.1",
+    "@types/node": "^12.6.1",
+    "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
     "babel-polyfill": "^6.26.0",
     "http-server": "^0.11.1",
     "parcel": "^1.12.3",
     "ts-refactor": "0.0.6",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.3"
   },
   "dependencies": {
+    "file-saver": "^2.0.2",
     "magica": "file:..",
-    "misc-utils-of-mine-generic": "^0.2.12",
+    "misc-utils-of-mine-generic": "^0.2.15",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.87.2"
+    "semantic-ui-react": "^0.87.3"
   },
   "repository": {
     "type": "git",
