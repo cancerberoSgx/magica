@@ -1,6 +1,6 @@
+import FileSaver from 'file-saver'
 import { toDataUrl } from 'magica'
 import * as React from 'react'
-import FileSaver from 'file-saver'
 import { Header, Segment, TextArea } from 'semantic-ui-react'
 import { AbstractComponent } from '../common/component'
 
@@ -8,9 +8,9 @@ export class Output extends AbstractComponent {
   render() {
     return <Segment>
       {this.state.result.outputFiles ? this.state.result.outputFiles.map(f =>
-        <> <a href="" onClick={e=>{             
+        <> <a href="" onClick={e => {
           var blob = new Blob([f.content])//, { type: 'image/svg+xml;charset=utf-8' })
-          FileSaver.saveAs(blob, f.name, )
+          FileSaver.saveAs(blob, f.name)
 
         }}>{f.name}
           <img src={toDataUrl(f)} />
