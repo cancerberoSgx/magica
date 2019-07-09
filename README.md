@@ -165,15 +165,15 @@ Options are the same for the command line and the API:
 - [ ] how high level scripts DDD can be integrated ? different project ?
 - [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
 - [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
-- [?] Option for Node.js users to work/mount current directory - the tool should not copy input files just use them since are present in mount root ems
-- [ ] travis
-- [ ] coverage
-- [ ] apidocs
 - [ ] adapt executeVirtualCommand from wasm-imagemagick own branch
 - [ ] adapt executeCommandPreprocessor and command template preprocessor from wasm-imagemagick own branch
+- [ ] apidocs
+- [?] Option for Node.js users to work/mount current directory - the tool should not copy input files just use them since are present in mount root ems
+- [x] travis
+- [x] coverage
 - [x] imageBuiltIn() to get all IM built-in images like rose:)
 - [x] run() script like executions uses main to run several commands feeding from previous output supporting syntax sugar
-  - [ ] fix issue with long operations and add more tests
+  - [x] fix issue with long operations and add more tests
   - [x] support multiple line string commands like in src/main/command.ts
 - [x] rich command syntax (src/main/command)
   - [x] end porting tests

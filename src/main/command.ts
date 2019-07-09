@@ -1,51 +1,7 @@
 import { checkThrow, notUndefined } from 'misc-utils-of-mine-generic'
 
-/**
- * Commands could have the following syntaxes:
- *  * array form like `[['convert', 'foo.png', 'bar.gif'], ['identify', 'bar.gif']]`
- *  * just one array: `['convert', 'foo.png', 'bar.gif']`
- *  * command line strings: `['convert foo.png bar.gif', 'idenfity bar.gif']`
- *  * just one string: `'convert foo.png bar.gif'`
- *
- * Also, for command line strings, multiple commands can be specified in the same string separating with new lines:
- *
- * ```js
- * const result = await execute(`
- *   convert rose: -sharpen 0x1 reconstruct.jpg
- *   compare rose: reconstruct.jpg difference.png
- *   compare -compose src rose: reconstruct.jpg difference.png
- * `)
- * ```
- *
- * Also, command line strings support breaking the same command in multiple lines by using `\` like in:
- *
- * ```js
- * const result = await execute(`
- *   convert -size 250x100 xc: +noise Random -channel R -threshold .4% \\
- *     -negate -channel RG -separate +channel \\
- *     \( +clone \) -compose multiply -flatten \\
- *     -virtual-pixel Tile -background Black \\
- *     -blur 0x.6 -motion-blur 0x15-90 -normalize \\
- *     +distort Polar 0 +repage 'star inward.gif'
- * `)
- * ```
- *
- * If you need to escape arguments like file names with spaces, use single quotes `'`, like the output file in the previous example `'star inward.gif'`
- */
-// export type Script = string
-
-
-
-function isArrayOfStrings(a: any): a is string[] {
-  return Array.isArray(a) && (a.length === 0 || typeof a[0] === 'string')
-}
-
 function isArrayOfArrays(a: any): a is any[][] {
   return Array.isArray(a) && (a.length === 0 || Array.isArray(a[0]))
-}
-
-function isArrayOfArrayOfStrings(a: any): a is any[][] {
-  return isArrayOfArrays(a) && (a[0][0].length === 0 || typeof a[0][0] === 'string')
 }
 
 export function processCommand(command: string | string[]) {
@@ -53,7 +9,6 @@ export function processCommand(command: string | string[]) {
     return command
   }
   return checkThrow<string[]>(cliToArrayOne(command), 'Cannot create a command array from given string ' + command)
-  // return command.split(/\s+/g) // TODO: support quoted args
 }
 
 /**
@@ -61,8 +16,6 @@ export function processCommand(command: string | string[]) {
  */
 export function arrayToCliOne(command: string[]): string {
   return command
-    // .map(c => c + '')
-
     // if it contain spaces
     .map(c => (c.trim().match(/\s/)) ? `'${c}'` : c)
 
@@ -114,8 +67,6 @@ function cliToArrayOne(cliCommand: string): string[] | undefined {
     .map(s => s === `\\(` ? `(` : s === `\\)` ? `)` : s)
 
     .map(s => s.replace(/\\n/g, '\n')) // so `%w\\n` is transformed to `%w\n' - we cant have new lines because of cliToArray split('\n') - so user must escape it and here we unescape
-  // .map(s=>s)
-  // debugger1
   return command
 }
 
@@ -145,55 +96,3 @@ export function cliToArray(cliCommand: string): string[][] {
   }
   return result
 }
-
-// /**
-//  * Makes sure that given {@link ExecuteCommand}, in whatever syntax, is transformed to the form `string[][]` that is compatible with {@link call}
-//  */
-// function asCommand(c: string|string[]): string[][]  {
-//   if (!c) {return []}
-//   if (typeof c === 'string') { return asCommand([c]) }
-//   if (!c[0]) { return [] }
-//   if (isArrayOfStrings(c)) {
-//     return flat(c.map(cliToArray))
-//   }
-//   if (isArrayOfArrayOfStrings(c)) {
-//     // this means that the command is already a valid Command. This means that Execute Commands cannot be [['convert a'], ['convert b']]
-//     return c as string[][]
-//   }else {
-//     throw new Error('Could not build Command from '+c)
-//   }
-
-// }
-
-// function unquote(s: string): string {
-//   s = s.startsWith('\'') ? s.substring(1, s.length) : s
-//   return s.endsWith('\'') ? s.substring(0, s.length - 1) : s
-// }
-
-
-// export function processCommand(command: string | string[]) {
-//   if (typeof command !== 'string') {
-//     return command
-//   }
-//   return command.split(/\s+/g) // TODO: support quoted args
-// }
-// export interface ExecuteConfig {
-//   inputFiles?: MagickInputFile[]
-//   /**
-//    */
-//   commands: ExecuteCommand
-// }
-// export function combinations<T>(arr: T[], fn: (a: T, b: T) => Promise<any>): Promise<any> {
-//   const promises:Promise<any>[] = []
-//   arr.forEach(f1 => {
-//     arr.
-//       filter((f2, i, subarr) => i > subarr.indexOf(f1))
-//       .forEach(f2 => promises.push(fn(f1, f2)))
-//   })
-//   return Promise.all(promises)
-// }
-
-
-// import { Command } from '..'
-// import { ExecuteCommand } from '../execute'
-// import { flat, isArrayOfStrings, isArrayOfArrayOfStrings } from './misc'

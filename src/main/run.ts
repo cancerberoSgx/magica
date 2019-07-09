@@ -26,9 +26,7 @@ export async function run(o: RunOptions) {
   await serial(commands.map((command, i) => async () => {
     try {
       const mainOptions = { ...o, command, inputFiles }
-      // console.log({...mainOptions, inputFiles: mainOptions.inputFiles.map(f=>f.name)})
       const result = await main(mainOptions)
-      // console.log(result.stdout, result.stderr);     
       result.outputFiles = result.outputFiles.map(f => ({ ...f, name: f.name.startsWith(emscriptenNodeFsRoot) ? f.name.substring(emscriptenNodeFsRoot.length + 1) : f.name }))
       inputFiles = [...inputFiles.filter(f => !result.outputFiles.find(f2 => f2.name === f.name)),
       ...result.outputFiles]
