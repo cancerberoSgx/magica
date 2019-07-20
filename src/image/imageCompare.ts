@@ -1,4 +1,4 @@
-import { File } from '../file'
+import { File } from '../file/file'
 import { main } from '../main/main'
 
 /**

@@ -1,6 +1,6 @@
 import { basename } from 'misc-utils-of-mine-generic';
 import { main } from '../../src';
-import { File } from '../../src/file';
+import { File } from '../../src/file/file';
 import { assertEquals, assertIncludes } from '../testUtil';
 
 export default async function f(){
@@ -13,5 +13,8 @@ export default async function f(){
   assertEquals(result.error, undefined)
   assertEquals(result.stderr, [])
   
+  var r = await fetch('asd');
+  var a = await r.arrayBuffer();
+  // a.
 }
 

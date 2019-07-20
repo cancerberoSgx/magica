@@ -2,7 +2,7 @@ import { ok } from 'assert'
 import fetch from 'cross-fetch'
 import { existsSync, readFileSync } from 'fs'
 import { basename, getFileNameFromUrl, isNode, serial } from 'misc-utils-of-mine-generic'
-import { File as IFile, Options } from './types'
+import { File as IFile, Options } from '../types'
 
 export class File implements IFile {
   public content: IFile['content']
@@ -44,6 +44,9 @@ export class File implements IFile {
     }))
   }
 
+  static asPath(f: string | File) {
+    return typeof f === 'string' ? f : f.name
+  }
 }
 
 

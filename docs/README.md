@@ -6,8 +6,9 @@
 
 #### External modules
 
-* ["emscriptenFs"](modules/_emscriptenfs_.md)
-* ["file"](modules/_file_.md)
+* ["file/emscriptenFs"](modules/_file_emscriptenfs_.md)
+* ["file/file"](modules/_file_file_.md)
+* ["file/protected"](modules/_file_protected_.md)
 * ["image/html"](modules/_image_html_.md)
 * ["image/imageBuiltIn"](modules/_image_imagebuiltin_.md)
 * ["image/imageCompare"](modules/_image_imagecompare_.md)

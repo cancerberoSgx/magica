@@ -1,12 +1,27 @@
-import { FS } from '../emscriptenFs'
+import { FS } from '../file/emscriptenFs'
 import { ls } from './lsR'
 
-export function rmRf(f: string, FS: FS) {
+export function rmRf(f: string, FS: FS, predicate: (f: string) => boolean = f => true) {
   if (FS.isDir(FS.stat(f).mode)) {
-    ls(f, FS).forEach(f => rmRf(f, FS))
-    FS.rmdir(f)
+    ls(f, FS).some(f => rmRf(f, FS))
+    if (predicate(f)) {
+      try {
+        FS.rmdir(f)
+      } catch (error) {
+        return true
+      }
+    }
+    else {
+      return false
+    }
   }
-  else {
-    FS.unlink(f)
+  else if (predicate(f)) {
+    try {
+      FS.unlink(f)
+    } catch (error) {
+      return true
+    }
   }
+
+  return false
 }

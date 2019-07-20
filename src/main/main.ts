@@ -1,5 +1,6 @@
 import { objectKeys } from 'misc-utils-of-mine-generic'
-import { File } from '../file'
+import { File } from '../file/file'
+import { isProtectedFile, protectFile } from '../file/protected'
 import { magickLoaded } from '../imageMagick/magickLoaded'
 import { getOptions, setOptions } from '../options'
 import { Options, Result } from '../types'
@@ -39,10 +40,19 @@ export async function main(o: Partial<Options>): Promise<Result> {
     name: f.path,
     content: FS.readFile(f.path)
   }))
-  !o.noRemove && ls(emscriptenNodeFsRoot, FS).forEach(f => rmRf(f, FS))
+    .filter(f => !isProtectedFile(f.name))
 
+  if (o.protectOutputFiles) {
+    outputFiles.forEach(protectFile)
+    outputFiles.length = 0
+  }
+  else {
+    ls(emscriptenNodeFsRoot, FS).forEach(f => rmRf(f, FS, f => !isProtectedFile(f)))
+  }
   return {
     ...returnValue,
     outputFiles
   }
 }
+
+

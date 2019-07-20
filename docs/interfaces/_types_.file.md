@@ -4,13 +4,16 @@
 
 # Interface: File
 
+Representation of input and output files. Use [File](_types_.file.md) class static methods to easily build files from
+filesystem files or urls .
+
 ## Hierarchy
 
 * **File**
 
 ## Implemented by
 
-* [File](../classes/_file_.file.md)
+* [File](../classes/_file_file_.file.md)
 
 ### Index
 
@@ -25,7 +28,9 @@
 
 • **content**: *`ArrayBufferView`*
 
-*Defined in [types.ts:5](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/types.ts#L5)*
+*Defined in [types.ts:16](https://github.com/cancerberoSgx/magica/blob/94207d7/src/types.ts#L16)*
+
+The content of the file.
 
 ___
 
@@ -33,4 +38,6 @@ ___
 
 • **name**: *string*
 
-*Defined in [types.ts:4](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/types.ts#L4)*
+*Defined in [types.ts:11](https://github.com/cancerberoSgx/magica/blob/94207d7/src/types.ts#L11)*
+
+Name for this file. Commands referencing this file must do so using this exact name.

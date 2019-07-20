@@ -1,8 +1,8 @@
 import { checkThrow, notUndefined } from 'misc-utils-of-mine-generic'
 
-function isArrayOfArrays(a: any): a is any[][] {
-  return Array.isArray(a) && (a.length === 0 || Array.isArray(a[0]))
-}
+// function isArrayOfArrays(a: any): a is any[][] {
+//   return Array.isArray(a) && (a.length === 0 || Array.isArray(a[0]))
+// }
 
 export function processCommand(command: string | string[]) {
   if (typeof command !== 'string') {

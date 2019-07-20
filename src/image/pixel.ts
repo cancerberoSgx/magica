@@ -1,4 +1,4 @@
-import { File } from '../file'
+import { File } from '../file/file'
 import { main } from '../main/main'
 
 export async function imagePixelColor(img: File, x: number, y: number): Promise<string> {

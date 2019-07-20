@@ -21,9 +21,9 @@
 * [help](_types_.clioptions.md#optional-help)
 * [input](_types_.clioptions.md#input)
 * [inputFiles](_types_.clioptions.md#optional-inputfiles)
-* [noRemove](_types_.clioptions.md#optional-noremove)
 * [nodeFsLocalRoot](_types_.clioptions.md#nodefslocalroot)
 * [outputDir](_types_.clioptions.md#outputdir)
+* [protectOutputFiles](_types_.clioptions.md#optional-protectoutputfiles)
 
 ## Properties
 
@@ -33,7 +33,7 @@
 
 *Inherited from [Options](_types_.options.md).[command](_types_.options.md#command)*
 
-*Defined in [types.ts:37](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/types.ts#L37)*
+*Defined in [types.ts:59](https://github.com/cancerberoSgx/magica/blob/94207d7/src/types.ts#L59)*
 
 An ImageMagick command, for example: `['convert', 'foo/bar.png', '-scale', '50%', 'out.gif']`
 
@@ -45,7 +45,7 @@ ___
 
 *Inherited from void*
 
-*Defined in [types.ts:29](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/types.ts#L29)*
+*Defined in [types.ts:45](https://github.com/cancerberoSgx/magica/blob/94207d7/src/types.ts#L45)*
 
 ___
 
@@ -55,9 +55,10 @@ ___
 
 *Inherited from [NativeOptions](_types_.nativeoptions.md).[disableNodeFs](_types_.nativeoptions.md#optional-disablenodefs)*
 
-*Defined in [types.ts:25](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/types.ts#L25)*
+*Defined in [types.ts:41](https://github.com/cancerberoSgx/magica/blob/94207d7/src/types.ts#L41)*
 
-Don't use system's filesystem in Node.js but memory filesystem (just like in the browser). This could be faster if read/write many images but consumes more memory.
+Don't use system's filesystem in Node.js but memory filesystem (just like in the browser). This could be
+faster if read/write many images but consumes more memory.
 
 ___
 
@@ -67,7 +68,7 @@ ___
 
 *Inherited from [NativeOptions](_types_.nativeoptions.md).[emscriptenNodeFsRoot](_types_.nativeoptions.md#emscriptennodefsroot)*
 
-*Defined in [types.ts:16](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/types.ts#L16)*
+*Defined in [types.ts:30](https://github.com/cancerberoSgx/magica/blob/94207d7/src/types.ts#L30)*
 
 Internal root FS directed path. This should rarely be configured by users.
 
@@ -77,7 +78,7 @@ ___
 
 • **help**? : *undefined | false | true*
 
-*Defined in [types.ts:57](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/types.ts#L57)*
+*Defined in [types.ts:75](https://github.com/cancerberoSgx/magica/blob/94207d7/src/types.ts#L75)*
 
 ___
 
@@ -85,7 +86,7 @@ ___
 
 • **input**: *string[]*
 
-*Defined in [types.ts:58](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/types.ts#L58)*
+*Defined in [types.ts:76](https://github.com/cancerberoSgx/magica/blob/94207d7/src/types.ts#L76)*
 
 ___
 
@@ -95,19 +96,11 @@ ___
 
 *Inherited from [Options](_types_.options.md).[inputFiles](_types_.options.md#optional-inputfiles)*
 
-*Defined in [types.ts:41](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/types.ts#L41)*
+*Defined in [types.ts:66](https://github.com/cancerberoSgx/magica/blob/94207d7/src/types.ts#L66)*
 
-The list of input files referenced in given [command](_types_.clioptions.md#command). It's important that the name of this files match the file names given in the command. If string and a file exists (node.js) then that file will be used. Otherwise it will be considered a url. In later cases, the filename will be the base name of file or url.
-
-___
-
-### `Optional` noRemove
-
-• **noRemove**? : *undefined | false | true*
-
-*Inherited from [Options](_types_.options.md).[noRemove](_types_.options.md#optional-noremove)*
-
-*Defined in [types.ts:33](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/types.ts#L33)*
+The list of input files referenced in given [command](_types_.clioptions.md#command). It's important that the name of this files match
+the file names given in the command. If string and a file exists (node.js) then that file will be used.
+Otherwise it will be considered a url. In later cases, the filename will be the base name of file or url.
 
 ___
 
@@ -117,9 +110,11 @@ ___
 
 *Inherited from [NativeOptions](_types_.nativeoptions.md).[nodeFsLocalRoot](_types_.nativeoptions.md#nodefslocalroot)*
 
-*Defined in [types.ts:12](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/types.ts#L12)*
+*Defined in [types.ts:25](https://github.com/cancerberoSgx/magica/blob/94207d7/src/types.ts#L25)*
 
-(Node.js and CLI only). In Node.js the local file system will be used to read/write files instead of memory (like in the browser). This folder will be used for that, by default, ./working_tmp. IMPORTANT: the content of this folder will be removed each time the tool is executed.
+(Node.js and CLI only). In Node.js the local file system will be used to read/write files instead of
+memory (like in the browser). This folder will be used for that, by default, ./working_tmp. IMPORTANT:
+the content of this folder will be removed each time the tool is executed.
 
 ___
 
@@ -129,6 +124,20 @@ ___
 
 *Inherited from [NativeOptions](_types_.nativeoptions.md).[outputDir](_types_.nativeoptions.md#outputdir)*
 
-*Defined in [types.ts:20](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/types.ts#L20)*
+*Defined in [types.ts:35](https://github.com/cancerberoSgx/magica/blob/94207d7/src/types.ts#L35)*
 
 (CLI only). Output files will be written in this folder. By default is current directory.
+
+___
+
+### `Optional` protectOutputFiles
+
+• **protectOutputFiles**? : *undefined | false | true*
+
+*Inherited from [Options](_types_.options.md).[protectOutputFiles](_types_.options.md#optional-protectoutputfiles)*
+
+*Defined in [types.ts:54](https://github.com/cancerberoSgx/magica/blob/94207d7/src/types.ts#L54)*
+
+Will register output files as protected files so they are not deleted in the future calls. Are managed by the user.
+
+Notice that protected files are not returned as [[output files]]

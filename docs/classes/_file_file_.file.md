@@ -1,6 +1,6 @@
 > **[magica](../README.md)**
 
-[Globals](../README.md) / ["file"](../modules/_file_.md) / [File](_file_.file.md) /
+[Globals](../README.md) / ["file/file"](../modules/_file_file_.md) / [File](_file_file_.file.md) /
 
 # Class: File
 
@@ -16,27 +16,28 @@
 
 #### Constructors
 
-* [constructor](_file_.file.md#constructor)
+* [constructor](_file_file_.file.md#constructor)
 
 #### Properties
 
-* [content](_file_.file.md#content)
-* [name](_file_.file.md#name)
+* [content](_file_file_.file.md#content)
+* [name](_file_file_.file.md#name)
 
 #### Methods
 
-* [fromFile](_file_.file.md#static-fromfile)
-* [fromUrl](_file_.file.md#static-fromurl)
-* [resolveOptions](_file_.file.md#static-resolveoptions)
-* [toString](_file_.file.md#static-tostring)
+* [asPath](_file_file_.file.md#static-aspath)
+* [fromFile](_file_file_.file.md#static-fromfile)
+* [fromUrl](_file_file_.file.md#static-fromurl)
+* [resolveOptions](_file_file_.file.md#static-resolveoptions)
+* [toString](_file_file_.file.md#static-tostring)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new File**(`name`: string, `content`: `ArrayBufferView` | `ArrayBuffer`): *[File](_file_.file.md)*
+\+ **new File**(`name`: string, `content`: `ArrayBufferView` | `ArrayBuffer`): *[File](_file_file_.file.md)*
 
-*Defined in [file.ts:8](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/file.ts#L8)*
+Defined in file/file.ts:8
 
 **Parameters:**
 
@@ -45,7 +46,7 @@ Name | Type |
 `name` | string |
 `content` | `ArrayBufferView` \| `ArrayBuffer` |
 
-**Returns:** *[File](_file_.file.md)*
+**Returns:** *[File](_file_file_.file.md)*
 
 ## Properties
 
@@ -55,7 +56,7 @@ Name | Type |
 
 *Implementation of [File](../interfaces/_types_.file.md).[content](../interfaces/_types_.file.md#content)*
 
-*Defined in [file.ts:8](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/file.ts#L8)*
+Defined in file/file.ts:8
 
 ___
 
@@ -65,15 +66,31 @@ ___
 
 *Implementation of [File](../interfaces/_types_.file.md).[name](../interfaces/_types_.file.md#name)*
 
-*Defined in [file.ts:10](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/file.ts#L10)*
+Defined in file/file.ts:10
 
 ## Methods
+
+### `Static` asPath
+
+▸ **asPath**(`f`: string | [File](_file_file_.file.md)): *string*
+
+Defined in file/file.ts:47
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`f` | string \| [File](_file_file_.file.md) |
+
+**Returns:** *string*
+
+___
 
 ### `Static` fromFile
 
 ▸ **fromFile**(`f`: string, `o`: `O`): *`Promise<File>`*
 
-*Defined in [file.ts:19](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/file.ts#L19)*
+Defined in file/file.ts:19
 
 **Parameters:**
 
@@ -90,7 +107,7 @@ ___
 
 ▸ **fromUrl**(`u`: string, `o`: `RequestInit` & `O`): *`Promise<File>`*
 
-*Defined in [file.ts:14](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/file.ts#L14)*
+Defined in file/file.ts:14
 
 **Parameters:**
 
@@ -107,7 +124,7 @@ ___
 
 ▸ **resolveOptions**(`o`: `Partial<Options>`): *`Promise<File[]>`*
 
-*Defined in [file.ts:30](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/file.ts#L30)*
+Defined in file/file.ts:30
 
 **Parameters:**
 
@@ -121,14 +138,14 @@ ___
 
 ### `Static` toString
 
-▸ **toString**(`f`: [File](_file_.file.md)): *string*
+▸ **toString**(`f`: [File](_file_file_.file.md)): *string*
 
-*Defined in [file.ts:26](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/file.ts#L26)*
+Defined in file/file.ts:26
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`f` | [File](_file_.file.md) |
+`f` | [File](_file_file_.file.md) |
 
 **Returns:** *string*

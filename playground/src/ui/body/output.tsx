@@ -9,9 +9,8 @@ export class Output extends AbstractComponent {
     return <Segment>
       {this.state.result.outputFiles ? this.state.result.outputFiles.map(f =>
         <> <a href="" onClick={e => {
-          var blob = new Blob([f.content])//, { type: 'image/svg+xml;charset=utf-8' })
+          var blob = new Blob([f.content])
           FileSaver.saveAs(blob, f.name)
-
         }}>{f.name}
           <img src={toDataUrl(f)} />
         </a>

@@ -21,7 +21,7 @@
 
 • **execute**: *function*
 
-*Defined in [main/executeCommandPreprocessor.ts:6](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/main/executeCommandPreprocessor.ts#L6)*
+*Defined in [main/executeCommandPreprocessor.ts:6](https://github.com/cancerberoSgx/magica/blob/94207d7/src/main/executeCommandPreprocessor.ts#L6)*
 
 #### Type declaration:
 
@@ -39,4 +39,4 @@ ___
 
 • **name**: *string*
 
-*Defined in [main/executeCommandPreprocessor.ts:5](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/main/executeCommandPreprocessor.ts#L5)*
+*Defined in [main/executeCommandPreprocessor.ts:5](https://github.com/cancerberoSgx/magica/blob/94207d7/src/main/executeCommandPreprocessor.ts#L5)*

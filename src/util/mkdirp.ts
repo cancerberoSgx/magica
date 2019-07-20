@@ -1,4 +1,4 @@
-import { FS } from '../emscriptenFs'
+import { FS } from '../file/emscriptenFs'
 
 export function mkdirp(path: string, exists: (f: string) => boolean, mkdir: (f: string) => any) {
   const folders = path.split('/')

@@ -1,5 +1,5 @@
 import { asArray, serial } from 'misc-utils-of-mine-generic'
-import { File } from '../file'
+import { File } from '../file/file'
 import { getOption } from '../options'
 import { Result, RunOptions, RunResult } from '../types'
 import { arrayToCliOne, cliToArray } from './command'
@@ -62,4 +62,14 @@ function resolveRunCommands(o: RunOptions) {
   }
   const commands = cliToArray(script)
   return commands
+}
+
+
+export async function runOne(script: string, input: File | File[] = []) {
+  const result = await run({ inputFiles: asArray(input), script })
+  if (result.error) { throw new Error(result.error + '' + result.stderr.join(', ')) }
+  if (!result.outputFiles.length) {
+    throw new Error('Expected output files but none resulted')
+  }
+  return result.outputFiles[0]
 }

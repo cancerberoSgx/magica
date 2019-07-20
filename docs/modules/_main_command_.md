@@ -19,7 +19,7 @@
 
 ▸ **arrayToCli**(`command`: string[] | string[][]): *string*
 
-*Defined in [main/command.ts:33](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/main/command.ts#L33)*
+*Defined in [main/command.ts:33](https://github.com/cancerberoSgx/magica/blob/94207d7/src/main/command.ts#L33)*
 
 Generates a valid command line string from given `string[]` that is compatible with  {@link call}. Works with multiple
 commands by separating  them with new lines and support comand splitting in new lines using `\`.
@@ -39,7 +39,7 @@ ___
 
 ▸ **arrayToCliOne**(`command`: string[]): *string*
 
-*Defined in [main/command.ts:17](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/main/command.ts#L17)*
+*Defined in [main/command.ts:17](https://github.com/cancerberoSgx/magica/blob/94207d7/src/main/command.ts#L17)*
 
 Generates a valid command line command from given `string[]` command. Works with a single command.
 
@@ -57,7 +57,7 @@ ___
 
 ▸ **cliToArray**(`cliCommand`: string): *string[][]*
 
-*Defined in [main/command.ts:78](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/main/command.ts#L78)*
+*Defined in [main/command.ts:78](https://github.com/cancerberoSgx/magica/blob/94207d7/src/main/command.ts#L78)*
 
 Generates a command in the form of `string[][]` that is compatible with {@link call} from given command line string.
 This works for strings containing multiple commands in different lines. and also respect `\` character for continue the same
@@ -77,7 +77,7 @@ ___
 
 ▸ **processCommand**(`command`: string | string[]): *string[]*
 
-*Defined in [main/command.ts:7](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/main/command.ts#L7)*
+*Defined in [main/command.ts:7](https://github.com/cancerberoSgx/magica/blob/94207d7/src/main/command.ts#L7)*
 
 **Parameters:**
 

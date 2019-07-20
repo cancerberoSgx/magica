@@ -1,6 +1,6 @@
 > **[magica](../README.md)**
 
-[Globals](../README.md) / ["emscriptenFs"](../modules/_emscriptenfs_.md) / [FS](_emscriptenfs_.fs.md) /
+[Globals](../README.md) / ["file/emscriptenFs"](../modules/_file_emscriptenfs_.md) / [FS](_file_emscriptenfs_.fs.md) /
 
 # Interface: FS
 
@@ -12,57 +12,57 @@
 
 #### Methods
 
-* [allocate](_emscriptenfs_.fs.md#allocate)
-* [analyzePath](_emscriptenfs_.fs.md#analyzepath)
-* [chdir](_emscriptenfs_.fs.md#chdir)
-* [chmod](_emscriptenfs_.fs.md#chmod)
-* [chown](_emscriptenfs_.fs.md#chown)
-* [close](_emscriptenfs_.fs.md#close)
-* [createLazyFile](_emscriptenfs_.fs.md#createlazyfile)
-* [createPreloadedFile](_emscriptenfs_.fs.md#createpreloadedfile)
-* [cwd](_emscriptenfs_.fs.md#cwd)
-* [fchmod](_emscriptenfs_.fs.md#fchmod)
-* [fchown](_emscriptenfs_.fs.md#fchown)
-* [ftruncate](_emscriptenfs_.fs.md#ftruncate)
-* [getPath](_emscriptenfs_.fs.md#getpath)
-* [init](_emscriptenfs_.fs.md#init)
-* [ioctl](_emscriptenfs_.fs.md#ioctl)
-* [isBlkdev](_emscriptenfs_.fs.md#isblkdev)
-* [isChrdev](_emscriptenfs_.fs.md#ischrdev)
-* [isDir](_emscriptenfs_.fs.md#isdir)
-* [isFIFO](_emscriptenfs_.fs.md#isfifo)
-* [isFile](_emscriptenfs_.fs.md#isfile)
-* [isLink](_emscriptenfs_.fs.md#islink)
-* [isSocket](_emscriptenfs_.fs.md#issocket)
-* [lchmod](_emscriptenfs_.fs.md#lchmod)
-* [lchown](_emscriptenfs_.fs.md#lchown)
-* [llseek](_emscriptenfs_.fs.md#llseek)
-* [lookupPath](_emscriptenfs_.fs.md#lookuppath)
-* [lstat](_emscriptenfs_.fs.md#lstat)
-* [major](_emscriptenfs_.fs.md#major)
-* [makedev](_emscriptenfs_.fs.md#makedev)
-* [minor](_emscriptenfs_.fs.md#minor)
-* [mkdev](_emscriptenfs_.fs.md#mkdev)
-* [mkdir](_emscriptenfs_.fs.md#mkdir)
-* [mmap](_emscriptenfs_.fs.md#mmap)
-* [mount](_emscriptenfs_.fs.md#mount)
-* [open](_emscriptenfs_.fs.md#open)
-* [read](_emscriptenfs_.fs.md#read)
-* [readFile](_emscriptenfs_.fs.md#readfile)
-* [readdir](_emscriptenfs_.fs.md#readdir)
-* [readlink](_emscriptenfs_.fs.md#readlink)
-* [registerDevice](_emscriptenfs_.fs.md#registerdevice)
-* [rename](_emscriptenfs_.fs.md#rename)
-* [rmdir](_emscriptenfs_.fs.md#rmdir)
-* [stat](_emscriptenfs_.fs.md#stat)
-* [symlink](_emscriptenfs_.fs.md#symlink)
-* [syncfs](_emscriptenfs_.fs.md#syncfs)
-* [truncate](_emscriptenfs_.fs.md#truncate)
-* [unlink](_emscriptenfs_.fs.md#unlink)
-* [unmount](_emscriptenfs_.fs.md#unmount)
-* [utime](_emscriptenfs_.fs.md#utime)
-* [write](_emscriptenfs_.fs.md#write)
-* [writeFile](_emscriptenfs_.fs.md#writefile)
+* [allocate](_file_emscriptenfs_.fs.md#allocate)
+* [analyzePath](_file_emscriptenfs_.fs.md#analyzepath)
+* [chdir](_file_emscriptenfs_.fs.md#chdir)
+* [chmod](_file_emscriptenfs_.fs.md#chmod)
+* [chown](_file_emscriptenfs_.fs.md#chown)
+* [close](_file_emscriptenfs_.fs.md#close)
+* [createLazyFile](_file_emscriptenfs_.fs.md#createlazyfile)
+* [createPreloadedFile](_file_emscriptenfs_.fs.md#createpreloadedfile)
+* [cwd](_file_emscriptenfs_.fs.md#cwd)
+* [fchmod](_file_emscriptenfs_.fs.md#fchmod)
+* [fchown](_file_emscriptenfs_.fs.md#fchown)
+* [ftruncate](_file_emscriptenfs_.fs.md#ftruncate)
+* [getPath](_file_emscriptenfs_.fs.md#getpath)
+* [init](_file_emscriptenfs_.fs.md#init)
+* [ioctl](_file_emscriptenfs_.fs.md#ioctl)
+* [isBlkdev](_file_emscriptenfs_.fs.md#isblkdev)
+* [isChrdev](_file_emscriptenfs_.fs.md#ischrdev)
+* [isDir](_file_emscriptenfs_.fs.md#isdir)
+* [isFIFO](_file_emscriptenfs_.fs.md#isfifo)
+* [isFile](_file_emscriptenfs_.fs.md#isfile)
+* [isLink](_file_emscriptenfs_.fs.md#islink)
+* [isSocket](_file_emscriptenfs_.fs.md#issocket)
+* [lchmod](_file_emscriptenfs_.fs.md#lchmod)
+* [lchown](_file_emscriptenfs_.fs.md#lchown)
+* [llseek](_file_emscriptenfs_.fs.md#llseek)
+* [lookupPath](_file_emscriptenfs_.fs.md#lookuppath)
+* [lstat](_file_emscriptenfs_.fs.md#lstat)
+* [major](_file_emscriptenfs_.fs.md#major)
+* [makedev](_file_emscriptenfs_.fs.md#makedev)
+* [minor](_file_emscriptenfs_.fs.md#minor)
+* [mkdev](_file_emscriptenfs_.fs.md#mkdev)
+* [mkdir](_file_emscriptenfs_.fs.md#mkdir)
+* [mmap](_file_emscriptenfs_.fs.md#mmap)
+* [mount](_file_emscriptenfs_.fs.md#mount)
+* [open](_file_emscriptenfs_.fs.md#open)
+* [read](_file_emscriptenfs_.fs.md#read)
+* [readFile](_file_emscriptenfs_.fs.md#readfile)
+* [readdir](_file_emscriptenfs_.fs.md#readdir)
+* [readlink](_file_emscriptenfs_.fs.md#readlink)
+* [registerDevice](_file_emscriptenfs_.fs.md#registerdevice)
+* [rename](_file_emscriptenfs_.fs.md#rename)
+* [rmdir](_file_emscriptenfs_.fs.md#rmdir)
+* [stat](_file_emscriptenfs_.fs.md#stat)
+* [symlink](_file_emscriptenfs_.fs.md#symlink)
+* [syncfs](_file_emscriptenfs_.fs.md#syncfs)
+* [truncate](_file_emscriptenfs_.fs.md#truncate)
+* [unlink](_file_emscriptenfs_.fs.md#unlink)
+* [unmount](_file_emscriptenfs_.fs.md#unmount)
+* [utime](_file_emscriptenfs_.fs.md#utime)
+* [write](_file_emscriptenfs_.fs.md#write)
+* [writeFile](_file_emscriptenfs_.fs.md#writefile)
 
 ## Methods
 
@@ -70,7 +70,7 @@
 
 ▸ **allocate**(`stream`: `FSStream`, `offset`: number, `length`: number): *void*
 
-*Defined in [emscriptenFs.ts:55](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L55)*
+Defined in file/emscriptenFs.ts:55
 
 **Parameters:**
 
@@ -88,7 +88,7 @@ ___
 
 ▸ **analyzePath**(`p`: string): *any*
 
-*Defined in [emscriptenFs.ts:61](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L61)*
+Defined in file/emscriptenFs.ts:61
 
 **Parameters:**
 
@@ -104,7 +104,7 @@ ___
 
 ▸ **chdir**(`path`: string): *void*
 
-*Defined in [emscriptenFs.ts:63](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L63)*
+Defined in file/emscriptenFs.ts:63
 
 **Parameters:**
 
@@ -120,7 +120,7 @@ ___
 
 ▸ **chmod**(`path`: string, `mode`: number, `dontFollow?`: undefined | false | true): *void*
 
-*Defined in [emscriptenFs.ts:41](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L41)*
+Defined in file/emscriptenFs.ts:41
 
 **Parameters:**
 
@@ -138,7 +138,7 @@ ___
 
 ▸ **chown**(`path`: string, `uid`: number, `gid`: number, `dontFollow?`: undefined | false | true): *void*
 
-*Defined in [emscriptenFs.ts:44](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L44)*
+Defined in file/emscriptenFs.ts:44
 
 **Parameters:**
 
@@ -157,7 +157,7 @@ ___
 
 ▸ **close**(`stream`: `FSStream`): *void*
 
-*Defined in [emscriptenFs.ts:51](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L51)*
+Defined in file/emscriptenFs.ts:51
 
 **Parameters:**
 
@@ -173,7 +173,7 @@ ___
 
 ▸ **createLazyFile**(`parent`: string, `name`: string, `url`: string, `canRead`: boolean, `canWrite`: boolean): *`FSNode`*
 
-*Defined in [emscriptenFs.ts:66](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L66)*
+Defined in file/emscriptenFs.ts:66
 
 **Parameters:**
 
@@ -189,7 +189,7 @@ Name | Type |
 
 ▸ **createLazyFile**(`parent`: `FSNode`, `name`: string, `url`: string, `canRead`: boolean, `canWrite`: boolean): *`FSNode`*
 
-*Defined in [emscriptenFs.ts:67](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L67)*
+Defined in file/emscriptenFs.ts:67
 
 **Parameters:**
 
@@ -209,7 +209,7 @@ ___
 
 ▸ **createPreloadedFile**(`parent`: string, `name`: string, `url`: string, `canRead`: boolean, `canWrite`: boolean, `onload?`: undefined | function, `onerror?`: undefined | function, `dontCreateFile?`: undefined | false | true, `canOwn?`: undefined | false | true): *void*
 
-*Defined in [emscriptenFs.ts:69](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L69)*
+Defined in file/emscriptenFs.ts:69
 
 **Parameters:**
 
@@ -229,7 +229,7 @@ Name | Type |
 
 ▸ **createPreloadedFile**(`parent`: `FSNode`, `name`: string, `url`: string, `canRead`: boolean, `canWrite`: boolean, `onload?`: undefined | function, `onerror?`: undefined | function, `dontCreateFile?`: undefined | false | true, `canOwn?`: undefined | false | true): *void*
 
-*Defined in [emscriptenFs.ts:70](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L70)*
+Defined in file/emscriptenFs.ts:70
 
 **Parameters:**
 
@@ -253,7 +253,7 @@ ___
 
 ▸ **cwd**(): *string*
 
-*Defined in [emscriptenFs.ts:62](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L62)*
+Defined in file/emscriptenFs.ts:62
 
 **Returns:** *string*
 
@@ -263,7 +263,7 @@ ___
 
 ▸ **fchmod**(`fd`: number, `mode`: number): *void*
 
-*Defined in [emscriptenFs.ts:43](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L43)*
+Defined in file/emscriptenFs.ts:43
 
 **Parameters:**
 
@@ -280,7 +280,7 @@ ___
 
 ▸ **fchown**(`fd`: number, `uid`: number, `gid`: number): *void*
 
-*Defined in [emscriptenFs.ts:46](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L46)*
+Defined in file/emscriptenFs.ts:46
 
 **Parameters:**
 
@@ -298,7 +298,7 @@ ___
 
 ▸ **ftruncate**(`fd`: number, `len`: number): *void*
 
-*Defined in [emscriptenFs.ts:48](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L48)*
+Defined in file/emscriptenFs.ts:48
 
 **Parameters:**
 
@@ -315,7 +315,7 @@ ___
 
 ▸ **getPath**(`node`: `FSNode`): *string*
 
-*Defined in [emscriptenFs.ts:11](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L11)*
+Defined in file/emscriptenFs.ts:11
 
 **Parameters:**
 
@@ -331,7 +331,7 @@ ___
 
 ▸ **init**(`input`: function, `output`: function, `error`: function): *void*
 
-*Defined in [emscriptenFs.ts:64](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L64)*
+Defined in file/emscriptenFs.ts:64
 
 **Parameters:**
 
@@ -367,7 +367,7 @@ ___
 
 ▸ **ioctl**(`stream`: `FSStream`, `cmd`: any, `arg`: any): *any*
 
-*Defined in [emscriptenFs.ts:57](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L57)*
+Defined in file/emscriptenFs.ts:57
 
 **Parameters:**
 
@@ -385,7 +385,7 @@ ___
 
 ▸ **isBlkdev**(`mode`: number): *boolean*
 
-*Defined in [emscriptenFs.ts:17](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L17)*
+Defined in file/emscriptenFs.ts:17
 
 **Parameters:**
 
@@ -401,7 +401,7 @@ ___
 
 ▸ **isChrdev**(`mode`: number): *boolean*
 
-*Defined in [emscriptenFs.ts:16](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L16)*
+Defined in file/emscriptenFs.ts:16
 
 **Parameters:**
 
@@ -417,7 +417,7 @@ ___
 
 ▸ **isDir**(`mode`: number): *boolean*
 
-*Defined in [emscriptenFs.ts:14](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L14)*
+Defined in file/emscriptenFs.ts:14
 
 **Parameters:**
 
@@ -433,7 +433,7 @@ ___
 
 ▸ **isFIFO**(`mode`: number): *boolean*
 
-*Defined in [emscriptenFs.ts:18](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L18)*
+Defined in file/emscriptenFs.ts:18
 
 **Parameters:**
 
@@ -449,7 +449,7 @@ ___
 
 ▸ **isFile**(`mode`: number): *boolean*
 
-*Defined in [emscriptenFs.ts:13](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L13)*
+Defined in file/emscriptenFs.ts:13
 
 **Parameters:**
 
@@ -465,7 +465,7 @@ ___
 
 ▸ **isLink**(`mode`: number): *boolean*
 
-*Defined in [emscriptenFs.ts:15](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L15)*
+Defined in file/emscriptenFs.ts:15
 
 **Parameters:**
 
@@ -481,7 +481,7 @@ ___
 
 ▸ **isSocket**(`mode`: number): *boolean*
 
-*Defined in [emscriptenFs.ts:19](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L19)*
+Defined in file/emscriptenFs.ts:19
 
 **Parameters:**
 
@@ -497,7 +497,7 @@ ___
 
 ▸ **lchmod**(`path`: string, `mode`: number): *void*
 
-*Defined in [emscriptenFs.ts:42](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L42)*
+Defined in file/emscriptenFs.ts:42
 
 **Parameters:**
 
@@ -514,7 +514,7 @@ ___
 
 ▸ **lchown**(`path`: string, `uid`: number, `gid`: number): *void*
 
-*Defined in [emscriptenFs.ts:45](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L45)*
+Defined in file/emscriptenFs.ts:45
 
 **Parameters:**
 
@@ -532,7 +532,7 @@ ___
 
 ▸ **llseek**(`stream`: `FSStream`, `offset`: number, `whence`: number): *any*
 
-*Defined in [emscriptenFs.ts:52](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L52)*
+Defined in file/emscriptenFs.ts:52
 
 **Parameters:**
 
@@ -550,7 +550,7 @@ ___
 
 ▸ **lookupPath**(`path`: string, `opts`: any): *`Lookup`*
 
-*Defined in [emscriptenFs.ts:10](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L10)*
+Defined in file/emscriptenFs.ts:10
 
 **Parameters:**
 
@@ -567,7 +567,7 @@ ___
 
 ▸ **lstat**(`path`: string): *any*
 
-*Defined in [emscriptenFs.ts:40](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L40)*
+Defined in file/emscriptenFs.ts:40
 
 **Parameters:**
 
@@ -583,7 +583,7 @@ ___
 
 ▸ **major**(`dev`: number): *number*
 
-*Defined in [emscriptenFs.ts:21](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L21)*
+Defined in file/emscriptenFs.ts:21
 
 **Parameters:**
 
@@ -599,7 +599,7 @@ ___
 
 ▸ **makedev**(`ma`: number, `mi`: number): *number*
 
-*Defined in [emscriptenFs.ts:23](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L23)*
+Defined in file/emscriptenFs.ts:23
 
 **Parameters:**
 
@@ -616,7 +616,7 @@ ___
 
 ▸ **minor**(`dev`: number): *number*
 
-*Defined in [emscriptenFs.ts:22](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L22)*
+Defined in file/emscriptenFs.ts:22
 
 **Parameters:**
 
@@ -632,7 +632,7 @@ ___
 
 ▸ **mkdev**(`path`: string, `mode?`: undefined | number, `dev?`: undefined | number): *any*
 
-*Defined in [emscriptenFs.ts:32](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L32)*
+Defined in file/emscriptenFs.ts:32
 
 **Parameters:**
 
@@ -650,7 +650,7 @@ ___
 
 ▸ **mkdir**(`path`: string, `mode?`: undefined | number): *any*
 
-*Defined in [emscriptenFs.ts:31](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L31)*
+Defined in file/emscriptenFs.ts:31
 
 **Parameters:**
 
@@ -667,7 +667,7 @@ ___
 
 ▸ **mmap**(`stream`: `FSStream`, `buffer`: `ArrayBufferView`, `offset`: number, `length`: number, `position`: number, `prot`: number, `flags`: number): *any*
 
-*Defined in [emscriptenFs.ts:56](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L56)*
+Defined in file/emscriptenFs.ts:56
 
 **Parameters:**
 
@@ -689,7 +689,7 @@ ___
 
 ▸ **mount**(`type`: any, `opts`: any, `mountpoint`: string): *any*
 
-*Defined in [emscriptenFs.ts:28](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L28)*
+Defined in file/emscriptenFs.ts:28
 
 **Parameters:**
 
@@ -707,7 +707,7 @@ ___
 
 ▸ **open**(`path`: string, `flags`: string, `mode?`: undefined | number, `fd_start?`: undefined | number, `fd_end?`: undefined | number): *`FSStream`*
 
-*Defined in [emscriptenFs.ts:50](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L50)*
+Defined in file/emscriptenFs.ts:50
 
 **Parameters:**
 
@@ -727,7 +727,7 @@ ___
 
 ▸ **read**(`stream`: `FSStream`, `buffer`: `ArrayBufferView`, `offset`: number, `length`: number, `position?`: undefined | number): *number*
 
-*Defined in [emscriptenFs.ts:53](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L53)*
+Defined in file/emscriptenFs.ts:53
 
 **Parameters:**
 
@@ -747,7 +747,7 @@ ___
 
 ▸ **readFile**(`path`: string, `opts?`: undefined | object): *any*
 
-*Defined in [emscriptenFs.ts:58](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L58)*
+Defined in file/emscriptenFs.ts:58
 
 **Parameters:**
 
@@ -764,7 +764,7 @@ ___
 
 ▸ **readdir**(`path`: string): *any*
 
-*Defined in [emscriptenFs.ts:36](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L36)*
+Defined in file/emscriptenFs.ts:36
 
 **Parameters:**
 
@@ -780,7 +780,7 @@ ___
 
 ▸ **readlink**(`path`: string): *string*
 
-*Defined in [emscriptenFs.ts:38](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L38)*
+Defined in file/emscriptenFs.ts:38
 
 **Parameters:**
 
@@ -796,7 +796,7 @@ ___
 
 ▸ **registerDevice**(`dev`: number, `ops`: any): *void*
 
-*Defined in [emscriptenFs.ts:24](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L24)*
+Defined in file/emscriptenFs.ts:24
 
 **Parameters:**
 
@@ -813,7 +813,7 @@ ___
 
 ▸ **rename**(`old_path`: string, `new_path`: string): *void*
 
-*Defined in [emscriptenFs.ts:34](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L34)*
+Defined in file/emscriptenFs.ts:34
 
 **Parameters:**
 
@@ -830,7 +830,7 @@ ___
 
 ▸ **rmdir**(`path`: string): *void*
 
-*Defined in [emscriptenFs.ts:35](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L35)*
+Defined in file/emscriptenFs.ts:35
 
 **Parameters:**
 
@@ -846,7 +846,7 @@ ___
 
 ▸ **stat**(`path`: string, `dontFollow?`: undefined | false | true): *any*
 
-*Defined in [emscriptenFs.ts:39](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L39)*
+Defined in file/emscriptenFs.ts:39
 
 **Parameters:**
 
@@ -863,7 +863,7 @@ ___
 
 ▸ **symlink**(`oldpath`: string, `newpath`: string): *any*
 
-*Defined in [emscriptenFs.ts:33](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L33)*
+Defined in file/emscriptenFs.ts:33
 
 **Parameters:**
 
@@ -880,7 +880,7 @@ ___
 
 ▸ **syncfs**(`populate`: boolean, `callback`: function): *void*
 
-*Defined in [emscriptenFs.ts:26](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L26)*
+Defined in file/emscriptenFs.ts:26
 
 **Parameters:**
 
@@ -900,7 +900,7 @@ Name | Type |
 
 ▸ **syncfs**(`callback`: function, `populate?`: undefined | false | true): *void*
 
-*Defined in [emscriptenFs.ts:27](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L27)*
+Defined in file/emscriptenFs.ts:27
 
 **Parameters:**
 
@@ -924,7 +924,7 @@ ___
 
 ▸ **truncate**(`path`: string, `len`: number): *void*
 
-*Defined in [emscriptenFs.ts:47](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L47)*
+Defined in file/emscriptenFs.ts:47
 
 **Parameters:**
 
@@ -941,7 +941,7 @@ ___
 
 ▸ **unlink**(`path`: string): *void*
 
-*Defined in [emscriptenFs.ts:37](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L37)*
+Defined in file/emscriptenFs.ts:37
 
 **Parameters:**
 
@@ -957,7 +957,7 @@ ___
 
 ▸ **unmount**(`mountpoint`: string): *void*
 
-*Defined in [emscriptenFs.ts:29](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L29)*
+Defined in file/emscriptenFs.ts:29
 
 **Parameters:**
 
@@ -973,7 +973,7 @@ ___
 
 ▸ **utime**(`path`: string, `atime`: number, `mtime`: number): *void*
 
-*Defined in [emscriptenFs.ts:49](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L49)*
+Defined in file/emscriptenFs.ts:49
 
 **Parameters:**
 
@@ -991,7 +991,7 @@ ___
 
 ▸ **write**(`stream`: `FSStream`, `buffer`: `ArrayBufferView`, `offset`: number, `length`: number, `position?`: undefined | number, `canOwn?`: undefined | false | true): *number*
 
-*Defined in [emscriptenFs.ts:54](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L54)*
+Defined in file/emscriptenFs.ts:54
 
 **Parameters:**
 
@@ -1012,7 +1012,7 @@ ___
 
 ▸ **writeFile**(`path`: string, `data`: `ArrayBufferView`, `opts?`: undefined | object): *void*
 
-*Defined in [emscriptenFs.ts:59](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L59)*
+Defined in file/emscriptenFs.ts:59
 
 **Parameters:**
 
@@ -1026,7 +1026,7 @@ Name | Type |
 
 ▸ **writeFile**(`path`: string, `data`: string, `opts?`: undefined | object): *void*
 
-*Defined in [emscriptenFs.ts:60](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/emscriptenFs.ts#L60)*
+Defined in file/emscriptenFs.ts:60
 
 **Parameters:**
 

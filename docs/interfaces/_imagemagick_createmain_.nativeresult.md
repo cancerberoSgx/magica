@@ -25,7 +25,7 @@
 
 • **error**: *`Error` | undefined*
 
-*Defined in [imageMagick/createMain.ts:28](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/imageMagick/createMain.ts#L28)*
+*Defined in [imageMagick/createMain.ts:28](https://github.com/cancerberoSgx/magica/blob/94207d7/src/imageMagick/createMain.ts#L28)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • **returnValue**: *any*
 
-*Defined in [imageMagick/createMain.ts:25](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/imageMagick/createMain.ts#L25)*
+*Defined in [imageMagick/createMain.ts:25](https://github.com/cancerberoSgx/magica/blob/94207d7/src/imageMagick/createMain.ts#L25)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • **stderr**: *string[]*
 
-*Defined in [imageMagick/createMain.ts:27](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/imageMagick/createMain.ts#L27)*
+*Defined in [imageMagick/createMain.ts:27](https://github.com/cancerberoSgx/magica/blob/94207d7/src/imageMagick/createMain.ts#L27)*
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 • **stdout**: *string[]*
 
-*Defined in [imageMagick/createMain.ts:26](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/imageMagick/createMain.ts#L26)*
+*Defined in [imageMagick/createMain.ts:26](https://github.com/cancerberoSgx/magica/blob/94207d7/src/imageMagick/createMain.ts#L26)*

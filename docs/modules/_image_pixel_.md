@@ -14,15 +14,15 @@
 
 ###  imagePixelColor
 
-▸ **imagePixelColor**(`img`: [File](../classes/_file_.file.md), `x`: number, `y`: number): *`Promise<string>`*
+▸ **imagePixelColor**(`img`: [File](../classes/_file_file_.file.md), `x`: number, `y`: number): *`Promise<string>`*
 
-*Defined in [image/pixel.ts:4](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/image/pixel.ts#L4)*
+*Defined in [image/pixel.ts:4](https://github.com/cancerberoSgx/magica/blob/94207d7/src/image/pixel.ts#L4)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`img` | [File](../classes/_file_.file.md) |
+`img` | [File](../classes/_file_file_.file.md) |
 `x` | number |
 `y` | number |
 

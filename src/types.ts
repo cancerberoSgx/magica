@@ -1,26 +1,42 @@
 import { NativeResult } from './imageMagick/createMain'
 
+/**
+ * Representation of input and output files. Use [[File]] class static methods to easily build files from
+ * filesystem files or urls .
+ */
 export interface File {
+  /**
+   * Name for this file. Commands referencing this file must do so using this exact name.
+   */
   name: string;
+
+  /**
+   * The content of the file. 
+   */
   content: ArrayBufferView
 }
 
 export interface NativeOptions extends BaseOptions {
   /**
-   * (Node.js and CLI only). In Node.js the local file system will be used to read/write files instead of memory (like in the browser). This folder will be used for that, by default, ./working_tmp. IMPORTANT: the content of this folder will be removed each time the tool is executed.
+   * (Node.js and CLI only). In Node.js the local file system will be used to read/write files instead of
+   * memory (like in the browser). This folder will be used for that, by default, ./working_tmp. IMPORTANT:
+   * the content of this folder will be removed each time the tool is executed.
    */
   nodeFsLocalRoot: string
+
   /**
    * Internal root FS directed path. This should rarely be configured by users.
    */
   emscriptenNodeFsRoot: string
+
   /**
    * (CLI only). Output files will be written in this folder. By default is current directory.
    */
   outputDir: string
 
   /**
-   * Don't use system's filesystem in Node.js but memory filesystem (just like in the browser). This could be faster if read/write many images but consumes more memory.
+   * Don't use system's filesystem in Node.js but memory filesystem (just like in the browser). This could be
+   * faster if read/write many images but consumes more memory.
    */
   disableNodeFs?: boolean
 }
@@ -30,23 +46,25 @@ interface BaseOptions {
 }
 
 export interface Options extends NativeOptions {
-  noRemove?: boolean
+  /**
+   * Will register output files as protected files so they are not deleted in the future calls. Are managed by the user.
+   * 
+   * Notice that protected files are not returned as [[output files]]
+   */
+  protectOutputFiles?: boolean
+
   /**
    * An ImageMagick command, for example: `['convert', 'foo/bar.png', '-scale', '50%', 'out.gif']`
    */
   command: string | string[]
+
   /**
-   * The list of input files referenced in given [[command]]. It's important that the name of this files match the file names given in the command. If string and a file exists (node.js) then that file will be used. Otherwise it will be considered a url. In later cases, the filename will be the base name of file or url.
+   * The list of input files referenced in given [[command]]. It's important that the name of this files match
+   * the file names given in the command. If string and a file exists (node.js) then that file will be used.
+   * Otherwise it will be considered a url. In later cases, the filename will be the base name of file or url.
    */
   inputFiles?: (string | File)[]
-  // /**
-  //  * Because input files are copied to the working folder, By default, they are removed after command ends. If this option is true they won't. 
-  //  */
-  // noRemoveInputFiles?: boolean
-  // /**
-  //  * By default, generated output files are removed after the command ends. If this option is true, they won't. 
-  //  */
-  // noRemoveOutputFiles?: boolean
+
 }
 
 export interface Result extends NativeResult {
@@ -107,11 +125,15 @@ export interface RunOptions extends Partial<Options> {
 }
 
 /**
- * represent the result of executing a sequence of commands. In this case outputFiles are the output files of just the last command, while stdout, stderr are the concatenation of all commands output. 
+ * Represent the result of executing a sequence of commands. In this case outputFiles are the output files of
+ * just the last command, while stdout, stderr are the concatenation of all commands output. 
  */
 export interface RunResult extends Result {
+
   results: Result[],
+
   commands: string[][],
+
   /**
    * Las command output files
    */

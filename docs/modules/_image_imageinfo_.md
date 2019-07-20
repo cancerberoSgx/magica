@@ -14,9 +14,9 @@
 
 ###  imageInfo
 
-▸ **imageInfo**(`img`: [File](../classes/_file_.file.md) | string): *`Promise<ExtractInfoResult[]>`*
+▸ **imageInfo**(`img`: [File](../classes/_file_file_.file.md) | string): *`Promise<ExtractInfoResult[]>`*
 
-*Defined in [image/imageInfo.ts:9](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/image/imageInfo.ts#L9)*
+*Defined in [image/imageInfo.ts:9](https://github.com/cancerberoSgx/magica/blob/94207d7/src/image/imageInfo.ts#L9)*
 
 Execute `convert $IMG info.json` to extract image metadata. Returns the parsed info.json file contents
 
@@ -24,6 +24,6 @@ Execute `convert $IMG info.json` to extract image metadata. Returns the parsed i
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`img` | [File](../classes/_file_.file.md) \| string | could be a string in case you want to extract information of built in images like `rose:`  |
+`img` | [File](../classes/_file_file_.file.md) \| string | could be a string in case you want to extract information of built in images like `rose:`  |
 
 **Returns:** *`Promise<ExtractInfoResult[]>`*

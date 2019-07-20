@@ -1,5 +1,5 @@
 import { basename, pathJoin } from 'misc-utils-of-mine-generic'
-import { FS } from '../emscriptenFs'
+import { FS } from '../file/emscriptenFs'
 
 interface Options {
   /**

@@ -1,6 +1,6 @@
 import test from 'ava'
 import fetch from 'cross-fetch'
-import { File } from '../src/file'
+import { File } from '../src/file/file'
 import { main } from '../src/main/main'
 import fileType = require('file-type')
 

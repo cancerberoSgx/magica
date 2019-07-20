@@ -168,6 +168,7 @@ Options are the same for the command line and the API:
 - [ ] verify support IM command quoted arguments
 - [ ] verify mkdir -p for output files
 - [ ] because options are global - sending commands concurrently could fail. Solution: queue or instance options
+- [ ] montage and other commands than convert and identify (montage is special with files?)
 - [ ] an easy to use API for web-workers
 - [ ] verify web worker  passing files is optimal (verify transferable/shared array buffers/optimal)
 - [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
@@ -206,3 +207,14 @@ Options are the same for the command line and the API:
 ### Ideas
 
 - [ ] drawing svg. is not documented and seems the official way is doing it using mvg. But... what if we convert all shapes to paths, use svgo to reduce the number to (even single ) path and use draw to draw them. syntax seems to be compatible... This way we should have yet another method of rasterize a svg, but this time to any format. I wonder what the speed is compared to other rasterize methods, if we target .ma
+
+- [ ] can we perform similar algorithm as geometrize with IM? this is interesting usecase since the objective is performance, reuse files so we need an api for:
+  * prevent/ control file removal
+  * commands to write/modify/access existing files
+    two api alternatives:
+       - Mode like / options - options.reuseFiles or options.preventFileRemove that wont write or remove files (user responsibility)
+       - per file attribute "readonly"
+           - an API to mark certain files or folders as readonly so they cannot me touched by convert commands. 
+              - so i can create a folder and work there.
+              - I can pass options.forceFileOverride to explicitly allow modifications by convert.
+  * could start with random drawings and image compare (whole image or the local area)

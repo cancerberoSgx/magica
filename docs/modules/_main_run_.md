@@ -9,6 +9,7 @@
 #### Functions
 
 * [run](_main_run_.md#run)
+* [runOne](_main_run_.md#runone)
 
 ## Functions
 
@@ -16,7 +17,7 @@
 
 ▸ **run**(`o`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<RunResult>`*
 
-*Defined in [main/run.ts:24](https://github.com/cancerberoSgx/magica/blob/cdb8012/src/main/run.ts#L24)*
+*Defined in [main/run.ts:24](https://github.com/cancerberoSgx/magica/blob/94207d7/src/main/run.ts#L24)*
 
 Has a signature compatible with main, but if `script` is given instead of `command` option then it's
 interpreted as a sequence of commands that are executed serially using [main](../interfaces/_imagemagick_magickloaded_.main.md#main)
@@ -39,3 +40,20 @@ Name | Type |
 **Returns:** *`Promise<RunResult>`*
 
 the result of each command execution
+
+___
+
+###  runOne
+
+▸ **runOne**(`script`: string, `input`: [File](../classes/_file_file_.file.md) | [File](../classes/_file_file_.file.md)[]): *`Promise<File>`*
+
+*Defined in [main/run.ts:68](https://github.com/cancerberoSgx/magica/blob/94207d7/src/main/run.ts#L68)*
+
+**Parameters:**
+
+Name | Type | Default |
+------ | ------ | ------ |
+`script` | string | - |
+`input` | [File](../classes/_file_file_.file.md) \| [File](../classes/_file_file_.file.md)[] |  [] |
+
+**Returns:** *`Promise<File>`*
