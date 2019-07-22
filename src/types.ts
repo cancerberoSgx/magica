@@ -139,3 +139,8 @@ export interface RunResult extends Result {
    */
   outputFiles: File[]
 }
+
+export interface CommandPreprocessor {
+  name: string,
+  execute(context: RunOptions) : Promise<RunOptions>
+}

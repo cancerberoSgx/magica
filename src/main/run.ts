@@ -23,7 +23,7 @@ import { main } from './main'
  */
 export async function run(o: RunOptions) {
   const emscriptenNodeFsRoot = getOption('emscriptenNodeFsRoot')
-  const commands = resolveRunCommands(o)
+  const commands = await resolveRunCommands(o)
   const finalResult: RunResult = { results: [], commands, outputFiles: [], stderr: [], stdout: [], error: undefined, returnValue: undefined }
   let inputFiles = await File.resolveOptions(o)
   await serial(commands.map((command, i) => async () => {
@@ -48,11 +48,11 @@ export async function run(o: RunOptions) {
   return r
 }
 
-function resolveRunCommands(o: RunOptions) {
+async  function resolveRunCommands(o: RunOptions) {
   if ((!o.script || !o.script.length) && (!o.command || !o.command.length)) {
     throw new Error('No script or command given')
   }
-  o = _preprocessCommand(o)
+  o = await _preprocessCommand(o)
   let script: string
   if (o.script && o.script.length) {
     script = asArray(o.script).join('\n')

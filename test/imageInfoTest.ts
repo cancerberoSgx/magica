@@ -173,7 +173,7 @@ const o = [
       "pixelsPerSecond": "15805000000000000B",
       "userTime": "0.000u",
       "elapsedTime": "0:01.000",
-      "version": "file:////share/doc/ImageMagick-7/index.html"
+      "version": "file:///code/prefix/share/doc/ImageMagick-7/index.html"
     }
   }
 ]

@@ -1,9 +1,5 @@
 import { checkThrow, notUndefined } from 'misc-utils-of-mine-generic'
 
-// function isArrayOfArrays(a: any): a is any[][] {
-//   return Array.isArray(a) && (a.length === 0 || Array.isArray(a[0]))
-// }
-
 export function processCommand(command: string | string[]) {
   if (typeof command !== 'string') {
     return command
@@ -55,7 +51,6 @@ function cliToArrayOne(cliCommand: string): string[] | undefined {
   }
   spaceIndexes.push(cliCommand.length)
   const command = spaceIndexes
-    // .map((spaceIndex, i) => cliCommand.substring(i === 0 ? 0 : spaceIndexes[i - 1], spaceIndexes[i]).trim())
     .map((spaceIndex, i) => cliCommand.substring(i === 0 ? 0 : spaceIndexes[i - 1], spaceIndexes[i]).replace(/^[ ]+/, '').replace(/[ ]+$/, ''))
     .filter(s => !!s)
 
