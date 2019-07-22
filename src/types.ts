@@ -130,8 +130,14 @@ export interface RunOptions extends Partial<Options> {
  */
 export interface RunResult extends Result {
 
+  /**
+   * Sequence of results for each command found in the script, in order.
+   */
   results: Result[],
 
+  /**
+   * The command sequence decoded from given script.
+   */
   commands: string[][],
 
   /**

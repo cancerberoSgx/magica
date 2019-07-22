@@ -17,7 +17,7 @@
 
 ▸ **_preprocessCommand**(`config`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<RunOptions>`*
 
-*Defined in [main/executeCommandPreprocessor.ts:8](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/main/executeCommandPreprocessor.ts#L8)*
+*Defined in [main/executeCommandPreprocessor.ts:8](https://github.com/cancerberoSgx/magica/blob/1a62845/src/main/executeCommandPreprocessor.ts#L8)*
 
 internal - executes all registered preprocessor on given config
 
@@ -35,7 +35,7 @@ ___
 
 ▸ **registerCommandPreprocessor**(`p`: [CommandPreprocessor](../interfaces/_types_.commandpreprocessor.md)): *void*
 
-*Defined in [main/executeCommandPreprocessor.ts:16](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/main/executeCommandPreprocessor.ts#L16)*
+*Defined in [main/executeCommandPreprocessor.ts:16](https://github.com/cancerberoSgx/magica/blob/1a62845/src/main/executeCommandPreprocessor.ts#L16)*
 
 **Parameters:**
 

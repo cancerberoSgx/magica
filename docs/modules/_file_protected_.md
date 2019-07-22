@@ -18,7 +18,7 @@
 
 ▸ **getProtectedFile**(`f`: string | [File](../classes/_file_file_.file.md)): *`Promise<object>`*
 
-*Defined in [file/protected.ts:10](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/file/protected.ts#L10)*
+*Defined in [file/protected.ts:10](https://github.com/cancerberoSgx/magica/blob/1a62845/src/file/protected.ts#L10)*
 
 **Parameters:**
 
@@ -34,7 +34,7 @@ ___
 
 ▸ **isProtectedFile**(`f`: string | [File](../classes/_file_file_.file.md)): *boolean*
 
-*Defined in [file/protected.ts:17](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/file/protected.ts#L17)*
+*Defined in [file/protected.ts:17](https://github.com/cancerberoSgx/magica/blob/1a62845/src/file/protected.ts#L17)*
 
 **Parameters:**
 
@@ -50,7 +50,7 @@ ___
 
 ▸ **protectFile**(`f`: string | [File](../classes/_file_file_.file.md)): *void*
 
-*Defined in [file/protected.ts:6](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/file/protected.ts#L6)*
+*Defined in [file/protected.ts:6](https://github.com/cancerberoSgx/magica/blob/1a62845/src/file/protected.ts#L6)*
 
 If string is given is assumes as the path and must exists
 

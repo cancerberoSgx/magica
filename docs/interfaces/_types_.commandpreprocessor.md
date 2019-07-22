@@ -24,7 +24,7 @@
 
 • **name**: *string*
 
-*Defined in [types.ts:144](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/types.ts#L144)*
+*Defined in [types.ts:150](https://github.com/cancerberoSgx/magica/blob/1a62845/src/types.ts#L150)*
 
 ## Methods
 
@@ -32,7 +32,7 @@
 
 ▸ **execute**(`context`: [RunOptions](_types_.runoptions.md)): *`Promise<RunOptions>`*
 
-*Defined in [types.ts:145](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/types.ts#L145)*
+*Defined in [types.ts:151](https://github.com/cancerberoSgx/magica/blob/1a62845/src/types.ts#L151)*
 
 **Parameters:**
 
