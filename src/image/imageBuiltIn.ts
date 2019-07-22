@@ -1,9 +1,9 @@
 import pMap from 'p-map'
-import { File } from '..'
 import { main } from '../main/main'
 import { imageInfo } from './imageInfo'
+import { IFile } from '../types';
 
-let builtInImages: File[]
+let builtInImages: IFile[]
 // export enum imageBuiltInNames {'rose:'='rose:', 'logo:'='logo:', 'wizard:'='wizard:', 'granite:'='granite:', 'netscape:'='netscape:'}
 type images = 'rose:' | 'logo:' | 'wizard:' | 'granite:' | 'netscape:'
 const names: images[] = ['rose:', 'logo:', 'wizard:', 'granite:', 'netscape:']
@@ -11,7 +11,7 @@ const names: images[] = ['rose:', 'logo:', 'wizard:', 'granite:', 'netscape:']
  * Gets ImageMagick built-in images like `rose:`, `logo:`, etc in the form of {@link File}s. 
  * @param builtIn if given it will resolve with with an array contianing only that image 
  */
-export async function imageBuiltIn(builtIn?: images): Promise<File[]> {
+export async function imageBuiltIn(builtIn?: images): Promise<IFile[]> {
   if (!builtInImages) {
     builtInImages = await pMap(names, async name => { // TODO: see if we can just use serial
       const info = await imageInfo(name)

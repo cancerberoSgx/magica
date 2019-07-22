@@ -11,3 +11,16 @@ convert -font helvetica.ttf -pointsize 44 -background lightblue -fill navy label
   t.true(await imageCompare(await File.fromFile('test/assets/text.png'), result.outputFiles[0]))
   t.deepEqual(result.error, undefined)
 })
+
+test('should list available fonts', async t => {
+  const result = await run({
+    script: `
+    convert -list font 
+      `,
+    inputFiles: [ ]
+  })
+  t.deepEqual(result.error, undefined)
+  t.deepEqual(result.stdout, [])
+  t.deepEqual(result.stderr, [])
+})
+

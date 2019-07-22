@@ -1,5 +1,6 @@
 import { objectKeys } from 'misc-utils-of-mine-generic'
 import { File } from '../file/file'
+import {  IFile } from '../types'
 import { isProtectedFile, protectFile } from '../file/protected'
 import { magickLoaded } from '../imageMagick/magickLoaded'
 import { getOptions, setOptions } from '../options'
@@ -36,7 +37,7 @@ export async function main(o: Partial<Options>): Promise<Result> {
   const afterTree = listFilesRecursively(emscriptenNodeFsRoot, FS)
 
   const diffTree = afterTree.filter(f => !beforeTree.find(b => b.path === f.path))
-  const outputFiles = diffTree.map(f => ({
+  const outputFiles: IFile[] = diffTree.map(f => ({
     name: f.path,
     content: FS.readFile(f.path)
   }))

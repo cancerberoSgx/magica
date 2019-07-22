@@ -1,4 +1,4 @@
-import { Deferred } from 'misc-utils-of-mine-generic'
+import { Deferred, isNode } from 'misc-utils-of-mine-generic'
 import { FS } from '../file/emscriptenFs'
 import { getOptions } from '../options'
 import { NativeMain } from './createMain'
@@ -7,12 +7,14 @@ export interface Main {
   main: NativeMain,
   FS: FS
 }
+const { nodeFsLocalRoot, emscriptenNodeFsRoot, debug, disableNodeFs } = getOptions()
 
 export const magickLoaded = new Deferred<Main>()
 
 const stdout: string[] = []
 export function pushStdout(s: string) {
-  stdout.push(s)
+    debug && console.log(`>> stdout >> ${scrollbars}`);
+    stdout.push(s)
 }
 export function resetStdout() {
   stdout.length = 0
@@ -23,7 +25,8 @@ export function getStdout() {
 
 const stderr: string[] = []
 export function pushStderr(s: string) {
-  stderr.push(s)
+    debug && console.log(`>> stderr >> ${s}`)
+    stderr.push(s)
 }
 export function resetStderr() {
   stderr.length = 0

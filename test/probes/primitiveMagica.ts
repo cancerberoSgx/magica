@@ -1,13 +1,14 @@
 // performance TODO
-// invesatigate the /tmpI.mpc cache files protecting them
+// investigate the /tmpI.mpc cache files protecting them
 
 import { writeFileSync } from 'fs'
 import { unique } from 'misc-utils-of-mine-generic'
 import { File, run } from '../../src'
 import { runOne } from '../../src/main/run'
+import {  IFile } from '../../src/types';
 
 interface Options {
-  input: File
+  input: IFile
   iterations?: number
   shapeCount?: number
   mutationCount?: number
@@ -47,15 +48,16 @@ interface Shape {
   svg(): string
   render(o: ShapeRenderOptions): Promise<ShapeRenderOutput>
 }
+
 interface ShapeRenderOptions {
-  file: File
+  file: IFile
   location: Point
   size: Point
   fill: string
   stroke: string
 }
 interface ShapeRenderOutput {
-  file: File
+  file: IFile
 }
 class Shape { }
 class Rectangle extends Shape {

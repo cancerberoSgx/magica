@@ -1,10 +1,11 @@
 import { NativeResult } from './imageMagick/createMain'
+import { ExtractInfoResultImage } from './image/imageInfo';
 
 /**
  * Representation of input and output files. Use [[File]] class static methods to easily build files from
  * filesystem files or urls .
  */
-export interface File {
+export interface IFile {
   /**
    * Name for this file. Commands referencing this file must do so using this exact name.
    */
@@ -14,6 +15,12 @@ export interface File {
    * The content of the file. 
    */
   content: ArrayBufferView
+
+  // /**
+  //  * Get image information, like geometry, important numbers, mimeType, etc. The first time it calls `identify` command, but then it will cache ths value.
+  //  */
+  // info: Promise<ExtractInfoResultImage>
+
 }
 
 export interface NativeOptions extends BaseOptions {
@@ -63,12 +70,12 @@ export interface Options extends NativeOptions {
    * the file names given in the command. If string and a file exists (node.js) then that file will be used.
    * Otherwise it will be considered a url. In later cases, the filename will be the base name of file or url.
    */
-  inputFiles?: (string | File)[]
+  inputFiles?: (string | IFile)[]
 
 }
 
 export interface Result extends NativeResult {
-  outputFiles: File[]
+  outputFiles: IFile[]
 }
 
 export interface CliOptions extends Options {
@@ -143,7 +150,7 @@ export interface RunResult extends Result {
   /**
    * Las command output files
    */
-  outputFiles: File[]
+  outputFiles: IFile[]
 }
 
 export interface CommandPreprocessor {
