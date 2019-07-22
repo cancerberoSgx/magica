@@ -30,15 +30,15 @@
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[error](_imagemagick_createmain_.nativeresult.md#error)*
 
-*Defined in [imageMagick/createMain.ts:40](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/imageMagick/createMain.ts#L40)*
+*Defined in [imageMagick/createMain.ts:40](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/imageMagick/createMain.ts#L40)*
 
 ___
 
 ###  outputFiles
 
-• **outputFiles**: *[File](_types_.file.md)[]*
+• **outputFiles**: *[IFile](_types_.ifile.md)[]*
 
-*Defined in [types.ts:71](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/types.ts#L71)*
+*Defined in [types.ts:77](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/types.ts#L77)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[returnValue](_imagemagick_createmain_.nativeresult.md#returnvalue)*
 
-*Defined in [imageMagick/createMain.ts:37](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/imageMagick/createMain.ts#L37)*
+*Defined in [imageMagick/createMain.ts:37](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/imageMagick/createMain.ts#L37)*
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[stderr](_imagemagick_createmain_.nativeresult.md#stderr)*
 
-*Defined in [imageMagick/createMain.ts:39](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/imageMagick/createMain.ts#L39)*
+*Defined in [imageMagick/createMain.ts:39](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/imageMagick/createMain.ts#L39)*
 
 ___
 
@@ -68,4 +68,4 @@ ___
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[stdout](_imagemagick_createmain_.nativeresult.md#stdout)*
 
-*Defined in [imageMagick/createMain.ts:38](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/imageMagick/createMain.ts#L38)*
+*Defined in [imageMagick/createMain.ts:38](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/imageMagick/createMain.ts#L38)*

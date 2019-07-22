@@ -14,15 +14,15 @@
 
 ###  toDataUrl
 
-▸ **toDataUrl**(`o`: [File](../classes/_file_file_.file.md), `mime`: string): *string*
+▸ **toDataUrl**(`o`: [IFile](../interfaces/_types_.ifile.md), `mime`: string): *string*
 
-*Defined in [image/html.ts:4](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/image/html.ts#L4)*
+*Defined in [image/html.ts:4](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/image/html.ts#L4)*
 
 **Parameters:**
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`o` | [File](../classes/_file_file_.file.md) | - |
+`o` | [IFile](../interfaces/_types_.ifile.md) | - |
 `mime` | string |  `image/${getFileExtension(o.name)}` |
 
 **Returns:** *string*

@@ -24,6 +24,7 @@
 * ["main/templatePreprocessor"](modules/_main_templatepreprocessor_.md)
 * ["options"](modules/_options_.md)
 * ["types"](modules/_types_.md)
+* ["util/base64"](modules/_util_base64_.md)
 * ["util/lsR"](modules/_util_lsr_.md)
 * ["util/mkdirp"](modules/_util_mkdirp_.md)
 * ["util/rmRf"](modules/_util_rmrf_.md)

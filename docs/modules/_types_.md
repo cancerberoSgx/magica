@@ -10,7 +10,7 @@
 
 * [CliOptions](../interfaces/_types_.clioptions.md)
 * [CommandPreprocessor](../interfaces/_types_.commandpreprocessor.md)
-* [File](../interfaces/_types_.file.md)
+* [IFile](../interfaces/_types_.ifile.md)
 * [NativeOptions](../interfaces/_types_.nativeoptions.md)
 * [Options](../interfaces/_types_.options.md)
 * [Result](../interfaces/_types_.result.md)

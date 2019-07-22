@@ -22,7 +22,7 @@
 
 • **script**? : *string | string[]*
 
-*Defined in [types.ts:124](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/types.ts#L124)*
+*Defined in [types.ts:130](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/types.ts#L130)*
 
 Takes precedence over [Options.command](_types_.options.md#command). If not provided then  [Options.command](_types_.options.md#command) is used.
 

@@ -30,7 +30,7 @@
 
 *Inherited from void*
 
-*Defined in [types.ts:45](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/types.ts#L45)*
+*Defined in [types.ts:51](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/types.ts#L51)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **disableNodeFs**? : *undefined | false | true*
 
-*Defined in [types.ts:41](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/types.ts#L41)*
+*Defined in [types.ts:47](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/types.ts#L47)*
 
 Don't use system's filesystem in Node.js but memory filesystem (just like in the browser). This could be
 faster if read/write many images but consumes more memory.
@@ -49,7 +49,7 @@ ___
 
 • **emscriptenNodeFsRoot**: *string*
 
-*Defined in [types.ts:30](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/types.ts#L30)*
+*Defined in [types.ts:36](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/types.ts#L36)*
 
 Internal root FS directed path. This should rarely be configured by users.
 
@@ -59,7 +59,7 @@ ___
 
 • **nodeFsLocalRoot**: *string*
 
-*Defined in [types.ts:25](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/types.ts#L25)*
+*Defined in [types.ts:31](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/types.ts#L31)*
 
 (Node.js and CLI only). In Node.js the local file system will be used to read/write files instead of
 memory (like in the browser). This folder will be used for that, by default, ./working_tmp. IMPORTANT:
@@ -71,6 +71,6 @@ ___
 
 • **outputDir**: *string*
 
-*Defined in [types.ts:35](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/types.ts#L35)*
+*Defined in [types.ts:41](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/types.ts#L41)*
 
 (CLI only). Output files will be written in this folder. By default is current directory.

@@ -17,7 +17,7 @@ test('should list available fonts', async t => {
     script: `
     convert -list font 
       `,
-    inputFiles: [ ]
+    inputFiles: []
   })
   t.deepEqual(result.error, undefined)
   t.deepEqual(result.stdout, [])

@@ -16,7 +16,7 @@
 
 ▸ **imagePixelColor**(`img`: [File](../classes/_file_file_.file.md), `x`: number, `y`: number): *`Promise<string>`*
 
-*Defined in [image/pixel.ts:4](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/image/pixel.ts#L4)*
+*Defined in [image/pixel.ts:4](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/image/pixel.ts#L4)*
 
 **Parameters:**
 

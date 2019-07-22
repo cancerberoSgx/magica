@@ -1,5 +1,5 @@
 import { magickLoaded } from '../imageMagick/magickLoaded'
-import {   IFile } from '../types';
+import { IFile } from '../types'
 import { File } from './file'
 /**
  * If string is given is assumes as the path and must exists

@@ -20,7 +20,7 @@ export interface ParserError {
 export async function getInitialState(): Promise<State> {
   var example = examples[0]
   var image = await File.fromUrl(example.inputFiles.length ? example.inputFiles[0]: sampleImages[0])
-  var state = {
+  return {
     example,
     inputFiles: [image],
     examples,
@@ -28,16 +28,4 @@ export async function getInitialState(): Promise<State> {
     script: '',
     working: false
   }
-  // var script = example.script(s)
-  // const result = await run({ 
-  //   inputFiles: [image], 
-  //   script 
-  // })
-  // var state:State = {...s, script}
-
-  // var script = example.script(state)
-  // state.script = script
-  // state.result = await run({...example, script})
-  return state
-  // return 
 }

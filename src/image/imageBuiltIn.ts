@@ -1,7 +1,7 @@
 import pMap from 'p-map'
 import { main } from '../main/main'
+import { IFile } from '../types'
 import { imageInfo } from './imageInfo'
-import { IFile } from '../types';
 
 let builtInImages: IFile[]
 // export enum imageBuiltInNames {'rose:'='rose:', 'logo:'='logo:', 'wizard:'='wizard:', 'granite:'='granite:', 'netscape:'='netscape:'}

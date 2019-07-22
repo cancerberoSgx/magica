@@ -1,5 +1,4 @@
 import { NativeResult } from './imageMagick/createMain'
-import { ExtractInfoResultImage } from './image/imageInfo';
 
 /**
  * Representation of input and output files. Use [[File]] class static methods to easily build files from

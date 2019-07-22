@@ -14,11 +14,11 @@
 
 ###  imageBuiltIn
 
-▸ **imageBuiltIn**(`builtIn?`: `images`): *`Promise<File[]>`*
+▸ **imageBuiltIn**(`builtIn?`: `images`): *`Promise<IFile[]>`*
 
-*Defined in [image/imageBuiltIn.ts:14](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/image/imageBuiltIn.ts#L14)*
+*Defined in [image/imageBuiltIn.ts:14](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/image/imageBuiltIn.ts#L14)*
 
-Gets ImageMagick built-in images like `rose:`, `logo:`, etc in the form of [File](../interfaces/_types_.file.md)s.
+Gets ImageMagick built-in images like `rose:`, `logo:`, etc in the form of [File](../classes/_file_file_.file.md)s.
 
 **Parameters:**
 
@@ -26,4 +26,4 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `builtIn?` | `images` | if given it will resolve with with an array contianing only that image  |
 
-**Returns:** *`Promise<File[]>`*
+**Returns:** *`Promise<IFile[]>`*

@@ -1,6 +1,6 @@
-import {   File } from '../file/file'
-import {  IFile } from '../types';
+import { File } from '../file/file'
 import { main } from '../main/main'
+import { IFile } from '../types'
 
 /**
  * Compare the two images and return true if they are equal visually. Optionally, a margin of error can be provided using `fuzz`

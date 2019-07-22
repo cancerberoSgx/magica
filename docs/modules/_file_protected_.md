@@ -16,15 +16,15 @@
 
 ###  getProtectedFile
 
-▸ **getProtectedFile**(`f`: string | [File](../classes/_file_file_.file.md)): *`Promise<object>`*
+▸ **getProtectedFile**(`f`: string | [IFile](../interfaces/_types_.ifile.md)): *`Promise<object>`*
 
-*Defined in [file/protected.ts:10](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/file/protected.ts#L10)*
+*Defined in [file/protected.ts:11](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/file/protected.ts#L11)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`f` | string \| [File](../classes/_file_file_.file.md) |
+`f` | string \| [IFile](../interfaces/_types_.ifile.md) |
 
 **Returns:** *`Promise<object>`*
 
@@ -32,15 +32,15 @@ ___
 
 ###  isProtectedFile
 
-▸ **isProtectedFile**(`f`: string | [File](../classes/_file_file_.file.md)): *boolean*
+▸ **isProtectedFile**(`f`: string | [IFile](../interfaces/_types_.ifile.md)): *boolean*
 
-*Defined in [file/protected.ts:17](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/file/protected.ts#L17)*
+*Defined in [file/protected.ts:18](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/file/protected.ts#L18)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`f` | string \| [File](../classes/_file_file_.file.md) |
+`f` | string \| [IFile](../interfaces/_types_.ifile.md) |
 
 **Returns:** *boolean*
 
@@ -48,9 +48,9 @@ ___
 
 ###  protectFile
 
-▸ **protectFile**(`f`: string | [File](../classes/_file_file_.file.md)): *void*
+▸ **protectFile**(`f`: string | [IFile](../interfaces/_types_.ifile.md)): *void*
 
-*Defined in [file/protected.ts:6](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/file/protected.ts#L6)*
+*Defined in [file/protected.ts:7](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/file/protected.ts#L7)*
 
 If string is given is assumes as the path and must exists
 
@@ -58,6 +58,6 @@ If string is given is assumes as the path and must exists
 
 Name | Type |
 ------ | ------ |
-`f` | string \| [File](../classes/_file_file_.file.md) |
+`f` | string \| [IFile](../interfaces/_types_.ifile.md) |
 
 **Returns:** *void*
