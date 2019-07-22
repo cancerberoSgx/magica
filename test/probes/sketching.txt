@@ -1,0 +1,56 @@
+
+http://www.fmwconcepts.com/imagemagick/sketching/index.php
+http://www.fmwconcepts.com/imagemagick/frosted/index.php
+http://www.fmwconcepts.com/imagemagick/glasseffects/index.php
+http://www.fmwconcepts.com/imagemagick/isolatecolor/index.php
+http://www.fmwconcepts.com/imagemagick/kuwahara/index.php
+http://www.fmwconcepts.com/imagemagick/mottle/index.php
+http://www.fmwconcepts.com/imagemagick/painteffect/index.php
+http://www.fmwconcepts.com/imagemagick/posteredges/index.php
+http://www.fmwconcepts.com/imagemagick/puzzle/index.php
+http://www.fmwconcepts.com/imagemagick/rgbdots/index.php
+http://www.fmwconcepts.com/imagemagick/screeneffects/index.php
+http://www.fmwconcepts.com/imagemagick/spots/index.php
+http://www.fmwconcepts.com/imagemagick/embroidery/index.php
+http://www.fmwconcepts.com/imagemagick/peelingpaint/index.php
+http://www.fmwconcepts.com/imagemagick/vintage1/index.php
+
+# set up temporaries
+tmpA1="$dir/sketching_1_$$.mpc"
+tmpA2="$dir/sketching_1_$$.cache"
+trap "rm -f $tmpA1 $tmpA2;" 0
+trap "rm -f $tmpA1 $tmpA2; exit 1" 1 2 3 15
+
+# read the input image into the temporary cached image and test if valid
+convert -quiet -regard-warnings "$infile" +repage "$tmpA1" ||
+	errMsg "--- 1 FILE $infile DOES NOT EXIST OR IS NOT AN ORDINARY FILE, NOT READABLE OR HAS ZERO size  ---"
+
+# set up for detail
+if [ "$detail" != "1" ]; then
+	detailing="-evaluate pow $detail"
+else
+	detailing=""
+fi
+
+# set up for coloring
+if [ "$coloring" != "1" ]; then
+	colorizing="-evaluate pow $coloring"
+else
+	colorizing=""
+fi
+
+# set up for saturation
+if [ "$saturation" != "100" ]; then
+	saturating="-modulate 100,$saturation,100"
+else
+	saturating=""
+fi
+
+# set up for edge
+edge=$((2*edge+1))
+
+convert $tmpA1 \
+\( -clone 0 -colorspace gray \) \
+\( -clone 1 -negate -statistic minimum ${edge}x${edge} $colorizing \) \
+\( -clone 1 -clone 2 -compose color_dodge -composite $detailing \) \
+-delete 1-2 +swap -compose screen -composite $saturating "$outfile"

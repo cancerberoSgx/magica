@@ -1,4 +1,4 @@
-import { asArray, serial } from 'misc-utils-of-mine-generic'
+import { asArray, serial, notUndefined } from 'misc-utils-of-mine-generic'
 import { File } from '../file/file'
 import { getOption } from '../options'
 import { Result, RunOptions, RunResult } from '../types'
@@ -23,17 +23,17 @@ import { main } from './main'
  */
 export async function run(o: RunOptions) {
   const emscriptenNodeFsRoot = getOption('emscriptenNodeFsRoot')
-  const commands = await resolveRunCommands(o)
+  let inputFiles = await File.resolve(o.inputFiles)
+  const commands = await resolveRunCommands({...o, inputFiles: inputFiles.filter(notUndefined).map(File.asFile)})
   const finalResult: RunResult = { results: [], commands, outputFiles: [], stderr: [], stdout: [], error: undefined, returnValue: undefined }
-  let inputFiles = await File.resolveOptions(o)
   await serial(commands.map((command, i) => async () => {
     try {
-      const mainOptions = { ...o, command, inputFiles }
+      const mainOptions = { ...o, command, inputFiles: inputFiles.map(File.asFile) }
       let result: Result
       result = await main(mainOptions)
-      result.outputFiles = result.outputFiles.map(f => ({ ...f, name: f.name.startsWith(emscriptenNodeFsRoot) ? f.name.substring(emscriptenNodeFsRoot.length + 1) : f.name }))
+      result.outputFiles = result.outputFiles.map(f => ({ ...f, name: f.name.startsWith(emscriptenNodeFsRoot) ? f.name.substring(emscriptenNodeFsRoot.length + 1) : f.name })).map(File.asFile)
       inputFiles = [...inputFiles.filter(f => !result.outputFiles.find(f2 => f2.name === f.name)),
-      ...result.outputFiles]
+      ...result.outputFiles].map(File.asFile)
       finalResult.results.push(result)
     } catch (error) {
       console.error('Error on ' + i + 'th command', error);
@@ -43,7 +43,7 @@ export async function run(o: RunOptions) {
     ...finalResult,
     stdout: finalResult.results.map(r => r.stdout).flat(),
     stderr: finalResult.results.map(r => r.stderr).flat(),
-    outputFiles: finalResult.results.length ? finalResult.results[finalResult.results.length - 1].outputFiles : []
+    outputFiles: finalResult.results.length ? finalResult.results[finalResult.results.length - 1].outputFiles.map(File.asFile) : []
   }
   return r
 }

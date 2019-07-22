@@ -69,7 +69,7 @@ export interface Options extends NativeOptions {
    * the file names given in the command. If string and a file exists (node.js) then that file will be used.
    * Otherwise it will be considered a url. In later cases, the filename will be the base name of file or url.
    */
-  inputFiles?: (string | IFile)[]
+  inputFiles?: (string | IFile|undefined)[]
 
 }
 

@@ -87,7 +87,7 @@ The JavaScript API is equivalent to the Command Line Interface. The command refe
 
 ### Node.js
 
-In the following example we convert an image in Node.js
+In the following example we convert an image in Node.js. (Checkout `run()` for a flexible script-like syntax below)
 
 ```ts
 import {main} from 'magica'
@@ -130,11 +130,11 @@ Both the command and result objects are designed to transfer data between main t
 See `test-browser/webWorker` and `npm run test-worker` script for a working simple example.
 
 
-### `run()`
+### `run()`: command script/template syntax
 
 While ImageMagick provides a syntax to run complex commands performing several operations, `main()` will be enough most of the time. 
 
-Nevertheless magica also supports `run()` which allows to run multiple commands similar to a shell script. 
+Nevertheless magica also supports `run()` which accept allows to create scripts to execute several commands, just like bash scripts
 
 It supports comments, command splitting in mutiple lines by ending them with `\`, just like bash scripts:
 

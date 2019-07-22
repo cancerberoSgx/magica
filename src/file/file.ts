@@ -1,7 +1,7 @@
 import { ok } from 'assert'
 import fetch from 'cross-fetch'
 import { existsSync, readFileSync } from 'fs'
-import { basename, getFileNameFromUrl, isNode, serial } from 'misc-utils-of-mine-generic'
+import { basename, getFileNameFromUrl, isNode, serial, inBrowser, asArray, notUndefined } from 'misc-utils-of-mine-generic'
 import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
 import { imagePixelColor } from '../image/pixel'
 import { IFile, Options } from '../types'
@@ -18,10 +18,13 @@ export class File implements IFile {
 
   /**
    * Get image information, like geometry, important numbers, mimeType, etc. The first time it calls `identify` command, but then it will cache ths value.
+   * TODO: make it async
    */
-  public get info(): Promise<ExtractInfoResultImage> {
+  public info(): Promise<ExtractInfoResultImage> {
     return new Promise(resolve => {
-      if (this._info) { resolve(this._info) } else {
+      if (this._info) {
+        resolve(this._info)
+      } else {
         imageInfo(this).then(data => {
           this._info = data[0].image
           resolve(this._info)
@@ -30,9 +33,15 @@ export class File implements IFile {
     })
   }
 
-  public getPixelColor(x: number, y: number): Promise<string> {
+  public async size(): Promise<{ width: number, height: number }> {
+    var i = await this.info()
+    return i.geometry || { width: 0, height: 0 }
+  }
+
+  public pixel(x: number, y: number): Promise<string | undefined> {
     return imagePixelColor(this, x, y)
   }
+
 
 
 	/** Creates a DataUrl like `data:image/png;name=f.png;base64,` using given base64 content, mimeType and fileName. 
@@ -53,29 +62,42 @@ export class File implements IFile {
     return 'data:' + mime + ';' + file.name + ';base64,' + File.toBase64(file)
   }
 
-	/**
-	 * Given a filesystem path or a url it will first check if the file exists (if applies) , if so returning that file, or if not loading the file from url.
-	 */
-  public static resolve(path: String): Promise<File | null> {
-    throw 'Not impl'
-    // if (IOUtil.fileExists(path, true)) {
-    // 	return Promise.resolve(File.fromFile(path));
-    // } else {
-    // 	return File.fromUrl(path);
-    // }
-  }
+  // /**
+  //  * Given a filesystem path or a url it will first check if the file exists (if applies) , if so returning that file, or if not loading the file from url.
+  //  */
+  // public static resolve(path: string): Promise<File | undefined> {
+  //   // throw 'Not impl'
+  //   if (inBrowser() || !existsSync(path)) {
+  //     	return File.fromUrl(path);
+  //     } else {
+  //         return Promise.resolve(File.fromFile(path));
+  //     }
+  //   }
+  // }
 
 
   public static async fromUrl(u: string, o: RequestInit & O = {}) {
-    const r = await fetch(u, o)
-    return new File(o.name || getFileNameFromUrl(u), await r.arrayBuffer())
+    try {
+      const r = await fetch(u, o)
+      return new File(o.name || getFileNameFromUrl(u), await r.arrayBuffer())
+    } catch (error) {
+      console.error(error)
+      return undefined
+    }
   }
 
   public static async fromFile(f: string, o: O = {}) {
     if (!isNode()) {
       throw new Error('File.readFile() called in the browser.')
     }
-    return new File(o.name || basename(f), readFileSync(f))
+    try {
+      return new File(o.name || basename(f), readFileSync(f))
+    } catch (error) {
+      console.error(error)
+      return undefined
+    }
+
+
   }
 
   public static toString(f: IFile) {
@@ -109,8 +131,10 @@ export class File implements IFile {
     })))
   }
 
-  public static async   resolveOptions(o: Partial<Options>) {
-    return await serial((o.inputFiles || []).map(f => async () => {
+  public static async   resolve(files: string | IFile | undefined | (string | IFile | undefined)[]) {
+    var fs = (asArray<undefined | string | IFile>(files || [])).filter(notUndefined)
+
+    var result = await serial(fs.map(f => async () => {
       if (typeof f === 'string') {
         if (isNode() && existsSync(f)) {
           return await File.fromFile(f)
@@ -124,6 +148,15 @@ export class File implements IFile {
         return f
       }
     }))
+    return result.filter(notUndefined).map(f => File.isFile(f) ? f : new File(f.name, f.content))
+  }
+
+  public static isFile(f: any): f is File {
+    return f && f.name && f.content && !!(f as File).size
+  }
+  
+  public static asFile(f: IFile): File {
+    return File.isFile(f) ? f : new File(f.name, f.content)
   }
 
   public static asPath(f: string | IFile) {

@@ -22,30 +22,28 @@ export async function loadImageFromUrl(u: string) {
   if (f && f.content && f.name) {
     getStore().setState({
       working: false,
-      inputFiles: [f, ...state.inputFiles]     .filter((f, i, a) => a.findIndex(g => g.name === f.name) === i)
+      inputFiles: [f, ...state.inputFiles].filter((f, i, a) => a.findIndex(g => g.name === f.name) === i)
     })
   }
 }
 
-export async function setExample(example: Example) {
+export async function setExample(example?: Example) {
   var state = getStore().getState()
   getStore().setState({
     working: true
   })
-var inputFiles = [...await serial(example.inputFiles.filter(f=>!state.inputFiles.find(f2=>f2.name==f)).map(file => async ()=>File.fromUrl(file))), ...state.inputFiles]
-  const script = example.script({...state, inputFiles})
+  var inputFiles = [...await serial((example ? example.inputFiles : state.inputFiles.map(f => f.name)).filter(f => !state.inputFiles.find(f2 => f2.name == f)).map(file => async () => File.fromUrl(file))), ...state.inputFiles]
+  const script = example ? example.script({ ...state, inputFiles }) : state.script
   var result = await callRun({
     script, inputFiles
   })
-  // const result = await callRun(o)
-
-        getStore().setState({
-          example,
-          script,
-          result,
-          inputFiles,
-          working: false
-        })
+  getStore().setState({
+    example: example || state.example,
+    script,
+    result,
+    inputFiles,
+    working: false
+  })
   await sleep(300)
 
 }

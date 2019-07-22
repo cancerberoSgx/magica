@@ -1,6 +1,7 @@
 import test from 'ava'
-import { File, imageCompare } from '../src'
+import { File, imageCompare, addTemplatePreprocessorContextMutator } from '../src'
 import { run } from '../src/main/run'
+import { writeFileSync } from 'fs';
 
 test('script template', async t => {
   const result = await run({
@@ -38,6 +39,17 @@ convert <%= inputFiles[0].name %> -resize <%= bounds.width+'x'+bounds.height %> 
     inputFiles: [await File.fromFile('test/assets/chala.tiff')],
   })
   t.true(await imageCompare(result.outputFiles[0], await File.fromFile('test/assets/chala.tiff')))
+})
+
+test('should be able to modify template context', async t => {
+  addTemplatePreprocessorContextMutator(c=>({...c, greet: (s:string)=>'hello '+s}))
+  const result = await run({
+    script: `
+convert -font helvetica.ttf -pointsize 24 -background lightblue -fill navy 'label:<%=greet("Seba")%>' tmp.png
+      `,
+      inputFiles: ['test/assets/helvetica.ttf']
+  })
+  t.true(await imageCompare(result.outputFiles[0], await File.fromFile('test/assets/text2.png')))
 })
 
 test.todo('register new processor')

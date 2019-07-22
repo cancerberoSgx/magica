@@ -8,6 +8,7 @@ export interface State {
   result: RunResult|undefined
   script: string
   working: boolean
+  showAllResultsOutput:boolean
 }
 
 export interface ParserError {
@@ -26,6 +27,7 @@ export async function getInitialState(): Promise<State> {
     examples,
     result: null as any,
     script: '',
-    working: false
+    working: false,
+    showAllResultsOutput:false
   }
 }

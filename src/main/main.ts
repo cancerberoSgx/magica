@@ -19,7 +19,7 @@ export async function main(o: Partial<Options>): Promise<Result> {
   const { emscriptenNodeFsRoot, debug } = getOptions()
   const { FS, main } = await magickLoaded
   debug && console.log('main call given options: ', o)
-  const files = await File.resolveOptions(o)
+  const files = await File.resolve(o.inputFiles)
   FS.chdir(emscriptenNodeFsRoot)
   files.forEach(f => {
     const dirName = getFileDir(f.name)
