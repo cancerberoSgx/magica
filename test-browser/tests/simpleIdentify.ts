@@ -1,7 +1,7 @@
-import { main } from '../../src';
-import { assertEquals, log } from '../testUtil';
+import { main } from '../../src'
+import { assertEquals, log } from '../testUtil'
 
-export default async function f(){
+export default async function() {
   const result = await main({
     command: ['identify', 'rose:'],
     inputFiles: []

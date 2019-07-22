@@ -16,7 +16,7 @@
 
 ▸ **imageCompare**(`img1`: [File](../classes/_file_file_.file.md), `img2`: [File](../classes/_file_file_.file.md), `fuzz`: number): *`Promise<boolean>`*
 
-*Defined in [image/imageCompare.ts:7](https://github.com/cancerberoSgx/magica/blob/1a62845/src/image/imageCompare.ts#L7)*
+*Defined in [image/imageCompare.ts:7](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/image/imageCompare.ts#L7)*
 
 Compare the two images and return true if they are equal visually. Optionally, a margin of error can be provided using `fuzz`
 

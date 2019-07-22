@@ -21,7 +21,7 @@
 
 • **isDir**: *boolean*
 
-*Defined in [util/lsR.ts:25](https://github.com/cancerberoSgx/magica/blob/1a62845/src/util/lsR.ts#L25)*
+*Defined in [util/lsR.ts:25](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/util/lsR.ts#L25)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 • **path**: *string*
 
-*Defined in [util/lsR.ts:24](https://github.com/cancerberoSgx/magica/blob/1a62845/src/util/lsR.ts#L24)*
+*Defined in [util/lsR.ts:24](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/util/lsR.ts#L24)*

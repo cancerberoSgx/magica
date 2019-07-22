@@ -16,19 +16,19 @@
 
 ### ▪ **templatePreprocessor**: *object*
 
-*Defined in [main/templatePreprocessor.ts:4](https://github.com/cancerberoSgx/magica/blob/1a62845/src/main/templatePreprocessor.ts#L4)*
+*Defined in [main/templatePreprocessor.ts:4](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/main/templatePreprocessor.ts#L4)*
 
 ###  name
 
 • **name**: *string* = "template"
 
-*Defined in [main/templatePreprocessor.ts:5](https://github.com/cancerberoSgx/magica/blob/1a62845/src/main/templatePreprocessor.ts#L5)*
+*Defined in [main/templatePreprocessor.ts:5](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/main/templatePreprocessor.ts#L5)*
 
 ###  execute
 
 ▸ **execute**(`context`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<RunOptions>`*
 
-*Defined in [main/templatePreprocessor.ts:6](https://github.com/cancerberoSgx/magica/blob/1a62845/src/main/templatePreprocessor.ts#L6)*
+*Defined in [main/templatePreprocessor.ts:6](https://github.com/cancerberoSgx/magica/blob/f07fbfd/src/main/templatePreprocessor.ts#L6)*
 
 **Parameters:**
 

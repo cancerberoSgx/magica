@@ -1,16 +1,15 @@
+import { File, imageCompare, run } from '../../src'
+import { assert, assertEquals } from '../testUtil'
 
-export default async function f(){
-//  let result = await main({
-//     command: 'convert chala.tiff -rotate 45 output.bmp',
-//     inputFiles: [await File.fromUrl('chala.tiff')]
-//   })
-//   assertIncludes(result.outputFiles[0].name, 'output.bmp')
-//   assertEquals(result.outputFiles.map(f=>basename(f.name)), ['output.bmp'])
-//   assertEquals(result.error, undefined)
-//   assertEquals(result.stderr, [])
-  
-//   var r = await fetch('asd');
-//   var a = await r.arrayBuffer();
-  // a.
+export default async function() {
+  const result = await run({
+    script: `
+  convert -font helvetica.ttf -pointsize 44 -background lightblue -fill navy label:Seba tmp.png
+  `,
+    inputFiles: ['helvetica.ttf']
+  })
+  assertEquals(result.stderr, [])
+  assertEquals(result.error, undefined)
+  assert(await imageCompare(await File.fromUrl('text.png'), result.outputFiles[0]), 'text output')
 }
 
