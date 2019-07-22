@@ -1,11 +1,12 @@
-import { File, main, Result } from 'magica'
-import { Example, examples } from "./examples"
+import { File, main, Result, RunResult } from 'magica'
+import { Example, examples, sampleImages } from "./examples"
 
 export interface State {
   example: Example
   inputFiles: File[]
   examples: Example[];
-  result: Result
+  result: RunResult|undefined
+  script: string
   working: boolean
 }
 
@@ -17,12 +18,26 @@ export interface ParserError {
 }
 
 export async function getInitialState(): Promise<State> {
-  const result = await main({ command: examples[0].command })
-  return {
-    example: examples[0],
-    inputFiles: [],
+  var example = examples[0]
+  var image = await File.fromUrl(example.inputFiles.length ? example.inputFiles[0]: sampleImages[0])
+  var state = {
+    example,
+    inputFiles: [image],
     examples,
-    result,
+    result: null as any,
+    script: '',
     working: false
   }
+  // var script = example.script(s)
+  // const result = await run({ 
+  //   inputFiles: [image], 
+  //   script 
+  // })
+  // var state:State = {...s, script}
+
+  // var script = example.script(state)
+  // state.script = script
+  // state.result = await run({...example, script})
+  return state
+  // return 
 }

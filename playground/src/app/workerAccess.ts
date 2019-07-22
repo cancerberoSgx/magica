@@ -1,11 +1,20 @@
-import { Options, Result } from 'magica'
+import { Options, Result, RunOptions, RunResult } from 'magica'
 import { Deferred, unique } from 'misc-utils-of-mine-generic'
 
-let pending: { magicaId: string, deferred: Deferred<Result | undefined> }[] = []
+let pending: { magicaId: string, deferred: Deferred<any> }[] = []
 
-export async function callMain(o: Partial<Options>) {
+// export async function callMain(o: Partial<Options>) {
+//   const magicaId = unique()
+//   const deferred = new Deferred<Result | undefined>()
+//   pending.push({ magicaId, deferred })
+//   worker.postMessage({ ...o, magicaId })
+//   const result = await deferred
+//   return result
+// }
+
+export async function callRun(o: RunOptions) {
   const magicaId = unique()
-  const deferred = new Deferred<Result | undefined>()
+  const deferred = new Deferred<RunResult | undefined>()
   pending.push({ magicaId, deferred })
   worker.postMessage({ ...o, magicaId })
   const result = await deferred

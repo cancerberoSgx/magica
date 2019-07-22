@@ -3,6 +3,7 @@ import * as React from 'react'
 import { Header, Input, List, Segment } from 'semantic-ui-react'
 import { loadImageFromUrl } from '../../app/dispatcher'
 import { AbstractComponent } from '../common/component'
+import { File } from 'magica';
 
 export class InputFiles extends AbstractComponent {
   render() {
@@ -10,7 +11,12 @@ export class InputFiles extends AbstractComponent {
       <Header as="h3">Input Images</Header>
       <div>Load or declare images from local file system and URLs here:</div><br />
       <Input label='URL' onChange={e => loadImageFromUrl(e.currentTarget.value)} placeholder='https://i.imgur.com/FVKBIJ7.png' /><br /><br />
-      <Input type="file" label='file' placeholder='foo.jpg' /><br /><br />
+      <Input type="file" label='file' placeholder='foo.jpg' onChange={async e=>{
+        var inputFiles = await File.fromHtmlFileInputElement(e.currentTarget)
+        inputFiles = [...this.state.inputFiles, ...inputFiles.filter(f=>!this.state.inputFiles.find(f2=>f2.name==f.name))]
+        // debugger;
+        this.setState({inputFiles})
+        }}/><br /><br />
       <Header as="h5">Current files</Header>
       <List divided relaxed>
         {this.state.inputFiles.map(f =>
