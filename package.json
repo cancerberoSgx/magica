@@ -8,13 +8,13 @@
     "magica": "bin/magica.js"
   },
   "scripts": {
-    "test": "npm run build && npx ava --serial",
+    "test": "npm run build && npx ava --serial && npm run test-browser",
     "test-js": "exit 0; npm run build && npx ava ./dist/test/*Test.js --serial",
     "test-watch": "ava -w",
     "test-worker": "npm run build && cp dist/src/imageMagick/compiled/magick.wasm dist && parcel serve test-browser/webWorker/index.html",
     "test-debug": "node --inspect-brk node_modules/ava/cli.js --serial",
     "test-browser": "npx ava test-browser/*Test.ts",
-    "build-node-magick": "cat src/imageMagick/magickPrefix.js > src/imageMagick/compiled/nodeMagick.js && cat src/imageMagick/compiled/magick.js >> src/imageMagick/compiled/nodeMagick.js",
+    "build-node-magick": "cat src/imageMagick/magickPrefix.js > src/imageMagick/compiled/nodeMagick.js && echo '' >> src/imageMagick/compiled/nodeMagick.js && cat src/imageMagick/compiled/magick.js >> src/imageMagick/compiled/nodeMagick.js",
     "coverage": "npx nyc --nycrc-path nyc.config.js npm test",
     "prepare": "npm run build",
     "performance": "npx ts-node -T test/performance/perf1.ts",
@@ -28,7 +28,7 @@
     "docs": "npm run docs-readme-toc && npm run docs-api",
     "docs-api": "rm -rf docs && typedoc  --ignoreCompilerErrors --theme markdown --out docs --readme none --excludeNotExported src/index.ts ",
     "docs-readme-toc": "npx markdown-toc README.md -i",
-    "all": "npm run clean && npm run lint && npm run build && npm run test && npm run test-js && npm run test-browser && npm run docs",
+    "all": "npm run clean && npm run lint && npm run build && npm run test && npm run test-js && npm run docs",
     "all-publish": "npm run all && npm version patch && npm publish"
   },
   "license": "MIT",

@@ -18,7 +18,7 @@ async function test() {
             let result = await main({
               command,
               inputFiles: [`test/assets/${img}`],
-              // debug: true
+              debug: true
             })
             const outputFiles = result.outputFiles
             deepEqual(result.error, undefined)
@@ -26,7 +26,7 @@ async function test() {
             result = await main({
               command: `identify  ${outputFiles[0].name}`,
               inputFiles: outputFiles,
-              // debug: true
+              debug: true
             })
               ;
             [format, '128x128'].forEach(s => assertIncludes(result.stdout.join('').toLowerCase(), s.toLowerCase()))
@@ -41,13 +41,13 @@ async function test() {
                     let result2 = await main({
                       command: command2,
                       inputFiles: outputFiles,
-                      // debug: true
+                      debug: true
                     })
                     deepEqual(result2.error, undefined)
                     deepEqual(result2.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')), [])
                     const c = `identify  ${result2.outputFiles[0].name}`
 
-                    // tga/ico/otb to xcf convertion produces invalid output and identify fails silently  - no catch, no error, program ends abruptly - 
+                    // tga/ico/otb to xcf conversion produces invalid output and identify fails silently  - no catch, no error, program ends abruptly - 
                     // TODO: does this happens in the real CLI
                     if (command2.includes('.tga -rotate') && ['.dcm', '.xcf'].find(s => c.includes(s)) ||
                       command2.includes('.ico -rotate') && ['.dcm', '.xcf'].find(s => c.includes(s)) ||
@@ -55,15 +55,16 @@ async function test() {
                     ) {
                       return
                     }
-                    // console.log(c);
+                    console.log(c);
                     try {
                       result2 = await main({
                         command: c,
                         inputFiles: result2.outputFiles,
-                        // debug: true
+                        debug: true
                       })
                         ;
                       [format2, '64x64'].forEach(s => assertIncludes(result2.stdout.join('').toLowerCase(), s.toLowerCase()))
+                      console.log('Result for "'+c+'"', result2.stdout, result2.stderr, result2.error, result2.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')));
                       deepEqual(result2.error, undefined)
                       deepEqual(result2.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')), [])
                     } catch (error) {
@@ -72,25 +73,24 @@ async function test() {
                     }
                     return result2
                   } catch (error) {
-                    console.error(error);
+                    console.error('ERRRRRR2', error);
                     ok(!error)
                   }
                 }))
             return result
-
           } catch (error) {
-            console.error(error);
+            console.error('ERRRRRR33', error);
             ok(!error)
           }
         }))
       } catch (error) {
-        console.error(error);
+        console.error('ERRRRRR44', error);
         ok(!error)
       }
     })
     )
   } catch (error) {
-    console.error(error)
+            console.error('ERRRRRR55', error);
     ok(!error)
   }
   console.log(process.memoryUsage())

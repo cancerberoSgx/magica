@@ -4,7 +4,7 @@ export default {
   ],
   "extensions": ['ts'],
   "compileEnhancements": false,
-  failFast:true,
+  // failFast:true,
   "require": [
     "ts-node/register"
   ]
