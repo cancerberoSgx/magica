@@ -27,7 +27,7 @@ import fileType = require('file-type')
 
 test('accept string input files, or urls', async t => {
   const result = await main({
-    debug: true,
+    // debug: true,
     command: 'convert n.png -scale 50% foo2.png',
     inputFiles: ['test/assets/n.png']
   })

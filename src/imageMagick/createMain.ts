@@ -6,7 +6,14 @@ export function createMain(Module: any): NativeMain {
     resetStderr()
     let returnValue: any, error: Error | undefined
     try {
+      // Module.noExitRuntime = true // This helps stdout to be correctly flushed on some situations
       returnValue = Module.callMain(...args)
+      // flush stdio so clients get stdout string that doesn't end with new lines.
+      // if(Module._fflush) {
+      //   Module._fflush(0)
+      //   Module._fflush(1)
+      //   Module._fflush(2)
+      // }
     } catch (ex) {
       error = ex
     }

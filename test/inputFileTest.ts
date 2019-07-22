@@ -33,7 +33,7 @@ test('InputFile.fromFile', async t => {
   let result = await main({
     command: ['convert', 'chala.tiff', '-scale', '200%', 'bigger.tiff'],
     inputFiles: [await File.fromFile('test/assets/chala.tiff')],
-    debug: true
+    // debug: true
   })
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'tif', mime: 'image/tiff' })
   t.deepEqual(result.stderr, [])
@@ -51,7 +51,7 @@ test('accept array buffer view', async t => {
   let result = await main({
     command: ['convert', 'chala.tiff', '-scale', '200%', 'bigger.tiff'],
     inputFiles: [await File.fromFile('test/assets/chala.tiff')],
-    debug: true
+    // debug: true
   })
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'tif', mime: 'image/tiff' })
   t.deepEqual(result.stderr, [])

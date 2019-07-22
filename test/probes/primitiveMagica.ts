@@ -29,7 +29,7 @@ interface Point {
   x: number, y: number
 }
 export async function f(o: Options = defaults) {
-  setOptions({ debug: true })
+  // setOptions({ debug: true })
   const options = { ...defaults, ...o }
   const width = 400
   const height = 400 //TODO: extract from input image

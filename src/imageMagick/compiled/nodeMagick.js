@@ -9,6 +9,7 @@ Module = typeof Module === 'undefined' ? {} : Module
 
 Object.assign(Module, {
   noInitialRun: true,  // tell wasm runner to not execute application
+    // moduleLoaded: false,
   print: function (text) {
     debug && console.log(`>> stdout >> ${text}`);
     pushStdout(text)

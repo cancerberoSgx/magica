@@ -126,6 +126,34 @@ Both the command and result objects are designed to transfer data between main t
 
 See `test-browser/webWorker` and `npm run test-worker` script for a working simple example.
 
+
+### `run()`
+
+While ImageMagick provides a syntax to run complex commands performing several operations, `main()` will be enough most of the time. 
+
+Nevertheless magica also supports `run()` which allows to run multiple commands similar to a shell script. 
+
+It supports comments, command splitting in mutiple lines by ending them with `\`, just like bash scripts:
+
+TODO: show one command divided with `\\` and with comments
+
+#### Commands Sequence
+
+The most useful feature of `run()` is that it will run the commands serially, and each command output files will be available to next commands as input files automatically:
+
+TODO: example of multiple commands consuming output files
+
+#### JavaScript templates
+
+TODO: document templates <%= %>
+
+#### Commands preprocessors
+
+run() supports adding custom commands preprocessor to support new syntax in scripts. JavaScript templates is a builtin concrete command preprocessor.
+TODO: example  link to the API for registering a new prepro
+
+
+
 ## Options
 
 Options are the same for the command line and the API:
@@ -146,7 +174,7 @@ Options are the same for the command line and the API:
 * ["types"](docs/modules/_types_.md)
 * ["options"](docs/modules/_options_.md)
 
-## Why
+## Why?
 
  * I really need a 100% JavaScript node.js API and CLI which [wasm-imagemagick](https://github.com/KnicKnic/WASM-ImageMagick) currently doesn't provides. 
  * I contributed in [wasm-imagemagick](https://github.com/KnicKnic/WASM-ImageMagick)'s JavaScript API (for browser only) and I wanted to revisit:
@@ -162,59 +190,4 @@ Options are the same for the command line and the API:
 
 ## TODO / Road map
 
-- [ ] performance tests in the browser
-- [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
-- [ ] fix npm run test-js  
-- [ ] verify support IM command quoted arguments
-- [ ] verify mkdir -p for output files
-- [ ] because options are global - sending commands concurrently could fail. Solution: queue or instance options
-- [ ] montage and other commands than convert and identify (montage is special with files?)
-- [ ] an easy to use API for web-workers
-- [ ] verify web worker  passing files is optimal (verify transferable/shared array buffers/optimal)
-- [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
-- [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
-- [ ] adapt executeVirtualCommand from wasm-imagemagick own branch
-- [ ] document run script and supported syntax
-- [ ] document command preprocessor and script template
-- [x] apidocs
-- [?] Option for Node.js users to work/mount current directory - the tool should not copy input files just use them since are present in mount root ems
-- [?] how high level scripts DDD can be integrated ? different project ?
-- [x] adapt executeCommandPreprocessor and command template preprocessor from wasm-imagemagick own branch
-- [x] travis
-- [x] coverage
-- [x] imageBuiltIn() to get all IM built-in images like rose:)
-- [x] run() script like executions uses main to run several commands feeding from previous output supporting syntax sugar
-  - [x] fix issue with long operations and add more tests
-  - [x] support multiple line string commands like in src/main/command.ts
-- [x] rich command syntax (src/main/command)
-  - [x] end porting tests
-- [x] imagePixelColor()
-- [x] imageCompare()
-- [x] extractImageInfo()
-- [x] test from a real-app - check missing exported APIs - npm install usability
-- [x] playground
-- [x] webworker example & recipe (see test-browser/webWorker)
-- [x] format tests
-- [x] Performance tests (can we measure also memory consumption?)
-- [x] browser tests
-- [x] support input images from URLS both in node and browser.
-- [x] node.js : work directly in user's filesystem without copying to emc FS: 
-- [x] browser
-- [x] CLI
-- [x] CLI tests
-- [x] Input file from url
-
-### Ideas
-
-- [ ] drawing svg. is not documented and seems the official way is doing it using mvg. But... what if we convert all shapes to paths, use svgo to reduce the number to (even single ) path and use draw to draw them. syntax seems to be compatible... This way we should have yet another method of rasterize a svg, but this time to any format. I wonder what the speed is compared to other rasterize methods, if we target .ma
-
-- [ ] can we perform similar algorithm as geometrize with IM? this is interesting usecase since the objective is performance, reuse files so we need an api for:
-  * prevent/ control file removal
-  * commands to write/modify/access existing files
-    two api alternatives:
-       - Mode like / options - options.reuseFiles or options.preventFileRemove that wont write or remove files (user responsibility)
-       - per file attribute "readonly"
-           - an API to mark certain files or folders as readonly so they cannot me touched by convert commands. 
-              - so i can create a folder and work there.
-              - I can pass options.forceFileOverride to explicitly allow modifications by convert.
-  * could start with random drawings and image compare (whole image or the local area)
+See [TODO.md](TODO.md).

@@ -18,7 +18,7 @@ async function test() {
             let result = await main({
               command,
               inputFiles: [`test/assets/${img}`],
-              debug: true
+              // debug: true
             })
             const outputFiles = result.outputFiles
             deepEqual(result.error, undefined)
@@ -26,7 +26,7 @@ async function test() {
             result = await main({
               command: `identify  ${outputFiles[0].name}`,
               inputFiles: outputFiles,
-              debug: true
+              // debug: true
             })
               ;
             [format, '128x128'].forEach(s => assertIncludes(result.stdout.join('').toLowerCase(), s.toLowerCase()))
@@ -41,7 +41,7 @@ async function test() {
                     let result2 = await main({
                       command: command2,
                       inputFiles: outputFiles,
-                      debug: true
+                      // debug: true
                     })
                     deepEqual(result2.error, undefined)
                     deepEqual(result2.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')), [])
@@ -60,7 +60,7 @@ async function test() {
                       result2 = await main({
                         command: c,
                         inputFiles: result2.outputFiles,
-                        debug: true
+                        // debug: true
                       })
                         ;
                       [format2, '64x64'].forEach(s => assertIncludes(result2.stdout.join('').toLowerCase(), s.toLowerCase()))
