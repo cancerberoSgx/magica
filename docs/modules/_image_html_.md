@@ -4,9 +4,9 @@
 
 # External module: "image/html"
 
-### Index
+## Index
 
-#### Functions
+### Functions
 
 * [toDataUrl](_image_html_.md#todataurl)
 
@@ -16,7 +16,7 @@
 
 ▸ **toDataUrl**(`o`: [File](../classes/_file_file_.file.md), `mime`: string): *string*
 
-*Defined in [image/html.ts:4](https://github.com/cancerberoSgx/magica/blob/94207d7/src/image/html.ts#L4)*
+*Defined in [image/html.ts:4](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/image/html.ts#L4)*
 
 **Parameters:**
 

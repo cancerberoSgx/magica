@@ -12,18 +12,18 @@
 
 * [File](../interfaces/_types_.file.md)
 
-### Index
+## Index
 
-#### Constructors
+### Constructors
 
 * [constructor](_file_file_.file.md#constructor)
 
-#### Properties
+### Properties
 
 * [content](_file_file_.file.md#content)
 * [name](_file_file_.file.md#name)
 
-#### Methods
+### Methods
 
 * [asPath](_file_file_.file.md#static-aspath)
 * [fromFile](_file_file_.file.md#static-fromfile)
@@ -37,7 +37,7 @@
 
 \+ **new File**(`name`: string, `content`: `ArrayBufferView` | `ArrayBuffer`): *[File](_file_file_.file.md)*
 
-Defined in file/file.ts:8
+*Defined in [file/file.ts:8](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/file/file.ts#L8)*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ Name | Type |
 
 *Implementation of [File](../interfaces/_types_.file.md).[content](../interfaces/_types_.file.md#content)*
 
-Defined in file/file.ts:8
+*Defined in [file/file.ts:8](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/file/file.ts#L8)*
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 *Implementation of [File](../interfaces/_types_.file.md).[name](../interfaces/_types_.file.md#name)*
 
-Defined in file/file.ts:10
+*Defined in [file/file.ts:10](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/file/file.ts#L10)*
 
 ## Methods
 
@@ -74,7 +74,7 @@ Defined in file/file.ts:10
 
 ▸ **asPath**(`f`: string | [File](_file_file_.file.md)): *string*
 
-Defined in file/file.ts:47
+*Defined in [file/file.ts:47](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/file/file.ts#L47)*
 
 **Parameters:**
 
@@ -90,7 +90,7 @@ ___
 
 ▸ **fromFile**(`f`: string, `o`: `O`): *`Promise<File>`*
 
-Defined in file/file.ts:19
+*Defined in [file/file.ts:19](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/file/file.ts#L19)*
 
 **Parameters:**
 
@@ -107,7 +107,7 @@ ___
 
 ▸ **fromUrl**(`u`: string, `o`: `RequestInit` & `O`): *`Promise<File>`*
 
-Defined in file/file.ts:14
+*Defined in [file/file.ts:14](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/file/file.ts#L14)*
 
 **Parameters:**
 
@@ -124,7 +124,7 @@ ___
 
 ▸ **resolveOptions**(`o`: `Partial<Options>`): *`Promise<File[]>`*
 
-Defined in file/file.ts:30
+*Defined in [file/file.ts:30](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/file/file.ts#L30)*
 
 **Parameters:**
 
@@ -140,7 +140,7 @@ ___
 
 ▸ **toString**(`f`: [File](_file_file_.file.md)): *string*
 
-Defined in file/file.ts:26
+*Defined in [file/file.ts:26](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/file/file.ts#L26)*
 
 **Parameters:**
 

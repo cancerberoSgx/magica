@@ -4,13 +4,13 @@
 
 # External module: "util/lsR"
 
-### Index
+## Index
 
-#### Interfaces
+### Interfaces
 
 * [LsRVisitorFile](../interfaces/_util_lsr_.lsrvisitorfile.md)
 
-#### Functions
+### Functions
 
 * [listFilesRecursively](_util_lsr_.md#listfilesrecursively)
 * [ls](_util_lsr_.md#ls)
@@ -22,7 +22,7 @@
 
 ▸ **listFilesRecursively**(`path`: string, `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *[LsRVisitorFile](../interfaces/_util_lsr_.lsrvisitorfile.md)[]*
 
-*Defined in [util/lsR.ts:53](https://github.com/cancerberoSgx/magica/blob/94207d7/src/util/lsR.ts#L53)*
+*Defined in [util/lsR.ts:53](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/util/lsR.ts#L53)*
 
 **Parameters:**
 
@@ -39,7 +39,7 @@ ___
 
 ▸ **ls**(`p`: string, `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *string[]*
 
-*Defined in [util/lsR.ts:62](https://github.com/cancerberoSgx/magica/blob/94207d7/src/util/lsR.ts#L62)*
+*Defined in [util/lsR.ts:62](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/util/lsR.ts#L62)*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ ___
 
 ▸ **lsR**(`o`: `Options`): *[LsRVisitorFile](../interfaces/_util_lsr_.lsrvisitorfile.md)[]*
 
-*Defined in [util/lsR.ts:28](https://github.com/cancerberoSgx/magica/blob/94207d7/src/util/lsR.ts#L28)*
+*Defined in [util/lsR.ts:28](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/util/lsR.ts#L28)*
 
 **Parameters:**
 

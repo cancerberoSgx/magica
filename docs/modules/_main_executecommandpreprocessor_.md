@@ -4,13 +4,9 @@
 
 # External module: "main/executeCommandPreprocessor"
 
-### Index
+## Index
 
-#### Interfaces
-
-* [CommandPreprocessor](../interfaces/_main_executecommandpreprocessor_.commandpreprocessor.md)
-
-#### Functions
+### Functions
 
 * [_preprocessCommand](_main_executecommandpreprocessor_.md#_preprocesscommand)
 * [registerCommandPreprocessor](_main_executecommandpreprocessor_.md#registercommandpreprocessor)
@@ -19,9 +15,9 @@
 
 ###  _preprocessCommand
 
-▸ **_preprocessCommand**(`config`: [RunOptions](../interfaces/_types_.runoptions.md)): *[RunOptions](../interfaces/_types_.runoptions.md)*
+▸ **_preprocessCommand**(`config`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<RunOptions>`*
 
-*Defined in [main/executeCommandPreprocessor.ts:12](https://github.com/cancerberoSgx/magica/blob/94207d7/src/main/executeCommandPreprocessor.ts#L12)*
+*Defined in [main/executeCommandPreprocessor.ts:8](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/main/executeCommandPreprocessor.ts#L8)*
 
 internal - executes all registered preprocessor on given config
 
@@ -31,20 +27,20 @@ Name | Type |
 ------ | ------ |
 `config` | [RunOptions](../interfaces/_types_.runoptions.md) |
 
-**Returns:** *[RunOptions](../interfaces/_types_.runoptions.md)*
+**Returns:** *`Promise<RunOptions>`*
 
 ___
 
 ###  registerCommandPreprocessor
 
-▸ **registerCommandPreprocessor**(`p`: [CommandPreprocessor](../interfaces/_main_executecommandpreprocessor_.commandpreprocessor.md)): *void*
+▸ **registerCommandPreprocessor**(`p`: [CommandPreprocessor](../interfaces/_types_.commandpreprocessor.md)): *void*
 
-*Defined in [main/executeCommandPreprocessor.ts:20](https://github.com/cancerberoSgx/magica/blob/94207d7/src/main/executeCommandPreprocessor.ts#L20)*
+*Defined in [main/executeCommandPreprocessor.ts:16](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/main/executeCommandPreprocessor.ts#L16)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`p` | [CommandPreprocessor](../interfaces/_main_executecommandpreprocessor_.commandpreprocessor.md) |
+`p` | [CommandPreprocessor](../interfaces/_types_.commandpreprocessor.md) |
 
 **Returns:** *void*

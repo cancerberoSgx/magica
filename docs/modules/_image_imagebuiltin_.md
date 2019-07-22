@@ -4,9 +4,9 @@
 
 # External module: "image/imageBuiltIn"
 
-### Index
+## Index
 
-#### Functions
+### Functions
 
 * [imageBuiltIn](_image_imagebuiltin_.md#imagebuiltin)
 
@@ -16,7 +16,7 @@
 
 ▸ **imageBuiltIn**(`builtIn?`: `images`): *`Promise<File[]>`*
 
-*Defined in [image/imageBuiltIn.ts:14](https://github.com/cancerberoSgx/magica/blob/94207d7/src/image/imageBuiltIn.ts#L14)*
+*Defined in [image/imageBuiltIn.ts:14](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/image/imageBuiltIn.ts#L14)*
 
 Gets ImageMagick built-in images like `rose:`, `logo:`, etc in the form of [File](../interfaces/_types_.file.md)s.
 

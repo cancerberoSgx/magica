@@ -4,11 +4,12 @@
 
 # External module: "types"
 
-### Index
+## Index
 
-#### Interfaces
+### Interfaces
 
 * [CliOptions](../interfaces/_types_.clioptions.md)
+* [CommandPreprocessor](../interfaces/_types_.commandpreprocessor.md)
 * [File](../interfaces/_types_.file.md)
 * [NativeOptions](../interfaces/_types_.nativeoptions.md)
 * [Options](../interfaces/_types_.options.md)

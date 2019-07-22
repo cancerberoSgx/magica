@@ -1,5 +1,5 @@
+import { getOption } from '../options'
 import { getStderr, getStdout, resetStderr, resetStdout } from './magickLoaded'
-import { getOption } from '../options';
 
 export function createMain(Module: any): NativeMain {
   return function main(...args: any[]) {

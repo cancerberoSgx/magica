@@ -4,9 +4,9 @@
 
 # External module: "image/pixel"
 
-### Index
+## Index
 
-#### Functions
+### Functions
 
 * [imagePixelColor](_image_pixel_.md#imagepixelcolor)
 
@@ -16,7 +16,7 @@
 
 ▸ **imagePixelColor**(`img`: [File](../classes/_file_file_.file.md), `x`: number, `y`: number): *`Promise<string>`*
 
-*Defined in [image/pixel.ts:4](https://github.com/cancerberoSgx/magica/blob/94207d7/src/image/pixel.ts#L4)*
+*Defined in [image/pixel.ts:4](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/image/pixel.ts#L4)*
 
 **Parameters:**
 

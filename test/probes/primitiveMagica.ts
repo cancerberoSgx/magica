@@ -5,7 +5,6 @@ import { writeFileSync } from 'fs'
 import { unique } from 'misc-utils-of-mine-generic'
 import { File, run } from '../../src'
 import { runOne } from '../../src/main/run'
-import { setOptions } from '../../src/options'
 
 interface Options {
   input: File

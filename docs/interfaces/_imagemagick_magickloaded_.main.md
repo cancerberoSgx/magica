@@ -8,9 +8,9 @@
 
 * **Main**
 
-### Index
+## Index
 
-#### Properties
+### Properties
 
 * [FS](_imagemagick_magickloaded_.main.md#fs)
 * [main](_imagemagick_magickloaded_.main.md#main)
@@ -21,7 +21,7 @@
 
 • **FS**: *[FS](_file_emscriptenfs_.fs.md)*
 
-*Defined in [imageMagick/magickLoaded.ts:8](https://github.com/cancerberoSgx/magica/blob/94207d7/src/imageMagick/magickLoaded.ts#L8)*
+*Defined in [imageMagick/magickLoaded.ts:8](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/imageMagick/magickLoaded.ts#L8)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 • **main**: *[NativeMain](../modules/_imagemagick_createmain_.md#nativemain)*
 
-*Defined in [imageMagick/magickLoaded.ts:7](https://github.com/cancerberoSgx/magica/blob/94207d7/src/imageMagick/magickLoaded.ts#L7)*
+*Defined in [imageMagick/magickLoaded.ts:7](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/imageMagick/magickLoaded.ts#L7)*

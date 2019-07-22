@@ -142,5 +142,5 @@ export interface RunResult extends Result {
 
 export interface CommandPreprocessor {
   name: string,
-  execute(context: RunOptions) : Promise<RunOptions>
+  execute(context: RunOptions): Promise<RunOptions>
 }

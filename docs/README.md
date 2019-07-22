@@ -2,9 +2,9 @@
 
 [Globals](README.md) /
 
-### Index
+## Index
 
-#### External modules
+### External modules
 
 * ["file/emscriptenFs"](modules/_file_emscriptenfs_.md)
 * ["file/file"](modules/_file_file_.md)
@@ -21,6 +21,7 @@
 * ["main/executeCommandPreprocessor"](modules/_main_executecommandpreprocessor_.md)
 * ["main/main"](modules/_main_main_.md)
 * ["main/run"](modules/_main_run_.md)
+* ["main/templatePreprocessor"](modules/_main_templatepreprocessor_.md)
 * ["options"](modules/_options_.md)
 * ["types"](modules/_types_.md)
 * ["util/lsR"](modules/_util_lsr_.md)

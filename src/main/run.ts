@@ -48,7 +48,7 @@ export async function run(o: RunOptions) {
   return r
 }
 
-async  function resolveRunCommands(o: RunOptions) {
+async function resolveRunCommands(o: RunOptions) {
   if ((!o.script || !o.script.length) && (!o.command || !o.command.length)) {
     throw new Error('No script or command given')
   }

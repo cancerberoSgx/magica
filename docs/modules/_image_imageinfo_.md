@@ -4,9 +4,9 @@
 
 # External module: "image/imageInfo"
 
-### Index
+## Index
 
-#### Functions
+### Functions
 
 * [imageInfo](_image_imageinfo_.md#imageinfo)
 
@@ -16,7 +16,7 @@
 
 ▸ **imageInfo**(`img`: [File](../classes/_file_file_.file.md) | string): *`Promise<ExtractInfoResult[]>`*
 
-*Defined in [image/imageInfo.ts:9](https://github.com/cancerberoSgx/magica/blob/94207d7/src/image/imageInfo.ts#L9)*
+*Defined in [image/imageInfo.ts:9](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/image/imageInfo.ts#L9)*
 
 Execute `convert $IMG info.json` to extract image metadata. Returns the parsed info.json file contents
 

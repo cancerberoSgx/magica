@@ -4,9 +4,9 @@
 
 # External module: "util/rmRf"
 
-### Index
+## Index
 
-#### Functions
+### Functions
 
 * [rmRf](_util_rmrf_.md#rmrf)
 
@@ -16,7 +16,7 @@
 
 ▸ **rmRf**(`f`: string, `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md), `predicate`: function): *boolean*
 
-*Defined in [util/rmRf.ts:4](https://github.com/cancerberoSgx/magica/blob/94207d7/src/util/rmRf.ts#L4)*
+*Defined in [util/rmRf.ts:4](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/util/rmRf.ts#L4)*
 
 **Parameters:**
 

@@ -1,13 +1,13 @@
-import { RunOptions, CommandPreprocessor } from '../types'
-import { serial } from 'misc-utils-of-mine-generic';
-import { templatePreprocessor } from './templatePreprocessor';
+import { serial } from 'misc-utils-of-mine-generic'
+import { CommandPreprocessor, RunOptions } from '../types'
+import { templatePreprocessor } from './templatePreprocessor'
 
-const commandPreprocessor: CommandPreprocessor [] = []
+const commandPreprocessor: CommandPreprocessor[] = []
 
 /** internal - executes all registered preprocessor on given config */
 export async function _preprocessCommand(config: RunOptions): Promise<RunOptions> {
   let cfg = config
-  await serial( commandPreprocessor.map(p=>async ()=> {
+  await serial(commandPreprocessor.map(p => async () => {
     cfg = await p.execute(cfg)
   }))
   return { ...cfg }

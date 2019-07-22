@@ -18,11 +18,14 @@ Easy to setup and use, ImageMagick Node.js and Browser API and Command Line Inte
   * [Node.js](#nodejs)
   * [Browser](#browser)
     + [Web Worker](#web-worker)
+  * [`run()`](#run)
+    + [Commands Sequence](#commands-sequence)
+    + [JavaScript templates](#javascript-templates)
+    + [Commands preprocessors](#commands-preprocessors)
 - [Options](#options)
 - [Reference API](#reference-api)
-- [Why](#why)
+- [Why?](#why)
 - [TODO / Road map](#todo--road-map)
-  * [Ideas](#ideas)
 
 <!-- tocstop -->
 

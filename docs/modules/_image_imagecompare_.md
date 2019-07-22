@@ -4,9 +4,9 @@
 
 # External module: "image/imageCompare"
 
-### Index
+## Index
 
-#### Functions
+### Functions
 
 * [imageCompare](_image_imagecompare_.md#imagecompare)
 
@@ -16,7 +16,7 @@
 
 ▸ **imageCompare**(`img1`: [File](../classes/_file_file_.file.md), `img2`: [File](../classes/_file_file_.file.md), `fuzz`: number): *`Promise<boolean>`*
 
-*Defined in [image/imageCompare.ts:7](https://github.com/cancerberoSgx/magica/blob/94207d7/src/image/imageCompare.ts#L7)*
+*Defined in [image/imageCompare.ts:7](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/image/imageCompare.ts#L7)*
 
 Compare the two images and return true if they are equal visually. Optionally, a margin of error can be provided using `fuzz`
 

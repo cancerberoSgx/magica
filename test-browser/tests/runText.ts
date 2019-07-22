@@ -1,7 +1,3 @@
-import { basename } from 'misc-utils-of-mine-generic';
-import { main } from '../../src';
-import { File } from '../../src/file/file';
-import { assertEquals, assertIncludes } from '../testUtil';
 
 export default async function f(){
 //  let result = await main({

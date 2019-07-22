@@ -8,9 +8,9 @@
 
 * **LsRVisitorFile**
 
-### Index
+## Index
 
-#### Properties
+### Properties
 
 * [isDir](_util_lsr_.lsrvisitorfile.md#isdir)
 * [path](_util_lsr_.lsrvisitorfile.md#path)
@@ -21,7 +21,7 @@
 
 • **isDir**: *boolean*
 
-*Defined in [util/lsR.ts:25](https://github.com/cancerberoSgx/magica/blob/94207d7/src/util/lsR.ts#L25)*
+*Defined in [util/lsR.ts:25](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/util/lsR.ts#L25)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 • **path**: *string*
 
-*Defined in [util/lsR.ts:24](https://github.com/cancerberoSgx/magica/blob/94207d7/src/util/lsR.ts#L24)*
+*Defined in [util/lsR.ts:24](https://github.com/cancerberoSgx/magica/blob/6bf4de2/src/util/lsR.ts#L24)*
