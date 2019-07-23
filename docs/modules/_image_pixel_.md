@@ -14,16 +14,16 @@
 
 ###  imagePixelColor
 
-▸ **imagePixelColor**(`img`: [File](../classes/_file_file_.file.md), `x`: number, `y`: number): *`Promise<string>`*
+▸ **imagePixelColor**(`img`: [IFile](../interfaces/_types_.ifile.md) | undefined, `x`: number, `y`: number): *`Promise<string | undefined>`*
 
-*Defined in [image/pixel.ts:4](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/image/pixel.ts#L4)*
+*Defined in [image/pixel.ts:5](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/image/pixel.ts#L5)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`img` | [File](../classes/_file_file_.file.md) |
+`img` | [IFile](../interfaces/_types_.ifile.md) \| undefined |
 `x` | number |
 `y` | number |
 
-**Returns:** *`Promise<string>`*
+**Returns:** *`Promise<string | undefined>`*

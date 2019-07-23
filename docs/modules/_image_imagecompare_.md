@@ -14,9 +14,9 @@
 
 ###  imageCompare
 
-▸ **imageCompare**(`img1`: [IFile](../interfaces/_types_.ifile.md), `img2`: [IFile](../interfaces/_types_.ifile.md), `fuzz`: number): *`Promise<boolean>`*
+▸ **imageCompare**(`img1?`: [IFile](../interfaces/_types_.ifile.md), `img2?`: [IFile](../interfaces/_types_.ifile.md), `fuzz`: number): *`Promise<boolean>`*
 
-*Defined in [image/imageCompare.ts:8](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/image/imageCompare.ts#L8)*
+*Defined in [image/imageCompare.ts:8](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/image/imageCompare.ts#L8)*
 
 Compare the two images and return true if they are equal visually. Optionally, a margin of error can be provided using `fuzz`
 
@@ -24,8 +24,8 @@ Compare the two images and return true if they are equal visually. Optionally, a
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`img1` | [IFile](../interfaces/_types_.ifile.md) | - |
-`img2` | [IFile](../interfaces/_types_.ifile.md) | - |
+`img1?` | [IFile](../interfaces/_types_.ifile.md) | - |
+`img2?` | [IFile](../interfaces/_types_.ifile.md) | - |
 `fuzz` | number | 0.015 |
 
 **Returns:** *`Promise<boolean>`*

@@ -16,3 +16,4 @@
 * [Result](../interfaces/_types_.result.md)
 * [RunOptions](../interfaces/_types_.runoptions.md)
 * [RunResult](../interfaces/_types_.runresult.md)
+* [ScriptEvent](../interfaces/_types_.scriptevent.md)

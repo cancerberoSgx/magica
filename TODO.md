@@ -20,9 +20,8 @@
 - [ ] improve errors thrown when there's a missing file, currently it fails silently.
 - [w] document run script and supported syntax
   - [ ] document command preprocessor and script template
+  - [ ] document about template syntax for compile-time and run-time templates.
 - [x] apidocs
-- [?] Option for Node.js users to work/mount current directory - the tool should not copy input files just use them since are present in mount root ems
-- [?] how high level scripts DDD can be integrated ? different project ?
 - [x] template should allow to add custom functions to the context
 - [x] adapt executeCommandPreprocessor and command template preprocessor from wasm-imagemagick own branch
 - [x] travis
@@ -51,10 +50,13 @@
 
 ### Ideas
 
-- [ ] ideas for script templates: ``` var result = await run({script:`convert <%= await resolve('foo.png') -scale <%= width('foo.png')/2 %> output.<%=inputFiles[0].extension%>`, inputFiles: [File.resolve('y.gif')]} ```
-- [ ] We will try to solve all scripting problems just with templates and not implement virtual commands or extra syntax since that would not be KISS. For some situations though new commands (at runtime - not a compile time) are need - templates are evaluated at compile time (For example, I want to protect imperatively one command's output file). But still we will try to solve this only with templates  so we don't have to parse any script code. The only way to support it without virtual commands is by adding event emitter in run() to protect files when they are created if needed
+- [x] ideas for script templates: ``` var result = await run({script:`convert <%= await resolve('foo.png') -scale <%= width('foo.png')/2 %> output.<%=inputFiles[0].extension%>`, inputFiles: [File.resolve('y.gif')]} ```
+- [x] We will try to solve all scripting problems just with templates and not implement virtual commands or extra syntax since that would not be KISS. For some situations though new commands (at runtime - not a compile time) are need - templates are evaluated at compile time (For example, I want to protect imperatively one command's output file). But still we will try to solve this only with templates  so we don't have to parse any script code. The only way to support it without virtual commands is by adding event emitter in run() to protect files when they are created if needed
+
+- [?] Option for Node.js users to work/mount current directory - the tool should not copy input files just use them since are present in mount root ems
 
 - [ ] drawing svg. is not documented and seems the official way is doing it using mvg. But... what if we convert all shapes to paths, use svgo to reduce the number to (even single ) path and use draw to draw them. syntax seems to be compatible... This way we should have yet another method of rasterize a svg, but this time to any format. I wonder what the speed is compared to other rasterize methods, if we target .ma
+- [?] how high level scripts DDD can be integrated ? different project ?
 
 - [ ] can we perform similar algorithm as geometrize with IM? this is interesting use-case since the objective is performance, reuse files so we need an api for:
   * prevent/ control file removal

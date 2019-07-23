@@ -74,7 +74,7 @@ export interface Options extends NativeOptions {
    * the file names given in the command. If string and a file exists (node.js) then that file will be used.
    * Otherwise it will be considered a url. In later cases, the filename will be the base name of file or url.
    */
-  inputFiles?: (string | IFile|undefined)[]
+  inputFiles?: (string | IFile | undefined)[]
 
 }
 
@@ -87,14 +87,14 @@ export interface CliOptions extends Options {
   input: string[]
 }
 
-type ScriptListener = (e:ScriptEvent)=>void
+type ScriptListener = (e: ScriptEvent) => void
 
 export interface ScriptEvent {
-  name: 'beforeCommand'|'afterCommand'|'onScriptStart'|'onScriptEnd'
-  stopPropagation:boolean
+  name: 'beforeCommand' | 'afterCommand' | 'onScriptStart' | 'onScriptEnd'
+  stopPropagation: boolean
   scriptOptions: RunOptions
   scriptInterrupt: boolean
-  commandOptions?:  Partial<Options>
+  commandOptions?: Partial<Options>
   commandResult?: Result
 }
 
@@ -178,8 +178,8 @@ export interface RunResult extends Result {
   outputFiles: IFile[]
 }
 
-export interface CommandPreprocessor<O extends RunOptions = RunOptions, O2 extends O = O, RO extends Options = Options > {
+export interface CommandPreprocessor<O extends RunOptions = RunOptions, O2 extends O = O, RO extends Options = Options> {
   name: string,
   fnCompileTime?(context: O): Promise<O2>
-  fnRuntime?(commandOptions: RO, commandIndex:number,runOptions: O ): Promise<void>
+  fnRuntime?(commandOptions: RO, commandIndex: number, runOptions: O): Promise<void>
 }

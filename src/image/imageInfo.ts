@@ -1,22 +1,21 @@
 import { equal } from 'assert'
+import { asArray, notUndefined } from 'misc-utils-of-mine-generic'
 import { File, IFile } from '..'
 import { main } from '../main/main'
-import { asArray, notUndefined } from 'misc-utils-of-mine-generic';
-import { fileLoader } from 'ejs';
 
 /**
  * Execute `convert $IMG info.json` to extract image metadata. Returns the parsed info.json file contents
  * @param img could be a string in case you want to extract information of built in images like `rose:`
  */
-export async function imageInfo(img?: IFile | string|(IFile | string)[]): Promise<ExtractInfoResult[]> {
-  if(!img){
+export async function imageInfo(img?: IFile | string | (IFile | string)[]): Promise<ExtractInfoResult[]> {
+  if (!img) {
     return Promise.resolve([])
   }
-  var files = await Promise.all(asArray(img).map(async img=>typeof img === 'string' ? await File.resolve(img) : [img]));
+  var files = await Promise.all(asArray(img).map(async img => typeof img === 'string' ? await File.resolve(img) : [img]))
 
   const r = await main({
     inputFiles: files.flat().filter(notUndefined),
-    command: ['convert', ...asArray(img).map(img=>typeof img === 'string' ? img : img.name), 'imgInfo.json']
+    command: ['convert', ...asArray(img).map(img => typeof img === 'string' ? img : img.name), 'imgInfo.json']
   })
   equal(r.outputFiles.length, 1)
   const s = File.toString(r.outputFiles[0])
@@ -28,16 +27,16 @@ export async function imageInfo(img?: IFile | string|(IFile | string)[]): Promis
  * Execute `convert $IMG info.json` to extract image metadata. Returns the parsed image.geometry object 
  */
 // export async function bounds(img: File | string): Promise<ExtractInfoResultGeometry[]> {
-  // var info = await imageInfo(img)
-  // return info.length>0 ? info[0].image.geometry : undefined
-  // const r = await main({
-  //   inputFiles: [...typeof img === 'string' ? [] : [img]],
-  //   command: ['convert', typeof img === 'string' ? img : img.name, 'imgInfo.json']
-  // })
-  // equal(r.outputFiles.length, 1)
-  // const s = File.toString(r.outputFiles[0])
-  // const obj = JSON.parse(s)
-  // return obj
+// var info = await imageInfo(img)
+// return info.length>0 ? info[0].image.geometry : undefined
+// const r = await main({
+//   inputFiles: [...typeof img === 'string' ? [] : [img]],
+//   command: ['convert', typeof img === 'string' ? img : img.name, 'imgInfo.json']
+// })
+// equal(r.outputFiles.length, 1)
+// const s = File.toString(r.outputFiles[0])
+// const obj = JSON.parse(s)
+// return obj
 // }
 
 // the following is ExtractInfoResult json output semi automatically translated to TypeScript.

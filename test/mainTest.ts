@@ -1,8 +1,8 @@
 import test from 'ava'
+import { readFileSync } from 'fs'
 import { basename } from 'misc-utils-of-mine-generic'
 import { main } from '../src/main/main'
 import fileType = require('file-type')
-import { readFileSync } from 'fs';
 
 test('stdout', async t => {
   const result = await main({

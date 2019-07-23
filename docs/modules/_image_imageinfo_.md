@@ -18,9 +18,9 @@
 
 ###  imageInfo
 
-▸ **imageInfo**(`img`: [IFile](../interfaces/_types_.ifile.md) | string): *`Promise<ExtractInfoResult[]>`*
+▸ **imageInfo**(`img?`: [IFile](../interfaces/_types_.ifile.md) | string | string | [IFile](../interfaces/_types_.ifile.md)[]): *`Promise<ExtractInfoResult[]>`*
 
-*Defined in [image/imageInfo.ts:9](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/image/imageInfo.ts#L9)*
+*Defined in [image/imageInfo.ts:10](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/image/imageInfo.ts#L10)*
 
 Execute `convert $IMG info.json` to extract image metadata. Returns the parsed info.json file contents
 
@@ -28,6 +28,6 @@ Execute `convert $IMG info.json` to extract image metadata. Returns the parsed i
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`img` | [IFile](../interfaces/_types_.ifile.md) \| string | could be a string in case you want to extract information of built in images like `rose:`  |
+`img?` | [IFile](../interfaces/_types_.ifile.md) \| string \| string \| [IFile](../interfaces/_types_.ifile.md)[] | could be a string in case you want to extract information of built in images like `rose:`  |
 
 **Returns:** *`Promise<ExtractInfoResult[]>`*

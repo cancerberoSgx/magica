@@ -16,7 +16,7 @@
 
 ▸ **imageBuiltIn**(`builtIn?`: `images`): *`Promise<IFile[]>`*
 
-*Defined in [image/imageBuiltIn.ts:14](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/image/imageBuiltIn.ts#L14)*
+*Defined in [image/imageBuiltIn.ts:14](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/image/imageBuiltIn.ts#L14)*
 
 Gets ImageMagick built-in images like `rose:`, `logo:`, etc in the form of [File](../classes/_file_file_.file.md)s.
 

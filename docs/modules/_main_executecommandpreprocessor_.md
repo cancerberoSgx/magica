@@ -8,16 +8,17 @@
 
 ### Functions
 
-* [_preprocessCommand](_main_executecommandpreprocessor_.md#_preprocesscommand)
+* [_compileTimePreprocess](_main_executecommandpreprocessor_.md#_compiletimepreprocess)
+* [_runTimePreprocess](_main_executecommandpreprocessor_.md#_runtimepreprocess)
 * [registerCommandPreprocessor](_main_executecommandpreprocessor_.md#registercommandpreprocessor)
 
 ## Functions
 
-###  _preprocessCommand
+###  _compileTimePreprocess
 
-▸ **_preprocessCommand**(`config`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<RunOptions>`*
+▸ **_compileTimePreprocess**(`config`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<RunOptions>`*
 
-*Defined in [main/executeCommandPreprocessor.ts:8](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/main/executeCommandPreprocessor.ts#L8)*
+*Defined in [main/executeCommandPreprocessor.ts:9](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/main/executeCommandPreprocessor.ts#L9)*
 
 internal - executes all registered preprocessor on given config
 
@@ -31,11 +32,29 @@ Name | Type |
 
 ___
 
+###  _runTimePreprocess
+
+▸ **_runTimePreprocess**(`runOptions`: [RunOptions](../interfaces/_types_.runoptions.md), `commandOptions`: [Options](../interfaces/_types_.options.md), `commandIndex`: number): *`Promise<void>`*
+
+*Defined in [main/executeCommandPreprocessor.ts:18](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/main/executeCommandPreprocessor.ts#L18)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`runOptions` | [RunOptions](../interfaces/_types_.runoptions.md) |
+`commandOptions` | [Options](../interfaces/_types_.options.md) |
+`commandIndex` | number |
+
+**Returns:** *`Promise<void>`*
+
+___
+
 ###  registerCommandPreprocessor
 
 ▸ **registerCommandPreprocessor**(`p`: [CommandPreprocessor](../interfaces/_types_.commandpreprocessor.md)): *void*
 
-*Defined in [main/executeCommandPreprocessor.ts:16](https://github.com/cancerberoSgx/magica/blob/ddf46a3/src/main/executeCommandPreprocessor.ts#L16)*
+*Defined in [main/executeCommandPreprocessor.ts:30](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/main/executeCommandPreprocessor.ts#L30)*
 
 **Parameters:**
 

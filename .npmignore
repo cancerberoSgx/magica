@@ -19,7 +19,7 @@ dist/test
 dist/test-browser
 test
 .cache
-.travis
+.travis.yml
 zangano
 zangano-demo
 astq-query*

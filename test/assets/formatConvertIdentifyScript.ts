@@ -64,7 +64,7 @@ async function test() {
                       })
                         ;
                       [format2, '64x64'].forEach(s => assertIncludes(result2.stdout.join('').toLowerCase(), s.toLowerCase()))
-                      console.log('Result for "'+c+'"', result2.stdout, result2.stderr, result2.error, result2.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')));
+                      console.log('Result for "' + c + '"', result2.stdout, result2.stderr, result2.error, result2.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')));
                       deepEqual(result2.error, undefined)
                       deepEqual(result2.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')), [])
                     } catch (error) {
@@ -90,7 +90,7 @@ async function test() {
     })
     )
   } catch (error) {
-            console.error('ERRRRRR55', error);
+    console.error('ERRRRRR55', error)
     ok(!error)
   }
   console.log(process.memoryUsage())

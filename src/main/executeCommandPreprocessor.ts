@@ -1,6 +1,6 @@
 import { serial } from 'misc-utils-of-mine-generic'
-import { CommandPreprocessor, RunOptions, Options } from '../types'
-import { Template } from './template/template';
+import { CommandPreprocessor, Options, RunOptions } from '../types'
+import { Template } from './template/template'
 
 const commandPreprocessor: CommandPreprocessor[] = []
 
@@ -15,7 +15,7 @@ export async function _compileTimePreprocess(config: RunOptions): Promise<RunOpt
   return { ...cfg }
 }
 
-export async function _runTimePreprocess(runOptions : RunOptions, commandOptions: Options, commandIndex: number): Promise<void> {
+export async function _runTimePreprocess(runOptions: RunOptions, commandOptions: Options, commandIndex: number): Promise<void> {
   if (!installed) {
     installed = true
     install()

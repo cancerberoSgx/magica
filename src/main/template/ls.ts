@@ -1,7 +1,7 @@
-import { asArray } from 'misc-utils-of-mine-generic';
-import { getOptions, magickLoaded, pushStdout } from '../../imageMagick/magickLoaded';
-import { listFilesRecursively, ls } from '../../util/lsR';
-import { TemplateHelper } from './template';
+import { asArray } from 'misc-utils-of-mine-generic'
+import { getOptions, magickLoaded, pushStdout } from '../../imageMagick/magickLoaded'
+import { listFilesRecursively, ls } from '../../util/lsR'
+import { TemplateHelper } from './template'
 
 interface Options {
   path?: string
@@ -16,7 +16,7 @@ export class LsHelper implements TemplateHelper<Options, Promise<string[]>> {
   public async fsCompileTime(options: Options = {}) {
     const { FS } = await magickLoaded
     const { emscriptenNodeFsRoot } = getOptions()
-  
+
     var path = options.path || emscriptenNodeFsRoot
     // console.log(path,  ls(path, FS), emscriptenNodeFsRoot, FS.cwd());
     // FS.chdir(emscriptenNodeFsRoot)

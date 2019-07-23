@@ -1,11 +1,10 @@
-import { compile } from 'ejs';
-import { CommandPreprocessor, RunOptions, Options } from '../../types';
+import { compile } from 'ejs'
 import { imageInfo } from '../../image/imageInfo'
-import { LsHelper } from './ls';
-import { serial } from 'misc-utils-of-mine-generic';
-import { processCommand, arrayToCliOne } from '../command';
+import { CommandPreprocessor, Options, RunOptions } from '../../types'
+import { arrayToCliOne, processCommand } from '../command'
+import { LsHelper } from './ls'
 
-export interface TemplateHelper<O=any, R =any, RO=any, RR=any> {
+export interface TemplateHelper<O = any, R = any, RO = any, RR = any> {
   name: string
   fsCompileTime: (options: O) => R
   fsRunTime: (options: RO) => RR
@@ -23,21 +22,21 @@ export class Template implements CommandPreprocessor {
 
   public async fnCompileTime(context: RunOptions) {
     if (typeof context.script === 'string') {
-      const t = compile(context.script, { async: true });
-      let c: { [s: string]: any } = { ...context, imageInfo }; // TODO: imageInfo should be another helper separately
+      const t = compile(context.script, { async: true })
+      let c: { [s: string]: any } = { ...context, imageInfo } // TODO: imageInfo should be another helper separately
       templateHelpers.forEach(fn => {
         c[fn.name] = fn.fsCompileTime.bind(fn)
-      });
-      const script = await t(c);
-      return { ...context, script };
+      })
+      const script = await t(c)
+      return { ...context, script }
     }
     else {
-      return context;
+      return context
     }
   }
 
-  public async fnRuntime(commandOptions: Options, commandIndex:number, runOptions: RunOptions) {
-    
+  public async fnRuntime(commandOptions: Options, commandIndex: number, runOptions: RunOptions) {
+
     // commandOptions = {...commandOptions}
     // runOptions = {...runOptions}
 
@@ -52,18 +51,18 @@ export class Template implements CommandPreprocessor {
     // console.log('TEMPLALSLSLSL', cs);
 
     // if (cs.includes('<$')) {
-      const t = compile(cs, { delimiter: '$', async: true })
-      // const ctx = {...context
-      let c: { [s: string]: any } = {runOptions , commandOptions, imageInfo }; // TODO: imageInfo should be another helper separately
-      templateHelpers.forEach(fn => {
-        c[fn.name] = fn.fsRunTime.bind(fn)
-      });
-      
-      // console.log('ctx', c);
-    var s = await t(c)
-    commandOptions.command = processCommand(s)  
+    const t = compile(cs, { delimiter: '$', async: true })
+    // const ctx = {...context
+    let c: { [s: string]: any } = { runOptions, commandOptions, imageInfo } // TODO: imageInfo should be another helper separately
+    templateHelpers.forEach(fn => {
+      c[fn.name] = fn.fsRunTime.bind(fn)
+    })
 
-    
+    // console.log('ctx', c);
+    var s = await t(c)
+    commandOptions.command = processCommand(s)
+
+
     // } 
 
     // else {
@@ -93,13 +92,13 @@ export class Template implements CommandPreprocessor {
   // }
 }
 
-const templateHelpers: TemplateHelper<any, any>[] = [];
+const templateHelpers: TemplateHelper<any, any>[] = []
 
 /**
  * Allows to change the context object on which templates are evaluated to add new properties or functions so they can be evaluated in command templates.
  */
 export function addTemplateHelper(h: TemplateHelper) {
-  templateHelpers.push(h);
+  templateHelpers.push(h)
 }
 
 let installed = false

@@ -1,12 +1,12 @@
 import { ok } from 'assert'
 import fetch from 'cross-fetch'
 import { existsSync, readFileSync } from 'fs'
-import { basename, getFileNameFromUrl, isNode, serial, inBrowser, asArray, notUndefined } from 'misc-utils-of-mine-generic'
+import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial } from 'misc-utils-of-mine-generic'
 import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
 import { imagePixelColor } from '../image/pixel'
-import { IFile, Options } from '../types'
+import { IFile } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
-import { protectFile } from './protected';
+import { protectFile } from './protected'
 
 type FileFlag = 'protected'
 // TODO: |readonly
@@ -20,7 +20,7 @@ export class File implements IFile {
     this.content = content instanceof ArrayBuffer ? new Uint8ClampedArray(content) : content
     this.flags = flags
     if (flags.includes('protected')) {
-      protectFile(this);
+      protectFile(this)
     }
   }
 

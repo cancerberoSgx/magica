@@ -1,7 +1,6 @@
 import test from 'ava'
 import { File } from '../src'
 import { run } from '../src/main/run'
-import { writeFileSync } from 'fs';
 
 test('script template', async t => {
   const result = await run({
