@@ -73,14 +73,14 @@ emconfigure ./configure \
   --disable-largefile --disable-openmp --without-bzlib --without-dps \
   --without-jbig --without-openjp2 --without-lcms --without-wmf \
   --without-xml --without-fftw --without-flif --without-fpx --without-djvu \
-  --without-fontconfig --without-raqm --without-gslib \
+ --without-raqm --without-gslib \
   --without-gvc --without-heic --without-lqr --without-openexr --without-pango \
-  --without-raw --without-rsvg --without-webp --enable-zero-configuration \
+  --without-raw --without-rsvg --without-webp \
+    # --without-fontconfig --enable-zero-configuration \
   PKG_CONFIG_PATH="$PKG_CONFIG_PATH"
 testExitCode "ImageMagick configure" $?
 
 # include emscripten freetype port and its includes files. 
-# heads up - there are some unresolved symbols on link so we need to use emscripten setting -s ERROR_ON_UNDEFINED_SYMBOLS=0 
 export CFLAGS="$CFLAGS -s ERROR_ON_UNDEFINED_SYMBOLS=0 -s USE_FREETYPE=1"
 emcmake make CFLAGS="$CFLAGS"
 testExitCode "ImageMagick make" $?

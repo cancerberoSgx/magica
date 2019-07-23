@@ -1,9 +1,11 @@
 
 ## TODO / Road map
 
+
 - [ ] performance tests in the browser
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
 - [ ] fix npm run test-js  
+- [ ] run scriptListener  . finish and test it or drop it
 - [ ] verify support IM command quoted arguments
 - [ ] verify mkdir -p for output files
 - [ ] because options are global - sending commands concurrently could fail. Solution: queue or instance options
@@ -14,6 +16,7 @@
 - [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
 - [ ] adapt executeVirtualCommand from wasm-imagemagick own branch
 - [ ] test and document protected files feature
+- [ ] should magica support running native IM executable in node if they are present ?  
 - [ ] improve errors thrown when there's a missing file, currently it fails silently.
 - [w] document run script and supported syntax
   - [ ] document command preprocessor and script template
@@ -47,6 +50,9 @@
 - [x] Input file from url
 
 ### Ideas
+
+- [ ] ideas for script templates: ``` var result = await run({script:`convert <%= await resolve('foo.png') -scale <%= width('foo.png')/2 %> output.<%=inputFiles[0].extension%>`, inputFiles: [File.resolve('y.gif')]} ```
+- [ ] We will try to solve all scripting problems just with templates and not implement virtual commands or extra syntax since that would not be KISS. For some situations though new commands (at runtime - not a compile time) are need - templates are evaluated at compile time (For example, I want to protect imperatively one command's output file). But still we will try to solve this only with templates  so we don't have to parse any script code. The only way to support it without virtual commands is by adding event emitter in run() to protect files when they are created if needed
 
 - [ ] drawing svg. is not documented and seems the official way is doing it using mvg. But... what if we convert all shapes to paths, use svgo to reduce the number to (even single ) path and use draw to draw them. syntax seems to be compatible... This way we should have yet another method of rasterize a svg, but this time to any format. I wonder what the speed is compared to other rasterize methods, if we target .ma
 

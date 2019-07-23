@@ -18,8 +18,8 @@ if [ "$?" -ne "0" ]; then
   echo "Error executing npm i && npm test. Aborting."
   exit 1
 fi
-rm src/imageMagick/compiled/magick.{wasm,js}
-cp $WASM_IMAGEMAGICK_DIR/magick.{wasm,js} src/imageMagick/compiled/
+rm src/imageMagick/compiled/magick.wasm src/imageMagick/compiled/magick.js
+cp $WASM_IMAGEMAGICK_DIR/magick.wasm $WASM_IMAGEMAGICK_DIR/magick.js} src/imageMagick/compiled/
 npm run build && npm test
 if [ "$?" -ne "0" ]; then
   echo "Error executing npm i && npm test. Aborting."

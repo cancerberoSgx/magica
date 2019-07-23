@@ -45,6 +45,11 @@ export interface NativeOptions extends BaseOptions {
    * faster if read/write many images but consumes more memory.
    */
   disableNodeFs?: boolean
+
+  /**
+   * If true and when running on node.js, and only if image magick commands are available in the local system, it will execute the commands using the local native ImageMagick commands, instead of running them though the emscripten port (which is slower and support less capabilities).
+   */
+  useNative?: boolean
 }
 
 interface BaseOptions {
@@ -82,9 +87,28 @@ export interface CliOptions extends Options {
   input: string[]
 }
 
+type ScriptListener = (e:ScriptEvent)=>void
 
+export interface ScriptEvent {
+  name: 'beforeCommand'|'afterCommand'|'onScriptStart'|'onScriptEnd'
+  stopPropagation:boolean
+  scriptOptions: RunOptions
+  scriptInterrupt: boolean
+  commandOptions?:  Partial<Options>
+  commandResult?: Result
+}
+
+// interface FilesCreatedEvent extends ScriptEvent {
+//   name: 'filesCreated'
+//   files: IFile[]
+// }
 
 export interface RunOptions extends Partial<Options> {
+  /**
+   * Register a script run event listener that will be notified when new files are created, before or after commands are executed, etc. Listeners can set `stopPropagation` property to true to prevent the event to propagate to other listeners. Also they could set the property `abortScript` to true to cancel the script execution.
+   */
+  scriptListener?: ScriptListener
+
   /**
    * Takes precedence over [[Options.command]]. If not provided then  [[Options.command]] is used.
    *
@@ -125,9 +149,11 @@ export interface RunOptions extends Partial<Options> {
    *   +distort Polar 0 +repage 'star inward.gif'
    * `})
    * ```
-   *
    */
   script?: string | string[]
+
+  // /** if true it won't execute any command  */
+  // onlyPreprocessing?: boolean
 }
 
 /**
@@ -152,7 +178,8 @@ export interface RunResult extends Result {
   outputFiles: IFile[]
 }
 
-export interface CommandPreprocessor {
+export interface CommandPreprocessor<O extends RunOptions = RunOptions, O2 extends O = O, RO extends Options = Options > {
   name: string,
-  execute(context: RunOptions): Promise<RunOptions>
+  fnCompileTime?(context: O): Promise<O2>
+  fnRuntime?(commandOptions: RO, commandIndex:number,runOptions: O ): Promise<void>
 }

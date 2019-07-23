@@ -1,3 +1,5 @@
 prefix
 # ImageMagick
 dist
+magick.wasm
+magick.js

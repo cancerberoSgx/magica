@@ -5,7 +5,8 @@ let options: Required<NativeOptions> = {
   emscriptenNodeFsRoot: '/w2',
   debug: false,
   outputDir: '.',
-  disableNodeFs: false
+  disableNodeFs: false,
+  useNative: false
 }
 export function getOptions() {
   return options

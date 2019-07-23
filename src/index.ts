@@ -9,13 +9,13 @@ import { imagePixelColor } from './image/pixel'
 import { magickLoaded } from './imageMagick/magickLoaded'
 import { cliToArray } from './main/command'
 import { registerCommandPreprocessor } from './main/executeCommandPreprocessor'
-import { addTemplatePreprocessorContextMutator } from './main/templatePreprocessor'
+import { addTemplateHelper } from "./main/template/template";
 import { main } from './main/main'
 import { run } from './main/run'
 
 export { File } from './file/file'
 export { getProtectedFile, isProtectedFile, protectFile } from './file/protected'
-export { addTemplatePreprocessorContextMutator } from './main/templatePreprocessor'
+export { addTemplateHelper as addTemplatePreprocessorContextMutator } from './main/template/template'
 export { toDataUrl } from './image/html'
 export { imageBuiltIn } from './image/imageBuiltIn'
 export { imageCompare } from './image/imageCompare'
@@ -32,6 +32,6 @@ export * from './types'
 
 if (typeof getGlobal().Magica == 'undefined') {
   getGlobal().Magica = {
-    File, toDataUrl, imageBuiltIn, imageCompare, magickLoaded, imageInfo, imagePixelColor, registerCommandPreprocessor, main, cliToArray, run, protectFile, isProtectedFile, getProtectedFile, addTemplatePreprocessorContextMutator
+    File, toDataUrl, imageBuiltIn, imageCompare, magickLoaded, imageInfo, imagePixelColor, registerCommandPreprocessor, main, cliToArray, run, protectFile, isProtectedFile, getProtectedFile, addTemplatePreprocessorContextMutator: addTemplateHelper
   }
 }

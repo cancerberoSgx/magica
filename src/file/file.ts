@@ -6,12 +6,22 @@ import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
 import { imagePixelColor } from '../image/pixel'
 import { IFile, Options } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
+import { protectFile } from './protected';
+
+type FileFlag = 'protected'
+// TODO: |readonly
 
 export class File implements IFile {
   public content: IFile['content']
 
-  constructor(public name: string, content: IFile['content'] | ArrayBuffer) {
+  protected flags: FileFlag[] = [];
+
+  constructor(public name: string, content: IFile['content'] | ArrayBuffer, flags: FileFlag[] = []) {
     this.content = content instanceof ArrayBuffer ? new Uint8ClampedArray(content) : content
+    this.flags = flags
+    if (flags.includes('protected')) {
+      protectFile(this);
+    }
   }
 
   protected _info: ExtractInfoResultImage | undefined;
@@ -42,8 +52,6 @@ export class File implements IFile {
     return imagePixelColor(this, x, y)
   }
 
-
-
 	/** Creates a DataUrl like `data:image/png;name=f.png;base64,` using given base64 content, mimeType and fileName. 
 	 * TODO: - [ ] asDataUrl / base64 - obtain mimetype with IM if user don't give.
 						- [ ] store file mimetype in property for future use.**/
@@ -62,21 +70,7 @@ export class File implements IFile {
     return 'data:' + mime + ';' + file.name + ';base64,' + File.toBase64(file)
   }
 
-  // /**
-  //  * Given a filesystem path or a url it will first check if the file exists (if applies) , if so returning that file, or if not loading the file from url.
-  //  */
-  // public static resolve(path: string): Promise<File | undefined> {
-  //   // throw 'Not impl'
-  //   if (inBrowser() || !existsSync(path)) {
-  //     	return File.fromUrl(path);
-  //     } else {
-  //         return Promise.resolve(File.fromFile(path));
-  //     }
-  //   }
-  // }
-
-
-  public static async fromUrl(u: string, o: RequestInit & O = {}) {
+  public static async fromUrl(u: string, o: RequestInit & O & ResolveOptions = {}) {
     try {
       const r = await fetch(u, o)
       return new File(o.name || getFileNameFromUrl(u), await r.arrayBuffer())
@@ -86,7 +80,7 @@ export class File implements IFile {
     }
   }
 
-  public static async fromFile(f: string, o: O = {}) {
+  public static async fromFile(f: string, o: O & ResolveOptions = {}) {
     if (!isNode()) {
       throw new Error('File.readFile() called in the browser.')
     }
@@ -96,14 +90,11 @@ export class File implements IFile {
       console.error(error)
       return undefined
     }
-
-
   }
 
   public static toString(f: IFile) {
     return String.fromCharCode.apply(null, f.content as any)
   }
-
 
   /** Returns base64 representation of this image in an ecoded format like PNG  **/
   public static toBase64(file: File) {
@@ -131,16 +122,15 @@ export class File implements IFile {
     })))
   }
 
-  public static async   resolve(files: string | IFile | undefined | (string | IFile | undefined)[]) {
+  public static async   resolve(files: string | IFile | undefined | (string | IFile | undefined)[], options: ResolveOptions = { flags: [] }) {
     var fs = (asArray<undefined | string | IFile>(files || [])).filter(notUndefined)
-
     var result = await serial(fs.map(f => async () => {
       if (typeof f === 'string') {
         if (isNode() && existsSync(f)) {
-          return await File.fromFile(f)
+          return await File.fromFile(f, options)
         }
         else {
-          return await File.fromUrl(f)
+          return await File.fromUrl(f, options)
         }
       }
       else {
@@ -154,7 +144,7 @@ export class File implements IFile {
   public static isFile(f: any): f is File {
     return f && f.name && f.content && !!(f as File).size
   }
-  
+
   public static asFile(f: IFile): File {
     return File.isFile(f) ? f : new File(f.name, f.content)
   }
@@ -164,8 +154,10 @@ export class File implements IFile {
   }
 }
 
-
 interface O {
   name?: string
 }
 
+interface ResolveOptions {
+  flags?: FileFlag[];
+}
