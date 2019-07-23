@@ -64,3 +64,21 @@ test('accept array buffer view', async t => {
   t.deepEqual(result.stderr, [])
   t.falsy(result.error)
 })
+
+test('protected files', async t => {
+  let result = await main({
+    command: ['convert', 'chala.tiff', '-scale', '200%', 'bigger.tiff'],
+    inputFiles: [await File.fromFile('test/assets/chala.tiff', { protected: true })],
+    // debug: true
+  })
+  t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'tif', mime: 'image/tiff' })
+  t.deepEqual(result.stderr, [])
+  t.falsy(result.error)
+  result = await main({
+    command: ['identify', 'bigger.tiff'],
+    inputFiles: result.outputFiles
+  })
+  t.deepEqual(result.stdout.join(''), 'bigger.tiff TIFF 100x100 100x100+0+0 8-bit sRGB 30346B 0.000u 0:00.000')
+  t.deepEqual(result.stderr, [])
+  t.falsy(result.error)
+})

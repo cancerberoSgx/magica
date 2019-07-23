@@ -40,7 +40,7 @@ convert rose: bar.gif '<%=( await ls({stdout: true, path: '/'})).join('_')%>.gif
 })
 
 
-test.only('template renderRuntimeArg', async t => {
+test.only('<$=$> expressions render at runtime', async t => {
   var result = await run({
     script: `
 convert rose: -scale <$=44+9$>x88 foo.png
@@ -60,7 +60,7 @@ convert wizard: bar.gif
 identify '<$="bar.gif"$>'
 `,
     debug: true,
-    inputFiles: ['test/assets/n.png', 'test/assets/to_rotate.jpg', ... await File.resolve('test/assets/bridge.psd', { flags: ['protected'] })]
+    inputFiles: ['test/assets/n.png', 'test/assets/to_rotate.jpg', ... await File.resolve('test/assets/bridge.psd', { protected: true })]
   })
   t.deepEqual(result.commands, [['convert', 'wizard:', 'bar.gif'], ['convert', 'rose:', 'bar.gif', 'tmp_home_dev_proc_w2.gif']])
 })

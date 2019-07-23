@@ -8,18 +8,15 @@ import { IFile } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
 import { protectFile } from './protected'
 
-type FileFlag = 'protected'
-// TODO: |readonly
-
 export class File implements IFile {
   public content: IFile['content']
 
-  protected flags: FileFlag[] = [];
+  protected isProtected: boolean;
 
-  constructor(public name: string, content: IFile['content'] | ArrayBuffer, flags: FileFlag[] = []) {
+  constructor(public name: string, content: IFile['content'] | ArrayBuffer, isProtected: boolean = false) {
     this.content = content instanceof ArrayBuffer ? new Uint8ClampedArray(content) : content
-    this.flags = flags
-    if (flags.includes('protected')) {
+    this.isProtected = isProtected
+    if (this.isProtected) {
       protectFile(this)
     }
   }
@@ -48,39 +45,48 @@ export class File implements IFile {
     return i.geometry || { width: 0, height: 0 }
   }
 
+  public async mimeType(): Promise<string> {
+    var i = await this.info()
+    return i.mimeType!
+  }
+
   public pixel(x: number, y: number): Promise<string | undefined> {
     return imagePixelColor(this, x, y)
   }
 
-	/** Creates a DataUrl like `data:image/png;name=f.png;base64,` using given base64 content, mimeType and fileName. 
-	 * TODO: - [ ] asDataUrl / base64 - obtain mimetype with IM if user don't give.
-						- [ ] store file mimetype in property for future use.**/
-  public asDataUrl(mime: String): String {
+	/** 
+   * Creates a DataUrl like `data:image/png;name=f.png;base64,` using given base64 content, mimeType and fileName. 
+  */
+  public async asDataUrl(mime?: String) {
     return File.toDataUrl(this, mime)
   }
 
-  /** Returns base64 representation of this image in an ecoded format like PNG  **/
+  /** 
+   * Returns base64 representation of this image in an encoded format like PNG  
+   */
   public asBase64(file: File) {
     return File.toBase64(file)
   }
 
-	/** Creates a DataUrl like `data:image/png;name=f.png;base64,` using given base64 content, mimeType and fileName.   * TODO: - [ ] asDataUrl / base64 - obtain mimetype with IM if user don't give.
-		- [ ] store file mimetype in property for future use.**/
-  public static toDataUrl(file: File, mime: String) {
+	/** 
+   * Creates a DataUrl like `data:image/png;name=f.png;base64,` using given base64 content, mimeType and fileName.   
+    */
+  public static async toDataUrl(file: File, mime?: String) {
+    mime = mime || await file.mimeType()
     return 'data:' + mime + ';' + file.name + ';base64,' + File.toBase64(file)
   }
 
-  public static async fromUrl(u: string, o: RequestInit & O & ResolveOptions = {}) {
+  public static async fromUrl(u: string, o: RequestInit & ResolveOptions = {}) {
     try {
       const r = await fetch(u, o)
-      return new File(o.name || getFileNameFromUrl(u), await r.arrayBuffer())
+      return new File(o.name || o.name || getFileNameFromUrl(u), await r.arrayBuffer())
     } catch (error) {
       console.error(error)
       return undefined
     }
   }
 
-  public static async fromFile(f: string, o: O & ResolveOptions = {}) {
+  public static async fromFile(f: string, o: ResolveOptions = {}) {
     if (!isNode()) {
       throw new Error('File.readFile() called in the browser.')
     }
@@ -96,17 +102,23 @@ export class File implements IFile {
     return String.fromCharCode.apply(null, f.content as any)
   }
 
-  /** Returns base64 representation of this image in an ecoded format like PNG  **/
+  /** 
+   * Returns base64 representation of this image in an ecoded format like PNG 
+   */
   public static toBase64(file: File) {
     return arrayBufferToBase64(file.content.buffer)
   }
 
-  /** Loads file from given base64 string. **/
+  /** 
+   * Loads file from given base64 string.  
+  */
   public static fromBase64(base64: string, name: string) {
     return new File(name, Buffer.from(Base64.decode(base64), 'base64'))
   }
 
-  /** Loads file from given data url string. **/
+  /** 
+   * Loads file from given data url string. 
+  */
   public static fromDataUrl(dataUrl: string, name: string) {
     return File.fromBase64(urlToBase64(dataUrl), name)
   }
@@ -122,7 +134,7 @@ export class File implements IFile {
     })))
   }
 
-  public static async   resolve(files: string | IFile | undefined | (string | IFile | undefined)[], options: ResolveOptions = { flags: [] }) {
+  public static async resolve(files: string | IFile | undefined | (string | IFile | undefined)[], options: ResolveOptions = { protected: false }) {
     var fs = (asArray<undefined | string | IFile>(files || [])).filter(notUndefined)
     var result = await serial(fs.map(f => async () => {
       if (typeof f === 'string') {
@@ -154,10 +166,7 @@ export class File implements IFile {
   }
 }
 
-interface O {
-  name?: string
-}
-
 interface ResolveOptions {
-  flags?: FileFlag[];
+  protected?: boolean
+  name?: string
 }

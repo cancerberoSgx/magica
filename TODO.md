@@ -7,7 +7,7 @@
 - [ ] fix npm run test-js  
 - [ ] run scriptListener  . finish and test it or drop it
 - [ ] verify support IM command quoted arguments
-- [ ] verify mkdir -p for output files
+- [ ] verify mkdir -p for output files   
 - [ ] because options are global - sending commands concurrently could fail. Solution: queue or instance options
 - [ ] verify montage and other commands than convert and identify (montage is special with files?)
 - [ ] an easy to use API for web-workers
@@ -21,8 +21,10 @@
 - [w] document run script and supported syntax
   - [ ] document command preprocessor and script template
   - [ ] document about template syntax for compile-time and run-time templates.
+  - [ ] test templates with complex expressions, spaces, quotes etc. whhat about templates expressions inside templates expressions?
 - [x] apidocs
 - [x] template should allow to add custom functions to the context
+- [x] compile time templates and run time templates w different syntax 
 - [x] adapt executeCommandPreprocessor and command template preprocessor from wasm-imagemagick own branch
 - [x] travis
 - [x] coverage
