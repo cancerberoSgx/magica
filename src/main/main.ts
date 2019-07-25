@@ -1,16 +1,16 @@
 import { objectKeys } from 'misc-utils-of-mine-generic'
 import { File } from '../file/file'
 import { isProtectedFile, protectFile } from '../file/protected'
-import { magickLoaded, pushStdout , pushStderr, resetStdout, resetStderr, getStdout, getStderr} from '../imageMagick/magickLoaded'
+import { magickLoaded, pushStdout , pushStderr} from '../imageMagick/magickLoaded'
 import { getOption, getOptions, setOptions } from '../options'
-import { IFile, Options, Result } from '../types'
+import { IFile, Options, Result, NativeOptions } from '../types'
 import { listFilesRecursively, ls } from '../util/lsR'
 import { mkdirp } from '../util/mkdirp'
 import { rmRf } from '../util/rmRf'
 import { getFileDir } from '../util/util'
 import { processCommand } from './command'
 import { NativeResult } from '../imageMagick/createMain';
-import { FS } from '../file/emscriptenFs';
+import { isCustomCommand, dispatchCustomCommand } from './customCommand';
 
 export async function main(o: Partial<Options>): Promise<Result> {
   if (o.useNative || getOption('useNative')) {
@@ -75,30 +75,4 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
 }
 
 
-async function isCustomCommand(c:string[], o: Partial<Options>) {
-  return  c[0].trim().startsWith('{')
-}
 
-async function dispatchCustomCommand(c:string[], o: Partial<Options>, FS:FS): Promise<NativeResult> {
-
-  var context = {
-    ...o, FS, pushStdout, pushStderr
-  }
-  var error:Error|undefined
-var returnValue:any;
-  resetStdout()
-  resetStderr()
-  try {
-  var f = eval(`(function(o){return (function()${c.join(' ')}).bind(o)() })`)
-  returnValue = await f(context)
-  }catch(er) {
-    error = er
-  }
-  return {
-      stdout: getStdout(),
-      stderr: getStderr(),
-      returnValue: undefined,
-      error,
-      ...returnValue
-  }
-}
