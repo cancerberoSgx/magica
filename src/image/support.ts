@@ -1,4 +1,5 @@
 import { main } from '../main/main'
+import { notUndefined, notFalsy } from 'misc-utils-of-mine-generic';
 
 export async function getConfigureFolders(): Promise<string[]> {
   const result = await main({ command: `convert -debug configure rose: info:` })
@@ -10,14 +11,32 @@ export async function getConfigureFolders(): Promise<string[]> {
     .map(s => s.substring(0, s.lastIndexOf('/')))
     .map(s => s.replace(/"/g, '').trim())
   return folders
-
 }
 
-// has some heuristic information regarding features (not) supported by wasm-imagemagick, for example, image formats
+interface Format {
+  name: string
+  flags: string
+  description: string
+}
 
-// heads up - all images spec/assets/to_rotate.* where converted using gimp unless explicitly saying otherwise
+export async function listFormat():Promise<Format[]> {
+  if(!formats){
+    const result = await main({ command: `convert -list format` })
+    var r = /^\s*([^\s]+)\s+([^\s]+)\s+(.+)$/g
+    formats =  result.stdout.slice(2).map(s=>r.exec(s)).filter(notFalsy).filter(r=>r[1]!=='See').map(r=>({
+      name: r![1], 
+      flags: r![2],
+      description: r![3],
+    }))
+  }
+  return formats
+}
+let formats: Format[]
+
 /**
- * List of image formats that are known to be supported by wasm-imagemagick both for read and write. See `spec/formatSpec.ts`
+ * List of image formats that are known to be supported by wasm-imagemagick both for read and write. See `spec/formatSpec.ts`.
+ * 
+ * has some heuristic information regarding features (not) supported by wasm-imagemagick, for example, image formats
  */
 export const knownSupportedReadWriteImageFormats = [
   'jpg', 'png',
@@ -56,7 +75,3 @@ export const knownSupportedReadOnlyImageFormats = [
   // 'pix',
   'mat',
 ]
-
-// export const _knownSupportedImageFormatsInFolderForTest = [
-//   'mat',
-// ]

@@ -5,6 +5,7 @@ import { Options, Result, RunOptions, RunResult, ScriptEvent } from '../types'
 import { arrayToCliOne, cliToArray, processCommand } from './command'
 import { _compileTimePreprocess , _runTimePreprocess } from './executeCommandPreprocessor'
 import { main } from './main'
+import { magickLoaded } from '../imageMagick/magickLoaded';
 
 /**
  * Has a signature compatible with main, but if `script` is given instead of `command` option then it's
@@ -35,6 +36,10 @@ export async function run(o: RunOptions) {
     setOptions({debug: o.debug})
   }
   const emscriptenNodeFsRoot = getOption('emscriptenNodeFsRoot')
+
+  const { FS } = await magickLoaded
+  FS.chdir(emscriptenNodeFsRoot)
+
   let inputFiles = await File.resolve(o.inputFiles)
   const commands = await resolveRunCommands({
     ...o,

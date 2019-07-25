@@ -2,6 +2,7 @@ import test from 'ava'
 import { File } from '../src'
 import { imageBuiltIn } from '../src/image/imageBuiltIn'
 import { imagePixelColor } from '../src/image/pixel'
+import { listFormat } from '../src/image/support';
 
 test('imagePixelColor', async t => {
   const c = await imagePixelColor(await File.fromFile('test/assets/n.png'), 20, 20)
@@ -16,4 +17,9 @@ test('imageBuiltIn with no args should return all ', async t => {
 test('imageBuiltIn with name should return only given ', async t => {
   const c = await imageBuiltIn('logo:')
   t.deepEqual(c.map(f => f.name), ['logo:'])
+})
+
+test('listFormat', async t => {
+  const c = await listFormat()
+  t.truthy(c.find(f=>f.name==='GIF*'))
 })

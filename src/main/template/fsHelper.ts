@@ -1,0 +1,49 @@
+import { asArray } from 'misc-utils-of-mine-generic'
+import { getOptions, magickLoaded, pushStdout } from '../../imageMagick/magickLoaded'
+import { listFilesRecursively, ls } from '../../util/lsR'
+import { TemplateHelper } from './template'
+
+interface Options {
+  path?: string
+  recursive?: boolean
+  stdout?: boolean
+  noReturnValue?: boolean
+  //TODO: size?: boolean
+}
+
+export class FSHelper implements TemplateHelper<Options, Promise<string[]>> {
+  public name = 'ls'
+  public async exec(options: Options = {}) {
+    const { FS } = await magickLoaded
+    const { emscriptenNodeFsRoot } = getOptions()
+    var path = options.path || emscriptenNodeFsRoot
+    var files = options.recursive ? listFilesRecursively(path, FS) : ls(path, FS)
+    var a: string[] = asArray<any>(files).map(f => typeof f === 'string' ? f : f.path)
+    if (options.stdout) {
+      a.forEach(pushStdout)
+    }
+    return options.noReturnValue ? [] : a
+  }
+    public async fnCompileTime(options: Options ) {
+    return await this.exec(options)
+  }
+  public async fnRunTime (options: Options) {
+    return await this.exec(options)
+  }
+}
+
+// interface ExitHelperOptions {
+//   error?:string
+// }
+// export class ExitHelper implements TemplateHelper<Options, Promise<string[]>> {
+//   public name = 'exit'
+//   public async exec(options: Options ) {
+    
+//   }
+//   public async fnCompileTime(options: Options ) {
+//     return await this.exec(options)
+//   }
+//   public async fnRunTime (options: Options) {
+//     return await this.exec(options)
+//   }
+// }

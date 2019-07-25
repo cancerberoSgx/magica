@@ -11,7 +11,7 @@ import { cliToArray } from './main/command'
 import { registerCommandPreprocessor } from './main/executeCommandPreprocessor'
 import { main } from './main/main'
 import { run } from './main/run'
-import { addTemplateHelper } from "./main/template/template"
+import { addTemplateHelper, TemplateHelper } from "./main/template/template"
 
 export  { FS } from "./file/emscriptenFs"
 export { File } from './file/file'
@@ -26,13 +26,13 @@ export { cliToArray } from './main/command'
 export { registerCommandPreprocessor } from './main/executeCommandPreprocessor'
 export { main } from './main/main'
 export { run } from './main/run'
-export { addTemplateHelper as addTemplatePreprocessorContextMutator } from './main/template/template'
+export { addTemplateHelper, TemplateHelper} from './main/template/template'
 export * from './types'
 
 
 
 if (typeof getGlobal().Magica == 'undefined') {
   getGlobal().Magica = {
-    File, toDataUrl, imageBuiltIn, imageCompare, magickLoaded, imageInfo, imagePixelColor, registerCommandPreprocessor, main, cliToArray, run, protectFile, isProtectedFile, getProtectedFile, addTemplatePreprocessorContextMutator: addTemplateHelper
+    File, toDataUrl, imageBuiltIn, imageCompare, magickLoaded, imageInfo, imagePixelColor, registerCommandPreprocessor, main, cliToArray, run, protectFile, isProtectedFile, getProtectedFile, addTemplateHelper
   }
 }

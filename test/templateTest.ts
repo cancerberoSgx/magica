@@ -1,7 +1,8 @@
 import test from 'ava'
-import { addTemplatePreprocessorContextMutator, File, imageCompare } from '../src'
+import { addTemplateHelper, File, imageCompare } from '../src'
 import { run } from '../src/main/run'
 import { writeFileSync } from 'fs';
+import { notUndefined } from 'misc-utils-of-mine-generic';
 
 test('async templates so they works with await expressions (I can call main() or run() or imageInfo() from template js', async (t) => {
   const result = await run({
@@ -19,7 +20,7 @@ convert <%= inputFiles[0].name %> -resize <%= bounds.width+'x'+bounds.height %> 
 
 
 test('should be able to modify template context', async t => {
-  addTemplatePreprocessorContextMutator({ name: 'greet', fnCompileTime: (s: string) => `hello ${s}`, fnRunTime: (o: any) => o })
+  addTemplateHelper({ name: 'greet', fnCompileTime: (s: string) => `hello ${s}`, fnRunTime: (o: any) => o })
   const result = await run({
     script: `
 convert -font helvetica.ttf -pointsize 24 -background lightblue -fill navy 'label:<%=greet("Seba")%>' tmp.png
@@ -39,7 +40,7 @@ convert rose: bar.gif '<%=( await ls({stdout: true, path: '/'})).join('_')%>.gif
   t.deepEqual(result.commands, [['convert', 'wizard:', 'bar.gif'], ['convert', 'rose:', 'bar.gif', 'tmp_home_dev_proc_w2.gif']])
 })
 
-test.only('size helper', async (t) => {
+test('size helper', async (t) => {
   const result = await run({
     script: `
 convert rose: bar.gif
@@ -65,6 +66,22 @@ convert foo.png -rotate <$=30+6$> bar.png
     ['convert', 'foo.png', '-rotate', '36', 'bar.png']])
 })
 
+test.only('custom commands', async (t) => {
+  const script =  `
+  convert rose: bar.gif
+  {  this.pushStdout('hello') }
+  {  this.pushStdout(...FS.readdir('.')) } `
+  var result = await run({
+    script,
+protectOutputFiles: true,
+  })
+t.deepEqual(result.stdout.filter(notUndefined), ['hello', 'bar.gif'])
+result = await run({
+  script
+})
+t.deepEqual(result.stdout.filter(notUndefined), ['hello'])
+
+})
 
 test.skip('ls runtime helper', async (t) => {
   const result = await run({

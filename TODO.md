@@ -24,6 +24,8 @@
   - [ ] script template syntax and how are evaluated
   - [ ] script template helpers available and how to add custom ones programatically
   - [ ] test templates with complex expressions, spaces, quotes etc. whhat about templates expressions inside templates expressions?
+- [ ] document custom commands
+- [x] custom commands - any command sourounded by curly braces will be evaluated as  a js function: `{  this.pushStdout(...FS.readdir('.')) }`
 - [x] apidocs
 - [x] template should allow to add custom functions to the context
 - [x] compile time templates and run time templates w different syntax 
