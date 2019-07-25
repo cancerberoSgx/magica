@@ -9,4 +9,7 @@ cd zlib
 
 chmod a+x ./configure
 export CHOST=emcc && emconfigure ./configure --prefix=$PREFIX --static 
-emcmake make install CFLAGS=$CFLAGS 
+testExitCode "zlib configure" $?
+
+emcmake make install CFLAGS="$CFLAGS"
+testExitCode "zlib make install" $?
