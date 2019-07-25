@@ -3,11 +3,12 @@ import { imageInfo } from '../../image/imageInfo'
 import { CommandPreprocessor, Options, RunOptions } from '../../types'
 import { arrayToCliOne, processCommand } from '../command'
 import { LsHelper } from './ls'
+import { SizeHelper } from './SizeHelper';
 
 export interface TemplateHelper<O = any, R = any, RO = any, RR = any> {
   name: string
-  fsCompileTime: (options: O) => R
-  fsRunTime: (options: RO) => RR
+  fnCompileTime: (options: O) => R
+  fnRunTime?: (options: RO) => RR
 }
 
 export class Template implements CommandPreprocessor {
@@ -16,6 +17,7 @@ export class Template implements CommandPreprocessor {
     if (!installed) {
       installed = true
       addTemplateHelper(new LsHelper())
+      addTemplateHelper(new SizeHelper())
     }
   }
   public name = 'template'
@@ -25,7 +27,7 @@ export class Template implements CommandPreprocessor {
       const t = compile(context.script, { async: true })
       let c: { [s: string]: any } = { ...context, imageInfo } // TODO: imageInfo should be another helper separately
       templateHelpers.forEach(fn => {
-        c[fn.name] = fn.fsCompileTime.bind(fn)
+        c[fn.name] = fn.fnCompileTime.bind(fn)
       })
       const script = await t(c)
       return { ...context, script }
@@ -48,17 +50,13 @@ export class Template implements CommandPreprocessor {
 
     var cs = commandOptions.command === 'string' ? commandOptions.command : !commandOptions.command ? '' : arrayToCliOne(commandOptions.command as any)
     // console.log(cs)
-    // console.log('TEMPLALSLSLSL', cs);
-
     // if (cs.includes('<$')) {
     const t = compile(cs, { delimiter: '$', async: true })
     // const ctx = {...context
     let c: { [s: string]: any } = { runOptions, commandOptions, imageInfo } // TODO: imageInfo should be another helper separately
-    templateHelpers.forEach(fn => {
-      c[fn.name] = fn.fsRunTime.bind(fn)
+    templateHelpers.filter(t=>t.fnRunTime).forEach(fn => {
+      c[fn.name] = fn.fnRunTime!.bind(fn)
     })
-
-    // console.log('ctx', c);
     var s = await t(c)
     commandOptions.command = processCommand(s)
 
@@ -100,7 +98,6 @@ const templateHelpers: TemplateHelper<any, any>[] = []
 export function addTemplateHelper(h: TemplateHelper) {
   templateHelpers.push(h)
 }
-
 let installed = false
 
 // export const templateCompileTimePreprocessor: () => CommandPreprocessor = () => {

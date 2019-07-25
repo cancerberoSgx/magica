@@ -13,6 +13,7 @@ import { main } from './main/main'
 import { run } from './main/run'
 import { addTemplateHelper } from "./main/template/template"
 
+export  { FS } from "./file/emscriptenFs"
 export { File } from './file/file'
 export { getProtectedFile, isProtectedFile, protectFile } from './file/protected'
 export { toDataUrl } from './image/html'

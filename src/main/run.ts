@@ -1,9 +1,9 @@
 import { asArray, notUndefined, serial } from 'misc-utils-of-mine-generic'
 import { File } from '../file/file'
-import { getOption } from '../options'
+import { getOption, setOptions } from '../options'
 import { Options, Result, RunOptions, RunResult, ScriptEvent } from '../types'
 import { arrayToCliOne, cliToArray, processCommand } from './command'
-import { _compileTimePreprocess as compileTimePreprocess, _runTimePreprocess } from './executeCommandPreprocessor'
+import { _compileTimePreprocess , _runTimePreprocess } from './executeCommandPreprocessor'
 import { main } from './main'
 
 /**
@@ -22,14 +22,17 @@ import { main } from './main'
  * @returns the result of each command execution
  */
 export async function run(o: RunOptions) {
-  var scriptStartEvent: ScriptEvent = {
-    name: 'onScriptStart',
-    scriptOptions: o,
-    stopPropagation: false,
-    scriptInterrupt: false
-  }
-  if (o.scriptListener) {
-    o.scriptListener(scriptStartEvent)
+  // var scriptStartEvent: ScriptEvent = {
+  //   name: 'onScriptStart',
+  //   scriptOptions: o,
+  //   stopPropagation: false,
+  //   scriptInterrupt: false
+  // }
+  // if (o.scriptListener) {
+  //   o.scriptListener(scriptStartEvent)
+  // }
+  if(o.debug){
+    setOptions({debug: o.debug})
   }
   const emscriptenNodeFsRoot = getOption('emscriptenNodeFsRoot')
   let inputFiles = await File.resolve(o.inputFiles)
@@ -46,23 +49,15 @@ export async function run(o: RunOptions) {
     error: undefined,
     returnValue: undefined
   }
-  if (scriptStartEvent.scriptInterrupt) {
-    return { ...finalResult, error: new Error('Script interrupted by listener') }
-  }
+  // if (scriptStartEvent.scriptInterrupt) {
+  //   return { ...finalResult, error: new Error('Script interrupted by listener') }
+  // }
   await serial(commands.map((command, i) => async () => {
-    // try {
     let mainOptions: Options = { ...o, command, inputFiles: inputFiles.map(File.asFile) } as any //TODO
-    // o.debug && console.log('Before run-time preprocessor the commands are', mainOptions.command , 'current command is ', mainOptions.command)
 
     await _runTimePreprocess(o, mainOptions, i)
 
-    // o.debug && console.log('after run-time preprocessor bt before main() call the commands are', mainOptions.command , 'current command is ', mainOptions.command)
-
-    // mainOptions.command  = Array.isArray( mainOptions.command  )? mainOptions.command  : processCommand(mainOptions.command ||[])
     let result: Result = await main(mainOptions)
-    // console.log('end', mainOptions);
-    // 
-    // o.debug && console.log('after main() call the commands are', mainOptions.command , 'current command is ', mainOptions.command)
 
     // var commandEndEvent: ScriptEvent = {
     //   name: 'afterCommand',
@@ -103,7 +98,7 @@ async function resolveRunCommands(o: RunOptions) {
   if ((!o.script || !o.script.length) && (!o.command || !o.command.length)) {
     throw new Error('No script or command given')
   }
-  o = await compileTimePreprocess(o)
+  o = await _compileTimePreprocess(o)
   let script: string
   if (o.script && o.script.length) {
     script = asArray(o.script).join('\n')

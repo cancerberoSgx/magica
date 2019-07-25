@@ -87,7 +87,7 @@ export interface CliOptions extends Options {
   input: string[]
 }
 
-type ScriptListener = (e: ScriptEvent) => void
+// type ScriptListener = (e: ScriptEvent) => void
 
 export interface ScriptEvent {
   name: 'beforeCommand' | 'afterCommand' | 'onScriptStart' | 'onScriptEnd'
@@ -104,10 +104,10 @@ export interface ScriptEvent {
 // }
 
 export interface RunOptions extends Partial<Options> {
-  /**
-   * Register a script run event listener that will be notified when new files are created, before or after commands are executed, etc. Listeners can set `stopPropagation` property to true to prevent the event to propagate to other listeners. Also they could set the property `abortScript` to true to cancel the script execution.
-   */
-  scriptListener?: ScriptListener
+  // /**
+  //  * Register a script run event listener that will be notified when new files are created, before or after commands are executed, etc. Listeners can set `stopPropagation` property to true to prevent the event to propagate to other listeners. Also they could set the property `abortScript` to true to cancel the script execution.
+  //  */
+  // scriptListener?: ScriptListener
 
   /**
    * Takes precedence over [[Options.command]]. If not provided then  [[Options.command]] is used.

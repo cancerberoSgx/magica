@@ -1,10 +1,9 @@
-
 ## TODO / Road map
-
 
 - [ ] performance tests in the browser
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
 - [ ] fix npm run test-js  
+- [ ] I should be able to make output files protected y config.
 - [ ] run scriptListener  . finish and test it or drop it
 - [ ] verify support IM command quoted arguments
 - [ ] verify mkdir -p for output files   
@@ -18,9 +17,12 @@
 - [ ] test and document protected files feature
 - [ ] should magica support running native IM executable in node if they are present ?  
 - [ ] improve errors thrown when there's a missing file, currently it fails silently.
-- [w] document run script and supported syntax
-  - [ ] document command preprocessor and script template
-  - [ ] document about template syntax for compile-time and run-time templates.
+- [w] document run() scripts and supported syntax
+  - [ ] script preprocessors API
+  - [ ]script templates infrstracture (API to add new helpers to use in templates) 
+  document command preprocessor and script template
+  - [ ] script template syntax and how are evaluated
+  - [ ] script template helpers available and how to add custom ones programatically
   - [ ] test templates with complex expressions, spaces, quotes etc. whhat about templates expressions inside templates expressions?
 - [x] apidocs
 - [x] template should allow to add custom functions to the context
@@ -50,10 +52,25 @@
 - [x] CLI tests
 - [x] Input file from url
 
-### Ideas
+### problems descriptions:
 
-- [x] ideas for script templates: ``` var result = await run({script:`convert <%= await resolve('foo.png') -scale <%= width('foo.png')/2 %> output.<%=inputFiles[0].extension%>`, inputFiles: [File.resolve('y.gif')]} ```
-- [x] We will try to solve all scripting problems just with templates and not implement virtual commands or extra syntax since that would not be KISS. For some situations though new commands (at runtime - not a compile time) are need - templates are evaluated at compile time (For example, I want to protect imperatively one command's output file). But still we will try to solve this only with templates  so we don't have to parse any script code. The only way to support it without virtual commands is by adding event emitter in run() to protect files when they are created if needed
+#### a doubt about templates - do we really need two types of templates ? compile time and runtime - or just with compilet time is enough? templates:
+
+TLDR: wr support both compile tme and tuntime templates - but in general users won't need these later. Also runtime templates require to be all the declaration in the same line of code. 
+- [x] We will try to solve all scripting problems just with templates and not implement virtual commands or extra syntax since that would not be KISS. Nevertheless static templates can not accomplish all situations, in general when you meed concrete values new commands (at runtime - not a compile time) are need - templates are evaluated at compile time (For example, I want to protect imperatively one command's output file). But still we will try to solve this only with templates  so we don't have to parse any script code. The only way to support it without virtual commands is by adding event emitter in run() to protect files when they are created if needed
+
+- [ ] two different types of templates are supported: 
+    * **compile time** . These are evaluated when `run()` is called, using the script text as a whole
+    
+    ones evaluated at "compile time" with the whones that are evaluated at compile time - this is when the script is evaluated when you function `run()` is
+- [x] ideas for script templates: 
+
+``` 
+var result = await run({script:`convert <%= await resolve('foo.png') -scale <%= width('foo.png')/2 %> output.<%=inputFiles[0].extension%>`, inputFiles: [File.resolve('y.gif')]} ```
+
+
+
+### Ideas
 
 - [?] Option for Node.js users to work/mount current directory - the tool should not copy input files just use them since are present in mount root ems
 
@@ -70,3 +87,4 @@
               - so i can create a folder and work there.
               - I can pass options.forceFileOverride to explicitly allow modifications by convert.
   * could start with random drawings and image compare (whole image or the local area)
+

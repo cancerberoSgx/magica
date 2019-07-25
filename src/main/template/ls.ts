@@ -13,10 +13,9 @@ interface Options {
 
 export class LsHelper implements TemplateHelper<Options, Promise<string[]>> {
   public name = 'ls'
-  public async fsCompileTime(options: Options = {}) {
+  public async fnCompileTime(options: Options = {}) {
     const { FS } = await magickLoaded
     const { emscriptenNodeFsRoot } = getOptions()
-
     var path = options.path || emscriptenNodeFsRoot
     // console.log(path,  ls(path, FS), emscriptenNodeFsRoot, FS.cwd());
     // FS.chdir(emscriptenNodeFsRoot)
@@ -27,5 +26,5 @@ export class LsHelper implements TemplateHelper<Options, Promise<string[]>> {
     }
     return a
   }
-  public fsRunTime = (o: any) => o
+  public fnRunTime = (o: any) => o
 }

@@ -2,11 +2,11 @@ import { ok } from 'assert'
 import fetch from 'cross-fetch'
 import { existsSync, readFileSync } from 'fs'
 import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial } from 'misc-utils-of-mine-generic'
-import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
 import { imagePixelColor } from '../image/pixel'
 import { IFile } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
 import { protectFile } from './protected'
+import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
 
 export class File implements IFile {
   public content: IFile['content']
@@ -40,9 +40,9 @@ export class File implements IFile {
     })
   }
 
-  public async size(): Promise<{ width: number, height: number }> {
+  public async size(): Promise<Size> {
     var i = await this.info()
-    return i.geometry || { width: 0, height: 0 }
+    return {width: i.geometry?i.geometry.width:0, height: i.geometry?i.geometry.height:0}
   }
 
   public async mimeType(): Promise<string> {
@@ -166,7 +166,12 @@ export class File implements IFile {
   }
 }
 
-interface ResolveOptions {
+export interface ResolveOptions {
   protected?: boolean
   name?: string
+}
+
+export interface Size {
+  width: number
+  height: number
 }

@@ -1,6 +1,7 @@
 import test from 'ava'
 import { addTemplatePreprocessorContextMutator, File, imageCompare } from '../src'
 import { run } from '../src/main/run'
+import { writeFileSync } from 'fs';
 
 test('async templates so they works with await expressions (I can call main() or run() or imageInfo() from template js', async (t) => {
   const result = await run({
@@ -18,7 +19,7 @@ convert <%= inputFiles[0].name %> -resize <%= bounds.width+'x'+bounds.height %> 
 
 
 test('should be able to modify template context', async t => {
-  addTemplatePreprocessorContextMutator({ name: 'greet', fsCompileTime: (s: string) => `hello ${s}`, fsRunTime: (o: any) => o })
+  addTemplatePreprocessorContextMutator({ name: 'greet', fnCompileTime: (s: string) => `hello ${s}`, fnRunTime: (o: any) => o })
   const result = await run({
     script: `
 convert -font helvetica.ttf -pointsize 24 -background lightblue -fill navy 'label:<%=greet("Seba")%>' tmp.png
@@ -27,7 +28,6 @@ convert -font helvetica.ttf -pointsize 24 -background lightblue -fill navy 'labe
   })
   t.true(await imageCompare(result.outputFiles[0], await File.fromFile('test/assets/text2.png')))
 })
-
 
 test('ls compile time helper', async (t) => {
   const result = await run({
@@ -39,8 +39,21 @@ convert rose: bar.gif '<%=( await ls({stdout: true, path: '/'})).join('_')%>.gif
   t.deepEqual(result.commands, [['convert', 'wizard:', 'bar.gif'], ['convert', 'rose:', 'bar.gif', 'tmp_home_dev_proc_w2.gif']])
 })
 
+test.only('size helper', async (t) => {
+  const result = await run({
+    script: `
+convert rose: bar.gif
+<% 
+var size = await size({file: inputFiles[0]})
+%>
+convert wizard: -resize <%= Math.round(size.width / 3) %>x<%= Math.round( size.height / 2) %> out.gif'
+`,
+    inputFiles: ['test/assets/n.png']
+  })
+  t.true(await imageCompare(result.outputFiles[0], await File.fromFile('test/assets/size1.gif')))
+})
 
-test.only('<$=$> expressions render at runtime', async t => {
+test('<$=$> expressions render at runtime', async t => {
   var result = await run({
     script: `
 convert rose: -scale <$=44+9$>x88 foo.png
@@ -57,6 +70,21 @@ test.skip('ls runtime helper', async (t) => {
   const result = await run({
     script: `
 convert wizard: bar.gif 
+identify '<$="bar.gif"$>'
+`,
+    debug: true,
+    inputFiles: ['test/assets/n.png', 'test/assets/to_rotate.jpg', ... await File.resolve('test/assets/bridge.psd', { protected: true })]
+  })
+  t.deepEqual(result.commands, [['convert', 'wizard:', 'bar.gif'], ['convert', 'rose:', 'bar.gif', 'tmp_home_dev_proc_w2.gif']])
+})
+
+test.skip('spaces quotes and other bad chars', async (t) => {
+  const result = await run({
+    script: `     
+<%=
+function compileTimeFn(a){return a+buildTimeFn(a+1)}
+%>
+convert wizard: -rotate 33 bar.gif 
 identify '<$="bar.gif"$>'
 `,
     debug: true,
