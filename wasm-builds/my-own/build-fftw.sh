@@ -21,15 +21,18 @@ testExitCode () {
 
 mkdir -p $PREFIX/src
 cd $PREFIX/src
-git clone https://github.com/ImageMagick/tiff.git
-cd tiff
+wget http://www.fftw.org/fftw-3.3.8.tar.gz
+tar xvfz fftw-3.3.8.tar.gz
+cd fftw-3.3.8
+# git clone https://github.com/ImageMagick/tiff.git
+# cd tiff
 # git fetch -a
 # git checkout tags/Release-v4-0-9 -b wasm-im
-autoreconf -fiv
-emconfigure ./configure --prefix=$PREFIX CFLAGS="$FLAGS" --disable-shared
-testExitCode "libtiff configure" $?
+# autoreconf -fiv
+emconfigure ./configure CC=emcc --prefix=$PREFIX CFLAGS="$FLAGS"
+testExitCode "fftw configure" $?
 emcmake make $MAKE_FLAGS CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" PKG_CONFIG_PATH="$PKG_CONFIG_PATH"
-testExitCode "libtiff make" $?
+testExitCode "fftw make" $?
 emcmake make install
 
 

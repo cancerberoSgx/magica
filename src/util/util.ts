@@ -14,11 +14,19 @@ export function getFileDir(f: string) {
 }
 
 export function isDir(f: string, FS: FS) {
-  return FS.isDir(FS.stat(f).mode)
+  try {
+    return FS.isDir(FS.stat(f).mode)
+  } catch (error) {
+    return false
+  }
 }
 
 export function isFile(f: string, FS: FS) {
-  return FS.isFile(FS.stat(f).mode)
+  try {
+    return FS.isFile(FS.stat(f).mode)
+  } catch (error) {
+    return false
+  }  
 }
 
 // export function values<T>(object: { [k: string]: T }): T[] {

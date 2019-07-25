@@ -7,6 +7,9 @@ import { IFile } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
 import { protectFile } from './protected'
 import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
+import { magickLoaded } from '../imageMagick/magickLoaded';
+import { isDir, isFile } from '../util/util';
+import { getOption } from '../options';
 
 export class File implements IFile {
   public content: IFile['content']
@@ -79,7 +82,7 @@ export class File implements IFile {
   public static async fromUrl(u: string, o: RequestInit & ResolveOptions = {}) {
     try {
       const r = await fetch(u, o)
-      return new File(o.name || o.name || getFileNameFromUrl(u), await r.arrayBuffer())
+      return new File(o.name || o.name || getFileNameFromUrl(u), await r.arrayBuffer(), o.protected)
     } catch (error) {
       console.error(error)
       return undefined
@@ -91,7 +94,7 @@ export class File implements IFile {
       throw new Error('File.readFile() called in the browser.')
     }
     try {
-      return new File(o.name || basename(f), readFileSync(f))
+      return new File(o.name || basename(f), readFileSync(f), o.protected)
     } catch (error) {
       console.error(error)
       return undefined
@@ -134,6 +137,11 @@ export class File implements IFile {
     })))
   }
 
+  public static async resolveOne(files: string | IFile | undefined | (string | IFile | undefined)[], options: ResolveOptions = { protected: false }) {
+    var a = await File.resolve(files, options)
+    return a.length>0 ? a[0] : undefined
+  }
+
   public static async resolve(files: string | IFile | undefined | (string | IFile | undefined)[], options: ResolveOptions = { protected: false }) {
     var fs = (asArray<undefined | string | IFile>(files || [])).filter(notUndefined)
     var result = await serial(fs.map(f => async () => {
@@ -163,6 +171,12 @@ export class File implements IFile {
 
   public static asPath(f: string | IFile) {
     return typeof f === 'string' ? f : f.name
+  }
+
+  public static async fileExists(f:string| IFile) {
+    const {FS} = await magickLoaded
+    FS.chdir(getOption('emscriptenNodeFsRoot'))
+    return isDir(File.asPath(f), FS)||isFile(File.asPath(f), FS)
   }
 }
 
