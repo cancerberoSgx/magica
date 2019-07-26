@@ -9,7 +9,7 @@ test('stdout', async t => {
     command: ['identify', 'foo.png'],
     inputFiles: [{ name: 'foo.png', content: readFileSync('test/assets/n.png') }]
   })
-  t.deepEqual(result.stdout.join(''), 'foo.png PNG 109x145 109x145+0+0 8-bit sRGB 39796B 0.000u 0:00.000')
+  t.true(result.stdout.join('').includes('foo.png PNG 109x145 109x145+0+0 8-bit sRGB 39796B'))
   t.deepEqual(result.stderr, [])
   t.falsy(result.error)
 })
@@ -28,7 +28,6 @@ test('output file names', async t => {
 
 test('accept string input files, or urls', async t => {
   const result = await main({
-    // debug: true,
     command: 'convert n.png -scale 50% foo2.png',
     inputFiles: ['test/assets/n.png']
   })

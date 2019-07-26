@@ -9,7 +9,7 @@ test('script template', async t => {
       `,
     inputFiles: [await File.fromFile('test/assets/n.png'), await File.fromFile('test/assets/chala.tiff')],
   })
-  t.deepEqual(result.stdout, ['chala.tiff TIFF 50x50 50x50+0+0 8-bit sRGB 7824B 0.000u 0:00.000'])
+  t.true(result.stdout.join().includes('chala.tiff TIFF 50x50 50x50+0+0 8-bit sRGB 7824B'))
 })
 
 test('script with template, comments multi lines and spaces', async t => {
@@ -23,7 +23,7 @@ test('script with template, comments multi lines and spaces', async t => {
       `,
     inputFiles: [await File.fromFile('test/assets/chala.tiff')],
   })
-  t.deepEqual(result.stdout, ['chala.tiff TIFF 50x50 50x50+0+0 8-bit sRGB 7824B 0.000u 0:00.000'])
+  t.true(result.stdout.join().includes('chala.tiff TIFF 50x50 50x50+0+0 8-bit sRGB 7824B'))
 })
 
 

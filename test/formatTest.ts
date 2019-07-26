@@ -6,3 +6,6 @@ test('identify', async t => {
   t.notThrows(() => r = execSync('npx ts-node -T test/assets/formatConvertIdentifyScript.ts'))
   t.true(r!.toString().includes('total time:'))
 })
+test('dummy', async t=>{
+  t.true(true)
+})

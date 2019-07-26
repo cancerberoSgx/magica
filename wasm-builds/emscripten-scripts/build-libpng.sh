@@ -14,9 +14,11 @@ libtoolize
 autoreconf 
 automake --add-missing
 chmod a+x ./configure
-emconfigure ./configure --prefix=$PREFIX --disable-shared PKG_CONFIG_PATH="$PKG_CONFIG_PATH" CFLAGS="$CFLAGS"
+emconfigure ./configure --prefix=$PREFIX --disable-shared # PKG_CONFIG_PATH="$PKG_CONFIG_PATH" CFLAGS="$CFLAGS"
 testExitCode "libpng configure" $?
-emcmake make install CFLAGS="$CFLAGS"
+emcmake make # CFLAGS="$CFLAGS"
+testExitCode "libpng make" $?
+emcmake make install # CFLAGS="$CFLAGS"
 testExitCode "libpng make install" $?
 
 

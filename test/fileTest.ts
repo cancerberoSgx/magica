@@ -15,7 +15,7 @@ test('from url request', async t => {
     command: ['identify', 'bridge.jpg'],
     inputFiles: [{ name: 'bridge.jpg', content: new Uint8Array(content) }]
   })
-  t.deepEqual(result.stdout.join(''), 'bridge.jpg JPEG 500x333 500x333+0+0 8-bit sRGB 35527B 0.000u 0:00.000')
+  t.true(result.stdout.join('').includes('bridge.jpg JPEG 500x333 500x333+0+0 8-bit sRGB 35527B'))
   t.deepEqual(result.stderr, [])
   t.falsy(result.error)
 })
@@ -26,7 +26,7 @@ test('InputFile.fromUrl', async t => {
     command: ['identify', 'bridge.jpg'],
     inputFiles: [await File.fromUrl(url)]
   })
-  t.deepEqual(result.stdout.join(''), 'bridge.jpg JPEG 500x333 500x333+0+0 8-bit sRGB 35527B 0.000u 0:00.000')
+  t.true(result.stdout.join('').includes('bridge.jpg JPEG 500x333 500x333+0+0 8-bit sRGB 35527B'))
   t.deepEqual(result.stderr, [])
   t.falsy(result.error)
 })
@@ -43,7 +43,7 @@ test('InputFile.fromFile', async t => {
     command: ['identify', 'bigger.tiff'],
     inputFiles: result.outputFiles
   })
-  t.deepEqual(result.stdout.join(''), 'bigger.tiff TIFF 100x100 100x100+0+0 8-bit sRGB 30346B 0.000u 0:00.000')
+  t.true(result.stdout.join('').includes('bigger.tiff TIFF 100x100 100x100+0+0 8-bit sRGB 30346B'))
   t.deepEqual(result.stderr, [])
   t.falsy(result.error)
 })
@@ -60,7 +60,7 @@ test('accept array buffer view', async t => {
     command: ['identify', 'bigger.tiff'],
     inputFiles: result.outputFiles
   })
-  t.deepEqual(result.stdout.join(''), 'bigger.tiff TIFF 100x100 100x100+0+0 8-bit sRGB 30346B 0.000u 0:00.000')
+  t.true(result.stdout.join('').includes('bigger.tiff TIFF 100x100 100x100+0+0 8-bit sRGB 30346B'))
   t.deepEqual(result.stderr, [])
   t.falsy(result.error)
 })
@@ -94,7 +94,7 @@ test.serial('protected files are not erased', async t => {
     command: ['identify', 'protected1.tiff'],
     inputFiles: []
   })
-  t.deepEqual(result.stdout.join(''), 'protected1.tiff TIFF 50x50 50x50+0+0 8-bit sRGB 7824B 0.000u 0:00.000')
+  t.true(result.stdout.join('').includes('protected1.tiff TIFF 50x50 50x50+0+0 8-bit sRGB 7824B'))
   t.deepEqual(result.stderr, [])
   t.falsy(result.error)
 
