@@ -1,3 +1,4 @@
+#!/bin/bash
 source emscripten-scripts/base.sh
 
 mkdir -p $PREFIX/src

@@ -13,11 +13,11 @@ export function createMain(Module: any): NativeMain {
       returnValue = Module.callMain(...args)
       debug && console.log('after Module.callMain', returnValue)
       // flush stdio so clients get stdout string that doesn't end with new lines.
-      if (Module._fflush) {
-        Module._fflush(0)
-        Module._fflush(1)
-        Module._fflush(2)
-      }
+      // if (Module._fflush) {
+      //   Module._fflush(0)
+      //   Module._fflush(1)
+      //   Module._fflush(2)
+      // }
     } catch (ex) {
       debug && console.error((ex))
       error = ex

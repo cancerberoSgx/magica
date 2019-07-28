@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source emscripten-scripts/base.sh
 
 echo "Packages repos and versions of wasm compilation">$CURRENT_DIR/versions.txt

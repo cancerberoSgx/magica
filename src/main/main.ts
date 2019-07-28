@@ -1,4 +1,4 @@
-import { objectKeys } from 'misc-utils-of-mine-generic'
+import { objectKeys, pathJoin } from 'misc-utils-of-mine-generic'
 import { File } from '../file/file'
 import { isProtectedFile, protectFile } from '../file/protected'
 import { magickLoaded, pushStdout , pushStderr} from '../imageMagick/magickLoaded'
@@ -31,6 +31,9 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
   const files = await File.resolve(o.inputFiles)
   FS.chdir(emscriptenNodeFsRoot)
   files.forEach(f => {
+    if(!f.name.startsWith(emscriptenNodeFsRoot)) {
+      f.name = pathJoin(emscriptenNodeFsRoot, f.name)
+    }
     const dirName = getFileDir(f.name)
     if (dirName.trim()) {
       mkdirp(dirName, p => FS.analyzePath(p).exists, FS.mkdir)
@@ -46,16 +49,25 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
     returnValue=await dispatchCustomCommand(processedCommand, o, FS)
   }else {
     debug && console.log('main processed command:',processedCommand)
-    returnValue = main(processedCommand)
+    try {
+      
+      returnValue = main(processedCommand)
+    } catch (error) {
+      console.log('MAIN error', error);
+      returnValue= {
+        stderr: [], stdout: [], error: error, returnValue: undefined
+      }
+    }
   }
 
   const afterTree = listFilesRecursively(emscriptenNodeFsRoot, FS)
 
   const diffTree = afterTree.filter(f => !beforeTree.find(b => b.path === f.path))
-  const outputFiles: IFile[] = diffTree.map(f => ({
-    name: f.path,
-    content: FS.readFile(f.path)
-  }))
+  const outputFiles: IFile[] = diffTree
+  // .map(f=>f.path.startsWith(emscriptenNodeFsRoot) ? f : {...f, path: pathJoin(emscriptenNodeFsRoot, f.path)})
+  .map(f => new File(
+    f.path,  FS.readFile(f.path)
+  ))
     .filter(f => !isProtectedFile(f.name))
 
   if (o.protectOutputFiles) {
@@ -64,7 +76,9 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
   }
   else {
     const removed:string[] = []
-    ls(emscriptenNodeFsRoot, FS).filter(f => !isProtectedFile(f)).forEach(f => rmRf(f, FS, f => !isProtectedFile(f), removed))
+  //   ls(emscriptenNodeFsRoot, FS).filter(f => !isProtectedFile(f))
+  // .map(f=>f.startsWith(emscriptenNodeFsRoot) ? f : pathJoin(emscriptenNodeFsRoot, f ))  
+  //   .forEach(f => rmRf(f, FS, f => !isProtectedFile(f), removed))
     o.debug && console.log('Removed files:', removed)    
   }
   o.debug && console.log('Protected files:', ls(emscriptenNodeFsRoot, FS).map(isProtectedFile))

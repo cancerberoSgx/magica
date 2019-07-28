@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # tests generataed .wasm files using magica test suite. 
 source emscripten-scripts/base.sh
 

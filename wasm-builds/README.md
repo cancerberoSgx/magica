@@ -32,3 +32,26 @@ sh emscripten-scripts/test-wasm-magica.sh
  * IM Q16 won't work nicely (or at least easily/ straightforward) when loading images as ArrayBuffer). If you create UInt8Array a "unaligned error" will be thrwon or fail silently. I think (hope) that it solves by just using  --with-quantum-depth=8. 
  even if I build the data view using   var view = new DataView(content) it won't work (or other ways new UInt16Array(new Uint8Array(content)))
  *  Also Probably this also solves the errors with ImageMagick/png project ?
+
+
+
+
+# browser :
+
+
+Module.callMain('convert wizard: -scale 44% -rotate 33 foo.jpg'.split(' '))
+var a = FS.readFile('foo.jpg')
+var b = new Blob([a])
+var img = document.createElement('img')
+img.src=URL.createObjectURL(b)
+document.body.append(img)
+
+Module.callMain('convert rose: foo.json'.split(' '))
+const bounds = JSON.parse(new TextDecoder("utf-8").decode(FS.readFile('foo.json')))[0].image.geometry
+
+const imageData = new ImageData(bounds.width, bounds.height)
+Module.callMain('convert rose: -depth 8 out.rgba'.split(' '))
+imageData.data = FS.readFile('out.rgba')
+
+document.getElementById('canvas').getContext('2d').putImageData(imageData)
+Module.callMain('convert -list format'.split(' '))

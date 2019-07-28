@@ -1,7 +1,7 @@
 import { ok } from 'assert'
 import fetch from 'cross-fetch'
 import { existsSync, readFileSync } from 'fs'
-import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial } from 'misc-utils-of-mine-generic'
+import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial, pathJoin } from 'misc-utils-of-mine-generic'
 import { imagePixelColor } from '../image/pixel'
 import { IFile } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
@@ -9,7 +9,7 @@ import { protectFile } from './protected'
 import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
 import { magickLoaded } from '../imageMagick/magickLoaded';
 import { isDir, isFile } from '../util/util';
-import { getOption } from '../options';
+import { getOption, getOptions } from '../options';
 
 export class File implements IFile {
   public content: IFile['content']
@@ -17,6 +17,12 @@ export class File implements IFile {
   protected isProtected: boolean;
 
   constructor(public name: string, content: IFile['content'] | ArrayBuffer, isProtected: boolean = false) {
+  
+    const { emscriptenNodeFsRoot, debug } = getOptions()
+
+    if(!name.startsWith(emscriptenNodeFsRoot)) {
+      this.name = pathJoin(emscriptenNodeFsRoot, this.name)
+    }
     this.content = content instanceof ArrayBuffer ? new Uint8ClampedArray(content) : content
     this.isProtected = isProtected
     if (this.isProtected) {
@@ -162,7 +168,7 @@ export class File implements IFile {
   }
 
   public static isFile(f: any): f is File {
-    return f && f.name && f.content && !!(f as File).size
+    return !!f && !!f.name && !!f.content && typeof f.constructor!=='undefined' // && !!(f as File).size
   }
 
   public static asFile(f: IFile): File {

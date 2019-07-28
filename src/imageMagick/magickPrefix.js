@@ -12,17 +12,20 @@ Object.assign(Module, {
   print: function (text) {
     pushStdout(text)
   },
+  logReadFiles: debug,
   printErr: function (text) {
     pushStderr(text)
   },
   preRun: function () {
     debug && console.log('Module.preRun. isNode: ', isNode())
-    FS.mkdir(emscriptenNodeFsRoot)
+    if(!FS.isDir(emscriptenNodeFsRoot)) {
+      FS.mkdir(emscriptenNodeFsRoot)
+    }
     if (isNode() && !disableNodeFs) {
-      if (!require('f' + 's').existsSync(nodeFsLocalRoot)) {
-        require('f' + 's').mkdirSync(nodeFsLocalRoot, { recursive: true })
+      if (!require('fs').existsSync(nodeFsLocalRoot)) {
+        require('fs').mkdirSync(nodeFsLocalRoot, { recursive: true })
       }
-      debug && console.log(`Mounting local folder ${nodeFsLocalRoot} as emscripten root folder ${emscriptenNodeFsRoot}.`)
+      debug && console.log(`Mounting local folder "${nodeFsLocalRoot}" as emscripten root folder "${emscriptenNodeFsRoot}".`)
       FS.mount(NODEFS, { root: nodeFsLocalRoot }, emscriptenNodeFsRoot);
     }
     debug && console.log('Module.preRun <-- exiting')

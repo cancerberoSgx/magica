@@ -58,9 +58,10 @@ export async function run(o: RunOptions) {
   //   return { ...finalResult, error: new Error('Script interrupted by listener') }
   // }
   await serial(commands.map((command, i) => async () => {
+    
     let mainOptions: Options = { ...o, command, inputFiles: inputFiles.map(File.asFile) } as any //TODO
 
-    await _runTimePreprocess(o, mainOptions, i)
+    // await _runTimePreprocess(o, mainOptions, i)
 
     let result: Result = await main(mainOptions)
 
@@ -77,11 +78,17 @@ export async function run(o: RunOptions) {
     //   //TODO: stopPropagation and scriptInterrupt
     // }
 
-    result.outputFiles = result.outputFiles.map(f => ({ ...f, name: f.name.startsWith(emscriptenNodeFsRoot) ? f.name.substring(emscriptenNodeFsRoot.length + 1) : f.name })).map(File.asFile)
+    result.outputFiles = result.outputFiles
+    // .map(f => ({ ...f, name: f.name.startsWith(emscriptenNodeFsRoot) ? f.name.substring(emscriptenNodeFsRoot.length + 1) : f.name }))
+    .map(File.asFile)
+
     inputFiles = [...inputFiles.filter(f => !result.outputFiles.find(f2 => f2.name === f.name)),
     ...result.outputFiles].map(File.asFile)
+
     finalResult.results.push(result)
+
     finalResult.commands[i] = processCommand(mainOptions.command)
+    
     // console.log('finalResult.commands', finalResult.commands);
 
     // } catch (error) {

@@ -11,7 +11,7 @@ export EMCC_FLAGS=$EMCC_FLAGS_DEBUG
 
 export LDFLAGS="-L$PREFIX/lib"
 export PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig"
-export CFLAGS="$CPPFLAGS -s BINARYEN_TRAP_MODE=clamp -s ALLOW_MEMORY_GROWTH=1 -s ERROR_ON_UNDEFINED_SYMBOLS=0 -Werror=implicit-function-declaration $EMCC_FLAGS"
+export CFLAGS="$CPPFLAGS -s BINARYEN_TRAP_MODE=clamp -s ALLOW_MEMORY_GROWTH=1 -s ERROR_ON_UNDEFINED_SYMBOLS=0 -Wno-error=implicit-function-declaration $EMCC_FLAGS"
 
 export QUANTUM_DEPTH=8 # only works on IM 7
 export HDRI=no # only works on IM 7

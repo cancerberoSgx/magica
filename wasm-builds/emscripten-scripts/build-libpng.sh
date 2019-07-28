@@ -4,8 +4,9 @@ source emscripten-scripts/base.sh
 mkdir -p $PREFIX/src
 cd $PREFIX/src
 rm -rf libpng
+git clone https://github.com/cancerberosgx/png.git libpng
 # git clone https://github.com/ImageMagick/png.git libpng
-git clone https://github.com/KnicKnic/libpng.git
+# git clone https://github.com/KnicKnic/libpng.git
 # https://github.com/glennrp/libpng.git
 cd libpng
 
@@ -18,8 +19,8 @@ automake --add-missing
 chmod a+x ./configure
 emconfigure ./configure --prefix=$PREFIX --disable-shared PKG_CONFIG_PATH="$PKG_CONFIG_PATH" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS"
 testExitCode "libpng configure" $?
-emcmake make  CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS"
-testExitCode "libpng make" $?
+# emcmake make  CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS"
+# testExitCode "libpng make" $?
 emcmake make install  CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS"
 testExitCode "libpng make install" $?
 
