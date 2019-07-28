@@ -1,7 +1,8 @@
 import { getOption } from '../options'
 import { getStderr, getStdout, resetStderr, resetStdout } from './magickLoaded'
+import { FS } from '../file/emscriptenFs';
 
-export function createMain(Module: any): NativeMain {
+export function createMain(Module: any, FS: FS): NativeMain {
   return function main(...args: any[]) {
     var debug = getOption('debug')
     resetStdout()
@@ -10,6 +11,8 @@ export function createMain(Module: any): NativeMain {
     try {
       Module.noExitRuntime = true // This helps stdout to be correctly flushed on some situations
       debug && console.log('before Module.callMain')
+  FS.chdir(getOption('emscriptenNodeFsRoot'))
+
       returnValue = Module.callMain(...args)
       debug && console.log('after Module.callMain', returnValue)
       // flush stdio so clients get stdout string that doesn't end with new lines.

@@ -13,7 +13,7 @@ export const magickLoaded = new Deferred<Main>()
 
 const stdout: string[] = []
 export function pushStdout(s: string) {
-  debug && console.log(`>> stdout >> ${scrollbars}`)
+  debug && console.log(`>> stdout >> ${s}`)
   stdout.push(s)
 }
 export function resetStdout() {

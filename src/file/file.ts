@@ -18,7 +18,7 @@ export class File implements IFile {
 
   constructor(public name: string, content: IFile['content'] | ArrayBuffer, isProtected: boolean = false) {
   
-    const { emscriptenNodeFsRoot, debug } = getOptions()
+    // const { emscriptenNodeFsRoot, debug } = getOptions()
 
     // if(!name.startsWith(emscriptenNodeFsRoot)) {
     //   this.name = pathJoin(emscriptenNodeFsRoot, this.name)

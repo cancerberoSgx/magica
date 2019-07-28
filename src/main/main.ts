@@ -11,6 +11,7 @@ import { getFileDir } from '../util/util'
 import { processCommand } from './command'
 import { NativeResult } from '../imageMagick/createMain';
 import { isCustomCommand, dispatchCustomCommand } from './customCommand';
+import { writeFileSync } from 'fs';
 
 export async function main(o: Partial<Options>): Promise<Result> {
   if (o.useNative || getOption('useNative')) {
@@ -38,7 +39,9 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
     if (dirName.trim()) {
       mkdirp(dirName, p => FS.analyzePath(p).exists, FS.mkdir)
     }
-    FS.writeFile(f.name, f.content)
+    // @ts-ig nore
+    FS.writeFile(f.name, f.content, {encoding: 'binary', flags: 'w+'})
+    // writeFileSync('working_tmp/'+f.name, f.content)
   })
 
   const beforeTree = listFilesRecursively(emscriptenNodeFsRoot, FS)

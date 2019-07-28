@@ -8,7 +8,9 @@ const { nodeFsLocalRoot, emscriptenNodeFsRoot, debug, disableNodeFs } = getOptio
 Module = typeof Module === 'undefined' ? {} : Module
 
 Object.assign(Module, {
+  noExitRuntime: true, // This helps stdout to be correctly flushed on some situations
   noInitialRun: true,  // tell wasm runner to not execute application
+  logReadFiles: debug,
   print: function (text) {
     pushStdout(text)
   },
@@ -29,12 +31,15 @@ Object.assign(Module, {
       FS.mount(NODEFS, { root: nodeFsLocalRoot }, emscriptenNodeFsRoot);
     }
     debug && console.log('Module.preRun <-- exiting')
+  },
+  onRuntimeInitialized: function () {
+    debug && console.log('Emscripten Module.onRuntimeInitialized ')
+    magickLoaded.resolve({
+      FS, main: require('../createMain').createMain(Module, FS)
+    })
+  },
+  onAbort: function(what){
+    console.error('onAbort', what)
+    console.trace()    
   }
 })
-
-Module.onRuntimeInitialized = function () {
-  debug && console.log('Emscripten Module.onRuntimeInitialized ')
-  magickLoaded.resolve({
-    FS, main: require('../createMain').createMain(Module)
-  })
-}; 
