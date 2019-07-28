@@ -20,9 +20,9 @@ export class File implements IFile {
   
     const { emscriptenNodeFsRoot, debug } = getOptions()
 
-    if(!name.startsWith(emscriptenNodeFsRoot)) {
-      this.name = pathJoin(emscriptenNodeFsRoot, this.name)
-    }
+    // if(!name.startsWith(emscriptenNodeFsRoot)) {
+    //   this.name = pathJoin(emscriptenNodeFsRoot, this.name)
+    // }
     this.content = content instanceof ArrayBuffer ? new Uint8ClampedArray(content) : content
     this.isProtected = isProtected
     if (this.isProtected) {

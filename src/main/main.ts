@@ -31,9 +31,9 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
   const files = await File.resolve(o.inputFiles)
   FS.chdir(emscriptenNodeFsRoot)
   files.forEach(f => {
-    if(!f.name.startsWith(emscriptenNodeFsRoot)) {
-      f.name = pathJoin(emscriptenNodeFsRoot, f.name)
-    }
+    // if(!f.name.startsWith(emscriptenNodeFsRoot)) {
+    //   f.name = pathJoin(emscriptenNodeFsRoot, f.name)
+    // }
     const dirName = getFileDir(f.name)
     if (dirName.trim()) {
       mkdirp(dirName, p => FS.analyzePath(p).exists, FS.mkdir)
@@ -50,7 +50,6 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
   }else {
     debug && console.log('main processed command:',processedCommand)
     try {
-      
       returnValue = main(processedCommand)
     } catch (error) {
       console.log('MAIN error', error);
@@ -72,13 +71,13 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
 
   if (o.protectOutputFiles) {
     outputFiles.forEach(protectFile)
-    // outputFiles.length = 0
+    outputFiles.length = 0
   }
   else {
     const removed:string[] = []
-  //   ls(emscriptenNodeFsRoot, FS).filter(f => !isProtectedFile(f))
+    ls(emscriptenNodeFsRoot, FS).filter(f => !isProtectedFile(f))
   // .map(f=>f.startsWith(emscriptenNodeFsRoot) ? f : pathJoin(emscriptenNodeFsRoot, f ))  
-  //   .forEach(f => rmRf(f, FS, f => !isProtectedFile(f), removed))
+    .forEach(f => rmRf(f, FS, f => !isProtectedFile(f), removed))
     o.debug && console.log('Removed files:', removed)    
   }
   o.debug && console.log('Protected files:', ls(emscriptenNodeFsRoot, FS).map(isProtectedFile))

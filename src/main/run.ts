@@ -61,7 +61,7 @@ export async function run(o: RunOptions) {
     
     let mainOptions: Options = { ...o, command, inputFiles: inputFiles.map(File.asFile) } as any //TODO
 
-    // await _runTimePreprocess(o, mainOptions, i)
+    await _runTimePreprocess(o, mainOptions, i)
 
     let result: Result = await main(mainOptions)
 
@@ -79,7 +79,7 @@ export async function run(o: RunOptions) {
     // }
 
     result.outputFiles = result.outputFiles
-    // .map(f => ({ ...f, name: f.name.startsWith(emscriptenNodeFsRoot) ? f.name.substring(emscriptenNodeFsRoot.length + 1) : f.name }))
+    .map(f => ({ ...f, name: f.name.startsWith(emscriptenNodeFsRoot) ? f.name.substring(emscriptenNodeFsRoot.length + 1) : f.name }))
     .map(File.asFile)
 
     inputFiles = [...inputFiles.filter(f => !result.outputFiles.find(f2 => f2.name === f.name)),
@@ -88,7 +88,7 @@ export async function run(o: RunOptions) {
     finalResult.results.push(result)
 
     finalResult.commands[i] = processCommand(mainOptions.command)
-    
+
     // console.log('finalResult.commands', finalResult.commands);
 
     // } catch (error) {
