@@ -7,12 +7,13 @@ source emscripten-scripts/base.sh
 # testExitCode "build-zlib" $?
 
 # cd $CURRENT_DIR
+# source emscripten-scripts/build-jpeg-turbo.sh
+# testExitCode "build-jpeg-turbo" $?
+
+# cd $CURRENT_DIR
 # source emscripten-scripts/build-libpng.sh
 # testExitCode "build-libpng" $?
 
-# cd $CURRENT_DIR
-# source emscripten-scripts/build-jpeg-turbo.sh
-# testExitCode "build-jpeg-turbo" $?
 
 # cd $CURRENT_DIR
 # source emscripten-scripts/build-tiff.sh

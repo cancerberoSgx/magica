@@ -25,3 +25,10 @@ The following command clone's magica project, replace the wasm files with the ne
 ```
 sh emscripten-scripts/test-wasm-magica.sh
 ```
+
+# Notes / Problems
+
+## IM quantum=16 and emscripten and typed arrays
+ * IM Q16 won't work nicely (or at least easily/ straightforward) when loading images as ArrayBuffer). If you create UInt8Array a "unaligned error" will be thrwon or fail silently. I think (hope) that it solves by just using  --with-quantum-depth=8. 
+ even if I build the data view using   var view = new DataView(content) it won't work (or other ways new UInt16Array(new Uint8Array(content)))
+ *  Also Probably this also solves the errors with ImageMagick/png project ?
