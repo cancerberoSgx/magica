@@ -12,26 +12,11 @@ cd libpng
 
 export PNG_LIBS="$LDFLAGS"
 
-# emcmake make clean
 libtoolize
 autoreconf 
 automake --add-missing
 chmod a+x ./configure
-emconfigure ./configure --prefix=$PREFIX --disable-shared PKG_CONFIG_PATH="$PKG_CONFIG_PATH" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS"
+export CHOST=emcc && emconfigure ./configure --prefix=$PREFIX --disable-shared --enable-static PKG_CONFIG_PATH="$PKG_CONFIG_PATH"
 testExitCode "libpng configure" $?
-# emcmake make  CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS"
-# testExitCode "libpng make" $?
-emcmake make install  CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS"
+emcmake make install  
 testExitCode "libpng make install" $?
-
-
-
-# cd /code/libpng
-# libtoolize
-# autoreconf
-# automake --add-missing
-# emconfigure ./configure --prefix=/code/prefix --disable-shared
-# testExitCode "libpng configure" $?
-# emcmake make 
-# testExitCode "libpng make" $?
-# emcmake make install

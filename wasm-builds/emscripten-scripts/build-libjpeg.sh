@@ -4,11 +4,12 @@ source emscripten-scripts/base.sh
 mkdir -p $PREFIX/src
 cd $PREFIX/src
 rm -rf libjpeg
-git clone https://github.com/LuaDist/libjpeg.git
+git clone https://github.com/KnicKnic/libjpeg.git
+# https://github.com/LuaDist/libjpeg.git
 cd libjpeg
 
 autoreconf -fvi
-emconfigure ./configure --prefix=$PREFIX --disable-shared PKG_CONFIG_PATH="$PKG_CONFIG_PATH" 
+emconfigure ./configure --prefix=$PREFIX --disable-shared --enable-static   PKG_CONFIG_PATH="$PKG_CONFIG_PATH" CC="emcc" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" CPPFLAGS="$CFLAGS" 
 testExitCode "libjpeg configure" $?
 emcmake make install  CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS"
 testExitCode "libjpeg make install" $?
