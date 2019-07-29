@@ -1,0 +1,65 @@
+{
+  "name": "magick-wasm",
+  "version": "0.0.1",
+  "description": "builds ImageMagick WASM for Magica, downloading sources and using docker.",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "bin": {
+    "magick-wasm": "bin/magick-wasm.js"
+  },
+  "scripts": {
+    "prepare": "npm run build",
+    "clean": "rm -rf tmp* dist",
+    "build": " npm run clean && npx tsc && npm run copy",
+    "copy": " exit 0",
+    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\" \"test-browser/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
+    "lint": "npm run organizeImports && npm run format",
+    "docs": "npx markdown-toc README.md -i",
+    "all": "npm run clean && npm run lint && npm run build  && npm run docs",
+    "all-publish": "npm run all && npm version patch && npm publish"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "glob": "^7.1.4",
+    "ejs": "^2.6.2",
+    "minimist": "^1.2.0",
+    "misc-utils-of-mine-generic": "^0.2.15"
+  },
+  "devDependencies": {
+    "@types/node": "^12.6.8",
+    "@types/ejs": "^2.6.3",
+    "ava": "^2.2.0",
+    "markdown-toc": "^1.2.0",
+    "ts-node": "^8.3.0",
+    "ts-refactor": "0.0.8",
+    "typescript": "^3.5.3"
+  },
+  "keywords": [
+    "ImageMagick",
+    "emscripten",
+    "browser",
+    "node.js",
+    "API",
+    "CLI",
+    "Command Line",
+    "image processing",
+    "image format",
+    "image",
+    "library",
+    "typescript",
+    "Magica"
+  ],
+  "author": {
+    "name": "Sebastian Gurin",
+    "email": "sebastigurin@gmail.com",
+    "url": "http://sgurin.com"
+  },
+  "homepage": "https://www.npmjs.com/package/magica",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cancerberoSgx/magica.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cancerberoSgx/magica"
+  }
+}

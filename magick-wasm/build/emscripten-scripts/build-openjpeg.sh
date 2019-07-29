@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# see http://www.openjpeg.org/
 source emscripten-scripts/base.sh
 
 mkdir -p $PREFIX/src

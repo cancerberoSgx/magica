@@ -25,7 +25,7 @@ test('listFormat', async t => {
   t.truthy(c.find(f => f.name.includes('GIF')))
 })
 
-test.skip('fft', async t => {
+test('fft', async t => {
   const c = await run({
     debug: true,
     script: 'convert rose: -fft +depth +adjoin tmp_fft_%d.jpg'

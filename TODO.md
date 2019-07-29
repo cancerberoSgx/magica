@@ -6,6 +6,7 @@
 - [ ] emscripten port generation configurable
 - [ ] fix format tests (broken with new wasm)
 - [ ] test fftw
+- [ ] test mng animations (A PNG-like Image Format Supporting Multiple Images, Animation and Transparent JPEG. Requires libpng-1.0.)
 - [ ] test webp
 - [ ] CLI options for run({script})
 - [ ] I should be able to make output files protected y config.
@@ -98,3 +99,5 @@ var result = await run({script:`convert <%= await resolve('foo.png') -scale <%= 
               - I can pass options.forceFileOverride to explicitly allow modifications by convert.
   * could start with random drawings and image compare (whole image or the local area)
 
+ * check these: to render in CLI ?    ISOBRL	W	ISO/TR 11548-1 BRaiLle	Uses juxtaposition of 8-dot braille patterns (thus 8x2 dot matrices) to reproduce images, using the ISO/TR 11548-1 Braille encoding.
+ISOBRL6	W	ISO/TR 11548-1 BRaiLle 6 dots	Uses juxtaposition of 6-dot braille patterns (thus 6x2 dot matrices) to reproduce images, using the ISO/TR 11548-1 Braille encoding.
