@@ -11,11 +11,17 @@ echo "`basename $PWD`: `git remote get-url --push origin` - `git log -1 --pretty
 cd $PREFIX/src/freetype
 echo "`basename $PWD`: `git remote get-url --push origin` - `git log -1 --pretty=format:%h`"  >> $CURRENT_DIR/versions.txt
 
+cd $PREFIX/src/libjpeg
+echo "`basename $PWD`: `git remote get-url --push origin` - `git log -1 --pretty=format:%h`"  >> $CURRENT_DIR/versions.txt
+
+cd $PREFIX/src/webp
+echo "`basename $PWD`: `git remote get-url --push origin` - `git log -1 --pretty=format:%h`"  >> $CURRENT_DIR/versions.txt
+
 cd $PREFIX/src/ImageMagick
 echo "`basename $PWD`: `git remote get-url --push origin` - `git log -1 --pretty=format:%h`"  >> $CURRENT_DIR/versions.txt
 
-cd $PREFIX/src/jpeg-turbo
-echo "`basename $PWD`: `git remote get-url --push origin` - `git log -1 --pretty=format:%h`"  >> $CURRENT_DIR/versions.txt
+# cd $PREFIX/src/jpeg-turbo
+# echo "`basename $PWD`: `git remote get-url --push origin` - `git log -1 --pretty=format:%h`"  >> $CURRENT_DIR/versions.txt
 
 cd $PREFIX/src/libpng
 echo "`basename $PWD`: `git remote get-url --push origin` - `git log -1 --pretty=format:%h`"  >> $CURRENT_DIR/versions.txt

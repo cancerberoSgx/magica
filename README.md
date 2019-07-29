@@ -36,9 +36,10 @@ Easy to setup and use, ImageMagick Node.js and Browser API and Command Line Inte
 ## Summary
 
  * JavaScript API for Node.js and Browser
- Command line interface which supports simple straightforwards translation between ImageMagick utilities command line interface (like `convert` command).
+ * Command line interface which supports simple straightforwards translation between ImageMagick utilities command line interface (like `convert` command).
  * Easy/Quick setup, no emscripten build needed.
- * Includes ImageMagick emscripten binaries from [wasm-imagemagick](https://github.com/KnicKnic/WASM-ImageMagick) so no build is necessary. Just `npm install` and you are ready to go.
+ * Includes ImageMagick emscripten WASM build using its own tools, and also from other parties, like [wasm-imagemagick](https://github.com/KnicKnic/WASM-ImageMagick). 
+ * So no build is necessary. Just `npm install` and you are ready to go.
 
 ## Install
 
@@ -65,8 +66,9 @@ The command line interface will let you use the same Image Magick commands. The 
 In the following example we execute `identify n.png`:
 
 ```sh
-$ magica --command "identify n.png" --input test/assets/n.png 
-n.png PNG 109x145 109x145+0+0 8-bit sRGB 39796B 0.000u 0:00.000
+$ magica --command "convert foo.tiff -scale 30% -rotate 33 output/img/bar.png" --input ../img/foo.tiff
+$ magica --command "identify bar.png" --input output/img/bar.png 
+bar.png PNG 109x145 109x145+0+0 8-bit sRGB 39796B 0.000u 0:00.000
 ```
 
 Notice that besides passing the ImageMagick command with `--command` we also passed the image files using `--input`. It is important that the basename of given input files match the file names referenced in the command (`n.png`): 
@@ -74,12 +76,12 @@ Notice that besides passing the ImageMagick command with `--command` we also pas
 Some other examples: 
 
 ```sh
-magica --input test/assets/n.png --command "convert n.png -scale 44% tmp.gif"
+magica --input "frames_*.jpg" --command "convert 'frames_[0-9].gif' -scale 44% tmp.gif"
 ```
+TODO: verify that works
 
-`--input` can be a glob of files, useful for batch multiple images or to build gifs from several images. 
-
-TODO example with globs and gifs
+ * `--input` can be a glob of files, useful for batch multiple images or to build gifs from several images. 
+ * For quoteing arguments inside `--command` use single quotes `'`
 
 ## JavaScript API
 
@@ -92,7 +94,6 @@ In the following example we convert an image in Node.js. (Checkout `run()` for a
 ```ts
 import {main} from 'magica'
 import { readFileSync, writeFileSync } from 'fs'
-
 (async ()=>{
  const result = await main({
     debug: true,
@@ -109,7 +110,6 @@ The following example is analog to the previous one but in the browser:
 
 ```ts
 import {main} from 'magica'
-
 (async ()=>{
  const result = await main({
     debug: true,
@@ -148,16 +148,17 @@ TODO: example of multiple commands consuming output files
 
 #### JavaScript templates
 
-TODO: document templates <%= %>
+TODO: document templates <%= %> in run scripts. the syntax, available context properties and template helpers, how to add new context properties and how to add new template helpers. 
 
-#### Commands preprocessors
+#### Commands pre processors
 
 run() supports adding custom commands preprocessor to support new syntax in scripts. JavaScript templates is a builtin concrete command preprocessor.
 TODO: example  link to the API for registering a new prepro
 
 
-
 ## Options
+
+TODO: update with run() and script()
 
 Options are the same for the command line and the API:
 

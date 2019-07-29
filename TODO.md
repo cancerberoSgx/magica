@@ -3,10 +3,15 @@
 - [ ] performance tests in the browser
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
 - [ ] fix npm run test-js  
+- [ ] emscripten port generation configurable
+- [ ] fix format tests (broken with new wasm)
+- [ ] test fftw
+- [ ] test webp
+- [ ] CLI options for run({script})
 - [ ] I should be able to make output files protected y config.
 - [ ] run scriptListener  . finish and test it or drop it
 - [ ] verify support IM command quoted arguments
-- [ ] verify mkdir -p for output files   
+- [ ] test mkdir -p for output files   
 - [ ] because options are global - sending commands concurrently could fail. Solution: queue or instance options
 - [ ] verify montage and other commands than convert and identify (montage is special with files?)
 - [ ] an easy to use API for web-workers
@@ -18,14 +23,14 @@
 - [ ] should magica support running native IM executable in node if they are present ?  
 - [ ] improve errors thrown when there's a missing file, currently it fails silently.
 - [w] document run() scripts and supported syntax
-  - [ ] script preprocessors API
-  - [ ]script templates infrstracture (API to add new helpers to use in templates) 
-  document command preprocessor and script template
-  - [ ] script template syntax and how are evaluated
-  - [ ] script template helpers available and how to add custom ones programatically
-  - [ ] test templates with complex expressions, spaces, quotes etc. whhat about templates expressions inside templates expressions?
+  - [ ] document  script pre processors API
 - [ ] document custom commands
-- [x] custom commands - any command sourounded by curly braces will be evaluated as  a js function: `{  this.pushStdout(...FS.readdir('.')) }`
+- [ ] Module.onAbort - listener API - also use it to build the Result return value.
+- [ ] document script templates infrastructure, syntax, examples, building helpers, how to add new helpers, how to add new properties to the context. 
+- [x] IM itself already supports loading images from URLS - delegate that to it:  convert  http://www.ict.griffith.edu.au/anthony/images/anthony_castle.gif -resize 100x100 castle_logo.png
+- [x] Module.onAbort
+- [x] emscripten port generation automatized
+- [x] custom commands - any command surrounded by curly braces will be evaluated as  a js function: `{  this.pushStdout(...FS.readdir('.')) }`
 - [x] apidocs
 - [x] template should allow to add custom functions to the context
 - [x] compile time templates and run time templates w different syntax 
@@ -64,15 +69,18 @@ TLDR: wr support both compile tme and tuntime templates - but in general users w
 - [ ] two different types of templates are supported: 
     * **compile time** . These are evaluated when `run()` is called, using the script text as a whole
     
-    ones evaluated at "compile time" with the whones that are evaluated at compile time - this is when the script is evaluated when you function `run()` is
+    ones evaluated at "compile time" with the ones that are evaluated at compile time - this is when the script is evaluated when you function `run()` is
 - [x] ideas for script templates: 
 
 ``` 
-var result = await run({script:`convert <%= await resolve('foo.png') -scale <%= width('foo.png')/2 %> output.<%=inputFiles[0].extension%>`, inputFiles: [File.resolve('y.gif')]} ```
+var result = await run({script:`convert <%= await resolve('foo.png') -scale <%= width('foo.png')/2 %> output.<%=inputFiles[0].extension%>`, inputFiles: [File.resolve('y.gif')]} 
+```
 
 
 
 ### Ideas
+
+- [ ] https://github.com/charto/nbind/ - "easily" generate a js API accessing directly C/C++ code. Also support targeting asm.js , wasm or native. Try to make a simple API for magick++
 
 - [?] Option for Node.js users to work/mount current directory - the tool should not copy input files just use them since are present in mount root ems
 
