@@ -1,5 +1,5 @@
+import { notFalsy } from 'misc-utils-of-mine-generic'
 import { main } from '../main/main'
-import { notUndefined, notFalsy } from 'misc-utils-of-mine-generic';
 
 export async function getConfigureFolders(): Promise<string[]> {
   const result = await main({ command: `convert -debug configure rose: info:` })
@@ -19,12 +19,12 @@ interface Format {
   description: string
 }
 
-export async function listFormat():Promise<Format[]> {
-  if(!formats){
+export async function listFormat(): Promise<Format[]> {
+  if (!formats) {
     const result = await main({ command: `convert -list format` })
     var r = /^\s*([^\s]+)\s+([^\s]+)\s+(.+)$/g
-    formats =  result.stdout.slice(2).map(s=>r.exec(s)).filter(notFalsy).filter(r=>r[1]!=='See').map(r=>({
-      name: r![1], 
+    formats = result.stdout.slice(2).map(s => r.exec(s)).filter(notFalsy).filter(r => r[1] !== 'See').map(r => ({
+      name: r![1],
       flags: r![2],
       description: r![3],
     }))

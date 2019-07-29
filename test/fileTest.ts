@@ -1,11 +1,11 @@
 import test from 'ava'
 import fetch from 'cross-fetch'
+import { rm } from 'shelljs'
+import { imageInfo } from '../src'
 import { File } from '../src/file/file'
 import { main } from '../src/main/main'
+import { getOption } from '../src/options'
 import fileType = require('file-type')
-import { run, imageInfo } from '../src';
-import { rm } from 'shelljs';
-import { getOption } from '../src/options';
 
 test('from url request', async t => {
   const u = 'https://cancerberosgx.github.io/demos/geometrizejs-cli/bridge.jpg', o = {}
@@ -17,10 +17,10 @@ test('from url request', async t => {
   const result = await main({
     command: ['identify', 'bridge.jpg'],
     debug: true,
-    inputFiles: [{ name: 'bridge.jpg', content:  view}]
+    inputFiles: [{ name: 'bridge.jpg', content: view }]
   })
-  console.log(result);
-  
+  console.log(result)
+
   t.true(result.stdout.join('').includes('bridge.jpg JPEG 500x333 500x333+0+0 8-bit sRGB 35527B'))
   // t.deepEqual(result.stderr, [])
   t.falsy(result.error)

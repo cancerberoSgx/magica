@@ -20,23 +20,27 @@
 
 ## Implemented by
 
-* [LsHelper](../classes/_main_template_ls_.lshelper.md)
+* [FSHelper](../classes/_main_template_fshelper_.fshelper.md)
+* [HeightHelper](../classes/_main_template_sizehelper_.heighthelper.md)
+* [ImageInfoHelper](../classes/_main_template_sizehelper_.imageinfohelper.md)
+* [SizeHelper](../classes/_main_template_sizehelper_.sizehelper.md)
+* [WidthHelper](../classes/_main_template_sizehelper_.widthhelper.md)
 
 ## Index
 
 ### Properties
 
-* [fsCompileTime](_main_template_template_.templatehelper.md#fscompiletime)
-* [fsRunTime](_main_template_template_.templatehelper.md#fsruntime)
+* [fnCompileTime](_main_template_template_.templatehelper.md#fncompiletime)
+* [fnRunTime](_main_template_template_.templatehelper.md#optional-fnruntime)
 * [name](_main_template_template_.templatehelper.md#name)
 
 ## Properties
 
-###  fsCompileTime
+###  fnCompileTime
 
-• **fsCompileTime**: *function*
+• **fnCompileTime**: *function*
 
-*Defined in [main/template/template.ts:9](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/main/template/template.ts#L9)*
+*Defined in [main/template/template.ts:9](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/main/template/template.ts#L9)*
 
 #### Type declaration:
 
@@ -50,21 +54,11 @@ Name | Type |
 
 ___
 
-###  fsRunTime
+### `Optional` fnRunTime
 
-• **fsRunTime**: *function*
+• **fnRunTime**? : *undefined | function*
 
-*Defined in [main/template/template.ts:10](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/main/template/template.ts#L10)*
-
-#### Type declaration:
-
-▸ (`options`: `RO`): *`RR`*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`options` | `RO` |
+*Defined in [main/template/template.ts:10](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/main/template/template.ts#L10)*
 
 ___
 
@@ -72,4 +66,4 @@ ___
 
 • **name**: *string*
 
-*Defined in [main/template/template.ts:8](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/main/template/template.ts#L8)*
+*Defined in [main/template/template.ts:8](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/main/template/template.ts#L8)*

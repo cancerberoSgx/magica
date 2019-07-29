@@ -1,8 +1,7 @@
 import test from 'ava'
+import { notUndefined } from 'misc-utils-of-mine-generic'
 import { addTemplateHelper, File, imageCompare } from '../src'
 import { run } from '../src/main/run'
-import { writeFileSync } from 'fs';
-import { notUndefined } from 'misc-utils-of-mine-generic';
 
 test('async templates so they works with await expressions (I can call main() or run() or imageInfo() from template js', async (t) => {
   const result = await run({
@@ -67,19 +66,19 @@ convert foo.png -rotate <$=30+6$> bar.png
 })
 
 test.only('custom commands', async (t) => {
-  const script =  `
+  const script = `
   convert rose: bar.gif
   {  this.pushStdout('hello') }
   {  this.pushStdout(...FS.readdir('.')) } `
   var result = await run({
     script,
-protectOutputFiles: true,
+    protectOutputFiles: true,
   })
-t.deepEqual(result.stdout.filter(notUndefined), ['hello', 'bar.gif'])
-result = await run({
-  script
-})
-t.deepEqual(result.stdout.filter(notUndefined), ['hello'])
+  t.deepEqual(result.stdout.filter(notUndefined), ['hello', 'bar.gif'])
+  result = await run({
+    script
+  })
+  t.deepEqual(result.stdout.filter(notUndefined), ['hello'])
 
 })
 

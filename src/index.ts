@@ -11,9 +11,9 @@ import { cliToArray } from './main/command'
 import { registerCommandPreprocessor } from './main/executeCommandPreprocessor'
 import { main } from './main/main'
 import { run } from './main/run'
-import { addTemplateHelper, TemplateHelper } from "./main/template/template"
+import { addTemplateHelper } from "./main/template/template"
 
-export  { FS } from "./file/emscriptenFs"
+export { FS } from "./file/emscriptenFs"
 export { File } from './file/file'
 export { getProtectedFile, isProtectedFile, protectFile } from './file/protected'
 export { toDataUrl } from './image/html'
@@ -26,10 +26,8 @@ export { cliToArray } from './main/command'
 export { registerCommandPreprocessor } from './main/executeCommandPreprocessor'
 export { main } from './main/main'
 export { run } from './main/run'
-export { addTemplateHelper, TemplateHelper} from './main/template/template'
+export { addTemplateHelper, TemplateHelper } from './main/template/template'
 export * from './types'
-
-
 
 if (typeof getGlobal().Magica == 'undefined') {
   getGlobal().Magica = {

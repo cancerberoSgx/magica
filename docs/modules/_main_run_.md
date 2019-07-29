@@ -17,7 +17,7 @@
 
 ▸ **run**(`o`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<RunResult>`*
 
-*Defined in [main/run.ts:24](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/main/run.ts#L24)*
+*Defined in [main/run.ts:25](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/main/run.ts#L25)*
 
 Has a signature compatible with main, but if `script` is given instead of `command` option then it's
 interpreted as a sequence of commands that are executed serially using [main](../interfaces/_imagemagick_magickloaded_.main.md#main)
@@ -47,7 +47,7 @@ ___
 
 ▸ **runOne**(`script`: string, `input`: [File](../classes/_file_file_.file.md) | [File](../classes/_file_file_.file.md)[]): *`Promise<IFile>`*
 
-*Defined in [main/run.ts:130](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/main/run.ts#L130)*
+*Defined in [main/run.ts:115](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/main/run.ts#L115)*
 
 **Parameters:**
 

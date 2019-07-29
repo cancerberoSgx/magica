@@ -32,7 +32,7 @@
 
 • **command**: *string | string[]*
 
-*Defined in [types.ts:70](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/types.ts#L70)*
+*Defined in [types.ts:65](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/types.ts#L65)*
 
 An ImageMagick command, for example: `['convert', 'foo/bar.png', '-scale', '50%', 'out.gif']`
 
@@ -44,7 +44,7 @@ ___
 
 *Inherited from void*
 
-*Defined in [types.ts:56](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/types.ts#L56)*
+*Defined in [types.ts:51](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/types.ts#L51)*
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 *Inherited from [NativeOptions](_types_.nativeoptions.md).[disableNodeFs](_types_.nativeoptions.md#optional-disablenodefs)*
 
-*Defined in [types.ts:47](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/types.ts#L47)*
+*Defined in [types.ts:42](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/types.ts#L42)*
 
 Don't use system's filesystem in Node.js but memory filesystem (just like in the browser). This could be
 faster if read/write many images but consumes more memory.
@@ -67,7 +67,7 @@ ___
 
 *Inherited from [NativeOptions](_types_.nativeoptions.md).[emscriptenNodeFsRoot](_types_.nativeoptions.md#emscriptennodefsroot)*
 
-*Defined in [types.ts:36](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/types.ts#L36)*
+*Defined in [types.ts:31](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/types.ts#L31)*
 
 Internal root FS directed path. This should rarely be configured by users.
 
@@ -77,7 +77,7 @@ ___
 
 • **inputFiles**? : *undefined | string | [IFile](_types_.ifile.md)[]*
 
-*Defined in [types.ts:77](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/types.ts#L77)*
+*Defined in [types.ts:72](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/types.ts#L72)*
 
 The list of input files referenced in given [command](_types_.options.md#command). It's important that the name of this files match
 the file names given in the command. If string and a file exists (node.js) then that file will be used.
@@ -91,7 +91,7 @@ ___
 
 *Inherited from [NativeOptions](_types_.nativeoptions.md).[nodeFsLocalRoot](_types_.nativeoptions.md#nodefslocalroot)*
 
-*Defined in [types.ts:31](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/types.ts#L31)*
+*Defined in [types.ts:26](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/types.ts#L26)*
 
 (Node.js and CLI only). In Node.js the local file system will be used to read/write files instead of
 memory (like in the browser). This folder will be used for that, by default, ./working_tmp. IMPORTANT:
@@ -105,7 +105,7 @@ ___
 
 *Inherited from [NativeOptions](_types_.nativeoptions.md).[outputDir](_types_.nativeoptions.md#outputdir)*
 
-*Defined in [types.ts:41](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/types.ts#L41)*
+*Defined in [types.ts:36](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/types.ts#L36)*
 
 (CLI only). Output files will be written in this folder. By default is current directory.
 
@@ -115,7 +115,7 @@ ___
 
 • **protectOutputFiles**? : *undefined | false | true*
 
-*Defined in [types.ts:65](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/types.ts#L65)*
+*Defined in [types.ts:60](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/types.ts#L60)*
 
 Will register output files as protected files so they are not deleted in the future calls. Are managed by the user.
 
@@ -129,6 +129,6 @@ ___
 
 *Inherited from [NativeOptions](_types_.nativeoptions.md).[useNative](_types_.nativeoptions.md#optional-usenative)*
 
-*Defined in [types.ts:52](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/types.ts#L52)*
+*Defined in [types.ts:47](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/types.ts#L47)*
 
 If true and when running on node.js, and only if image magick commands are available in the local system, it will execute the commands using the local native ImageMagick commands, instead of running them though the emscripten port (which is slower and support less capabilities).

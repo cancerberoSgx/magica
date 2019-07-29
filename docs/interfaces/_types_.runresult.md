@@ -31,7 +31,7 @@ just the last command, while stdout, stderr are the concatenation of all command
 
 • **commands**: *string[][]*
 
-*Defined in [types.ts:173](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/types.ts#L173)*
+*Defined in [types.ts:166](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/types.ts#L166)*
 
 The command sequence decoded from given script.
 
@@ -43,7 +43,7 @@ ___
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[error](_imagemagick_createmain_.nativeresult.md#error)*
 
-*Defined in [imageMagick/createMain.ts:40](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/imageMagick/createMain.ts#L40)*
+*Defined in [imageMagick/createMain.ts:43](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/imageMagick/createMain.ts#L43)*
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 *Overrides [Result](_types_.result.md).[outputFiles](_types_.result.md#outputfiles)*
 
-*Defined in [types.ts:178](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/types.ts#L178)*
+*Defined in [types.ts:171](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/types.ts#L171)*
 
 Las command output files
 
@@ -63,7 +63,7 @@ ___
 
 • **results**: *[Result](_types_.result.md)[]*
 
-*Defined in [types.ts:168](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/types.ts#L168)*
+*Defined in [types.ts:161](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/types.ts#L161)*
 
 Sequence of results for each command found in the script, in order.
 
@@ -75,7 +75,7 @@ ___
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[returnValue](_imagemagick_createmain_.nativeresult.md#returnvalue)*
 
-*Defined in [imageMagick/createMain.ts:37](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/imageMagick/createMain.ts#L37)*
+*Defined in [imageMagick/createMain.ts:40](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/imageMagick/createMain.ts#L40)*
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[stderr](_imagemagick_createmain_.nativeresult.md#stderr)*
 
-*Defined in [imageMagick/createMain.ts:39](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/imageMagick/createMain.ts#L39)*
+*Defined in [imageMagick/createMain.ts:42](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/imageMagick/createMain.ts#L42)*
 
 ___
 
@@ -95,4 +95,4 @@ ___
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[stdout](_imagemagick_createmain_.nativeresult.md#stdout)*
 
-*Defined in [imageMagick/createMain.ts:38](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/imageMagick/createMain.ts#L38)*
+*Defined in [imageMagick/createMain.ts:41](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/imageMagick/createMain.ts#L41)*

@@ -1,6 +1,6 @@
+import { FS } from '../file/emscriptenFs'
 import { getOption } from '../options'
 import { getStderr, getStdout, resetStderr, resetStdout } from './magickLoaded'
-import { FS } from '../file/emscriptenFs';
 
 export function createMain(Module: any, FS: FS): NativeMain {
   return function main(...args: any[]) {
@@ -11,7 +11,7 @@ export function createMain(Module: any, FS: FS): NativeMain {
     try {
       Module.noExitRuntime = true // This helps stdout to be correctly flushed on some situations
       debug && console.log('before Module.callMain')
-  FS.chdir(getOption('emscriptenNodeFsRoot'))
+      FS.chdir(getOption('emscriptenNodeFsRoot'))
 
       returnValue = Module.callMain(...args)
       debug && console.log('after Module.callMain', returnValue)

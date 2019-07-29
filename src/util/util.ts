@@ -26,9 +26,6 @@ export function isFile(f: string, FS: FS) {
     return FS.isFile(FS.stat(f).mode)
   } catch (error) {
     return false
-  }  
+  }
 }
 
-// export function values<T>(object: { [k: string]: T }): T[] {
-//   return Object.keys(object).map(name => object[name])
-// }

@@ -1,7 +1,7 @@
 import { FS } from '../file/emscriptenFs'
 import { ls } from './lsR'
 
-export function rmRf(f: string, FS: FS, predicate: (f: string) => boolean = f => true, removed:string[]=[]) {
+export function rmRf(f: string, FS: FS, predicate: (f: string) => boolean = f => true, removed: string[] = []) {
   if (FS.isDir(FS.stat(f).mode)) {
     ls(f, FS).some(f => rmRf(f, FS, predicate, removed))
     if (predicate(f)) {
@@ -12,9 +12,6 @@ export function rmRf(f: string, FS: FS, predicate: (f: string) => boolean = f =>
         return true
       }
     }
-    // else {
-    //   return false
-    // }
   }
   else if (predicate(f)) {
     try {

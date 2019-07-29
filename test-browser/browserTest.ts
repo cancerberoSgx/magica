@@ -32,14 +32,12 @@ test('browser tests', async t => {
   const url = `http://localhost:8080/testBrowser.html`
   console.log(url)
 
-  // await sleep(1000000)
   const browser = await puppeteer.launch({ headless: true })
   const page = await browser.newPage()
 
   await page.goto(url)
   await sleep(1500)
 
-  // if(await page.evaluate(() => document.getElementById('assert')!.innerHTML.trim()))
   t.true(await page.evaluate(() => !!document.getElementById('assert')), 'assert container not found')
   const asserts = await page.evaluate(() => document.getElementById('assert')!.innerHTML.trim() + '')
   t.deepEqual(asserts.trim(), '')

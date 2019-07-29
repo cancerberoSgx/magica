@@ -1,11 +1,11 @@
 import { asArray, notUndefined, serial } from 'misc-utils-of-mine-generic'
 import { File } from '../file/file'
+import { magickLoaded } from '../imageMagick/magickLoaded'
 import { getOption, setOptions } from '../options'
-import { Options, Result, RunOptions, RunResult, ScriptEvent } from '../types'
+import { Options, Result, RunOptions, RunResult } from '../types'
 import { arrayToCliOne, cliToArray, processCommand } from './command'
-import { _compileTimePreprocess , _runTimePreprocess } from './executeCommandPreprocessor'
+import { _compileTimePreprocess, _runTimePreprocess } from './executeCommandPreprocessor'
 import { main } from './main'
-import { magickLoaded } from '../imageMagick/magickLoaded';
 
 /**
  * Has a signature compatible with main, but if `script` is given instead of `command` option then it's
@@ -32,8 +32,8 @@ export async function run(o: RunOptions) {
   // if (o.scriptListener) {
   //   o.scriptListener(scriptStartEvent)
   // }
-  if(o.debug){
-    setOptions({debug: o.debug})
+  if (o.debug) {
+    setOptions({ debug: o.debug })
   }
   const emscriptenNodeFsRoot = getOption('emscriptenNodeFsRoot')
 
@@ -54,11 +54,8 @@ export async function run(o: RunOptions) {
     error: undefined,
     returnValue: undefined
   }
-  // if (scriptStartEvent.scriptInterrupt) {
-  //   return { ...finalResult, error: new Error('Script interrupted by listener') }
-  // }
   await serial(commands.map((command, i) => async () => {
-    
+
     let mainOptions: Options = { ...o, command, inputFiles: inputFiles.map(File.asFile) } as any //TODO
 
     await _runTimePreprocess(o, mainOptions, i)
@@ -79,8 +76,8 @@ export async function run(o: RunOptions) {
     // }
 
     result.outputFiles = result.outputFiles
-    .map(f => ({ ...f, name: f.name.startsWith(emscriptenNodeFsRoot) ? f.name.substring(emscriptenNodeFsRoot.length + 1) : f.name }))
-    .map(File.asFile)
+      .map(f => ({ ...f, name: f.name.startsWith(emscriptenNodeFsRoot) ? f.name.substring(emscriptenNodeFsRoot.length + 1) : f.name }))
+      .map(File.asFile)
 
     inputFiles = [...inputFiles.filter(f => !result.outputFiles.find(f2 => f2.name === f.name)),
     ...result.outputFiles].map(File.asFile)
@@ -89,11 +86,6 @@ export async function run(o: RunOptions) {
 
     finalResult.commands[i] = processCommand(mainOptions.command)
 
-    // console.log('finalResult.commands', finalResult.commands);
-
-    // } catch (error) {
-    //   console.error('Error on ' + i + 'th command', error);
-    // }
   }))
   const r: RunResult = {
     ...finalResult,
@@ -101,8 +93,6 @@ export async function run(o: RunOptions) {
     stderr: finalResult.results.map(r => r.stderr).flat(),
     outputFiles: finalResult.results.length ? finalResult.results[finalResult.results.length - 1].outputFiles.map(File.asFile) : []
   }
-  // console.log('r: RunResult', r.commands);
-
   return r
 }
 
@@ -119,20 +109,8 @@ async function resolveRunCommands(o: RunOptions) {
     script = arrayToCliOne(asArray(o.command!))
   }
   const commands = cliToArray(script)
-  // const commands = await serial(cliToArray(script).map(command=>async ()=>{
-  //   var args = await serial(command.map(arg=>async ()=>{
-  //     if(unquote(arg).trim().startsWith('<$=')) {
-  //       return await _runTimePreprocess({...o, command, arg})
-  //     }else {
-  //       return [arg]
-  //     }
-  // }))
-  // return args.flat()
-
-  // }))
   return commands
 }
-
 
 export async function runOne(script: string, input: File | File[] = []) {
   const result = await run({ inputFiles: asArray(input), script })

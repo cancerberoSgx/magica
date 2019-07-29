@@ -15,11 +15,6 @@ export interface IFile {
    */
   content: ArrayBufferView
 
-  // /**
-  //  * Get image information, like geometry, important numbers, mimeType, etc. The first time it calls `identify` command, but then it will cache ths value.
-  //  */
-  // info: Promise<ExtractInfoResultImage>
-
 }
 
 export interface NativeOptions extends BaseOptions {
@@ -86,8 +81,6 @@ export interface CliOptions extends Options {
   help?: boolean
   input: string[]
 }
-
-// type ScriptListener = (e: ScriptEvent) => void
 
 export interface ScriptEvent {
   name: 'beforeCommand' | 'afterCommand' | 'onScriptStart' | 'onScriptEnd'

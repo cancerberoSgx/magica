@@ -1,9 +1,9 @@
 import { equal } from 'assert'
 import { asArray, notUndefined } from 'misc-utils-of-mine-generic'
+import { File } from '../file/file'
 // import { File, IFile } from '..'
 import { main } from '../main/main'
-import { IFile } from '../types';
-import { File } from '../file/file';
+import { IFile } from '../types'
 
 /**
  * Execute `convert $IMG info.json` to extract image metadata. Returns the parsed info.json file contents

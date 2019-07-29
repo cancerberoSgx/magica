@@ -11,6 +11,6 @@ export default async function() {
   assertIncludes(result.outputFiles[0].name, 'output.bmp')
   assertEquals(result.outputFiles.map(f => basename(f.name)), ['output.bmp'])
   assertEquals(result.error, undefined)
-  assertEquals(result.stderr.filter(e=>!e.includes('.xml\' @ warning')), [])
+  assertEquals(result.stderr.filter(e => !e.includes('.xml\' @ warning')), [])
 }
 

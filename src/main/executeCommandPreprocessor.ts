@@ -20,11 +20,9 @@ export async function _runTimePreprocess(runOptions: RunOptions, commandOptions:
     installed = true
     install()
   }
-  // let c = config as any
   await serial(commandPreprocessor.filter(p => p.fnRuntime).map(p => async () => {
     await p.fnRuntime!(commandOptions, commandIndex, runOptions)
   }))
-
 }
 
 export function registerCommandPreprocessor(p: CommandPreprocessor) {

@@ -14,7 +14,6 @@ test('convert should generate files in local dir by default', async t => {
   }
   execSync('node bin/magica --input test/assets/n.png --command "convert n.png -scale 144% tmp_cli_2.gif"')
   t.deepEqual(fileType(readFileSync('tmp_cli_2.gif')), { ext: 'gif', mime: 'image/gif' })
-  // t.true(true)
 })
 
 test.todo('should accept several input images')

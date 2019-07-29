@@ -15,7 +15,6 @@
 ### Properties
 
 * [script](_types_.runoptions.md#optional-script)
-* [scriptListener](_types_.runoptions.md#optional-scriptlistener)
 
 ## Properties
 
@@ -23,7 +22,7 @@
 
 • **script**? : *string | string[]*
 
-*Defined in [types.ts:153](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/types.ts#L153)*
+*Defined in [types.ts:146](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/types.ts#L146)*
 
 Takes precedence over [Options.command](_types_.options.md#command). If not provided then  [Options.command](_types_.options.md#command) is used.
 
@@ -64,13 +63,3 @@ convert -size 250x100 xc: +noise Random -channel R -threshold .4% \\
   +distort Polar 0 +repage 'star inward.gif'
 `})
 ```
-
-___
-
-### `Optional` scriptListener
-
-• **scriptListener**? : *`ScriptListener`*
-
-*Defined in [types.ts:110](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/types.ts#L110)*
-
-Register a script run event listener that will be notified when new files are created, before or after commands are executed, etc. Listeners can set `stopPropagation` property to true to prevent the event to propagate to other listeners. Also they could set the property `abortScript` to true to cancel the script execution.

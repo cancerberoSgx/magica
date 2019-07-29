@@ -6,6 +6,6 @@ test.skip('low level identify', async t => {
   t.true(s.toString().includes('The format is: png'))
 })
 
-test('dummy', async t=>{
+test('dummy', async t => {
   t.true(true)
 })

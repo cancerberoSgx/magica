@@ -1,64 +1,64 @@
+import { asArray } from 'misc-utils-of-mine-generic'
+import { File, Size } from '../../file/file'
+import { ExtractInfoResultImage } from '../../image/imageInfo'
 import { TemplateHelper } from './template'
-import { File, Size } from '../../file/file';
-import { asArray } from 'misc-utils-of-mine-generic';
-import { ExtractInfoResultImage } from '../../image/imageInfo';
 
 interface Options {
-  file: string|File
+  file: string | File
 }
 
 export class SizeHelper implements TemplateHelper<Options, Promise<Size>> {
   public name = 'size'
-  public async exec(options: Options ) {
-    var file =  asArray(typeof options.file==='string' ? await File.resolve(options.file) : options.file)
+  public async exec(options: Options) {
+    var file = asArray(typeof options.file === 'string' ? await File.resolve(options.file) : options.file)
     return await file[0].size()
   }
-  public async fnCompileTime(options: Options ) {
+  public async fnCompileTime(options: Options) {
     return await this.exec(options)
   }
-  public async fnRunTime (options: Options) {
+  public async fnRunTime(options: Options) {
     return await this.exec(options)
   }
 }
 
 export class ImageInfoHelper implements TemplateHelper<Options, Promise<ExtractInfoResultImage>> {
-  public name = 'imageInfo'  
-  protected async exec(options: Options ) {
-    var file =  asArray(typeof options.file==='string' ? await File.resolve(options.file) : options.file)
+  public name = 'imageInfo'
+  protected async exec(options: Options) {
+    var file = asArray(typeof options.file === 'string' ? await File.resolve(options.file) : options.file)
     return await file[0].info()
   }
-  public async fnCompileTime(options: Options ) {
+  public async fnCompileTime(options: Options) {
     return await this.exec(options)
   }
-  public async fnRunTime (options: Options) {
+  public async fnRunTime(options: Options) {
     return await this.exec(options)
   }
 }
 
 export class HeightHelper implements TemplateHelper<Options, Promise<number>> {
   public name = 'height'
-  public async exec(options: Options ) {
-    var file =  asArray(typeof options.file==='string' ? await File.resolve(options.file) : options.file)
+  public async exec(options: Options) {
+    var file = asArray(typeof options.file === 'string' ? await File.resolve(options.file) : options.file)
     return (await file[0].size()).height
   }
-  public async fnCompileTime(options: Options ) {
+  public async fnCompileTime(options: Options) {
     return await this.exec(options)
   }
-  public async fnRunTime (options: Options) {
+  public async fnRunTime(options: Options) {
     return await this.exec(options)
   }
 }
 
 export class WidthHelper implements TemplateHelper<Options, Promise<number>> {
   public name = 'width'
-  public async exec(options: Options ) {
-    var file =  asArray(typeof options.file==='string' ? await File.resolve(options.file) : options.file)
+  public async exec(options: Options) {
+    var file = asArray(typeof options.file === 'string' ? await File.resolve(options.file) : options.file)
     return (await file[0].size()).width
   }
-  public async fnCompileTime(options: Options ) {
+  public async fnCompileTime(options: Options) {
     return await this.exec(options)
   }
-  public async fnRunTime (options: Options) {
+  public async fnRunTime(options: Options) {
     return await this.exec(options)
   }
 }

@@ -8,7 +8,6 @@ interface Options {
   recursive?: boolean
   stdout?: boolean
   noReturnValue?: boolean
-  //TODO: size?: boolean
 }
 
 export class FSHelper implements TemplateHelper<Options, Promise<string[]>> {
@@ -24,26 +23,10 @@ export class FSHelper implements TemplateHelper<Options, Promise<string[]>> {
     }
     return options.noReturnValue ? [] : a
   }
-    public async fnCompileTime(options: Options ) {
+  public async fnCompileTime(options: Options) {
     return await this.exec(options)
   }
-  public async fnRunTime (options: Options) {
+  public async fnRunTime(options: Options) {
     return await this.exec(options)
   }
 }
-
-// interface ExitHelperOptions {
-//   error?:string
-// }
-// export class ExitHelper implements TemplateHelper<Options, Promise<string[]>> {
-//   public name = 'exit'
-//   public async exec(options: Options ) {
-    
-//   }
-//   public async fnCompileTime(options: Options ) {
-//     return await this.exec(options)
-//   }
-//   public async fnRunTime (options: Options) {
-//     return await this.exec(options)
-//   }
-// }

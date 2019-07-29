@@ -1,15 +1,15 @@
 import { ok } from 'assert'
 import fetch from 'cross-fetch'
 import { existsSync, readFileSync } from 'fs'
-import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial, pathJoin } from 'misc-utils-of-mine-generic'
+import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial } from 'misc-utils-of-mine-generic'
+import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
 import { imagePixelColor } from '../image/pixel'
+import { magickLoaded } from '../imageMagick/magickLoaded'
+import { getOption } from '../options'
 import { IFile } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
+import { isDir, isFile } from '../util/util'
 import { protectFile } from './protected'
-import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
-import { magickLoaded } from '../imageMagick/magickLoaded';
-import { isDir, isFile } from '../util/util';
-import { getOption, getOptions } from '../options';
 
 export class File implements IFile {
   public content: IFile['content']
@@ -17,7 +17,7 @@ export class File implements IFile {
   protected isProtected: boolean;
 
   constructor(public name: string, content: IFile['content'] | ArrayBuffer, isProtected: boolean = false) {
-  
+
     // const { emscriptenNodeFsRoot, debug } = getOptions()
 
     // if(!name.startsWith(emscriptenNodeFsRoot)) {
@@ -51,7 +51,7 @@ export class File implements IFile {
 
   public async size(): Promise<Size> {
     var i = await this.info()
-    return {width: i.geometry?i.geometry.width:0, height: i.geometry?i.geometry.height:0}
+    return { width: i.geometry ? i.geometry.width : 0, height: i.geometry ? i.geometry.height : 0 }
   }
 
   public async mimeType(): Promise<string> {
@@ -145,7 +145,7 @@ export class File implements IFile {
 
   public static async resolveOne(files: string | IFile | undefined | (string | IFile | undefined)[], options: ResolveOptions = { protected: false }) {
     var a = await File.resolve(files, options)
-    return a.length>0 ? a[0] : undefined
+    return a.length > 0 ? a[0] : undefined
   }
 
   public static async resolve(files: string | IFile | undefined | (string | IFile | undefined)[], options: ResolveOptions = { protected: false }) {
@@ -168,7 +168,7 @@ export class File implements IFile {
   }
 
   public static isFile(f: any): f is File {
-    return !!f && !!f.name && !!f.content && typeof f.constructor!=='undefined' // && !!(f as File).size
+    return !!f && !!f.name && !!f.content && typeof f.constructor !== 'undefined' // && !!(f as File).size
   }
 
   public static asFile(f: IFile): File {
@@ -179,10 +179,10 @@ export class File implements IFile {
     return typeof f === 'string' ? f : f.name
   }
 
-  public static async fileExists(f:string| IFile) {
-    const {FS} = await magickLoaded
+  public static async fileExists(f: string | IFile) {
+    const { FS } = await magickLoaded
     FS.chdir(getOption('emscriptenNodeFsRoot'))
-    return isDir(File.asPath(f), FS)||isFile(File.asPath(f), FS)
+    return isDir(File.asPath(f), FS) || isFile(File.asPath(f), FS)
   }
 }
 

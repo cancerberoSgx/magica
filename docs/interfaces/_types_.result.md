@@ -30,7 +30,7 @@
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[error](_imagemagick_createmain_.nativeresult.md#error)*
 
-*Defined in [imageMagick/createMain.ts:40](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/imageMagick/createMain.ts#L40)*
+*Defined in [imageMagick/createMain.ts:43](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/imageMagick/createMain.ts#L43)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **outputFiles**: *[IFile](_types_.ifile.md)[]*
 
-*Defined in [types.ts:82](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/types.ts#L82)*
+*Defined in [types.ts:77](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/types.ts#L77)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[returnValue](_imagemagick_createmain_.nativeresult.md#returnvalue)*
 
-*Defined in [imageMagick/createMain.ts:37](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/imageMagick/createMain.ts#L37)*
+*Defined in [imageMagick/createMain.ts:40](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/imageMagick/createMain.ts#L40)*
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[stderr](_imagemagick_createmain_.nativeresult.md#stderr)*
 
-*Defined in [imageMagick/createMain.ts:39](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/imageMagick/createMain.ts#L39)*
+*Defined in [imageMagick/createMain.ts:42](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/imageMagick/createMain.ts#L42)*
 
 ___
 
@@ -68,4 +68,4 @@ ___
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[stdout](_imagemagick_createmain_.nativeresult.md#stdout)*
 
-*Defined in [imageMagick/createMain.ts:38](https://github.com/cancerberoSgx/magica/blob/8ec8971/src/imageMagick/createMain.ts#L38)*
+*Defined in [imageMagick/createMain.ts:41](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/imageMagick/createMain.ts#L41)*

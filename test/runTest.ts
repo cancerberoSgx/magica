@@ -1,7 +1,6 @@
 import test from 'ava'
 import { File, imageCompare } from '../src'
 import { run } from '../src/main/run'
-import { writeFileSync } from 'fs';
 
 test('should run a single command with comments, spaces and command break line', async t => {
   const r = await run({
@@ -43,7 +42,7 @@ test('should provide output images as input images to next command', async t => 
       convert n.png -scale 50% 1.jpg
       convert 1.jpg -rotate 133 2.gif
       `,
-      debug: true,
+    debug: true,
     inputFiles: ['test/assets/n.png']
   })
   t.deepEqual(result.outputFiles.map(f => f.name), ['2.gif'])
@@ -57,7 +56,7 @@ test('should provide output images as input images to next command, tiff repage 
       convert chala.tiff -scale 50% 1.jpg
       convert 1.jpg -rotate 133 +repage 2.tiff
       `,
-      debug: true,
+    debug: true,
     inputFiles: ['test/assets/chala.tiff']
   })
   t.deepEqual(result.outputFiles.map(f => f.name), ['2.tiff'])

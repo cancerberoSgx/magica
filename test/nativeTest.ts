@@ -1,9 +1,8 @@
 import test from 'ava'
-import { File, imageCompare, main, magickLoaded , FS} from '../src'
-import { run } from '../src/main/run'
+import { main } from '../src'
 
 test('wasm FS behavior', async t => {
-  var r = await main({command: 'convert -version'})
+  var r = await main({ command: 'convert -version' })
   t.falsy(r.error)
   t.true(r.stdout.join().includes('Version: ImageMagick'))
 })

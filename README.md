@@ -21,7 +21,7 @@ Easy to setup and use, ImageMagick Node.js and Browser API and Command Line Inte
   * [`run()`: command script/template syntax](#run-command-scripttemplate-syntax)
     + [Commands Sequence](#commands-sequence)
     + [JavaScript templates](#javascript-templates)
-    + [Commands preprocessors](#commands-preprocessors)
+    + [Commands pre processors](#commands-pre-processors)
 - [Options](#options)
 - [Reference API](#reference-api)
 - [Why?](#why)

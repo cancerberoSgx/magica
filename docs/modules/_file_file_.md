@@ -9,3 +9,8 @@
 ### Classes
 
 * [File](../classes/_file_file_.file.md)
+
+### Interfaces
+
+* [ResolveOptions](../interfaces/_file_file_.resolveoptions.md)
+* [Size](../interfaces/_file_file_.size.md)
