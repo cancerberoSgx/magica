@@ -1,15 +1,16 @@
 import { ok } from 'assert'
 import fetch from 'cross-fetch'
 import { existsSync, readFileSync } from 'fs'
-import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial } from 'misc-utils-of-mine-generic'
+import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial, pathJoin } from 'misc-utils-of-mine-generic'
 import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
 import { imagePixelColor } from '../image/pixel'
 import { magickLoaded } from '../imageMagick/magickLoaded'
-import { getOption } from '../options'
+import { getOption, getOptions } from '../options'
 import { IFile } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
 import { isDir, isFile } from '../util/util'
 import { protectFile } from './protected'
+import { imageCompare } from '../image/imageCompare';
 
 export class File implements IFile {
   public content: IFile['content']
@@ -23,7 +24,9 @@ export class File implements IFile {
     // if(!name.startsWith(emscriptenNodeFsRoot)) {
     //   this.name = pathJoin(emscriptenNodeFsRoot, this.name)
     // }
+    // this.content =  content instanceof ArrayBuffer ?  new Uint8ClampedArray(content) : content
     this.content = content instanceof ArrayBuffer ? new Uint8ClampedArray(content) : content
+
     this.isProtected = isProtected
     if (this.isProtected) {
       protectFile(this)
@@ -76,6 +79,14 @@ export class File implements IFile {
   public asBase64(file: File) {
     return File.toBase64(file)
   }
+
+  // /** 
+  //  * Returns base64 representation of this image in an encoded format like PNG  
+  //  */
+  // public async equals2(file?: File) {
+  //   return  await imageCompare(this, file)
+  // }
+
 
 	/** 
    * Creates a DataUrl like `data:image/png;name=f.png;base64,` using given base64 content, mimeType and fileName.   
@@ -164,7 +175,7 @@ export class File implements IFile {
         return f
       }
     }))
-    return result.filter(notUndefined).map(f => File.isFile(f) ? f : new File(f.name, f.content))
+    return result.filter(notUndefined).map(File.asFile)
   }
 
   public static isFile(f: any): f is File {

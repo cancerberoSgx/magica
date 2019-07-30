@@ -25,10 +25,10 @@ testExitCode "build-tiff" $?
 # # source emscripten-scripts/build-jpeg-turbo.sh
 # # testExitCode "build-jpeg-turbo" $?
 
-# # This compiles buy I really want to understand the value of this library before include it
-# cd $CURRENT_DIR
-# source emscripten-scripts/build-openjpeg.sh
-# testExitCode "build-openjpeg" $?
+# # # This compiles buy I really want to understand the value of this library before include it
+# # cd $CURRENT_DIR
+# # source emscripten-scripts/build-openjpeg.sh
+# # testExitCode "build-openjpeg" $?
 
 
 cd $CURRENT_DIR

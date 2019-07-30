@@ -15,6 +15,8 @@ export interface IFile {
    */
   content: ArrayBufferView
 
+  // isUrl?: boolean
+
 }
 
 export interface NativeOptions extends BaseOptions {
@@ -73,8 +75,8 @@ export interface Options extends NativeOptions {
 
 }
 
-export interface Result extends NativeResult {
-  outputFiles: IFile[]
+export interface Result<T extends IFile = IFile> extends NativeResult {
+  outputFiles: T[]
 }
 
 export interface CliOptions extends Options {
@@ -153,7 +155,7 @@ export interface RunOptions extends Partial<Options> {
  * Represent the result of executing a sequence of commands. In this case outputFiles are the output files of
  * just the last command, while stdout, stderr are the concatenation of all commands output. 
  */
-export interface RunResult extends Result {
+export interface RunResult<T extends IFile = IFile> extends Result<T> {
 
   /**
    * Sequence of results for each command found in the script, in order.
@@ -165,10 +167,10 @@ export interface RunResult extends Result {
    */
   commands: string[][],
 
-  /**
-   * Las command output files
-   */
-  outputFiles: IFile[]
+  // /**
+  //  * Las command output files
+  //  */
+  // outputFiles: TY[]
 }
 
 export interface CommandPreprocessor<O extends RunOptions = RunOptions, O2 extends O = O, RO extends Options = Options> {

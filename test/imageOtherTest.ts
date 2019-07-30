@@ -1,6 +1,6 @@
 import test from 'ava'
 import { writeFileSync } from 'fs'
-import { File, run } from '../src'
+import { File, run, imageCompare } from '../src'
 import { imageBuiltIn } from '../src/image/imageBuiltIn'
 import { imagePixelColor } from '../src/image/pixel'
 import { listFormat } from '../src/image/support'
@@ -25,14 +25,29 @@ test('listFormat', async t => {
   t.truthy(c.find(f => f.name.includes('GIF')))
 })
 
-test('fft', async t => {
-  const c = await run({
-    debug: true,
-    script: 'convert rose: -fft +depth +adjoin tmp_fft_%d.jpg'
+test.skip('fft', async t => {
+  const c = await run<File>({
+    // debug: true,
+    script: `
+    convert -size 32x32 gradient: -chop 0x1 -rotate 90 -evaluate sine 16 sine4.png
+    convert sine4.png -fft +delete -contrast-stretch 0 -evaluate log 100 sine4_spectrum.png`
   })
-  console.log(c)
+  // const a = c.outputFiles[0]
+  // writeFileSync('tmp33.png', a.content)
+  // console.log(c);
+  // t.deepEqual([], c.stderr)
+  
+  // const expected = await File.fromFile('test/assets/fftsin.png')
+  // const b =
+  // console.log(a, b!.content.toString());
+  // t.true(await a.equals2(await File.fromFile('test/assets/fftsin.png')))
+  // t.true(await a.equals2(b))
+  t.true(await imageCompare( await File.fromFile('test/assets/ttf1.png'), c.outputFiles[0]))
 
-  writeFileSync('tmp_fft1.jpg', c.outputFiles[0].content)
-  // writeFileSync( 'tmp_fft2.jpg', c.outputFiles[1]. content)
+  // t.true(true)
+  // t.true(await  a.equals2(expected))
+  
+  // console.log(c.stderr)
+  // c.results.map(r=>r.outputFiles).flat().forEach((f, i)=>writeFileSync(i+'.png', f.content))//'tmp_fft2.jpg', c.outputFiles[1]. content)
 })
 

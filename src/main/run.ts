@@ -2,7 +2,7 @@ import { asArray, notUndefined, serial } from 'misc-utils-of-mine-generic'
 import { File } from '../file/file'
 import { magickLoaded } from '../imageMagick/magickLoaded'
 import { getOption, setOptions } from '../options'
-import { Options, Result, RunOptions, RunResult } from '../types'
+import { Options, Result, RunOptions, RunResult, IFile } from '../types'
 import { arrayToCliOne, cliToArray, processCommand } from './command'
 import { _compileTimePreprocess, _runTimePreprocess } from './executeCommandPreprocessor'
 import { main } from './main'
@@ -22,7 +22,7 @@ import { main } from './main'
  *
  * @returns the result of each command execution
  */
-export async function run(o: RunOptions) {
+export async function run<T extends IFile = IFile>(o: RunOptions):Promise<RunResult<T> >{
   // var scriptStartEvent: ScriptEvent = {
   //   name: 'onScriptStart',
   //   scriptOptions: o,
@@ -80,18 +80,19 @@ export async function run(o: RunOptions) {
       .map(File.asFile)
 
     inputFiles = [...inputFiles.filter(f => !result.outputFiles.find(f2 => f2.name === f.name)),
-    ...result.outputFiles].map(File.asFile)
+    ...result.outputFiles]
+    .map(File.asFile)
 
     finalResult.results.push(result)
 
     finalResult.commands[i] = processCommand(mainOptions.command)
 
   }))
-  const r: RunResult = {
+  const r: RunResult<T> = {
     ...finalResult,
     stdout: finalResult.results.map(r => r.stdout).flat(),
     stderr: finalResult.results.map(r => r.stderr).flat(),
-    outputFiles: finalResult.results.length ? finalResult.results[finalResult.results.length - 1].outputFiles.map(File.asFile) : []
+    outputFiles: finalResult.results.length ? finalResult.results[finalResult.results.length - 1].outputFiles.map(File.asFile) : [] as any
   }
   return r
 }
