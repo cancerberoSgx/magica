@@ -1,16 +1,15 @@
 import { ok } from 'assert'
 import fetch from 'cross-fetch'
 import { existsSync, readFileSync } from 'fs'
-import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial, pathJoin } from 'misc-utils-of-mine-generic'
+import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial } from 'misc-utils-of-mine-generic'
 import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
 import { imagePixelColor } from '../image/pixel'
 import { magickLoaded } from '../imageMagick/magickLoaded'
-import { getOption, getOptions } from '../options'
+import { getOption } from '../options'
 import { IFile } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
 import { isDir, isFile } from '../util/util'
 import { protectFile } from './protected'
-import { imageCompare } from '../image/imageCompare';
 
 export class File implements IFile {
   public content: IFile['content']

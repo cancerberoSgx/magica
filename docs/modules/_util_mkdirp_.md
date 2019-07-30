@@ -17,7 +17,7 @@
 
 ▸ **makeDirRecursive**(`p`: string, `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *void*
 
-*Defined in [util/mkdirp.ts:18](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/util/mkdirp.ts#L18)*
+*Defined in [util/mkdirp.ts:18](https://github.com/cancerberoSgx/magica/blob/b406772/src/util/mkdirp.ts#L18)*
 
 **Parameters:**
 
@@ -34,7 +34,7 @@ ___
 
 ▸ **mkdirp**(`path`: string, `exists`: function, `mkdir`: function): *void*
 
-*Defined in [util/mkdirp.ts:3](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/util/mkdirp.ts#L3)*
+*Defined in [util/mkdirp.ts:3](https://github.com/cancerberoSgx/magica/blob/b406772/src/util/mkdirp.ts#L3)*
 
 **Parameters:**
 

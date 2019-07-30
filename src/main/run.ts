@@ -2,7 +2,7 @@ import { asArray, notUndefined, serial } from 'misc-utils-of-mine-generic'
 import { File } from '../file/file'
 import { magickLoaded } from '../imageMagick/magickLoaded'
 import { getOption, setOptions } from '../options'
-import { Options, Result, RunOptions, RunResult, IFile } from '../types'
+import { IFile, Options, Result, RunOptions, RunResult } from '../types'
 import { arrayToCliOne, cliToArray, processCommand } from './command'
 import { _compileTimePreprocess, _runTimePreprocess } from './executeCommandPreprocessor'
 import { main } from './main'
@@ -22,7 +22,7 @@ import { main } from './main'
  *
  * @returns the result of each command execution
  */
-export async function run<T extends IFile = IFile>(o: RunOptions):Promise<RunResult<T> >{
+export async function run<T extends IFile = IFile>(o: RunOptions): Promise<RunResult<T>> {
   // var scriptStartEvent: ScriptEvent = {
   //   name: 'onScriptStart',
   //   scriptOptions: o,
@@ -81,7 +81,7 @@ export async function run<T extends IFile = IFile>(o: RunOptions):Promise<RunRes
 
     inputFiles = [...inputFiles.filter(f => !result.outputFiles.find(f2 => f2.name === f.name)),
     ...result.outputFiles]
-    .map(File.asFile)
+      .map(File.asFile)
 
     finalResult.results.push(result)
 

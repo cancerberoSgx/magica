@@ -15,9 +15,9 @@
 
 ###  run
 
-▸ **run**(`o`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<RunResult>`*
+▸ **run**<**T**>(`o`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<RunResult<T>>`*
 
-*Defined in [main/run.ts:25](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/main/run.ts#L25)*
+*Defined in [main/run.ts:25](https://github.com/cancerberoSgx/magica/blob/b406772/src/main/run.ts#L25)*
 
 Has a signature compatible with main, but if `script` is given instead of `command` option then it's
 interpreted as a sequence of commands that are executed serially using [main](../interfaces/_imagemagick_magickloaded_.main.md#main)
@@ -31,13 +31,17 @@ in multiple lines using `\`.
 
 See [RunOptions.script](../interfaces/_types_.runoptions.md#optional-script) option.
 
+**Type parameters:**
+
+▪ **T**: *[IFile](../interfaces/_types_.ifile.md)*
+
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `o` | [RunOptions](../interfaces/_types_.runoptions.md) |
 
-**Returns:** *`Promise<RunResult>`*
+**Returns:** *`Promise<RunResult<T>>`*
 
 the result of each command execution
 
@@ -47,7 +51,7 @@ ___
 
 ▸ **runOne**(`script`: string, `input`: [File](../classes/_file_file_.file.md) | [File](../classes/_file_file_.file.md)[]): *`Promise<IFile>`*
 
-*Defined in [main/run.ts:115](https://github.com/cancerberoSgx/magica/blob/94e3b58/src/main/run.ts#L115)*
+*Defined in [main/run.ts:116](https://github.com/cancerberoSgx/magica/blob/b406772/src/main/run.ts#L116)*
 
 **Parameters:**
 

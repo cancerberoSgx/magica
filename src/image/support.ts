@@ -20,16 +20,16 @@ interface ListConfigure {
   /** lower case feature names like Cipher DPC HDRI Modules OpenMP(3.1) */
   features: string[]
 }
-let listConfigure_:ListConfigure|undefined
+let listConfigure_: ListConfigure | undefined
 /** returns the output of part of the information returned in `convert -list configure`, parsed. */
-export async function listConfigure(): Promise<ListConfigure>{
-  if(!listConfigure_){
+export async function listConfigure(): Promise<ListConfigure> {
+  if (!listConfigure_) {
     const result = await main({ command: `convert -list configure` })
-    const delegatesS = result.stderr.find(l=>l.trim().toLowerCase().startsWith('delegates'))
-  const delegates = delegatesS ? delegatesS.split(/\s+/).splice(1): []
-  const featuresS = result.stderr.find(l=>l.trim().toLowerCase().startsWith('features'))
-  const features = featuresS ? featuresS.split(/\s+/).splice(1): []
-  listConfigure_= {delegates, features};
+    const delegatesS = result.stderr.find(l => l.trim().toLowerCase().startsWith('delegates'))
+    const delegates = delegatesS ? delegatesS.split(/\s+/).splice(1) : []
+    const featuresS = result.stderr.find(l => l.trim().toLowerCase().startsWith('features'))
+    const features = featuresS ? featuresS.split(/\s+/).splice(1) : []
+    listConfigure_ = { delegates, features }
   }
   return listConfigure_
 }
