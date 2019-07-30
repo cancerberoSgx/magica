@@ -1,4 +1,30 @@
-magica's own scripts to compile ImageMagick and several of it's dependency libraries to WASM
+magica's own scripts to compile ImageMagick and several of it's dependency libraries to WASM using emscripten
+
+
+# Build
+
+docker needs to be installed
+
+```
+sh emscripten-scripts/run-docker.sh
+```
+
+# Tests
+
+The following command clone's magica project, replace the wasm files with the new ones, and runs its tests to verify nothing it's broken.
+
+```
+sh emscripten-scripts/test-wasm-magica.sh
+```
+
+Take into account that some tests could assume some magick capabilities or image format support that might not be so. Tests are not yet intelligent to detect current IM capabilities but they will be.
+
+# Configuration / structure
+
+ * `wasm-builds/emscripten-scripts/base.sh` base flags, debug or production build, etc
+ * `wasm-builds/emscripten-scripts/build.sh` libraries build orchestrator
+
+
 
 # Package versions and sources:
 
@@ -62,70 +88,4 @@ Compiling fine from latest https://github.com/ImageMagick/open-jpeg.git  - seems
 
 # Questions
 
- * What is Magick.Native is neccesary ? how would improve the browser ?
-
-# Build
-
-## Use docker
-
-```
-sh emscripten-scripts/run-docker.sh
-```
-
-## Use local emcc
-
-(not recommended - since we want an exact set of libraries installed)
-
-Use local system's emsdk (it will also need build essential tools):
-
-```
-sh emscripten-scripts/sh.sh
-```
-
-If everything is OK, any of previous commands will generate the folder `emscripten_prefix/wasm/` with files `magick.wasm` and magick.js files that can substitute magica's `src/imageMagick/compiled/*`.`
-
-# Tests
-
-The following command clone's magica project, replace the wasm files with the new ones, and runs its tests to verify nothing it's broken.
-
-```
-sh emscripten-scripts/test-wasm-magica.sh
-```
-
-Take into account that some tests could assume some magick capabilities or image format support that might not be so. Tests are not yet intelligent to detect current IM capabilities but they will be.
-
-# Configuration / structure
-
- * `wasm-builds/emscripten-scripts/base.sh` base flags, debug or production build, etc
- * `wasm-builds/emscripten-scripts/build.sh` libraries build orchestrator
-
-
-# Notes / Problems
-
-## IM quantum=16 and emscripten and typed arrays
- * IM Q16 won't work nicely (or at least easily/ straightforward) when loading images as ArrayBuffer). If you create UInt8Array a "unaligned error" will be thrwon or fail silently. I think (hope) that it solves by just using  --with-quantum-depth=8. 
- even if I build the data view using   var view = new DataView(content) it won't work (or other ways new UInt16Array(new Uint8Array(content)))
- *  Also Probably this also solves the errors with ImageMagick/png project ?
-
-
-
-
-# browser :
-
-
-Module.callMain('convert wizard: -scale 44% -rotate 33 foo.jpg'.split(' '))
-var a = FS.readFile('foo.jpg')
-var b = new Blob([a])
-var img = document.createElement('img')
-img.src=URL.createObjectURL(b)
-document.body.append(img)
-
-Module.callMain('convert rose: foo.json'.split(' '))
-const bounds = JSON.parse(new TextDecoder("utf-8").decode(FS.readFile('foo.json')))[0].image.geometry
-
-const imageData = new ImageData(bounds.width, bounds.height)
-Module.callMain('convert rose: -depth 8 out.rgba'.split(' '))
-imageData.data = FS.readFile('out.rgba')
-
-document.getElementById('canvas').getContext('2d').putImageData(imageData)
-Module.callMain('convert -list format'.split(' '))
+ * What is Magick.Native is necessary ? how would improve the browser ?
