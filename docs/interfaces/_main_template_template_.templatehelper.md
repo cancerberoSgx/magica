@@ -40,7 +40,7 @@
 
 • **fnCompileTime**: *function*
 
-*Defined in [main/template/template.ts:9](https://github.com/cancerberoSgx/magica/blob/b406772/src/main/template/template.ts#L9)*
+*Defined in [main/template/template.ts:9](https://github.com/cancerberoSgx/magica/blob/5aa0082/src/main/template/template.ts#L9)*
 
 #### Type declaration:
 
@@ -58,7 +58,7 @@ ___
 
 • **fnRunTime**? : *undefined | function*
 
-*Defined in [main/template/template.ts:10](https://github.com/cancerberoSgx/magica/blob/b406772/src/main/template/template.ts#L10)*
+*Defined in [main/template/template.ts:10](https://github.com/cancerberoSgx/magica/blob/5aa0082/src/main/template/template.ts#L10)*
 
 ___
 
@@ -66,4 +66,4 @@ ___
 
 • **name**: *string*
 
-*Defined in [main/template/template.ts:8](https://github.com/cancerberoSgx/magica/blob/b406772/src/main/template/template.ts#L8)*
+*Defined in [main/template/template.ts:8](https://github.com/cancerberoSgx/magica/blob/5aa0082/src/main/template/template.ts#L8)*

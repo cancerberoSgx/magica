@@ -42,5 +42,5 @@ scripts
 playground
 bkps
 docs
-wasm-builds
+magick-wasm
 emscripten_prefix
