@@ -1,4 +1,4 @@
-import { asArray } from 'misc-utils-of-mine-generic'
+import { asArray, notUndefined } from 'misc-utils-of-mine-generic'
 import { File, Size } from '../../file/file'
 import { ExtractInfoResultImage } from '../../image/imageInfo'
 import { TemplateHelper } from './template'
@@ -24,7 +24,7 @@ export class SizeHelper implements TemplateHelper<Options, Promise<Size>> {
 export class ImageInfoHelper implements TemplateHelper<Options, Promise<ExtractInfoResultImage>> {
   public name = 'imageInfo'
   protected async exec(options: Options) {
-    var file = asArray(typeof options.file === 'string' ? await File.resolve(options.file) : options.file)
+    var file = asArray(typeof options.file === 'string' ? await File.resolve(options.file) : options.file).filter(notUndefined).map(File.asFile)
     return await file[0].info()
   }
   public async fnCompileTime(options: Options) {

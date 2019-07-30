@@ -1,20 +1,24 @@
 //@ts-nocheck
 
-var { magickLoaded } = require('../../')
+var { magickLoaded, getOptions } = require('../../')
 const { readFileSync } = require('fs')
 
-magickLoaded.then(({ FS, main }) => {
-  const format = getImageFormat({ FS, main, fileName: 'n.png', fileContent: readFileSync('test/assets/n.png') })
-  process.stdout.write('The format is: ' + format+'\n');
-})
+function test() {
+  magickLoaded.then(({ FS, main }) => {
+    const format = getImageFormat({ FS, main, fileName: 'n.png', fileContent: readFileSync('test/assets/n.png') })
+    process.stdout.write('The format is: ' + format + '\n');
+  })
+}
 
 function getImageFormat({ FS, main, fileName, fileContent }) {
-  var internalName = fileName;
+  const { emscriptenNodeFsRoot } = getOptions()
+  var internalName = emscriptenNodeFsRoot + '/' + fileName;
   FS.writeFile(internalName, fileContent);
 
-  var command = ["identify", internalName];
+  var command = ["identify", fileName];
+
   try {
-    const { stdout, stderr } = main(command)
+    const { stdout, stderr, error } = main(command)
     var format = stdout.join('').split(/\s+/g)[1]
     return format.toLowerCase()
   }
@@ -24,4 +28,4 @@ function getImageFormat({ FS, main, fileName, fileContent }) {
   }
 }
 
-
+test()

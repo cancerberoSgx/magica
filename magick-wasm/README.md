@@ -9,6 +9,10 @@ docker needs to be installed
 sh emscripten-scripts/run-docker.sh
 ```
 
+If everything is OK that should generate magick WASM files at `magick-wasm/build/emscripten_prefix/wasm/`. 
+
+Also, since latest versions of git projects for ImageMagick and libraries are used, the versions of each are dump at `magick-wasm/build/versions.txt`.
+
 # Tests
 
 The following command clone's magica project, replace the wasm files with the new ones, and runs its tests to verify nothing it's broken.
