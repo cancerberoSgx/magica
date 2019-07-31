@@ -22,10 +22,6 @@ export CFLAGS="$CPPFLAGS -s BINARYEN_TRAP_MODE=clamp -s ALLOW_MEMORY_GROWTH=1 -W
 
 export CXXFLAGS="$CFLAGS"
 
-export QUANTUM_DEPTH=<%= quantumDepth %> 
-
-export HDRI=<%= hdri ? 'yes' : 'no' %>
-
 export CURRENT_DIR=$PWD
 
 testExitCode () {

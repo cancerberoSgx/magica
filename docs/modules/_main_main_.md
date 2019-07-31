@@ -16,7 +16,7 @@
 
 ▸ **main**(`o`: `Partial<Options>`): *`Promise<Result>`*
 
-*Defined in [main/main.ts:15](https://github.com/cancerberoSgx/magica/blob/7866695/src/main/main.ts#L15)*
+*Defined in [main/main.ts:15](https://github.com/cancerberoSgx/magica/blob/6686cf2/src/main/main.ts#L15)*
 
 **Parameters:**
 

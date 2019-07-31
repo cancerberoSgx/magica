@@ -1,11 +1,25 @@
-magica's own scripts to compile ImageMagick and several of it's dependency libraries to WASM using emscripten
+This package contains scripts that will build ImageMagick WebAssembly WASM distribution using emscripten from latest official ImageMagick and libraries sources.
 
+Scripts are written as templates so they are easy to configure. 
+
+Also this project contains a simple API and CLI tool to run tbe build given hight level parameters such as quantumDepth, noHdri, type (debug/production), and libraries to enable/disable.
+
+# Build CLI tool
+ 
+TODO: the idea is to have a CLI that accepts parameters, builds scripts and optionally runs the build and tests. Right now there is only the following:
+
+```
+npx ts-node -T src/launch.ts
+```
+
+Will generate build/emscripten-scripts so run-docker.sh can run (see below)
 
 # Build
 
 docker needs to be installed
 
 ```
+cd build
 sh emscripten-scripts/run-docker.sh
 ```
 

@@ -24,7 +24,7 @@
 
 Ƭ **NativeMain**: *function*
 
-*Defined in [imageMagick/createMain.ts:37](https://github.com/cancerberoSgx/magica/blob/7866695/src/imageMagick/createMain.ts#L37)*
+*Defined in [imageMagick/createMain.ts:37](https://github.com/cancerberoSgx/magica/blob/6686cf2/src/imageMagick/createMain.ts#L37)*
 
 #### Type declaration:
 
@@ -42,7 +42,7 @@ Name | Type |
 
 ▸ **createMain**(`Module`: any, `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *[NativeMain](_imagemagick_createmain_.md#nativemain)*
 
-*Defined in [imageMagick/createMain.ts:5](https://github.com/cancerberoSgx/magica/blob/7866695/src/imageMagick/createMain.ts#L5)*
+*Defined in [imageMagick/createMain.ts:5](https://github.com/cancerberoSgx/magica/blob/6686cf2/src/imageMagick/createMain.ts#L5)*
 
 **Parameters:**
 
