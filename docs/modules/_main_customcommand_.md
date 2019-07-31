@@ -17,7 +17,7 @@
 
 ▸ **dispatchCustomCommand**(`c`: string[], `o`: `Partial<Options>`, `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *`Promise<NativeResult>`*
 
-*Defined in [main/customCommand.ts:51](https://github.com/cancerberoSgx/magica/blob/c182367/src/main/customCommand.ts#L51)*
+*Defined in [main/customCommand.ts:51](https://github.com/cancerberoSgx/magica/blob/7866695/src/main/customCommand.ts#L51)*
 
 **Parameters:**
 
@@ -35,7 +35,7 @@ ___
 
 ▸ **isCustomCommand**(`c`: string[], `o`: `Partial<Options>`): *`Promise<boolean>`*
 
-*Defined in [main/customCommand.ts:7](https://github.com/cancerberoSgx/magica/blob/c182367/src/main/customCommand.ts#L7)*
+*Defined in [main/customCommand.ts:7](https://github.com/cancerberoSgx/magica/blob/7866695/src/main/customCommand.ts#L7)*
 
 **Parameters:**
 

@@ -11,11 +11,11 @@ export EMCC_FLAGS=$EMCC_FLAGS_PRODUCTION
 
 export LDFLAGS="-L$PREFIX/lib"
 export PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig"
-export CFLAGS="$CPPFLAGS -s BINARYEN_TRAP_MODE=clamp -s ALLOW_MEMORY_GROWTH=1 -Wno-almost-asm -s ERROR_ON_UNDEFINED_SYMBOLS=1 $EMCC_FLAGS"
-# export CXXFLAGS="$CFLAGS"
+export CFLAGS="$CPPFLAGS -s BINARYEN_TRAP_MODE=clamp -s ALLOW_MEMORY_GROWTH=1 -Wno-almost-asm -s ERROR_ON_UNDEFINED_SYMBOLS=1 -Werror=implicit-function-declaration $EMCC_FLAGS"
+export CXXFLAGS="$CFLAGS"
 
-export QUANTUM_DEPTH=8 # Other values are 16, 32 - the greater the more memory it consumes.
-export HDRI=no # enabling this will impact speed
+export QUANTUM_DEPTH=16 # Other values are 16, 32 - the greater the more memory it consumes.
+export HDRI=yes # enabling this will impact speed
 
 # export AUTOCONF_COMMON="--prefix=$PREFIX"
 # export AUTOCONF_COMMON="--cache-file=$PREFIX/autoconf.cache --prefix=$PREFIX"

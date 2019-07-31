@@ -18,7 +18,7 @@
 
 ▸ **getFileDir**(`f`: string): *string*
 
-*Defined in [util/util.ts:7](https://github.com/cancerberoSgx/magica/blob/c182367/src/util/util.ts#L7)*
+*Defined in [util/util.ts:7](https://github.com/cancerberoSgx/magica/blob/7866695/src/util/util.ts#L7)*
 
 dirname
 
@@ -36,7 +36,7 @@ ___
 
 ▸ **isDir**(`f`: string, `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *boolean*
 
-*Defined in [util/util.ts:16](https://github.com/cancerberoSgx/magica/blob/c182367/src/util/util.ts#L16)*
+*Defined in [util/util.ts:16](https://github.com/cancerberoSgx/magica/blob/7866695/src/util/util.ts#L16)*
 
 **Parameters:**
 
@@ -53,7 +53,7 @@ ___
 
 ▸ **isFile**(`f`: string, `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *boolean*
 
-*Defined in [util/util.ts:24](https://github.com/cancerberoSgx/magica/blob/c182367/src/util/util.ts#L24)*
+*Defined in [util/util.ts:24](https://github.com/cancerberoSgx/magica/blob/7866695/src/util/util.ts#L24)*
 
 **Parameters:**
 

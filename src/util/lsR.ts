@@ -17,7 +17,7 @@ interface Options {
    * return true if given file is a directory.
    */
   isDir: (f: string) => boolean
-  
+
   /**
    * If true is returned the visit will stop.
    */

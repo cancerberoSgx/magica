@@ -2,43 +2,43 @@
 
 source emscripten-scripts/base.sh
 
-# rm -rf $PREFIX
+rm -rf $PREFIX
 
+cd $CURRENT_DIR
+source emscripten-scripts/build-zlib.sh
+testExitCode "build-zlib" $?
+
+cd $CURRENT_DIR
+source emscripten-scripts/build-libjpeg.sh
+testExitCode "build-libjpeg" $?
+
+cd $CURRENT_DIR
+source emscripten-scripts/build-libpng.sh
+testExitCode "build-libpng" $?
+
+cd $CURRENT_DIR
+source emscripten-scripts/build-tiff.sh
+testExitCode "build-tiff" $?
+
+
+# # jpeg-turbo library supodsely implements libjpeg but it doesn't work on most images
 # cd $CURRENT_DIR
-# source emscripten-scripts/build-zlib.sh
-# testExitCode "build-zlib" $?
+# source emscripten-scripts/build-jpeg-turbo.sh
+# testExitCode "build-jpeg-turbo" $?
 
+# # This compiles buy I really want to understand the value of this library before include it
 # cd $CURRENT_DIR
-# source emscripten-scripts/build-libjpeg.sh
-# testExitCode "build-libjpeg" $?
-
-# cd $CURRENT_DIR
-# source emscripten-scripts/build-libpng.sh
-# testExitCode "build-libpng" $?
-
-# cd $CURRENT_DIR
-# source emscripten-scripts/build-tiff.sh
-# testExitCode "build-tiff" $?
+# source emscripten-scripts/build-openjpeg.sh
+# testExitCode "build-openjpeg" $?
 
 
-# # # jpeg-turbo library supodsely implements libjpeg but it doesn't work on most images
-# # cd $CURRENT_DIR
-# # source emscripten-scripts/build-jpeg-turbo.sh
-# # testExitCode "build-jpeg-turbo" $?
+cd $CURRENT_DIR
+source emscripten-scripts/build-freetype.sh
+testExitCode "build-freetype" $?
 
-# # # This compiles buy I really want to understand the value of this library before include it
-# # cd $CURRENT_DIR
-# # source emscripten-scripts/build-openjpeg.sh
-# # testExitCode "build-openjpeg" $?
-
-
-# cd $CURRENT_DIR
-# source emscripten-scripts/build-freetype.sh
-# testExitCode "build-freetype" $?
-
-# cd $CURRENT_DIR
-# source emscripten-scripts/build-fftw.sh
-# testExitCode "build-fftw" $?
+cd $CURRENT_DIR
+source emscripten-scripts/build-fftw.sh
+testExitCode "build-fftw" $?
 
 cd $CURRENT_DIR
 source emscripten-scripts/build-webp.sh

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker build -t magica-im <%= scriptsFolder %>/ && docker run --tty --rm --workdir /code -v "$PWD":/code magica-im /bin/bash --login <%= scriptsFolder %>/build.sh
+ 

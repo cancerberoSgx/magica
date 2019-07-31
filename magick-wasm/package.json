@@ -20,14 +20,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "glob": "^7.1.4",
     "ejs": "^2.6.2",
+    "glob": "^7.1.4",
     "minimist": "^1.2.0",
-    "misc-utils-of-mine-generic": "^0.2.15"
+    "misc-utils-of-mine-generic": "^0.2.15",
+    "shelljs": "^0.8.3"
   },
   "devDependencies": {
-    "@types/node": "^12.6.8",
     "@types/ejs": "^2.6.3",
+    "@types/node": "^12.6.8",
+    "@types/shelljs": "^0.8.5",
     "ava": "^2.2.0",
     "markdown-toc": "^1.2.0",
     "ts-node": "^8.3.0",

@@ -32,7 +32,7 @@
 
 *Implementation of [TemplateHelper](../interfaces/_main_template_template_.templatehelper.md).[name](../interfaces/_main_template_template_.templatehelper.md#name)*
 
-*Defined in [main/template/imageHelper.ts:25](https://github.com/cancerberoSgx/magica/blob/c182367/src/main/template/imageHelper.ts#L25)*
+*Defined in [main/template/imageHelper.ts:25](https://github.com/cancerberoSgx/magica/blob/7866695/src/main/template/imageHelper.ts#L25)*
 
 ## Methods
 
@@ -40,7 +40,7 @@
 
 ▸ **exec**(`options`: `Options`): *`Promise<ExtractInfoResultImage>`*
 
-*Defined in [main/template/imageHelper.ts:26](https://github.com/cancerberoSgx/magica/blob/c182367/src/main/template/imageHelper.ts#L26)*
+*Defined in [main/template/imageHelper.ts:26](https://github.com/cancerberoSgx/magica/blob/7866695/src/main/template/imageHelper.ts#L26)*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ ___
 
 ▸ **fnCompileTime**(`options`: `Options`): *`Promise<ExtractInfoResultImage>`*
 
-*Defined in [main/template/imageHelper.ts:30](https://github.com/cancerberoSgx/magica/blob/c182367/src/main/template/imageHelper.ts#L30)*
+*Defined in [main/template/imageHelper.ts:30](https://github.com/cancerberoSgx/magica/blob/7866695/src/main/template/imageHelper.ts#L30)*
 
 **Parameters:**
 
@@ -72,7 +72,7 @@ ___
 
 ▸ **fnRunTime**(`options`: `Options`): *`Promise<ExtractInfoResultImage>`*
 
-*Defined in [main/template/imageHelper.ts:33](https://github.com/cancerberoSgx/magica/blob/c182367/src/main/template/imageHelper.ts#L33)*
+*Defined in [main/template/imageHelper.ts:33](https://github.com/cancerberoSgx/magica/blob/7866695/src/main/template/imageHelper.ts#L33)*
 
 **Parameters:**
 

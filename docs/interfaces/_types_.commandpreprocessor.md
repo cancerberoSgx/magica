@@ -37,7 +37,7 @@
 
 • **name**: *string*
 
-*Defined in [types.ts:178](https://github.com/cancerberoSgx/magica/blob/c182367/src/types.ts#L178)*
+*Defined in [types.ts:178](https://github.com/cancerberoSgx/magica/blob/7866695/src/types.ts#L178)*
 
 ## Methods
 
@@ -45,7 +45,7 @@
 
 ▸ **fnCompileTime**(`context`: `O`): *`Promise<O2>`*
 
-*Defined in [types.ts:179](https://github.com/cancerberoSgx/magica/blob/c182367/src/types.ts#L179)*
+*Defined in [types.ts:179](https://github.com/cancerberoSgx/magica/blob/7866695/src/types.ts#L179)*
 
 **Parameters:**
 
@@ -61,7 +61,7 @@ ___
 
 ▸ **fnRuntime**(`commandOptions`: `RO`, `commandIndex`: number, `runOptions`: `O`): *`Promise<void>`*
 
-*Defined in [types.ts:180](https://github.com/cancerberoSgx/magica/blob/c182367/src/types.ts#L180)*
+*Defined in [types.ts:180](https://github.com/cancerberoSgx/magica/blob/7866695/src/types.ts#L180)*
 
 **Parameters:**
 
