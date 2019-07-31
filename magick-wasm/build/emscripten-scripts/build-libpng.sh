@@ -7,9 +7,6 @@ cd $PREFIX/src
 
 if [ ! -d "libpng" ]; then
   git clone https://github.com/cancerberosgx/png.git libpng
-  # git clone https://github.com/ImageMagick/png.git libpng
-  # git clone https://github.com/KnicKnic/libpng.git
-  # https://github.com/glennrp/libpng.git
 fi
 
 cd libpng

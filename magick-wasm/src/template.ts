@@ -1,7 +1,7 @@
 import { mkdir, ls, test } from 'shelljs';
 import { compile } from 'ejs';
 import { readFileSync, writeFileSync } from 'fs';
-import { buildFolder, templatesFolder } from "./config";
+import { Options, defaultOptions } from './main';
 
 export interface Context {
   scriptsFolder?: string
@@ -11,7 +11,7 @@ export interface Context {
   hdri?: boolean
 }
 
-const defaultContext: Required<Context> = {
+export const defaultContext: Required<Context> = {
   scriptsFolder: 'emscripten-scripts',
   type: 'production',
   dontCleanPrefix: false,
@@ -21,12 +21,12 @@ const defaultContext: Required<Context> = {
   hdri: true
 }
 
-export function renderTemplates(context: Context = defaultContext) {
+export function renderTemplates(context: Required<Options> = defaultOptions) {
   context = { ...defaultContext, ...context }
-  mkdir('-p', `${buildFolder}/${context.scriptsFolder}`);
-  ls(templatesFolder)
-    .filter(f => test('-f', `${templatesFolder}/${f}`) && f.endsWith('.ejs'))
-    .map(f => ({ src: `${templatesFolder}/${f}`, dest: `${buildFolder}/${context.scriptsFolder}/${f.substring(0, f.length - '.ejs'.length)}` })).forEach(o => {
+  mkdir('-p', `${context.buildFolder}/${context.scriptsFolder}`);
+  ls(context.templatesFolder)
+    .filter(f => test('-f', `${context.templatesFolder}/${f}`) && f.endsWith('.ejs'))
+    .map(f => ({ src: `${context.templatesFolder}/${f}`, dest: `${context.buildFolder}/${context.scriptsFolder}/${f.substring(0, f.length - '.ejs'.length)}` })).forEach(o => {
       const t = compile(readFileSync(o.src).toString());
       const result = t(context);
       writeFileSync(o.dest, result);

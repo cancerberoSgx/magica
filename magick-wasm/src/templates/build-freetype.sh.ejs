@@ -19,7 +19,9 @@ export CHOST=emcc && emconfigure ./configure --prefix=$PREFIX --disable-shared \
   --enable-static --disable-mmap --without-bzip2  --without-old-mac-fonts --without-fsspec \
   --without-ats --disable-largefile --disable-freetype-config --disable-biarch-config \
   CFLAGS="$CPPFLAGS" 
+
 testExitCode "freetype configure" $?
 
 emcmake make install
+
 testExitCode "freetype make install" $?
