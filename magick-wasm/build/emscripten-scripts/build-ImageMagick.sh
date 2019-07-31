@@ -4,7 +4,7 @@
 
 source emscripten-scripts/base.sh
 
-SKIP_CONFIG=1
+SKIP_CONFIG=0
 SKIP_BUILD=0
 
 mkdir -p $PREFIX/src
@@ -40,7 +40,8 @@ fi
 if [ "$SKIP_BUILD" -eq "0" ]; then
 
 echo "ImageMagick make install"
-  emcmake make install PKG_CONFIG_PATH="$PKG_CONFIG_PATH" LDFLAGS="$LDFLAGS" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+FINAL_CFLAGS=$CFLAGS
+  emcmake make install PKG_CONFIG_PATH="$PKG_CONFIG_PATH" LDFLAGS="$LDFLAGS" CFLAGS="$FINAL_CFLAGS" CXXFLAGS="$FINAL_CFLAGS"
 
   testExitCode "ImageMagick make install" $?
 

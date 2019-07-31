@@ -4,23 +4,23 @@
 
 source emscripten-scripts/base.sh
 
-# rm -rf $PREFIX
+rm -rf $PREFIX
 
-# cd $CURRENT_DIR
-# source emscripten-scripts/build-zlib.sh
-# testExitCode "build-zlib" $?
+cd $CURRENT_DIR
+source emscripten-scripts/build-zlib.sh
+testExitCode "build-zlib" $?
 
-# cd $CURRENT_DIR
-# source emscripten-scripts/build-libjpeg.sh
-# testExitCode "build-libjpeg" $?
+cd $CURRENT_DIR
+source emscripten-scripts/build-libjpeg.sh
+testExitCode "build-libjpeg" $?
 
-# cd $CURRENT_DIR
-# source emscripten-scripts/build-libpng.sh
-# testExitCode "build-libpng" $?
+cd $CURRENT_DIR
+source emscripten-scripts/build-libpng.sh
+testExitCode "build-libpng" $?
 
-# cd $CURRENT_DIR
-# source emscripten-scripts/build-tiff.sh
-# testExitCode "build-tiff" $?
+cd $CURRENT_DIR
+source emscripten-scripts/build-tiff.sh
+testExitCode "build-tiff" $?
 
 # cd $CURRENT_DIR
 # source emscripten-scripts/build-jpeg-turbo.sh
@@ -30,17 +30,17 @@ source emscripten-scripts/base.sh
 # source emscripten-scripts/build-build-openjpeg.sh
 # testExitCode "build-build-openjpeg" $?
 
-# cd $CURRENT_DIR
-# source emscripten-scripts/build-freetype.sh
-# testExitCode "build-freetype" $?
+cd $CURRENT_DIR
+source emscripten-scripts/build-freetype.sh
+testExitCode "build-freetype" $?
 
-# cd $CURRENT_DIR
-# source emscripten-scripts/build-fftw.sh
-# testExitCode "build-fftw" $?
+cd $CURRENT_DIR
+source emscripten-scripts/build-fftw.sh
+testExitCode "build-fftw" $?
 
-# cd $CURRENT_DIR
-# source emscripten-scripts/build-webp.sh
-# testExitCode "build-webp" $?
+cd $CURRENT_DIR
+source emscripten-scripts/build-webp.sh
+testExitCode "build-webp" $?
 
 cd $CURRENT_DIR
 source emscripten-scripts/build-ImageMagick.sh
