@@ -4,7 +4,7 @@
 
 source <%= scriptsFolder %>/base.sh
 
-<%= dontCleanPrefix ? '' : 'rm -rf $PREFIX' %>
+<%= dontClean ? '' : 'rm -rf $PREFIX' %>
 
 cd $CURRENT_DIR
 source <%= scriptsFolder %>/build-zlib.sh

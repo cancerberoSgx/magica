@@ -7,6 +7,8 @@ cd $PREFIX/src
 
 if [ ! -d "webp" ]; then
   git clone https://github.com/ImageMagick/webp.git
+else
+  ( cd webp ; make clean )
 fi
 
 cd webp

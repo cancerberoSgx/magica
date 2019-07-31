@@ -6,8 +6,11 @@ source <%= scriptsFolder %>/base.sh
 
 mkdir -p $PREFIX/src
 cd $PREFIX/src
+
 if [ ! -d "ImageMagick" ]; then
   git clone https://github.com/ImageMagick/ImageMagick.git
+else
+  ( cd ImageMagick ; make clean )
 fi
 
 cd ImageMagick

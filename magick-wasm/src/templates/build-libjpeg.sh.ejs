@@ -9,6 +9,8 @@ cd $PREFIX/src
 
 if [ ! -d "libjpeg" ]; then
   git clone https://github.com/KnicKnic/libjpeg.git
+else
+  ( cd libjpeg ; make clean )
 fi
 
 cd libjpeg

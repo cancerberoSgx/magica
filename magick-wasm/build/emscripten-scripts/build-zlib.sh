@@ -7,6 +7,8 @@ cd $PREFIX/src
 
 if [ ! -d "zlib" ]; then
   git clone https://github.com/ImageMagick/zlib.git
+else
+  ( cd zlib ; make clean )
 fi
 
 cd zlib

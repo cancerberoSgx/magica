@@ -1,10 +1,11 @@
-import { Options } from './main';
+import { Options, main } from './main';
 
 export function cli(o:Options) {
   if(o.help){
     printHelp()
     process.exit(0)
   }
+  main(o)
 }
 
 function printHelp(){

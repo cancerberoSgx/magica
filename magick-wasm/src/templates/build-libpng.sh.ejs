@@ -7,7 +7,10 @@ cd $PREFIX/src
 
 if [ ! -d "libpng" ]; then
   git clone https://github.com/cancerberosgx/png.git libpng
+else
+  ( cd libpng ; make clean )
 fi
+
 
 cd libpng
 

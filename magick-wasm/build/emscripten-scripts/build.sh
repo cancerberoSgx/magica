@@ -4,7 +4,7 @@
 
 source emscripten-scripts/base.sh
 
-rm -rf $PREFIX
+
 
 cd $CURRENT_DIR
 source emscripten-scripts/build-zlib.sh

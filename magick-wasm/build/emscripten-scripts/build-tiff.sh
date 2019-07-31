@@ -9,6 +9,8 @@ cd $PREFIX/src
 
 if [ ! -d "tiff" ]; then
   git clone https://github.com/ImageMagick/tiff.git
+else
+  ( cd tiff ; make clean )
 fi
 
 cd tiff
