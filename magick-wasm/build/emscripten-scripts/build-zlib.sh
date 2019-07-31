@@ -5,14 +5,13 @@ mkdir -p $PREFIX/src
 cd $PREFIX/src
 
 if [ ! -d "zlib" ]; then
-  # rm -rf zlib
   git clone https://github.com/ImageMagick/zlib.git
 fi
 
 cd zlib
 
 chmod a+x ./configure
-emconfigure ./configure --prefix=$PREFIX --static 
+export CHOST=emcc && emconfigure ./configure --prefix=$PREFIX --static 
 testExitCode "zlib configure" $?
 
 emcmake make install CFLAGS="$CFLAGS"

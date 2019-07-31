@@ -6,6 +6,7 @@ import { File } from '../src/file/file'
 import { main } from '../src/main/main'
 import { getOption } from '../src/options'
 import fileType = require('file-type')
+import { readFileSync } from 'fs';
 
 test('from url request as array buffer view', async t => {
   const u = 'https://cancerberosgx.github.io/demos/geometrizejs-cli/bridge.jpg', o = {}
@@ -70,6 +71,13 @@ test('size()', async t => {
   var i = await imageInfo(f)
   t.deepEqual(i[0].image.mimeType, 'image/png')
   t.deepEqual(await f!.size(), { width: 109, height: 145 })
+})
+
+test('isFile()', async t => {
+  var f = await File.fromFile('test/assets/n.png')
+  t.true(File.isFile(f))
+  var f2 = {name: 'foo.png', content: readFileSync('test/assets/n.png')}
+  t.false(File.isFile(f2))
 })
 
 test.serial('protected files are not erased', async t => {

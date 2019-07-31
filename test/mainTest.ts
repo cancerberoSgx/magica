@@ -37,6 +37,19 @@ test('accept string input files, or urls', async t => {
   t.deepEqual(result.stderr, [])
 })
 
+// test('accept string input files, or urls 2', async t => {
+//   const result = await main({
+//     command: 'convert text2.png -scale 50% foo2.png',
+//     inputFiles: ['test/assets/text2.png']
+//   })
+//   t.deepEqual(result.outputFiles.map(f => basename(f.name)), ['foo2.png'])
+//   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'png', mime: 'image/png' })
+//   t.falsy(result.error)
+//   t.deepEqual(result.stderr, [])
+// })
+
+
+
 test.todo('incorrect IM command')
 test.todo('should set options in command')
 test.todo('should support input file names with folders: convert input/in/nested/folder/foo.png -scale 100 bar.png')

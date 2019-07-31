@@ -11,7 +11,7 @@ export function createMain(Module: any, FS: FS): NativeMain {
     try {
       Module.noExitRuntime = true // This helps stdout to be correctly flushed on some situations
       debug && console.log('before Module.callMain')
-      FS.chdir(getOption('emscriptenNodeFsRoot'))
+      // FS.chdir(getOption('emscriptenNodeFsRoot'))
 
       returnValue = Module.callMain(...args)
       debug && console.log('after Module.callMain', returnValue)

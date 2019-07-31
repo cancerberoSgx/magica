@@ -1,22 +1,22 @@
 import { ok } from 'assert'
 import fetch from 'cross-fetch'
 import { existsSync, readFileSync } from 'fs'
-import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial } from 'misc-utils-of-mine-generic'
+import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial, pathJoin } from 'misc-utils-of-mine-generic'
 import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
 import { imagePixelColor } from '../image/pixel'
 import { magickLoaded } from '../imageMagick/magickLoaded'
-import { getOption } from '../options'
+import { getOption, getOptions } from '../options'
 import { IFile } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
 import { isDir, isFile } from '../util/util'
 import { protectFile } from './protected'
 
 export class File implements IFile {
-  public content: IFile['content']
+  // public content: IFile['content']
 
   protected isProtected: boolean;
 
-  constructor(public name: string, content: IFile['content'] | ArrayBuffer, isProtected: boolean = false) {
+  constructor(public name: string, public content: IFile['content']  , isProtected: boolean = false) {
 
     // const { emscriptenNodeFsRoot, debug } = getOptions()
 
@@ -24,7 +24,7 @@ export class File implements IFile {
     //   this.name = pathJoin(emscriptenNodeFsRoot, this.name)
     // }
     // this.content =  content instanceof ArrayBuffer ?  new Uint8ClampedArray(content) : content
-    this.content = content instanceof ArrayBuffer ? new Uint8ClampedArray(content) : content
+    // this.content = content instanceof ArrayBuffer ? new Uint8ClampedArray(content) : content
 
     this.isProtected = isProtected
     if (this.isProtected) {
@@ -98,7 +98,7 @@ export class File implements IFile {
   public static async fromUrl(u: string, o: RequestInit & ResolveOptions = {}) {
     try {
       const r = await fetch(u, o)
-      return new File(o.name || o.name || getFileNameFromUrl(u), await r.arrayBuffer(), o.protected)
+      return new File(o.name || o.name || getFileNameFromUrl(u), new Uint8ClampedArray(await r.arrayBuffer()), o.protected)
     } catch (error) {
       console.error(error)
       return undefined
@@ -110,7 +110,12 @@ export class File implements IFile {
       throw new Error('File.readFile() called in the browser.')
     }
     try {
-      return new File(o.name || basename(f), readFileSync(f), o.protected)
+      var file =  new File(o.name || basename(f),  new Uint8Array( readFileSync(f)), o.protected)
+      // console.log('SEBA', readFileSync(f).toString(), 'SEBA');
+      
+  // console.log('asd', file.content.toString(), 'asd');
+  // console.log('asd', Buffer.from(file.content.buffer).toString());
+return file
     } catch (error) {
       console.error(error)
       return undefined
@@ -147,9 +152,9 @@ export class File implements IFile {
 	 */
   public static fromHtmlFileInputElement(el: HTMLInputElement): Promise<Array<File>> {
     return Promise.all(Array.from(el.files!).map(file => new Promise<File>((resolve, reject) => {
-      var reader = new FileReader();
-      reader.addEventListener('loadend', e => resolve(new File(file.name, reader.result as ArrayBuffer)));
-      reader.readAsArrayBuffer(file);
+      var reader = new FileReader()
+      reader.addEventListener('loadend', e => resolve(new File(file.name, new Uint8ClampedArray(reader.result as ArrayBuffer))))
+      reader.readAsArrayBuffer(file)
     })))
   }
 
@@ -178,7 +183,7 @@ export class File implements IFile {
   }
 
   public static isFile(f: any): f is File {
-    return !!f && !!f.name && !!f.content && typeof f.constructor !== 'undefined' // && !!(f as File).size
+    return !!f && !!f.name && !!f.content && typeof f.constructor !== 'undefined' && !!(f as File).size && !!(f as File).info
   }
 
   public static asFile(f: IFile): File {

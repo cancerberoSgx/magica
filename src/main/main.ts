@@ -12,7 +12,7 @@ import { getFileDir } from '../util/util'
 import { processCommand } from './command'
 import { dispatchCustomCommand, isCustomCommand } from './customCommand'
 
-export async function main(o: Partial<Options>): Promise<Result> {
+export function main(o: Partial<Options>): Promise<Result> {
   if (o.useNative || getOption('useNative')) {
     throw 'useNative not supported yet'
   }
@@ -20,6 +20,7 @@ export async function main(o: Partial<Options>): Promise<Result> {
 }
 
 async function mainWasm(o: Partial<Options>): Promise<Result> {
+  const t0 = Date.now()
   // set global options that user might given
   objectKeys(getOptions())
     .filter(k => !!o[k])
@@ -28,14 +29,24 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
   const { emscriptenNodeFsRoot, debug } = getOptions()
   const { FS, main } = await magickLoaded
   debug && console.log('main call given options: ', o)
-  const files = await File.resolve(o.inputFiles)
   FS.chdir(emscriptenNodeFsRoot)
+  const files = await File.resolve(o.inputFiles)
+  // console.log('Buffer.from(f.content.buffer).toString()', Buffer.from(files[0].content.buffer).toString());
+  // console.log('Buffer.from(f.content.buffer).toString()', Buffer.from(files[0].content as any).toString());
   files.forEach(f => {
     const dirName = getFileDir(f.name)
+    // FS.chdir(emscriptenNodeFsRoot)
     if (dirName.trim()) {
       mkdirp(dirName, p => FS.analyzePath(p).exists, FS.mkdir)
     }
-    FS.writeFile(f.name, f.content, { encoding: 'binary', flags: 'w+' })
+    // console.log(dirName, f.name,  f.content);
+    // FS.chdir(emscriptenNodeFsRoot)
+    
+    FS.writeFile(f.name, f.content )
+
+    // FS.writeFile(f.name, f.content, { encoding: 'binary', flags: 'w+' })
+    // console.log(Buffer.from(FS.readFile(f.name)).toString());
+    
   })
 
   const beforeTree = listFilesRecursively(emscriptenNodeFsRoot, FS)
@@ -78,7 +89,10 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
   o.debug && console.log('Protected files:', ls(emscriptenNodeFsRoot, FS).map(isProtectedFile))
   return {
     ...returnValue,
-    outputFiles
+    outputFiles,
+      times: {
+        total: Date.now() - t0
+      },
   }
 }
 

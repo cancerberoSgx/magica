@@ -23,6 +23,7 @@ import { main } from './main'
  * @returns the result of each command execution
  */
 export async function run<T extends IFile = IFile>(o: RunOptions): Promise<RunResult<T>> {
+  const t0 = Date.now()
   // var scriptStartEvent: ScriptEvent = {
   //   name: 'onScriptStart',
   //   scriptOptions: o,
@@ -93,7 +94,10 @@ export async function run<T extends IFile = IFile>(o: RunOptions): Promise<RunRe
     ...finalResult,
     stdout: finalResult.results.map(r => r.stdout).flat(),
     stderr: finalResult.results.map(r => r.stderr).flat(),
-    outputFiles: finalResult.results.length ? finalResult.results[finalResult.results.length - 1].outputFiles.map(File.asFile) : [] as any
+    outputFiles: finalResult.results.length ? finalResult.results[finalResult.results.length - 1].outputFiles.map(File.asFile) : [] as any,
+    times: {
+      total: Date.now() - t0
+    },
   }
   return r
 }

@@ -5,6 +5,8 @@
 ## TODO / Road map
 
 - [ ] performance tests in the browser
+- [ ] remove / replace knownSupportedReadWriteImageFormats with listFormat() - formatTest should use that.
+- [ ] listFormat() should parse read/write info too
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
 - [ ] fix npm run test-js  
 - [ ] emscripten port generation configurable

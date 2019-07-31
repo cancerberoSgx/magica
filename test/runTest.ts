@@ -22,7 +22,6 @@ test('should output files', async t => {
     inputFiles: ['test/assets/n.png']
   })
   t.deepEqual(result.outputFiles.map(f => f.name), ['1.jpg'])
-  t.true(true)
 })
 
 test('should output files2', async t => {
@@ -33,7 +32,6 @@ test('should output files2', async t => {
     inputFiles: ['test/assets/logo.jpg']
   })
   t.deepEqual(result.outputFiles.map(f => f.name), ['2.png'])
-  t.true(true)
 })
 
 test('should provide output images as input images to next command', async t => {

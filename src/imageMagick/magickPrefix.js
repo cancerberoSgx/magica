@@ -23,8 +23,8 @@ Object.assign(Module, {
       FS.mkdir(emscriptenNodeFsRoot)
     }
     if (isNode() && !disableNodeFs) {
-      if (!require('fs').existsSync(nodeFsLocalRoot)) {
-        require('fs').mkdirSync(nodeFsLocalRoot, { recursive: true })
+      if (!require('f'+'s').existsSync(nodeFsLocalRoot)) {
+        require('f'+'s').mkdirSync(nodeFsLocalRoot, { recursive: true })
       }
       debug && console.log(`Mounting local folder "${nodeFsLocalRoot}" as emscripten root folder "${emscriptenNodeFsRoot}".`)
       FS.mount(NODEFS, { root: nodeFsLocalRoot }, emscriptenNodeFsRoot);

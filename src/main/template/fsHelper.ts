@@ -10,7 +10,7 @@ interface Options {
   noReturnValue?: boolean
 }
 
-export class FSHelper implements TemplateHelper<Options, Promise<string[]>> {
+export class LSHelper implements TemplateHelper<Options, Promise<string[]>> {
   public name = 'ls'
   public async exec(options: Options = {}) {
     const { FS } = await magickLoaded

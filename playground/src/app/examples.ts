@@ -156,24 +156,31 @@ convert test.png \\
     description: `https://www.imagemagick.org/Usage/anim_mods/#glitter_tiles`,
     tags: [ExampleTag.morph, ExampleTag.animation],
     script: state => `
-convert -size 600x600 xc: +noise Random -separate \\
-  null: \( xc: +noise Random -separate -threshold 30% -negate \) \\
+<% 
+var img = inputFiles[0]
+var noise = '30%'
+var threshold = '10%'
+var color = await img.pixel(0, 0)
+var size = await img.size()
+%>
+    
+convert -size <%= size.width%>x<%= size.height%> xc: +noise Random -separate \\
+  null: ( xc: +noise Random -separate -threshold <%= noise %> -negate ) \\
       -compose CopyOpacity -layers composite \\
   -set dispose background -set delay 20 -loop 0   glitter_overlay.gif
 
 convert glitter_overlay.gif \\
-  -compose Screen -bordercolor blue -border 0x0  glitter_plasma.gif
+  -compose Screen -bordercolor <%= color %> -border 0x0  glitter_plasma.gif
 
 convert glitter_plasma.gif -virtual-pixel tile \\
-  -set option:distort:viewport 680x680 -distort SRT 0 \\
+  -set option:distort:viewport <%= size.width%>x<%= size.height%> -distort SRT 0 \\
   glitter_plasma_tiled.gif
 
-convert logo: -matte -fuzz 33% -transparent blue logo_holed.gif
+convert '<%= img.name%>' -matte -fuzz <%= threshold %> -transparent <%= color %> logo_holed.gif
 
 convert logo_holed.gif null: glitter_plasma_tiled.gif \\
   -compose DstOver -layers composite \\
   -loop 0 -layers Optimize logo_glittered.gif
-
             `.trim(),
     inputFiles: []
   },

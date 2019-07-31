@@ -1,8 +1,8 @@
 import { compile } from 'ejs'
 import { CommandPreprocessor, Options, RunOptions } from '../../types'
 import { arrayToCliOne, processCommand } from '../command'
-import { FSHelper } from './fsHelper'
-import { HeightHelper, ImageInfoHelper, SizeHelper, WidthHelper } from './SizeHelper'
+import { LSHelper } from './fsHelper'
+import { HeightHelper, ImageInfoHelper, SizeHelper, WidthHelper } from './imageHelper'
 
 export interface TemplateHelper<O = any, R = any, RO = any, RR = any> {
   name: string
@@ -15,7 +15,7 @@ export class Template implements CommandPreprocessor {
   constructor() {
     if (!installed) {
       installed = true
-      addTemplateHelper(new FSHelper())
+      addTemplateHelper(new LSHelper())
       addTemplateHelper(new SizeHelper())
       addTemplateHelper(new ImageInfoHelper())
       addTemplateHelper(new HeightHelper())

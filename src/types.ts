@@ -77,6 +77,7 @@ export interface Options extends NativeOptions {
 
 export interface Result<T extends IFile = IFile> extends NativeResult {
   outputFiles: T[]
+  times?: {total: number}
 }
 
 export interface CliOptions extends Options {
