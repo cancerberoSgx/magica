@@ -1,3 +1,7 @@
+## ISSUES
+
+- [ ]  await File.fromFile('test/assets/text2.tiff') will fail for files generated/written with this new version for some reasom - I think they are written incorrectly...
+
 ## TODO / Road map
 
 - [ ] performance tests in the browser

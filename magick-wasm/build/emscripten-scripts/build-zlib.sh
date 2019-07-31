@@ -3,12 +3,16 @@ source emscripten-scripts/base.sh
 
 mkdir -p $PREFIX/src
 cd $PREFIX/src
-rm -rf zlib
-git clone https://github.com/ImageMagick/zlib.git
+
+if [ ! -d "zlib" ]; then
+  # rm -rf zlib
+  git clone https://github.com/ImageMagick/zlib.git
+fi
+
 cd zlib
 
 chmod a+x ./configure
-export CHOST=emcc && emconfigure ./configure --prefix=$PREFIX --static 
+emconfigure ./configure --prefix=$PREFIX --static 
 testExitCode "zlib configure" $?
 
 emcmake make install CFLAGS="$CFLAGS"

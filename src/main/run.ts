@@ -41,9 +41,10 @@ export async function run<T extends IFile = IFile>(o: RunOptions): Promise<RunRe
   FS.chdir(emscriptenNodeFsRoot)
 
   let inputFiles = await File.resolve(o.inputFiles)
+  inputFiles = inputFiles.filter(notUndefined).map(File.asFile)
   const commands = await resolveRunCommands({
     ...o,
-    inputFiles: inputFiles.filter(notUndefined).map(File.asFile)
+    inputFiles
   })
   const finalResult: RunResult = {
     results: [],

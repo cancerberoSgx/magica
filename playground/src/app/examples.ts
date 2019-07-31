@@ -1,4 +1,4 @@
-import { State } from './state';
+import { State } from './state'
 
 export const sampleImages = [
   "bluebells.png",
@@ -34,7 +34,7 @@ export interface Example {
   description: string;
   inputFiles: string[]
 }
- 
+
 export const examples: Example[] = [
 
   {
@@ -175,7 +175,7 @@ convert logo_holed.gif null: glitter_plasma_tiled.gif \\
   -loop 0 -layers Optimize logo_glittered.gif
 
             `.trim(),
-            inputFiles: []
+    inputFiles: []
   },
   {
     name: 'gradient_complex_hues',
@@ -276,7 +276,7 @@ convert -size 100x100 xc: -colorspace RGB -define shepards:power=8 \\
     tags: [ExampleTag.info, ExampleTag.color],
     inputFiles: [],
     script: state => `
-    convert ${state.inputFiles.map(f=>f.name).join(' ')} histogram:histogram.gif
+    convert ${state.inputFiles.map(f => f.name).join(' ')} histogram:histogram.gif
 
          `.trim(),
   },
@@ -399,7 +399,7 @@ convert -size 100x100 xc: +noise Random -channel R -threshold 1% \\
   stars_colored.gif
 
 `.trim(),
-tags: [ExampleTag.distort],
+    tags: [ExampleTag.distort],
   },
 
   {

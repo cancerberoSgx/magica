@@ -7,7 +7,7 @@
     "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json  --dontAsk ",
     "lint": "npm run organizeImports && npm run format",
-    "start": "npm run copy && npx parcel serve src/index.html -d docs --no-source-maps",
+    "start": "cd .. && npm run build && cd playground && npm run copy && npx parcel serve src/index.html -d docs --no-source-maps",
     "build-dev-no-maps": "npm run copy &&export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-content-hash  --no-source-maps",
     "build-dev": "export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-source-maps --no-content-hash",
     "copy": "mkdir -p docs; cp node_modules/magica/dist/src/imageMagick/compiled/magick.wasm src/static/* docs",
@@ -25,13 +25,13 @@
   "license": "MIT",
   "devDependencies": {
     "@types/file-saver": "^2.0.1",
-    "@types/node": "^12.6.1",
+    "@types/node": "^12.6.8",
     "@types/react": "^16.8.23",
-    "@types/react-dom": "^16.8.4",
+    "@types/react-dom": "^16.8.5",
     "babel-polyfill": "^6.26.0",
     "http-server": "^0.11.1",
     "parcel": "^1.12.3",
-    "ts-refactor": "0.0.6",
+    "ts-refactor": "0.0.9",
     "typescript": "^3.5.3"
   },
   "dependencies": {

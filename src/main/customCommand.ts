@@ -21,7 +21,6 @@ interface CustomCommandContext {
 }
 
 class CustomCommandContextImpl implements CustomCommandContext {
-
   pushStdout: (s: string) => void;
   pushStderr: (s: string) => void;
   File: typeof File;
