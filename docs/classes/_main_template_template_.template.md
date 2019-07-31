@@ -21,6 +21,8 @@
 ### Properties
 
 * [name](_main_template_template_.template.md#name)
+* [templateOptions](_main_template_template_.template.md#protected-templateoptions)
+* [templateRuntimeOptions](_main_template_template_.template.md#protected-templateruntimeoptions)
 
 ### Methods
 
@@ -33,7 +35,7 @@
 
 \+ **new Template**(): *[Template](_main_template_template_.template.md)*
 
-*Defined in [main/template/template.ts:13](https://github.com/cancerberoSgx/magica/blob/6686cf2/src/main/template/template.ts#L13)*
+*Defined in [main/template/template.ts:15](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/main/template/template.ts#L15)*
 
 **Returns:** *[Template](_main_template_template_.template.md)*
 
@@ -45,7 +47,27 @@
 
 *Implementation of [CommandPreprocessor](../interfaces/_types_.commandpreprocessor.md).[name](../interfaces/_types_.commandpreprocessor.md#name)*
 
-*Defined in [main/template/template.ts:26](https://github.com/cancerberoSgx/magica/blob/6686cf2/src/main/template/template.ts#L26)*
+*Defined in [main/template/template.ts:32](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/main/template/template.ts#L32)*
+
+___
+
+### `Protected` templateOptions
+
+• **templateOptions**: *object*
+
+*Defined in [main/template/template.ts:14](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/main/template/template.ts#L14)*
+
+#### Type declaration:
+
+___
+
+### `Protected` templateRuntimeOptions
+
+• **templateRuntimeOptions**: *object*
+
+*Defined in [main/template/template.ts:15](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/main/template/template.ts#L15)*
+
+#### Type declaration:
 
 ## Methods
 
@@ -53,7 +75,7 @@
 
 ▸ **fnCompileTime**(`context`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<RunOptions>`*
 
-*Defined in [main/template/template.ts:28](https://github.com/cancerberoSgx/magica/blob/6686cf2/src/main/template/template.ts#L28)*
+*Defined in [main/template/template.ts:34](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/main/template/template.ts#L34)*
 
 **Parameters:**
 
@@ -69,7 +91,7 @@ ___
 
 ▸ **fnRuntime**(`commandOptions`: [Options](../interfaces/_types_.options.md), `commandIndex`: number, `runOptions`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<void>`*
 
-*Defined in [main/template/template.ts:44](https://github.com/cancerberoSgx/magica/blob/6686cf2/src/main/template/template.ts#L44)*
+*Defined in [main/template/template.ts:51](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/main/template/template.ts#L51)*
 
 **Parameters:**
 

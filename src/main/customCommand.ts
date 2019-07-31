@@ -3,8 +3,8 @@ import { File } from '../file/file'
 import { NativeResult } from '../imageMagick/createMain'
 import { getStderr, getStdout, pushStderr, pushStdout, resetStderr, resetStdout } from '../imageMagick/magickLoaded'
 import { Options } from '../types'
-import { run } from './run';
-import { main } from './main';
+import { main } from './main'
+import { run } from './run'
 
 export async function isCustomCommand(c: string[], o: Partial<Options>) {
   return c[0].trim().startsWith('{')

@@ -1,7 +1,7 @@
 import test from 'ava'
+import { notUndefined } from 'misc-utils-of-mine-generic'
 import { File } from '../src'
 import { run } from '../src/main/run'
-import { notUndefined } from 'misc-utils-of-mine-generic';
 
 test('script template', async t => {
   const result = await run({

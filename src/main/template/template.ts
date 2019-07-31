@@ -16,8 +16,8 @@ export class Template implements CommandPreprocessor {
 
   constructor() {
 
-   this. templateOptions = { async: true, escape: (s:string) => s, rmWhitespace: false };
-  this.templateRuntimeOptions = {...this.templateOptions, delimiter: '$'}
+    this.templateOptions = { async: true, escape: (s: string) => s, rmWhitespace: false }
+    this.templateRuntimeOptions = { ...this.templateOptions, delimiter: '$' }
 
     if (!installed) {
       installed = true

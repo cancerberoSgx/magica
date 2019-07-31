@@ -1,4 +1,5 @@
 import { objectKeys } from 'misc-utils-of-mine-generic'
+import Queue from 'p-queue'
 import { File } from '../file/file'
 import { isProtectedFile, protectFile } from '../file/protected'
 import { NativeResult } from '../imageMagick/createMain'
@@ -11,12 +12,11 @@ import { rmRf } from '../util/rmRf'
 import { getFileDir } from '../util/util'
 import { processCommand } from './command'
 import { dispatchCustomCommand, isCustomCommand } from './customCommand'
-import Queue from 'p-queue'
 
-let  queue:Queue|undefined
-function getQueue(){
-  if(!queue){
-    queue = new Queue({autoStart: true, concurrency: getOption('mainConcurrency'), interval: getOption('mainInterval')})
+let queue: Queue | undefined
+function getQueue() {
+  if (!queue) {
+    queue = new Queue({ autoStart: true, concurrency: getOption('mainConcurrency'), interval: getOption('mainInterval') })
   }
   return queue
 }
@@ -24,7 +24,7 @@ export function main(o: Partial<Options>): Promise<Result> {
   if (o.useNative || getOption('useNative')) {
     throw 'useNative not supported yet'
   }
-  return  getQueue().add(()=>mainWasm(o))
+  return getQueue().add(() => mainWasm(o))
   // return mainWasm(o)
 }
 
@@ -46,7 +46,7 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
     if (dirName.trim()) {
       mkdirp(dirName, p => FS.analyzePath(p).exists, FS.mkdir)
     }
-    debug && console.log('FS.write', f.name);
+    debug && console.log('FS.write', f.name)
     FS.writeFile(f.name, f.content)
   })
 

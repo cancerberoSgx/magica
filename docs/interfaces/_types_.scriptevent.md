@@ -25,7 +25,7 @@
 
 • **commandOptions**? : *`Partial<Options>`*
 
-*Defined in [types.ts:93](https://github.com/cancerberoSgx/magica/blob/6686cf2/src/types.ts#L93)*
+*Defined in [types.ts:103](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/types.ts#L103)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • **commandResult**? : *[Result](_types_.result.md)*
 
-*Defined in [types.ts:94](https://github.com/cancerberoSgx/magica/blob/6686cf2/src/types.ts#L94)*
+*Defined in [types.ts:104](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/types.ts#L104)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • **name**: *"beforeCommand" | "afterCommand" | "onScriptStart" | "onScriptEnd"*
 
-*Defined in [types.ts:89](https://github.com/cancerberoSgx/magica/blob/6686cf2/src/types.ts#L89)*
+*Defined in [types.ts:99](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/types.ts#L99)*
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 • **scriptInterrupt**: *boolean*
 
-*Defined in [types.ts:92](https://github.com/cancerberoSgx/magica/blob/6686cf2/src/types.ts#L92)*
+*Defined in [types.ts:102](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/types.ts#L102)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 • **scriptOptions**: *[RunOptions](_types_.runoptions.md)*
 
-*Defined in [types.ts:91](https://github.com/cancerberoSgx/magica/blob/6686cf2/src/types.ts#L91)*
+*Defined in [types.ts:101](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/types.ts#L101)*
 
 ___
 
@@ -65,4 +65,4 @@ ___
 
 • **stopPropagation**: *boolean*
 
-*Defined in [types.ts:90](https://github.com/cancerberoSgx/magica/blob/6686cf2/src/types.ts#L90)*
+*Defined in [types.ts:100](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/types.ts#L100)*

@@ -520,6 +520,19 @@ convert ${state.inputFiles[0].name}  boolean_mask.png \\
 // convert parrots_orig.png  -resize 40% ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 ) ( +clone -rotate 22.5 )  ppp.gif
 
 
+// var a = `
+// var a = []
+// <% for (let o = 0; o < 300; o+=20) { %>
+//   convert random.png -channel G \
+//     -function Sinusoid 1,<%=i%> \
+//     -virtual-pixel tile -blur 0x8 -auto-level \
+//     -function Sinusoid 2.5,<%=j/5%> \
+//     -separate +channel <%= i%>.miff
+//   a.push(i)
+// <% }%>
+// convert <%= a.map(i=>i+'.miff%> -set delay 15 -loop 0 ripples_flux_anim.gif
+// `
+
 // for i in `seq 0 10 359`; do
 //     j=`expr $i \* 5`
 //     convert random.png -channel G \

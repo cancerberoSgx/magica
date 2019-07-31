@@ -1,7 +1,7 @@
 import test from 'ava'
-import { File, imageCompare, addTemplateHelper } from '../src'
+import { writeFileSync } from 'fs'
+import { addTemplateHelper, File, imageCompare } from '../src'
 import { run } from '../src/main/run'
-import { writeFileSync } from 'fs';
 
 test('async templates so they works with await expressions (I can call main() or run() or imageInfo() from template js', async (t) => {
   const result = await run({
@@ -25,7 +25,7 @@ convert -font helvetica.ttf -pointsize 24 -background lightblue -fill navy 'labe
       `,
     inputFiles: ['test/assets/helvetica.ttf']
   })
-  writeFileSync('tmp_222.png',result.outputFiles[0].content)
+  writeFileSync('tmp_222.png', result.outputFiles[0].content)
   t.true(await imageCompare(result.outputFiles[0], await File.fromFile('test/assets/text2.png')))
 })
 

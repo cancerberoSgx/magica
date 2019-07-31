@@ -16,7 +16,7 @@ test('webp read', async t => {
       `,
     inputFiles: ['test/assets/ear.webp']
   })
-  t .deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')&&!s.includes('Calling stub instead of')), [])
+  t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
   t.falsy(result.error)
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'gif', mime: 'image/gif' })
   t.true(await imageCompare(await File.fromFile('test/assets/ear.webp'), result.outputFiles[0]))
