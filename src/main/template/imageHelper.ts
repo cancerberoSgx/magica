@@ -62,17 +62,3 @@ export class WidthHelper implements TemplateHelper<Options, Promise<number>> {
     return await this.exec(options)
   }
 }
-
-// export class PixelColorHelper implements TemplateHelper<Options, Promise<ExtractInfoResultImage>> {
-//   public name = 'pixel'
-//   protected async exec(options: Options) {
-//     var file = asArray(typeof options.file === 'string' ? await File.resolve(options.file) : options.file).filter(notUndefined).map(File.asFile)
-//     return await file[0].info()
-//   }
-//   public async fnCompileTime(options: Options) {
-//     return await this.exec(options)
-//   }
-//   public async fnRunTime(options: Options) {
-//     return await this.exec(options)
-//   }
-// }

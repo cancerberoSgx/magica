@@ -25,22 +25,6 @@ export async function imageInfo(img?: IFile | string | (IFile | string)[]): Prom
   return obj
 }
 
-/**
- * Execute `convert $IMG info.json` to extract image metadata. Returns the parsed image.geometry object 
- */
-// export async function bounds(img: File | string): Promise<ExtractInfoResultGeometry[]> {
-// var info = await imageInfo(img)
-// return info.length>0 ? info[0].image.geometry : undefined
-// const r = await main({
-//   inputFiles: [...typeof img === 'string' ? [] : [img]],
-//   command: ['convert', typeof img === 'string' ? img : img.name, 'imgInfo.json']
-// })
-// equal(r.outputFiles.length, 1)
-// const s = File.toString(r.outputFiles[0])
-// const obj = JSON.parse(s)
-// return obj
-// }
-
 // the following is ExtractInfoResult json output semi automatically translated to TypeScript.
 
 interface ExtractInfoResult {

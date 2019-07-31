@@ -8,4 +8,4 @@
 
 ### Classes
 
-* [FSHelper](../classes/_main_template_fshelper_.fshelper.md)
+* [LSHelper](../classes/_main_template_fshelper_.lshelper.md)

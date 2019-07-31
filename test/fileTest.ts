@@ -1,12 +1,12 @@
 import test from 'ava'
 import fetch from 'cross-fetch'
+import { readFileSync } from 'fs'
 import { rm } from 'shelljs'
 import { imageInfo } from '../src'
 import { File } from '../src/file/file'
 import { main } from '../src/main/main'
 import { getOption } from '../src/options'
 import fileType = require('file-type')
-import { readFileSync } from 'fs';
 
 test('from url request as array buffer view', async t => {
   const u = 'https://cancerberosgx.github.io/demos/geometrizejs-cli/bridge.jpg', o = {}
@@ -76,7 +76,7 @@ test('size()', async t => {
 test('isFile()', async t => {
   var f = await File.fromFile('test/assets/n.png')
   t.true(File.isFile(f))
-  var f2 = {name: 'foo.png', content: readFileSync('test/assets/n.png')}
+  var f2 = { name: 'foo.png', content: readFileSync('test/assets/n.png') }
   t.false(File.isFile(f2))
 })
 

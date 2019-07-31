@@ -31,22 +31,12 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
   debug && console.log('main call given options: ', o)
   FS.chdir(emscriptenNodeFsRoot)
   const files = await File.resolve(o.inputFiles)
-  // console.log('Buffer.from(f.content.buffer).toString()', Buffer.from(files[0].content.buffer).toString());
-  // console.log('Buffer.from(f.content.buffer).toString()', Buffer.from(files[0].content as any).toString());
   files.forEach(f => {
     const dirName = getFileDir(f.name)
-    // FS.chdir(emscriptenNodeFsRoot)
     if (dirName.trim()) {
       mkdirp(dirName, p => FS.analyzePath(p).exists, FS.mkdir)
     }
-    // console.log(dirName, f.name,  f.content);
-    // FS.chdir(emscriptenNodeFsRoot)
-    
-    FS.writeFile(f.name, f.content )
-
-    // FS.writeFile(f.name, f.content, { encoding: 'binary', flags: 'w+' })
-    // console.log(Buffer.from(FS.readFile(f.name)).toString());
-    
+    FS.writeFile(f.name, f.content)
   })
 
   const beforeTree = listFilesRecursively(emscriptenNodeFsRoot, FS)
@@ -90,9 +80,9 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
   return {
     ...returnValue,
     outputFiles,
-      times: {
-        total: Date.now() - t0
-      },
+    times: {
+      total: Date.now() - t0
+    },
   }
 }
 

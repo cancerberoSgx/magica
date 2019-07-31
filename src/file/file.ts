@@ -1,30 +1,22 @@
 import { ok } from 'assert'
 import fetch from 'cross-fetch'
 import { existsSync, readFileSync } from 'fs'
-import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial, pathJoin } from 'misc-utils-of-mine-generic'
+import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial } from 'misc-utils-of-mine-generic'
+import { imageCompare } from '../image/imageCompare'
 import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
 import { imagePixelColor } from '../image/pixel'
 import { magickLoaded } from '../imageMagick/magickLoaded'
-import { getOption, getOptions } from '../options'
+import { getOption } from '../options'
 import { IFile } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
 import { isDir, isFile } from '../util/util'
 import { protectFile } from './protected'
 
 export class File implements IFile {
-  // public content: IFile['content']
 
   protected isProtected: boolean;
 
-  constructor(public name: string, public content: IFile['content']  , isProtected: boolean = false) {
-
-    // const { emscriptenNodeFsRoot, debug } = getOptions()
-
-    // if(!name.startsWith(emscriptenNodeFsRoot)) {
-    //   this.name = pathJoin(emscriptenNodeFsRoot, this.name)
-    // }
-    // this.content =  content instanceof ArrayBuffer ?  new Uint8ClampedArray(content) : content
-    // this.content = content instanceof ArrayBuffer ? new Uint8ClampedArray(content) : content
+  constructor(public name: string, public content: IFile['content'], isProtected: boolean = false) {
 
     this.isProtected = isProtected
     if (this.isProtected) {
@@ -79,12 +71,12 @@ export class File implements IFile {
     return File.toBase64(file)
   }
 
-  // /** 
-  //  * Returns base64 representation of this image in an encoded format like PNG  
-  //  */
-  // public async equals2(file?: File) {
-  //   return  await imageCompare(this, file)
-  // }
+  /** 
+   * Returns base64 representation of this image in an encoded format like PNG  
+   */
+  public async equals(file?: File) {
+    return await imageCompare(this, file)
+  }
 
 
 	/** 
@@ -110,12 +102,7 @@ export class File implements IFile {
       throw new Error('File.readFile() called in the browser.')
     }
     try {
-      var file =  new File(o.name || basename(f),  new Uint8Array( readFileSync(f)), o.protected)
-      // console.log('SEBA', readFileSync(f).toString(), 'SEBA');
-      
-  // console.log('asd', file.content.toString(), 'asd');
-  // console.log('asd', Buffer.from(file.content.buffer).toString());
-return file
+      return new File(o.name || basename(f), new Uint8Array(readFileSync(f)), o.protected)
     } catch (error) {
       console.error(error)
       return undefined

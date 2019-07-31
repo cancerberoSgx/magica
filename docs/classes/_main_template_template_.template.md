@@ -33,7 +33,7 @@
 
 \+ **new Template**(): *[Template](_main_template_template_.template.md)*
 
-*Defined in [main/template/template.ts:13](https://github.com/cancerberoSgx/magica/blob/5aa0082/src/main/template/template.ts#L13)*
+*Defined in [main/template/template.ts:13](https://github.com/cancerberoSgx/magica/blob/c182367/src/main/template/template.ts#L13)*
 
 **Returns:** *[Template](_main_template_template_.template.md)*
 
@@ -45,7 +45,7 @@
 
 *Implementation of [CommandPreprocessor](../interfaces/_types_.commandpreprocessor.md).[name](../interfaces/_types_.commandpreprocessor.md#name)*
 
-*Defined in [main/template/template.ts:26](https://github.com/cancerberoSgx/magica/blob/5aa0082/src/main/template/template.ts#L26)*
+*Defined in [main/template/template.ts:26](https://github.com/cancerberoSgx/magica/blob/c182367/src/main/template/template.ts#L26)*
 
 ## Methods
 
@@ -53,7 +53,7 @@
 
 ▸ **fnCompileTime**(`context`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<RunOptions>`*
 
-*Defined in [main/template/template.ts:28](https://github.com/cancerberoSgx/magica/blob/5aa0082/src/main/template/template.ts#L28)*
+*Defined in [main/template/template.ts:28](https://github.com/cancerberoSgx/magica/blob/c182367/src/main/template/template.ts#L28)*
 
 **Parameters:**
 
@@ -69,7 +69,7 @@ ___
 
 ▸ **fnRuntime**(`commandOptions`: [Options](../interfaces/_types_.options.md), `commandIndex`: number, `runOptions`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<void>`*
 
-*Defined in [main/template/template.ts:44](https://github.com/cancerberoSgx/magica/blob/5aa0082/src/main/template/template.ts#L44)*
+*Defined in [main/template/template.ts:44](https://github.com/cancerberoSgx/magica/blob/c182367/src/main/template/template.ts#L44)*
 
 **Parameters:**
 

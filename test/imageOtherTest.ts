@@ -3,7 +3,6 @@ import { File, imageCompare, run } from '../src'
 import { imageBuiltIn } from '../src/image/imageBuiltIn'
 import { imagePixelColor } from '../src/image/pixel'
 import { listFormat } from '../src/image/support'
-import { writeFileSync, readFileSync } from 'fs';
 
 test('imagePixelColor', async t => {
   const c = await imagePixelColor(await File.fromFile('test/assets/n.png'), 20, 20)
@@ -32,7 +31,7 @@ test('fft', async t => {
     convert -size 32x32 gradient: -chop 0x1 -rotate 90 -evaluate sine 16 sine4.png
     convert sine4.png -fft +delete -contrast-stretch 0 -evaluate log 100 sine4_spectrum.png`
   })
-  
+
   t.deepEqual(undefined, c.error)
   t.true(await imageCompare(await File.fromFile('test/assets/fft1.png'), c.outputFiles[0]))
   // writeFileSync('tmp33.png', a.content)

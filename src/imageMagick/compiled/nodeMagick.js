@@ -33,7 +33,6 @@ Object.assign(Module, {
   },
   onRuntimeInitialized: function () {
     debug && console.log('Emscripten Module.onRuntimeInitialized ')
-    // console.log(FS.readdir('/etc/ImageMagick-7'));
     magickLoaded.resolve({
       FS, main: require('../createMain').createMain(Module, FS)
     })

@@ -1,13 +1,11 @@
 import test from 'ava'
 import { execSync } from 'child_process'
-import { run, File, imageCompare, main } from '../src';
-import fileType = require('file-type');
-import { writeFileSync } from 'fs';
+import { writeFileSync } from 'fs'
+import { File, imageCompare, main, run } from '../src'
+import fileType = require('file-type')
 
 test.serial('identify', async t => {
   let r = execSync('npx ts-node -T test/assets/formatConvertIdentifyScript.ts')
-  // console.log(r.toString());
-  // t.notThrows(() => r = execSync('npx ts-node -T test/assets/formatConvertIdentifyScript.ts'))
   t.true(r.toString().includes('total time:'))
 })
 
@@ -16,10 +14,9 @@ test('webp read', async t => {
     script: `
       convert ear.webp -scale 200% ear.gif
       `,
-    // debug: true,
     inputFiles: ['test/assets/ear.webp']
-  }) 
-   t.deepEqual(result.stderr, [])
+  })
+  t.deepEqual(result.stderr, [])
   t.falsy(result.error)
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'gif', mime: 'image/gif' })
   t.true(await imageCompare(await File.fromFile('test/assets/ear.webp'), result.outputFiles[0]))
@@ -31,10 +28,8 @@ test('webp read main', async t => {
     command: `
       convert ear.webp -scale 200% ear.png
       `.trim().split(' '),
-    // debug: true,
     inputFiles: ['test/assets/ear.webp']
-  }) 
-  //  t.deepEqual(result.stderr, [])
+  })
   t.falsy(result.error)
   writeFileSync('tmp.png', result.outputFiles[0].content)
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'png', mime: 'image/png' })

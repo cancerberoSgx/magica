@@ -20,11 +20,11 @@
 
 ## Implemented by
 
-* [FSHelper](../classes/_main_template_fshelper_.fshelper.md)
-* [HeightHelper](../classes/_main_template_sizehelper_.heighthelper.md)
-* [ImageInfoHelper](../classes/_main_template_sizehelper_.imageinfohelper.md)
-* [SizeHelper](../classes/_main_template_sizehelper_.sizehelper.md)
-* [WidthHelper](../classes/_main_template_sizehelper_.widthhelper.md)
+* [HeightHelper](../classes/_main_template_imagehelper_.heighthelper.md)
+* [ImageInfoHelper](../classes/_main_template_imagehelper_.imageinfohelper.md)
+* [LSHelper](../classes/_main_template_fshelper_.lshelper.md)
+* [SizeHelper](../classes/_main_template_imagehelper_.sizehelper.md)
+* [WidthHelper](../classes/_main_template_imagehelper_.widthhelper.md)
 
 ## Index
 
@@ -40,7 +40,7 @@
 
 • **fnCompileTime**: *function*
 
-*Defined in [main/template/template.ts:9](https://github.com/cancerberoSgx/magica/blob/5aa0082/src/main/template/template.ts#L9)*
+*Defined in [main/template/template.ts:9](https://github.com/cancerberoSgx/magica/blob/c182367/src/main/template/template.ts#L9)*
 
 #### Type declaration:
 
@@ -58,7 +58,7 @@ ___
 
 • **fnRunTime**? : *undefined | function*
 
-*Defined in [main/template/template.ts:10](https://github.com/cancerberoSgx/magica/blob/5aa0082/src/main/template/template.ts#L10)*
+*Defined in [main/template/template.ts:10](https://github.com/cancerberoSgx/magica/blob/c182367/src/main/template/template.ts#L10)*
 
 ___
 
@@ -66,4 +66,4 @@ ___
 
 • **name**: *string*
 
-*Defined in [main/template/template.ts:8](https://github.com/cancerberoSgx/magica/blob/5aa0082/src/main/template/template.ts#L8)*
+*Defined in [main/template/template.ts:8](https://github.com/cancerberoSgx/magica/blob/c182367/src/main/template/template.ts#L8)*

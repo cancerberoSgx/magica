@@ -4,7 +4,6 @@ import { IFile } from '../types'
 import { imageInfo } from './imageInfo'
 
 let builtInImages: IFile[]
-// export enum imageBuiltInNames {'rose:'='rose:', 'logo:'='logo:', 'wizard:'='wizard:', 'granite:'='granite:', 'netscape:'='netscape:'}
 type images = 'rose:' | 'logo:' | 'wizard:' | 'granite:' | 'netscape:'
 const names: images[] = ['rose:', 'logo:', 'wizard:', 'granite:', 'netscape:']
 /**
@@ -23,10 +22,3 @@ export async function imageBuiltIn(builtIn?: images): Promise<IFile[]> {
   return builtIn ? builtInImages.filter(i => i.name === builtIn) : builtInImages
 }
 
-// /**
-//  * shortcut of {@link getBuiltInImages} to get a single image by name
-//  */
-// export async function getBuiltInImage(name: string): Promise<File> {
-//   const images = await imageBuiltIn()
-//   return images.find(f => f.name === name)
-// }

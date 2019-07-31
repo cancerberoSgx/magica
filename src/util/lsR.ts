@@ -2,18 +2,22 @@ import { basename, pathJoin } from 'misc-utils-of-mine-generic'
 import { FS } from '../file/emscriptenFs'
 
 interface Options {
+
   /**
    * Folder path to list files.
    */
   path: string
+
   /**
    * list files in given folder. Returns children files and folders base names.
    */
   ls: (f: string) => string[]
+
   /**
    * return true if given file is a directory.
    */
   isDir: (f: string) => boolean
+  
   /**
    * If true is returned the visit will stop.
    */
