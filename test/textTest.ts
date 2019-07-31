@@ -21,6 +21,6 @@ test('should list available fonts', async t => {
   })
   t.deepEqual(result.error, undefined)
   t.deepEqual(result.stdout, [])
-  // t.deepEqual(result.stderr, [])
+  t. deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')&&!s.includes('Calling stub instead of')), [])
 })
 

@@ -4,7 +4,7 @@
 
 source <%= scriptsFolder %>/base.sh
 
-<%= dontClean ? '' : 'rm -rf $PREFIX' %>
+<%= noClean ? '# ' : '' %>rm -rf $PREFIX
 
 <%= addLib('zlib') %>
 

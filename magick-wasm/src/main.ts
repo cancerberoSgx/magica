@@ -20,7 +20,7 @@ export const defaultOptions: Required<Options> = {
 export function main(o: Options) {
   const allOptions: Required<Options> = { ...defaultOptions, ...o }
   allOptions.debug && console.log(allOptions);
-  // !allOptions.dontClean && rm('-rf', allOptions.outputFolder)
+  // !allOptions.noClean && rm('-rf', allOptions.outputFolder)
   renderTemplates(allOptions)
   // if (test('-f', `./build/${allOptions.scriptsFolder}/Dockerfile`)) {
   //   rm('-rf', `./build/${allOptions.scriptsFolder}`)

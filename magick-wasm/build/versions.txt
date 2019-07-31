@@ -1,5 +1,5 @@
 Packages repos and versions of wasm compilation
-Wed Jul 31 14:10:04 UTC 2019
+Wed Jul 31 19:12:40 UTC 2019
 fftw:  - 
 freetype: https://github.com/ImageMagick/freetype.git - 598ad7c
 libjpeg: https://github.com/KnicKnic/libjpeg.git - fbaf3bf

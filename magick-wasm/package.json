@@ -24,7 +24,7 @@
     "glob": "^7.1.4",
     "minimist": "^1.2.0",
     "misc-utils-of-mine-generic": "^0.2.15",
-    "shelljs": "^0.8.3"
+    "shelljs": "^0.8.3",
   },
   "devDependencies": {
     "@types/ejs": "^2.6.3",

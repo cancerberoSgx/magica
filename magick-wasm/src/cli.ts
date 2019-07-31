@@ -6,7 +6,7 @@ export function cli(o:Options) {
     printHelp()
     process.exit(0)
   }
-  const librariesS = o.libraries as any as string || defaultLibraries.join(',')
+  const librariesS = o.noLibraries ? '' : (o.libraries as any as string || defaultLibraries.join(','))
   o.libraries = librariesS.split(',') as any
   main(o)
 }

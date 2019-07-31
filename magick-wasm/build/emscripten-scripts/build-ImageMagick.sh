@@ -4,29 +4,44 @@
 
 source emscripten-scripts/base.sh
 
+SKIP_CONFIG=1
+SKIP_BUILD=0
+
 mkdir -p $PREFIX/src
 cd $PREFIX/src
 
 if [ ! -d "ImageMagick" ]; then
+  SKIP_CONFIG=0
+  SKIP_BUILD=0
   git clone https://github.com/ImageMagick/ImageMagick.git
-else
+elif [ "$SKIP_BUILD" -eq "0" ]; then
   ( cd ImageMagick ; make clean )
 fi
 
 cd ImageMagick
 
-autoconf
+if [ "$SKIP_CONFIG" -eq "0" ]; then
 
-emconfigure ./configure --prefix="$PREFIX" \
-  --without-threads --disable-shared --disable-openmp --enable-static --without-lcms \
-  --disable-docs --without-bzlib --without-magick-plus-plus \
-  --without-heic --without-raw --without-perl --without-lzma --without-x \
-  --disable-largefile --without-modules --without-jbig --without-dps --without-fontconfig \
-  --with-quantum-depth=16 --enable-hdri=yes --with-utilities \
-   PKG_CONFIG_PATH="$PKG_CONFIG_PATH" LDFLAGS="$LDFLAGS" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" 
+  autoconf
 
-testExitCode "ImageMagick emconfigure" $?
+  emconfigure ./configure --prefix="$PREFIX" \
+    --without-threads --disable-shared --disable-openmp --enable-static --without-lcms \
+    --disable-docs --without-bzlib --without-magick-plus-plus \
+    --without-heic --without-raw --without-perl --without-lzma --without-x \
+    --disable-largefile --without-modules --without-jbig --without-dps --without-fontconfig \
+    --with-quantum-depth=16 --enable-hdri=yes --with-utilities \
+    PKG_CONFIG_PATH="$PKG_CONFIG_PATH" LDFLAGS="$LDFLAGS" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" 
 
-emcmake make install PKG_CONFIG_PATH="$PKG_CONFIG_PATH" LDFLAGS="$LDFLAGS" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+  testExitCode "ImageMagick emconfigure" $?
 
-testExitCode "ImageMagick emcmake make install" $?
+fi
+
+
+if [ "$SKIP_BUILD" -eq "0" ]; then
+
+echo "ImageMagick make install"
+  emcmake make install PKG_CONFIG_PATH="$PKG_CONFIG_PATH" LDFLAGS="$LDFLAGS" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
+
+  testExitCode "ImageMagick make install" $?
+
+fi

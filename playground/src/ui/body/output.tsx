@@ -15,7 +15,7 @@ export class Output extends AbstractComponent {
 
       <Segment>
 
-        {output.map(f =>
+        {output.reverse().map(f =>
           <> <a href="" onClick={e => {
             var blob = new Blob([f.content])
             FileSaver.saveAs(blob, f.name)

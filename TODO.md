@@ -6,6 +6,8 @@
 
 - [ ] performance tests in the browser
 - [ ] do the same as mainConcurrency for run()
+- [ ] concat run(): `var r1 = await run(...) ... var r2 = await run({script, inputFiles: await File.fromResult(r1)})
+- [ ] options should allow to define a different nodeJsFsRoot or emscriptenFsRoot 
 - [ ] remove / replace knownSupportedReadWriteImageFormats with listFormat() - formatTest should use that.
 - [ ] listFormat() should parse read/write info too
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout

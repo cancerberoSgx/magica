@@ -22,7 +22,7 @@ async function test() {
             })
             const outputFiles = result.outputFiles
             deepEqual(result.error, undefined)
-            deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')), [])
+            deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')&&!s.includes('Calling stub instead of')), [])
             result = await main({
               command: `identify  ${outputFiles[0].name}`,
               inputFiles: outputFiles,
@@ -31,7 +31,7 @@ async function test() {
               ;
             [format, '128x128'].forEach(s => assertIncludes(result.stdout.join('').toLowerCase(), s.toLowerCase()))
             deepEqual(result.error, undefined)
-            deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')), [])
+            deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')&&!s.includes('Calling stub instead of')), [])
 
             await serial(
               knownSupportedReadWriteImageFormats
@@ -44,7 +44,7 @@ async function test() {
                       // debug: true
                     })
                     deepEqual(result2.error, undefined)
-                    deepEqual(result2.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')), [])
+                    deepEqual(result2.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')&&!s.includes('Calling stub instead of')), [])
                     const c = `identify  ${result2.outputFiles[0].name}`
 
                     // tga/ico/otb to xcf conversion produces invalid output and identify fails silently  - no catch, no error, program ends abruptly - 
@@ -66,7 +66,7 @@ async function test() {
                       [format2, '64x64'].forEach(s => assertIncludes(result2.stdout.join('').toLowerCase(), s.toLowerCase()))
                       console.log('Result for "' + c + '"', result2.stdout, result2.stderr, result2.error, result2.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')));
                       deepEqual(result2.error, undefined)
-                      deepEqual(result2.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')), [])
+                      deepEqual(result2.stderr.filter(s => !s.includes('UnableToOpenConfigureFile')&&!s.includes('Calling stub instead of')), [])
                     } catch (error) {
                       console.error('ERRRRRR', { error }, error);
                       ok(!error)

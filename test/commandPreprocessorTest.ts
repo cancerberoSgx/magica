@@ -1,6 +1,7 @@
 import test from 'ava'
 import { File } from '../src'
 import { run } from '../src/main/run'
+import { notUndefined } from 'misc-utils-of-mine-generic';
 
 test('script template', async t => {
   const result = await run({
@@ -28,6 +29,39 @@ test('script with template, comments multi lines and spaces', async t => {
 })
 
 
+test('custom commands', async (t) => {
+  const script = `
+  convert rose: bar.gif
+  {  this.pushStdout('hello') }
+  {  this.pushStdout(...FS.readdir('.')) } `
+  var result = await run({
+    script,
+    protectOutputFiles: true,
+  })
+  t.deepEqual(result.stdout.filter(notUndefined), ['hello', 'bar.gif'])
+  result = await run({
+    script
+  })
+  t.deepEqual(result.stdout.filter(notUndefined), ['hello'])
+
+})
+
+// test('custom commands and templates together', async (t) => {
+//   const script = `
+//   <%= var img %>
+//   { img = await run({script}) this.pushStdout('hello') }
+//   {  this.pushStdout(...FS.readdir('.')) } `
+//   var result = await run({
+//     script,
+//     protectOutputFiles: true,
+//   })
+//   t.deepEqual(result.stdout.filter(notUndefined), ['hello', 'bar.gif'])
+//   result = await run({
+//     script
+//   })
+//   t.deepEqual(result.stdout.filter(notUndefined), ['hello'])
+
+// })
 
 test.todo('register new processor')
 

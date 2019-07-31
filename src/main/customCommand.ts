@@ -3,6 +3,8 @@ import { File } from '../file/file'
 import { NativeResult } from '../imageMagick/createMain'
 import { getStderr, getStdout, pushStderr, pushStdout, resetStderr, resetStdout } from '../imageMagick/magickLoaded'
 import { Options } from '../types'
+import { run } from './run';
+import { main } from './main';
 
 export async function isCustomCommand(c: string[], o: Partial<Options>) {
   return c[0].trim().startsWith('{')
@@ -18,6 +20,8 @@ interface CustomCommandContext {
   fileExists(f: string): boolean
   readFile(f: string): File
   isDirectory(f: string): boolean
+  run: typeof run
+  main: typeof main
 }
 
 class CustomCommandContextImpl implements CustomCommandContext {
@@ -45,6 +49,9 @@ class CustomCommandContextImpl implements CustomCommandContext {
   writeFile(f: File) {
     this.FS.writeFile(f.name, f.content)
   }
+
+  main = main
+  run = run
 
 }
 
