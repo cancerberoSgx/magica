@@ -4,7 +4,7 @@ import { setExample } from '../app/dispatcher'
 import { examples } from '../app/examples'
 import { About } from './about'
 import { AbstractComponent } from './common/component'
-import { printMs } from './common/urlState';
+import { printMs } from './common/urlState'
 
 export class Header extends AbstractComponent {
   render() {
@@ -15,7 +15,7 @@ export class Header extends AbstractComponent {
         </Dropdown.Menu>
       </Dropdown>
       <Menu.Item>{this.state.working ? <div style={{ color: 'red' }}>WORKING</div> : 'IDLE'}</Menu.Item>
-      <Menu.Item> <div>{this.state.result && this.state.result.times && printMs(this.state.result.times.total, {seconds: true, ms: false})||''}</div></Menu.Item>
+      <Menu.Item> <div>{this.state.result && this.state.result.times && printMs(this.state.result.times.total) || ''}</div></Menu.Item>
       <Menu.Menu position="right">
         <Modal trigger={<Menu.Item as='a' icon="help">About</Menu.Item>}>
           <Modal.Header>About</Modal.Header>

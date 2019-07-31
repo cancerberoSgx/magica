@@ -7,12 +7,18 @@ export interface Context {
   scriptsFolder?: string
   type?: 'debug'|'production'
   dontCleanPrefix?: boolean
+  quantumDepth?: '8'|'16'|'32',
+  hdri?: boolean
 }
 
 const defaultContext: Required<Context> = {
   scriptsFolder: 'emscripten-scripts',
   type: 'production',
-  dontCleanPrefix: false
+  dontCleanPrefix: false,
+  /** the greater the more memory it consumes */
+  quantumDepth: '16',
+  /** impact speed */
+  hdri: true
 }
 
 export function renderTemplates(context: Context = defaultContext) {

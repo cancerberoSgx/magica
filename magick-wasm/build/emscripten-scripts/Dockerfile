@@ -1,3 +1,5 @@
+# This file is auto-generated from src/templates
+
 FROM trzeci/emscripten:sdk-tag-1.38.32-64bit
 
 RUN apt-get update -y

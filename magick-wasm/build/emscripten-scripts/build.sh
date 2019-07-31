@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This file is auto-generated from src/templates
+
 source emscripten-scripts/base.sh
 
 rm -rf $PREFIX
@@ -20,7 +22,6 @@ cd $CURRENT_DIR
 source emscripten-scripts/build-tiff.sh
 testExitCode "build-tiff" $?
 
-
 # # jpeg-turbo library supodsely implements libjpeg but it doesn't work on most images
 # cd $CURRENT_DIR
 # source emscripten-scripts/build-jpeg-turbo.sh
@@ -30,7 +31,6 @@ testExitCode "build-tiff" $?
 # cd $CURRENT_DIR
 # source emscripten-scripts/build-openjpeg.sh
 # testExitCode "build-openjpeg" $?
-
 
 cd $CURRENT_DIR
 source emscripten-scripts/build-freetype.sh

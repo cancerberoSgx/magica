@@ -1,2 +1,2 @@
-export const buildFolder = 'build2';
+export const buildFolder = 'build';
 export const templatesFolder = 'src/templates';

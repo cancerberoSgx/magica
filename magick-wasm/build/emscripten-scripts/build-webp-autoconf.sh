@@ -1,4 +1,5 @@
 # #!/bin/bash
+# This file is auto-generated from src/templates
 source emscripten-scripts/base.sh
 
 mkdir -p $PREFIX/src
