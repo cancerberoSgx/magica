@@ -16,7 +16,7 @@
 
 ▸ **imagePixelColor**(`img`: [IFile](../interfaces/_types_.ifile.md) | undefined, `x`: number, `y`: number): *`Promise<string | undefined>`*
 
-*Defined in [image/pixel.ts:5](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/image/pixel.ts#L5)*
+*Defined in [image/pixel.ts:5](https://github.com/cancerberoSgx/magica/blob/1131304/src/image/pixel.ts#L5)*
 
 **Parameters:**
 

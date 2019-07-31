@@ -6,6 +6,7 @@ import { imageInfo } from './imageInfo'
 let builtInImages: IFile[]
 type images = 'rose:' | 'logo:' | 'wizard:' | 'granite:' | 'netscape:'
 const names: images[] = ['rose:', 'logo:', 'wizard:', 'granite:', 'netscape:']
+
 /**
  * Gets ImageMagick built-in images like `rose:`, `logo:`, etc in the form of {@link File}s. 
  * @param builtIn if given it will resolve with with an array contianing only that image 

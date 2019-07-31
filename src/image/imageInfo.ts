@@ -1,7 +1,6 @@
 import { equal } from 'assert'
 import { asArray, notUndefined } from 'misc-utils-of-mine-generic'
 import { File } from '../file/file'
-// import { File, IFile } from '..'
 import { main } from '../main/main'
 import { IFile } from '../types'
 
@@ -24,8 +23,6 @@ export async function imageInfo(img?: IFile | string | (IFile | string)[]): Prom
   const obj = JSON.parse(s)
   return obj
 }
-
-// the following is ExtractInfoResult json output semi automatically translated to TypeScript.
 
 interface ExtractInfoResult {
   image: ExtractInfoResultImage

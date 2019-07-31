@@ -20,7 +20,7 @@
 
 ▸ **imageInfo**(`img?`: [IFile](../interfaces/_types_.ifile.md) | string | string | [IFile](../interfaces/_types_.ifile.md)[]): *`Promise<ExtractInfoResult[]>`*
 
-*Defined in [image/imageInfo.ts:12](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/image/imageInfo.ts#L12)*
+*Defined in [image/imageInfo.ts:11](https://github.com/cancerberoSgx/magica/blob/1131304/src/image/imageInfo.ts#L11)*
 
 Execute `convert $IMG info.json` to extract image metadata. Returns the parsed info.json file contents
 

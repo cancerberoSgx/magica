@@ -29,7 +29,7 @@
 
 • **magickLoaded**: *`Deferred<Main, any>`* =  new Deferred<Main>()
 
-*Defined in [imageMagick/magickLoaded.ts:12](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/imageMagick/magickLoaded.ts#L12)*
+*Defined in [imageMagick/magickLoaded.ts:12](https://github.com/cancerberoSgx/magica/blob/1131304/src/imageMagick/magickLoaded.ts#L12)*
 
 ## Functions
 
@@ -37,7 +37,7 @@
 
 ▸ **getStderr**(): *string[]*
 
-*Defined in [imageMagick/magickLoaded.ts:34](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/imageMagick/magickLoaded.ts#L34)*
+*Defined in [imageMagick/magickLoaded.ts:34](https://github.com/cancerberoSgx/magica/blob/1131304/src/imageMagick/magickLoaded.ts#L34)*
 
 **Returns:** *string[]*
 
@@ -47,7 +47,7 @@ ___
 
 ▸ **getStdout**(): *string[]*
 
-*Defined in [imageMagick/magickLoaded.ts:22](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/imageMagick/magickLoaded.ts#L22)*
+*Defined in [imageMagick/magickLoaded.ts:22](https://github.com/cancerberoSgx/magica/blob/1131304/src/imageMagick/magickLoaded.ts#L22)*
 
 **Returns:** *string[]*
 
@@ -57,7 +57,7 @@ ___
 
 ▸ **pushStderr**(`s`: string): *void*
 
-*Defined in [imageMagick/magickLoaded.ts:27](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/imageMagick/magickLoaded.ts#L27)*
+*Defined in [imageMagick/magickLoaded.ts:27](https://github.com/cancerberoSgx/magica/blob/1131304/src/imageMagick/magickLoaded.ts#L27)*
 
 **Parameters:**
 
@@ -73,7 +73,7 @@ ___
 
 ▸ **pushStdout**(`s`: string): *void*
 
-*Defined in [imageMagick/magickLoaded.ts:15](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/imageMagick/magickLoaded.ts#L15)*
+*Defined in [imageMagick/magickLoaded.ts:15](https://github.com/cancerberoSgx/magica/blob/1131304/src/imageMagick/magickLoaded.ts#L15)*
 
 **Parameters:**
 
@@ -89,7 +89,7 @@ ___
 
 ▸ **resetStderr**(): *void*
 
-*Defined in [imageMagick/magickLoaded.ts:31](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/imageMagick/magickLoaded.ts#L31)*
+*Defined in [imageMagick/magickLoaded.ts:31](https://github.com/cancerberoSgx/magica/blob/1131304/src/imageMagick/magickLoaded.ts#L31)*
 
 **Returns:** *void*
 
@@ -99,6 +99,6 @@ ___
 
 ▸ **resetStdout**(): *void*
 
-*Defined in [imageMagick/magickLoaded.ts:19](https://github.com/cancerberoSgx/magica/blob/cc2de79/src/imageMagick/magickLoaded.ts#L19)*
+*Defined in [imageMagick/magickLoaded.ts:19](https://github.com/cancerberoSgx/magica/blob/1131304/src/imageMagick/magickLoaded.ts#L19)*
 
 **Returns:** *void*
