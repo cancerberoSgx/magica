@@ -4,6 +4,7 @@ import { run } from '../src/main/run'
 
 test('script template', async t => {
   const result = await run({
+    // debug: true,
     script: `
       identify <%= inputFiles[1].name%>
       `,

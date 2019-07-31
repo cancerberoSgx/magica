@@ -91,7 +91,7 @@ downloading http://www.fftw.org/fftw-3.3.8.tar.gz - no modifications needed - no
 
 ## webp
 
-from official IM project without modifications: https://github.com/ImageMagick/webp.git
+from official IM project without modifications: https://github.com/ImageMagick/webp.git. Uses its own webassembly build (-DWEBP_BUILD_WEBP_JS=on)
 
 ## turbo-jpeg (not included)
 

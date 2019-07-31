@@ -25,25 +25,38 @@ export interface Context {
    */
   scriptsFolder?: string
   templatesFolder?: string
+  libraries?:Library[]
 }
+type Library = 'fftw'|'freetype'|'libjpeg'|'libpng'|'tiff'|'webp'|'zlib'
 
+export const defaultLibraries: Library[] = ['fftw', 'freetype', 'libjpeg', 'libpng', 'tiff', 'webp', 'zlib'];
 export const defaultContext: Required<Context> = {
   type: 'production',
   dontClean: false,
   quantumDepth: '16',
   noHdri: false,
   scriptsFolder: 'emscripten-scripts',
-  templatesFolder: join(__dirname, '..', 'src', 'templates')
+  templatesFolder: join(__dirname, '..', 'src', 'templates'),
+  libraries: defaultLibraries
 }
 
 export function renderTemplates(context: Required<Options> = defaultOptions) {
   context = { ...defaultContext, ...context }
+  context = {...context, addLib: addLib.bind(context)} as any
   mkdir('-p', `${context.outputFolder}/${context.scriptsFolder}`);
   ls(context.templatesFolder)
     .filter(f => test('-f', `${context.templatesFolder}/${f}`) && f.endsWith('.ejs'))
     .map(f => ({ src: `${context.templatesFolder}/${f}`, dest: `${context.outputFolder}/${context.scriptsFolder}/${f.substring(0, f.length - '.ejs'.length)}` })).forEach(o => {
-      const t = compile(readFileSync(o.src).toString());
+      const t = compile(readFileSync(o.src).toString(), {escape: s=>s, rmWhitespace: false});
       const result = t(context);
       writeFileSync(o.dest, result);
     });
+}
+
+function addLib(this:  Required<Options> , lib:Library){
+return `
+cd $CURRENT_DIR
+source ${this.scriptsFolder}/build-${lib}.sh
+testExitCode "build-${lib}" $?
+`.trim().split('\n').map(l=>this.libraries.includes(lib) ? l : `# ${l}`).join('\n')
 }

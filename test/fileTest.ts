@@ -8,12 +8,12 @@ import { main } from '../src/main/main'
 import { getOption } from '../src/options'
 import fileType = require('file-type')
 
-test('from url request as array buffer view', async t => {
+test.serial('from url request as array buffer view', async t => {
   const u = 'https://cancerberosgx.github.io/demos/geometrizejs-cli/bridge.jpg', o = {}
   const r = await fetch(u, o)
   const result = await main({
     command: ['identify', 'bridge.jpg'],
-    debug: true,
+    // debug: true,
     inputFiles: [{ name: 'bridge.jpg', content: new Uint8Array(await r.arrayBuffer()) }]
   })
   t.true(result.stdout.join('').includes('bridge.jpg JPEG 500x333 500x333+0+0 8-bit sRGB 35527B'))
@@ -32,7 +32,7 @@ test('InputFile.fromUrl', async t => {
   t.falsy(result.error)
 })
 
-test('InputFile.fromFile', async t => {
+test.serial('InputFile.fromFile', async t => {
   let result = await main({
     command: ['convert', 'chala.tiff', '-scale', '200%', 'bigger.tiff'],
     inputFiles: [await File.fromFile('test/assets/chala.tiff')],
@@ -49,15 +49,17 @@ test('InputFile.fromFile', async t => {
   t.falsy(result.error)
 })
 
-test('accept array buffer view', async t => {
+test.serial('accept array buffer view', async t => {
   let result = await main({
     command: ['convert', 'chala.tiff', '-scale', '200%', 'bigger.tiff'],
+    // debug: true,
     inputFiles: [await File.fromFile('test/assets/chala.tiff')],
   })
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'tif', mime: 'image/tiff' })
   t.deepEqual(result.stderr, [])
   t.falsy(result.error)
   result = await main({
+    // debug: true,
     command: ['identify', 'bigger.tiff'],
     inputFiles: result.outputFiles
   })
@@ -66,7 +68,7 @@ test('accept array buffer view', async t => {
   t.falsy(result.error)
 })
 
-test('size()', async t => {
+test.serial('size()', async t => {
   var f = await File.fromFile('test/assets/n.png')
   var i = await imageInfo(f)
   t.deepEqual(i[0].image.mimeType, 'image/png')
@@ -81,7 +83,7 @@ test('isFile()', async t => {
 })
 
 test.serial('protected files are not erased', async t => {
-  rm('-rf', getOption('nodeFsLocalRoot'))
+  rm('-rf', getOption('nodeFsLocalRoot')+'/*')
   t.false(await File.fileExists('protected1.tiff'))
   t.false(await File.fileExists('unprotected1.tiff'))
   t.false(await File.fileExists('aa33ee.gif'))

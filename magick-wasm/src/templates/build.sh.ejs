@@ -6,43 +6,23 @@ source <%= scriptsFolder %>/base.sh
 
 <%= dontClean ? '' : 'rm -rf $PREFIX' %>
 
-cd $CURRENT_DIR
-source <%= scriptsFolder %>/build-zlib.sh
-testExitCode "build-zlib" $?
+<%= addLib('zlib') %>
 
-cd $CURRENT_DIR
-source <%= scriptsFolder %>/build-libjpeg.sh
-testExitCode "build-libjpeg" $?
+<%= addLib('libjpeg') %>
 
-cd $CURRENT_DIR
-source <%= scriptsFolder %>/build-libpng.sh
-testExitCode "build-libpng" $?
+<%= addLib('libpng') %>
 
-cd $CURRENT_DIR
-source <%= scriptsFolder %>/build-tiff.sh
-testExitCode "build-tiff" $?
+<%= addLib('tiff') %>
 
-# # jpeg-turbo library supodsely implements libjpeg but it doesn't work on most images
-# cd $CURRENT_DIR
-# source <%= scriptsFolder %>/build-jpeg-turbo.sh
-# testExitCode "build-jpeg-turbo" $?
+<%= addLib('jpeg-turbo') %>
 
-# # This compiles buy I really want to understand the value of this library before include it
-# cd $CURRENT_DIR
-# source <%= scriptsFolder %>/build-openjpeg.sh
-# testExitCode "build-openjpeg" $?
+<%= addLib('build-openjpeg') %>
 
-cd $CURRENT_DIR
-source <%= scriptsFolder %>/build-freetype.sh
-testExitCode "build-freetype" $?
+<%= addLib('freetype') %>
 
-cd $CURRENT_DIR
-source <%= scriptsFolder %>/build-fftw.sh
-testExitCode "build-fftw" $?
+<%= addLib('fftw') %>
 
-cd $CURRENT_DIR
-source <%= scriptsFolder %>/build-webp.sh
-testExitCode "build-webp" $?
+<%= addLib('webp') %>
 
 cd $CURRENT_DIR
 source <%= scriptsFolder %>/build-ImageMagick.sh

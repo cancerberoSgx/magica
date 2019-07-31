@@ -8,7 +8,7 @@
     "magica": "bin/magica.js"
   },
   "scripts": {
-    "test": "npm run build && npx ava --serial && npm run test-browser",
+    "test": "npm run build && npx ava --serial --concurrency 1 --config ava.config.js && npm run test-browser",
     "test-js": "exit 0; npm run build && npx ava ./dist/test/*Test.js --serial",
     "test-watch": "ava -w",
     "test-worker": "npm run build && cp dist/src/imageMagick/compiled/magick.wasm dist && parcel serve test-browser/webWorker/index.html",
@@ -38,7 +38,8 @@
     "glob": "^7.1.4",
     "js-base64": "^2.5.1",
     "minimist": "^1.2.0",
-    "misc-utils-of-mine-generic": "^0.2.15"
+    "misc-utils-of-mine-generic": "^0.2.15",
+    "p-queue": "^6.1.0"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^0.1.3",

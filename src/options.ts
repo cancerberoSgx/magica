@@ -6,7 +6,9 @@ let options: Required<NativeOptions> = {
   debug: false,
   outputDir: '.',
   disableNodeFs: false,
-  useNative: false
+  useNative: false,
+  mainConcurrency: 1,
+  mainInterval: 0
 }
 
 export function getOptions() {

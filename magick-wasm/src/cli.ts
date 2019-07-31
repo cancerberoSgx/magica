@@ -1,10 +1,13 @@
 import { Options, main } from './main';
+import { defaultLibraries } from './template';
 
 export function cli(o:Options) {
   if(o.help){
     printHelp()
     process.exit(0)
   }
+  const librariesS = o.libraries as any as string || defaultLibraries.join(',')
+  o.libraries = librariesS.split(',') as any
   main(o)
 }
 

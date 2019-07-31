@@ -4,7 +4,7 @@
 
 source emscripten-scripts/base.sh
 
-
+rm -rf $PREFIX
 
 cd $CURRENT_DIR
 source emscripten-scripts/build-zlib.sh
@@ -22,15 +22,13 @@ cd $CURRENT_DIR
 source emscripten-scripts/build-tiff.sh
 testExitCode "build-tiff" $?
 
-# # jpeg-turbo library supodsely implements libjpeg but it doesn't work on most images
 # cd $CURRENT_DIR
 # source emscripten-scripts/build-jpeg-turbo.sh
 # testExitCode "build-jpeg-turbo" $?
 
-# # This compiles buy I really want to understand the value of this library before include it
 # cd $CURRENT_DIR
-# source emscripten-scripts/build-openjpeg.sh
-# testExitCode "build-openjpeg" $?
+# source emscripten-scripts/build-build-openjpeg.sh
+# testExitCode "build-build-openjpeg" $?
 
 cd $CURRENT_DIR
 source emscripten-scripts/build-freetype.sh

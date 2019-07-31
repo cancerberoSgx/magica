@@ -11,8 +11,14 @@ export interface TemplateHelper<O = any, R = any, RO = any, RR = any> {
 }
 
 export class Template implements CommandPreprocessor {
+  protected templateOptions: { async: boolean; escape: (s: string) => string; rmWhitespace: boolean; };
+  protected templateRuntimeOptions: { delimiter: string; async: boolean; escape: (s: string) => string; rmWhitespace: boolean; };
 
   constructor() {
+
+   this. templateOptions = { async: true, escape: (s:string) => s, rmWhitespace: false };
+  this.templateRuntimeOptions = {...this.templateOptions, delimiter: '$'}
+
     if (!installed) {
       installed = true
       addTemplateHelper(new LSHelper())
@@ -27,7 +33,7 @@ export class Template implements CommandPreprocessor {
 
   public async fnCompileTime(context: RunOptions) {
     if (typeof context.script === 'string') {
-      const t = compile(context.script, { async: true })
+      const t = compile(context.script, this.templateOptions)
       context.debug && console.log('Template compiled: ', t.toString())
       let c: { [s: string]: any } = { ...context }
       templateHelpers.forEach(fn => {
@@ -41,9 +47,10 @@ export class Template implements CommandPreprocessor {
     }
   }
 
+
   public async fnRuntime(commandOptions: Options, commandIndex: number, runOptions: RunOptions) {
     var cs = commandOptions.command === 'string' ? commandOptions.command : !commandOptions.command ? '' : arrayToCliOne(commandOptions.command as any)
-    const t = compile(cs, { delimiter: '$', async: true })
+    const t = compile(cs, this.templateRuntimeOptions)
     let c: { [s: string]: any } = { runOptions, commandOptions }
     templateHelpers.filter(t => t.fnRunTime).forEach(fn => {
       c[fn.name] = fn.fnRunTime!.bind(fn)

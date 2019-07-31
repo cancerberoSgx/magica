@@ -47,6 +47,16 @@ export interface NativeOptions extends BaseOptions {
    * If true and when running on node.js, and only if image magick commands are available in the local system, it will execute the commands using the local native ImageMagick commands, instead of running them though the emscripten port (which is slower and support less capabilities).
    */
   useNative?: boolean
+
+  /**
+   * main() commands are queued and this defines de limit of running commands at the same time. it's no so important since the main() call is synch but files/urls are resolved also so this has an impact on those async operations
+   */
+  mainConcurrency: 1,
+  /**
+   * main() commands are queued and this is the milliseconds to wait before starting a new main command
+   */
+  mainInterval: 0
+
 }
 
 interface BaseOptions {
