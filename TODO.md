@@ -6,45 +6,56 @@
 
 - [ ] performance tests in the browser
 - [ ] do the same as mainConcurrency for run()
-- [ ] concat run(): `var r1 = await run(...) ... var r2 = await run({script, inputFiles: await File.fromResult(r1)})
 - [ ] options should allow to define a different nodeJsFsRoot or emscriptenFsRoot 
 - [ ] remove / replace knownSupportedReadWriteImageFormats with listFormat() - formatTest should use that.
 - [ ] distribute magica as esm module (< script type"=mo>)
-- [ ] distribute magica as UMD file (< script src="cdn/magica.js> ... and now I can use it with requirejs or as global)
 - [ ] listFormat() should parse read/write info too
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
 - [ ] fix npm run test-js  
 - [ ] emscripten port generation configurable
-- [ ] fix format tests (broken with new wasm)
-- [ ] test fftw
-- [ ] test mng animations (A PNG-like Image Format Supporting Multiple Images, Animation and Transparent JPEG. Requires libpng-1.0.)
-- [ ] test webp
-- [ ] CLI options for run({script})
+- [ ] test mng animations "(A PNG-like Image Format Supporting Multiple Images, Animation and Transparent JPEG. Requires libpng-1.0.)"
 - [ ] I should be able to make output files protected y config.
 - [ ] run scriptListener  . finish and test it or drop it
-- [ ] verify support IM command quoted arguments
 - [ ] test mkdir -p for output files   
 - [ ] because options are global - sending commands concurrently could fail. Solution: queue or instance options
-- [ ] verify montage and other commands than convert and identify (montage is special with files?)
 - [ ] an easy to use API for web-workers
 - [ ] verify web worker  passing files is optimal (verify transferable/shared array buffers/optimal)
 - [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
 - [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
-- [ ] adapt executeVirtualCommand from wasm-imagemagick own branch
-- [ ] test and document protected files feature
 - [ ] should magica support running native IM executable in node if they are present ?  
 - [ ] improve errors thrown when there's a missing file, currently it fails silently.
-- [w] document run() scripts and supported syntax
+  - [ ] document CLI options for run({script})
   - [ ] document  script pre processors API
-- [ ] document custom commands
-- [ ] Module.onAbort - listener API - also use it to build the Result return value.
-- [ ] document script templates infrastructure, syntax, examples, building helpers, how to add new helpers, how to add new properties to the context. 
+  - [ ] document script templates infrastructure, syntax, examples, building helpers, how to add new helpers, how to add new properties to the context. 
+  - [ ] document custom commands
+- [ ] in the readme document a working example of loading magica.umd.js directly from unpkg cdn
+- [ ] feature: concat run(): `var r1 = await run(...) ... var r2 = await run({script, inputFiles: await File.fromResult(r1)})
+- [ ] Module.onAbort()
+  - [ ] abort listeners API
+  - [ ] when abort use that info to build the result 
+
+## WIP
+
+- [w] test and document protected files feature
+- [w] document run() scripts and supported syntax
+
+
+## DONE
+
+- [x] browser tests for umd.js and custom wasm location
+- [x] distribute magica as UMD file (< script src="cdn/magica.js> ... and now I can use it with requirejs or as global)
 - [x] browser: be able to load the library from a cdn. solution : global MAGICA_WASM_LOCATION or script src parameter: MAGICA_WASM_LOCATION
 - [x] IM itself already supports loading images from URLS - delegate that to it:  convert  http://www.ict.griffith.edu.au/anthony/images/anthony_castle.gif -resize 100x100 castle_logo.png
 - [x] test TTF and OTF fonts
+- [x] adapt executeVirtualCommand from wasm-imagemagick own branch -- DOME: we ended up doing it differently
 - [x] Module.onAbort
+- [x] test webp
+- [x] fix format tests (broken with new wasm)
+- [x] verify support IM command quoted arguments
+- [x] test fftw
 - [x] emscripten port generation automatized
 - [x] custom commands - any command surrounded by curly braces will be evaluated as  a js function: `{  this.pushStdout(...FS.readdir('.')) }`
+- [x] verify montage and other commands than convert and identify (montage is special with files?)
 - [x] apidocs
 - [x] template should allow to add custom functions to the context
 - [x] compile time templates and run time templates w different syntax 

@@ -32,7 +32,7 @@
 
 *Implementation of [TemplateHelper](../interfaces/_main_template_template_.templatehelper.md).[name](../interfaces/_main_template_template_.templatehelper.md#name)*
 
-*Defined in [main/template/fsHelper.ts:14](https://github.com/cancerberoSgx/magica/blob/48e3aa5/src/main/template/fsHelper.ts#L14)*
+*Defined in [main/template/fsHelper.ts:14](https://github.com/cancerberoSgx/magica/blob/c5226cf/src/main/template/fsHelper.ts#L14)*
 
 ## Methods
 
@@ -40,7 +40,7 @@
 
 ▸ **exec**(`options`: `Options`): *`Promise<string[]>`*
 
-*Defined in [main/template/fsHelper.ts:15](https://github.com/cancerberoSgx/magica/blob/48e3aa5/src/main/template/fsHelper.ts#L15)*
+*Defined in [main/template/fsHelper.ts:15](https://github.com/cancerberoSgx/magica/blob/c5226cf/src/main/template/fsHelper.ts#L15)*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ ___
 
 ▸ **fnCompileTime**(`options`: `Options`): *`Promise<string[]>`*
 
-*Defined in [main/template/fsHelper.ts:26](https://github.com/cancerberoSgx/magica/blob/48e3aa5/src/main/template/fsHelper.ts#L26)*
+*Defined in [main/template/fsHelper.ts:26](https://github.com/cancerberoSgx/magica/blob/c5226cf/src/main/template/fsHelper.ts#L26)*
 
 **Parameters:**
 
@@ -72,7 +72,7 @@ ___
 
 ▸ **fnRunTime**(`options`: `Options`): *`Promise<string[]>`*
 
-*Defined in [main/template/fsHelper.ts:29](https://github.com/cancerberoSgx/magica/blob/48e3aa5/src/main/template/fsHelper.ts#L29)*
+*Defined in [main/template/fsHelper.ts:29](https://github.com/cancerberoSgx/magica/blob/c5226cf/src/main/template/fsHelper.ts#L29)*
 
 **Parameters:**
 

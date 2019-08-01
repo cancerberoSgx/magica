@@ -13,7 +13,6 @@ import { main } from '../main/main'
 import { run } from '../main/run'
 import { addTemplateHelper } from "../main/template/template"
 import { getOptions, setOptions } from '../options'
-import { getThisBrowserScriptTagSrc } from './magicaWasm';
 
 
 function _getMagica() {

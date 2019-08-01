@@ -4,7 +4,7 @@ import { resolve } from 'path'
 import puppeteer from 'puppeteer'
 import { staticServer } from "./staticServer"
 
-declare var window: any 
+declare var window: any
 
 test.serial('browser tests', async t => {
   const htmlFile = 'testUmdWasmLocation.html'
@@ -16,7 +16,7 @@ test.serial('browser tests', async t => {
   const server = await staticServer(resolve(`${testBrowserOutDir}`), port)
   const browser = await puppeteer.launch({ headless: true })
   const page = await browser.newPage()
-  page.on('console', e=>console.log(e.type(), e.text(), e.location(), e.args()))
+  page.on('console', e => console.log(e.type(), e.text(), e.location(), e.args()))
   await page.goto(url)
   await page.evaluate(() => window.testUmdWasmLocationTEST_FINISH = undefined)
   await page.waitForFunction(() => !!window.testUmdWasmLocationTEST_FINISH || !!document.getElementById('assert') && !!document.getElementById('assert')!.innerHTML.trim(), { timeout: 30000 })

@@ -20,13 +20,13 @@ export async function staticServer(basePath: string, port = 9999): Promise<Serve
   })
 }
 
-function resolveUrl(url=''){
+function resolveUrl(url = '') {
   var i = url.indexOf('?')
-  if(i!=-1){
+  if (i != -1) {
     url = url.substr(0, i)
   }
   i = url.indexOf('#')
-  if(i!=-1){
+  if (i != -1) {
     url = url.substr(0, i)
   }
   return url
