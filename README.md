@@ -12,11 +12,12 @@ Easy to setup and use, ImageMagick Node.js and Browser API and Command Line Inte
 - [Playground & demos](#playground--demos)
 - [Summary](#summary)
 - [Install](#install)
-  * [Browser setup](#browser-setup)
 - [Command line](#command-line)
 - [JavaScript API](#javascript-api)
   * [Node.js](#nodejs)
   * [Browser](#browser)
+    + [Browser setup](#browser-setup)
+    + [WASM file in different location](#wasm-file-in-different-location)
     + [Web Worker](#web-worker)
   * [`run()`: command script/template syntax](#run-command-scripttemplate-syntax)
     + [Commands Sequence](#commands-sequence)
@@ -52,12 +53,7 @@ If you only will use the Command Line Interface perhaps a better option is insta
 ```sh
 npm install -g magica
 ```
-### Browser setup
 
- * **IMPORTANT**: make sure `dist/src/imageMagick/compiled/magick.wasm` is located at the same folder of your .js bundle file.
- * the rest of the files you can be bundled with any technology like browserify, parcel, webpack etc.
- * See npm script "browser-sample". Run "npm run browser-sample" and look samples at `test-browser/` file
- * browser tests can be executed (run with puppeteer) with `npm run test-browser`
 
 ## Command line
 
@@ -120,6 +116,33 @@ import {main} from 'magica'
   document.getElementById('img-foo').src = dataUrl
 })()
 ```
+
+#### Browser setup
+
+ * **IMPORTANT**: make sure `dist/src/imageMagick/compiled/magick.wasm` is located at the same folder of your .js bundle file.
+ * the rest of the files you can be bundled with any technology like browserify, parcel, webpack etc.
+ * See npm script "browser-sample". Run "npm run browser-sample" and look samples at `test-browser/` file
+ * browser tests can be executed (run with puppeteer) with `npm run test-browser`
+
+#### WASM file in different location
+
+If you need to load magick.wasm from a different location than your index.html and even from magick.js it can be done by declaring a global variable with its url or adding a parameter in magica.js script src attribute: 
+
+Global variable:
+
+```html
+<script>
+  MAGICA_WASM_LOCATION = 'https://my.cdn.com/something/magick.wasm'
+</script>
+<script src="other/location/magica.js"></script>
+```
+
+Script src attribute with a parameter
+
+```html
+<script src="other/location/magica.js?MAGICA_WASM_LOCATION=https://my.cdn.com/something/magick.wasm"></script>
+```
+
 
 #### Web Worker
 

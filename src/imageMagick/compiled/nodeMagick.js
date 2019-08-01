@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-const { magickLoaded, pushStdout, pushStderr, getOptions } = require('../magickLoaded')
+const { magickLoaded, pushStdout, pushStderr, getOptions, getThisBrowserScriptTagSrc, getThisBrowserScriptTagSrcParams, dirname } = require('../magickLoaded')
 const {isNode} = require('misc-utils-of-mine-generic')
 
 const { nodeFsLocalRoot, emscriptenNodeFsRoot, debug, disableNodeFs } = getOptions()
@@ -40,6 +40,24 @@ Object.assign(Module, {
   onAbort: function(what){
     console.error('onAbort', what)
     console.trace()    
+  },
+  locateFile: function(path, prefix) {
+    if(typeof MAGICA_WASM_LOCATION === 'string') {
+      return MAGICA_WASM_LOCATION
+    } else{
+      var thisScriptUrlParams = getThisBrowserScriptTagSrcParams()
+      if(thisScriptUrlParams && thisScriptUrlParams.MAGICA_WASM_LOCATION) {
+        return decodeURIComponent(thisScriptUrlParams.MAGICA_WASM_LOCATION)
+      }
+      var thisScriptUrl = getThisBrowserScriptTagSrc()
+      if(typeof thisScriptUrl === 'string') {
+        var d = dirname(thisScriptUrl)
+        if(d){
+          return d
+        }
+      }
+    }
+    return prefix + path;
   }
 })
 

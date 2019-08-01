@@ -7,33 +7,44 @@ export interface Main {
   main: NativeMain,
   FS: FS
 }
-const { nodeFsLocalRoot, emscriptenNodeFsRoot, debug, disableNodeFs } = getOptions()
+
+const { debug } = getOptions()
 
 export const magickLoaded = new Deferred<Main>()
 
 const stdout: string[] = []
+
 export function pushStdout(s: string) {
   debug && console.log(`>> stdout >> ${s}`)
   stdout.push(s)
 }
+
 export function resetStdout() {
   stdout.length = 0
 }
+
 export function getStdout() {
   return stdout.slice()
 }
 
 const stderr: string[] = []
+
 export function pushStderr(s: string) {
   debug && console.log(`>> stderr >> ${s}`)
   stderr.push(s)
 }
+
 export function resetStderr() {
   stderr.length = 0
 }
+
 export function getStderr() {
   return stderr.slice()
 }
+
+export { getOptions } from '../options'
+export { getThisBrowserScriptTagSrc , getThisBrowserScriptTagSrcParams} from '../util/magica'
+export {  dirname } from 'misc-utils-of-mine-generic'
 
 setTimeout(function() {
   (global as any).nodeMagickOptions = getOptions()
@@ -45,4 +56,3 @@ setTimeout(function() {
   }
 }, 0)
 
-export { getOptions } from '../options'

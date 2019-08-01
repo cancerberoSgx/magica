@@ -24,7 +24,7 @@
 
 ▸ **addTemplateHelper**(`h`: [TemplateHelper](../interfaces/_main_template_template_.templatehelper.md)): *void*
 
-*Defined in [main/template/template.ts:69](https://github.com/cancerberoSgx/magica/blob/1131304/src/main/template/template.ts#L69)*
+*Defined in [main/template/template.ts:69](https://github.com/cancerberoSgx/magica/blob/48e3aa5/src/main/template/template.ts#L69)*
 
 Allows to change the context object on which templates are evaluated to add new properties or functions
 so they can be evaluated in command templates.

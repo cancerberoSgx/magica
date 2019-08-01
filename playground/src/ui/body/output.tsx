@@ -13,7 +13,6 @@ export class Output extends AbstractComponent {
     return <Segment className="outputSegment">
       <Header as="h3">Output</Header>
 
-
       <label><input type="checkbox" checked={this.state.showAllResultsOutput} onChange={e => this.setState({ showAllResultsOutput: e.currentTarget.checked })}></input>Show all commands output files?</label>
 
       <Segment >

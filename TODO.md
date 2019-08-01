@@ -9,6 +9,8 @@
 - [ ] concat run(): `var r1 = await run(...) ... var r2 = await run({script, inputFiles: await File.fromResult(r1)})
 - [ ] options should allow to define a different nodeJsFsRoot or emscriptenFsRoot 
 - [ ] remove / replace knownSupportedReadWriteImageFormats with listFormat() - formatTest should use that.
+- [ ] distribute magica as esm module (< script type"=mo>)
+- [ ] distribute magica as UMD file (< script src="cdn/magica.js> ... and now I can use it with requirejs or as global)
 - [ ] listFormat() should parse read/write info too
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
 - [ ] fix npm run test-js  
@@ -37,7 +39,9 @@
 - [ ] document custom commands
 - [ ] Module.onAbort - listener API - also use it to build the Result return value.
 - [ ] document script templates infrastructure, syntax, examples, building helpers, how to add new helpers, how to add new properties to the context. 
+- [x] browser: be able to load the library from a cdn. solution : global MAGICA_WASM_LOCATION or script src parameter: MAGICA_WASM_LOCATION
 - [x] IM itself already supports loading images from URLS - delegate that to it:  convert  http://www.ict.griffith.edu.au/anthony/images/anthony_castle.gif -resize 100x100 castle_logo.png
+- [x] test TTF and OTF fonts
 - [x] Module.onAbort
 - [x] emscripten port generation automatized
 - [x] custom commands - any command surrounded by curly braces will be evaluated as  a js function: `{  this.pushStdout(...FS.readdir('.')) }`

@@ -1,4 +1,4 @@
-import { objectKeys } from 'misc-utils-of-mine-generic'
+import { objectKeys, dirname } from 'misc-utils-of-mine-generic'
 import Queue from 'p-queue'
 import { File } from '../file/file'
 import { isProtectedFile, protectFile } from '../file/protected'
@@ -9,7 +9,6 @@ import { IFile, Options, Result } from '../types'
 import { listFilesRecursively, ls } from '../util/lsR'
 import { mkdirp } from '../util/mkdirp'
 import { rmRf } from '../util/rmRf'
-import { getFileDir } from '../util/util'
 import { processCommand } from './command'
 import { dispatchCustomCommand, isCustomCommand } from './customCommand'
 
@@ -42,7 +41,7 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
   FS.chdir(emscriptenNodeFsRoot)
   const files = await File.resolve(o.inputFiles)
   files.forEach(f => {
-    const dirName = getFileDir(f.name)
+    const dirName = dirname(f.name)
     if (dirName.trim()) {
       mkdirp(dirName, p => FS.analyzePath(p).exists, FS.mkdir)
     }

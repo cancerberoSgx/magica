@@ -1,6 +1,5 @@
 import test from 'ava'
 import { File, imageCompare, run } from '../src'
-import { writeFileSync } from 'fs';
 
 test('should render ttf', async t => {
   const result = await run({
@@ -20,7 +19,6 @@ convert -font PoetsenOne-Regular.otf -pointsize 44 -background #113311 -fill #e0
       `,
     inputFiles: ['test/assets/PoetsenOne-Regular.otf']
   })
-  // writeFileSync('tmp1.jpg', result.outputFiles[0].content)
   t.true(await imageCompare(await File.fromFile('test/assets/text3.jpg'), result.outputFiles[0]))
   t.deepEqual(result.error, undefined)
 })
