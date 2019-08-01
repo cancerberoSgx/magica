@@ -10,22 +10,17 @@ export const sampleImages = [
 ]
 
 export enum ExampleTag {
-  animation,
-  info,
-  drawing,
-  gradient,
-  // morph,
-  color,
-  append,
-  format,
-  distort,
-  text,
-  // virtualCommand,
-  // template,
-  // '3d',
-  effect,
-  artistic,
-  simple
+  animation='animation',
+  info='info',
+  drawing='drawing',
+  gradient='gradient',
+  color='color',
+  append='append',
+  format='format',
+  distort='distort',
+  text='text',
+  artistic='artistic',
+  simple='simple'
 }
 
 export interface Example {
@@ -63,10 +58,10 @@ convert photo.tiff photo_info.json
     name: 'Animated gif transformation',
     tags: [ExampleTag.simple, ExampleTag.animation],
     description: 'Multiple transformations on animated gif (loaded from url) which results in another animated transformed gif.',
-    inputFiles: ['challenge.git'],
+    inputFiles: ['challenge.gif'],
     script: state => `
 convert -swirl 123 -wave 14x95 -scale 74% -rotate 15 \\
-   -background transparent challenge.git foo22.gif
+   -background transparent challenge.gif foo22.gif
     `.trim()
   },
 
@@ -74,7 +69,7 @@ convert -swirl 123 -wave 14x95 -scale 74% -rotate 15 \\
     name: 'Poligonize photo artistic',
     description: `With some parameters a WIP effect that kind of poligonize an image. The size the initial image before polar distorting, basically sets the number of rays that will be produced`,
     inputFiles: [],
-    tags: [ExampleTag.artistic, ExampleTag.effect],
+    tags: [ExampleTag.artistic, ExampleTag.color],
     script: state => `
 <% 
   var speed = 2
@@ -82,8 +77,8 @@ convert -swirl 123 -wave 14x95 -scale 74% -rotate 15 \\
   var width = 14
   var height = 21
 %>
-convert bluebells.png original.png
-convert bluebells.png \\
+convert <%=inputFiles[0].name %> original.png
+convert <%=inputFiles[0].name %> \\
   -resize <%= 100/speed%>% -blur 0x1 -colorspace YIQ -monitor \\
   -mean-shift <%= width%>x<%=height%>+<%= intensity %>% +monitor \\
   -set colorspace YIQ -colorspace sRGB \\
@@ -115,7 +110,7 @@ convert sphere_mask.png \\
       +sigmoidal-contrast 6x50% -fill grey50 -colorize 10%  ) \\
   -composite sphere_overlay.png
 
-convert bluebells.png -resize <%=wxh%>! sphere_lut.png -fx 'p{ v*w, j }' \\
+convert <%=inputFiles[0].name %> -resize <%=wxh%>! sphere_lut.png -fx 'p{ v*w, j }' \\
   sphere_overlay.png -compose HardLight  -composite \\
   sphere_mask.png -alpha off -compose CopyOpacity -composite \\
   sphere_lena.png
@@ -453,6 +448,26 @@ convert -size 100x100 xc: -colorspace RGB -define shepards:power=8 \\
 convert ${state.inputFiles.map(f => f.name).join(' ')} histogram:histogram.gif
          `.trim(),
   },
+
+  {
+    name: 'Film Strip Animation',
+    description: `Drawing, distorting and composing to archive a nice "film strip" like animation`,
+    tags: [ExampleTag.animation, ExampleTag.distort],
+    inputFiles: [],
+    script: state => `
+convert -size 12x12 xc: -draw 'circle 6,6 6,2' -negate \\
+  -duplicate 5 +append +duplicate \\
+  rose: +swap -background black -append \\
+  -duplicate 3 +append \\
+  -virtual-pixel HorizontalTile -background SkyBlue \\
+  -duplicate 19  -distort SRT '%[fx:72*t/n],0 1 0 0,0' \\
+  -distort Plane2cylinder 115 \\
+  -bordercolor Skyblue -border 0x3 -set delay 5 \\
+  film_strip_anim.gif
+         `.trim(),
+  },
+
+
 
   {
     name: 'gradient sparse_fill',

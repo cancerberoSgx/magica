@@ -8,7 +8,7 @@ import { Output } from './output'
 export class Body extends AbstractComponent {
   render() {
     return (
-      <Segment basic className="appBody">
+      <Segment basic className="appBody" >
         <Grid>
           <Grid.Column floated='left' width={8}>
             <Command />

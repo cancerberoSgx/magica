@@ -13,12 +13,11 @@ export class InputFiles extends AbstractComponent {
       <Input label='URL' onChange={e => loadImageFromUrl(e.currentTarget.value)} placeholder='https://i.imgur.com/FVKBIJ7.png' /><br /><br />
       <Input type="file" label='file' placeholder='foo.jpg' onChange={async e => {
         var inputFiles = await File.fromHtmlFileInputElement(e.currentTarget)
-        inputFiles = [...this.state.inputFiles, ...inputFiles.filter(f => !this.state.inputFiles.find(f2 => f2.name == f.name))]
-        debugger
+        inputFiles = [...this.state.inputFiles, ...inputFiles.filter(f => !this.state.inputFiles.find(f2 => f2.name == f.name))].reverse()
         this.setState({ inputFiles })
       }} /><br /><br />
       <Header as="h5">Current files</Header>
-      <List divided relaxed>
+      <List relaxed>
         {this.state.inputFiles.map(f =>
           <List.Item>
             <List.Content>

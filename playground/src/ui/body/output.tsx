@@ -10,11 +10,13 @@ export class Output extends AbstractComponent {
       return ''
     }
     var output = this.state.showAllResultsOutput ? this.state.result.results.map(r => r.outputFiles).flat() : this.state.result.outputFiles
-    return <>
+    return <Segment className="outputSegment">
+      <Header as="h3">Output</Header>
+
+
       <label><input type="checkbox" checked={this.state.showAllResultsOutput} onChange={e => this.setState({ showAllResultsOutput: e.currentTarget.checked })}></input>Show all commands output files?</label>
 
-      <Segment>
-
+      <Segment >
         {output.reverse().map(f =>
           <> <a href="" onClick={e => {
             var blob = new Blob([f.content])
@@ -30,6 +32,6 @@ export class Output extends AbstractComponent {
           <TextArea value={this.state.result.stderr.join('\n')}></TextArea>
         </div>
       </Segment>
-    </>
+    </Segment>
   }
 }

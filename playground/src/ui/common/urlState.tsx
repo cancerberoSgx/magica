@@ -16,6 +16,3 @@ export function loadUrl() {
   }
 }
 
-export function printMs(ms: number) {
-  return (ms / 1000) + ''.padEnd(4, ' ') + ' seconds'
-}

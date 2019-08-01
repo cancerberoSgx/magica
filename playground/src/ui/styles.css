@@ -8,3 +8,6 @@ textarea{
   background-color: red;
   border-color: black;
 }
+.ui.segment.appBody, .ui.segment.outputSegment {
+  padding-top: 2em;
+}
