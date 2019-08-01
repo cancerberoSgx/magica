@@ -33,7 +33,7 @@
 
 *Inherited from void*
 
-*Defined in [types.ts:63](https://github.com/cancerberoSgx/magica/blob/c5226cf/src/types.ts#L63)*
+*Defined in [types.ts:63](https://github.com/cancerberoSgx/magica/blob/819ab9b/src/types.ts#L63)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • **disableNodeFs**? : *undefined | false | true*
 
-*Defined in [types.ts:44](https://github.com/cancerberoSgx/magica/blob/c5226cf/src/types.ts#L44)*
+*Defined in [types.ts:44](https://github.com/cancerberoSgx/magica/blob/819ab9b/src/types.ts#L44)*
 
 Don't use system's filesystem in Node.js but memory filesystem (just like in the browser). This could be
 faster if read/write many images but consumes more memory.
@@ -52,7 +52,7 @@ ___
 
 • **emscriptenNodeFsRoot**: *string*
 
-*Defined in [types.ts:33](https://github.com/cancerberoSgx/magica/blob/c5226cf/src/types.ts#L33)*
+*Defined in [types.ts:33](https://github.com/cancerberoSgx/magica/blob/819ab9b/src/types.ts#L33)*
 
 Internal root FS directed path. This should rarely be configured by users.
 
@@ -62,7 +62,7 @@ ___
 
 • **mainConcurrency**: *`1`*
 
-*Defined in [types.ts:54](https://github.com/cancerberoSgx/magica/blob/c5226cf/src/types.ts#L54)*
+*Defined in [types.ts:54](https://github.com/cancerberoSgx/magica/blob/819ab9b/src/types.ts#L54)*
 
 main() commands are queued and this defines de limit of running commands at the same time. it's no so important since the main() call is synch but files/urls are resolved also so this has an impact on those async operations
 
@@ -72,7 +72,7 @@ ___
 
 • **mainInterval**: *`0`*
 
-*Defined in [types.ts:58](https://github.com/cancerberoSgx/magica/blob/c5226cf/src/types.ts#L58)*
+*Defined in [types.ts:58](https://github.com/cancerberoSgx/magica/blob/819ab9b/src/types.ts#L58)*
 
 main() commands are queued and this is the milliseconds to wait before starting a new main command
 
@@ -82,7 +82,7 @@ ___
 
 • **nodeFsLocalRoot**: *string*
 
-*Defined in [types.ts:28](https://github.com/cancerberoSgx/magica/blob/c5226cf/src/types.ts#L28)*
+*Defined in [types.ts:28](https://github.com/cancerberoSgx/magica/blob/819ab9b/src/types.ts#L28)*
 
 (Node.js and CLI only). In Node.js the local file system will be used to read/write files instead of
 memory (like in the browser). This folder will be used for that, by default, ./working_tmp. IMPORTANT:
@@ -94,7 +94,7 @@ ___
 
 • **outputDir**: *string*
 
-*Defined in [types.ts:38](https://github.com/cancerberoSgx/magica/blob/c5226cf/src/types.ts#L38)*
+*Defined in [types.ts:38](https://github.com/cancerberoSgx/magica/blob/819ab9b/src/types.ts#L38)*
 
 (CLI only). Output files will be written in this folder. By default is current directory.
 
@@ -104,6 +104,6 @@ ___
 
 • **useNative**? : *undefined | false | true*
 
-*Defined in [types.ts:49](https://github.com/cancerberoSgx/magica/blob/c5226cf/src/types.ts#L49)*
+*Defined in [types.ts:49](https://github.com/cancerberoSgx/magica/blob/819ab9b/src/types.ts#L49)*
 
 If true and when running on node.js, and only if image magick commands are available in the local system, it will execute the commands using the local native ImageMagick commands, instead of running them though the emscripten port (which is slower and support less capabilities).

@@ -6,7 +6,6 @@ dist
 .nyc_output
 coverage
 /package
-.vscode
 test-browser-outdir
 tmp*
 working_tmp
