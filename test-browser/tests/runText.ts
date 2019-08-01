@@ -9,7 +9,7 @@ export default async function() {
     inputFiles: ['helvetica.ttf']
   })
   assertEquals(result.stderr.filter(e => !e.includes('.xml\' @ warning')), [])
-
+  assertEquals(result.stdout, [])
   assertEquals(result.error, undefined)
   assert(await imageCompare(await File.fromUrl('text.png'), result.outputFiles[0]), 'text output')
 }

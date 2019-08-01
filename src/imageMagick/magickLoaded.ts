@@ -43,8 +43,6 @@ export function getStderr() {
 }
 
 export { getOptions } from '../options'
-export { getThisBrowserScriptTagSrc , getThisBrowserScriptTagSrcParams} from '../util/magica'
-export {  dirname } from 'misc-utils-of-mine-generic'
 
 setTimeout(function() {
   (global as any).nodeMagickOptions = getOptions()

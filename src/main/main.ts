@@ -1,4 +1,4 @@
-import { objectKeys, dirname } from 'misc-utils-of-mine-generic'
+import { dirname, objectKeys } from 'misc-utils-of-mine-generic'
 import Queue from 'p-queue'
 import { File } from '../file/file'
 import { isProtectedFile, protectFile } from '../file/protected'

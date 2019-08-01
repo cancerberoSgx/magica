@@ -1,6 +1,5 @@
 import { basename } from 'misc-utils-of-mine-generic'
-import { main } from '../../src'
-import { File } from '../../src/file/file'
+import { File, main } from '../../src'
 import { assertEquals, assertIncludes } from '../testUtil'
 
 export default async function() {

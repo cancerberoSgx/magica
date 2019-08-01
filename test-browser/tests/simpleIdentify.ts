@@ -1,12 +1,12 @@
 import { main } from '../../src'
-import { assertEquals, log } from '../testUtil'
+import { assertEquals } from '../testUtil'
 
 export default async function() {
   const result = await main({
     command: ['identify', 'rose:'],
     inputFiles: []
   })
-  assertEquals(result.stdout.join(''), 'rose:=>ROSE PNM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000')
-  assertEquals(result.stderr.filter(e => !e.includes('.xml\' @ warning')), [])
+  assertEquals(result.stdout.join(''), 'rose:=>ROSE PNM 70x46 70x46+0+0 8-bit sRGB 9673B 0.000u 0:00.000', 'stdout')
+  assertEquals(result.stderr.filter(e => !e.includes('.xml\' @ warning')), [], 'stderr')
 }
 

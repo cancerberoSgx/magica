@@ -1,10 +1,11 @@
-import { serial, sleep, getGlobal } from 'misc-utils-of-mine-generic'
+import { getGlobal, serial } from 'misc-utils-of-mine-generic'
 import runText from './tests/runText'
 import simpleConvert from './tests/simpleConvert'
 import simpleIdentify from './tests/simpleIdentify'
-import { assert, log } from './testUtil'
-(async ()=>{
-  
+import { assert } from './testUtil';
+
+(async () => {
+  assert(!getGlobal().browserTest_ts_TEST_FINISHl, '')
   const MAGICA_TEST_TO_RUN = [
     simpleIdentify,
     simpleConvert,
@@ -14,12 +15,10 @@ import { assert, log } from './testUtil'
     try {
       await test()
     } catch (ex) {
-      assert(false, ex.toString())
       console.error(ex);
+      assert(false, ex.toString())
     }
   }))
-  await sleep(500)
-
-  log('TEST_FINISH =true')
-  getGlobal().TEST_FINISH = 'TEST_FINISH =true'
+  getGlobal().browserTest_ts_TEST_FINISH = 'browserTest_ts_TEST_FINISH'
+  return true
 })()

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <table>
+    <tr>
+      <td width="50%">
+        <h3>Assert errors:</h3>
+        <div id="assert"></div>
+      </td>
+      <td width="50%">
+        <h3>Logs:</h3>
+        <div id="logs"></div>
+      </td>
+    </tr>
+  </table>
+  <script src="magica.umd.js?MAGICA_WASM_LOCATION=https://unpkg.com/magica@0.2.3/dist/src/imageMagick/compiled/magick.wasm"></script>
+
+  <script>
+    async function test() {
+      // await sleep(400)
+      assertEquals(window.testUmdWasmLocationTEST_FINISH, undefined)
+      // console.log(typeof Magica);
+
+      await Magica.magickLoaded
+
+      let result = await Magica.run({ script: 'identify rose:' })
+      assertIncludes(result.stdout.join(' '), 'rose:=>ROSE PNM 70x46 70x46+0+0 8-bit sRGB 9673B', '1 stdout')
+      assertEquals(result.error, undefined, '1 result.error ')
+      assertEquals(result.stderr.filter(e => !e.includes('.xml\' @ warning')), [], '1 result.stderr.filter')
+
+      result = await Magica.run({
+        script: `convert -font helvetica.ttf -pointsize 44 -background lightblue -fill navy label:Seba tmp.png`,
+        debug: true,
+        inputFiles: ['helvetica.ttf']
+      })
+      assertEquals(result.stderr.filter(e => !e.includes('.xml\' @ warning')), [])
+      assertEquals(result.stdout, [])
+      assertEquals(result.error, undefined)
+      assert(await Magica.imageCompare(await Magica.File.fromUrl('text.png'), result.outputFiles[0]), 'text output')
+
+      result = await Magica.main({
+        command: 'convert chala.tiff -rotate 45 output.webp',
+        inputFiles: [await Magica.File.fromUrl('chala.tiff')]
+      })
+      assertIncludes(result.outputFiles[0].name, 'output.webp')
+      assertIncludes(result.outputFiles.map(f => f.name).join(), 'output.webp')
+      assertEquals(result.error, undefined)
+      assertEquals(result.stderr.filter(e => !e.includes('.xml\' @ warning')), [])
+
+      window.testUmdWasmLocationTEST_FINISH = true
+    }
+    (async () => {
+      try {
+        await test()
+      } catch (error) {
+        console.log('ERROR in testUmdWasmLocation', error)
+        assertEquals(error, undefined)
+      }
+    })()
+
+    function assertEquals(a, b, s) {
+      if (s === void 0) { s = ''; }
+      var aS = stringifyJSON(a || '', 'JSON.stringify(a) thrown'), bS = stringifyJSON(b || '', 'JSON.stringify(b) thrown');
+      assert(aS === bS, (s ? (s + ': ') : '') + 'Expected "' + aS + '" to equals "' + bS + '"');
+    }
+    function assertIncludes(a, b, s) {
+      if (s === void 0) { s = ''; }
+      assert(a.includes(b), (s ? (s + ': ') : '') + 'Expected "' + a + '" to include "' + b + '"');
+    }
+    function assert(t, msg, s) {
+      if (s === void 0) { s = ''; }
+      if (!t) {
+        document.getElementById('assert').innerHTML += ((s ? (s + ': ') : '') + msg);
+      } else {
+        document.getElementById('logs').innerHTML += ('<br/>PASSED: ' + (s ? (s + ': ') : '') + msg);
+      }
+    }
+    function log(msg) {
+      document.getElementById('logs').innerHTML += msg + '<br/>';
+    }
+    function sleep(ms) {
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          resolve();
+        }, ms);
+      });
+    }
+    function stringifyJSON(s, defaultValue) {
+      if (defaultValue === void 0) { defaultValue = undefined; }
+      try {
+        return JSON.stringify(s);
+      }
+      catch (error) {
+        return defaultValue;
+      }
+    }
+  </script>
+</body>
+
+</html>

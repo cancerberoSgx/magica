@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-const { magickLoaded, pushStdout, pushStderr, getOptions, getThisBrowserScriptTagSrc, getThisBrowserScriptTagSrcParams, dirname } = require('../magickLoaded')
-const {isNode} = require('misc-utils-of-mine-generic')
-
+const { magickLoaded, pushStdout, pushStderr, getOptions } = require('../magickLoaded')
+const {isNode, dirname} = require('misc-utils-of-mine-generic')
+const { getThisBrowserScriptTagSrc, getThisBrowserScriptTagSrcParams } = require('../../util/magicaWasm')
 const { nodeFsLocalRoot, emscriptenNodeFsRoot, debug, disableNodeFs } = getOptions()
 
 Module = typeof Module === 'undefined' ? {} : Module
