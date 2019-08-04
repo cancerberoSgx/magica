@@ -1,6 +1,6 @@
 # This file is auto-generated from src/templates
 
-FROM trzeci/emscripten:sdk-tag-1.38.32-64bit
+FROM trzeci/emscripten:latest
 
 RUN apt-get update -y
 RUN apt-get install -y autoconf libtool shtool autogen pkg-config

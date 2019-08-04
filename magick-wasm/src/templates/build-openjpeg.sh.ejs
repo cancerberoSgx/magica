@@ -22,17 +22,3 @@ testExitCode "openjpeg configure" $?
 emcmake make install
 cp bin/libopenjp2.a $PREFIX/lib
 testExitCode "openjpeg make install" $?
-
-## Heads up ! I'm new to cmake and it's very strange - but seems that execute it twice does the trick.
-
-# make clean
-# export CHOST=emcc && emconfigure cmake . -DCMAKE_INSTALL_PREFIX=$PREFIX -DBUILD_SHARED_LIBS=off -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$CFLAGS" -DCMAKE_LIBRARY_PATH="$PREFIX/lib"  -DBUILD_PKGCONFIG_FILES=on -DCFLAGS="$CFLAGS" -DPKG_CONFIG_PATH="$PKG_CONFIG_PATH" -DLDFLAGS="$LDFLAGS" -DZLIB_INCLUDE_DIR:PATH="$PREFIX/include" -DZLIB_LIBRARY:FILEPATH="$PREFIX/lib/libz.a" -DPNG_PNG_INCLUDE_DIR:PATH="$PREFIX/include" -DPNG_LIBRARY:FILEPATH="$PREFIX/lib/libpng.a" -DTIFF_INCLUDE_DIR:PATH="$PREFIX/include" -DTIFF_LIBRARY:FILEPATH="$PREFIX/lib/libtiff.a" 
-
-# export CHOST=emcc && emconfigure cmake . -DCMAKE_INSTALL_PREFIX=$PREFIX -DBUILD_SHARED_LIBS=off -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$CFLAGS" -DCMAKE_LIBRARY_PATH="$PREFIX/lib"  -DBUILD_PKGCONFIG_FILES=on -DCFLAGS="$CFLAGS" -DPKG_CONFIG_PATH="$PKG_CONFIG_PATH" -DLDFLAGS="$LDFLAGS" -DZLIB_INCLUDE_DIR:PATH="$PREFIX/include" -DZLIB_LIBRARY:FILEPATH="$PREFIX/lib/libz.a" -DPNG_PNG_INCLUDE_DIR:PATH="$PREFIX/include" -DPNG_LIBRARY:FILEPATH="$PREFIX/lib/libpng.a" -DTIFF_INCLUDE_DIR:PATH="$PREFIX/include" -DTIFF_LIBRARY:FILEPATH="$PREFIX/lib/libtiff.a" 
-
-# testExitCode "openjpeg configure" $?
-
-# emcmake make install CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS"
-# cp bin/libopenjp2.a $PREFIX/lib
-# testExitCode "openjpeg make install" $?
- 

@@ -21,13 +21,11 @@
       </td>
     </tr>
   </table>
-  <script src="magica.umd.js?MAGICA_WASM_LOCATION=https://unpkg.com/magica@0.2.3/dist/src/imageMagick/compiled/magick.wasm"></script>
+  <script src="magica.umd.js?MAGICA_WASM_LOCATION=https://unpkg.com/magica@0.2.5/dist/src/imageMagick/compiled/magick.wasm"></script>
 
   <script>
     async function test() {
-      // await sleep(400)
       assertEquals(window.testUmdWasmLocationTEST_FINISH, undefined)
-      // console.log(typeof Magica);
 
       await Magica.magickLoaded
 

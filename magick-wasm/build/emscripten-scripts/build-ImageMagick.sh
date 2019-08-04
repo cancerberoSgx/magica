@@ -4,40 +4,40 @@
 
 source emscripten-scripts/base.sh
 
-# SKIP_CONFIG=0
-# SKIP_BUILD=0
+SKIP_CONFIG=0
+SKIP_BUILD=0
 
-# mkdir -p $PREFIX/src
+mkdir -p $PREFIX/src
 cd $PREFIX/src
 
-# if [ ! -d "ImageMagick" ]; then
-#   SKIP_CONFIG=0
-#   SKIP_BUILD=0
-#   git clone https://github.com/ImageMagick/ImageMagick.git
-# elif [ "$SKIP_BUILD" -eq "0" ]; then
-#   ( cd ImageMagick ; make clean )
-# fi
+if [ ! -d "ImageMagick" ]; then
+  SKIP_CONFIG=0
+  SKIP_BUILD=0
+  git clone https://github.com/ImageMagick/ImageMagick.git
+elif [ "$SKIP_BUILD" -eq "0" ]; then
+  ( cd ImageMagick ; make clean )
+fi
 
 cd ImageMagick
 
-# if [ "$SKIP_CONFIG" -eq "0" ]; then
+if [ "$SKIP_CONFIG" -eq "0" ]; then
 
-#   autoconf
+  autoconf
 
-#   emconfigure ./configure --prefix="$PREFIX" \
-#     --without-threads --disable-shared --disable-openmp --enable-static --without-lcms \
-#     --disable-docs --without-bzlib --without-magick-plus-plus \
-#     --without-heic --without-raw --without-perl --without-lzma --without-x \
-#     --disable-largefile --without-modules --without-jbig --without-dps --without-fontconfig \
-#     --with-quantum-depth=16 --enable-hdri=yes --with-utilities \
-#     PKG_CONFIG_PATH="$PKG_CONFIG_PATH" LDFLAGS="$LDFLAGS" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" 
+  emconfigure ./configure --prefix="$PREFIX" \
+    --without-threads --disable-shared --disable-openmp --enable-static --without-lcms \
+    --disable-docs --without-bzlib --without-magick-plus-plus \
+    --without-heic --without-raw --without-perl --without-lzma --without-x \
+    --disable-largefile --without-modules --without-jbig --without-dps --without-fontconfig \
+    --with-quantum-depth=16 --enable-hdri=yes --with-utilities \
+    PKG_CONFIG_PATH="$PKG_CONFIG_PATH" LDFLAGS="$LDFLAGS" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" 
 
-#   testExitCode "ImageMagick emconfigure" $?
+  testExitCode "ImageMagick emconfigure" $?
 
-# fi
+fi
 
 
-# if [ "$SKIP_BUILD" -eq "0" ]; then
+if [ "$SKIP_BUILD" -eq "0" ]; then
 
 echo "ImageMagick make install"
 FINAL_CFLAGS=$CFLAGS
@@ -45,4 +45,4 @@ FINAL_CFLAGS=$CFLAGS
 
   testExitCode "ImageMagick make install" $?
 
-# fi
+fi
