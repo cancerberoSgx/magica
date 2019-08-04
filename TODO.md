@@ -11,11 +11,12 @@
 - [ ] distribute magica as esm module (< script type"=mo>)
 - [ ] listFormat() should parse read/write info too
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
-- [ ] fix npm run test-js  
+- [x] fix npm run test-js  
 - [ ] emscripten port generation configurable
+- [ ] try to build something similar to a realtime experience with canvas and IMG cache format files being careful not to remove them. User moving mouse  affects the canvas (processed with IM)
 - [ ] test mng animations "(A PNG-like Image Format Supporting Multiple Images, Animation and Transparent JPEG. Requires libpng-1.0.)"
-- [ ] I should be able to make output files protected y config.
-- [ ] run scriptListener  . finish and test it or drop it
+- [ ] I should be able to make output files protected by config.
+- [ ] run() scriptListener  . finish the feature and test it or drop it
 - [ ] test mkdir -p for output files   
 - [ ] because options are global - sending commands concurrently could fail. Solution: queue or instance options
 - [ ] an easy to use API for web-workers

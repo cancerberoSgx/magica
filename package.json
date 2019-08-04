@@ -9,9 +9,8 @@
   },
   "scripts": {
     "test": "npm run build && npx ava --serial --concurrency 1 --config ava.config.js && npm run test-browser",
-    "test-js": "exit 0; npm run build && npx ava ./dist/test/*Test.js --serial",
+    "test-js": "npm run build && npx ava --serial --concurrency 1 --config ava.config-js.js",
     "test-watch": "ava -w",
-    "test-worker": "npm run build && cp dist/src/imageMagick/compiled/magick.wasm dist && parcel serve test-browser/webWorker/index.html",
     "test-debug": "node --inspect-brk node_modules/ava/cli.js --serial",
     "test-browser": " npx ava --serial --concurrency 1 test-browser/*Test.ts",
     "build-node-magick": "cat src/imageMagick/magickPrefix.js > src/imageMagick/compiled/nodeMagick.js && echo '' >> src/imageMagick/compiled/nodeMagick.js && cat src/imageMagick/compiled/magick.js >> src/imageMagick/compiled/nodeMagick.js",
