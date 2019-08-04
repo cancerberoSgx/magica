@@ -26,6 +26,8 @@ source <%= scriptsFolder %>/base.sh
 
 <%= addLib('webp') %>
 
+<%= addLib('jp2') %>
+
 cd $CURRENT_DIR
 source <%= scriptsFolder %>/build-ImageMagick.sh
 testExitCode "build-ImageMagick" $?

@@ -24,19 +24,30 @@ export class File implements IFile {
     }
   }
 
-  protected _info: ExtractInfoResultImage | undefined;
+  protected _info: ExtractInfoResultImage[] | undefined;
 
   /**
-   * Get image information, like geometry, important numbers, mimeType, etc. The first time it calls `identify` command, but then it will cache ths value.
-   * TODO: make it async
+  * Same as [info] but returning only the first image's data.
+  */
+  public async infoOne(): Promise<ExtractInfoResultImage> {
+    var i = await this.info()
+    if (!i || !i.length) {
+      throw new Error('Expected image info extract to work')
+    }
+    return i[0]
+  }
+  
+  /**
+   * Get image information, like geometry, important numbers, mimeType, etc. 
+   * The first time it calls `identify` command, but then it will cache ths value. 
    */
-  public info(): Promise<ExtractInfoResultImage> {
+  public info(): Promise<ExtractInfoResultImage[]> {
     return new Promise(resolve => {
       if (this._info) {
         resolve(this._info)
       } else {
         imageInfo(this).then(data => {
-          this._info = data[0].image
+          this._info = (data || []).map(i => i.image)
           resolve(this._info)
         })
       }
@@ -44,12 +55,12 @@ export class File implements IFile {
   }
 
   public async size(): Promise<Size> {
-    var i = await this.info()
+    var i = await this.infoOne()
     return { width: i.geometry ? i.geometry.width : 0, height: i.geometry ? i.geometry.height : 0 }
   }
 
   public async mimeType(): Promise<string> {
-    var i = await this.info()
+    var i = await this.infoOne()
     return i.mimeType!
   }
 
@@ -174,7 +185,7 @@ export class File implements IFile {
   }
 
   public static isFile(f: any): f is File {
-    return !!f && !!f.name && !!f.content && typeof f.constructor !== 'undefined' && !!(f as File).size && !!(f as File).info
+    return !!f && !!f.name && !!f.content && typeof f.constructor !== 'undefined' && !!(f as File).size && !!(f as File).infoOne
   }
 
   public static asFile(f: IFile): File {

@@ -12,7 +12,6 @@
 - [ ] distribute magica as esm module (< script type"=mo>)
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
 - [ ] try to build something similar to a realtime experience with canvas and IMG cache format files being careful not to remove them. User moving mouse  affects the canvas (processed with IM)
-- [ ] test mng animations "(A PNG-like Image Format Supporting Multiple Images, Animation and Transparent JPEG. Requires libpng-1.0.)"
 - [ ] I should be able to make output files protected by config.
 - [ ] run() scriptListener  . finish the feature and test it or drop it
 - [ ] test mkdir -p for output files   
@@ -43,6 +42,8 @@
 
 ## DONE
 
+- [x] test mng animations  
+- [x] test jp2, jpc
 - [x] IM itself already supports loading images from URLS - BUT THIS IS NOT SUPPORTED IN THE PORT. 
 - [x] colorCount(image) - image.colorCount()
 - [x] browser tests for umd.js and custom wasm location
@@ -52,7 +53,7 @@
 - [x] test TTF and OTF fonts
 - [x] adapt executeVirtualCommand from wasm-imagemagick own branch -- DOME: we ended up doing it differently
 - [x] Module.onAbort
-- [x] test webp
+- [x] test webp read/write
 - [x] fix format tests (broken with new wasm)
 - [x] verify support IM command quoted arguments
 - [x] test fftw

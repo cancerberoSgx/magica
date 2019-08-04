@@ -4,7 +4,7 @@
 
 export PREFIX="$PWD/emscripten_prefix"
 
-export CPPFLAGS="-I$PREFIX/include -I$PREFIX/include/freetype2"
+export CPPFLAGS="-I$PREFIX/include -I$PREFIX/include/freetype2 -I$PREFIX/include/openjpeg-2.3"
 
 export EMCC_RELEASE_TYPE_FLAGS_DEBUG="-O0 --llvm-lto 0 --llvm-opts 0 --llvm-lto 0 -s ASSERTIONS=1 -s SAFE_HEAP=1 -s ALIASING_FUNCTION_POINTERS=0 -s DISABLE_EXCEPTION_CATCHING=0 -s NODEJS_CATCH_EXIT=1 -s EXCEPTION_DEBUG=1 -s ABORTING_MALLOC=0 -g -v"
 

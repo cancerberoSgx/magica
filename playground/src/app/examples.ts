@@ -67,7 +67,7 @@ convert -swirl 123 -wave 14x95 -scale 74% -rotate 15 \\
 
   {
     name: 'Text with shadow',
-    tags: [ExampleTag.text, ExampleTag.artistic],
+    tags: [ExampleTag.text ],
     description: 'Using -shadow on text to add shadow',
     inputFiles: ['PoetsenOne-Regular.otf'],
     script: state => `
@@ -87,6 +87,35 @@ convert -background none -stroke <%= options.stroke%> -fill <%= options.fill%> \
   -background none -layers merge +repage shadow_a.png
     `.trim()
   },
+
+
+  {
+    name: 'Remove background and add shadow',
+    tags: [  ExampleTag.color],
+    description: 'Removing background color and adding shadow with -shadow',
+    inputFiles: [ 'https://i.imgur.com/JACCXT5.png'],
+    script: state => `
+<%
+var options = {
+  shadowColor: '#137726',
+  shadow: '80x3-4-3',
+  threshold: '5%',
+  point: '10,10'
+} 
+%>
+convert ${state.inputFiles[0].name} ( +clone -fx 'p{<%= options.point%>}' ) \\
+  -compose Difference -composite \\
+  -modulate 100,0 -alpha off difference.miff
+convert difference.miff -threshold <%= options.threshold %> boolean_mask.miff
+convert ${state.inputFiles[0].name} boolean_mask.miff \\
+  -alpha off -compose CopyOpacity -composite \\
+  differenceRemoveBackground.miff
+convert differenceRemoveBackground.miff  \\
+  ( +clone -background <%= options.shadowColor %> -shadow <%= options.shadow %> ) +swap \\
+  -background none -layers merge +repage shadow_b.png
+    `.trim()
+  },
+
 
   {
     name: 'Poligonize photo artistic',
@@ -123,19 +152,19 @@ convert <%=inputFiles[0].name %> \\
 
 convert -size <%=wxh%> xc:  -channel R \\
   -fx 'yy=(j+.5)/h-.5; (i/w-.5)/(sqrt(1-4*yy^2))+.5' \\
-  -separate  +channel  sphere_lut.png
+  -separate  +channel  sphere_lut.miff
 
 convert -size <%=wxh%> xc:black -fill white \\
-  -draw 'circle <%=size.width/2%>,<%=size.height/2%> <%=size.width/2%>,0'    sphere_mask.png
+  -draw 'circle <%=size.width/2%>,<%=size.height/2%> <%=size.width/2%>,0'    sphere_mask.miff
 
-convert sphere_mask.png \\
+convert sphere_mask.miff \\
   ( +clone -blur 0x90 -shade <%=size.width/2%>x<%=size.height/4%> -contrast-stretch 0% \\
       +sigmoidal-contrast 6x50% -fill grey50 -colorize 10%  ) \\
-  -composite sphere_overlay.png
+  -composite sphere_overlay.miff
 
-convert <%=inputFiles[0].name %> -resize <%=wxh%>! sphere_lut.png -fx 'p{ v*w, j }' \\
-  sphere_overlay.png -compose HardLight  -composite \\
-  sphere_mask.png -alpha off -compose CopyOpacity -composite \\
+convert <%=inputFiles[0].name %> -resize <%=wxh%>! sphere_lut.miff -fx 'p{ v*w, j }' \\
+  sphere_overlay.miff -compose HardLight  -composite \\
+  sphere_mask.miff -alpha off -compose CopyOpacity -composite \\
   sphere_lena.png
 `.trim(),
   },
@@ -182,25 +211,25 @@ convert -size 150x150 xc: +noise random \\
   var img = inputFiles[0]
   var noise = '30%'
   var threshold = '10%'
-  var color = await img.pixel(0, 0)
+  var color = await img.pixel(30, 30)
   var size = await img.size()
 %>
   
 convert -size <%= size.width%>x<%= size.height%> xc: +noise Random -separate \\
   null: ( xc: +noise Random -separate -threshold <%= noise %> -negate ) \\
   -compose CopyOpacity -layers composite \\
-  -set dispose background -set delay 20 -loop 0   glitter_overlay.gif
+  -set dispose background -set delay 20 -loop 0   glitter_overlay.miff
 
-convert glitter_overlay.gif \\
-  -compose Screen -bordercolor <%= color %> -border 0x0  glitter_plasma.gif
+convert glitter_overlay.miff \\
+  -compose Screen -bordercolor <%= color %> -border 0x0  glitter_plasma.miff
 
-convert glitter_plasma.gif -virtual-pixel tile \\
+convert glitter_plasma.miff -virtual-pixel tile \\
   -set option:distort:viewport <%= size.width%>x<%= size.height%> -distort SRT 0 \\
-  glitter_plasma_tiled.gif
+  glitter_plasma_tiled.miff
 
-convert '<%= img.name%>' -matte -fuzz <%= threshold %> -transparent <%= color %> logo_holed.gif
+convert '<%= img.name%>' -matte -fuzz <%= threshold %> -transparent <%= color %> logo_holed.miff
 
-convert logo_holed.gif null: glitter_plasma_tiled.gif \\
+convert logo_holed.miff null: glitter_plasma_tiled.miff \\
   -compose DstOver -layers composite \\
   -loop 0 -layers Optimize logo_glittered.gif
           `.trim(),
@@ -252,8 +281,6 @@ convert ${state.inputFiles[0].name} -scale 50% -virtual-pixel mirror \\
   `.trim(),
   },
 
-
-
   {
     name: 'Write pdf',
     description: `append a couple of images and then all images and output a pdf`,
@@ -271,27 +298,25 @@ montage \\
   `.trim(),
   },
 
-
-
   {
     name: 'Flux anim',
     description: `<a href="https://imagemagick.org/Usage/canvas/#random_flux">See ImageMagick examples page canvas/#random_flux</a>`,
     tags: [ExampleTag.animation],
     inputFiles: [],
     script: state => `
-
 # first generate a random noise image. We use miff format which is faster
-convert -size 100x100 xc:   +noise Random   random.miff
-convert random.miff random.gif # copy it just to see it in the browser
+convert -size 100x100 xc: +noise Random random.miff
+# copy it just to see it in the browser
+convert random.miff random.gif 
 
 # Now generate sequence of variations of it with function Sinusoid
 <% sequence(0, 30, 359).forEach(i=>{ %>
-convert random.miff  -channel G  -function Sinusoid 1,<%=i%> \
-  -virtual-pixel tile -blur 0x8 -auto-level \
-  -separate flux_<%=i%>.miff
+  convert random.miff -channel G -function Sinusoid 1,<%=i%> \\
+    -virtual-pixel tile -blur 0x8 -auto-level \\
+    -separate flux_<%=i%>.miff
 <%})%>
 # And append them all in an anim gif:
-convert set delay 20  <%= sequence(0, 30, 359).map(i=>\`flux_\${i}.miff\`).join(' ') %> flux_anim.gif
+convert -set delay 12 <%= sequence(0, 30, 359).map(i=>\`flux_\${i}.miff\`).join(' ') %> flux_anim.gif
 
 # a threshold variation of previous:
 convert flux_anim.gif -threshold 70% flux_thres_anim.gif
@@ -299,19 +324,17 @@ convert flux_anim.gif -threshold 70% flux_thres_anim.gif
 # Another "filaments" variation:
 convert flux_anim.gif  \\
   -sigmoidal-contrast 30x50% -solarize 50% -auto-level \\
-  -set delay 20 filaments_anim.gif
+  -set delay 12 filaments_anim.gif
 
 # generate another sequence with more frames this time "ripples"
 <% sequence(0, 10, 359).forEach(i=>{ %>
-convert random.miff -channel G \\
-  -function Sinusoid 1,<%=i%> \\
-  -virtual-pixel tile -blur 0x8 -auto-level \\
-  -function Sinusoid 2.5,<%=i*5%> \\
-  -separate +channel flux_ripples_<%=i%>.miff
-  <%})%>
-  <%debugger%>
-convert set delay 20  <%= sequence(0, 10, 359).map(i=>\`flux_ripples_\${i}.miff\`).join(' ') %> flux_ripples_anim.gif
-
+  convert random.miff -channel G \\
+    -function Sinusoid 1,<%=i%> \\
+    -virtual-pixel tile -blur 0x8 -auto-level \\
+    -function Sinusoid 2.5,<%=i*5%> \\
+    -separate +channel flux_ripples_<%=i%>.miff
+<%})%>
+convert -set delay 12 <%= sequence(0, 10, 359).map(i=>\`flux_ripples_\${i}.miff\`).join(' ') %> flux_ripples_anim.gif
 <%
 function sequence(start, step, end){
   var a = []
@@ -320,8 +343,7 @@ function sequence(start, step, end){
   }
   return a
 } 
-  %>
-  
+%>
   `.trim(),
   },
 

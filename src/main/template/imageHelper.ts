@@ -25,7 +25,7 @@ export class ImageInfoHelper implements TemplateHelper<Options, Promise<ExtractI
   public name = 'imageInfo'
   protected async exec(options: Options) {
     var file = asArray(typeof options.file === 'string' ? await File.resolve(options.file) : options.file).filter(notUndefined).map(File.asFile)
-    return await file[0].info()
+    return await file[0].infoOne()
   }
   public async fnCompileTime(options: Options) {
     return await this.exec(options)
