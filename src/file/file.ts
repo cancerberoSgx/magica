@@ -4,7 +4,7 @@ import { existsSync, readFileSync } from 'fs'
 import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial } from 'misc-utils-of-mine-generic'
 import { imageCompare } from '../image/imageCompare'
 import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
-import { imagePixelColor } from '../image/pixel'
+import { colorCount, imagePixelColor } from '../image/imageUtil'
 import { magickLoaded } from '../imageMagick/magickLoaded'
 import { getOption } from '../options'
 import { IFile } from '../types'
@@ -55,6 +55,10 @@ export class File implements IFile {
 
   public pixel(x: number, y: number): Promise<string | undefined> {
     return imagePixelColor(this, x, y)
+  }
+
+  public colorCount(): Promise<number | undefined> {
+    return colorCount(this)
   }
 
 	/** 

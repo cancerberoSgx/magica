@@ -5,21 +5,17 @@ source <%= scriptsFolder %>/base.sh
 mkdir -p $PREFIX/src
 cd $PREFIX/src
 
-if [ ! -d "libpng" ]; then
-  git clone https://github.com/cancerberosgx/png.git libpng
+if [ ! -d "liblqr" ]; then
+  git clone https://github.com/ImageMagick/lqr.git liblqr
 else
-  ( cd libpng ; make clean )
+  ( cd liblqr ; make clean )
 fi
 
-cd libpng
-
-libtoolize
-autoreconf 
-automake --add-missing
+cd liblqr
 
 chmod a+x ./configure
 emconfigure ./configure --prefix=$PREFIX --disable-shared --enable-static PKG_CONFIG_PATH="$PKG_CONFIG_PATH"
-testExitCode "libpng configure" $?
+testExitCode "liblqr configure" $?
 
 emcmake make install  
-testExitCode "libpng make install" $?
+testExitCode "liblqr make install" $?

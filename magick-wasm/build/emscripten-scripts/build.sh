@@ -14,14 +14,6 @@ cd $CURRENT_DIR
 source emscripten-scripts/build-libjpeg.sh
 testExitCode "build-libjpeg" $?
 
-cd $CURRENT_DIR
-source emscripten-scripts/build-libpng.sh
-testExitCode "build-libpng" $?
-
-cd $CURRENT_DIR
-source emscripten-scripts/build-tiff.sh
-testExitCode "build-tiff" $?
-
 # cd $CURRENT_DIR
 # source emscripten-scripts/build-jpeg-turbo.sh
 # testExitCode "build-jpeg-turbo" $?
@@ -29,6 +21,18 @@ testExitCode "build-tiff" $?
 # cd $CURRENT_DIR
 # source emscripten-scripts/build-build-openjpeg.sh
 # testExitCode "build-build-openjpeg" $?
+
+cd $CURRENT_DIR
+source emscripten-scripts/build-libpng.sh
+testExitCode "build-libpng" $?
+
+# cd $CURRENT_DIR
+# source emscripten-scripts/build-liblqr.sh
+# testExitCode "build-liblqr" $?
+
+cd $CURRENT_DIR
+source emscripten-scripts/build-tiff.sh
+testExitCode "build-tiff" $?
 
 cd $CURRENT_DIR
 source emscripten-scripts/build-freetype.sh

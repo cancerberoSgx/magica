@@ -5,7 +5,7 @@ import { toDataUrl } from '../image/html'
 import { imageBuiltIn } from '../image/imageBuiltIn'
 import { imageCompare } from '../image/imageCompare'
 import { imageInfo } from '../image/imageInfo'
-import { imagePixelColor } from '../image/pixel'
+import { colorCount, imagePixelColor } from '../image/imageUtil'
 import { magickLoaded } from '../imageMagick/magickLoaded'
 import { cliToArray } from '../main/command'
 import { registerCommandPreprocessor } from '../main/executeCommandPreprocessor'
@@ -20,7 +20,7 @@ function _getMagica() {
     File, toDataUrl, imageBuiltIn, imageCompare, magickLoaded, imageInfo,
     imagePixelColor, registerCommandPreprocessor, main, cliToArray,
     run, protectFile, isProtectedFile, getProtectedFile, addTemplateHelper,
-    getOptions, setOptions
+    getOptions, setOptions, colorCount
   }
 }
 

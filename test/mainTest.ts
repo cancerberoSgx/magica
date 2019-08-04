@@ -37,7 +37,6 @@ test('accept string input files, or urls', async t => {
   t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
 })
 
-
 test.todo('incorrect IM command')
 test.todo('should set options in command')
 test.todo('should support input file names with folders: convert input/in/nested/folder/foo.png -scale 100 bar.png')

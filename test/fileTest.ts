@@ -13,7 +13,6 @@ test.serial('from url request as array buffer view', async t => {
   const r = await fetch(u, o)
   const result = await main({
     command: ['identify', 'bridge.jpg'],
-    // debug: true,
     inputFiles: [{ name: 'bridge.jpg', content: new Uint8Array(await r.arrayBuffer()) }]
   })
   t.true(result.stdout.join('').includes('bridge.jpg JPEG 500x333 500x333+0+0 8-bit sRGB 35527B'))
@@ -52,14 +51,12 @@ test.serial('InputFile.fromFile', async t => {
 test.serial('accept array buffer view', async t => {
   let result = await main({
     command: ['convert', 'chala.tiff', '-scale', '200%', 'bigger.tiff'],
-    // debug: true,
     inputFiles: [await File.fromFile('test/assets/chala.tiff')],
   })
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'tif', mime: 'image/tiff' })
   t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
   t.falsy(result.error)
   result = await main({
-    // debug: true,
     command: ['identify', 'bigger.tiff'],
     inputFiles: result.outputFiles
   })

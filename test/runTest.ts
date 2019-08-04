@@ -40,7 +40,6 @@ test('should provide output images as input images to next command', async t => 
       convert n.png -scale 50% 1.jpg
       convert 1.jpg -rotate 133 2.gif
       `,
-    debug: true,
     inputFiles: ['test/assets/n.png']
   })
   t.deepEqual(result.outputFiles.map(f => f.name), ['2.gif'])
@@ -54,11 +53,19 @@ test('should provide output images as input images to next command, tiff repage 
       convert chala.tiff -scale 50% 1.jpg
       convert 1.jpg -rotate 133 +repage 2.tiff
       `,
-    debug: true,
     inputFiles: ['test/assets/chala.tiff']
   })
   t.deepEqual(result.outputFiles.map(f => f.name), ['2.tiff'])
   t.deepEqual(result.results.map(f => f.outputFiles.map(f => f.name)), [['1.jpg'], ['2.tiff']])
+})
+
+test.skip('not supported: should read image from url directly using IM', async t => {
+  const result = await run({
+    script: `
+    identify 'https://cancerberosgx.github.io/demos/geometrizejs-cli/bridge.jpg'  
+    `,
+  })
+  t.true(result.stdout.join('').includes('bridge.jpg JPEG 500x333 500x333+0+0 8-bit sRGB 35527B'))
 })
 
 test.todo('error handling')

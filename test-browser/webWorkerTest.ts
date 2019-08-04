@@ -3,12 +3,11 @@ import { execSync } from 'child_process'
 import { resolve } from 'path'
 import puppeteer from 'puppeteer'
 import { staticServer } from "./staticServer"
-
 declare var window: any
 
 test.serial('webworker', async t => {
 
-  
+
   // const htmlFile = 'test-browser/webWorker/index.html'
   // const testBrowserOutDir = 'tmp-browser-tests-webWorker' 
 

@@ -8,10 +8,9 @@
 - [ ] do the same as mainConcurrency for run()
 - [ ] options should allow to define a different nodeJsFsRoot or emscriptenFsRoot 
 - [ ] remove / replace knownSupportedReadWriteImageFormats with listFormat() - formatTest should use that.
+  - [ ] listFormat() should parse read/write info too
 - [ ] distribute magica as esm module (< script type"=mo>)
-- [ ] listFormat() should parse read/write info too
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
-- [ ] emscripten port generation configurable
 - [ ] try to build something similar to a realtime experience with canvas and IMG cache format files being careful not to remove them. User moving mouse  affects the canvas (processed with IM)
 - [ ] test mng animations "(A PNG-like Image Format Supporting Multiple Images, Animation and Transparent JPEG. Requires libpng-1.0.)"
 - [ ] I should be able to make output files protected by config.
@@ -20,33 +19,36 @@
 - [ ] because options are global - sending commands concurrently could fail. Solution: queue or instance options
 - [ ] an easy to use API for web-workers
 - [ ] verify web worker  passing files is optimal (verify transferable/shared array buffers/optimal)
-- [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
 - [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
 - [ ] should magica support running native IM executable in node if they are present ?  
-- [ ] improve errors thrown when there's a missing file, currently it fails silently.
-  - [ ] document CLI options for run({script})
-  - [ ] document  script pre processors API
-  - [ ] document script templates infrastructure, syntax, examples, building helpers, how to add new helpers, how to add new properties to the context. 
-  - [ ] document custom commands
+- [ ] improve/test errors thrown when there's a missing file, currently it fails silently.
+- [ ] document CLI options for run({script})
 - [ ] in the readme document a working example of loading magica.umd.js directly from unpkg cdn
 - [ ] feature: concat run(): `var r1 = await run(...) ... var r2 = await run({script, inputFiles: await File.fromResult(r1)})
 - [ ] Module.onAbort()
   - [ ] abort listeners API
   - [ ] when abort use that info to build the result 
+- [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
 
 ## WIP
 
+- [w] document run({script}) template, preprocessor, custom commands 
+  - [w] document  script pre processors API
+  - [w] document script templates infrastructure, syntax, examples, building helpers, how to add new helpers, how to add new properties to the context. 
+  - [ ] document custom commands
 - [w] test and document protected files feature
 - [w] document run() scripts and supported syntax
+- [x] emscripten port generation configurable
 
 
 ## DONE
 
+- [x] IM itself already supports loading images from URLS - BUT THIS IS NOT SUPPORTED IN THE PORT. 
+- [x] colorCount(image) - image.colorCount()
 - [x] browser tests for umd.js and custom wasm location
 - [x] fix npm run test-js  
 - [x] distribute magica as UMD file (< script src="cdn/magica.js> ... and now I can use it with requirejs or as global)
 - [x] browser: be able to load the library from a cdn. solution : global MAGICA_WASM_LOCATION or script src parameter: MAGICA_WASM_LOCATION
-- [x] IM itself already supports loading images from URLS - delegate that to it:  convert  http://www.ict.griffith.edu.au/anthony/images/anthony_castle.gif -resize 100x100 castle_logo.png
 - [x] test TTF and OTF fonts
 - [x] adapt executeVirtualCommand from wasm-imagemagick own branch -- DOME: we ended up doing it differently
 - [x] Module.onAbort

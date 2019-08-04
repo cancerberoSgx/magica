@@ -64,6 +64,7 @@ interface TemplateContext extends Options {
   readFileSync: typeof readFileSync
   writeFileSync: typeof writeFileSync
 }
+
 export function renderTemplates(options: Required<Options> = defaultOptions) {
  const context : TemplateContext = {...defaultTemplateContext, ...options, addLib: addLib.bind(options)} 
   mkdir('-p', `${options.outputFolder}/${options.scriptsFolder}`);

@@ -16,7 +16,7 @@
 
 ▸ **toDataUrl**(`o`: [IFile](../interfaces/_types_.ifile.md), `mime`: string): *string*
 
-*Defined in [image/html.ts:4](https://github.com/cancerberoSgx/magica/blob/819ab9b/src/image/html.ts#L4)*
+*Defined in [image/html.ts:4](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/image/html.ts#L4)*
 
 **Parameters:**
 

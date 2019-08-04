@@ -13,7 +13,7 @@
 * ["image/imageBuiltIn"](modules/_image_imagebuiltin_.md)
 * ["image/imageCompare"](modules/_image_imagecompare_.md)
 * ["image/imageInfo"](modules/_image_imageinfo_.md)
-* ["image/pixel"](modules/_image_pixel_.md)
+* ["image/imageUtil"](modules/_image_imageutil_.md)
 * ["imageMagick/createMain"](modules/_imagemagick_createmain_.md)
 * ["imageMagick/magickLoaded"](modules/_imagemagick_magickloaded_.md)
 * ["index"](modules/_index_.md)
