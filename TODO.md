@@ -11,7 +11,6 @@
 - [ ] distribute magica as esm module (< script type"=mo>)
 - [ ] listFormat() should parse read/write info too
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
-- [x] fix npm run test-js  
 - [ ] emscripten port generation configurable
 - [ ] try to build something similar to a realtime experience with canvas and IMG cache format files being careful not to remove them. User moving mouse  affects the canvas (processed with IM)
 - [ ] test mng animations "(A PNG-like Image Format Supporting Multiple Images, Animation and Transparent JPEG. Requires libpng-1.0.)"
@@ -44,6 +43,7 @@
 ## DONE
 
 - [x] browser tests for umd.js and custom wasm location
+- [x] fix npm run test-js  
 - [x] distribute magica as UMD file (< script src="cdn/magica.js> ... and now I can use it with requirejs or as global)
 - [x] browser: be able to load the library from a cdn. solution : global MAGICA_WASM_LOCATION or script src parameter: MAGICA_WASM_LOCATION
 - [x] IM itself already supports loading images from URLS - delegate that to it:  convert  http://www.ict.griffith.edu.au/anthony/images/anthony_castle.gif -resize 100x100 castle_logo.png

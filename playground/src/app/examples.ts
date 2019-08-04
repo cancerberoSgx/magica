@@ -66,6 +66,29 @@ convert -swirl 123 -wave 14x95 -scale 74% -rotate 15 \\
   },
 
   {
+    name: 'Text with shadow',
+    tags: [ExampleTag.text, ExampleTag.artistic],
+    description: 'Using -shadow on text to add shadow',
+    inputFiles: ['PoetsenOne-Regular.otf'],
+    script: state => `
+<%
+var options = {
+  text: 'Hello World 1234',
+  stroke: 'black',
+  fill: 'white',
+  pointSize: 68,
+  shadowColor: 'navy',
+  shadow: '80x3+3+3'
+} 
+%>
+convert -background none -stroke <%= options.stroke%> -fill <%= options.fill%> \\
+  -font PoetsenOne-Regular.otf -pointsize <%= options.pointSize%> 'label:<%= options.text%>' -trim \\
+  ( +clone -background <%= options.shadowColor %> -shadow <%= options.shadow %> ) +swap \\
+  -background none -layers merge +repage shadow_a.png
+    `.trim()
+  },
+
+  {
     name: 'Poligonize photo artistic',
     description: `With some parameters a WIP effect that kind of poligonize an image. The size the initial image before polar distorting, basically sets the number of rays that will be produced`,
     inputFiles: [],
