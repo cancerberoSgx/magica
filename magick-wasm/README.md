@@ -125,7 +125,7 @@ https://github.com/ImageMagick/zlib.git - 6a152c1
 
 https://github.com/KnicKnic/libjpeg.git - fbaf3bf 
 
-Using wasm-imagemagick (knickknick) version. had trouble reading files with mageMagick/jpeg-turbo and with the original libjpeg repos (see below). TODO: ask kninkknink for changes since git diff is not clear. Also we could search for an alternative / updated or look which changes are needed in those.
+Using wasm-imagemagick (knicknic) version. had trouble reading files with mageMagick/jpeg-turbo and with the original libjpeg repos (see below). TODO: ask knicknic for changes since git diff is not clear. Also we could search for an alternative / updated or look which changes are needed in those.
 
 ## freetype
 
@@ -145,9 +145,9 @@ from official IM project without modifications: https://github.com/ImageMagick/w
 
 ## turbo-jpeg (not included)
 
-didn't work for most images since a problem in "markers" . There is some notes documenting this as limitation. But probably is an error related to why kninkknink need to change the official library. In any case it compiles OK and writes OK but fails to read. 
+didn't work for most images since a problem in "markers" . There is some notes documenting this as limitation. But probably is an error related to why knicknic need to change the official library. In any case it compiles OK and writes OK but fails to read. 
 
-TODO: ask kninkknik for help to patch this version or update his, since the diff in git is not clear.
+TODO: ask knicknic for help to patch this version or update his, since the diff in git is not clear.
 
 ## open-jpeg (not included)
 
