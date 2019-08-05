@@ -13,11 +13,10 @@ if [ ! -d "autotrace" ]; then
 #   tar xvfz autotrace-0.31.1.tar.gz
 #  mv autotrace-0.31.1 autotrace
    git clone https://github.com/autotrace/autotrace.git
-else  
-  ( cd autotrace ; emcmake make clean )
 fi
 
 cd autotrace
+
 # autoreconf -fiv
 # autoreconf -vif 
 # sh autogen.sh --prefix=$PREFIX

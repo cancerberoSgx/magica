@@ -43,4 +43,3 @@ export async function setExample(example?: Example) {
   await sleep(100)
 }
 
-// function getFields(){}

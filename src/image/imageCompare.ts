@@ -13,7 +13,7 @@ export async function imageCompare(img1?: IFile, img2?: IFile, fuzz: number = 0.
   return identical <= fuzz
 }
 
-async function imageCompareNumber(img1: IFile, img2: IFile): Promise<number> {
+export async function imageCompareNumber(img1: IFile, img2: IFile): Promise<number> {
   const result = await main({
     inputFiles: [img1, img2], command: ['convert', img1.name, img2.name, '-resize', '256x256^!', '-metric', 'RMSE', '-format', '%[distortion]', '-compare', 'info:info.txt'],
   })

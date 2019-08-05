@@ -6,6 +6,7 @@ import { imageInfo } from '../src'
 import { File } from '../src/file/file'
 import { main } from '../src/main/main'
 import { getOption } from '../src/options'
+import { filterResultStdErr } from './testUtil'
 import fileType = require('file-type')
 
 test.serial('from url request as array buffer view', async t => {
@@ -16,7 +17,7 @@ test.serial('from url request as array buffer view', async t => {
     inputFiles: [{ name: 'bridge.jpg', content: new Uint8Array(await r.arrayBuffer()) }]
   })
   t.true(result.stdout.join('').includes('bridge.jpg JPEG 500x333 500x333+0+0 8-bit sRGB 35527B'))
-  t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
+  t.deepEqual(filterResultStdErr(result), [])
   t.falsy(result.error)
 })
 
@@ -27,7 +28,7 @@ test('InputFile.fromUrl', async t => {
     inputFiles: [await File.fromUrl(url)]
   })
   t.true(result.stdout.join('').includes('bridge.jpg JPEG 500x333 500x333+0+0 8-bit sRGB 35527B'))
-  t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
+  t.deepEqual(filterResultStdErr(result), [])
   t.falsy(result.error)
 })
 
@@ -37,14 +38,14 @@ test.serial('InputFile.fromFile', async t => {
     inputFiles: [await File.fromFile('test/assets/chala.tiff')],
   })
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'tif', mime: 'image/tiff' })
-  t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
+  t.deepEqual(filterResultStdErr(result), [])
   t.falsy(result.error)
   result = await main({
     command: ['identify', 'bigger.tiff'],
     inputFiles: result.outputFiles
   })
   t.true(result.stdout.join('').includes('bigger.tiff TIFF 100x100 100x100+0+0 8-bit sRGB 30346B'))
-  t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
+  t.deepEqual(filterResultStdErr(result), [])
   t.falsy(result.error)
 })
 
@@ -54,14 +55,14 @@ test.serial('accept array buffer view', async t => {
     inputFiles: [await File.fromFile('test/assets/chala.tiff')],
   })
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'tif', mime: 'image/tiff' })
-  t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
+  t.deepEqual(filterResultStdErr(result), [])
   t.falsy(result.error)
   result = await main({
     command: ['identify', 'bigger.tiff'],
     inputFiles: result.outputFiles
   })
   t.true(result.stdout.join('').includes('bigger.tiff TIFF 100x100 100x100+0+0 8-bit sRGB 30346B'))
-  t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
+  t.deepEqual(filterResultStdErr(result), [])
   t.falsy(result.error)
 })
 
@@ -90,7 +91,7 @@ test.serial('protected files are not erased', async t => {
     inputFiles: [await File.fromFile('test/assets/chala.tiff', { protected: true, name: 'protected1.tiff' }), await File.fromFile('test/assets/chala.tiff', { name: 'unprotected1.tiff' })],
   })
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'gif', mime: 'image/gif' })
-  t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
+  t.deepEqual(filterResultStdErr(result), [])
   t.falsy(result.error)
 
   t.true(await File.fileExists('protected1.tiff'))
@@ -102,7 +103,9 @@ test.serial('protected files are not erased', async t => {
     inputFiles: []
   })
   t.true(result.stdout.join('').includes('protected1.tiff TIFF 50x50 50x50+0+0 8-bit sRGB 7824B'))
-  t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
+  t.deepEqual(filterResultStdErr(result), [])
   t.falsy(result.error)
 
 })
+
+

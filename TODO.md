@@ -32,7 +32,7 @@
   - [ ] when abort use that info to build the result 
 - [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
 - [ ] autotrace test
-- [ ] lcms test
+- [ ] test -font companion:  -family, -stretch, -style, and -weight.
 
 ## WIP
 
@@ -47,8 +47,10 @@
 
 ## DONE
 
-- [x] lcms
-- [x] autotrace
+- [x] lcms - -profile icc test
+- [x] lcms - -profile .icc
+- [x] autotrace - working but currently disabled 
+  - [ ] try to build from github. it's not working at all for photos and very badly for letters. it generates invalid svg (not opening in chrome)
 - [x] test mng animations  
 - [x] add support for openjpeg (jp2, jpc (jpeg 2000))
 - [x] test jp2, jpc

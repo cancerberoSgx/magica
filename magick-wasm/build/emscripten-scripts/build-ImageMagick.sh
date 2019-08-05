@@ -14,8 +14,6 @@ if [ ! -d "ImageMagick" ]; then
   SKIP_CONFIG=0
   SKIP_BUILD=0
   git clone https://github.com/ImageMagick/ImageMagick.git
-elif [ "$SKIP_BUILD" -eq "0" ]; then
-  ( cd ImageMagick ; make clean )
 fi
 
 cd ImageMagick
@@ -25,9 +23,9 @@ if [ "$SKIP_CONFIG" -eq "0" ]; then
   autoconf
 
   emconfigure ./configure --prefix="$PREFIX" \
+  --with-quantum-depth=16 --enable-hdri=yes \
     --without-threads --disable-shared --disable-openmp --enable-static \
     --with-utilities --with-autotrace \
-    --with-quantum-depth=16 --enable-hdri=yes \
     --disable-docs --without-bzlib --without-magick-plus-plus \
     --without-perl --without-x --disable-largefile --without-modules  \
     PKG_CONFIG_PATH="$PKG_CONFIG_PATH" LDFLAGS="$LDFLAGS" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"

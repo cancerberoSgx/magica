@@ -2,6 +2,7 @@ import test from 'ava'
 import { notUndefined } from 'misc-utils-of-mine-generic'
 import { File } from '../src'
 import { run } from '../src/main/run'
+import { filterResultStdErr } from './testUtil'
 
 test('custom commands & protected files', async (t) => {
   const script = `
@@ -14,6 +15,7 @@ test('custom commands & protected files', async (t) => {
     script,
     protectOutputFiles: true,
   })
+  t.deepEqual(filterResultStdErr(result), [])
   t.deepEqual(result.stdout.filter(notUndefined), ['hello', 'bar.gif', 'hello2'])
   result = await run({
     script
@@ -28,6 +30,7 @@ test('custom commands support async ', async (t) => {
     `,
     inputFiles: [await File.fromFile('test/assets/chala.tiff')],
   })
+  t.deepEqual(filterResultStdErr(result), [])
   t.deepEqual(result.stdout, ['{"width":50,"height":50}'])
 })
 

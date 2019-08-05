@@ -1,24 +1,67 @@
-This package contains scripts that will build ImageMagick WebAssembly WASM distribution using emscripten from latest official ImageMagick and libraries sources.
+# magick-wasm
 
-Scripts are written as templates so they are easy to configure. 
 
-Also this project contains a simple API and CLI tool to run tbe build given hight level parameters such as quantumDepth, noHdri, type (debug/production), and libraries to enable/disable.
+## Contents
 
-# Build CLI tool
+<!-- toc -->
  
-TODO: the idea is to have a CLI that accepts parameters, builds scripts and optionally runs the build and tests. Right now there is only the following:
+<!-- tocstop -->
+
+
+## What?
+
+**WebAssembly build of ImageMagick and its libraries**
+
+Produces JavaScript and WASM usable form Node.js and Browser with a simple API to call  ImageMagick command line utilities like `convert`, `identify`, `montage`, etc as an API.
+
+Although it was implemented for [magica](https://github.com/cancerberoSgx/magica) it's totally independent of it and should be suitable for any use case needing.
+
+See [main()](https://github.com/cancerberoSgx/magica/blob/master/src/main/main.ts) for simpler higher level implementation on top of it based on promises and defining a simple `File` interface.
+
+## Summary
+
+ * Generates shell scripts that: 
+   * downloads latest versions of ImageMagick project and dependency libraries (mostly https://github.com/ImageMagick)
+   * the script builder accepts settings for: 
+     * enable/disable features like quantum-depth, hdri
+     * build type: 'production', 'debug', 'incremental'
+     * enable/disable dependency library
+     * output folder, docker launch, script output, etc
+   * WIP settings to re-use existing sources and optimize wasm build time and/or compile only certain libraries
+   * WIP : command line tool to call the script generator
+   * report git commits/sources for each project downloaded.
+
+# Usage
+ 
+TODO: the idea is to have a CLI that accepts parameters, builds scripts and optionally runs the build and tests. Right now what works instead is (`npx ts-node src/launch.ts`)
+
+Install the tool globally (or locally and call it with `npx`)
 
 ```
-# build default configuration scripts and execute them (with docker)
-npx ts-node src/launch.ts
-
-# generates scripts for a "debug" release type, reusing current PREFIX/src folders. It doesn't execute docker.
-npx ts-node src/launch.ts --type debug --noClean --noRun
+npm install -g magick-wasm
 ```
 
-Will generate build/emscripten-scripts so run-docker.sh can run (see below)
+Generates the default build type (production). in current directory and start it (docker needs to be up and running):
+```
+magick-wasm
+```
 
-# Build
+Generates a "debug" build type, reusing current PREFIX/src folders in given `outputFolder`. 
+It doesn't execute docker but prints instructions how to do it manually:
+
+```
+npx ts-node src/launch.ts --outputFolder $HOME/wasm/im --type debug --noClean --noRun
+```
+
+
+## Build result 
+
+If everything is OK, (assuming default options), `emscripten_prefix/wasm/magick.wasm` and  `emscripten_prefix/wasm/magick.js` files should be generated.
+
+In [magica](https://github.com/cancerberoSgx/magica) those can replace the ones at [src/imageMagick/compiled](https://github.com/cancerberoSgx/magica/src/imageMagick/compiled)
+
+
+### run-docker command (Internal)
 
 docker needs to be installed
 
@@ -31,7 +74,7 @@ If everything is OK that should generate magick WASM files at `magick-wasm/build
 
 Also, since latest versions of git projects for ImageMagick and libraries are used, the versions of each are dump at `magick-wasm/build/versions.txt`.
 
-# Tests
+### Replace magica's and run its tests (Internal)
 
 The following command clone's magica project, replace the wasm files with the new ones, and runs its tests to verify nothing it's broken.
 

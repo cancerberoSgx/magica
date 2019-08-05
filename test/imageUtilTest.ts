@@ -1,9 +1,8 @@
 import test from 'ava'
-import { File, imageCompare, run } from '../src'
+import { File } from '../src'
 import { imageBuiltIn } from '../src/image/imageBuiltIn'
 import { colorCount, imagePixelColor } from '../src/image/imageUtil'
 import { listFormat } from '../src/image/support'
-import { writeFileSync } from 'fs';
 
 test('imagePixelColor', async t => {
   const c = await imagePixelColor(await File.fromFile('test/assets/n.png'), 20, 20)
@@ -33,23 +32,4 @@ test('listFormat', async t => {
   t.truthy(c.find(f => f.name.includes('GIF')))
 })
 
-test('fft', async t => {
-  const c = await run<File>({
-    script: `
-    convert -size 32x32 gradient: -chop 0x1 -rotate 90 -evaluate sine 16 sine4.png
-    convert sine4.png -fft +delete -contrast-stretch 0 -evaluate log 100 sine4_spectrum.png`
-  })
-  t.deepEqual(undefined, c.error)
-  t.true(await imageCompare(await File.fromFile('test/assets/fft1.png'), c.outputFiles[0]))
-})
 
-test.skip('autotrace', async t => {
-  const result = await run<File>({
-    script: `
-    convert rose: p.pnm
-    convert p.pnm -rotate 54 -scale 200% rose.svg`
-  })
-  writeFileSync('tmpww.svg', result.outputFiles[0].content)
-  t.deepEqual(undefined, result.error)
-  // t.true(await imageCompare(await File.fromFile('test/assets/fft1.png'), result.outputFiles[0]))
-})

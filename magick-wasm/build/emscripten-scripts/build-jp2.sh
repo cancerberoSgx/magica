@@ -9,8 +9,6 @@ cd $PREFIX/src
 
 if [ ! -d "jp2" ]; then
   git clone https://github.com/ImageMagick/jp2.git
-else  
-  ( mkdir -p jp2/build; cd jp2/build ; emcmake make clean )
 fi
 
 rm -rf jp2/build

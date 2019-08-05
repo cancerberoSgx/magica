@@ -738,19 +738,6 @@ convert ${state.inputFiles[0].name}  boolean_mask.miff \\
   differenceRemoveBackground.png
     `.trim(),
   },
-
-  //   {
-  //     name: 'Hello fields',
-  //     description: 'visual fields test',
-  //     tags: [ExampleTag.simple],
-  //     inputFiles: ['bluebells.png'],
-  //     fields: [
-  //       {id: 'angle', value: '23'},
-  //       {id: 'scale', value: '123%'},
-  //     ],
-  //     script: state =>
-  //       `
-  // convert ${state.inputFiles[0].name} -rotate <%= get('angle') %> -scale <%= get('scale') %> foo.gif`
-  //   },
+ 
 
 ]

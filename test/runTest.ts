@@ -1,6 +1,7 @@
 import test from 'ava'
 import { File, imageCompare } from '../src'
 import { run } from '../src/main/run'
+import { filterResultStdErr } from './testUtil'
 
 test('should run a single command with comments, spaces and command break line', async t => {
   const r = await run({
@@ -11,6 +12,7 @@ test('should run a single command with comments, spaces and command break line',
       # this is a comment after
       `
   })
+  t.deepEqual(filterResultStdErr(r), [])
   t.true(r.stdout.join().includes('wizard:=>WIZARD GIF 480x640 480x640+0+0 8-bit sRGB 256c 99674B'))
 })
 
@@ -21,6 +23,7 @@ test('should output files', async t => {
     `,
     inputFiles: ['test/assets/n.png']
   })
+  t.deepEqual(filterResultStdErr(result), [])
   t.deepEqual(result.outputFiles.map(f => f.name), ['1.jpg'])
 })
 
@@ -31,6 +34,7 @@ test('should output files2', async t => {
     `,
     inputFiles: ['test/assets/logo.jpg']
   })
+  t.deepEqual(filterResultStdErr(result), [])
   t.deepEqual(result.outputFiles.map(f => f.name), ['2.png'])
 })
 
@@ -43,6 +47,7 @@ test('should provide output images as input images to next command', async t => 
     inputFiles: ['test/assets/n.png']
   })
   t.deepEqual(result.outputFiles.map(f => f.name), ['2.gif'])
+  t.deepEqual(filterResultStdErr(result), [])
   t.deepEqual(result.results.map(f => f.outputFiles.map(f => f.name)), [['1.jpg'], ['2.gif']])
   t.true(await imageCompare(result.outputFiles[0], await File.fromFile('test/assets/run_2.gif')))
 })
@@ -55,6 +60,7 @@ test('should provide output images as input images to next command, tiff repage 
       `,
     inputFiles: ['test/assets/chala.tiff']
   })
+  t.deepEqual(filterResultStdErr(result), [])
   t.deepEqual(result.outputFiles.map(f => f.name), ['2.tiff'])
   t.deepEqual(result.results.map(f => f.outputFiles.map(f => f.name)), [['1.jpg'], ['2.tiff']])
 })
@@ -65,6 +71,7 @@ test.skip('not supported: should read image from url directly using IM', async t
     identify 'https://cancerberosgx.github.io/demos/geometrizejs-cli/bridge.jpg'  
     `,
   })
+  t.deepEqual(filterResultStdErr(result), [])
   t.true(result.stdout.join('').includes('bridge.jpg JPEG 500x333 500x333+0+0 8-bit sRGB 35527B'))
 })
 

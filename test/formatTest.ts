@@ -1,6 +1,7 @@
 import test from 'ava'
 import { array } from 'misc-utils-of-mine-generic'
 import { File, imageCompare, main, run } from '../src'
+import { filterResultStdErr } from './testUtil'
 import fileType = require('file-type')
 
 test('webp read', async t => {
@@ -8,7 +9,7 @@ test('webp read', async t => {
     script: `convert ear.webp -scale 200% ear.gif`,
     inputFiles: ['test/assets/ear.webp']
   })
-  t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
+  t.deepEqual(filterResultStdErr(result), [])
   t.falsy(result.error)
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'gif', mime: 'image/gif' })
   t.true(await imageCompare(await File.fromFile('test/assets/ear.webp'), result.outputFiles[0]))
@@ -30,7 +31,7 @@ test('webp write', async t => {
     script: `convert n.png -scale 50% -rotate 133 n2.webp`,
     inputFiles: ['test/assets/n.png']
   })
-  t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
+  t.deepEqual(filterResultStdErr(result), [])
   t.falsy(result.error)
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'webp', mime: 'image/webp' })
   t.true(await imageCompare(await File.fromFile('test/assets/run_2.gif'), result.outputFiles[0]))
@@ -43,6 +44,7 @@ test('mng read', async t => {
   })
   t.falsy(result.error)
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'gif', mime: 'image/gif' })
+  t.deepEqual(filterResultStdErr(result), [])
   const info = await File.asFile(result.outputFiles[0]).info()
   t.deepEqual(
     info.map(i => ({ mimeType: i.mimeType, numberPixels: i.numberPixels, type: i.type })),
@@ -56,6 +58,7 @@ test('mng write', async t => {
     inputFiles: ['test/assets/input.gif']
   })
   t.falsy(result.error)
+  t.deepEqual(filterResultStdErr(result), [])
   const info = await File.asFile(result.outputFiles[0]).info()
   t.deepEqual(
     info.map(i => ({ mimeType: i.mimeType, numberPixels: i.numberPixels, type: i.type })),
@@ -71,6 +74,7 @@ test('mng write', async t => {
       inputFiles: [`test/assets/input2.${ext}`]
     })
     t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'png', mime: 'image/png' })
+    t.deepEqual(filterResultStdErr(result), [])
     t.falsy(result.error)
     t.true(await result.outputFiles[0].equals(await File.fromFile(`test/assets/input2.png`)))
   })

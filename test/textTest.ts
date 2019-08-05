@@ -1,5 +1,6 @@
 import test from 'ava'
 import { File, imageCompare, run } from '../src'
+import { filterResultStdErr } from './testUtil'
 
 test('should render ttf', async t => {
   const result = await run({
@@ -9,6 +10,7 @@ convert -font helvetica.ttf -pointsize 44 -background lightblue -fill navy label
     inputFiles: ['test/assets/helvetica.ttf']
   })
   t.true(await imageCompare(await File.fromFile('test/assets/text.png'), result.outputFiles[0]))
+  t.deepEqual(filterResultStdErr(result), [])
   t.deepEqual(result.error, undefined)
 })
 
@@ -20,6 +22,7 @@ convert -font PoetsenOne-Regular.otf -pointsize 44 -background #113311 -fill #e0
     inputFiles: ['test/assets/PoetsenOne-Regular.otf']
   })
   t.true(await imageCompare(await File.fromFile('test/assets/text3.jpg'), result.outputFiles[0]))
+  t.deepEqual(filterResultStdErr(result), [])
   t.deepEqual(result.error, undefined)
 })
 
@@ -32,6 +35,7 @@ test('should list available fonts', async t => {
   })
   t.deepEqual(result.error, undefined)
   t.deepEqual(result.stdout, [])
-  t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
+  t.deepEqual(filterResultStdErr(result), [])
+
 })
 

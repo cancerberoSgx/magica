@@ -11,6 +11,8 @@ Easy to setup and use, ImageMagick Node.js and Browser API and Command Line Inte
 
 - [Playground & demos](#playground--demos)
 - [Summary](#summary)
+- [Status](#status)
+  * [WebAssembly build](#webassembly-build)
 - [Install](#install)
 - [Command line](#command-line)
 - [JavaScript API](#javascript-api)
@@ -41,6 +43,16 @@ Easy to setup and use, ImageMagick Node.js and Browser API and Command Line Inte
  * Easy/Quick setup, no emscripten build needed.
  * Includes ImageMagick emscripten WASM build using its own tools, and also from other parties, like [wasm-imagemagick](https://github.com/KnicKnic/WASM-ImageMagick). 
  * So no build is necessary. Just `npm install` and you are ready to go.
+
+## Status
+ 
+ * See [TODO.md](TODO.md) for progress, supported features / libraries ported , things not supported yet and and roadmap.
+ * Most libraries and features supported. Each has a test (formats, features, commands)
+ 
+### WebAssembly build
+
+See [magick-wasm](magick-wasm)
+ 
 
 ## Install
 

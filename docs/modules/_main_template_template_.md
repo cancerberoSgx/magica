@@ -22,17 +22,29 @@
 
 ###  addTemplateHelper
 
-▸ **addTemplateHelper**(`h`: [TemplateHelper](../interfaces/_main_template_template_.templatehelper.md)): *void*
+▸ **addTemplateHelper**<**O**, **R**, **RO**, **RR**, **CRO**>(`h`: [TemplateHelper](../interfaces/_main_template_template_.templatehelper.md)‹*`O`*, *`R`*, *`RO`*, *`RR`*, *`CRO`*›): *void*
 
-*Defined in [main/template/template.ts:69](https://github.com/cancerberoSgx/magica/blob/cf74fdd/src/main/template/template.ts#L69)*
+*Defined in [main/template/template.ts:69](https://github.com/cancerberoSgx/magica/blob/bfeda69/src/main/template/template.ts#L69)*
 
 Allows to change the context object on which templates are evaluated to add new properties or functions
 so they can be evaluated in command templates.
+
+**Type parameters:**
+
+▪ **O**
+
+▪ **R**
+
+▪ **RO**
+
+▪ **RR**
+
+▪ **CRO**: *[RunOptions](../interfaces/_types_.runoptions.md)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`h` | [TemplateHelper](../interfaces/_main_template_template_.templatehelper.md) |
+`h` | [TemplateHelper](../interfaces/_main_template_template_.templatehelper.md)‹*`O`*, *`R`*, *`RO`*, *`RR`*, *`CRO`*› |
 
 **Returns:** *void*

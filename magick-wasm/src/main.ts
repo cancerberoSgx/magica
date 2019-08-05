@@ -3,13 +3,14 @@ import { renderTemplates } from './template';
 import { Context, Options } from "./types";
 import { defaultContext } from "./defaults";
 import { execSync } from 'child_process';
+import { resolve } from 'path';
 
 export const defaultOptions: Required<Options> = {
   ...defaultContext,
   help: false,
   debug: false,
   // outputFolder: getRoot()+'/build', 
-  outputFolder: './build',
+  outputFolder: resolve('./build'),
 }
 // import { homedir } from 'os';
 //  function getRoot() {
@@ -35,11 +36,23 @@ export function main(o: Options) {
   }
   if(!allOptions.noRun) {
 
-    try {
-      execSync(`cd ${allOptions.outputFolder} &&  sh ${allOptions.scriptsFolder}/run-docker.sh`, {stdio: 'pipe'})
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+    // try {
+      const cmd = `sh ${allOptions.scriptsFolder}/run-docker.sh`
+      const cwd = allOptions.outputFolder
+      console.log(`
+Build scripts built at ${allOptions.outputFolder}/${allOptions.scriptsFolder}
+
+To launch tests run: 
+
+cd ${cwd}
+${cmd}
+`
+      );
+      
+      // execSync(cmd, {cwd })
+    // } catch (error) {
+    //   console.error(error);
+    //   throw error;
+    // }
   }
 }

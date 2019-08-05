@@ -5,7 +5,8 @@ import { join } from 'path';
 import { Context, Library, TemplateContext, Options } from "./types";
 
 
-export const defaultLibraries = ['fftw', 'freetype', 'libjpeg', 'libpng', 'tiff', 'webp', 'zlib', 'openjpeg', 'lcms', 'raw', 'autotrace', 'libde265', 'libheif'
+export const defaultLibraries = ['fftw', 'freetype', 'libjpeg', 'libpng', 'tiff', 'webp', 'zlib', 'openjpeg', 'lcms', 'raw', 'libde265', 'libheif'
+// 'autotrace'
   // 'openexr',
 ];
 

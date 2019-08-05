@@ -2,6 +2,7 @@ import test from 'ava'
 import { readFileSync } from 'fs'
 import { basename } from 'misc-utils-of-mine-generic'
 import { main } from '../src/main/main'
+import { filterResultStdErr } from './testUtil'
 import fileType = require('file-type')
 
 test('stdout', async t => {
@@ -10,7 +11,7 @@ test('stdout', async t => {
     inputFiles: [{ name: 'foo.png', content: readFileSync('test/assets/n.png') }]
   })
   t.true(result.stdout.join('').includes('foo.png PNG 109x145 109x145+0+0 8-bit sRGB 39796B'))
-  t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
+  t.deepEqual(filterResultStdErr(result), [])
   t.falsy(result.error)
 })
 
@@ -23,7 +24,7 @@ test('output file names', async t => {
   t.deepEqual(result.outputFiles.map(f => basename(f.name)), ['foo2.png'])
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'png', mime: 'image/png' })
   t.falsy(result.error)
-  t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
+  t.deepEqual(filterResultStdErr(result), [])
 })
 
 test('accept string input files, or urls', async t => {
@@ -34,7 +35,7 @@ test('accept string input files, or urls', async t => {
   t.deepEqual(result.outputFiles.map(f => basename(f.name)), ['foo2.png'])
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'png', mime: 'image/png' })
   t.falsy(result.error)
-  t.deepEqual(result.stderr.filter(s => !s.includes('UnableToOpenConfigureFile') && !s.includes('Calling stub instead of')), [])
+  t.deepEqual(filterResultStdErr(result), [])
 })
 
 test.todo('incorrect IM command')

@@ -9,8 +9,6 @@ cd $PREFIX/src
 
 if [ ! -d "freetype" ]; then
   git clone https://github.com/ImageMagick/freetype.git
-else
-  ( cd freetype ; make clean )
 fi
   
 cd freetype

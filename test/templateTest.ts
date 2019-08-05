@@ -1,7 +1,7 @@
 import test from 'ava'
-import { writeFileSync } from 'fs'
 import { addTemplateHelper, File, imageCompare } from '../src'
 import { run } from '../src/main/run'
+import { filterResultStdErr } from './testUtil'
 
 test('script template', async t => {
   const result = await run({
@@ -10,6 +10,7 @@ test('script template', async t => {
       `,
     inputFiles: [await File.fromFile('test/assets/n.png'), await File.fromFile('test/assets/chala.tiff')],
   })
+  t.deepEqual(filterResultStdErr(result), [])
   t.true(result.stdout.join().includes('chala.tiff TIFF 50x50 50x50+0+0 8-bit sRGB 7824B'))
 })
 
@@ -24,6 +25,7 @@ test('script with template, comments multi lines and spaces', async t => {
       `,
     inputFiles: [await File.fromFile('test/assets/chala.tiff')],
   })
+  t.deepEqual(filterResultStdErr(result), [])
   t.true(result.stdout.join().includes('chala.tiff TIFF 50x50 50x50+0+0 8-bit sRGB 7824B'))
 })
 
@@ -38,6 +40,7 @@ convert <%= inputFiles[0].name %> -resize <%= bounds.width+'x'+bounds.height %> 
       `,
     inputFiles: [await File.fromFile('test/assets/chala.tiff')],
   })
+  t.deepEqual(filterResultStdErr(result), [])
   t.true(await imageCompare(result.outputFiles[0], await File.fromFile('test/assets/chala.tiff')))
 })
 
@@ -49,7 +52,8 @@ convert -font helvetica.ttf -pointsize 24 -background lightblue -fill navy 'labe
       `,
     inputFiles: ['test/assets/helvetica.ttf']
   })
-  writeFileSync('tmp_222.png', result.outputFiles[0].content)
+  // writeFileSync('tmp_222.png', result.outputFiles[0].content)
+  t.deepEqual(filterResultStdErr(result), [])
   t.true(await imageCompare(result.outputFiles[0], await File.fromFile('test/assets/text2.png')))
 })
 
@@ -60,6 +64,7 @@ convert wizard: bar.gif
 convert rose: bar.gif '<%=( await ls({stdout: true, path: '/'})).join('_')%>.gif'
 `,
   })
+  t.deepEqual(filterResultStdErr(result), [])
   t.deepEqual(result.commands, [['convert', 'wizard:', 'bar.gif'], ['convert', 'rose:', 'bar.gif', 'tmp_home_dev_proc_w2.gif']])
 })
 
@@ -74,6 +79,7 @@ convert wizard: -resize <%= Math.round(size.width / 3) %>x<%= Math.round( size.h
 `,
     inputFiles: ['test/assets/n.png']
   })
+  t.deepEqual(filterResultStdErr(result), [])
   t.true(await imageCompare(result.outputFiles[0], await File.fromFile('test/assets/size1.gif')))
 })
 
@@ -84,6 +90,7 @@ convert rose: -scale <$=44+9$>x88 foo.png
 convert foo.png -rotate <$=30+6$> bar.png
     `
   })
+  t.deepEqual(filterResultStdErr(result), [])
   t.deepEqual(result.commands, [
     ['convert', 'rose:', '-scale', '53x88', 'foo.png'],
     ['convert', 'foo.png', '-rotate', '36', 'bar.png']])
