@@ -37,7 +37,7 @@ export const examples: Example[] = [
     name: 'Hello world:',
     description: 'Simple example that transform built in rose: image',
     tags: [ExampleTag.simple],
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state =>
       `convert ${state.inputFiles.length ? state.inputFiles[0].name : 'rose:'} -rotate 33 -scale 136% foo.gif`
   },
@@ -118,7 +118,7 @@ convert differenceRemoveBackground.miff  \\
   {
     name: 'Poligonize photo artistic',
     description: `With some parameters a WIP effect that kind of poligonize an image. The size the initial image before polar distorting, basically sets the number of rays that will be produced`,
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     tags: [ExampleTag.artistic, ExampleTag.color],
     script: state => `
 <% 
@@ -140,7 +140,7 @@ convert <%=inputFiles[0].name %> \\
     name: 'Spherical Distortion Map',
     description: `<a href="https://imagemagick.org/Usage/mapping/#spherical">See ImageMagick examples page mapping/#spherical</a>`,
     tags: [ExampleTag.distort, ExampleTag.artistic,],
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
 <% 
   var size = await inputFiles[0].size()
@@ -171,7 +171,7 @@ convert <%=inputFiles[0].name %> -resize <%=wxh%>! sphere_lut.miff -fx 'p{ v*w, 
     name: 'animate_granularity',
     description: `<a href="https://imagemagick.org/Usage/canvas/#granularity">See ImageMagick examples page canvas/#granularity</a>`,
     tags: [ExampleTag.animation, ExampleTag.gradient],
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
 # Generate initial random image (also  granularity=0 image
 convert -size 150x150 xc: +noise random \\
@@ -230,14 +230,14 @@ convert logo_holed.miff null: glitter_plasma_tiled.miff \\
   -compose DstOver -layers composite \\
   -loop 0 -layers Optimize logo_glittered.gif
           `.trim(),
-    inputFiles: []
+    inputFiles: ['bluebells.png']
   },
 
   {
     name: 'Composite commands',
     tags: [ExampleTag.simple],
     description: 'Example of how to compose several commands starting with the same input image using parenthesis and -composite',
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
 convert ${state.inputFiles[0].name} \\
   ( -clone 0 -roll +1+0 -clone 0 -compose difference -composite ) \\
@@ -299,40 +299,9 @@ montage \\
     name: 'Flux anim',
     description: `<a href="https://imagemagick.org/Usage/canvas/#random_flux">See ImageMagick examples page canvas/#random_flux</a>`,
     tags: [ExampleTag.animation],
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
-# first generate a random noise image. We use miff format which is faster
-convert -size 100x100 xc: +noise Random random.miff
-# copy it just to see it in the browser
-convert random.miff random.gif 
-
-# Now generate sequence of variations of it with function Sinusoid
-<% sequence(0, 30, 359).forEach(i=>{ %>
-  convert random.miff -channel G -function Sinusoid 1,<%=i%> \\
-    -virtual-pixel tile -blur 0x8 -auto-level \\
-    -separate flux_<%=i%>.miff
-<%})%>
-# And append them all in an anim gif:
-convert -set delay 12 <%= sequence(0, 30, 359).map(i=>\`flux_\${i}.miff\`).join(' ') %> flux_anim.gif
-
-# a threshold variation of previous:
-convert flux_anim.gif -threshold 70% flux_thres_anim.gif
-
-# Another "filaments" variation:
-convert flux_anim.gif  \\
-  -sigmoidal-contrast 30x50% -solarize 50% -auto-level \\
-  -set delay 12 filaments_anim.gif
-
-# generate another sequence with more frames this time "ripples"
-<% sequence(0, 10, 359).forEach(i=>{ %>
-  convert random.miff -channel G \\
-    -function Sinusoid 1,<%=i%> \\
-    -virtual-pixel tile -blur 0x8 -auto-level \\
-    -function Sinusoid 2.5,<%=i*5%> \\
-    -separate +channel flux_ripples_<%=i%>.miff
-<%})%>
-convert -set delay 12 <%= sequence(0, 10, 359).map(i=>\`flux_ripples_\${i}.miff\`).join(' ') %> flux_ripples_anim.gif
-<%
+<% 
 function sequence(start, step, end){
   var a = []
   for(var i = start; i<=end; i+=step){
@@ -340,6 +309,43 @@ function sequence(start, step, end){
   }
   return a
 } 
+var size = '100x100'
+var delay = 12
+var list = sequence(0, 20, 359)
+%>
+# first generate a random noise image. We use miff format which is faster
+convert -size <%= size %> xc: +noise Random random.miff
+# copy it just to see it in the browser
+convert random.miff random.gif 
+
+# Now generate sequence of variations of it with function Sinusoid
+<% list.forEach(i=>{ %>
+  convert random.miff -channel G -function Sinusoid 1,<%=i%> \\
+    -virtual-pixel tile -blur 0x8 -auto-level \\
+    -separate flux_<%=i%>.miff
+<%})%>
+# And append them all in an anim gif:
+convert -set delay <%= delay %> <%= list.map(i=>\`flux_\${i}.miff\`).join(' ') %> flux_anim.gif
+
+# a threshold variation of previous:
+convert flux_anim.gif -threshold 70% flux_thres_anim.gif
+
+# Another "filaments" variation:
+convert flux_anim.gif  \\
+  -sigmoidal-contrast 30x50% -solarize 50% -auto-level \\
+  -set delay <%= delay %> filaments_anim.gif
+
+# generate another list this time "ripples"
+<% list.forEach(i=>{ %>
+  convert random.miff -channel G \\
+    -function Sinusoid 1,<%=i%> \\
+    -virtual-pixel tile -blur 0x8 -auto-level \\
+    -function Sinusoid 2.5,<%=i*5%> \\
+    -separate +channel flux_ripples_<%=i%>.miff
+<%})%>
+convert -set delay <%= delay %> <%= list.map(i=>\`flux_ripples_\${i}.miff\`).join(' ') %> flux_ripples_anim.gif
+<%
+
 %>
   `.trim(),
   },
@@ -385,14 +391,14 @@ convert test.png \\
   -compose SrcIn -composite tint_overlay_pattern.png
         `.trim(),
 
-    inputFiles: []
+    inputFiles: ['bluebells.png']
   },
 
   {
     name: 'Gradient complex hues',
     description: `<a href="https://imagemagick.org/Usage/canvas/#gradient_complex_hues">See ImageMagick examples page canvas/#gradient_complex_hues</a>`,
     tags: [ExampleTag.drawing, ExampleTag.gradient],
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
 convert -size 100x100 xc: +size xc:red xc:blue xc:lime -colorspace HSB \\
   -fx 'ar=1/max(1,  (i-50)*(i-50)+(j-10)*(j-10)  ); br=1/max(1,  (i-10)*(i-10)+(j-70)*(j-70)  );  cr=1/max(1,  (i-90)*(i-90)+(j-90)*(j-90)  );  ( u[1]*ar + u[2]*br + u[3]*cr )/( ar+br+cr )' \\
@@ -419,7 +425,7 @@ convert gradient_inverse_RGB.png -colorspace HSB \\
     name: 'Gradient baricentric',
     description: `<a href="https://imagemagick.org/Usage/canvas/#barycentric">See ImageMagick examples page canvas/#barycentric</a>`,
     tags: [ExampleTag.drawing, ExampleTag.gradient],
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
 convert -size 100x100 xc: -colorspace RGB \\
   -sparse-color  Barycentric '30,10 red   10,80 blue   90,90 lime' \\
@@ -446,7 +452,7 @@ convert -size 100x100 xc:none -draw 'polygon 30,10  10,80  90,90' \\
     name: 'Gradient Shepard\'s power',
     description: `<a href="https://imagemagick.org/Usage/canvas/#shepards_power">See ImageMagick examples page canvas/#shepards_power</a>`,
     tags: [ExampleTag.drawing, ExampleTag.gradient],
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
 convert -size 100x100 xc: -colorspace RGB -define shepards:power=0.5 \\
   -sparse-color Shepards '30,10 red  10,80 blue  70,60 lime  80,20 yellow' \\
@@ -485,7 +491,7 @@ convert -size 100x100 xc: -colorspace RGB -define shepards:power=8 \\
     name: 'histogram',
     description: `Generate combined histogram representation of all current input images`,
     tags: [ExampleTag.info, ExampleTag.color],
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
 convert ${state.inputFiles.map(f => f.name).join(' ')} histogram:histogram.gif
          `.trim(),
@@ -495,7 +501,7 @@ convert ${state.inputFiles.map(f => f.name).join(' ')} histogram:histogram.gif
     name: 'Film Strip Animation',
     description: `Drawing, distorting and composing to archive a nice "film strip" like animation`,
     tags: [ExampleTag.animation, ExampleTag.distort],
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
 convert -size 12x12 xc: -draw 'circle 6,6 6,2' -negate \\
   -duplicate 5 +append +duplicate \\
@@ -515,7 +521,7 @@ convert -size 12x12 xc: -draw 'circle 6,6 6,2' -negate \\
     name: 'gradient sparse_fill',
     description: `<a href="https://imagemagick.org/Usage/canvas/#sparse_fill">See ImageMagick examples page canvas/#sparse_fill</a>`,
     tags: [ExampleTag.drawing, ExampleTag.gradient],
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
 convert -size 100x100 xc:none +antialias -fill none -strokewidth 0.5 \\
   -stroke Gold        -draw 'path "M 20,70  A 1,1 0 0,1 80,50"' \\
@@ -540,7 +546,7 @@ convert sparse_source.gif \\
     name: 'Hourglass Distortion Map',
     description: `<a href="https://imagemagick.org/Usage/mapping/#hourglass">See ImageMagick examples page mapping/#hourglass</a>`,
     tags: [ExampleTag.distort],
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
 convert -size 100x100 xc:  -channel G \\
   -fx 'sc=.15; (i/w-.5)/(1+sc*cos(j*pi*2/h)-sc)+.5' \\
@@ -557,7 +563,7 @@ convert ${state.inputFiles[0].name} \\
     name: 'Stars spiral and inwards',
     description: `By Polar Distorting the image we can make the comets flying or spiraling into a point!`,
     tags: [ExampleTag.drawing, ExampleTag.distort],
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
 convert -size 250x100 xc: +noise Random -channel R -threshold .4% \\
   -negate -channel RG -separate +channel \\
@@ -577,7 +583,7 @@ convert -size 250x100 xc: +noise Random -channel R -threshold .4% \\
   {
     name: 'Falling stars',
     description: `use '-motion-blur' to create a field of falling stars`,
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
 convert -size 100x100 xc: +noise Random -channel R -threshold .4% \\
   -negate -channel RG -separate +channel \\
@@ -625,7 +631,7 @@ montage -size 400x400 null: \\
     name: 'Stars animation',
     description: `By combining the above with a plasma glitter animation you can make set of stars that look like christmas decorations.`,
     tags: [ExampleTag.animation],
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
 convert -size 200x200 xc: +noise Random -separate \\
   null: \\
@@ -652,7 +658,7 @@ convert -size 200x200 xc: +noise Random -separate \\
   {
     name: 'Warping local region',
     description: `<a href="https://imagemagick.org/Usage/masking/#region_warping">See ImageMagick examples page masking/#region_warping</a>`,
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
 convert -size 600x70 xc:darkred \\
   -fill white -draw 'roundrectangle 5,5  595,65 5,5' \\
@@ -675,7 +681,7 @@ convert lines.gif \\
     name: 'Remove background color',
     description: `<a href="https://imagemagick.org/Usage/masking/#difference">See ImageMagick examples page masking/#difference</a>`,
     tags: [ExampleTag.color],
-    inputFiles: [],
+    inputFiles: ['bluebells.png'],
     script: state => `
 convert ${state.inputFiles[0].name} ( +clone -fx 'p{0,0}' ) \\
   -compose Difference  -composite  \\

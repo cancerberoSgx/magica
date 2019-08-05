@@ -17,7 +17,7 @@
 
 ▸ **getThisBrowserScriptTagSrc**(): *any*
 
-*Defined in [util/magicaWasm.ts:8](https://github.com/cancerberoSgx/magica/blob/80b354c/src/util/magicaWasm.ts#L8)*
+*Defined in [util/magicaWasm.ts:8](https://github.com/cancerberoSgx/magica/blob/0c53937/src/util/magicaWasm.ts#L8)*
 
 This function and module needs to be loaded before of everything from index,  If in the browser get this script src attribute (it's one of the way of configuring magick.wasm location).
 
@@ -29,6 +29,6 @@ ___
 
 ▸ **getThisBrowserScriptTagSrcParams**(): *undefined | object*
 
-*Defined in [util/magicaWasm.ts:18](https://github.com/cancerberoSgx/magica/blob/80b354c/src/util/magicaWasm.ts#L18)*
+*Defined in [util/magicaWasm.ts:18](https://github.com/cancerberoSgx/magica/blob/0c53937/src/util/magicaWasm.ts#L18)*
 
 **Returns:** *undefined | object*

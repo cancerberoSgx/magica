@@ -34,7 +34,7 @@ export class Template implements CommandPreprocessor {
   public async fnCompileTime(context: RunOptions) {
     if (typeof context.script === 'string') {
       const t = compile(context.script, this.templateOptions)
-      context.debug && console.log('Template compiled: ', t.toString())
+      // context.debug && console.log('Template compiled: ', t.toString())
       let c: { [s: string]: any } = { ...context }
       templateHelpers.forEach(fn => {
         c[fn.name] = fn.fnCompileTime.bind(fn)

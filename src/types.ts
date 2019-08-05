@@ -51,12 +51,13 @@ export interface NativeOptions extends BaseOptions {
   /**
    * main() commands are queued and this defines de limit of running commands at the same time. it's no so important since the main() call is synch but files/urls are resolved also so this has an impact on those async operations
    */
-  mainConcurrency: 1,
+  mainConcurrency: number,
   /**
    * main() commands are queued and this is the milliseconds to wait before starting a new main command
    */
   mainInterval: 0
 
+  customCommandPrefix?: string
 }
 
 interface BaseOptions {

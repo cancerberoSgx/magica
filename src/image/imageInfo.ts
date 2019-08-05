@@ -19,7 +19,7 @@ export async function imageInfo(img?: IFile | string | (IFile | string)[]): Prom
     command: ['convert', ...asArray(img).map(img => typeof img === 'string' ? img : img.name), 'imgInfo.json']
   })
   equal(r.outputFiles.length, 1)
-  const s = File.toString(r.outputFiles[0])
+  const s = File.asString(r.outputFiles[0])
   const obj = JSON.parse(s)
   return obj
 }

@@ -19,7 +19,7 @@ export class InputFiles extends AbstractComponent {
       <Header as="h5">Current files</Header>
       <List relaxed>
         {this.state.inputFiles.map(f =>
-          <List.Item>
+          <List.Item key={f.name}>
             <List.Content>
               <List.Header><a href="" onClick={e => {
                 var blob = new Blob([f.content])

@@ -1,9 +1,7 @@
 import { getStore } from '../../app/store';
 import { setExample } from '../../app/dispatcher';
-import { sleep, serial } from 'misc-utils-of-mine-generic';
+import { sleep, serial, notUndefined } from 'misc-utils-of-mine-generic';
 import { File } from 'magica';
-import { any } from 'prop-types';
-import { notUndefined } from 'misc-utils-of-mine-generic';
 
 export function createUrl() {
   var state = getStore().getState()
@@ -12,7 +10,7 @@ export function createUrl() {
       ...state.example, 
       script: state.script, 
     },
-    inputFileNames: state.inputFiles.map(f=>f.name),
+    inputFileNames: state.inputFiles.map(f=>f.url).filter(notUndefined),
     script: state.script
   }
   const b = btoa(JSON.stringify(s))

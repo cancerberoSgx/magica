@@ -17,7 +17,7 @@
 
 ▸ **colorCount**(`img`: [IFile](../interfaces/_types_.ifile.md) | undefined): *`Promise<number | undefined>`*
 
-*Defined in [image/imageUtil.ts:11](https://github.com/cancerberoSgx/magica/blob/80b354c/src/image/imageUtil.ts#L11)*
+*Defined in [image/imageUtil.ts:11](https://github.com/cancerberoSgx/magica/blob/0c53937/src/image/imageUtil.ts#L11)*
 
 **Parameters:**
 
@@ -33,7 +33,7 @@ ___
 
 ▸ **imagePixelColor**(`img`: [IFile](../interfaces/_types_.ifile.md) | undefined, `x`: number, `y`: number): *`Promise<string | undefined>`*
 
-*Defined in [image/imageUtil.ts:5](https://github.com/cancerberoSgx/magica/blob/80b354c/src/image/imageUtil.ts#L5)*
+*Defined in [image/imageUtil.ts:5](https://github.com/cancerberoSgx/magica/blob/0c53937/src/image/imageUtil.ts#L5)*
 
 **Parameters:**
 

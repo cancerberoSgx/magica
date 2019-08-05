@@ -16,7 +16,7 @@ export class File implements IFile {
 
   protected isProtected: boolean;
 
-  constructor(public name: string, public content: IFile['content'], isProtected: boolean = false, protected url?: string) {
+  constructor(public name: string, public content: IFile['content'], isProtected: boolean = false, public url?: string) {
 
     this.isProtected = isProtected
     if (this.isProtected) {
@@ -124,7 +124,7 @@ export class File implements IFile {
     }
   }
 
-  public static toString(f: IFile) {
+  public static asString(f: IFile) {
     return String.fromCharCode.apply(null, f.content as any)
   }
 

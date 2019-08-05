@@ -16,9 +16,9 @@
 
 ###  getOption
 
-▸ **getOption**<**K**>(`k`: `K`): *`NativeOptions[K]`*
+▸ **getOption**<**K**>(`k`: `K`): *`Required<NativeOptions>[K]`*
 
-*Defined in [options.ts:18](https://github.com/cancerberoSgx/magica/blob/80b354c/src/options.ts#L18)*
+*Defined in [options.ts:19](https://github.com/cancerberoSgx/magica/blob/0c53937/src/options.ts#L19)*
 
 **Type parameters:**
 
@@ -30,7 +30,7 @@ Name | Type |
 ------ | ------ |
 `k` | `K` |
 
-**Returns:** *`NativeOptions[K]`*
+**Returns:** *`Required<NativeOptions>[K]`*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 ▸ **getOptions**(): *object*
 
-*Defined in [options.ts:14](https://github.com/cancerberoSgx/magica/blob/80b354c/src/options.ts#L14)*
+*Defined in [options.ts:15](https://github.com/cancerberoSgx/magica/blob/0c53937/src/options.ts#L15)*
 
 **Returns:** *object*
 
@@ -48,7 +48,7 @@ ___
 
 ▸ **setOptions**(`o`: `Partial<NativeOptions>`): *void*
 
-*Defined in [options.ts:22](https://github.com/cancerberoSgx/magica/blob/80b354c/src/options.ts#L22)*
+*Defined in [options.ts:23](https://github.com/cancerberoSgx/magica/blob/0c53937/src/options.ts#L23)*
 
 **Parameters:**
 

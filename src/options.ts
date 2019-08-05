@@ -7,15 +7,16 @@ let options: Required<NativeOptions> = {
   outputDir: '.',
   disableNodeFs: false,
   useNative: false,
-  mainConcurrency: 1,
-  mainInterval: 0
+  mainConcurrency: 3,
+  mainInterval: 0,
+  customCommandPrefix: '!js:'
 }
 
 export function getOptions() {
   return options
 }
 
-export function getOption<K extends keyof NativeOptions>(k: K): NativeOptions[K] {
+export function getOption<K extends keyof NativeOptions>(k: K): Required<NativeOptions>[K] {
   return options[k]
 }
 

@@ -45,22 +45,23 @@
 ## DONE
 
 - [x] test mng animations  
+- [x] add support for openjpeg (jp2, jpc (jpeg 2000))
 - [x] test jp2, jpc
-- [x] IM itself already supports loading images from URLS - BUT THIS IS NOT SUPPORTED IN THE PORT. 
+- [x] IM itself already supports loading images from URLS - NOT SUPPORTED 
 - [x] colorCount(image) - image.colorCount()
 - [x] browser tests for umd.js and custom wasm location
 - [x] fix npm run test-js  
 - [x] distribute magica as UMD file (< script src="cdn/magica.js> ... and now I can use it with requirejs or as global)
 - [x] browser: be able to load the library from a cdn. solution : global MAGICA_WASM_LOCATION or script src parameter: MAGICA_WASM_LOCATION
 - [x] test TTF and OTF fonts
-- [x] adapt executeVirtualCommand from wasm-imagemagick own branch -- DOME: we ended up doing it differently
-- [x] Module.onAbort
+- [x] adapt executeVirtualCommand from wasm-imagemagick own branch -- NOT DONE: we ended up doing it differently
+- [x] Module.onAbort prints error
 - [x] test webp read/write
 - [x] fix format tests (broken with new wasm)
 - [x] verify support IM command quoted arguments
 - [x] test fftw
 - [x] emscripten port generation automatized
-- [x] custom commands - any command surrounded by curly braces will be evaluated as  a js function: `{  this.pushStdout(...FS.readdir('.')) }`
+- [x] custom commands - expressions surrounded by curly braces will be evaluated as a js: `{  this.pushStdout(...FS.readdir('.')) }`
 - [x] verify montage and other commands than convert and identify (montage is special with files?)
 - [x] apidocs
 - [x] template should allow to add custom functions to the context

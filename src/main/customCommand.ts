@@ -2,17 +2,32 @@ import { FS } from '../file/emscriptenFs'
 import { File } from '../file/file'
 import { NativeResult } from '../imageMagick/createMain'
 import { getStderr, getStdout, pushStderr, pushStdout, resetStderr, resetStdout } from '../imageMagick/magickLoaded'
+import { getOption } from '../options'
 import { Options } from '../types'
 import { main } from './main'
 import { run } from './run'
 
 export async function isCustomCommand(c: string[], o: Partial<Options>) {
-  return c[0].trim().startsWith('{')
+  return c.join(' ').trim().startsWith(getOption('customCommandPrefix'))
 }
 
-interface CustomCommandContext {
+/**
+ * In [run]'s [script] property, or in commands given to [main], lines starting with `!js:` are be evaluated as a JavaScript function that accept one parameter context which is an object containing utilities that can be used asynchronously. This interface describes such an object. The expression  `!js:` can be configured using [Options]. 
+ * 
+ * ```js
+ * result = await run({
+ *  script: `
+ *    convert rose: foo.gif
+ *    !js: c=>c.pushStdout(FS.readdir('.').join(', '))
+ *    !js: async c=> {const f = c.File.asFile(c.files[0]) ; c.pushStdout(JSON.stringify(await f.size())) }
+ *  `
+ * })
+ * ```
+ */
+export interface CustomCommandContext {
   FS: FS;
   options: Partial<Options>
+  files: File[]
   pushStdout(s: string): void;
   pushStderr(s: string): void;
   File: typeof File
@@ -26,9 +41,12 @@ interface CustomCommandContext {
 
 class CustomCommandContextImpl implements CustomCommandContext {
   pushStdout: (s: string) => void;
+
   pushStderr: (s: string) => void;
+
   File: typeof File;
-  constructor(public command: string[], public options: Partial<Options>, public FS: FS) {
+
+  constructor(public options: Partial<Options>, public FS: FS, public files: File[]) {
     this.pushStdout = pushStdout
     this.pushStderr = pushStderr
     this.File = File
@@ -51,28 +69,31 @@ class CustomCommandContextImpl implements CustomCommandContext {
   }
 
   main = main
-  run = run
 
+  run = run
 }
 
-export async function dispatchCustomCommand(c: string[], o: Partial<Options>, FS: FS): Promise<NativeResult> {
-  var context = new CustomCommandContextImpl(c, o, FS)
+export async function dispatchCustomCommand(c: string[], o: Partial<Options>, FS: FS, files: File[]): Promise<NativeResult> {
+  const s = c.slice(1).join(' ').trim()
+  o.debug && console.log('custom command js expression: ' + s)
+  var context = new CustomCommandContextImpl(o, FS, files)
   var error: Error | undefined
   var returnValue: any
   resetStdout()
   resetStderr()
   try {
-    var f = eval(`(function(o){return (function()${c.join(' ')}).bind(o)() })`)
+    var f: (context: CustomCommandContext) => Promise<any> = eval(s)
+    o.debug && console.log('custom command js evaluated result function: ' + f)
     returnValue = await f(context)
   }
   catch (er) {
+    o.debug && console.error('Custom command ', s, 'evaluation error: ', er)
     error = er
   }
   return {
     stdout: getStdout(),
     stderr: getStderr(),
-    returnValue: undefined,
+    returnValue,
     error,
-    ...returnValue
   }
 }

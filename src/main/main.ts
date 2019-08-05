@@ -54,7 +54,7 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
   let returnValue: NativeResult
   var processedCommand = processCommand(o.command!)
   if (await isCustomCommand(processedCommand, o)) {
-    returnValue = await dispatchCustomCommand(processedCommand, o, FS)
+    returnValue = await dispatchCustomCommand(processedCommand, o, FS, files)
   } else {
     debug && console.log('main processed command:', processedCommand)
     try {

@@ -9,33 +9,37 @@ import { enumNoValueKeys } from 'misc-utils-of-mine-generic';
 import { enumKeys } from 'misc-utils-of-mine-typescript';
 
 export class Header extends AbstractComponent {
+  
   timer: NodeJS.Timeout|undefined
+
   componentDidMount(){
     this.timer = setInterval(()=>this.updateMem(), 1000)
   }
+
   componentWillUnmount(){
     this.timer && clearInterval(this.timer)
   }
+
   updateMem(): void {
    if(this.memEl){
     this.memEl.innerHTML=memoryReport().usedMb + ' ' +memoryReport().percent
    } 
   }
+
   memEl: HTMLDivElement|null = null;
+
   render() {
     return <Menu inverted fixed="top">
-    
-      
       <Dropdown text='Examples' pointing className='link item'>
       <Dropdown.Menu>
       {/* <Dropdown.Header>All ({examples.length})</Dropdown.Header> */}
       <Dropdown.Item>
-           <Dropdown text={`All (${examples.length})`} fluid scrolling>
+           <Dropdown text={`All (${examples.length})`} fluid={true} scrolling>
              <Dropdown.Menu>
 
       {/* <Dropdown scrolling item icons="file code outline" text={`"${this.state.example.name}"`}  > */}
         {/* <Dropdown.Menu > */}
-          {examples.map(example => <Dropdown.Item fluid onClick={e => setExample(example)}>{example.name}</Dropdown.Item>)}
+          {examples.map(example => <Dropdown.Item key={example.name} fluid={true} onClick={e => setExample(example)}>{example.name}</Dropdown.Item>)}
         </Dropdown.Menu>
       </Dropdown>
       </Dropdown.Item>
@@ -43,11 +47,11 @@ export class Header extends AbstractComponent {
       <Dropdown.Divider />
         <Dropdown.Header>Categories ({enumNoValueKeys(ExampleTag).length})</Dropdown.Header>
         {enumKeys(ExampleTag).map(tag=>
-           <Dropdown.Item>
+           <Dropdown.Item key={tag}>
            <Dropdown text={tag} fluid>
              <Dropdown.Menu>
                {examples.filter(e=>e.tags.includes(tag)).map(e=>
-                 <Dropdown.Item fluid onClick={ev => setExample(e)}><Dropdown.Header>{e.name}</Dropdown.Header></Dropdown.Item>
+                 <Dropdown.Item key={tag+e.name} fluid onClick={ev => setExample(e)}><Dropdown.Header>{e.name}</Dropdown.Header></Dropdown.Item>
                )}
              </Dropdown.Menu>
            </Dropdown>
@@ -61,7 +65,7 @@ export class Header extends AbstractComponent {
       <Menu.Item ><div ref={c=>this.memEl= c}></div></Menu.Item>
       
       <Menu.Menu position="right">
-        <Modal trigger={<Menu.Item as='a' icon="help">About</Menu.Item>}>
+        <Modal trigger={<Menu.Item as='a'>About</Menu.Item>}>
           <Modal.Header>About</Modal.Header>
           <Modal.Content>
             <About />

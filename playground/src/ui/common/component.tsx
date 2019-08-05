@@ -15,7 +15,7 @@ export class AbstractComponent<P extends AbstractProps = AbstractProps, S extend
   setState: React.Component<AbstractProps, State>['setState'] = state => {
     getStore().setState(state as Partial<S>)
   }
-  setStateSilently: React.Component<AbstractProps, State>['setState'] = state => {
-    getStore().setState(state as Partial<S>)
-  }
+  // setStateSilently: React.Component<AbstractProps, State>['setState'] = state => {
+  //   getStore().setState(state as Partial<S>, true)
+  // }
 }
