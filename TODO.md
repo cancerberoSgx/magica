@@ -17,6 +17,8 @@
 - [ ] test mkdir -p for output files   
 - [ ] because options are global - sending commands concurrently could fail. Solution: queue or instance options
 - [ ] an easy to use API for web-workers
+- [ ] test mpeg format support
+- [ ] test cypher feature 
 - [ ] verify web worker  passing files is optimal (verify transferable/shared array buffers/optimal)
 - [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
 - [ ] should magica support running native IM executable in node if they are present ?  
@@ -35,8 +37,8 @@
   - [w] document  script pre processors API
   - [w] document script templates infrastructure, syntax, examples, building helpers, how to add new helpers, how to add new properties to the context. 
   - [ ] document custom commands
+  - [w] document run() scripts and supported syntax
 - [w] test and document protected files feature
-- [w] document run() scripts and supported syntax
 - [x] emscripten port generation configurable
 
 

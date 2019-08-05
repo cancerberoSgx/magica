@@ -7,7 +7,11 @@ cd $PREFIX/src/ImageMagick
 rm -rf $PREFIX/wasm
 mkdir -p $PREFIX/wasm
 
-./libtool --tag=CC --mode=link emcc $LDFLAGS $CFLAGS \
+
+echo "// @ts-nocheck
+" > $PREFIX/wasm/pre-js.js
+
+./libtool --tag=CC --mode=link emcc $LDFLAGS $CFLAGS --pre-js "$PREFIX/wasm/pre-js.js" \
   -o "$PREFIX/wasm/magick.html" utilities/magick.o  $PREFIX/lib/*.a \
   $PREFIX/src/ImageMagick/MagickWand/libMagickWand_7_*_la-compare.o \
   $PREFIX/src/ImageMagick/MagickCore/libMagickCore_7_*_la-fourier.o \

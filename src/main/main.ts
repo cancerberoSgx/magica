@@ -13,20 +13,20 @@ import { processCommand } from './command'
 import { dispatchCustomCommand, isCustomCommand } from './customCommand'
 
 let queue: Queue | undefined
+
 function getQueue() {
   if (!queue) {
     queue = new Queue({ autoStart: true, concurrency: getOption('mainConcurrency'), interval: getOption('mainInterval') })
   }
   return queue
 }
+
 export function main(o: Partial<Options>): Promise<Result> {
   if (o.useNative || getOption('useNative')) {
     throw 'useNative not supported yet'
   }
   return getQueue().add(() => mainWasm(o))
-  // return mainWasm(o)
 }
-
 
 async function mainWasm(o: Partial<Options>): Promise<Result> {
   const t0 = Date.now()
@@ -60,7 +60,7 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
     try {
       returnValue = main(processedCommand)
     } catch (error) {
-      console.log('MAIN error', error)
+      debug && console.error('MAIN error', error)
       returnValue = {
         stderr: [], stdout: [], error: error, returnValue: undefined
       }

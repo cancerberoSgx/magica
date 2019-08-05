@@ -21,7 +21,7 @@
 
 • **height**: *number*
 
-*Defined in [file/file.ts:203](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L203)*
+*Defined in [file/file.ts:213](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L213)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 • **width**: *number*
 
-*Defined in [file/file.ts:202](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L202)*
+*Defined in [file/file.ts:212](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L212)*

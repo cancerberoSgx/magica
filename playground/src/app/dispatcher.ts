@@ -35,6 +35,5 @@ export async function setExample(example?: Example) {
     inputFiles,
     working: false
   })
-  await sleep(300)
-
+  await sleep(100)
 }

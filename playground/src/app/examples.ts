@@ -15,7 +15,7 @@ export enum ExampleTag {
   drawing='drawing',
   gradient='gradient',
   color='color',
-  append='append',
+  montage='montage',
   format='format',
   distort='distort',
   text='text',
@@ -88,7 +88,6 @@ convert -background none -stroke <%= options.stroke%> -fill <%= options.fill%> \
     `.trim()
   },
 
-
   {
     name: 'Remove background and add shadow',
     tags: [  ExampleTag.color],
@@ -116,7 +115,6 @@ convert differenceRemoveBackground.miff  \\
     `.trim()
   },
 
-
   {
     name: 'Poligonize photo artistic',
     description: `With some parameters a WIP effect that kind of poligonize an image. The size the initial image before polar distorting, basically sets the number of rays that will be produced`,
@@ -137,7 +135,6 @@ convert <%=inputFiles[0].name %> \\
   -resize <%= 100*speed%>% lindo.png
 `.trim()
   },
-
 
   {
     name: 'Spherical Distortion Map',
@@ -284,8 +281,8 @@ convert ${state.inputFiles[0].name} -scale 50% -virtual-pixel mirror \\
   {
     name: 'Write pdf',
     description: `append a couple of images and then all images and output a pdf`,
-    tags: [ExampleTag.format],
-    inputFiles: [],
+    tags: [ExampleTag.format, ExampleTag.montage],
+    inputFiles: ['helvetica.ttf'],
     script: state => `
 montage \\
   null: \\
@@ -293,7 +290,7 @@ montage \\
   null: \\
   ( logo: -rotate -90 -resize 66% ) \\
   <%= inputFiles.map(i=>i.name).join(' ') %> \\
-  -page A4 -tile 2x3 -geometry +10+10 -shadow -frame 8   \\
+  -font helvetica.ttf -page A4 -tile 2x3 -geometry +10+10 -shadow -frame 8   \\
   out_pdf.pdf
   `.trim(),
   },
@@ -610,7 +607,7 @@ convert -size 100x100 xc: +noise Random -channel R -threshold 1% \\
 
   {
     name: 'Montage polaroid',
-    tags: [ExampleTag.append],
+    tags: [ExampleTag.montage],
     description: `Example of the command montage: <a href="https://imagemagick.org/Usage/montage/#overlap">See ImageMagick examples page montage/#overlap</a>`,
     inputFiles: ['helvetica.ttf', 'whale4.jpg', 'photo.tiff', 'bridge.psd'],
     script: state => `

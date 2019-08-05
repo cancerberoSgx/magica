@@ -9,11 +9,6 @@ import { Header } from './header'
 import './styles.css'
 
 export class App extends AbstractComponent {
-  componentDidMount() {
-    setTimeout(() => {
-      loadUrl()
-    }, 100)
-  }
 
   render() {
     return <Container fluid textAlign="left">

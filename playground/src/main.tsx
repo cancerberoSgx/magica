@@ -1,18 +1,30 @@
 // import 'babel-polyfill'
+import { File } from 'magica'
 import * as React from 'react'
 import { render } from 'react-dom'
 import { setExample } from './app/dispatcher'
 import { getInitialState } from './app/state'
-import { _setStore } from './app/store'
+import { _setStore, getStore } from './app/store'
 import { App } from './ui/app'
+import { sleep } from 'misc-utils-of-mine-generic';
+import { sampleImages } from './app/examples';
+import { urlHasState, loadUrl, createUrl } from './ui/common/urlState';
 
 async function main() {
   var s = await getInitialState()
-  setTimeout(async () => {
     _setStore(s)
-    await setExample(s.example)
     render(<App />, document.getElementById('main'))
-  }, 100)
+
+    if(urlHasState()){
+      await loadUrl()
+    }
+    else {
+      await setExample(s.example)
+    }
+
+    getStore().add(()=>{
+      createUrl()
+    })
 }
 
 main()

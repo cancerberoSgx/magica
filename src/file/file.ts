@@ -16,7 +16,7 @@ export class File implements IFile {
 
   protected isProtected: boolean;
 
-  constructor(public name: string, public content: IFile['content'], isProtected: boolean = false) {
+  constructor(public name: string, public content: IFile['content'], isProtected: boolean = false, protected url?: string) {
 
     this.isProtected = isProtected
     if (this.isProtected) {
@@ -36,7 +36,7 @@ export class File implements IFile {
     }
     return i[0]
   }
-  
+
   /**
    * Get image information, like geometry, important numbers, mimeType, etc. 
    * The first time it calls `identify` command, but then it will cache ths value. 
@@ -102,10 +102,10 @@ export class File implements IFile {
     return 'data:' + mime + ';' + file.name + ';base64,' + File.toBase64(file)
   }
 
-  public static async fromUrl(u: string, o: RequestInit & ResolveOptions = {}) {
+  public static async fromUrl(url: string, o: RequestInit & ResolveOptions = {}) {
     try {
-      const r = await fetch(u, o)
-      return new File(o.name || o.name || getFileNameFromUrl(u), new Uint8ClampedArray(await r.arrayBuffer()), o.protected)
+      const response = await fetch(url, o)
+      return new File(o.name || o.name || getFileNameFromUrl(url), new Uint8ClampedArray(await response.arrayBuffer()), o.protected, url)
     } catch (error) {
       console.error(error)
       return undefined

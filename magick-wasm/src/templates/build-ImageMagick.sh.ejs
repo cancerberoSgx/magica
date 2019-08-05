@@ -39,8 +39,8 @@ fi
 
 if [ "$SKIP_BUILD" -eq "0" ]; then
 
-echo "ImageMagick make install"
-FINAL_CFLAGS=<%=type==='debug' ? "$COMMON_CFLAGS -s ASSERTIONS=2" : "$CFLAGS" %>
+  FINAL_CFLAGS=<%=type==='debug' ? "$COMMON_CFLAGS -s ASSERTIONS=2" : "$CFLAGS" %>
+  
   emcmake make install PKG_CONFIG_PATH="$PKG_CONFIG_PATH" LDFLAGS="$LDFLAGS" CFLAGS="$FINAL_CFLAGS" CXXFLAGS="$FINAL_CFLAGS"
 
   testExitCode "ImageMagick make install" $?

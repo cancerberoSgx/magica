@@ -18,6 +18,7 @@
 
 * [getStderr](_imagemagick_magickloaded_.md#getstderr)
 * [getStdout](_imagemagick_magickloaded_.md#getstdout)
+* [moduleLocateFile](_imagemagick_magickloaded_.md#modulelocatefile)
 * [pushStderr](_imagemagick_magickloaded_.md#pushstderr)
 * [pushStdout](_imagemagick_magickloaded_.md#pushstdout)
 * [resetStderr](_imagemagick_magickloaded_.md#resetstderr)
@@ -29,7 +30,7 @@
 
 • **magickLoaded**: *`Deferred<Main, any>`* =  new Deferred<Main>()
 
-*Defined in [imageMagick/magickLoaded.ts:13](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/imageMagick/magickLoaded.ts#L13)*
+*Defined in [imageMagick/magickLoaded.ts:14](https://github.com/cancerberoSgx/magica/blob/80b354c/src/imageMagick/magickLoaded.ts#L14)*
 
 ## Functions
 
@@ -37,7 +38,7 @@
 
 ▸ **getStderr**(): *string[]*
 
-*Defined in [imageMagick/magickLoaded.ts:41](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/imageMagick/magickLoaded.ts#L41)*
+*Defined in [imageMagick/magickLoaded.ts:42](https://github.com/cancerberoSgx/magica/blob/80b354c/src/imageMagick/magickLoaded.ts#L42)*
 
 **Returns:** *string[]*
 
@@ -47,9 +48,26 @@ ___
 
 ▸ **getStdout**(): *string[]*
 
-*Defined in [imageMagick/magickLoaded.ts:26](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/imageMagick/magickLoaded.ts#L26)*
+*Defined in [imageMagick/magickLoaded.ts:27](https://github.com/cancerberoSgx/magica/blob/80b354c/src/imageMagick/magickLoaded.ts#L27)*
 
 **Returns:** *string[]*
+
+___
+
+###  moduleLocateFile
+
+▸ **moduleLocateFile**(`path`: string, `prefix`: string): *string*
+
+*Defined in [imageMagick/magickLoaded.ts:48](https://github.com/cancerberoSgx/magica/blob/80b354c/src/imageMagick/magickLoaded.ts#L48)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`path` | string |
+`prefix` | string |
+
+**Returns:** *string*
 
 ___
 
@@ -57,7 +75,7 @@ ___
 
 ▸ **pushStderr**(`s`: string): *void*
 
-*Defined in [imageMagick/magickLoaded.ts:32](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/imageMagick/magickLoaded.ts#L32)*
+*Defined in [imageMagick/magickLoaded.ts:33](https://github.com/cancerberoSgx/magica/blob/80b354c/src/imageMagick/magickLoaded.ts#L33)*
 
 **Parameters:**
 
@@ -73,7 +91,7 @@ ___
 
 ▸ **pushStdout**(`s`: string): *void*
 
-*Defined in [imageMagick/magickLoaded.ts:17](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/imageMagick/magickLoaded.ts#L17)*
+*Defined in [imageMagick/magickLoaded.ts:18](https://github.com/cancerberoSgx/magica/blob/80b354c/src/imageMagick/magickLoaded.ts#L18)*
 
 **Parameters:**
 
@@ -89,7 +107,7 @@ ___
 
 ▸ **resetStderr**(): *void*
 
-*Defined in [imageMagick/magickLoaded.ts:37](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/imageMagick/magickLoaded.ts#L37)*
+*Defined in [imageMagick/magickLoaded.ts:38](https://github.com/cancerberoSgx/magica/blob/80b354c/src/imageMagick/magickLoaded.ts#L38)*
 
 **Returns:** *void*
 
@@ -99,6 +117,6 @@ ___
 
 ▸ **resetStdout**(): *void*
 
-*Defined in [imageMagick/magickLoaded.ts:22](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/imageMagick/magickLoaded.ts#L22)*
+*Defined in [imageMagick/magickLoaded.ts:23](https://github.com/cancerberoSgx/magica/blob/80b354c/src/imageMagick/magickLoaded.ts#L23)*
 
 **Returns:** *void*

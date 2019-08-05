@@ -24,6 +24,7 @@
 * [content](_file_file_.file.md#content)
 * [isProtected](_file_file_.file.md#protected-isprotected)
 * [name](_file_file_.file.md#name)
+* [url](_file_file_.file.md#protected-optional-url)
 
 ### Methods
 
@@ -32,6 +33,7 @@
 * [colorCount](_file_file_.file.md#colorcount)
 * [equals](_file_file_.file.md#equals)
 * [info](_file_file_.file.md#info)
+* [infoOne](_file_file_.file.md#infoone)
 * [mimeType](_file_file_.file.md#mimetype)
 * [pixel](_file_file_.file.md#pixel)
 * [size](_file_file_.file.md#size)
@@ -54,9 +56,9 @@
 
 ###  constructor
 
-\+ **new File**(`name`: string, `content`: `ArrayBufferView`, `isProtected`: boolean): *[File](_file_file_.file.md)*
+\+ **new File**(`name`: string, `content`: `ArrayBufferView`, `isProtected`: boolean, `url?`: undefined | string): *[File](_file_file_.file.md)*
 
-*Defined in [file/file.ts:17](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L17)*
+*Defined in [file/file.ts:17](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L17)*
 
 **Parameters:**
 
@@ -65,6 +67,7 @@ Name | Type | Default |
 `name` | string | - |
 `content` | `ArrayBufferView` | - |
 `isProtected` | boolean | false |
+`url?` | undefined \| string | - |
 
 **Returns:** *[File](_file_file_.file.md)*
 
@@ -72,9 +75,9 @@ Name | Type | Default |
 
 ### `Protected` _info
 
-• **_info**: *[ExtractInfoResultImage](../interfaces/_image_imageinfo_.extractinforesultimage.md) | undefined*
+• **_info**: *[ExtractInfoResultImage](../interfaces/_image_imageinfo_.extractinforesultimage.md)[] | undefined*
 
-*Defined in [file/file.ts:27](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L27)*
+*Defined in [file/file.ts:27](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L27)*
 
 ___
 
@@ -84,7 +87,7 @@ ___
 
 *Implementation of [IFile](../interfaces/_types_.ifile.md).[content](../interfaces/_types_.ifile.md#content)*
 
-*Defined in [file/file.ts:19](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L19)*
+*Defined in [file/file.ts:19](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L19)*
 
 ___
 
@@ -92,7 +95,7 @@ ___
 
 • **isProtected**: *boolean*
 
-*Defined in [file/file.ts:17](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L17)*
+*Defined in [file/file.ts:17](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L17)*
 
 ___
 
@@ -102,7 +105,15 @@ ___
 
 *Implementation of [IFile](../interfaces/_types_.ifile.md).[name](../interfaces/_types_.ifile.md#name)*
 
-*Defined in [file/file.ts:19](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L19)*
+*Defined in [file/file.ts:19](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L19)*
+
+___
+
+### `Protected` `Optional` url
+
+• **url**? : *undefined | string*
+
+*Defined in [file/file.ts:19](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L19)*
 
 ## Methods
 
@@ -110,7 +121,7 @@ ___
 
 ▸ **asBase64**(`file`: [File](_file_file_.file.md)): *string*
 
-*Defined in [file/file.ts:75](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L75)*
+*Defined in [file/file.ts:85](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L85)*
 
 Returns base64 representation of this image in an encoded format like PNG
 
@@ -128,7 +139,7 @@ ___
 
 ▸ **asDataUrl**(`mime?`: `String`): *`Promise<string>`*
 
-*Defined in [file/file.ts:68](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L68)*
+*Defined in [file/file.ts:78](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L78)*
 
 Creates a DataUrl like `data:image/png;name=f.png;base64,` using given base64 content, mimeType and fileName.
 
@@ -146,7 +157,7 @@ ___
 
 ▸ **colorCount**(): *`Promise<number | undefined>`*
 
-*Defined in [file/file.ts:60](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L60)*
+*Defined in [file/file.ts:71](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L71)*
 
 **Returns:** *`Promise<number | undefined>`*
 
@@ -156,7 +167,7 @@ ___
 
 ▸ **equals**(`file?`: [File](_file_file_.file.md)): *`Promise<boolean>`*
 
-*Defined in [file/file.ts:82](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L82)*
+*Defined in [file/file.ts:92](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L92)*
 
 Returns base64 representation of this image in an encoded format like PNG
 
@@ -172,12 +183,24 @@ ___
 
 ###  info
 
-▸ **info**(): *`Promise<ExtractInfoResultImage>`*
+▸ **info**(): *`Promise<ExtractInfoResultImage[]>`*
 
-*Defined in [file/file.ts:33](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L33)*
+*Defined in [file/file.ts:44](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L44)*
 
-Get image information, like geometry, important numbers, mimeType, etc. The first time it calls `identify` command, but then it will cache ths value.
-TODO: make it async
+Get image information, like geometry, important numbers, mimeType, etc.
+The first time it calls `identify` command, but then it will cache ths value.
+
+**Returns:** *`Promise<ExtractInfoResultImage[]>`*
+
+___
+
+###  infoOne
+
+▸ **infoOne**(): *`Promise<ExtractInfoResultImage>`*
+
+*Defined in [file/file.ts:32](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L32)*
+
+Same as [info] but returning only the first image's data.
 
 **Returns:** *`Promise<ExtractInfoResultImage>`*
 
@@ -187,7 +210,7 @@ ___
 
 ▸ **mimeType**(): *`Promise<string>`*
 
-*Defined in [file/file.ts:51](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L51)*
+*Defined in [file/file.ts:62](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L62)*
 
 **Returns:** *`Promise<string>`*
 
@@ -197,7 +220,7 @@ ___
 
 ▸ **pixel**(`x`: number, `y`: number): *`Promise<string | undefined>`*
 
-*Defined in [file/file.ts:56](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L56)*
+*Defined in [file/file.ts:67](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L67)*
 
 **Parameters:**
 
@@ -214,7 +237,7 @@ ___
 
 ▸ **size**(): *`Promise<Size>`*
 
-*Defined in [file/file.ts:46](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L46)*
+*Defined in [file/file.ts:57](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L57)*
 
 **Returns:** *`Promise<Size>`*
 
@@ -224,7 +247,7 @@ ___
 
 ▸ **asFile**(`f`: [IFile](../interfaces/_types_.ifile.md)): *[File](_file_file_.file.md)*
 
-*Defined in [file/file.ts:181](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L181)*
+*Defined in [file/file.ts:191](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L191)*
 
 **Parameters:**
 
@@ -240,7 +263,7 @@ ___
 
 ▸ **asPath**(`f`: string | [IFile](../interfaces/_types_.ifile.md)): *string*
 
-*Defined in [file/file.ts:185](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L185)*
+*Defined in [file/file.ts:195](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L195)*
 
 **Parameters:**
 
@@ -256,7 +279,7 @@ ___
 
 ▸ **fileExists**(`f`: string | [IFile](../interfaces/_types_.ifile.md)): *`Promise<boolean>`*
 
-*Defined in [file/file.ts:189](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L189)*
+*Defined in [file/file.ts:199](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L199)*
 
 **Parameters:**
 
@@ -272,7 +295,7 @@ ___
 
 ▸ **fromBase64**(`base64`: string, `name`: string): *[File](_file_file_.file.md)*
 
-*Defined in [file/file.ts:131](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L131)*
+*Defined in [file/file.ts:141](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L141)*
 
 Loads file from given base64 string.
 
@@ -291,7 +314,7 @@ ___
 
 ▸ **fromDataUrl**(`dataUrl`: string, `name`: string): *[File](_file_file_.file.md)*
 
-*Defined in [file/file.ts:138](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L138)*
+*Defined in [file/file.ts:148](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L148)*
 
 Loads file from given data url string.
 
@@ -310,7 +333,7 @@ ___
 
 ▸ **fromFile**(`f`: string, `o`: [ResolveOptions](../interfaces/_file_file_.resolveoptions.md)): *`Promise<undefined | File>`*
 
-*Defined in [file/file.ts:105](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L105)*
+*Defined in [file/file.ts:115](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L115)*
 
 **Parameters:**
 
@@ -327,7 +350,7 @@ ___
 
 ▸ **fromHtmlFileInputElement**(`el`: `HTMLInputElement`): *`Promise<Array<File>>`*
 
-*Defined in [file/file.ts:145](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L145)*
+*Defined in [file/file.ts:155](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L155)*
 
 Loads files from files in html input element of type "file"
 
@@ -343,15 +366,15 @@ ___
 
 ### `Static` fromUrl
 
-▸ **fromUrl**(`u`: string, `o`: `RequestInit` & [ResolveOptions](../interfaces/_file_file_.resolveoptions.md)): *`Promise<undefined | File>`*
+▸ **fromUrl**(`url`: string, `o`: `RequestInit` & [ResolveOptions](../interfaces/_file_file_.resolveoptions.md)): *`Promise<undefined | File>`*
 
-*Defined in [file/file.ts:95](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L95)*
+*Defined in [file/file.ts:105](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L105)*
 
 **Parameters:**
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`u` | string | - |
+`url` | string | - |
 `o` | `RequestInit` & [ResolveOptions](../interfaces/_file_file_.resolveoptions.md) |  {} |
 
 **Returns:** *`Promise<undefined | File>`*
@@ -362,7 +385,7 @@ ___
 
 ▸ **isFile**(`f`: any): *boolean*
 
-*Defined in [file/file.ts:177](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L177)*
+*Defined in [file/file.ts:187](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L187)*
 
 **Parameters:**
 
@@ -378,7 +401,7 @@ ___
 
 ▸ **resolve**(`files`: string | [IFile](../interfaces/_types_.ifile.md) | undefined | undefined | string | [IFile](../interfaces/_types_.ifile.md)[], `options`: [ResolveOptions](../interfaces/_file_file_.resolveoptions.md)): *`Promise<File[]>`*
 
-*Defined in [file/file.ts:158](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L158)*
+*Defined in [file/file.ts:168](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L168)*
 
 **Parameters:**
 
@@ -395,7 +418,7 @@ ___
 
 ▸ **resolveOne**(`files`: string | [IFile](../interfaces/_types_.ifile.md) | undefined | undefined | string | [IFile](../interfaces/_types_.ifile.md)[], `options`: [ResolveOptions](../interfaces/_file_file_.resolveoptions.md)): *`Promise<undefined | File>`*
 
-*Defined in [file/file.ts:153](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L153)*
+*Defined in [file/file.ts:163](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L163)*
 
 **Parameters:**
 
@@ -412,7 +435,7 @@ ___
 
 ▸ **toBase64**(`file`: [File](_file_file_.file.md)): *string*
 
-*Defined in [file/file.ts:124](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L124)*
+*Defined in [file/file.ts:134](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L134)*
 
 Returns base64 representation of this image in an ecoded format like PNG
 
@@ -430,7 +453,7 @@ ___
 
 ▸ **toDataUrl**(`file`: [File](_file_file_.file.md), `mime?`: `String`): *`Promise<string>`*
 
-*Defined in [file/file.ts:90](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L90)*
+*Defined in [file/file.ts:100](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L100)*
 
 Creates a DataUrl like `data:image/png;name=f.png;base64,` using given base64 content, mimeType and fileName.
 
@@ -449,7 +472,7 @@ ___
 
 ▸ **toString**(`f`: [IFile](../interfaces/_types_.ifile.md)): *string*
 
-*Defined in [file/file.ts:117](https://github.com/cancerberoSgx/magica/blob/0188ba1/src/file/file.ts#L117)*
+*Defined in [file/file.ts:127](https://github.com/cancerberoSgx/magica/blob/80b354c/src/file/file.ts#L127)*
 
 **Parameters:**
 

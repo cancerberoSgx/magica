@@ -30,6 +30,7 @@
 * ["util/base64"](modules/_util_base64_.md)
 * ["util/lsR"](modules/_util_lsr_.md)
 * ["util/magica"](modules/_util_magica_.md)
+* ["util/magicaWasm"](modules/_util_magicawasm_.md)
 * ["util/mkdirp"](modules/_util_mkdirp_.md)
 * ["util/rmRf"](modules/_util_rmrf_.md)
 * ["util/util"](modules/_util_util_.md)

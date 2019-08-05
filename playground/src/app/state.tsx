@@ -1,6 +1,5 @@
 import { File, RunResult } from 'magica'
-import { notUndefined } from 'misc-utils-of-mine-generic'
-import { Example, examples, sampleImages } from "./examples"
+import { Example, examples } from "./examples"
 
 export interface State {
   example: Example
@@ -21,10 +20,9 @@ export interface ParserError {
 
 export async function getInitialState(): Promise<State> {
   var example = examples[0]
-  var image = await File.fromUrl(example.inputFiles.length ? example.inputFiles[0] : sampleImages[0])
   return {
     example,
-    inputFiles: [image].filter(notUndefined),
+    inputFiles: [],
     examples,
     result: null as any,
     script: '',

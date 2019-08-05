@@ -1,8 +1,4 @@
 import test from 'ava'
-import { execSync } from 'child_process'
-import { resolve } from 'path'
-import puppeteer from 'puppeteer'
-import { staticServer } from "./staticServer"
 declare var window: any
 
 test.serial('webworker', async t => {

@@ -1,22 +1,21 @@
 // @ts-nocheck
 
-const { magickLoaded, pushStdout, pushStderr, getOptions } = require('../magickLoaded')
-const {isNode, dirname} = require('misc-utils-of-mine-generic')
-const { getThisBrowserScriptTagSrc, getThisBrowserScriptTagSrcParams } = require('../../util/magicaWasm')
+const { magickLoaded, pushStdout, pushStderr, getOptions, moduleLocateFile, isNode } = require('../magickLoaded')
 const { nodeFsLocalRoot, emscriptenNodeFsRoot, debug, disableNodeFs } = getOptions()
 
 Module = typeof Module === 'undefined' ? {} : Module
 
 Object.assign(Module, {
-  noExitRuntime: true, // This helps stdout to be correctly flushed on some situations
-  noInitialRun: true,  // tell wasm runner to not execute application
+  noExitRuntime: true,  
+
+  noInitialRun: true,   
+
   logReadFiles: debug,
-  print: function (text) {
-    pushStdout(text)
-  },
-  printErr: function (text) {
-    pushStderr(text)
-  },
+
+  print: pushStdout,
+
+  printErr: pushStderr,
+
   preRun: function () {
     debug && console.log('Module.preRun. isNode: ', isNode())
     if(!FS.isDir(emscriptenNodeFsRoot)) {
@@ -31,32 +30,19 @@ Object.assign(Module, {
     }
     debug && console.log('Module.preRun <-- exiting')
   },
+
   onRuntimeInitialized: function () {
     debug && console.log('Emscripten Module.onRuntimeInitialized ')
     magickLoaded.resolve({
       FS, main: require('../createMain').createMain(Module, FS)
     })
   },
+
   onAbort: function(what){
     console.error('onAbort', what)
     console.trace()    
   },
-  locateFile: function(path, prefix) {
-    if(typeof MAGICA_WASM_LOCATION === 'string') {
-      return MAGICA_WASM_LOCATION
-    } else{
-      var thisScriptUrlParams = getThisBrowserScriptTagSrcParams()
-      if(thisScriptUrlParams && thisScriptUrlParams.MAGICA_WASM_LOCATION) {
-        return decodeURIComponent(thisScriptUrlParams.MAGICA_WASM_LOCATION)
-      }
-      var thisScriptUrl = getThisBrowserScriptTagSrc()
-      if(typeof thisScriptUrl === 'string') {
-        var d = dirname(thisScriptUrl)
-        if(d){
-          return d
-        }
-      }
-    }
-    return prefix + path;
-  }
+
+  locateFile: moduleLocateFile
+  
 })

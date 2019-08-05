@@ -1,6 +1,7 @@
-import { Deferred } from 'misc-utils-of-mine-generic'
+import { Deferred, dirname, isNode } from 'misc-utils-of-mine-generic'
 import { FS } from '../file/emscriptenFs'
 import { getOptions } from '../options'
+import { getThisBrowserScriptTagSrc, getThisBrowserScriptTagSrcParams } from '../util/magicaWasm'
 import { NativeMain } from './createMain'
 
 export interface Main {
@@ -42,10 +43,30 @@ export function getStderr() {
   return stderr.slice()
 }
 
-export { getOptions } from '../options'
+declare var MAGICA_WASM_LOCATION: any
+
+export function moduleLocateFile(path: string, prefix: string) {
+  if (typeof MAGICA_WASM_LOCATION === 'string') {
+    return MAGICA_WASM_LOCATION
+  } else {
+    var thisScriptUrlParams = getThisBrowserScriptTagSrcParams()
+    if (thisScriptUrlParams && thisScriptUrlParams.MAGICA_WASM_LOCATION) {
+      return decodeURIComponent(thisScriptUrlParams.MAGICA_WASM_LOCATION)
+    }
+    var thisScriptUrl = getThisBrowserScriptTagSrc()
+    if (typeof thisScriptUrl === 'string') {
+      var d = dirname(thisScriptUrl)
+      if (d) {
+        return d
+      }
+    }
+  }
+  return prefix + path
+}
+
+export { getOptions, isNode }
 
 setTimeout(function() {
-  (global as any).nodeMagickOptions = getOptions()
   try {
     require('./compiled/nodeMagick')
   } catch (error) {
