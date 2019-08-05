@@ -21,8 +21,9 @@ cd fftw
 
 chmod a+x ./configure
 
-export CHOST=emcc && emconfigure ./configure CC=emcc --prefix=$PREFIX CFLAGS="$FLAGS" PKG_CONFIG_PATH="$PKG_CONFIG_PATH" \
-  --disable-shared --disable-doc --enable-static --disable-fortran --disable-alloca --disable-threads   --disable-openmp  --without-g77-wrappers
+export CHOST=emcc && emconfigure ./configure CC=emcc --prefix=$PREFIX CFLAGS="$FLAGS" \PKG_CONFIG_PATH="$PKG_CONFIG_PATH" \
+  --disable-shared --disable-doc --enable-static --disable-fortran --disable-alloca --disable-threads \
+  --disable-openmp  --without-g77-wrappers
 testExitCode "fftw configure" $?
 
 emcmake make install CFLAGS="$CFLAGS" PKG_CONFIG_PATH="$PKG_CONFIG_PATH"

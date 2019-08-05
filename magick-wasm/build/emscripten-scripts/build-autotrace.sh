@@ -9,10 +9,10 @@ mkdir -p $PREFIX/src
 cd $PREFIX/src
 
 if [ ! -d "autotrace" ]; then
-  wget https://ufpr.dl.sourceforge.net/project/autotrace/AutoTrace/0.31.1/autotrace-0.31.1.tar.gz
-  tar xvfz autotrace-0.31.1.tar.gz
-  mv autotrace-0.31.1 autotrace
-  # git clone https://github.com/autotrace/autotrace.git
+#  wget https://ufpr.dl.sourceforge.net/project/autotrace/AutoTrace/0.31.1/autotrace-0.31.1.tar.gz
+#   tar xvfz autotrace-0.31.1.tar.gz
+#  mv autotrace-0.31.1 autotrace
+   git clone https://github.com/autotrace/autotrace.git
 else  
   ( cd autotrace ; emcmake make clean )
 fi

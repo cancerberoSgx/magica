@@ -1,6 +1,5 @@
 // import 'babel-polyfill'
-import { run } from 'magica'
-import {addTemplateHelper, magickLoaded} from 'magica'
+import { run, addTemplateHelper, magickLoaded } from 'magica'
 
 self.onmessage = async e => {
   if (!e.data.magicaId) {
@@ -10,10 +9,16 @@ self.onmessage = async e => {
   postMessage({ ...r, magicaId: e.data.magicaId }, undefined as any)
 }
 
-// magickLoaded.then(installTemplateExtensions)
+magickLoaded.then(installTemplateExtensions)
 
-// function installTemplateExtensions() {
-//   addTemplateHelper({ name: 'greet', fnCompileTime: (s: string) => `hello ${s}`, fnRunTime: (o: any) => o })
+function installTemplateExtensions() {
+  addTemplateHelper({ 
+    name: 'getField', 
+    fnCompileTime (s: string)   {
+      return this.options.fields[s]
+    }, 
+    fnRunTime: (o: any) => o 
+  })
 //   addTemplateHelper({ name: 'fieldGet', fnCompileTime: (id:string, defaultValue='') => {
 //     var el = document.querySelector<HTMLInputElement>(`#field-${id}`)
 //     if(!el) {
@@ -51,4 +56,4 @@ self.onmessage = async e => {
 // type Type='string'
 // interface FieldDeclareOptions extends Options{
 //   container?: string
-// }
+}

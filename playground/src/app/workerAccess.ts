@@ -3,7 +3,7 @@ import { Deferred, unique } from 'misc-utils-of-mine-generic'
 
 let pending: { magicaId: string, deferred: Deferred<RunResult | undefined> }[] = []
 
-export async function callRun(o: RunOptions): Promise<RunResult | undefined> {
+export async function callRun(o: RunOptions&{fields: {[k:string]:string|undefined}}): Promise<RunResult | undefined> {
   const magicaId = unique()
   const deferred = new Deferred<RunResult | undefined>()
   pending.push({ magicaId, deferred })

@@ -9,11 +9,13 @@ export interface State {
   script: string
   working: boolean
   showAllResultsOutput: boolean
-  fields:Fields
+  fields:Field[]
 }
-type Fields = {[s:string]:Field}
-interface Field{
-  value():string
+
+export interface Field{
+  // getValue():string
+  id:string
+  value: string
 }
 
 export interface ParserError {
@@ -32,6 +34,7 @@ export async function getInitialState(): Promise<State> {
     result: null as any,
     script: '',
     working: false,
-    showAllResultsOutput: true
+    showAllResultsOutput: true,
+    fields: []
   }
 }

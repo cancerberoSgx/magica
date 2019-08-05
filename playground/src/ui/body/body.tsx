@@ -4,6 +4,7 @@ import { AbstractComponent } from '../common/component'
 import { Command } from './command'
 import { InputFiles } from './inputFiles'
 import { Output } from './output'
+import { Fields } from './fields';
 
 export class Body extends AbstractComponent {
   render() {
@@ -12,6 +13,7 @@ export class Body extends AbstractComponent {
         <Grid>
           <Grid.Column floated='left' width={8}>
             <Command />
+            <Fields />
             <InputFiles />
           </Grid.Column>
           <Grid.Column floated='right' width={8}>

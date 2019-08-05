@@ -3,6 +3,7 @@ import { File, imageCompare, run } from '../src'
 import { imageBuiltIn } from '../src/image/imageBuiltIn'
 import { colorCount, imagePixelColor } from '../src/image/imageUtil'
 import { listFormat } from '../src/image/support'
+import { writeFileSync } from 'fs';
 
 test('imagePixelColor', async t => {
   const c = await imagePixelColor(await File.fromFile('test/assets/n.png'), 20, 20)
@@ -40,4 +41,15 @@ test('fft', async t => {
   })
   t.deepEqual(undefined, c.error)
   t.true(await imageCompare(await File.fromFile('test/assets/fft1.png'), c.outputFiles[0]))
+})
+
+test.skip('autotrace', async t => {
+  const result = await run<File>({
+    script: `
+    convert rose: p.pnm
+    convert p.pnm -rotate 54 -scale 200% rose.svg`
+  })
+  writeFileSync('tmpww.svg', result.outputFiles[0].content)
+  t.deepEqual(undefined, result.error)
+  // t.true(await imageCompare(await File.fromFile('test/assets/fft1.png'), result.outputFiles[0]))
 })

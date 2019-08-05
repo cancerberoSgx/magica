@@ -1,4 +1,4 @@
-import { State } from './state'
+import { State, Field } from './state'
 
 export const sampleImages = [
   "bluebells.png",
@@ -29,18 +29,35 @@ export interface Example {
   name: string
   description: string;
   inputFiles: string[]
-  fields?: any[]
+  fields?: Field[]
 }
+
+const fieldsText =[      
+  {id: 'text', value: 'Hello World 1234'},
+{id: 'stroke', value: 'black'},
+{id: 'strokewidth', value: '2'},
+{id: 'fill', value: 'white'},
+{id: 'pointSize', value: '68'}
+]
+
+const fieldsTextCommand = `-stroke <%= getField('stroke') %> -strokewidth <%= getField('strokewidth') %> -fill <%= getField('fill') %> -pointsize <%= getField('pointSize') %> 'label:<%= getField('text') %>'`
+
 
 export const examples: Example[] = [
 
   {
-    name: 'Hello world:',
+    name: 'Hello world',
     description: 'Simple example that transform built in rose: image',
     tags: [ExampleTag.simple],
     inputFiles: ['bluebells.png'],
+    fields: [
+      {id: 'angle', value: '23'},
+      {id: 'scale', value: '123%'},
+    ],
     script: state =>
-      `convert ${state.inputFiles[0].name} -rotate 33 -scale 136% foo.gif`
+      `
+      convert ${state.inputFiles[0].name} -rotate <%= getField('angle') %> -scale <%= getField('scale') %> foo.gif
+      `.trim()
   },
 
   {
@@ -52,7 +69,7 @@ export const examples: Example[] = [
       `
 identify ${ state.inputFiles[0].name}
 convert photo.tiff photo_info.json
-      `
+      `.trim()
   },
 
   {
@@ -60,9 +77,17 @@ convert photo.tiff photo_info.json
     tags: [ExampleTag.simple, ExampleTag.animation],
     description: 'Multiple transformations on animated gif (loaded from url) which results in another animated transformed gif.',
     inputFiles: ['challenge.gif'],
+    fields: [
+      {id: 'swirl', value: '123'},
+      {id: 'wave', value: '14x95'},
+      {id: 'scale', value: '74%'},
+      {id: 'rotate', value: '15'},
+      {id: 'background', value: 'transparent'},
+      {id: 'delay', value: '12'},
+    ],
     script: state => `
-convert -swirl 123 -wave 14x95 -scale 74% -rotate 15 \\
-   -background transparent challenge.gif foo22.gif
+convert -swirl <%= getField('swirl') %> -wave <%= getField('wave') %> -scale <%= getField('scale') %> -rotate <%= getField('rotate') %> \\
+   -background <%= getField('background') %> -set delay <%= getField('delay') %> challenge.gif foo22.gif
     `.trim()
   },
 
@@ -71,20 +96,15 @@ convert -swirl 123 -wave 14x95 -scale 74% -rotate 15 \\
     tags: [ExampleTag.text],
     description: 'Using -shadow on text to add shadow',
     inputFiles: ['PoetsenOne-Regular.otf'],
+    fields: [
+...fieldsText,
+      {id: 'shadowColor', value: 'navy'},
+      {id: 'shadow', value: '80x3+3+3'},
+    ],
     script: state => `
-<%
-var options = {
-  text: 'Hello World 1234',
-  stroke: 'black',
-  fill: 'white',
-  pointSize: 68,
-  shadowColor: 'navy',
-  shadow: '80x3+3+3'
-}
-%>
-convert -background none -stroke <%= options.stroke%> -fill <%= options.fill%> \\
-  -font PoetsenOne-Regular.otf -pointsize <%= options.pointSize%> 'label:<%= options.text%>' -trim \\
-  ( +clone -background <%= options.shadowColor %> -shadow <%= options.shadow %> ) +swap \\
+convert -background none ${fieldsTextCommand} \\
+  -font PoetsenOne-Regular.otf -trim \\
+  ( +clone -background <%= getField('shadowColor')  %> -shadow <%= getField('shadow')  %> ) +swap \\
   -background none -layers merge +repage shadow_a.png
 `.trim()
   },
@@ -93,13 +113,14 @@ convert -background none -stroke <%= options.stroke%> -fill <%= options.fill%> \
     name: 'render text file',
     tags: [ExampleTag.text],
     description: 'Render txt file to bitmap',
-    inputFiles: ['PoetsenOne-Regular.otf', 'LICENSE.txt'],
+    inputFiles: ['PoetsenOne-Regular.otf', 'LICENSE.txt'],   
+     fields: [
+      ...fieldsText
+          ],
     script: state => `
-    convert -font PoetsenOne-Regular.otf -pointsize 12 TEXT:LICENSE.txt LICENSE.jpg
+    convert -font PoetsenOne-Regular.otf ${fieldsTextCommand} TEXT:LICENSE.txt LICENSE.jpg
 `.trim()
   },
-
-
 
 
   {
@@ -706,15 +727,18 @@ convert ${state.inputFiles[0].name}  boolean_mask.png \\
     `.trim(),
   },
 
-  {
-    name: 'Hello fields',
-    description: 'visual fields test',
-    tags: [ExampleTag.simple],
-    inputFiles: ['bluebells.png'],
-    fields: [{id: 'angle'}],
-    script: state =>
-      `
-convert ${state.inputFiles[0].name} -rotate ${state.fields['angle'].value()} -scale 136% foo.gif`
-  },
+//   {
+//     name: 'Hello fields',
+//     description: 'visual fields test',
+//     tags: [ExampleTag.simple],
+//     inputFiles: ['bluebells.png'],
+//     fields: [
+//       {id: 'angle', value: '23'},
+//       {id: 'scale', value: '123%'},
+//     ],
+//     script: state =>
+//       `
+// convert ${state.inputFiles[0].name} -rotate <%= getField('angle') %> -scale <%= getField('scale') %> foo.gif`
+//   },
 
 ]

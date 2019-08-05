@@ -6,7 +6,7 @@ import { HeightHelper, ImageInfoHelper, SizeHelper, WidthHelper } from './imageH
 
 export interface TemplateHelper<O = any, R = any, RO = any, RR = any> {
   name: string
-  fnCompileTime: (options: O) => R
+  fnCompileTime: (this: TemplateHelper&{options: RunOptions}, options: O) => R
   fnRunTime?: (options: RO) => RR
 }
 
@@ -37,7 +37,7 @@ export class Template implements CommandPreprocessor {
       // context.debug && console.log('Template compiled: ', t.toString())
       let c: { [s: string]: any } = { ...context }
       templateHelpers.forEach(fn => {
-        c[fn.name] = fn.fnCompileTime.bind(fn)
+        c[fn.name] = fn.fnCompileTime.bind({...fn, options: context})
       })
       const script = await t(c)
       return { ...context, script }

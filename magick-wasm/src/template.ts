@@ -33,7 +33,9 @@ export interface Context {
   skipImageMagickConfig?: boolean
   skipImageMagickBuild?: boolean
 }
-export const defaultLibraries = ['fftw', 'freetype', 'libjpeg', 'libpng', 'tiff', 'webp', 'zlib', 'openjpeg', 'autotrace']
+export const defaultLibraries = ['fftw', 'freetype', 'libjpeg', 'libpng', 'tiff', 'webp', 'zlib', 'openjpeg', 'lcms'
+// , 'autotrace'
+]
 
 type Library = keyof (typeof defaultLibraries)
 
