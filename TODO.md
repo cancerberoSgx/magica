@@ -5,6 +5,7 @@
 ## TODO / Road map
 
 - [ ] performance tests in the browser
+- [ ] concurrency node.js/CLI - if executed in different processes concurrently in the same folder, since working_tmp is the same will fail
 - [ ] do the same as mainConcurrency for run()
 - [ ] options should allow to define a different nodeJsFsRoot or emscriptenFsRoot 
 - [ ] remove / replace knownSupportedReadWriteImageFormats with listFormat() - formatTest should use that.
