@@ -2,9 +2,9 @@ import * as React from 'react'
 import { Grid, Segment } from 'semantic-ui-react'
 import { AbstractComponent } from '../common/component'
 import { Command } from './command'
+import { Fields } from './fields'
 import { InputFiles } from './inputFiles'
 import { Output } from './output'
-import { Fields } from './fields';
 
 export class Body extends AbstractComponent {
   render() {

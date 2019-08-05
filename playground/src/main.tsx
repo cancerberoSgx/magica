@@ -6,7 +6,6 @@ import { getInitialState } from './app/state'
 import { getStore, _setStore } from './app/store'
 import { App } from './ui/app'
 import { createUrl, loadUrl, urlHasState } from './ui/common/urlState'
-import {addTemplateHelper, magickLoaded} from 'magica'
 
 async function main() {
   // magickLoaded.then(installTemplateExtensions)

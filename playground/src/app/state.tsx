@@ -9,12 +9,11 @@ export interface State {
   script: string
   working: boolean
   showAllResultsOutput: boolean
-  fields:Field[]
+  fields: Field[]
 }
 
-export interface Field{
-  // getValue():string
-  id:string
+export interface Field {
+  id: string
   value: string
 }
 

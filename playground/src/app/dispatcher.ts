@@ -1,5 +1,5 @@
 import { File } from 'magica'
-import { notUndefined, serial, sleep, arrayToObject } from 'misc-utils-of-mine-generic'
+import { arrayToObject, notUndefined, serial, sleep } from 'misc-utils-of-mine-generic'
 import { Example } from './examples'
 import { getStore } from './store'
 import { callRun } from './workerAccess'
@@ -28,7 +28,9 @@ export async function setExample(example?: Example) {
   var inputFiles = [...await serial((example ? example.inputFiles : state.inputFiles.map(f => f.name)).filter(f => !state.inputFiles.find(f2 => f2.name == f)).map(file => async () => File.fromUrl(file))), ...state.inputFiles].filter(notUndefined)
   const script = example ? example.script({ ...state, inputFiles }) : state.script
   var result = await callRun({
-    script, inputFiles, fields: arrayToObject(fields.map(f=>f.id), f=>{var f3 = fields.find(f2=>f2.id===f); return f3 ? f3.value : undefined})
+    script,
+    inputFiles,
+    fields: arrayToObject(fields.map(f => f.id), f => { var f3 = fields.find(f2 => f2.id === f); return f3 ? f3.value : undefined })
   })
   getStore().setState({
     example: example || state.example,

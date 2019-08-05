@@ -1,4 +1,4 @@
-import { State, Field } from './state'
+import { Field, State } from './state'
 
 export const sampleImages = [
   "bluebells.png",
@@ -32,16 +32,25 @@ export interface Example {
   fields?: Field[]
 }
 
-const fieldsText =[      
-  {id: 'text', value: 'Hello World 1234'},
-{id: 'stroke', value: 'black'},
-{id: 'strokewidth', value: '2'},
-{id: 'fill', value: 'white'},
-{id: 'pointSize', value: '68'}
+const fieldsText = [
+  { id: 'text', value: 'Hello World 1234' },
+  { id: 'stroke', value: 'black' },
+  { id: 'strokewidth', value: '2' },
+  { id: 'fill', value: 'white' },
+  { id: 'pointSize', value: '68' }
 ]
 
-const fieldsTextCommand = `-stroke <%= getField('stroke') %> -strokewidth <%= getField('strokewidth') %> -fill <%= getField('fill') %> -pointsize <%= getField('pointSize') %> 'label:<%= getField('text') %>'`
+const fieldsShadow = [
+  { id: 'shadowColor', value: 'navy' },
+  { id: 'shadow', value: '120x5+5+4' },
+]
 
+const fieldsTextCommand = `
+  -stroke <%= get('stroke') %> -strokewidth <%= get('strokewidth') %> \\
+  -fill <%= get('fill') %> -pointsize <%= get('pointSize') %> 'label:<%= get('text') %>'
+  `.trim()
+
+const fieldsShadowCommand = `-background <%= get('shadowColor') %> -shadow <%= get('shadow') %>`
 
 export const examples: Example[] = [
 
@@ -51,12 +60,12 @@ export const examples: Example[] = [
     tags: [ExampleTag.simple],
     inputFiles: ['bluebells.png'],
     fields: [
-      {id: 'angle', value: '23'},
-      {id: 'scale', value: '123%'},
+      { id: 'angle', value: '23' },
+      { id: 'scale', value: '123%' },
     ],
     script: state =>
       `
-      convert ${state.inputFiles[0].name} -rotate <%= getField('angle') %> -scale <%= getField('scale') %> foo.gif
+      convert ${state.inputFiles[0].name} -rotate <%= get('angle') %> -scale <%= get('scale') %> foo.gif
       `.trim()
   },
 
@@ -78,16 +87,16 @@ convert photo.tiff photo_info.json
     description: 'Multiple transformations on animated gif (loaded from url) which results in another animated transformed gif.',
     inputFiles: ['challenge.gif'],
     fields: [
-      {id: 'swirl', value: '123'},
-      {id: 'wave', value: '14x95'},
-      {id: 'scale', value: '74%'},
-      {id: 'rotate', value: '15'},
-      {id: 'background', value: 'transparent'},
-      {id: 'delay', value: '12'},
+      { id: 'swirl', value: '123' },
+      { id: 'wave', value: '14x95' },
+      { id: 'scale', value: '74%' },
+      { id: 'rotate', value: '15' },
+      { id: 'background', value: 'transparent' },
+      { id: 'delay', value: '12' },
     ],
     script: state => `
-convert -swirl <%= getField('swirl') %> -wave <%= getField('wave') %> -scale <%= getField('scale') %> -rotate <%= getField('rotate') %> \\
-   -background <%= getField('background') %> -set delay <%= getField('delay') %> challenge.gif foo22.gif
+convert -swirl <%= get('swirl') %> -wave <%= get('wave') %> -scale <%= get('scale') %> -rotate <%= get('rotate') %> \\
+   -background <%= get('background') %> -set delay <%= get('delay') %> challenge.gif foo22.gif
     `.trim()
   },
 
@@ -97,14 +106,13 @@ convert -swirl <%= getField('swirl') %> -wave <%= getField('wave') %> -scale <%=
     description: 'Using -shadow on text to add shadow',
     inputFiles: ['PoetsenOne-Regular.otf'],
     fields: [
-...fieldsText,
-      {id: 'shadowColor', value: 'navy'},
-      {id: 'shadow', value: '80x3+3+3'},
+      ...fieldsText,
+      ...fieldsShadow
     ],
     script: state => `
-convert -background none ${fieldsTextCommand} \\
-  -font PoetsenOne-Regular.otf -trim \\
-  ( +clone -background <%= getField('shadowColor')  %> -shadow <%= getField('shadow')  %> ) +swap \\
+convert -font PoetsenOne-Regular.otf -background none \\
+  ${fieldsTextCommand} \\
+  -trim ( +clone ${fieldsShadowCommand} ) +swap \\
   -background none -layers merge +repage shadow_a.png
 `.trim()
   },
@@ -113,10 +121,10 @@ convert -background none ${fieldsTextCommand} \\
     name: 'render text file',
     tags: [ExampleTag.text],
     description: 'Render txt file to bitmap',
-    inputFiles: ['PoetsenOne-Regular.otf', 'LICENSE.txt'],   
-     fields: [
+    inputFiles: ['PoetsenOne-Regular.otf', 'LICENSE.txt'],
+    fields: [
       ...fieldsText
-          ],
+    ],
     script: state => `
     convert -font PoetsenOne-Regular.otf ${fieldsTextCommand} TEXT:LICENSE.txt LICENSE.jpg
 `.trim()
@@ -128,24 +136,22 @@ convert -background none ${fieldsTextCommand} \\
     tags: [ExampleTag.color],
     description: 'Removing background color and adding shadow with -shadow',
     inputFiles: ['https://i.imgur.com/JACCXT5.png'],
+    fields: [
+      ...fieldsShadow,
+      { id: 'threshold', value: '5%' },
+      { id: 'point', value: '10,10' },
+    ],
     script: state => `
-<%
-var options = {
-  shadowColor: '#001100',
-  shadow: '120x6+5-4',
-  threshold: '12%',
-  point: '10,10'
-} 
-%>
-convert ${state.inputFiles[0].name} ( +clone -fx 'p{<%= options.point%>}' ) \\
-  -compose Difference -composite \\
-  -modulate 100,0 -alpha off difference.miff
-convert difference.miff -threshold <%= options.threshold %> boolean_mask.miff
+convert ${state.inputFiles[0].name} ( +clone -fx 'p{<%= get('point') %>}' ) \\
+  -compose Difference -composite -modulate 100,0 -alpha off difference.miff
+
+convert difference.miff -threshold <%= get('threshold') %> boolean_mask.miff
+
 convert ${state.inputFiles[0].name} boolean_mask.miff \\
-  -alpha off -compose CopyOpacity -composite \\
-  differenceRemoveBackground.miff
+  -alpha off -compose CopyOpacity -composite differenceRemoveBackground.miff
+
 convert differenceRemoveBackground.miff  \\
-  ( +clone -background <%= options.shadowColor %> -shadow <%= options.shadow %> ) +swap \\
+  ( +clone ${fieldsShadowCommand} ) +swap \\
   -background none -layers merge +repage shadow_b.png
     `.trim()
   },
@@ -155,19 +161,19 @@ convert differenceRemoveBackground.miff  \\
     description: `With some parameters a WIP effect that kind of poligonize an image. The size the initial image before polar distorting, basically sets the number of rays that will be produced`,
     inputFiles: ['bluebells.png'],
     tags: [ExampleTag.artistic, ExampleTag.color],
+    fields: [
+      { id: 'speed', value: '2' },
+      { id: 'intensity', value: '9' },
+      { id: 'width', value: '14' },
+      { id: 'height', value: '21' },
+    ],
     script: state => `
-<% 
-  var speed = 2
-  var intensity = 9
-  var width = 14
-  var height = 21
-%>
 convert <%=inputFiles[0].name %> original.png
 convert <%=inputFiles[0].name %> \\
-  -resize <%= 100/speed%>% -blur 0x1 -colorspace YIQ -monitor \\
-  -mean-shift <%= width%>x<%=height%>+<%= intensity %>% +monitor \\
+  -resize <%= 100/get('speed') %>% -blur 0x1 -colorspace YIQ -monitor \\
+  -mean-shift <%= get('width') %>x<%= get('height') %>+<%= get('intensity') %>% +monitor \\
   -set colorspace YIQ -colorspace sRGB \\
-  -resize <%= 100*speed%>% lindo.png
+  -resize <%= 100*get('speed') %>% lindo.png
 `.trim()
   },
 
@@ -179,7 +185,6 @@ convert <%=inputFiles[0].name %> \\
     script: state => `
 <% 
   var size = await inputFiles[0].size()
-  var wxh = size.width+'x'+size.height
 %>
 
 convert -size <%=size.width+'x'+size.height%> xc:  -channel R \\
@@ -237,28 +242,32 @@ convert -size 150x150 xc: +noise random \\
     name: 'glitter_tiles tile',
     description: `<a href="https://www.imagemagick.org/Usage/anim_mods/#glitter_tiles">See ImageMagick examples page anim_mods/#glitter_tiles</a>`,
     tags: [ExampleTag.animation, ExampleTag.artistic],
+    fields: [
+      { id: 'point', value: '30,30' },
+      { id: 'noise', value: '30%' },
+      { id: 'threshold', value: '10%' },
+      { id: 'delay', value: '12' },
+    ],
     script: state => `
 <% 
   var img = inputFiles[0]
-  var noise = '30%'
-  var threshold = '10%'
-  var color = await img.pixel(30, 30)
+  var color = await img.pixel(parseInt(get('point').split(',')[0]), parseInt(get('point').split(',')[1]))
   var size = await img.size()
 %>
 
 convert -size <%= size.width%>x<%= size.height%> xc: +noise Random -separate \\
-  null: ( xc: +noise Random -separate -threshold <%= noise %> -negate ) \\
+  null: ( xc: +noise Random -separate -threshold <%= get('noise') %> -negate ) \\
   -compose CopyOpacity -layers composite \\
-  -set dispose background -set delay 20 -loop 0   glitter_overlay.miff
+  -set dispose background -set delay <%= get('delay')%> -loop 0 glitter_overlay.miff
 
 convert glitter_overlay.miff \\
-  -compose Screen -bordercolor <%= color %> -border 0x0  glitter_plasma.miff
+  -compose Screen -bordercolor <%= color %> -border 0x0 glitter_plasma.miff
 
 convert glitter_plasma.miff -virtual-pixel tile \\
   -set option:distort:viewport <%= size.width%>x<%= size.height%> -distort SRT 0 \\
   glitter_plasma_tiled.miff
 
-convert '<%= img.name%>' -matte -fuzz <%= threshold %> -transparent <%= color %> logo_holed.miff
+convert '<%= img.name %>' -matte -fuzz <%= get('threshold') %> -transparent <%= color %> logo_holed.miff
 
 convert logo_holed.miff null: glitter_plasma_tiled.miff \\
   -compose DstOver -layers composite \\
@@ -378,9 +387,6 @@ convert flux_anim.gif  \\
     -separate +channel flux_ripples_<%=i%>.miff
 <%})%>
 convert -set delay <%= delay %> <%= list.map(i=>\`flux_ripples_\${i}.miff\`).join(' ') %> flux_ripples_anim.gif
-<%
-
-%>
   `.trim(),
   },
 
@@ -611,7 +617,8 @@ convert -size 250x100 xc: +noise Random -channel R -threshold .4% \\
   ( +clone ) -compose multiply -flatten \\
   -virtual-pixel Tile -background Black \\
   -blur 0x.6 -motion-blur 0x15-60 -normalize \\
-  +distort Polar 0 +repage   star_spiral.gif`.trim(),
+  +distort Polar 0 +repage   star_spiral.gif
+  `.trim(),
   },
 
   {
@@ -716,29 +723,34 @@ convert lines.gif \\
     description: `<a href="https://imagemagick.org/Usage/masking/#difference">See ImageMagick examples page masking/#difference</a>`,
     tags: [ExampleTag.color],
     inputFiles: ['bluebells.png'],
+    fields: [
+      { id: 'threshold', value: '15%' },
+      { id: 'point', value: '10,10' },
+    ],
     script: state => `
-convert ${state.inputFiles[0].name} ( +clone -fx 'p{0,0}' ) \\
-  -compose Difference  -composite  \\
-  -modulate 100,0  -alpha off  difference.png
-convert difference.png  -threshold 15%  boolean_mask.png
-convert ${state.inputFiles[0].name}  boolean_mask.png \\
+convert ${state.inputFiles[0].name} original.png
+convert ${state.inputFiles[0].name} ( +clone -fx 'p{<%= get('point') %>}' ) \\
+  -compose Difference -composite \\
+  -modulate 100,0 -alpha off difference.miff
+convert difference.miff -threshold <%= get('threshold') %> boolean_mask.miff
+convert ${state.inputFiles[0].name}  boolean_mask.miff \\
   -alpha off -compose CopyOpacity -composite \\
   differenceRemoveBackground.png
     `.trim(),
   },
 
-//   {
-//     name: 'Hello fields',
-//     description: 'visual fields test',
-//     tags: [ExampleTag.simple],
-//     inputFiles: ['bluebells.png'],
-//     fields: [
-//       {id: 'angle', value: '23'},
-//       {id: 'scale', value: '123%'},
-//     ],
-//     script: state =>
-//       `
-// convert ${state.inputFiles[0].name} -rotate <%= getField('angle') %> -scale <%= getField('scale') %> foo.gif`
-//   },
+  //   {
+  //     name: 'Hello fields',
+  //     description: 'visual fields test',
+  //     tags: [ExampleTag.simple],
+  //     inputFiles: ['bluebells.png'],
+  //     fields: [
+  //       {id: 'angle', value: '23'},
+  //       {id: 'scale', value: '123%'},
+  //     ],
+  //     script: state =>
+  //       `
+  // convert ${state.inputFiles[0].name} -rotate <%= get('angle') %> -scale <%= get('scale') %> foo.gif`
+  //   },
 
 ]

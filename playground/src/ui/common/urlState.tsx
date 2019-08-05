@@ -1,5 +1,5 @@
 import { File } from 'magica'
-import { notUndefined, serial, sleep } from 'misc-utils-of-mine-generic'
+import { notUndefined, serial } from 'misc-utils-of-mine-generic'
 import { setExample } from '../../app/dispatcher'
 import { getStore } from '../../app/store'
 
@@ -22,7 +22,6 @@ export async function loadUrl() {
   if (urlHasState()) {
     const d = window.location.hash.split('state=')[1]
     const state = JSON.parse(atob(d))
-    // console.log(state)
     let inputFiles = await serial(state.inputFileNames.map((f: string) => async () => {
       try {
         return await File.fromUrl(f)
@@ -31,16 +30,18 @@ export async function loadUrl() {
       }
     }))
     inputFiles = inputFiles.filter(notUndefined)
-    getStore().setState({ 
-      example: { 
-        ...getStore().getState().example, 
-        script: () => state.script 
-      }, 
-      script: state.script, 
+    getStore().setState({
+      example: {
+        ...getStore().getState().example,
+        script: () => state.script,
+
+        fields: state.fields && state.fields.length ? state.fields : state.example.fields || [],
+      },
+      script: state.script,
       fields: state.fields,
-      inputFiles: inputFiles 
+      inputFiles: inputFiles
     })
-    await sleep(400)
+    // await sleep(400)
     await setExample(getStore().getState().example)
   } else {
 

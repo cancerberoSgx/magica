@@ -13,8 +13,6 @@ if [ ! -d "fftw" ]; then
   tar xvfz fftw-3.3.8.tar.gz
   rm *.tar.gz
   mv fftw* fftw
-else
-  ( cd fftw ; make clean )
 fi
 
 cd fftw

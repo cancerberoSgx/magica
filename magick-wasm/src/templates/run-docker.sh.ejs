@@ -2,6 +2,8 @@
 
 # This file is auto-generated from src/templates
 
-docker build -t magica-im <%= scriptsFolder %>/ && \
-  docker run --tty --rm --workdir /code -v "$PWD":/code magica-im /bin/bash --login <%= scriptsFolder %>/build.sh
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+docker build -t magica-im "$DIR" && \
+  docker run --tty --rm -t -i --workdir /code -v "$PWD":/code magica-im /bin/bash --login <%= scriptsFolder %>/build.sh
  

@@ -4,9 +4,9 @@ import { arrayToCliOne, processCommand } from '../command'
 import { LSHelper } from './fsHelper'
 import { HeightHelper, ImageInfoHelper, SizeHelper, WidthHelper } from './imageHelper'
 
-export interface TemplateHelper<O = any, R = any, RO = any, RR = any> {
+export interface TemplateHelper<O = any, R = any, RO = any, RR = any, CRO extends RunOptions = RunOptions> {
   name: string
-  fnCompileTime: (this: TemplateHelper&{options: RunOptions}, options: O) => R
+  fnCompileTime: (this: TemplateHelper&{options: CRO}, options: O) => R
   fnRunTime?: (options: RO) => RR
 }
 
@@ -37,7 +37,7 @@ export class Template implements CommandPreprocessor {
       // context.debug && console.log('Template compiled: ', t.toString())
       let c: { [s: string]: any } = { ...context }
       templateHelpers.forEach(fn => {
-        c[fn.name] = fn.fnCompileTime.bind({...fn, options: context})
+        c[fn.name] = fn.fnCompileTime.bind(Object.assign(fn, {options: context}))
       })
       const script = await t(c)
       return { ...context, script }
@@ -60,14 +60,14 @@ export class Template implements CommandPreprocessor {
   }
 }
 
-const templateHelpers: TemplateHelper<any, any>[] = []
+const templateHelpers: TemplateHelper [] = []
 
 /**
  * Allows to change the context object on which templates are evaluated to add new properties or functions 
  * so they can be evaluated in command templates.
  */
-export function addTemplateHelper(h: TemplateHelper) {
-  templateHelpers.push(h)
+export function addTemplateHelper<O = any, R = any, RO = any, RR = any, CRO extends RunOptions = RunOptions>(h: TemplateHelper<O,R,RO,RR,CRO>) {
+  templateHelpers.push(h as any)
 }
 let installed = false
 

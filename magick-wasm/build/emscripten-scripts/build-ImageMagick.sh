@@ -25,12 +25,12 @@ if [ "$SKIP_CONFIG" -eq "0" ]; then
   autoconf
 
   emconfigure ./configure --prefix="$PREFIX" \
-    --without-threads --disable-shared --disable-openmp --enable-static --without-lcms \
+    --without-threads --disable-shared --disable-openmp --enable-static \
+    --with-utilities --with-autotrace \
+    --with-quantum-depth=16 --enable-hdri=yes \
     --disable-docs --without-bzlib --without-magick-plus-plus \
-    --without-heic --without-raw --without-perl --without-lzma --without-x --without-autotrace \
-    --disable-largefile --without-modules --without-jbig --without-dps --without-fontconfig \
-    --with-quantum-depth=16 --enable-hdri=yes --with-utilities \
-    PKG_CONFIG_PATH="$PKG_CONFIG_PATH" LDFLAGS="$LDFLAGS" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" 
+    --without-perl --without-x --disable-largefile --without-modules  \
+    PKG_CONFIG_PATH="$PKG_CONFIG_PATH" LDFLAGS="$LDFLAGS" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
 
   testExitCode "ImageMagick emconfigure" $?
 

@@ -1,5 +1,6 @@
-import { Options, main } from './main';
-import { defaultLibraries } from './template';
+import {  main } from './main';
+import {  Options } from "./types";
+import { defaultLibraries } from './defaults';
 
 export function cli(o:Options) {
   if(o.help){
@@ -15,9 +16,8 @@ function printHelp(){
   console.log(`
 ImageMagick WASM builder
 
-Usage: 
+Usage:
 
-magick-wasm --type debug --quantumDepth 8 
-  `);
-  
+magick-wasm --type debug --quantumDepth 8
+  `)  
 }

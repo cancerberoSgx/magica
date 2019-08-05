@@ -1,5 +1,7 @@
 #!/bin/bash
+
 # This file is auto-generated from src/templates
+
 source emscripten-scripts/base.sh
 
 mkdir -p $PREFIX/src
@@ -13,10 +15,14 @@ fi
 
 cd lcms
 
-
 autoreconf -fiv
-emconfigure ./configure --prefix=$PREFIX --disable-shared  CFLAGS="$FLAGS"
+
+chmod a+x ./configure
+emconfigure ./configure --prefix=$PREFIX --disable-shared --enable-static --without-threads \
+  CFLAGS="$CFLAGS" PKG_CONFIG_PATH="$PKG_CONFIG_PATH"
+
 testExitCode "lcms configure" $?
 
 emcmake make install  
+
 testExitCode "lcms make install" $?

@@ -3,12 +3,12 @@ import { toDataUrl } from 'magica'
 import * as React from 'react'
 import { Header, Segment, TextArea } from 'semantic-ui-react'
 import { State } from '../../app/state'
-import { AbstractComponent, AbstractProps } from '../common/component'
+import { AbstractComponent } from '../common/component'
 
 export class Output extends AbstractComponent {
   // shouldComponentUpdate(nextProps: AbstractProps, nextState: State, nextContext: any) {
-    // var output =
-    // return this.state.script!=nextState.script || this.state.showAllResultsOutput != nextState.showAllResultsOutput || JSON.stringify(this.getOutput(this.state).map(f => f.name)) != JSON.stringify(this.getOutput(nextState).map(f => f.name))
+  // var output =
+  // return this.state.script!=nextState.script || this.state.showAllResultsOutput != nextState.showAllResultsOutput || JSON.stringify(this.getOutput(this.state).map(f => f.name)) != JSON.stringify(this.getOutput(nextState).map(f => f.name))
   // }
 
   render() {

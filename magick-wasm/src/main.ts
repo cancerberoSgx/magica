@@ -1,13 +1,8 @@
 import { rm, which, test, cp, mkdir } from 'shelljs';
-import { Context, renderTemplates, defaultContext } from './template';
-// import { getRoot } from './getRoot';
-// import { join } from 'path';
-
-export interface Options extends Context {
-  help?: boolean
-  debug?: boolean
-  outputFolder?: string
-}
+import { renderTemplates } from './template';
+import { Context, Options } from "./types";
+import { defaultContext } from "./defaults";
+import { execSync } from 'child_process';
 
 export const defaultOptions: Required<Options> = {
   ...defaultContext,
@@ -16,6 +11,14 @@ export const defaultOptions: Required<Options> = {
   // outputFolder: getRoot()+'/build', 
   outputFolder: './build',
 }
+// import { homedir } from 'os';
+//  function getRoot() {
+//   const d = homedir() + '/.magick-wasm';
+//   if (!test('-d', d)) {
+//     mkdir('-p', d);
+//   }
+//   return d;
+// }
 
 export function main(o: Options) {
   const allOptions: Required<Options> = { ...defaultOptions, ...o }
@@ -29,5 +32,14 @@ export function main(o: Options) {
   // cp('-r', `${allOptions.outputFolder}/${allOptions.scriptsFolder}/*`, `./build/${allOptions.scriptsFolder}`)
   if(!which('docker')){
     throw new Error('docker not found and is required. Aborting.')
+  }
+  if(!allOptions.noRun) {
+
+    try {
+      execSync(`cd ${allOptions.outputFolder} &&  sh ${allOptions.scriptsFolder}/run-docker.sh`, {stdio: 'pipe'})
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 }

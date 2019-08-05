@@ -10,9 +10,9 @@
 - [ ] options should allow to define a different nodeJsFsRoot or emscriptenFsRoot 
 - [ ] remove / replace knownSupportedReadWriteImageFormats with listFormat() - formatTest should use that.
   - [ ] listFormat() should parse read/write info too
-- [ ] distribute magica as esm module (< script type"=mo>)
+- [ ] distribute magica as esm module (< script type"module...)
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
-- [ ] try to build something similar to a realtime experience with canvas and IMG cache format files being careful not to remove them. User moving mouse  affects the canvas (processed with IM)
+- [ ] try to build something similar to a real time experience with canvas and IMG cache format files being careful not to remove them. User moving mouse  affects the canvas (processed with IM)
 - [ ] I should be able to make output files protected by config.
 - [ ] run() scriptListener  . finish the feature and test it or drop it
 - [ ] test mkdir -p for output files   
@@ -32,6 +32,7 @@
   - [ ] when abort use that info to build the result 
 - [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
 - [ ] autotrace test
+- [ ] lcms test
 
 ## WIP
 
@@ -45,6 +46,8 @@
 
 
 ## DONE
+
+- [x] lcms
 - [x] autotrace
 - [x] test mng animations  
 - [x] add support for openjpeg (jp2, jpc (jpeg 2000))

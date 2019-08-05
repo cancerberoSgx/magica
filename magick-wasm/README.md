@@ -9,7 +9,11 @@ Also this project contains a simple API and CLI tool to run tbe build given high
 TODO: the idea is to have a CLI that accepts parameters, builds scripts and optionally runs the build and tests. Right now there is only the following:
 
 ```
-npx ts-node -T src/launch.ts
+# build default configuration scripts and execute them (with docker)
+npx ts-node src/launch.ts
+
+# generates scripts for a "debug" release type, reusing current PREFIX/src folders. It doesn't execute docker.
+npx ts-node src/launch.ts --type debug --noClean --noRun
 ```
 
 Will generate build/emscripten-scripts so run-docker.sh can run (see below)
@@ -41,6 +45,9 @@ Take into account that some tests could assume some magick capabilities or image
 
  * `wasm-builds/emscripten-scripts/base.sh` base flags, debug or production build, etc
  * `wasm-builds/emscripten-scripts/build.sh` libraries build orchestrator
+ * `src/defaults.ts` has defaults template context values (like depth, production/debug release, hdri, etc)
+ * `src/types.ts` types of template context and CLI/API options
+
 
 
 
