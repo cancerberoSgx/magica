@@ -1,6 +1,6 @@
-import { mkdir, ls, test } from 'shelljs';
-import { readFileSync, writeFileSync } from 'fs';
-import { defaultLibraries } from './defaults';
+import { readFileSync, writeFileSync } from 'fs'
+import { ls, mkdir, test } from 'shelljs'
+import { defaultLibraries } from './defaults'
 
 export interface Options extends Context {
   help?: boolean
@@ -44,16 +44,16 @@ export interface Context {
    * Skips `./configure` step on ImageMagick
    */
   skipImageMagickConfig?: boolean;
-    /**
-   * Skips `make` step on ImageMagick
-   */
+  /**
+ * Skips `make` step on ImageMagick
+ */
   skipImageMagickBuild?: boolean;
   /**
    * If true it just generate scripts and doesn't execute them (with docker)
    */
   noRun?: boolean
 }
-export type Library = keyof (typeof defaultLibraries);
+export type Library = keyof (typeof defaultLibraries)
 export interface TemplateContext extends Options {
   addLib(this: Required<Options>, lib: Library): void;
   test: typeof test;

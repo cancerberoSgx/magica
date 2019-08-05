@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "clean": "rm -rf dist docs",
-    "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
-    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
+    "format": "npx ts-refactor format \"**/*.ts*\" ../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
+    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
     "lint": "npm run organizeImports && npm run format",
     "start": "cd .. && npm run build && cd playground && npm run copy && npx parcel serve src/index.html -d docs --no-source-maps",
     "build-dev-no-maps": "npm run copy &&export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-content-hash  --no-source-maps",

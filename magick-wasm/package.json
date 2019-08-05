@@ -1,6 +1,6 @@
 {
   "name": "magick-wasm",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "builds ImageMagick WASM for Magica, downloading sources and using docker.",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -12,7 +12,8 @@
     "clean": "rm -rf tmp* dist",
     "build": " npm run clean && npx tsc && npm run copy",
     "copy": " exit 0",
-    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\" \"test-browser/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
+    "organizeImports": "npx ts-refactor organizeImports \"**/*.ts*\" ../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
+    "format": "npx ts-refactor format \"**/*.ts*\" ../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "lint": "npm run organizeImports && npm run format",
     "docs": "npx markdown-toc README.md -i",
     "all": "npm run clean && npm run lint && npm run build  && npm run docs",
@@ -24,7 +25,7 @@
     "glob": "^7.1.4",
     "minimist": "^1.2.0",
     "misc-utils-of-mine-generic": "^0.2.15",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.3"
   },
   "devDependencies": {
     "@types/ejs": "^2.6.3",

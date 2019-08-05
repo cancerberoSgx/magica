@@ -1,14 +1,14 @@
-import {  defaultOptions } from './main';
-import { mkdir, ls, test } from 'shelljs';
-import { readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
-import { Context, Library, TemplateContext, Options } from "./types";
+import { readFileSync, writeFileSync } from 'fs'
+import { join } from 'path'
+import { ls, mkdir, test } from 'shelljs'
+import { defaultOptions } from './main'
+import { Context, Library, Options, TemplateContext } from "./types"
 
 
 export const defaultLibraries = ['fftw', 'freetype', 'libjpeg', 'libpng', 'tiff', 'webp', 'zlib', 'openjpeg', 'lcms', 'raw', 'libde265', 'libheif'
-// 'autotrace'
+  // 'autotrace'
   // 'openexr',
-];
+]
 
 export const defaultContext: Required<Context> = {
   type: 'production',
@@ -22,12 +22,12 @@ export const defaultContext: Required<Context> = {
   skipImageMagickConfig: false,
   skipImageMagickBuild: false,
   noRun: false
-};
+}
 
 export const defaultTemplateContext: Required<TemplateContext> = {
   ...defaultOptions,
   addLib(this: Required<Options>, lib: Library) {
-    throw new Error('Not implemented');
+    throw new Error('Not implemented')
   },
   test, ls, mkdir, readFileSync, writeFileSync
-};
+}

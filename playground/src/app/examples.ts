@@ -738,6 +738,6 @@ convert ${state.inputFiles[0].name}  boolean_mask.miff \\
   differenceRemoveBackground.png
     `.trim(),
   },
- 
+
 
 ]

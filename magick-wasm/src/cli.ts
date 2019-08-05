@@ -1,9 +1,9 @@
-import {  main } from './main';
-import {  Options } from "./types";
-import { defaultLibraries } from './defaults';
+import { defaultLibraries } from './defaults'
+import { main } from './main'
+import { Options } from "./types"
 
-export function cli(o:Options) {
-  if(o.help){
+export function cli(o: Options) {
+  if (o.help) {
     printHelp()
     process.exit(0)
   }
@@ -12,12 +12,12 @@ export function cli(o:Options) {
   main(o)
 }
 
-function printHelp(){
+function printHelp() {
   console.log(`
 ImageMagick WASM builder
 
 Usage:
 
 magick-wasm --type debug --quantumDepth 8
-  `)  
+  `)
 }
