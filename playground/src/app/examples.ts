@@ -10,17 +10,17 @@ export const sampleImages = [
 ]
 
 export enum ExampleTag {
-  animation='animation',
-  info='info',
-  drawing='drawing',
-  gradient='gradient',
-  color='color',
-  montage='montage',
-  format='format',
-  distort='distort',
-  text='text',
-  artistic='artistic',
-  simple='simple'
+  animation = 'animation',
+  info = 'info',
+  drawing = 'drawing',
+  gradient = 'gradient',
+  color = 'color',
+  montage = 'montage',
+  format = 'format',
+  distort = 'distort',
+  text = 'text',
+  artistic = 'artistic',
+  simple = 'simple'
 }
 
 export interface Example {
@@ -29,6 +29,7 @@ export interface Example {
   name: string
   description: string;
   inputFiles: string[]
+  fields?: any[]
 }
 
 export const examples: Example[] = [
@@ -39,7 +40,7 @@ export const examples: Example[] = [
     tags: [ExampleTag.simple],
     inputFiles: ['bluebells.png'],
     script: state =>
-      `convert ${state.inputFiles.length ? state.inputFiles[0].name : 'rose:'} -rotate 33 -scale 136% foo.gif`
+      `convert ${state.inputFiles[0].name} -rotate 33 -scale 136% foo.gif`
   },
 
   {
@@ -67,7 +68,7 @@ convert -swirl 123 -wave 14x95 -scale 74% -rotate 15 \\
 
   {
     name: 'Text with shadow',
-    tags: [ExampleTag.text ],
+    tags: [ExampleTag.text],
     description: 'Using -shadow on text to add shadow',
     inputFiles: ['PoetsenOne-Regular.otf'],
     script: state => `
@@ -79,26 +80,39 @@ var options = {
   pointSize: 68,
   shadowColor: 'navy',
   shadow: '80x3+3+3'
-} 
+}
 %>
 convert -background none -stroke <%= options.stroke%> -fill <%= options.fill%> \\
   -font PoetsenOne-Regular.otf -pointsize <%= options.pointSize%> 'label:<%= options.text%>' -trim \\
   ( +clone -background <%= options.shadowColor %> -shadow <%= options.shadow %> ) +swap \\
   -background none -layers merge +repage shadow_a.png
-    `.trim()
+`.trim()
   },
 
   {
+    name: 'render text file',
+    tags: [ExampleTag.text],
+    description: 'Render txt file to bitmap',
+    inputFiles: ['PoetsenOne-Regular.otf', 'LICENSE.txt'],
+    script: state => `
+    convert -font PoetsenOne-Regular.otf -pointsize 12 TEXT:LICENSE.txt LICENSE.jpg
+`.trim()
+  },
+
+
+
+
+  {
     name: 'Remove background and add shadow',
-    tags: [  ExampleTag.color],
+    tags: [ExampleTag.color],
     description: 'Removing background color and adding shadow with -shadow',
-    inputFiles: [ 'https://i.imgur.com/JACCXT5.png'],
+    inputFiles: ['https://i.imgur.com/JACCXT5.png'],
     script: state => `
 <%
 var options = {
-  shadowColor: '#137726',
-  shadow: '80x3-4-3',
-  threshold: '5%',
+  shadowColor: '#001100',
+  shadow: '120x6+5-4',
+  threshold: '12%',
   point: '10,10'
 } 
 %>
@@ -147,11 +161,11 @@ convert <%=inputFiles[0].name %> \\
   var wxh = size.width+'x'+size.height
 %>
 
-convert -size <%=wxh%> xc:  -channel R \\
+convert -size <%=size.width+'x'+size.height%> xc:  -channel R \\
   -fx 'yy=(j+.5)/h-.5; (i/w-.5)/(sqrt(1-4*yy^2))+.5' \\
   -separate  +channel  sphere_lut.miff
 
-convert -size <%=wxh%> xc:black -fill white \\
+convert -size <%=size.width+'x'+size.height%> xc:black -fill white \\
   -draw 'circle <%=size.width/2%>,<%=size.height/2%> <%=size.width/2%>,0'    sphere_mask.miff
 
 convert sphere_mask.miff \\
@@ -159,13 +173,12 @@ convert sphere_mask.miff \\
       +sigmoidal-contrast 6x50% -fill grey50 -colorize 10%  ) \\
   -composite sphere_overlay.miff
 
-convert <%=inputFiles[0].name %> -resize <%=wxh%>! sphere_lut.miff -fx 'p{ v*w, j }' \\
+convert <%=inputFiles[0].name %> -resize <%=size.width+'x'+size.height%>! sphere_lut.miff -fx 'p{ v*w, j }' \\
   sphere_overlay.miff -compose HardLight  -composite \\
   sphere_mask.miff -alpha off -compose CopyOpacity -composite \\
   sphere_lena.png
 `.trim(),
   },
-
 
   {
     name: 'animate_granularity',
@@ -211,7 +224,7 @@ convert -size 150x150 xc: +noise random \\
   var color = await img.pixel(30, 30)
   var size = await img.size()
 %>
-  
+
 convert -size <%= size.width%>x<%= size.height%> xc: +noise Random -separate \\
   null: ( xc: +noise Random -separate -threshold <%= noise %> -negate ) \\
   -compose CopyOpacity -layers composite \\
@@ -691,6 +704,17 @@ convert ${state.inputFiles[0].name}  boolean_mask.png \\
   -alpha off -compose CopyOpacity -composite \\
   differenceRemoveBackground.png
     `.trim(),
+  },
+
+  {
+    name: 'Hello fields',
+    description: 'visual fields test',
+    tags: [ExampleTag.simple],
+    inputFiles: ['bluebells.png'],
+    fields: [{id: 'angle'}],
+    script: state =>
+      `
+convert ${state.inputFiles[0].name} -rotate ${state.fields['angle'].value()} -scale 136% foo.gif`
   },
 
 ]

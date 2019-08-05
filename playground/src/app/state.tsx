@@ -9,6 +9,11 @@ export interface State {
   script: string
   working: boolean
   showAllResultsOutput: boolean
+  fields:Fields
+}
+type Fields = {[s:string]:Field}
+interface Field{
+  value():string
 }
 
 export interface ParserError {

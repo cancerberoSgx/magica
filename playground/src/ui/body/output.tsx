@@ -2,14 +2,14 @@ import FileSaver from 'file-saver'
 import { toDataUrl } from 'magica'
 import * as React from 'react'
 import { Header, Segment, TextArea } from 'semantic-ui-react'
+import { State } from '../../app/state'
 import { AbstractComponent, AbstractProps } from '../common/component'
-import { State } from '../../app/state';
 
 export class Output extends AbstractComponent {
-    shouldComponentUpdate(nextProps:AbstractProps , nextState:State , nextContext: any) {
-      // var output =
-    return this.state.showAllResultsOutput!=nextState.showAllResultsOutput || JSON.stringify( this.getOutput(this.state).map(f=>f.name))!= JSON.stringify( this.getOutput(nextState).map(f=>f.name))
-  }
+  // shouldComponentUpdate(nextProps: AbstractProps, nextState: State, nextContext: any) {
+    // var output =
+    // return this.state.script!=nextState.script || this.state.showAllResultsOutput != nextState.showAllResultsOutput || JSON.stringify(this.getOutput(this.state).map(f => f.name)) != JSON.stringify(this.getOutput(nextState).map(f => f.name))
+  // }
 
   render() {
     if (!this.state.result) {
@@ -23,13 +23,13 @@ export class Output extends AbstractComponent {
 
       <Segment >
         {output.reverse().map(f =>
-        <a key={f.name} href="" onClick={e => {
+          <a key={f.name} href="" onClick={e => {
             var blob = new Blob([f.content])
             FileSaver.saveAs(blob, f.name)
           }}>{f.name}
             <img src={toDataUrl(f)} />
           </a>
-         )}
+        )}
         <div><Header as="h4">stdout</Header>
           <TextArea value={this.state.result.stdout.join('\n')}></TextArea>
         </div>
@@ -40,8 +40,8 @@ export class Output extends AbstractComponent {
     </Segment>
   }
 
-  private getOutput(s:State) {
-    if(!s.result) {return []}
-    return s.showAllResultsOutput ? s.result.results.map(r => r.outputFiles).flat() : s.result.outputFiles;
+  private getOutput(s: State) {
+    if (!s.result) { return [] }
+    return s.showAllResultsOutput ? s.result.results.map(r => r.outputFiles).flat() : s.result.outputFiles
   }
 }

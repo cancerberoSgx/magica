@@ -1,14 +1,7 @@
 import test from 'ava'
-import { execSync } from 'child_process'
-import { writeFileSync } from 'fs'
 import { array } from 'misc-utils-of-mine-generic'
 import { File, imageCompare, main, run } from '../src'
 import fileType = require('file-type')
-
-test.serial('identify', async t => {
-  let r = execSync('npx ts-node -T test/assets/formatConvertIdentifyScript.ts')
-  t.true(r.toString().includes('total time:'))
-})
 
 test('webp read', async t => {
   const result = await run({
@@ -27,7 +20,6 @@ test('webp read main', async t => {
     inputFiles: ['test/assets/ear.webp']
   })
   t.falsy(result.error)
-  writeFileSync('tmp.png', result.outputFiles[0].content)
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'png', mime: 'image/png' })
   t.true(await imageCompare(await File.fromFile('test/assets/ear.webp'), result.outputFiles[0]))
   t.false(await imageCompare(await File.fromFile('test/assets/n.png'), result.outputFiles[0]))
@@ -82,4 +74,17 @@ test('mng write', async t => {
     t.falsy(result.error)
     t.true(await result.outputFiles[0].equals(await File.fromFile(`test/assets/input2.png`)))
   })
+})
+
+
+test.skip(`svg - mng dont work`, async t => {
+  let result = await run<File>({
+    script: `
+    convert  image.svg image.mng
+    convert -size 262x250 xc:skyblue  -draw '@image.mng' output.gif
+    `, debug: true,
+    inputFiles: [`test/assets/image.svg`]
+  })
+  // writeFileSync('tmpww.gif', result.outputFiles[0].content)
+  t.falsy(result.error)
 })

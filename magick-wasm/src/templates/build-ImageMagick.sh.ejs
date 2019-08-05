@@ -27,7 +27,7 @@ if [ "$SKIP_CONFIG" -eq "0" ]; then
   emconfigure ./configure --prefix="$PREFIX" \
     --without-threads --disable-shared --disable-openmp --enable-static --without-lcms \
     --disable-docs --without-bzlib --without-magick-plus-plus \
-    --without-heic --without-raw --without-perl --without-lzma --without-x \
+    --without-heic --without-raw --without-perl --without-lzma --without-x --with-autotrace \
     --disable-largefile --without-modules --without-jbig --without-dps --without-fontconfig \
     --with-quantum-depth=<%= quantumDepth %> --enable-hdri=<%= noHdri ? 'no' : 'yes' %> --with-utilities \
     PKG_CONFIG_PATH="$PKG_CONFIG_PATH" LDFLAGS="$LDFLAGS" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" 

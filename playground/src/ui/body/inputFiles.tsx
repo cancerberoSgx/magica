@@ -1,7 +1,7 @@
 import FileSaver from 'file-saver'
 import { File } from 'magica'
 import * as React from 'react'
-import { Header, Input, List, Segment } from 'semantic-ui-react'
+import { Button, Header, Icon, Input, List, Segment } from 'semantic-ui-react'
 import { loadImageFromUrl } from '../../app/dispatcher'
 import { AbstractComponent } from '../common/component'
 
@@ -21,11 +21,12 @@ export class InputFiles extends AbstractComponent {
         {this.state.inputFiles.map(f =>
           <List.Item key={f.name}>
             <List.Content>
+              <Button floated="left" size="tiny" onClick={e => this.setState({ inputFiles: this.state.inputFiles.filter(f2 => f2.name !== f.name) })}><Icon name="delete"></Icon></Button>
               <List.Header><a href="" onClick={e => {
                 var blob = new Blob([f.content])
                 FileSaver.saveAs(blob, f.name)
               }}>{f.name}</a></List.Header>
-              <List.Description as='a'>{f.content.byteLength} bytes</List.Description>
+              <List.Description as='a'>{Math.round(f.content.byteLength / 1024)} kb</List.Description>
             </List.Content>
           </List.Item>
         )}

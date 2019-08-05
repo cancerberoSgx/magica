@@ -13,7 +13,7 @@ else
   ( cd freetype ; make clean )
 fi
   
-  cd freetype
+cd freetype
 
 chmod a+x ./configure
 

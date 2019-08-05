@@ -30,6 +30,7 @@
   - [ ] abort listeners API
   - [ ] when abort use that info to build the result 
 - [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
+- [ ] autotrace test
 
 ## WIP
 
@@ -43,7 +44,7 @@
 
 
 ## DONE
-
+- [x] autotrace
 - [x] test mng animations  
 - [x] add support for openjpeg (jp2, jpc (jpeg 2000))
 - [x] test jp2, jpc

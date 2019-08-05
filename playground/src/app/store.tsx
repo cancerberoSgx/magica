@@ -7,10 +7,10 @@ class Store extends Emitter<{ oldState: State, partial: Partial<State>, newState
     super()
   }
 
-  setState(state: Partial<State> ) {
+  setState(state: Partial<State>) {
     const oldState = this.state
     this.state = { ...this.state, ...state }
-      this.emit({ oldState, partial: state, newState: this.state })
+    this.emit({ oldState, partial: state, newState: this.state })
   }
 
   getState() {

@@ -22,6 +22,10 @@ cd $CURRENT_DIR
 source emscripten-scripts/build-libpng.sh
 testExitCode "build-libpng" $?
 
+cd $CURRENT_DIR
+source emscripten-scripts/build-autotrace.sh
+testExitCode "build-autotrace" $?
+
 # cd $CURRENT_DIR
 # source emscripten-scripts/build-liblqr.sh
 # testExitCode "build-liblqr" $?

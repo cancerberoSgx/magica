@@ -1,8 +1,7 @@
 import * as React from 'react'
-import { Button, Header, Segment, TextArea } from 'semantic-ui-react'
+import { Button, Header, Segment } from 'semantic-ui-react'
 import { setExample } from '../../app/dispatcher'
-import { AbstractComponent, AbstractProps } from '../common/component'
-import { State } from '../../app/state';
+import { AbstractComponent } from '../common/component'
 
 export class Command extends AbstractComponent {
 
