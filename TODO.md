@@ -31,7 +31,6 @@
   - [ ] when abort use that info to build the result 
 - [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
 - [ ] test -font companion:  -family, -stretch, -style, and -weight.
-- [ ] raw library tests
 - [ ] libheif tests
 - [ ] libheif 
 - [ ] API to manipulate pixels in memory - currently not possible with IM CLI-based API. 
@@ -42,6 +41,7 @@
 
 ## WIP
 
+- [w] raw library tests
 - [w] document run({script}) template, preprocessor, custom commands 
   - [w] document  script pre processors API
   - [w] document script templates infrastructure, syntax, examples, building helpers, how to add new helpers, how to add new properties to the context. 

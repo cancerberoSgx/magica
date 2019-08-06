@@ -1,9 +1,9 @@
 import test from 'ava'
+import { writeFileSync } from 'fs'
 import { array } from 'misc-utils-of-mine-generic'
 import { File, imageCompare, main, run } from '../src'
 import { filterResultStdErr } from './testUtil'
 import fileType = require('file-type')
-import { writeFileSync } from 'fs';
 
 test('webp read', async t => {
   const result = await run({
@@ -81,9 +81,9 @@ test('mng write', async t => {
   })
 })
 test.skip(`raw cr2 read`, async t => {
-  var f = await File.fromUrl('https://raw.githubusercontent.com/lclevy/libcraw2/master/pics/IMG_0596_sraw.CR2', {name: 'test.cr2'})
-  console.log(f!.name);
-  
+  var f = await File.fromUrl('https://raw.githubusercontent.com/lclevy/libcraw2/master/pics/IMG_0596_sraw.CR2', { name: 'test.cr2' })
+  console.log(f!.name)
+
   let result = await run<File>({
     script: `convert IMG_0596_sraw.CR2 -rotate 32 -scale 18% input2.png`, debug: true,
     inputFiles: [f]

@@ -1,6 +1,5 @@
-import { resolve } from 'path'
 import { which } from 'shelljs'
-import { defaultContext, defaultOptions } from "./defaults"
+import { defaultOptions } from "./defaults"
 import { renderTemplates } from './template'
 import { Options } from "./types"
 

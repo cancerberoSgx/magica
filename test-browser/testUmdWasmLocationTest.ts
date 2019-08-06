@@ -6,7 +6,7 @@ import { staticServer } from "./staticServer"
 
 declare var window: any
 
-test.serial('umd and wasm custom location', async t => {
+test.skip('umd and wasm custom location', async t => {
   const htmlFile = 'testUmdWasmLocation.html'
   const port = 8081
   const testBrowserOutDir = 'tmp-browser-test-testUmdWasmLocation'

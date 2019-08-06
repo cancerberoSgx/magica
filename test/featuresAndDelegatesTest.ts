@@ -1,7 +1,6 @@
 import test from 'ava'
 import { File, imageCompare, run } from '../src'
 import { filterResultStdErr } from './testUtil'
-import { writeFileSync } from 'fs';
 
 test('fft', async (t) => {
   const c = await run<File>({
@@ -58,7 +57,7 @@ test('Encipher / Decipher ', async (t) => {
   })
   t.deepEqual(filterResultStdErr(result), [])
   t.deepEqual(undefined, result.error)
-  t.false(await imageCompare( await File.fromFile('test/assets/bluebells.png'), result.outputFiles[0]))
+  t.false(await imageCompare(await File.fromFile('test/assets/bluebells.png'), result.outputFiles[0]))
 
   result = await run<File>({
     script: `
@@ -71,7 +70,7 @@ test('Encipher / Decipher ', async (t) => {
   })
   t.deepEqual(filterResultStdErr(result), [])
   t.deepEqual(undefined, result.error)
-  t.true(await imageCompare( await File.fromFile('test/assets/bluebells.png'), result.outputFiles[0]))
+  t.true(await imageCompare(await File.fromFile('test/assets/bluebells.png'), result.outputFiles[0]))
 })
 
 test.skip('autotrace', async (t) => {

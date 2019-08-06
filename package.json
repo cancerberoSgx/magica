@@ -38,6 +38,7 @@
     "glob": "^7.1.4",
     "js-base64": "^2.5.1",
     "minimist": "^1.2.0",
+    "babel-polyfill": "^6.26.0",
     "misc-utils-of-mine-generic": "^0.2.17",
     "p-queue": "^6.1.0"
   },
@@ -49,7 +50,6 @@
     "@types/puppeteer": "^1.19.0",
     "@types/shelljs": "^0.8.5",
     "ava": "^2.2.0",
-    "babel-polyfill": "^6.26.0",
     "browserify": "^16.3.0",
     "coveralls": "^3.0.5",
     "file-type": "^12.1.0",
