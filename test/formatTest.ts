@@ -3,6 +3,7 @@ import { array } from 'misc-utils-of-mine-generic'
 import { File, imageCompare, main, run } from '../src'
 import { filterResultStdErr } from './testUtil'
 import fileType = require('file-type')
+import { writeFileSync } from 'fs';
 
 test('webp read', async t => {
   const result = await run({
@@ -79,8 +80,21 @@ test('mng write', async t => {
     t.true(await result.outputFiles[0].equals(await File.fromFile(`test/assets/input2.png`)))
   })
 })
-
-
+test.skip(`raw cr2 read`, async t => {
+  var f = await File.fromUrl('https://raw.githubusercontent.com/lclevy/libcraw2/master/pics/IMG_0596_sraw.CR2', {name: 'test.cr2'})
+  console.log(f!.name);
+  
+  let result = await run<File>({
+    script: `convert IMG_0596_sraw.CR2 -rotate 32 -scale 18% input2.png`, debug: true,
+    inputFiles: [f]
+  })
+  writeFileSync('tmpwwdddd.png', result.outputFiles[0].content)
+  t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'png', mime: 'image/png' })
+  t.deepEqual(filterResultStdErr(result), [])
+  t.falsy(result.error)
+  // t.true(await result.outputFiles[0].equals(await File.fromFile(`test/assets/input2.png`)))
+})
+// 
 test.skip(`svg - mng dont work`, async t => {
   let result = await run<File>({
     script: `

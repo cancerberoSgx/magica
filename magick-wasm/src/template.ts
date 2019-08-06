@@ -1,8 +1,7 @@
 import { compile } from 'ejs'
 import { readFileSync, writeFileSync } from 'fs'
 import { ls, mkdir, test } from 'shelljs'
-import { defaultTemplateContext } from './defaults'
-import { defaultOptions } from './main'
+import { defaultTemplateContext, defaultOptions } from './defaults'
 import { Library, Options, TemplateContext } from './types'
 
 export function renderTemplates(options: Required<Options> = defaultOptions) {

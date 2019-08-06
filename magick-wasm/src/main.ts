@@ -1,16 +1,9 @@
 import { resolve } from 'path'
 import { which } from 'shelljs'
-import { defaultContext } from "./defaults"
+import { defaultContext, defaultOptions } from "./defaults"
 import { renderTemplates } from './template'
 import { Options } from "./types"
 
-export const defaultOptions: Required<Options> = {
-  ...defaultContext,
-  help: false,
-  debug: false,
-  // outputFolder: getRoot()+'/build', 
-  outputFolder: resolve('./build'),
-}
 // import { homedir } from 'os';
 //  function getRoot() {
 //   const d = homedir() + '/.magick-wasm';

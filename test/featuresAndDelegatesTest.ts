@@ -1,6 +1,7 @@
 import test from 'ava'
 import { File, imageCompare, run } from '../src'
 import { filterResultStdErr } from './testUtil'
+import { writeFileSync } from 'fs';
 
 test('fft', async (t) => {
   const c = await run<File>({
@@ -43,20 +44,34 @@ test('lcms and -profile .icc profiles', async (t) => {
   t.false(JSON.stringify(i0.properties).includes('icc:'))
   t.true(JSON.stringify(i1.properties).includes('Color LCD Calibrated2'))
   t.true(JSON.stringify(i2.properties).includes('"icc:description":"ACES CG Linear (Academy Color Encoding System AP1)"'))
-  // console.log(i0.profiles, i0.properties);  
-  // console.log(i2.profiles, i2.properties);
-  // t.true(JSON.stringify(i0.properties).includes('Color LCD Calibrated2'))
+})
 
+test('Encipher / Decipher ', async (t) => {
+  let result = await run<File>({
+    script: `
+    convert bluebells.png -encipher secret.txt bluebellsSurprise.png
+    ` ,
+    inputFiles: [
+      new File('secret.txt', Buffer.from('Se75751cret')),
+      await File.fromFile('test/assets/bluebells.png')
+    ],
+  })
+  t.deepEqual(filterResultStdErr(result), [])
+  t.deepEqual(undefined, result.error)
+  t.false(await imageCompare( await File.fromFile('test/assets/bluebells.png'), result.outputFiles[0]))
 
-  // var files = c.results.map(r=>r.outputFiles).flat()
-  // writeFileSync('tmp_0.png', c.results[0].outputFiles[0].content)
-  // writeFileSync('tmp_1.png', c.results[1].outputFiles[0].content)
-  // writeFileSync('tmp_2.png', c.results[2].outputFiles[0].content)
-  // files .forEach(f=>writeFileSync('tmp_'+f.name, f.content))
-  // t.false(imageCompare(files[0], files[1]))
-
-
-
+  result = await run<File>({
+    script: `
+    convert bluebellsSurprise.png -decipher secret.txt bluebellSurpriseReady.png
+    ` ,
+    inputFiles: [
+      new File('secret.txt', Buffer.from('Se75751cret')),
+      result.outputFiles[0]
+    ],
+  })
+  t.deepEqual(filterResultStdErr(result), [])
+  t.deepEqual(undefined, result.error)
+  t.true(await imageCompare( await File.fromFile('test/assets/bluebells.png'), result.outputFiles[0]))
 })
 
 test.skip('autotrace', async (t) => {

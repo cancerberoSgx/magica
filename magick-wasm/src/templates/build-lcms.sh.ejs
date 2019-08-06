@@ -18,7 +18,7 @@ cd lcms
 autoreconf -fiv
 
 chmod a+x ./configure
-emconfigure ./configure --prefix=$PREFIX --disable-shared --enable-static --without-threads \
+emconfigure ./configure --prefix=$PREFIX --disable-shared --enable-static --without-threads  --disable-openmp \
   CFLAGS="$CFLAGS" PKG_CONFIG_PATH="$PKG_CONFIG_PATH"
 
 testExitCode "lcms configure" $?

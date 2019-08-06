@@ -9,7 +9,6 @@ mkdir -p $PREFIX/wasm
 
 ./libtool --tag=CC --mode=link emcc $LDFLAGS $CFLAGS \
   -o "$PREFIX/wasm/magick.html" utilities/magick.o  \
-  # remove this: should work with ust -L and -l - of not just include Magick-.la
   $PREFIX/lib/*.a \
   $PREFIX/src/ImageMagick/MagickWand/libMagickWand_7_*_la-compare.o \
   $PREFIX/src/ImageMagick/MagickCore/libMagickCore_7_*_la-fourier.o \

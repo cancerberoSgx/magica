@@ -4,7 +4,7 @@
 
 source emscripten-scripts/base.sh
 
-HEIF_HACK="false"
+HEIF_HACK="true"
 
 mkdir -p $PREFIX/src
 cd $PREFIX/src
@@ -15,15 +15,15 @@ fi
 
 cd libheif
 
-CFLAGS_NEW="-Wno-error=macro-redefined -s ERROR_ON_UNDEFINED_SYMBOLS=0 -Wno-error=c++11-extensions"
+CFLAGS_NEW="-Wno-error=macro-redefined -Wno-error=c++11-extensions"
 export CFLAGS=$(echo "$CFLAGS $CFLAGS_NEW" | sed "s/-fno-rtti -fno-exceptions//") # error: cannot use dynamic_cast with -fno-rtti
 export CXXFLAGS="$CFLAGS"
 
 autoreconf -fiv
 
 chmod +x ./configure
-emconfigure ./configure --prefix=$PREFIX --disable-shared --enable-static --disable-libfuzzer --disable-openmp \
-  --disable-go --disable-gdk-pixbuf --disable-multithreading \
+#--disable-shared --enable-static --disable-libfuzzer --disable-openmp --without-threads --disable-go --disable-gdk-pixbuf --disable-multithreading 
+emconfigure ./configure --prefix=$PREFIX --disable-shared --disable-go \
   CFLAGS="$CFLAGS" CXXFLAGS="$CFLAGS" PKG_CONFIG_PATH="$PKG_CONFIG_PATH"
 
 if [ "$HEIF_HACK" = "true" ]; then

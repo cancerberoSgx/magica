@@ -20,11 +20,14 @@ chmod a+x ./configure ./*.sh ./missing
 export CFLAGS=$(echo "$CFLAGS" | sed "s/-fno-rtti -fno-exceptions//")
 export CXXFLAGS="$CFLAGS"
 
-emconfigure ./configure --prefix=$PREFIX --disable-openmp --disable-shared --enable-static \
-  CFLAGS="$CFLAGS -fexceptions" PKG_CONFIG_PATH="$PKG_CONFIG_PATH"
+emconfigure ./configure --prefix=$PREFIX \
+  --disable-shared --disable-examples --disable-openmp --disable-jpeg --disable-jasper \
+  --disable-openmp --disable-shared --enable-static  --without-threads  \
+  CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" 
+  # PKG_CONFIG_PATH="$PKG_CONFIG_PATH" 
 
 testExitCode "raw configure" $?
 
-emcmake make install  CFLAGS="$CFLAGS" PKG_CONFIG_PATH="$PKG_CONFIG_PATH"
+emcmake make install # CFLAGS="$CFLAGS" PKG_CONFIG_PATH="$PKG_CONFIG_PATH"
 
 testExitCode "raw make install" $?

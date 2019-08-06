@@ -19,8 +19,9 @@ export CXXFLAGS="$CFLAGS"
 autoreconf -fiv
 
 chmod +x ./configure
-emconfigure ./configure --prefix=$PREFIX --disable-shared --disable-dec265  --disable-sherlock265   --disable-sse   --disable-arm \
-  CFLAGS="$CFLAGS" PKG_CONFIG_PATH="$PKG_CONFIG_PATH" CXXFLAGS="$CFLAGS" 
+#--disable-sse   --disable-arm  --without-threads  --disable-openmp --disable-sherlock265 PKG_CONFIG_PATH="$PKG_CONFIG_PATH" \
+emconfigure ./configure --prefix=$PREFIX --disable-shared --disable-dec265    \
+  CFLAGS="$CFLAGS"  CXXFLAGS="$CFLAGS" 
 testExitCode "libde265 configure" $?
 
 emcmake make install

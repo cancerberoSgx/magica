@@ -1,11 +1,11 @@
 import { readFileSync, writeFileSync } from 'fs'
-import { join } from 'path'
+import { join, resolve } from 'path'
 import { ls, mkdir, test } from 'shelljs'
-import { defaultOptions } from './main'
 import { Context, Library, Options, TemplateContext } from "./types"
 
 
-export const defaultLibraries = ['fftw', 'freetype', 'libjpeg', 'libpng', 'tiff', 'webp', 'zlib', 'openjpeg', 'lcms', 'raw', 'libde265', 'libheif'
+export const defaultLibraries = ['fftw', 'freetype', 'libjpeg', 'libpng', 'tiff', 'webp', 'zlib', 'openjpeg', 'lcms', 'raw', 
+// 'libde265', 'libheif'
   // 'autotrace'
   // 'openexr',
 ]
@@ -22,6 +22,15 @@ export const defaultContext: Required<Context> = {
   skipImageMagickConfig: false,
   skipImageMagickBuild: false,
   noRun: false
+}
+
+export const defaultOptions: Required<Options> = {
+  ...defaultContext,
+  help: false,
+  debug: false,
+  outputFolder:  './build',
+  // outputFolder: getRoot()+'/build', 
+  // outputFolder: resolve('./build'),
 }
 
 export const defaultTemplateContext: Required<TemplateContext> = {

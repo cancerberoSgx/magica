@@ -19,7 +19,6 @@
 - [ ] because options are global - sending commands concurrently could fail. Solution: queue or instance options
 - [ ] an easy to use API for web-workers
 - [ ] test mpeg format support
-- [ ] test cypher feature 
 - [ ] verify web worker  passing files is optimal (verify transferable/shared array buffers/optimal)
 - [ ] remove all logic from imageMagick/compiled/nodeMagick.js to separate.ts file
 - [ ] should magica support running native IM executable in node if they are present ?  
@@ -31,8 +30,15 @@
   - [ ] abort listeners API
   - [ ] when abort use that info to build the result 
 - [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
-- [ ] autotrace test
 - [ ] test -font companion:  -family, -stretch, -style, and -weight.
+- [ ] raw library tests
+- [ ] libheif tests
+- [ ] libheif 
+- [ ] API to manipulate pixels in memory - currently not possible with IM CLI-based API. 
+  - [ ] integrate haxe-bitmap js API that currently reads RGBA-8bit raw bitmaps
+    - [ ] probably need to support 16 bit depth too
+  - why ? so we also contribute code there for cool algorithms and filters - and we already have a nice API defined
+  - 
 
 ## WIP
 
@@ -42,16 +48,18 @@
   - [ ] document custom commands
   - [w] document run() scripts and supported syntax
 - [w] test and document protected files feature
-- [x] emscripten port generation configurable
+- [w] autotrace - working but currently disabled 
+  - [ ] try to build from github. it's not working at all for photos and very badly for letters. it generates invalid svg (not opening in chrome)
+  - [w] autotrace test
 
 
 ## DONE
-
+- [x] raw library
 - [x] lcms - -profile icc test
 - [x] lcms - -profile .icc
-- [x] autotrace - working but currently disabled 
-  - [ ] try to build from github. it's not working at all for photos and very badly for letters. it generates invalid svg (not opening in chrome)
+- [x] test cypher feature 
 - [x] test mng animations  
+- [x] emscripten port generation configurable
 - [x] add support for openjpeg (jp2, jpc (jpeg 2000))
 - [x] test jp2, jpc
 - [x] IM itself already supports loading images from URLS - NOT SUPPORTED 
