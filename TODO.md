@@ -6,6 +6,7 @@
 
 ## TODO / Road map
 
+- [ ] test unicode chars with fonts 
 - [ ] performance tests in the browser
 - [ ] fix testUmdWasmLocationTest in browser test so dont break on pulish
 - [ ] concurrency node.js/CLI - if executed in different processes concurrently in the same folder, since working_tmp is the same will fail
