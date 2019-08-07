@@ -8,7 +8,10 @@ test('should return true same image file', async t => {
 })
 
 test('should return true for equal images different formats', async t => {
-  const { outputFiles } = await main({ command: 'convert n.png 2.tiff', inputFiles: [await File.fromFile('test/assets/n.png')] })
+  const { outputFiles } = await main({
+    command: 'convert n.png 2.tiff',
+    inputFiles: [await File.fromFile('test/assets/n.png')]
+  })
   const eq = await imageCompare(await File.fromFile('test/assets/n.png'), outputFiles[0])
   t.true(eq)
 })

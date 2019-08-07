@@ -6,6 +6,7 @@
 
 ### External modules
 
+* ["examples/examples"](modules/_examples_examples_.md)
 * ["file/emscriptenFs"](modules/_file_emscriptenfs_.md)
 * ["file/file"](modules/_file_file_.md)
 * ["file/protected"](modules/_file_protected_.md)

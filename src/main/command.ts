@@ -40,7 +40,7 @@ function cliToArrayOne(cliCommand: string): string[] | undefined {
   }
   let inString = false
   const spaceIndexes = [0]
-  for (let index = 0;index < cliCommand.length;index++) {
+  for (let index = 0; index < cliCommand.length; index++) {
     const c = cliCommand[index]
     if (c.match(/[ ]/im) && !inString) {
       spaceIndexes.push(index)
@@ -78,7 +78,7 @@ export function cliToArray(cliCommand: string): string[][] {
     .filter(a => a.length)
   const result = []
   let currentCommand: string[] = []
-  for (let i = 0;i < lines.length;i++) {
+  for (let i = 0; i < lines.length; i++) {
     const line = lines[i]
     if (line[line.length - 1] !== '\\') {
       currentCommand = currentCommand.concat(line)

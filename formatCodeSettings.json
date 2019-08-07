@@ -1,7 +1,7 @@
 {
   "insertSpaceBeforeAndAfterBinaryOperators": true,
   "insertSpaceAfterCommaDelimiter": true,
-  "insertSpaceAfterSemicolonInForStatements": false,
+  "insertSpaceAfterSemicolonInForStatements": true,
   "insertSpaceAfterConstructor": false,
   "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
   "insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,

@@ -1,10 +1,13 @@
 ## ISSUES
 
 - [ ]  await File.fromFile('test/assets/text2.tiff') will fail for files generated/written with this new version for some reasom - I think they are written incorrectly...
+- [ ] errors are silently ignored - passing non existent file name
+
 
 ## TODO / Road map
 
 - [ ] performance tests in the browser
+- [ ] fix testUmdWasmLocationTest in browser test so dont break on pulish
 - [ ] concurrency node.js/CLI - if executed in different processes concurrently in the same folder, since working_tmp is the same will fail
 - [ ] do the same as mainConcurrency for run()
 - [ ] options should allow to define a different nodeJsFsRoot or emscriptenFsRoot 
@@ -37,11 +40,10 @@
   - [ ] integrate haxe-bitmap js API that currently reads RGBA-8bit raw bitmaps
     - [ ] probably need to support 16 bit depth too
   - why ? so we also contribute code there for cool algorithms and filters - and we already have a nice API defined
-  - 
+  - [ ] collect all IM commads executed when npm test  . Present that as test evidense ii n a table
 
 ## WIP
 
-- [w] raw library tests
 - [w] document run({script}) template, preprocessor, custom commands 
   - [w] document  script pre processors API
   - [w] document script templates infrastructure, syntax, examples, building helpers, how to add new helpers, how to add new properties to the context. 
@@ -55,6 +57,7 @@
 
 ## DONE
 - [x] raw library
+- [x] raw library tests
 - [x] lcms - -profile icc test
 - [x] lcms - -profile .icc
 - [x] test cypher feature 
@@ -126,6 +129,38 @@ var result = await run({script:`convert <%= await resolve('foo.png') -scale <%= 
 
 
 ### Ideas
+
+- [ ] a tool to convert ttf, ect font files to bitmaps (user can choose font size style colors shadows, background , transparency and policy to divide the glyphs  - single image vs multiple images.) etc. similar to http://kvazars.com/littera/ 
+
+# <Magick> react component
+* to show the result images of gicen input files and commands as react component. whyle the command is executed show a comrfigurable loading visual feedback. example: 
+  * how to solve wewirker ? 
+  * support input as urls, blobs, image elements, canvas els, or passing directly the File objects
+  * how to feedback errors / stdout, ect
+<!-- ```jsx
+// example code - not recommended
+
+  const inputFiles = Promise.app(this.props.imageUrls .map(async url=>await File.fromUrl(url))) 
+  return <div>
+  Pictures: 
+    <ul>
+      { this.props.imageUrls.map(url=><li> 
+        <Magick 
+        inputFiles={this.props.inputFiles} 
+          script={`
+        convert <%= await inputAt(1) %> <%= await inputAt(1) %> 
+          `}
+        includeIndex={[1,3]}
+          />
+    </li>)}
+    </ul>
+  </div> 
+ ``` -->
+
+- [ ] react components or generic html widgets that acts viewers. COnfigurable to provide different experiences:
+ * Shows just the output images resulting from commandsw 
+ * shows a compilete playground experience where users can upload / select input images interactively, change the command, show / filter output image files. and these components layouts.
+
 
 - [ ] https://github.com/charto/nbind/ - "easily" generate a js API accessing directly C/C++ code. Also support targeting asm.js , wasm or native. Try to make a simple API for magick++
 

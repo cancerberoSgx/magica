@@ -56,19 +56,20 @@ TODO: the idea is to have a CLI that accepts parameters, builds scripts and opti
 
 Install the tool globally (or locally and call it with `npx`)
 
-```
+```sh
 npm install -g magick-wasm
 ```
 
 Generates the default build type (production). in current directory and start it (docker needs to be up and running):
-```
+
+```sh
 magick-wasm
 ```
 
 Generates a "debug" build type, reusing current PREFIX/src folders in given `outputFolder`. 
 It doesn't execute docker but prints instructions how to do it manually:
 
-```
+```sh
 npx ts-node src/launch.ts --outputFolder $HOME/wasm/im --type debug --noClean --noRun
 ```
 
@@ -78,6 +79,15 @@ npx ts-node src/launch.ts --outputFolder $HOME/wasm/im --type debug --noClean --
 If everything is OK, (assuming default options), `emscripten_prefix/wasm/magick.wasm` and  `emscripten_prefix/wasm/magick.js` files should be generated.
 
 In [magica](https://github.com/cancerberoSgx/magica) those can replace the ones at [src/imageMagick/compiled](https://github.com/cancerberoSgx/magica/src/imageMagick/compiled)
+
+
+## TODO / STATUS / Roadmap
+
+- [ ] --outputFolder
+- [ ] minimal js api
+- [ ] cli test
+- [ ] test that control important build configuration (type=debug && type==production) (generates scripts from scratch, calls docker ) and run scripts/test-* scripts
+ 
 
 ## Questions
 

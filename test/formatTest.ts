@@ -1,5 +1,4 @@
 import test from 'ava'
-import { writeFileSync } from 'fs'
 import { array } from 'misc-utils-of-mine-generic'
 import { File, imageCompare, main, run } from '../src'
 import { filterResultStdErr } from './testUtil'
@@ -80,21 +79,19 @@ test('mng write', async t => {
     t.true(await result.outputFiles[0].equals(await File.fromFile(`test/assets/input2.png`)))
   })
 })
-test.skip(`raw cr2 read`, async t => {
-  var f = await File.fromUrl('https://raw.githubusercontent.com/lclevy/libcraw2/master/pics/IMG_0596_sraw.CR2', { name: 'test.cr2' })
-  console.log(f!.name)
 
+test(`raw cr2 read`, async t => {
+  var f = await File.fromUrl('https://cancerberosgx.github.io/demos/magica/images/IMG_0596_sraw.CR2?ss=9s9s9', { name: 'test.cr2' })
   let result = await run<File>({
-    script: `convert IMG_0596_sraw.CR2 -rotate 32 -scale 18% input2.png`, debug: true,
+    script: `convert test.cr2 -rotate 32 -scale 18% input2.png`,
     inputFiles: [f]
   })
-  writeFileSync('tmpwwdddd.png', result.outputFiles[0].content)
   t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'png', mime: 'image/png' })
   t.deepEqual(filterResultStdErr(result), [])
   t.falsy(result.error)
-  // t.true(await result.outputFiles[0].equals(await File.fromFile(`test/assets/input2.png`)))
+  t.true(await result.outputFiles[0].equals(await File.fromFile(`test/assets/raw1.png`)))
 })
-// 
+
 test.skip(`svg - mng dont work`, async t => {
   let result = await run<File>({
     script: `

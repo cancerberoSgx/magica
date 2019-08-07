@@ -1,4 +1,5 @@
 import test from 'ava'
+import 'babel-polyfill'
 declare var window: any
 
 test.serial('webworker', async t => {

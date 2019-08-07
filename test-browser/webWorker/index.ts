@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 
 const worker = new Worker('worker.ts')
 worker.addEventListener('message', e => {
