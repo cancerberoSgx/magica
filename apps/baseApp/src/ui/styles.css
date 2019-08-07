@@ -1,0 +1,13 @@
+textarea{
+  width: 100%;
+  height: 9em;
+}
+.working, .working * {
+  color: white;
+  font-weight: bold;
+  background-color: red;
+  border-color: black;
+}
+.ui.segment.appBody, .ui.segment.outputSegment {
+  padding-top: 2em;
+}

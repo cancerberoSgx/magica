@@ -1,6 +1,5 @@
-import { File } from 'magica'
+import { File , Example} from 'magica'
 import { arrayToObject, notUndefined, serial, sleep } from 'misc-utils-of-mine-generic'
-import { Example } from './examples'
 import { getStore } from './store'
 import { callRun } from './workerAccess'
 

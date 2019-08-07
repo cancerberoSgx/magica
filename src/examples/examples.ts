@@ -215,24 +215,37 @@ convert <%=inputFiles[0].name %> -resize <%=size.width+'x'+size.height%>! sphere
     script: `
 # Generate initial random image (also  granularity=0 image
 convert -size 150x150 xc: +noise random \\
+
   # Ensure final image is 'tilable' makes results better too..
   -virtual-pixel tile \\
+
   # to speed things up - lets limit operaqtions to just the 'G' channel.
   -channel G \\
+
   # generate a sequence of images with varying granularity
-  ( -clone 0 -blur 0x0.5 ) ( -clone 0 -blur 0x0.65 ) ( -clone 0 -blur 0x0.845 ) ( -clone 0 -blur 0x1.0985 ) ( -clone 0 -blur 0x1.42805 ) ( -clone 0 -blur 0x1.85647 ) ( -clone 0 -blur 0x2.41341 ) ( -clone 0 -blur 0x3.13743 ) ( -clone 0 -blur 0x4.07866 ) ( -clone 0 -blur 0x5.30226 ) ( -clone 0 -blur 0x6.89294 ) ( -clone 0 -blur 0x8.96082 ) ( -clone 0 -blur 0x11.6491 ) ( -clone 0 -blur 0x15.1438 ) ( -clone 0 -blur 0x19.6869 ) ( -clone 0 -blur 0x25.593 ) \\
+  ( -clone 0 -blur 0x0.5 ) ( -clone 0 -blur 0x0.65 ) ( -clone 0 -blur 0x0.845 ) ( -clone 0 -blur 0x1.0985 ) \\
+  ( -clone 0 -blur 0x1.42805 ) ( -clone 0 -blur 0x1.85647 ) ( -clone 0 -blur 0x2.41341 ) ( -clone 0 -blur 0x3.13743 ) \\
+  ( -clone 0 -blur 0x4.07866 ) ( -clone 0 -blur 0x5.30226 ) ( -clone 0 -blur 0x6.89294 ) ( -clone 0 -blur 0x8.96082 ) \\
+  ( -clone 0 -blur 0x11.6491 ) ( -clone 0 -blur 0x15.1438 ) ( -clone 0 -blur 0x19.6869 ) ( -clone 0 -blur 0x25.593 ) \\
+
   # normalize and separate a grayscale imag
   -normalize -separate +channel \\
+
   # separate black and white granules in equal divisions of black,gray,white
   -ordered-dither threshold,3 \\
+
   # Set intermedite frame animation delay and infinite loop cycle
   -set delay 12 \\
+
   # give a longer pause for the first image
   ( -clone 0 -set delay 50 ) -swap 0 +delete \\
+
   # give a longer pause for the last image
   ( +clone -set delay 50 ) +swap +delete \\
+
   # make it a patrol cycle (see Animation Modifications)
   ( -clone -2-1 ) \\
+
   # final image save
   -loop 0 animated_granularity.gif
 `.trim(),
@@ -255,7 +268,6 @@ convert -size 150x150 xc: +noise random \\
   var color = await img.pixel(parseInt(get('point').split(',')[0]), parseInt(get('point').split(',')[1]))
   var size = await img.size()
 %>
-
 convert -size <%= size.width%>x<%= size.height%> xc: +noise Random -separate \\
   null: ( xc: +noise Random -separate -threshold <%= get('noise') %> -negate ) \\
   -compose CopyOpacity -layers composite \\
@@ -565,21 +577,15 @@ convert -size 12x12 xc: -draw 'circle 6,6 6,2' -negate \\
     inputFiles: ['bluebells.png'],
     script: `
 convert -size 100x100 xc:none +antialias -fill none -strokewidth 0.5 \\
-  -stroke Gold        -draw 'path "M 20,70  A 1,1 0 0,1 80,50"' \\
-  -stroke DodgerBlue  -draw 'line 30,10  50,80' \\
-  -stroke Red         -draw 'circle 80,60  82,60' \\
+  -stroke Gold -draw 'path "M 20,70  A 1,1 0 0,1 80,50"' \\
+  -stroke DodgerBlue -draw 'line 30,10  50,80' \\
+  -stroke Red -draw 'circle 80,60  82,60' \\
   sparse_source.gif
 
-convert sparse_source.gif \\
-  ( +clone -resize 50% ) \\
-  ( +clone -resize 50% ) \\
-  ( +clone -resize 50% ) \\
-  ( +clone -resize 50% ) \\
-  ( +clone -resize 50% ) \\
-  ( +clone -resize 50% ) \\
-  ( +clone -resize 50% ) \\
+convert sparse_source.gif  ( +clone -resize 50% )  ( +clone -resize 50% )  ( +clone -resize 50% ) \\
+  ( +clone -resize 50% ) ( +clone -resize 50% ) ( +clone -resize 50% ) ( +clone -resize 50% ) \\
   -layers RemoveDups -filter Gaussian -resize 100x100! -reverse \\
-  -background None -flatten -alpha off    sparse_blur_pyramid.png
+  -background None -flatten -alpha off sparse_blur_pyramid.png
          `.trim(),
   },
 
@@ -729,10 +735,13 @@ convert lines.gif \\
     ],
     script: `
 convert <%= inputFiles[0].name %> original.png
+
 convert <%= inputFiles[0].name %> ( +clone -fx 'p{<%= get('point') %>}' ) \\
   -compose Difference -composite \\
   -modulate 100,0 -alpha off difference.miff
+
 convert difference.miff -threshold <%= get('threshold') %> boolean_mask.miff
+
 convert <%= inputFiles[0].name %>  boolean_mask.miff \\
   -alpha off -compose CopyOpacity -composite \\
   differenceRemoveBackground.png
