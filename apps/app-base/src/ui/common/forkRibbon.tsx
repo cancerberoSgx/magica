@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { getStore } from '../../app/store';
+import { getStore } from '../../app/store'
 
 export const ForkRibbon = () => <div className="forkRibbon" dangerouslySetInnerHTML={getRibbonHtml()} />
 

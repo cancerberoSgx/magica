@@ -2,30 +2,18 @@ export interface ExampleField {
   id: string
   value: string
 }
-// export function setSampleImages(images:SampleImage[]){
-//   sampleImages = images
-// }
 
-// export function setSampleImages(images:SampleImage[]){
-//   sampleImages = images
-// }
 interface SampleImage {
   type: 'animation' | 'color'
   path: string
 }
+
 let _sampleImages: SampleImage[] = []
 
 export function sampleImages(images?: SampleImage[]) {
   _sampleImages = images || _sampleImages
   return _sampleImages
 }
-//   "bluebells.png",
-//   "bridge.psd",
-//   "challenge.gif",
-//   "photo.tiff",
-//   "whale4.jpg",
-//   "wand.ico"
-// ]
 
 export enum ExampleTag {
   animation = 'animation',
@@ -137,12 +125,12 @@ convert -font PoetsenOne-Regular.otf -background none \\
     name: 'render text file',
     tags: [ExampleTag.text],
     description: 'Render txt file to bitmap',
-    inputFiles: ['PoetsenOne-Regular.otf', 'LICENSE.txt'],
+    inputFiles: ['PoetsenOne-Regular.otf', 'lowlevelTestScript.js'],
     fields: [
       ...fieldsText
     ],
     script: `
-    convert -font PoetsenOne-Regular.otf ${fieldsTextCommand} TEXT:LICENSE.txt LICENSE.jpg
+    convert -font PoetsenOne-Regular.otf ${fieldsTextCommand} TEXT:lowlevelTestScript.js LICENSE.jpg
 `.trim()
   },
 

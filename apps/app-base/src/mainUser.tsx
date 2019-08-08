@@ -1,9 +1,9 @@
 import 'babel-polyfill'
-import { main } from './main';
-import { AppOptions } from './app/state';
+import { AppOptions } from './app/state'
+import { main } from './main'
 
 
-var app:AppOptions = {
+var app: AppOptions = {
   projectAddress: 'https://github.com/cancerberoSgx'
 }
 main(app)

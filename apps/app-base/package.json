@@ -6,9 +6,9 @@
   "types": "dist/src/baseApp.d.ts",
   "scripts": {
     "clean": "rm -rf dist docs",
-    "start": "P=$PWD && cd ../../ && npm run build && cd $P && npm run build && npx parcel serve src/static/index.html -d docs --no-source-maps",
-    "copy": "mkdir -p docs ; cp node_modules/magica/dist/src/imageMagick/compiled/magick.wasm docs",
-    "clean-npm": " rm -rf node_modules/ package-lock.json",
+    "start": "npm run clean && P=$PWD && cd ../../ && npm run build && cd $P && npm run build && npx parcel serve src/static/index.html -d docs --no-source-maps",
+    "copy": "mkdir -p docs ; cp -r node_modules/magica/dist/src/imageMagick/compiled/magick.wasm ../../test/assets/* docs",
+    "clean-npm": "rm -rf node_modules/ package-lock.json",
     "format": "npx ts-refactor format \"**/*.ts*\" ../../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\"  ../../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
     "lint": "npm run organizeImports && npm run format",

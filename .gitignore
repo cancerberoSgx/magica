@@ -13,3 +13,4 @@ bkps
 emscripten_prefix
 apps/font2bitmap
 apps/sample-app
+apps/magica-react

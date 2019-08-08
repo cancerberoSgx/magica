@@ -1,12 +1,12 @@
+import { ExampleTag } from 'magica-examples'
 import { enumNoValueKeys } from 'misc-utils-of-mine-generic'
 import { enumKeys } from 'misc-utils-of-mine-typescript'
 import * as React from 'react'
 import { Dropdown, Menu, Modal } from 'semantic-ui-react'
 import { setExample } from '../app/dispatcher'
+import { About } from './common/about'
 import { AbstractComponent } from './common/component'
 import { memoryReport, printMs } from "./common/util"
-import { About } from './common/about';
-import { ExampleTag } from 'magica-examples';
 
 export class Header extends AbstractComponent {
 
@@ -30,6 +30,7 @@ export class Header extends AbstractComponent {
 
   render() {
     return <Menu inverted fixed="top">
+
       <Dropdown text='Examples' pointing className='link item'>
         <Dropdown.Menu>
           <Dropdown.Item>

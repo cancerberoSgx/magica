@@ -1,5 +1,5 @@
-import { File, RunResult  } from 'magica'
-import { Example, examples } from 'magica-examples';
+import { File, RunResult } from 'magica'
+import { Example, examples } from 'magica-examples'
 
 export interface State {
   example: Example
@@ -29,7 +29,7 @@ export interface ParserError {
   e: any
 }
 
-export async function getInitialState( app:AppOptions): Promise<State> {
+export async function getInitialState(app: AppOptions): Promise<State> {
   var example = examples()[0]
   return {
     example,
