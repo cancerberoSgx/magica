@@ -1,4 +1,5 @@
-import { File, RunResult , Example, examples} from 'magica'
+import { File, RunResult  } from 'magica'
+import { Example, examples } from 'magica-examples';
 
 export interface State {
   example: Example
@@ -29,11 +30,11 @@ export interface ParserError {
 }
 
 export async function getInitialState( app:AppOptions): Promise<State> {
-  var example = examples[0]
+  var example = examples()[0]
   return {
     example,
     inputFiles: [],
-    examples,
+    examples: examples(),
     result: null as any,
     script: '',
     working: false,

@@ -1,0 +1,35 @@
+{
+  "name": "magica-examples",
+  "version": "0.0.1",
+  "private": true,
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "clean": "rm -rf dist docs",
+    "clean-npm": " rm -rf node_modules/ package-lock.json",
+    "format": "npx ts-refactor format \"**/*.ts*\" ../../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
+    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\"   ../../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
+    "lint": "npm run organizeImports && npm run format",
+    "build": "npm run clean && npx tsc ",
+    "all": "npm run clean && npm run lint && npm run build"
+  },
+  "keywords": [
+    "typescript",
+    "imagemagick"
+  ],
+  "author": "Sebastián Gurin",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^12.6.8",
+    "ts-refactor": "0.0.9",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cancerberoSgx/magica.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cancerberoSgx/magica"
+  }
+}

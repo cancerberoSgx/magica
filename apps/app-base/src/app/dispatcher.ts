@@ -1,7 +1,8 @@
-import { File , Example} from 'magica'
+import { File } from 'magica'
 import { arrayToObject, notUndefined, serial, sleep } from 'misc-utils-of-mine-generic'
 import { getStore } from './store'
 import { callRun } from './workerAccess'
+import { Example } from 'magica-examples';
 
 export async function loadImageFromUrl(u: string) {
   var state = getStore().getState()

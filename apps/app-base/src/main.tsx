@@ -1,4 +1,5 @@
 import 'semantic-ui-css/semantic.css'
+import './static/styles.css'
 import * as React from 'react'
 import { render } from 'react-dom'
 import { setExample } from './app/dispatcher'
@@ -22,8 +23,8 @@ export async function main(appOptions: AppOptions) {
       <Header />
       <Body />
       <ForkRibbon />
-    </Container>
-    , document.getElementById('main'))
+    </Container>    , 
+    document.getElementById('main'))
   if (urlHasState()) {
     await loadUrl()
   }

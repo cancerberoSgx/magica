@@ -1,13 +1,13 @@
 export {examples, ExampleTag, Example}  from 'magica'
 
-export const sampleImages = [
-  "bluebells.png",
-  "bridge.psd",
-  "challenge.gif",
-  "photo.tiff",
-  "whale4.jpg",
-  "wand.ico"
-]
+// export const sampleImages = [
+//   "bluebells.png",
+//   "bridge.psd",
+//   "challenge.gif",
+//   "photo.tiff",
+//   "whale4.jpg",
+//   "wand.ico"
+// ]
 
 // import { Field, State } from './state'
 

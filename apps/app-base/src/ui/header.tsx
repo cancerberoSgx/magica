@@ -3,12 +3,10 @@ import { enumKeys } from 'misc-utils-of-mine-typescript'
 import * as React from 'react'
 import { Dropdown, Menu, Modal } from 'semantic-ui-react'
 import { setExample } from '../app/dispatcher'
-// import { examples, ExampleTag } from '../app/examples'
-// import { About } from './about'
 import { AbstractComponent } from './common/component'
 import { memoryReport, printMs } from "./common/util"
-import { ExampleTag } from '../../../../dist/src';
 import { About } from './common/about';
+import { ExampleTag } from 'magica-examples';
 
 export class Header extends AbstractComponent {
 
@@ -34,13 +32,9 @@ export class Header extends AbstractComponent {
     return <Menu inverted fixed="top">
       <Dropdown text='Examples' pointing className='link item'>
         <Dropdown.Menu>
-          {/* <Dropdown.Header>All ({examples.length})</Dropdown.Header> */}
           <Dropdown.Item>
             <Dropdown text={`All (${this.state.examples.length})`} fluid={true} scrolling>
               <Dropdown.Menu>
-
-                {/* <Dropdown scrolling item icons="file code outline" text={`"${this.state.example.name}"`}  > */}
-                {/* <Dropdown.Menu > */}
                 {this.state.examples.map(example => <Dropdown.Item key={example.name} fluid={true} onClick={e => setExample(example)}>{example.name}</Dropdown.Item>)}
               </Dropdown.Menu>
             </Dropdown>

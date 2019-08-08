@@ -2,7 +2,6 @@ require('./util/magicaWasm').getThisBrowserScriptTagSrc()
 // import 'babel-polyfill'
 require('./util/magica').installMagica() // HEADS UP needs to be called before everything else.
 
-export * from './examples/examples'
 export { FS } from "./file/emscriptenFs"
 export { File } from './file/file'
 export { getProtectedFile, isProtectedFile, protectFile } from './file/protected'

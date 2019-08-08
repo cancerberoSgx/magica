@@ -1,4 +1,3 @@
-import 'babel-polyfill'
 export * from './ui/common/component'
 export * from './main' 
 export * from './app/dispatcher' 

@@ -5,7 +5,8 @@
 
 
 ## TODO / Road map
-
+- [ ] implement a monaco syntax color and autocompletion like we did in cannabis
+- [ ] move exaples to its own project
 - [ ] test unicode chars with fonts 
 - [ ] performance tests in the browser
 - [ ] fix testUmdWasmLocationTest in browser test so dont break on pulish
