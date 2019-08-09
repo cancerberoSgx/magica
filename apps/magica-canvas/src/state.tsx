@@ -1,20 +1,13 @@
 import { File, protectFile } from 'magica'
-import { run } from '../../../dist/src/main/run'
 import { Command, commands } from './commands'
 import { fieldArrayToObject } from './misc';
+import { createInputFile } from './dispatch';
 
 export async function getInitialState(): Promise<State> {
-  var r = await run({
-    script: 'convert bluebells.png output.miff',
-    inputFiles: [await File.fromUrl('bluebells.png')],
-    verbose: true
-  })
-  var inputFile = File.asFile(r.outputFiles[0])
-  protectFile(inputFile)
+  var inputFile = await createInputFile(await File.fromUrl('bluebells.png') as File);
   const command = commands[0]
   const s = {
     command,
-    // ctx: document.querySelector<HTMLCanvasElement>('#canvas')!.getContext('2d')!,
     inputFile,
     x: 0,
     y: 0,
@@ -22,7 +15,9 @@ export async function getInitialState(): Promise<State> {
     time: '',
     fields: fieldArrayToObject(command),
     stderr: [],
-    working:false,commandString: ''
+    working:false,
+    commandString: '',
+    video: false
   } as State
   s.commandString = command.command(s)
   return s
@@ -35,11 +30,11 @@ export interface State {
   time: string;
   onMouseMove: boolean;
   inputFile: File;
-  // ctx: CanvasRenderingContext2D;
   x: number
   y: number
   command: Command
   commandString: string
+  video:boolean
 }
 
 export interface Field {

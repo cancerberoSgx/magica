@@ -22,7 +22,7 @@ import { protectFile } from './protected'
  */
 export class File implements IFile {
 
-  protected isProtected: boolean
+  // protected isProtected: boolean
   public readonly url?: string
   /**
    * Stores size for those image formats that don't store size information such as RGBA
@@ -37,12 +37,12 @@ export class File implements IFile {
 
   constructor(public readonly name: string, public readonly content: IFile['content'], 
     isProtected: boolean = false, url?: string, width?: number, height?: number) {
-    this.isProtected = isProtected
+    // this.isProtected = isProtected
     this.url = url
     this.width = width
     this.height = height
-    if (this.isProtected) {
-      protectFile(this)
+    if (isProtected) {
+      protectFile(name)
     }
   }
 

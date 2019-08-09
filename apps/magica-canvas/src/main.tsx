@@ -10,7 +10,7 @@ import { Canvas } from './canvas';
 
 async function main() {
   _setStore(await getInitialState())
-  render(
+  render(<>
     <table>
       <tr>
         <td>
@@ -21,6 +21,7 @@ async function main() {
         </td>
       </tr>
     </table> 
+    </>
   , document.getElementById('layout-container')!)
   await change(0, 0, [getStore().getState().inputFile])
 }

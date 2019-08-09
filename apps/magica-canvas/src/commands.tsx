@@ -8,15 +8,13 @@ export const commands: Command[] = [
   },
   {
     name: 'rotate',
-    command: state => `convert  ${state.inputFile.name} -rotate ${randomIntBetween(0, 360)} output.rgba`,
+    command: state => `convert  ${state.inputFile.name} -rotate ${state.x+state.y} output.rgba`,
     fields: []
   },
   {
     name: 'distort perspective',
     command: state => {
-      const D = 9, dx=6, dy=3 , M=N(100, 5)
-      // return `convert  ${state.inputFile.name} -matte -virtual-pixel transparent -distort Perspective '${state.x-50+R(D)},${state.y-50+R(D)} ${state.x-50+R(D)+dx},${state.y-50+R(D)+dy}      ${state.x-50+R(D)},${state.y+50+R(D)} ${state.x-50+R(D)+dx},${state.y+50+R(D)+dy}      ${state.x+50+R(D)},${state.y+50+R(D)} ${state.x+50+R(D)+dx},${state.y+50+R(D)+dy}      ${state.x+50+R(D)},${state.y-50+R(D)} ${state.x+50+R(D)+dx},${state.y-50+R(D)+dy}' output.rgba`
-      // return `convert ${state.inputFile.name} -matte -virtual-pixel transparent -distort Perspective '0,0 ${Math.round(state.x/D)},${Math.round(state.y/D)}      0,100 ${Math.round(state.x/D)},${state.y}      100,100 ${state.x},${state.y}         100,0 ${state.x},${Math.round(state.y/D)}' output.rgba`
+      const D = 9,  M=N(100, 5)
       return `convert ${state.inputFile.name} -matte -virtual-pixel transparent -distort perspective '${N(10, 5)},${N(10, 5)} ${Math.round(state.x/(D+R(D/4)))},${Math.round(state.y/(D+R(D/4)))}      0,${M} ${Math.round(state.x/(D+R(D/4)))},${state.y + R(D)}      ${M},${M} ${state.x + R(D)},${state.y + R(D)}         ${M},0 ${state.x + R(D)},${Math.round(state.y/(D+R(D/4)))}' output.rgba`
       
     },

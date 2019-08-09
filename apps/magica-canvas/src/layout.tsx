@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { change } from './change'
 import { commands, Command } from './commands'
 import { AbstractComponent } from './component'
 import { Fields } from './fields';
 import { memoryReport } from './misc';
-import { dispatchCommandSelected, dispatchCanvasMouseMove } from './dispatch';
+import { dispatchCommandSelected, dispatchCanvasMouseMove, handleFileInputChange } from './dispatch';
+import { setVideoEnable } from './video';
 
 export class Layout extends AbstractComponent {
   timer: NodeJS.Timeout | undefined
@@ -33,6 +33,11 @@ export class Layout extends AbstractComponent {
           <option selected={c.name === this.state.command.name} key={c.name} value={c.name}>{c.name}</option>
         )}
       </select>
+      <label><input type="file" onChange={e=>handleFileInputChange(e.currentTarget)}></input></label>
+      <label><input type="checkbox" checked={this.state.video} onChange={async e=>{
+        await setVideoEnable(!this.state.video)
+        this.setState({video: !this.state.video})
+      }}></input> video</label>
       - Time: <span id="time">{this.state.time}</span> - Memory: <span ref={c => this.memEl = c}></span>
       <div >{this.state.commandString}</div>
       <div >{this.state.stderr.map(s => <span>{s}</span>)}</div>
@@ -40,7 +45,7 @@ export class Layout extends AbstractComponent {
       <label><input type="checkbox" checked={this.state.onMouseMove}
         onChange={e => { this.setState({ onMouseMove: !this.state.onMouseMove }) }} />on mouse move</label>
       <Fields />
-    
+    <br/>
     </>
   }
 }

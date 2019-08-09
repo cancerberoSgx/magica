@@ -8,7 +8,6 @@ export async function change(x: number, y: number, inputFiles: File[] = []) {
   state.x = x
   state.y = y
   var t0 = performance.now()
-  debugger
   state.commandString = state.command.command(state)
   var r = await main({
     command: state.commandString,

@@ -77,35 +77,26 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
   const diffTree = afterTree.filter(f => !beforeTree.find(b => b.path === f.path))
   const outputFiles = diffTree
     .map(f => new File(
-      f.path, FS.readFile(f.path)
+      f.path.startsWith(`/${emscriptenNodeFsRoot}/`) ? f.path.substring(`/${emscriptenNodeFsRoot}/`.length) : f.path, 
+      FS.readFile(f.path)
     ))
-    .filter(f => !isProtectedFile(f.name))
+    // .filter(f => !isProtectedFile(f.name))
     .map(f => {
       var v = verbose.find(v => f.name.endsWith(v.outputName))
       if (v) {
         f.width = v.outputSize.width
         f.height = v.outputSize.height
       }
-      if(o.protectOutputFiles){
+      if (o.protectOutputFiles) {
         protectFile(f)
       }
       return f
     })
-    
-  // if (o.protectOutputFiles) {
-  //   outputFiles.forEach(protectFile)
-  //   outputFiles.length = 0
-  // }
-  // if(!o.protectOutputFiles) {
-    const removed: string[] = []
-    ls(emscriptenNodeFsRoot, FS).filter(f => !isProtectedFile(f))
-      .forEach(f => rmRf(f, FS, f => !isProtectedFile(f), removed))
-    o.debug && console.log('Removed files:', removed)
-  // }
+  const removed: string[] = []
+  ls(emscriptenNodeFsRoot, FS).filter(f => !isProtectedFile(f))
+    .forEach(f => rmRf(f, FS, f => !isProtectedFile(f), removed))
+  o.debug && console.log('Removed files:', removed)
   o.debug && console.log('Protected files:', ls(emscriptenNodeFsRoot, FS).map(isProtectedFile))
-
-  console.log(outputFiles);
-  
   return {
     ...returnValue,
     outputFiles,
