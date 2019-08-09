@@ -1,4 +1,4 @@
-import { File, IFile } from '../../../../dist/src'
+import { File, IFile } from 'magica'
 
 export function printMs(ms: number) {
   return (ms / 1000) + ''.padEnd(4, ' ') + ' seconds'

@@ -77,9 +77,9 @@ export async function run<T extends IFile = IFile>(o: RunOptions): Promise<RunRe
     //   //TODO: stopPropagation and scriptInterrupt
     // }
 
-    result.outputFiles = result.outputFiles
-      .map(f => ({ ...f, name: f.name.startsWith(emscriptenNodeFsRoot) ? f.name.substring(emscriptenNodeFsRoot.length + 1) : f.name }))
-      .map(File.asFile)
+    result.outputFiles .forEach(f=>{
+      f.name =   f.name.startsWith(emscriptenNodeFsRoot) ? f.name.substring(emscriptenNodeFsRoot.length + 1) : f.name
+    })
 
     inputFiles = [...inputFiles.filter(f => !result.outputFiles.find(f2 => f2.name === f.name)),
     ...result.outputFiles]
@@ -94,7 +94,7 @@ export async function run<T extends IFile = IFile>(o: RunOptions): Promise<RunRe
     ...finalResult,
     stdout: finalResult.results.map(r => r.stdout).flat(),
     stderr: finalResult.results.map(r => r.stderr).flat(),
-    outputFiles: finalResult.results.length ? finalResult.results[finalResult.results.length - 1].outputFiles.map(File.asFile) : [] as any,
+    outputFiles: finalResult.results.length ? finalResult.results[finalResult.results.length - 1].outputFiles : [] as any,
     times: {
       total: Date.now() - t0
     },

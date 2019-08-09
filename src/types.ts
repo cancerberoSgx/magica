@@ -210,3 +210,23 @@ export interface CommandPreprocessor<O extends RunOptions = RunOptions, O2 exten
   fnCompileTime?(context: O): Promise<O2>
   fnRuntime?(commandOptions: RO, commandIndex: number, runOptions: O): Promise<void>
 }
+
+
+
+export interface Size {
+  width: number
+  height: number
+}
+
+export interface Point {
+  x: number
+  y: number
+}
+
+export interface Rectangle extends Size, Point{
+
+}
+
+export interface Rgba {
+r: number, g: number, b: number, a: number
+}

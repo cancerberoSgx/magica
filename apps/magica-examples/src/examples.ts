@@ -1,6 +1,7 @@
 export interface ExampleField {
   id: string
   value: string
+  type?: 'string'|'integer'|'float'
 }
 
 interface SampleImage {
