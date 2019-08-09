@@ -126,10 +126,7 @@ export class File implements IFile {
 
   public async asHTMLImageData(): Promise<ImageData> {  
     var d = await this.asRGBAImageData()
-    // @ts-ignore
-    var d = new ImageData(d.data, d.width)
-    d.height = d.height
-    return d
+   return new ImageData(d.data, d.width, d.height)
   }
   
   public async asRGBAImageData( ): Promise<RGBAImageData> {  

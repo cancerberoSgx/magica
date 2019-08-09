@@ -1,32 +1,39 @@
 import 'babel-polyfill'
 import { File, loadHtmlCanvasElement, run, main } from 'magica'
+import { randomIntBetween, randomFloatBetween } from 'misc-utils-of-mine-generic';
 
 async function test() {
   var root = document.getElementById('main')!
   root.innerHTML = `
-  <p>canvas</p>
+  <p>click the canvas</p>
 <canvas id="canvas" width="600" height="600"><canvas>
   `
-  var img = await File.fromUrl('bluebells.png')
+  var img = await File.fromUrl('bluebells.png', {protected: true})
   var c = root.querySelector<HTMLCanvasElement>('#canvas')!
+  c.addEventListener('click', change)
   var ctx = c.getContext('2d')!
   await loadHtmlCanvasElement(img!, ctx)
 
-  var r = await main({
-    command: `convert  ${img!.name} -rotate 33 output.rgba`,
-    inputFiles: [img],
-    verbose: true
-  })
-  // var o = File.asFile(r.outputFiles[0])
-  // o.width = r.verbose![0].outputSize.width
-  // o.height = r.verbose![0].outputSize.height
+  async function change(event:any) {
+    var x = event.layerX;
+    var y = event.layerY;
+    const command =  rotateCommand(x, y)
+    console.time('c1')
+    var r = await main({
+      command,
+      inputFiles: [img],
+      verbose: true
+    })
+    await loadHtmlCanvasElement(r.outputFiles[0] as any, ctx)
+    console.timeEnd('c1')
+  }
 
-  await loadHtmlCanvasElement(r.outputFiles[0] as any, ctx)
-
-  //   var {outputFiles } = await run({script: `convert bluebells.png -depth 8 i.rgba`, inputFiles: [img]})
-  //   var data = new ImageData(new Uint8ClampedArray(outputFiles[0].content.buffer), size.width, size.height)
-  // ctx.drawImage(await loadHtmlImageElement(img!, undefined, true), 0, 0)
-  // ctx.putImageData(data, 0, 0)
+  function rotateCommand(x: number, y: number) {
+    return `convert  ${img!.name} -rotate ${randomIntBetween(0,360)} output.rgba`;
+  }
+  function barrelCommand(x: number, y: number) {
+    return `convert ${img!.name} -matte -virtual-pixel transparent -distort Barrel '${[0.2, 0.7, .2, .5, x, y].join(' ')}' output.rgba`;
+  }
 }
 
 test()

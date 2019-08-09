@@ -18,10 +18,15 @@ export async function colorCount(img: IFile | undefined): Promise<number | undef
 
 export function parseConvertVerbose(stdout: string[]) {
   // logo:=>bbb.rgba GIF 640x480=>800x754
-  var r = /([^=]+)=>([^\s]+) ([a-zA-Z0-9]+) ([^=]+)=>([^\s]+)/
-  return stdout.map(l => r.exec(l)).filter(notFalsy).map(m=>{
+  var r = /([^=]+)=>([^\s]+)\s+([a-zA-Z0-9]+)\s+([^=]+)=>([^\s]+)/
+  // logo:=>bbb.rgba GIF 384x288 384x288+0+0
+  var r2 = /([^=]+)=>([^\s]+)\s+([a-zA-Z0-9]+)\s+([^\s]+)/
+
+
+
+  return stdout.map(l => r.exec(l)||r2.exec(l)).filter(notFalsy).map(m=>{
     var a = m[4].split('x')
-    var b = m[5].split('x')
+    var b = m[Math.min(m.length-1, 6)].split('x')
     return {
       inputName: m[1],
       outputName: m[2],
