@@ -7,7 +7,7 @@
     "format": "npx ts-refactor format \"**/*.ts*\" ../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
     "lint": "npm run organizeImports && npm run format",
-    "start": "cd .. && npm run build && cd playground && npm run copy && npx parcel serve src/index.html -d docs --no-source-maps",
+    "start": "cd .. && npm run build && cd playground && npm run copy && npx parcel serve src/index.html -d docs ",
     "build-dev-no-maps": "npm run copy &&export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-content-hash  --no-source-maps",
     "build-dev": "export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-source-maps --no-content-hash",
     "copy": "mkdir -p docs; cp node_modules/magica/dist/src/imageMagick/compiled/magick.wasm src/static/* docs",
@@ -37,6 +37,7 @@
   "dependencies": {
     "file-saver": "^2.0.2",
     "magica": "file:..",
+    "magica-examples": "file:../apps/magica-examples",
     "misc-utils-of-mine-generic": "^0.2.15",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

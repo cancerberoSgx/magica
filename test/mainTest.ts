@@ -1,10 +1,10 @@
 import test from 'ava'
 import { readFileSync } from 'fs'
 import { basename } from 'misc-utils-of-mine-generic'
+import { File } from '../src'
 import { main } from '../src/main/main'
 import { filterResultStdErr } from './testUtil'
 import fileType = require('file-type')
-import { File } from '../src';
 
 test('stdout', async t => {
   const result = await main({
@@ -43,48 +43,48 @@ test('verbose', async t => {
   const result = await main({
     command: 'convert n.png -rotate 33 foo.png',
     inputFiles: ['test/assets/n.png'],
-    verbose:true
+    verbose: true
   })
   t.falsy(result.error)
-  t.deepEqual(result.verbose,[ {
-    inputFormat: 'png', 
-  inputSize: {width: 109, height: 145}, 
-  inputName: 'n.png', 
-  outputName: 'foo.png', 
-  outputSize: {width: 173, height: 183}
-}])
+  t.deepEqual(result.verbose, [{
+    inputFormat: 'png',
+    inputSize: { width: 109, height: 145 },
+    inputName: 'n.png',
+    outputName: 'foo.png',
+    outputSize: { width: 173, height: 183 }
+  }])
 })
 
 test('verbose should set width, height of output files', async t => {
   var result = await main({
     command: 'convert n.png -rotate 33 foo.png',
     inputFiles: ['test/assets/n.png'],
-    verbose:true
+    verbose: true
   })
   t.falsy(result.error)
   t.deepEqual(File.asFile(result.outputFiles[0]).width, 173)
   t.deepEqual(File.asFile(result.outputFiles[0]).height, 183)
-
   result = await main({
-    command: 'convert n.png foo.png',
+    command: 'convert n.png -rotate 33 foo.png',
     inputFiles: ['test/assets/n.png'],
-    verbose:true
+    verbose: true
   })
   t.falsy(result.error)
   t.deepEqual(File.asFile(result.outputFiles[0]).width, 173)
   t.deepEqual(File.asFile(result.outputFiles[0]).height, 183)
-
 })
+
 test('verbose should set width, height of output files even if not changed', async t => {
-var  result = await main({
+  var result = await main({
     command: 'convert n.png foo.png',
     inputFiles: ['test/assets/n.png'],
-    verbose:true
+    verbose: true
   })
   t.falsy(result.error)
   t.deepEqual(File.asFile(result.outputFiles[0]).width, 109)
   t.deepEqual(File.asFile(result.outputFiles[0]).height, 145)
 })
+
 test.todo('incorrect IM command')
 test.todo('should set options in command')
 test.todo('should support input file names with folders: convert input/in/nested/folder/foo.png -scale 100 bar.png')

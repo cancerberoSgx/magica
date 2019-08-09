@@ -1,5 +1,5 @@
 import { File, RunResult } from 'magica'
-import { Example, examples } from "./examples"
+import { Example, examples } from "magica-examples"
 
 export interface State {
   example: Example
@@ -25,11 +25,11 @@ export interface ParserError {
 }
 
 export async function getInitialState(): Promise<State> {
-  var example = examples[0]
+  var example = examples()[0]
   return {
     example,
-    inputFiles: [],
-    examples,
+    inputFiles: [await File.fromUrl('bluebells.png') as File],
+    examples: examples(),
     result: null as any,
     script: '',
     working: false,

@@ -1,3 +1,5 @@
+import { File, IFile } from '../../../../dist/src'
+
 export function printMs(ms: number) {
   return (ms / 1000) + ''.padEnd(4, ' ') + ' seconds'
 }
@@ -11,7 +13,12 @@ export function memoryReport() {
   }
   return {
     usedMb: (m.usedJSHeapSize / 1048576).toFixed(2) + 'Mb',
-    // totalMb: (m.totalJSHeapSize / 1048576).toFixed(2) + 'Mb',
     percent: (100 * m.usedJSHeapSize / m.totalJSHeapSize).toFixed(1) + '%',
   }
+}
+
+
+export function asDataUrl(f: IFile): string | undefined {
+  var mime = f.name.endsWith('png') ? 'image/png' : 'image/jpeg'
+  return 'data:' + mime + ';' + f.name + ';base64,' + File.toBase64(File.asFile(f))
 }

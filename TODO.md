@@ -1,5 +1,6 @@
 ## ISSUES
 
+- [ ]  var r = await run({     script: 'convert bluebells.png output.png',     inputFiles: [await File.fromUrl('bluebells.png')],  protectOutputFiles: true   })
 - [ ]  await File.fromFile('test/assets/text2.tiff') will fail for files generated/written with this new version for some reasom - I think they are written incorrectly...
 - [ ] errors are silently ignored - passing non existent file name
 

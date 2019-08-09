@@ -33,8 +33,7 @@ export async function loadUrl() {
     getStore().setState({
       example: {
         ...getStore().getState().example,
-        script: () => state.script,
-
+        script: state.script,
         fields: state.fields && state.fields.length ? state.fields : state.example.fields || [],
       },
       script: state.script,

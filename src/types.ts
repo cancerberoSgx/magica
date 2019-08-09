@@ -97,17 +97,17 @@ export interface Result<T extends IFile = IFile> extends NativeResult {
   verbose?: VerboseInfo[]
 }
 
-interface VerboseInfo {  
+interface VerboseInfo {
   inputName: string;
   outputName: string;
   inputFormat: string;
   inputSize: {
-      width: number;
-      height: number;
+    width: number;
+    height: number;
   };
   outputSize: {
-      width: number;
-      height: number;
+    width: number;
+    height: number;
   };
 }
 

@@ -1,28 +1,28 @@
-import { File } from '../file/file';
+import { File } from '../file/file'
 
 export async function toDataUrl(o: File, mime?: string) {
   mime = mime || await o.mimeType()
   return 'data:' + mime + ';' + o.name + ';base64,' + File.toBase64(o)
 }
 
-export async function loadHtmlImageElement(o: File, el?: HTMLImageElement, forceDataUrl=false): Promise<HTMLImageElement> {
-  var img = el || new Image();  
-  if(!forceDataUrl&&o.url) {
+export async function loadHtmlImageElement(o: File, el?: HTMLImageElement, forceDataUrl = false): Promise<HTMLImageElement> {
+  var img = el || new Image()
+  if (!forceDataUrl && o.url) {
     img.src = o.url
   }
   else {
-    img.src= await o.asDataUrl()
+    img.src = await o.asDataUrl()
   }
   return img
 }
 
-export async function loadHtmlCanvasElement(f: File, ctx: CanvasRenderingContext2D, dx: number = 0, dy: number = 0, dirtyX: number|undefined = undefined, dirtyY: number|undefined = undefined, dirtyWidth: number|undefined = undefined, dirtyHeight: number|undefined = undefined) {
+export async function loadHtmlCanvasElement(f: File, ctx: CanvasRenderingContext2D, dx: number = 0, dy: number = 0, dirtyX: number | undefined = undefined, dirtyY: number | undefined = undefined, dirtyWidth: number | undefined = undefined, dirtyHeight: number | undefined = undefined) {
   var d = await f.asHTMLImageData()
-  if(typeof dirtyX ==='undefined'||typeof dirtyY ==='undefined'||typeof dirtyWidth ==='undefined'||typeof dirtyHeight==='undefined'){
+  if (typeof dirtyX === 'undefined' || typeof dirtyY === 'undefined' || typeof dirtyWidth === 'undefined' || typeof dirtyHeight === 'undefined') {
     ctx.putImageData(d, dx, dy)
-  }else {
+  } else {
     ctx.putImageData(d, dx, dy, dirtyX, dirtyY, dirtyWidth, dirtyHeight)
-  }  
+  }
 }
 // interface RGBAImageData {width: number, height: number,data: Uint8ClampedArray}
 

@@ -1,6 +1,6 @@
 import { File } from 'magica'
+import { Example } from 'magica-examples'
 import { arrayToObject, notUndefined, serial, sleep } from 'misc-utils-of-mine-generic'
-import { Example } from './examples'
 import { getStore } from './store'
 import { callRun } from './workerAccess'
 
@@ -26,7 +26,7 @@ export async function setExample(example?: Example) {
     fields,
   })
   var inputFiles = [...await serial((example ? example.inputFiles : state.inputFiles.map(f => f.name)).filter(f => !state.inputFiles.find(f2 => f2.name == f)).map(file => async () => File.fromUrl(file))), ...state.inputFiles].filter(notUndefined)
-  const script = example ? example.script  : state.script
+  const script = example ? example.script : state.script
   var result = await callRun({
     script,
     inputFiles,

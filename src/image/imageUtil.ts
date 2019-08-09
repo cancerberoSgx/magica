@@ -1,7 +1,7 @@
+import { notFalsy } from 'misc-utils-of-mine-generic'
 import { File } from '../file/file'
 import { main } from '../main/main'
 import { IFile } from '../types'
-import { notUndefined, notFalsy } from 'misc-utils-of-mine-generic';
 
 export async function imagePixelColor(img: IFile | undefined, x: number, y: number): Promise<string | undefined> {
   if (!img) { return }
@@ -24,9 +24,9 @@ export function parseConvertVerbose(stdout: string[]) {
 
 
 
-  return stdout.map(l => r.exec(l)||r2.exec(l)).filter(notFalsy).map(m=>{
+  return stdout.map(l => r.exec(l) || r2.exec(l)).filter(notFalsy).map(m => {
     var a = m[4].split('x')
-    var b = m[Math.min(m.length-1, 6)].split('x')
+    var b = m[Math.min(m.length - 1, 6)].split('x')
     return {
       inputName: m[1],
       outputName: m[2],
@@ -39,5 +39,5 @@ export function parseConvertVerbose(stdout: string[]) {
   // if (!m) {
   //   return
   // }
-  
+
 }

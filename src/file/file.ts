@@ -2,17 +2,17 @@ import { ok } from 'assert'
 import fetch from 'cross-fetch'
 import { existsSync, readFileSync } from 'fs'
 import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial } from 'misc-utils-of-mine-generic'
+import { toDataUrl } from '../image/html'
 import { imageCompare } from '../image/imageCompare'
 import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
 import { colorCount, imagePixelColor } from '../image/imageUtil'
 import { magickLoaded } from '../imageMagick/magickLoaded'
+import { run } from '../main/run'
 import { getOption } from '../options'
 import { IFile } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
 import { isDir, isFile } from '../util/util'
 import { protectFile } from './protected'
-import { toDataUrl } from '../image/html';
-import { run } from '../main/run';
 
 /**
  * Default File implementation with utilities for creating from file system or urls. 
@@ -21,7 +21,7 @@ import { run } from '../main/run';
  * interacting with HTML DOM, etc.
  */
 export class File implements IFile {
-  
+
   protected isProtected: boolean
   public url?: string
   /**
@@ -34,7 +34,7 @@ export class File implements IFile {
   public height?: number
   protected _info: ExtractInfoResultImage[] | undefined
 
-  constructor(public name: string, public content: IFile['content'], isProtected: boolean = false,  url?: string,  width?: number,  height?: number ) {
+  constructor(public name: string, public content: IFile['content'], isProtected: boolean = false, url?: string, width?: number, height?: number) {
     this.isProtected = isProtected
     this.url = url
     this.width = width
@@ -73,8 +73,8 @@ export class File implements IFile {
   }
 
   public async size(): Promise<Size> {
-    if(this.width && this.height){
-      return { width: this.width,  height:this.height }
+    if (this.width && this.height) {
+      return { width: this.width, height: this.height }
     }
     var i = await this.infoOne()
     return { width: i.geometry ? i.geometry.width : 0, height: i.geometry ? i.geometry.height : 0 }
@@ -82,7 +82,7 @@ export class File implements IFile {
 
 
   public async widthXHeight(): Promise<string> {
-    if(this.width && this.height){
+    if (this.width && this.height) {
       return `${this.width}x${this.height}`
     }
     var s = await this.size()
@@ -124,28 +124,28 @@ export class File implements IFile {
     return await imageCompare(this, file)
   }
 
-  public async asHTMLImageData(): Promise<ImageData> {  
+  public async asHTMLImageData(): Promise<ImageData> {
     var d = await this.asRGBAImageData()
-   return new ImageData(d.data, d.width, d.height)
+    return new ImageData(d.data, d.width, d.height)
   }
-  
-  public async asRGBAImageData( ): Promise<RGBAImageData> {  
+
+  public async asRGBAImageData(): Promise<RGBAImageData> {
     var size = await this.size()
-    var {outputFiles } = this.name.endsWith('.rgba')&&this.width && this.height ? 
-      {outputFiles: [this]} : 
-      await run({script: `convert ${await this.sizeDepthArgs()} ${this.name} ${await this.sizeDepthArgs(false)} output.rgba`, inputFiles: [this]})
+    var { outputFiles } = this.name.endsWith('.rgba') && this.width && this.height ?
+      { outputFiles: [this] } :
+      await run({ script: `convert ${await this.sizeDepthArgs()} ${this.name} ${await this.sizeDepthArgs(false)} output.rgba`, inputFiles: [this] })
     return {
-      data: new Uint8ClampedArray(outputFiles[0].content.buffer), 
-      width: size.width, 
+      data: new Uint8ClampedArray(outputFiles[0].content.buffer),
+      width: size.width,
       height: size.height
     }
   }
 
-  public async sizeDepthArgs(onlyIfRGBA=true) {
+  public async sizeDepthArgs(onlyIfRGBA = true) {
     return File.getSizeDepthArgs(this, onlyIfRGBA)
   }
-  public static async  getSizeDepthArgs(f: File, onlyIfRGBA=true){
-    return (!onlyIfRGBA||f.name.endsWith('.rgba') )? `-size ${await f.widthXHeight()} -depth 8` : ''
+  public static async  getSizeDepthArgs(f: File, onlyIfRGBA = true) {
+    return (!onlyIfRGBA || f.name.endsWith('.rgba')) ? `-size ${await f.widthXHeight()} -depth 8` : ''
   }
 
 	/** 
@@ -265,12 +265,12 @@ export class File implements IFile {
     return typeof f === 'string' ? f : f.name
   }
 
-  public static fromRGBAImageData(d: RGBAImageData) {  
-   return  new File('img.rgba', d.data, undefined, undefined, d.width, d.height)
+  public static fromRGBAImageData(d: RGBAImageData) {
+    return new File('img.rgba', d.data, undefined, undefined, d.width, d.height)
   }
-  
-  public static fromHTMLImageData(d: ImageData): File{  
-    return File.fromRGBAImageData(d) 
+
+  public static fromHTMLImageData(d: ImageData): File {
+    return File.fromRGBAImageData(d)
   }
 
   public static async fileExists(f: string | IFile) {
@@ -289,4 +289,4 @@ export interface Size {
   width: number
   height: number
 }
-interface RGBAImageData {width: number, height: number,data: Uint8ClampedArray}
+interface RGBAImageData { width: number, height: number, data: Uint8ClampedArray }
