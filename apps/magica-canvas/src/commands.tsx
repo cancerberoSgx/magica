@@ -1,5 +1,5 @@
-import { randomIntBetween } from 'misc-utils-of-mine-generic';
-import { State } from './state';
+import { randomIntBetween } from 'misc-utils-of-mine-generic'
+import { State } from './state'
 
 export const commands: Command[] = [
   {
