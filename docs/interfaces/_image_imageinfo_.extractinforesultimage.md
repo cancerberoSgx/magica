@@ -64,7 +64,7 @@
 
 • **alpha**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:53](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L53)*
+*Defined in [image/imageInfo.ts:53](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L53)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 • **backgroundColor**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:58](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L58)*
+*Defined in [image/imageInfo.ts:58](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L58)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 • **baseDepth**? : *undefined | number*
 
-*Defined in [image/imageInfo.ts:48](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L48)*
+*Defined in [image/imageInfo.ts:48](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L48)*
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 • **baseName**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:34](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L34)*
+*Defined in [image/imageInfo.ts:34](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L34)*
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 • **baseType**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:44](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L44)*
+*Defined in [image/imageInfo.ts:44](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L44)*
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 • **borderColor**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:59](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L59)*
+*Defined in [image/imageInfo.ts:59](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L59)*
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 • **channelDepth**? : *`ExtractInfoResultChannelDepth`*
 
-*Defined in [image/imageInfo.ts:49](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L49)*
+*Defined in [image/imageInfo.ts:49](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L49)*
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 • **channelStatistics**? : *`ExtractInfoResultChannelStatistics`*
 
-*Defined in [image/imageInfo.ts:52](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L52)*
+*Defined in [image/imageInfo.ts:52](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L52)*
 
 ___
 
@@ -128,7 +128,7 @@ ___
 
 • **chromaticity**? : *`ExtractInfoResultChromaticity`*
 
-*Defined in [image/imageInfo.ts:56](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L56)*
+*Defined in [image/imageInfo.ts:56](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L56)*
 
 ___
 
@@ -136,7 +136,7 @@ ___
 
 • **class**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:38](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L38)*
+*Defined in [image/imageInfo.ts:38](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L38)*
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 • **colorspace**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:46](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L46)*
+*Defined in [image/imageInfo.ts:46](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L46)*
 
 ___
 
@@ -152,7 +152,7 @@ ___
 
 • **compose**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:63](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L63)*
+*Defined in [image/imageInfo.ts:63](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L63)*
 
 ___
 
@@ -160,7 +160,7 @@ ___
 
 • **compression**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:67](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L67)*
+*Defined in [image/imageInfo.ts:67](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L67)*
 
 ___
 
@@ -168,7 +168,7 @@ ___
 
 • **depth**? : *undefined | number*
 
-*Defined in [image/imageInfo.ts:47](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L47)*
+*Defined in [image/imageInfo.ts:47](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L47)*
 
 ___
 
@@ -176,7 +176,7 @@ ___
 
 • **dispose**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:65](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L65)*
+*Defined in [image/imageInfo.ts:65](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L65)*
 
 ___
 
@@ -184,7 +184,7 @@ ___
 
 • **elapsedTime**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:76](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L76)*
+*Defined in [image/imageInfo.ts:76](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L76)*
 
 ___
 
@@ -192,7 +192,7 @@ ___
 
 • **endianess**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:45](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L45)*
+*Defined in [image/imageInfo.ts:45](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L45)*
 
 ___
 
@@ -200,7 +200,7 @@ ___
 
 • **filesize**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:72](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L72)*
+*Defined in [image/imageInfo.ts:72](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L72)*
 
 ___
 
@@ -208,7 +208,7 @@ ___
 
 • **format**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:35](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L35)*
+*Defined in [image/imageInfo.ts:35](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L35)*
 
 ___
 
@@ -216,7 +216,7 @@ ___
 
 • **formatDescription**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:36](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L36)*
+*Defined in [image/imageInfo.ts:36](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L36)*
 
 ___
 
@@ -224,7 +224,7 @@ ___
 
 • **gamma**? : *undefined | number*
 
-*Defined in [image/imageInfo.ts:55](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L55)*
+*Defined in [image/imageInfo.ts:55](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L55)*
 
 ___
 
@@ -232,7 +232,7 @@ ___
 
 • **geometry**? : *`ExtractInfoResultGeometry`*
 
-*Defined in [image/imageInfo.ts:39](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L39)*
+*Defined in [image/imageInfo.ts:39](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L39)*
 
 ___
 
@@ -240,7 +240,7 @@ ___
 
 • **imageStatistics**? : *`ExtractInfoResultImageStatistics`*
 
-*Defined in [image/imageInfo.ts:51](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L51)*
+*Defined in [image/imageInfo.ts:51](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L51)*
 
 ___
 
@@ -248,7 +248,7 @@ ___
 
 • **intensity**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:62](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L62)*
+*Defined in [image/imageInfo.ts:62](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L62)*
 
 ___
 
@@ -256,7 +256,7 @@ ___
 
 • **interlace**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:61](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L61)*
+*Defined in [image/imageInfo.ts:61](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L61)*
 
 ___
 
@@ -264,7 +264,7 @@ ___
 
 • **iterations**? : *undefined | number*
 
-*Defined in [image/imageInfo.ts:66](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L66)*
+*Defined in [image/imageInfo.ts:66](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L66)*
 
 ___
 
@@ -272,7 +272,7 @@ ___
 
 • **matteColor**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:57](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L57)*
+*Defined in [image/imageInfo.ts:57](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L57)*
 
 ___
 
@@ -280,7 +280,7 @@ ___
 
 • **mimeType**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:37](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L37)*
+*Defined in [image/imageInfo.ts:37](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L37)*
 
 ___
 
@@ -288,7 +288,7 @@ ___
 
 • **name**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:33](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L33)*
+*Defined in [image/imageInfo.ts:33](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L33)*
 
 ___
 
@@ -296,7 +296,7 @@ ___
 
 • **numberPixels**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:73](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L73)*
+*Defined in [image/imageInfo.ts:73](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L73)*
 
 ___
 
@@ -304,7 +304,7 @@ ___
 
 • **orientation**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:68](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L68)*
+*Defined in [image/imageInfo.ts:68](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L68)*
 
 ___
 
@@ -312,7 +312,7 @@ ___
 
 • **pageGeometry**? : *`ExtractInfoResultPageGeometry`*
 
-*Defined in [image/imageInfo.ts:64](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L64)*
+*Defined in [image/imageInfo.ts:64](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L64)*
 
 ___
 
@@ -320,7 +320,7 @@ ___
 
 • **pixels**? : *undefined | number*
 
-*Defined in [image/imageInfo.ts:50](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L50)*
+*Defined in [image/imageInfo.ts:50](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L50)*
 
 ___
 
@@ -328,7 +328,7 @@ ___
 
 • **pixelsPerSecond**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:74](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L74)*
+*Defined in [image/imageInfo.ts:74](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L74)*
 
 ___
 
@@ -336,7 +336,7 @@ ___
 
 • **printSize**? : *`ExtractInfoResultPrintSize`*
 
-*Defined in [image/imageInfo.ts:41](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L41)*
+*Defined in [image/imageInfo.ts:41](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L41)*
 
 ___
 
@@ -344,7 +344,7 @@ ___
 
 • **profiles**? : *`ExtractInfoResultProfiles`*
 
-*Defined in [image/imageInfo.ts:70](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L70)*
+*Defined in [image/imageInfo.ts:70](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L70)*
 
 ___
 
@@ -352,7 +352,7 @@ ___
 
 • **properties**? : *`ExtractInfoResultProperties`*
 
-*Defined in [image/imageInfo.ts:69](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L69)*
+*Defined in [image/imageInfo.ts:69](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L69)*
 
 ___
 
@@ -360,7 +360,7 @@ ___
 
 • **renderingIntent**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:54](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L54)*
+*Defined in [image/imageInfo.ts:54](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L54)*
 
 ___
 
@@ -368,7 +368,7 @@ ___
 
 • **resolution**? : *`ExtractInfoResultResolution`*
 
-*Defined in [image/imageInfo.ts:40](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L40)*
+*Defined in [image/imageInfo.ts:40](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L40)*
 
 ___
 
@@ -376,7 +376,7 @@ ___
 
 • **tainted**? : *undefined | false | true*
 
-*Defined in [image/imageInfo.ts:71](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L71)*
+*Defined in [image/imageInfo.ts:71](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L71)*
 
 ___
 
@@ -384,7 +384,7 @@ ___
 
 • **transparentColor**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:60](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L60)*
+*Defined in [image/imageInfo.ts:60](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L60)*
 
 ___
 
@@ -392,7 +392,7 @@ ___
 
 • **type**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:43](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L43)*
+*Defined in [image/imageInfo.ts:43](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L43)*
 
 ___
 
@@ -400,7 +400,7 @@ ___
 
 • **units**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:42](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L42)*
+*Defined in [image/imageInfo.ts:42](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L42)*
 
 ___
 
@@ -408,7 +408,7 @@ ___
 
 • **userTime**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:75](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L75)*
+*Defined in [image/imageInfo.ts:75](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L75)*
 
 ___
 
@@ -416,4 +416,4 @@ ___
 
 • **version**? : *undefined | string*
 
-*Defined in [image/imageInfo.ts:77](https://github.com/cancerberoSgx/magica/blob/cc19f3a/src/image/imageInfo.ts#L77)*
+*Defined in [image/imageInfo.ts:77](https://github.com/cancerberoSgx/magica/blob/99a018b/src/image/imageInfo.ts#L77)*

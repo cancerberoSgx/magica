@@ -5,6 +5,8 @@
 
 
 ## TODO / Road map
+- [ ] run(verbose: true) - propagate verbose to main() call and RunResult.
+- [x] main(verbose: true) : {..., verbose: VerboseInfo} - with output size
 - [ ] implement a monaco syntax color and autocompletion like we did in cannabis
 - [ ] move exaples to its own project
 - [ ] test unicode chars with fonts 

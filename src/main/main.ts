@@ -1,4 +1,4 @@
-import { dirname, objectKeys } from 'misc-utils-of-mine-generic'
+import { dirname, objectKeys, tryTo } from 'misc-utils-of-mine-generic'
 import Queue from 'p-queue'
 import { File } from '../file/file'
 import { isProtectedFile, protectFile } from '../file/protected'
@@ -11,6 +11,7 @@ import { mkdirp } from '../util/mkdirp'
 import { rmRf } from '../util/rmRf'
 import { processCommand } from './command'
 import { dispatchCustomCommand, isCustomCommand } from './customCommand'
+import { parseConvertVerbose } from '../image/imageUtil';
 
 let queue: Queue | undefined
 
@@ -53,6 +54,9 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
 
   let returnValue: NativeResult
   var processedCommand = processCommand(o.command!)
+  if(o.verbose ) {
+    processedCommand.splice(1, 0, '-verbose')
+  }
   if (await isCustomCommand(processedCommand, o)) {
     returnValue = await dispatchCustomCommand(processedCommand, o, FS, files)
   } else {
@@ -66,16 +70,24 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
       }
     }
   }
-
+  var verbose = o.verbose ?tryTo(()=>parseConvertVerbose(returnValue.stdout))||[]: []
+  
   const afterTree = listFilesRecursively(emscriptenNodeFsRoot, FS)
-
+  
   const diffTree = afterTree.filter(f => !beforeTree.find(b => b.path === f.path))
-  const outputFiles: IFile[] = diffTree
-    .map(f => new File(
-      f.path, FS.readFile(f.path)
+  const outputFiles = diffTree
+  .map(f => new File(
+    f.path, FS.readFile(f.path)
     ))
     .filter(f => !isProtectedFile(f.name))
-
+    .map(f=>{
+      var v = verbose.find(v=>f.name.endsWith('/'+v.outputName))
+      if(v){
+        f.width=v.outputSize.width
+        f.height=v.outputSize.height
+      }
+      return f
+    })
   if (o.protectOutputFiles) {
     outputFiles.forEach(protectFile)
     outputFiles.length = 0
@@ -87,9 +99,11 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
     o.debug && console.log('Removed files:', removed)
   }
   o.debug && console.log('Protected files:', ls(emscriptenNodeFsRoot, FS).map(isProtectedFile))
+  
   return {
     ...returnValue,
     outputFiles,
+    verbose,
     times: {
       total: Date.now() - t0
     },

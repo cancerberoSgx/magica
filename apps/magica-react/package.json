@@ -1,12 +1,12 @@
 {
-  "name": "app-base",
+  "name": "magica-react",
+  "description": "React components and utilities for ImageMagick operations based on magica",
   "version": "0.0.1",
-  "private": true,
   "main": "dist/src/baseApp.js",
   "types": "dist/src/baseApp.d.ts",
   "scripts": {
     "clean": "rm -rf dist docs",
-    "start": "npm run clean && P=$PWD && cd ../../ && npm run build && cd $P && npm run build && npx parcel serve src/static/index.html -d docs --no-source-maps",
+    "start": "npm run clean && P=$PWD && cd ../../ && npm run build && cd $P && npm run build && npx parcel serve src/static/index.html -d docs ",
     "copy": "mkdir -p docs ; cp -r node_modules/magica/dist/src/imageMagick/compiled/magick.wasm ../../test/assets/* docs",
     "clean-npm": "rm -rf node_modules/ package-lock.json",
     "format": "npx ts-refactor format \"**/*.ts*\" ../../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
@@ -34,12 +34,9 @@
   "dependencies": {
     "file-saver": "^2.0.2",
     "magica": "file:../..",
-    "magica-examples": "file:../magica-examples",
     "misc-utils-of-mine-generic": "^0.2.15",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.87.3"
+    "react-dom": "^16.8.6"
   },
   "repository": {
     "type": "git",

@@ -38,6 +38,22 @@ test('accept string input files, or urls', async t => {
   t.deepEqual(filterResultStdErr(result), [])
 })
 
+test('verbose', async t => {
+  const result = await main({
+    command: 'convert n.png -rotate 33 foo.png',
+    inputFiles: ['test/assets/n.png'],
+    verbose:true
+  })
+  t.deepEqual(result.verbose,[ {
+    inputFormat: 'png', 
+  inputSize: {width: 109, height: 145}, 
+  inputName: 'n.png', 
+  outputName: 'foo.png', 
+  outputSize: {width: 173, height: 183}
+}])
+  t.falsy(result.error)
+})
+
 test.todo('incorrect IM command')
 test.todo('should set options in command')
 test.todo('should support input file names with folders: convert input/in/nested/folder/foo.png -scale 100 bar.png')

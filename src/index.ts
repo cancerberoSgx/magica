@@ -1,5 +1,4 @@
 require('./util/magicaWasm').getThisBrowserScriptTagSrc()
-// import 'babel-polyfill'
 require('./util/magica').installMagica() // HEADS UP needs to be called before everything else.
 
 export { FS } from "./file/emscriptenFs"
@@ -8,8 +7,9 @@ export { getProtectedFile, isProtectedFile, protectFile } from './file/protected
 export { toDataUrl } from './image/html'
 export { imageBuiltIn } from './image/imageBuiltIn'
 export { imageCompare } from './image/imageCompare'
+export *  from './image/html'
 export { imageInfo } from './image/imageInfo'
-export { colorCount, imagePixelColor } from './image/imageUtil'
+export *  from './image/imageUtil'
 export { magickLoaded } from './imageMagick/magickLoaded'
 export { cliToArray } from './main/command'
 export { registerCommandPreprocessor } from './main/executeCommandPreprocessor'

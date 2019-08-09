@@ -84,11 +84,31 @@ export interface Options extends NativeOptions {
    */
   inputFiles?: (string | IFile | undefined)[]
 
+  /**
+   * Will automatically add -verbose to convert command and parse stdout returning a verbose object in the Result.
+   */
+  verbose?: boolean
+
 }
 
 export interface Result<T extends IFile = IFile> extends NativeResult {
   outputFiles: T[]
   times?: { total: number }
+  verbose?: VerboseInfo[]
+}
+
+interface VerboseInfo {  
+  inputName: string;
+  outputName: string;
+  inputFormat: string;
+  inputSize: {
+      width: number;
+      height: number;
+  };
+  outputSize: {
+      width: number;
+      height: number;
+  };
 }
 
 export interface CliOptions extends Options {

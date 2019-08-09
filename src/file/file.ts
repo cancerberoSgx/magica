@@ -11,20 +11,38 @@ import { IFile } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
 import { isDir, isFile } from '../util/util'
 import { protectFile } from './protected'
+import { toDataUrl } from '../image/html';
+import { run } from '../main/run';
 
+/**
+ * Default File implementation with utilities for creating from file system or urls. 
+ * 
+ * Also instances have utilities to cache and get image information like size, mimeType, image comparison, 
+ * interacting with HTML DOM, etc.
+ */
 export class File implements IFile {
+  
+  protected isProtected: boolean
+  public url?: string
+  /**
+   * Stores size for those image formats that don't store size information such as RGBA
+   */
+  public width?: number
+  /**
+   * Stores size for those image formats that don't store size information such as RGBA
+   */
+  public height?: number
+  protected _info: ExtractInfoResultImage[] | undefined
 
-  protected isProtected: boolean;
-
-  constructor(public name: string, public content: IFile['content'], isProtected: boolean = false, public url?: string) {
-
+  constructor(public name: string, public content: IFile['content'], isProtected: boolean = false,  url?: string,  width?: number,  height?: number ) {
     this.isProtected = isProtected
+    this.url = url
+    this.width = width
+    this.height = height
     if (this.isProtected) {
       protectFile(this)
     }
   }
-
-  protected _info: ExtractInfoResultImage[] | undefined;
 
   /**
   * Same as [info] but returning only the first image's data.
@@ -55,9 +73,22 @@ export class File implements IFile {
   }
 
   public async size(): Promise<Size> {
+    if(this.width && this.height){
+      return { width: this.width,  height:this.height }
+    }
     var i = await this.infoOne()
     return { width: i.geometry ? i.geometry.width : 0, height: i.geometry ? i.geometry.height : 0 }
   }
+
+
+  public async widthXHeight(): Promise<string> {
+    if(this.width && this.height){
+      return `${this.width}x${this.height}`
+    }
+    var s = await this.size()
+    return `${s.width}x${s.height}`
+  }
+
 
   public async mimeType(): Promise<string> {
     var i = await this.infoOne()
@@ -75,7 +106,7 @@ export class File implements IFile {
 	/** 
    * Creates a DataUrl like `data:image/png;name=f.png;base64,` using given base64 content, mimeType and fileName. 
   */
-  public async asDataUrl(mime?: String) {
+  public async asDataUrl(mime?: string) {
     return File.toDataUrl(this, mime)
   }
 
@@ -93,15 +124,43 @@ export class File implements IFile {
     return await imageCompare(this, file)
   }
 
+  public async asHTMLImageData(): Promise<ImageData> {  
+    var d = await this.asRGBAImageData()
+    // @ts-ignore
+    var d = new ImageData(d.data, d.width)
+    d.height = d.height
+    return d
+  }
+  
+  public async asRGBAImageData( ): Promise<RGBAImageData> {  
+    var size = await this.size()
+    var {outputFiles } = this.name.endsWith('.rgba')&&this.width && this.height ? 
+      {outputFiles: [this]} : 
+      await run({script: `convert ${await this.sizeDepthArgs()} ${this.name} ${await this.sizeDepthArgs(false)} output.rgba`, inputFiles: [this]})
+    return {
+      data: new Uint8ClampedArray(outputFiles[0].content.buffer), 
+      width: size.width, 
+      height: size.height
+    }
+  }
+
+  public async sizeDepthArgs(onlyIfRGBA=true) {
+    return File.getSizeDepthArgs(this, onlyIfRGBA)
+  }
+  public static async  getSizeDepthArgs(f: File, onlyIfRGBA=true){
+    return (!onlyIfRGBA||f.name.endsWith('.rgba') )? `-size ${await f.widthXHeight()} -depth 8` : ''
+  }
 
 	/** 
    * Creates a DataUrl like `data:image/png;name=f.png;base64,` using given base64 content, mimeType and fileName.   
     */
-  public static async toDataUrl(file: File, mime?: String) {
-    mime = mime || await file.mimeType()
-    return 'data:' + mime + ';' + file.name + ';base64,' + File.toBase64(file)
+  public static async toDataUrl(file: File, mime?: string) {
+    return await toDataUrl(file, mime)
   }
 
+  /**
+   * Creates a File from given url. In Node.js urls must be absolute!. 
+   */
   public static async fromUrl(url: string, o: RequestInit & ResolveOptions = {}) {
     try {
       const response = await fetch(url, o)
@@ -112,24 +171,31 @@ export class File implements IFile {
     }
   }
 
+  /**
+   * Creates a File from given file system path. Only Node.js. 
+   */
   public static async fromFile(f: string, o: ResolveOptions = {}) {
     if (!isNode()) {
       throw new Error('File.readFile() called in the browser.')
     }
     try {
-      return new File(o.name || basename(f), new Uint8Array(readFileSync(f)), o.protected)
+      return new File(o.name || basename(f), new Uint8ClampedArray(readFileSync(f)), o.protected)
     } catch (error) {
       console.error(error)
       return undefined
     }
   }
 
+  /**
+   * Returns the file content as plain string. This is useful to read the content of a .json or .txt file 
+   * but not for images or other binary file content. 
+   */
   public static asString(f: IFile) {
     return String.fromCharCode.apply(null, f.content as any)
   }
 
   /** 
-   * Returns base64 representation of this image in an ecoded format like PNG 
+   * Returns base64 representation of this image in an encoded format like PNG 
    */
   public static toBase64(file: File) {
     return arrayBufferToBase64(file.content.buffer)
@@ -150,7 +216,7 @@ export class File implements IFile {
   }
 
 	/**
-	 * Loads files from files in html input element of type "file"
+	 * Loads files from files in html input element of type "file".
 	 */
   public static fromHtmlFileInputElement(el: HTMLInputElement): Promise<Array<File>> {
     return Promise.all(Array.from(el.files!).map(file => new Promise<File>((resolve, reject) => {
@@ -160,11 +226,17 @@ export class File implements IFile {
     })))
   }
 
+  /**
+   * Shortcut for [resolve] that returns the first result.
+   */
   public static async resolveOne(files: string | IFile | undefined | (string | IFile | undefined)[], options: ResolveOptions = { protected: false }) {
     var a = await File.resolve(files, options)
     return a.length > 0 ? a[0] : undefined
   }
 
+  /**
+   * Given paths, urls or files it will try to load them all and return a list of File for those succeed.
+   */
   public static async resolve(files: string | IFile | undefined | (string | IFile | undefined)[], options: ResolveOptions = { protected: false }) {
     var fs = (asArray<undefined | string | IFile>(files || [])).filter(notUndefined)
     var result = await serial(fs.map(f => async () => {
@@ -196,6 +268,14 @@ export class File implements IFile {
     return typeof f === 'string' ? f : f.name
   }
 
+  public static fromRGBAImageData(d: RGBAImageData) {  
+   return  new File('img.rgba', d.data, undefined, undefined, d.width, d.height)
+  }
+  
+  public static fromHTMLImageData(d: ImageData): File{  
+    return File.fromRGBAImageData(d) 
+  }
+
   public static async fileExists(f: string | IFile) {
     const { FS } = await magickLoaded
     FS.chdir(getOption('emscriptenNodeFsRoot'))
@@ -212,3 +292,4 @@ export interface Size {
   width: number
   height: number
 }
+interface RGBAImageData {width: number, height: number,data: Uint8ClampedArray}
