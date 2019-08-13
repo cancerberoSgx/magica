@@ -28,7 +28,7 @@ export async function getInitialState(): Promise<State> {
   var example = examples()[0]
   return {
     example,
-    inputFiles: [await File.fromUrl('bluebells.png') as File],
+    inputFiles: [],
     examples: [...examples()],
     result: null as any,
     script: '',

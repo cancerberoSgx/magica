@@ -1,4 +1,4 @@
- * [Magica Canvas](https://cancerberosgx.github.io/demos/magica/canvas/) (WIP) - Renders transformations in canvas as fast as possible to show that for images width<1000px it's instantaneous. See transformations happen on mouse move, and on streaming video.  [https://cancerberosgx.github.io/demos/magica/magica-canvas-demo.mp4](Demo video)
+ * [Magica Canvas](https://cancerberosgx.github.io/demos/magica/canvas/) (WIP) - Renders transformations in canvas as fast as possible to show that for images width<1000px it's instantaneous. See transformations happen on mouse move, and on streaming video.  [https://cancerberosgx.github.io/demos/magica/images/magica-canvas-demo.mp4](Demo video)
 
  * Currently there is no web workers
    * it would improve performance for video experience

@@ -27,8 +27,6 @@ export async function setExample(example?: Example) {
   })
   var inputFiles = [...await serial((example ? example.inputFiles : state.inputFiles.map(f => f.name)).filter(f => !state.inputFiles.find(f2 => f2.name == f)).map(file => async () => File.fromUrl(file))), ...state.inputFiles].filter(notUndefined)
   const script = example ? example.script : state.script
-  // console.log(script);
-
   var result = await callRun({
     script,
     inputFiles,

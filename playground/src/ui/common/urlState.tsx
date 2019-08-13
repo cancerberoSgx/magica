@@ -33,6 +33,7 @@ export async function loadUrl() {
     getStore().setState({
       example: {
         ...getStore().getState().example,
+        ...inputFiles.length ? { inputFiles } : {},
         script: state.script,
         fields: state.fields && state.fields.length ? state.fields : state.example.fields || [],
       },
@@ -41,7 +42,10 @@ export async function loadUrl() {
       inputFiles: inputFiles
     })
     // await sleep(400)
-    await setExample(getStore().getState().example)
+    if (inputFiles.length) {
+
+    }
+    await setExample({ ...getStore().getState().example, })
   } else {
 
   }

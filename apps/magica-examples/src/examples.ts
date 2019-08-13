@@ -122,6 +122,29 @@ convert -font PoetsenOne-Regular.otf -background none \\
 `.trim()
   },
 
+  {
+    name: 'Contour',
+    tags: [ExampleTag.text],
+    description: 'removing background and highlighting contour. <a href="http://www.imagemagick.org/discourse-server/viewtopic.php?f=1&t=31654&sid=485d2bc58c62e24244c65ad897c74350">discussion</a>',
+    inputFiles: ['https://i.imgur.com/Ic0gwsp.png'],
+    fields: [
+    ],
+    script: `
+convert <%= inputFiles[0].name%>  -gravity south -chop 0x3 -gravity east -chop 2x0 \\
+  -trim +repage -bordercolor white -border 50 aux.png
+
+convert  aux.png -write mpr:img +delete \\ 
+  ( mpr:img -negate -threshold 0 -morphology close disk:1 \\
+    -morphology dilate disk:30 -blur 0x1 -level 0x50% \\
+    -write mpr:msk +delete ) \\
+  ( mpr:img  mpr:msk -alpha off -compose copy_opacity -composite ) \\
+  ( mpr:msk -negate -fill gray30 -opaque black -blur 0x10 -fill gray95 -opaque gray30 ) \\
+  -reverse -compose over -composite \\
+  ( mpr:msk -morphology edgein diamond:1 -negate ) \\
+  -compose multiply -composite \\
+  result4.png
+`.trim()
+  },
 
   {
     name: 'Text shaded without background',
@@ -147,11 +170,10 @@ convert -font PoetsenOne-Regular.otf -background none \\
     name: 'Brightness, saturation and lightness',
     tags: [ExampleTag.color],
     description: 'use -modulate Brightness, saturation and lightness',    
-    inputFiles: ['bluebells.png'],
+    inputFiles: [],
     fields: [
       { id: 'brightness', value: '120' },
       { id: 'saturation', value: '80' },
-      // { id: 'lightness', value: '70' },
     ],
     script: `
 convert <%= inputFiles[0].name%> -modulate <%= get('brightness') %>,<%= get('saturation') %>,100 %>  oo.png
