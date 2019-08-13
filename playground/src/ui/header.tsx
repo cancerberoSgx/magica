@@ -1,4 +1,4 @@
-import { examples, ExampleTag } from 'magica-examples'
+import { ExampleTag } from 'magica-examples'
 import { enumNoValueKeys } from 'misc-utils-of-mine-generic'
 import { enumKeys } from 'misc-utils-of-mine-typescript'
 import * as React from 'react'
@@ -32,14 +32,10 @@ export class Header extends AbstractComponent {
     return <Menu inverted fixed="top">
       <Dropdown text='Examples' pointing className='link item'>
         <Dropdown.Menu>
-          {/* <Dropdown.Header>All ({examples.length})</Dropdown.Header> */}
           <Dropdown.Item>
-            <Dropdown text={`All (${examples().length})`} fluid={true} scrolling>
+            <Dropdown text={`All (${this.state.examples.length})`} fluid={true} scrolling>
               <Dropdown.Menu>
-
-                {/* <Dropdown scrolling item icons="file code outline" text={`"${this.state.example.name}"`}  > */}
-                {/* <Dropdown.Menu > */}
-                {examples().map(example => <Dropdown.Item key={example.name} fluid={true} onClick={e => setExample(example)}>{example.name}</Dropdown.Item>)}
+                {this.state.examples.map(example => <Dropdown.Item key={example.name} fluid={true} onClick={e => setExample(example)}>{example.name}</Dropdown.Item>)}
               </Dropdown.Menu>
             </Dropdown>
           </Dropdown.Item>
@@ -50,7 +46,7 @@ export class Header extends AbstractComponent {
             <Dropdown.Item key={tag}>
               <Dropdown text={tag} fluid>
                 <Dropdown.Menu>
-                  {examples().filter(e => e.tags.includes(tag)).map(e =>
+                  {this.state.examples.filter(e => e.tags.includes(tag)).map(e =>
                     <Dropdown.Item key={tag + e.name} fluid onClick={ev => setExample(e)}><Dropdown.Header>{e.name}</Dropdown.Header></Dropdown.Item>
                   )}
                 </Dropdown.Menu>

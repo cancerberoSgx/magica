@@ -1,40 +1,95 @@
-import { tryTo } from 'misc-utils-of-mine-generic'
+import { sleep, tryTo } from 'misc-utils-of-mine-generic'
 import { File } from '../../../dist/src'
 import { handleInputFileChange } from './app/dispatch'
-
-export async function setVideoEnable(enabled: boolean) {
+import { getCanvasContext } from './ui/canvas'
+let stream: MediaStream | undefined
+export async function setVideoEnable(enabled: boolean | 'takePhoto') {
   if (!enabled) {
-    resetCapture()
+    await resetCapture()
     return
   }
-  tryTo(resetCapture)
-  const constraints = {
-    video: true
+  // let first =!imageCapture
+  // if(!stream){
+  // }
+
+  if (enabled === 'takePhoto') {
+    // if (!imageCapture) {
+    //   await takePhoto()
+    await initCapture()
+
+    // }
+    await shot()
+    // await tryTo(async ()=>await resetCapture())
+    // change
+  } else {
+    // timer = setInterval(async ()=>{
+    async function f() {
+      await shot()
+      timer = setTimeout(f, 3000)
+    }
+    // await takePhoto()
+    await initCapture()
+    await f()
   }
-  const stream = await navigator.mediaDevices.getUserMedia(constraints)
-  const videoTrack = stream.getVideoTracks().find(v => v.readyState === 'live')!
-  //@ts-ignore
-  imageCapture = new ImageCapture(videoTrack)
-  timer = setInterval(setInputImage, 2000)
 }
 
-function resetCapture() {
-  if (imageCapture) {
-    imageCapture.track.stop()
-    imageCapture = undefined
+async function initCapture(force = false) {
+  if (force) {
+    await tryTo(async () => await resetCapture())
   }
-  clearInterval(timer)
+  if (!imageCapture) {
+    const constraints = {
+      video: true
+    }
+    stream = await navigator.mediaDevices.getUserMedia(constraints)
+    const videoTrack = stream.getVideoTracks().find(v => v.readyState === 'live')!
+    //@ts-ignore
+    imageCapture = new ImageCapture(videoTrack)
+    await sleep(1500)
+  }
+}
+
+async function resetCapture() {
+  if (imageCapture) {
+    await tryTo(async () => {
+      await imageCapture.track.stop()
+      clearTimeout(timer)
+    })
+  }
+  imageCapture = undefined
 }
 
 let timer: any
 
 let imageCapture: any
 
-async function setInputImage() {
+async function shot() {
+  // var f = await shotGrabFrame()
+  var f = await shotTakePhoto()
+
+  return await handleInputFileChange(f)
+}
+
+async function shotGrabFrame() {
+  console.log(imageCapture, imageCapture.getPhotoCapabilities(), imageCapture.getPhotoSettings(), stream, stream!.getVideoTracks())
+  var b: ImageBitmap = await imageCapture.grabFrame()
+  getCanvasContext().drawImage(b, 0, 0)
+  var data = getCanvasContext().getImageData(0, 0, b.width, b.height)
+  b.close()
+  return await File.fromHTMLImageData(data, 'f.rgba')
+}
+
+
+
+async function shotTakePhoto() {
+  // console.log(imageCapture , stream, stream!.getVideoTracks());
+
   var p: Blob = await imageCapture.takePhoto()
   //@ts-ignore
   var buffer = await p.arrayBuffer()
   var content = new Uint8ClampedArray(buffer)
-  var f = new File('fpp.' + p.type.split('/')[1], content)
-  await handleInputFileChange(f)
+  var ext = p.type.includes('/') ? p.type.split('/')[1] : 'jpg'
+  return new File('f.' + ext, content)
+
 }
+

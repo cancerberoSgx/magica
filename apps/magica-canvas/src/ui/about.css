@@ -1,10 +1,3 @@
-#command {
-  font-family: monospace;
-  margin-left: 3em;
-  font-size: 0.8em;
-}
-
-
 .modal-window.hidden {
   visibility: hidden;
   opacity: 0;

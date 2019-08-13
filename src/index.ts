@@ -17,5 +17,5 @@ export { run } from './main/run'
 export { addTemplateHelper, TemplateHelper } from './main/template/template'
 export { getOptions, setOptions } from './options'
 export * from './types'
-export { getMagica, Magica } from './util/magica'
+export * from './util'
 

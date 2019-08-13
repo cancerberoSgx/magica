@@ -4,11 +4,11 @@ import { NativeResult } from '../imageMagick/createMain'
 import { getStderr, getStdout, pushStderr, pushStdout, resetStderr, resetStdout } from '../imageMagick/magickLoaded'
 import { getOption } from '../options'
 import { Options } from '../types'
+import { isDir, isFile, readFile, writeFile } from '../util/fileUtil'
 import { main } from './main'
 import { run } from './run'
-import { readFile, isDir, writeFile, isFile } from '../util/util';
 
-export async function isCustomCommand(c: string[] ) {
+export async function isCustomCommand(c: string[]) {
   return c.join(' ').trim().startsWith(getOption('customCommandPrefix'))
 }
 
@@ -45,10 +45,10 @@ class CustomCommandContextImpl implements CustomCommandContext {
   main = main
 
   run = run
-  
-  log= pushStdout
 
-  error= pushStderr
+  log = pushStdout
+
+  error = pushStderr
 
   File: typeof File;
 
@@ -69,7 +69,7 @@ class CustomCommandContextImpl implements CustomCommandContext {
   }
 
   writeFile(f: File) {
-     writeFile(f, this.FS)
+    writeFile(f, this.FS)
   }
 
 }

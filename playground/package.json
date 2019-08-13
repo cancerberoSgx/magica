@@ -7,12 +7,10 @@
     "format": "npx ts-refactor format \"**/*.ts*\" ../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\"  ../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
     "lint": "npm run organizeImports && npm run format",
-    "start": "cd .. && npm run build && cd playground && npm run copy && npx parcel serve src/index.html -d docs ",
-    "build-dev-no-maps": "npm run copy &&export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-content-hash  --no-source-maps",
-    "build-dev": "export NODE_ENV=development ; parcel build src/index.html -d docs  --no-minify --no-source-maps --no-content-hash",
+    "start": " npm run build-only && npx parcel serve src/index.html -d docs ",
     "copy": "mkdir -p docs; cp node_modules/magica/dist/src/imageMagick/compiled/magick.wasm src/static/* docs",
-    "build": "npm run clean && npx tsc && npm run build-only && rm -rf ../../demos/docs/magica/playground && mkdir -p ../../demos/docs/magica/playground &&  mv docs/* ../../demos/docs/magica/playground/",
-    "build-only": "npm run copy && export NODE_ENV=production && node --max-old-space-size=5000 node_modules/parcel/bin/cli.js build src/index.html -d docs --no-content-hash --detailed-report --no-source-maps --public-url './'",
+    "build": "npm run clean  && npm run build-only && export NODE_ENV=production && node --max-old-space-size=5000 node_modules/parcel/bin/cli.js build src/index.html -d docs --no-content-hash --detailed-report --no-source-maps --public-url './' && rm -rf ../../demos/docs/magica/playground && mkdir -p ../../demos/docs/magica/playground &&  mv docs/* ../../demos/docs/magica/playground/",
+    "build-only": "P=$PWD &&  cd ../apps/magica-examples && npm run build && cd \"$P/..\" && npm run build && cd $P && npx tsc && npm run copy ",
     "all": "npm run clean && npm run lint && npm run build"
   },
   "keywords": [

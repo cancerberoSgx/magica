@@ -1,14 +1,13 @@
 import test from 'ava'
 import { notUndefined } from 'misc-utils-of-mine-generic'
-import { File, protectFile, magickLoaded, setOptions, RunResult } from '../src'
+import { File, magickLoaded, protectFile, RunResult } from '../src'
 import { run } from '../src/main/run'
+import { getFilePath, isFile } from '../src/util/fileUtil'
 import { filterResultStdErr } from './testUtil'
-import { getFilePath, isFile } from '../src/util/util';
-import { rmRf } from '../src/util/rmRf';
 
 test('custom commands & protected files', async (t) => {
   var result: RunResult
-  
+
   result = await run({
     script: `
     convert rose: bar.gif
@@ -21,22 +20,22 @@ test('custom commands & protected files', async (t) => {
   t.deepEqual(filterResultStdErr(result), [])
   t.deepEqual(result.stdout.filter(notUndefined), ['hello1', 'bar.gif', 'hello2'])
   protectFile(getFilePath('bar.gif'), false)
-  
-  const {FS} =  await magickLoaded
+
+  const { FS } = await magickLoaded
   t.deepEqual(isFile(getFilePath('bar.gif'), FS), true)
-  
-  result = await run({  
-      script: `
+
+  result = await run({
+    script: `
     !js: c=>c.log('hello1')
     !js: c=>c.log(...c.FS.readdir('.') )
   convert rose: bar2.gif
   !js: c=>c.log(...c.FS.readdir('.') )
     !js: c=>c.log('hello2')
     `,
-  protectOutputFiles: false,
+    protectOutputFiles: false,
   })
   t.deepEqual(filterResultStdErr(result), [])
-  t.deepEqual(result.stdout.filter(notUndefined), ['hello1','bar2.gif',  'hello2'])
+  t.deepEqual(result.stdout.filter(notUndefined), ['hello1', 'bar2.gif', 'hello2'])
 })
 
 test('custom commands support async ', async (t) => {

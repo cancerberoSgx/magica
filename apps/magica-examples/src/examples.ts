@@ -1,6 +1,6 @@
 export interface ExampleField {
   id: string
-  value: string
+  value: string|number
   type?: 'string'|'integer'|'float'
 }
 
@@ -81,7 +81,7 @@ export const examples: () => Example[] = () => [
     tags: [ExampleTag.simple, ExampleTag.info],
     inputFiles: ['photo.tiff'],
     script: `
-identify <%= inputFiles[0].name%>>
+identify <%= inputFiles[0].name%>
 convert photo.tiff photo_info.json
       `.trim()
   },
@@ -121,6 +121,43 @@ convert -font PoetsenOne-Regular.otf -background none \\
   -background none -layers merge +repage shadow_a.png
 `.trim()
   },
+
+
+  {
+    name: 'Text shaded without background',
+    tags: [ExampleTag.text],
+    description: 'Using -shade on text ',
+    inputFiles: ['PoetsenOne-Regular.otf'],
+    fields: [
+      ...fieldsText,
+    ],
+    script: `
+  convert -size 400x400 -gravity center -background none \\
+    -font PoetsenOne-Regular.otf  ${fieldsTextCommand}   \\
+    -alpha Extract -blur 0x1 -shade 121x12 -fuzz 0% -fill none -draw 'color 1,1 floodfill' shade_heart.png
+  
+  convert -size 400x400 -gravity center -background none \\
+    -font PoetsenOne-Regular.otf  ${fieldsTextCommand}   \\
+    -alpha Extract -blur 0x1 -shade 11x112 -fuzz 0% -fill none -draw 'color 1,1 floodfill' shade_heart2.png
+   
+`.trim()
+  },
+
+  {
+    name: 'Brightness, saturation and lightness',
+    tags: [ExampleTag.color],
+    description: 'use -modulate Brightness, saturation and lightness',    
+    inputFiles: ['bluebells.png'],
+    fields: [
+      { id: 'brightness', value: '120' },
+      { id: 'saturation', value: '80' },
+      // { id: 'lightness', value: '70' },
+    ],
+    script: `
+convert <%= inputFiles[0].name%> -modulate <%= get('brightness') %>,<%= get('saturation') %>,100 %>  oo.png
+    `.trim()
+  },
+
 
   {
     name: 'render text file',
@@ -790,4 +827,66 @@ convert <%= inputFiles[0].name %> \\
     `.trim(),
   },
 
+  {
+    name: 'Grid of pixels (circle)',
+    description: `<a href="http://www.imagemagick.org/Usage/transform/#gridding">See ImageMagick examples page transform/#gridding</a>`,
+    tags: [ExampleTag.artistic, ExampleTag.color, ExampleTag.drawing],
+    inputFiles: ['bluebells.png'],
+    fields: [
+      { id: 'size', value: 10 },
+    ],
+    script: ` 
+convert -size <%= get('size') %>x<%= get('size') %> \\
+  xc: -draw 'circle <%= get('size')/2 %>,<%= get('size')/2 %> 1,<%= get('size')/2 %>'   -write mpr:block +delete \\
+  <%=inputFiles[0].name%> -size <%= await inputFiles[0].widthXHeight()%> tile:mpr:block \\
+  +swap -compose screen -composite grid_blocks.png
+    `.trim(),
+  },
+
+{
+  name: 'Grid of pixels (diamond)',
+  description: `<a href="http://www.imagemagick.org/Usage/transform/#gridding">See ImageMagick examples page transform/#gridding</a>`,
+  tags: [ExampleTag.artistic, ExampleTag.color],
+  inputFiles: ['bluebells.png'],
+  fields: [
+    { id: 'size', value: 10 },
+  ],
+  script: ` 
+convert -size  <%=get('size') %>x<%= get('size') %> xc: \\
+  -draw 'point <%= Math.round(parseInt(get('size'))/2) %>,<%= Math.round(parseInt(get('size'))/2) %>' \\
+  -morphology Erode:5 Diamond \\
+  -alpha shape -write mpr:diamond +delete \\
+  <%=inputFiles[0].name%>  -scale 100%   \\
+  -size <%= await inputFiles[0].widthXHeight()%>   tile:mpr:diamond \\
+  -compose Over -composite grid_diamonds.png
+  `.trim(),
+},
+
+{
+  name: 'Morphological animation',
+  description: `<a href="http://www.imagemagick.org/Usage/transform/#gridding">See ImageMagick examples page transform/#gridding</a>`,
+  tags: [ExampleTag.artistic, ExampleTag.animation],
+  inputFiles: ['bluebells.png'],
+  fields: [
+    { id: 'N', value: 25 }
+  ],
+  script: ` 
+<% 
+var N =  parseInt(get('N'))
+for(var i = 1 ; i<N; i++) {
+%>
+  convert <%= inputFiles[0].name %> -morphology Dilate  Octagon:<%=i%>  -morphology Erode  Octagon:<%=i%> o<%=i%>.miff
+<%
+}
+var arr = new Array(N-1).fill(0).map((n,i)=>i+1).map(i=>"o"+i+".miff")
+%>
+convert o1.miff <%= arr .join(" ")%> <%= arr[arr.length-1] %> <%= arr.reverse().join(" ") %> o1.miff o.gif
+  `.trim(),
+}
+
+
+
+
+
+ 
 ]

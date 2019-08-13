@@ -1,4 +1,4 @@
-import { File, protectFile, run } from 'magica'
+import { File, fileUtil, magickLoaded, protectFile, run } from 'magica'
 import { array, notUndefined, randomIntBetween, serial, sleep } from 'misc-utils-of-mine-generic'
 import { fieldArrayToObject } from '../misc'
 import { CANVAS_WIDTH } from '../ui/canvas'
@@ -39,32 +39,44 @@ export async function handleFileInputChange(e: HTMLInputElement) {
   await handleInputFileChange(files[0])
 }
 
-export async function handleInputFileChange(files: File) {
-  var inputFile = await createInputFile(files)
+export async function handleInputFileChange(file: File) {
+  var inputFile = await createInputFile(file)
   getStore().setState({
     inputFile
   })
-  await change(getStore().getState().x, getStore().getState().y, [inputFile])
+  // getStore().getState().inputFile = inputFile!
+  await change(getStore().getState().x, getStore().getState().y, [inputFile!])
 }
 
 export async function createInputFile(f: File) {
-  var s = await f.size()
-  var r = await run({
-    script: `convert ${f ? f.name : 'rose:'} -alpha set -resize ${s.width > CANVAS_WIDTH ? CANVAS_WIDTH : s.width} output.miff`,
+  var size = await f.size()
+
+  var result = await run({
+    script: `convert ${await f.sizeDepthArgs()}  ${f ? f.name : 'rose:'} -alpha set -resize ${size.width > CANVAS_WIDTH ? CANVAS_WIDTH : size.width} output.miff`,
     inputFiles: [f],
     verbose: true
   })
-  var inputFile = File.asFile(r.outputFiles[0])
-  protectFile(inputFile)
-  return inputFile
+  // console.log('CMDMDMD', `convert ${await f.sizeDepthArgs()}  ${f ? f.name : 'rose:'} -alpha set -resize ${size.width > CANVAS_WIDTH ? CANVAS_WIDTH : size.width} output.miff`);
+
+  if (!result.error && result.outputFiles.length === 0) {
+    const { FS } = await magickLoaded
+    result.outputFiles.push(fileUtil.readFile('output.miff', FS))
+  }
+  if (result.error || result.outputFiles.length === 0) {
+    console.error('Error executing run()', result.stderr, result.error)
+  } else {
+    var inputFile = File.asFile(result.outputFiles[0])
+    protectFile(inputFile)
+    return inputFile!
+  }
 }
 
-export async function warmEngines() {
+export async function warmUp(n: number) {
   await sleep(1)
   var size = await getStore().getState().inputFile.size()
-  await serial(array(40).map(i => async () => {
-    await change(randomIntBetween(0, size.width - 1), randomIntBetween(0, size.height - 1));
+  await serial(array(n).map(i => async () => {
     await sleep(1);
+    await change(randomIntBetween(0, size.width - 1), randomIntBetween(0, size.height - 1));
   }))
 }
 
@@ -72,3 +84,8 @@ export async function handleSetVideoEnable(enabled: boolean) {
   await setVideoEnable(enabled)
   getStore().setState({ video: enabled })
 }
+
+// export async function handleTakePicture( ) {
+  // await setVideoEnable(enabled)
+  // getStore().setState({ video: enabled })
+// }

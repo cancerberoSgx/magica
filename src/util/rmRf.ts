@@ -1,6 +1,6 @@
 import { FS } from '../file/emscriptenFs'
+import { getOption } from '../options'
 import { ls } from './lsR'
-import { getOption } from '../options';
 
 export function rmRf(f: string, FS: FS, predicate: (f: string) => boolean = f => true, removed: string[] = []) {
   if (FS.isDir(FS.stat(f).mode)) {
@@ -10,7 +10,7 @@ export function rmRf(f: string, FS: FS, predicate: (f: string) => boolean = f =>
         FS.rmdir(f)
         removed.push(f)
       } catch (error) {
-          getOption('debug') && console.log(`Error in rmRf command rmdir ${f}`, error);
+        getOption('debug') && console.log(`Error in rmRf command rmdir ${f}`, error)
         return true
       }
     }
@@ -20,7 +20,7 @@ export function rmRf(f: string, FS: FS, predicate: (f: string) => boolean = f =>
       FS.unlink(f)
       removed.push(f)
     } catch (error) {
-      getOption('debug') && console.log(`Error in rmRf command unlink ${f}`, error);
+      getOption('debug') && console.log(`Error in rmRf command unlink ${f}`, error)
       return true
     }
   }

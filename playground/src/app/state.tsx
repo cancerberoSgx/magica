@@ -1,5 +1,5 @@
 import { File, RunResult } from 'magica'
-import { Example, examples } from "magica-examples"
+import { Example, ExampleField, examples } from "magica-examples"
 
 export interface State {
   example: Example
@@ -9,13 +9,13 @@ export interface State {
   script: string
   working: boolean
   showAllResultsOutput: boolean
-  fields: Field[]
+  fields: ExampleField[]
 }
 
-export interface Field {
-  id: string
-  value: string
-}
+// export interface Field {
+//   id: string
+//   value: string
+// }
 
 export interface ParserError {
   line: number
@@ -29,7 +29,7 @@ export async function getInitialState(): Promise<State> {
   return {
     example,
     inputFiles: [await File.fromUrl('bluebells.png') as File],
-    examples: examples(),
+    examples: [...examples()],
     result: null as any,
     script: '',
     working: false,

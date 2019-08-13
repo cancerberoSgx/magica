@@ -6,6 +6,7 @@ import { processCommand } from '../main/command'
 import { main } from '../main/main'
 import { getOptions } from '../options'
 import { CliOptions } from '../types'
+import { getFileName } from '../util/fileUtil';
 
 export async function cli(options: CliOptions) {
   preconditions(options as any)
@@ -16,7 +17,6 @@ export async function cli(options: CliOptions) {
   const inputPaths = asArray(options.input).filter(isString)
     .map(f => glob(f)).flat().filter(existsSync)
   const result = await main({
-    // debug: true,
     command: processCommand(options.command),
     inputFiles: inputPaths.map(name => ({ name: basename(name), content: readFileSync(name) }))
   })
@@ -31,8 +31,7 @@ export async function cli(options: CliOptions) {
     if (!existsSync(options.outputDir)) {
       mkdirSync(options.outputDir, { recursive: true })
     }
-    const outputName = pathJoin(options.outputDir, f.name.substring(options.emscriptenNodeFsRoot.length + 1))
-    // const outputName = f.name.substring(options.emscriptenNodeFsRoot.length+1)
+    const outputName = pathJoin(options.outputDir, getFileName(f.name))
     options.debug && console.log('Writing output file', outputName)
     writeFileSync(outputName, f.content, { encoding: 'binary' })
   })

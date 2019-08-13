@@ -6,8 +6,6 @@ import { IFile, Options, Result, RunOptions, RunResult } from '../types'
 import { arrayToCliOne, cliToArray, processCommand } from './command'
 import { _compileTimePreprocess, _runTimePreprocess } from './executeCommandPreprocessor'
 import { main } from './main'
-import { isCustomCommand } from './customCommand';
-import { getFileName } from '../util/util';
 
 /**
  * Has a signature compatible with main, but if `script` is given instead of `command` option then it's
@@ -40,7 +38,7 @@ export async function run<T extends IFile = IFile>(o: RunOptions): Promise<RunRe
     ...o,
     inputFiles
   })
-  
+
   const finalResult: RunResult = {
     results: [],
     commands,
@@ -69,7 +67,7 @@ export async function run<T extends IFile = IFile>(o: RunOptions): Promise<RunRe
 
     finalResult.commands[i] = processCommand(mainOptions.command)
   }))
-  
+
   const r: RunResult<T> = {
     ...finalResult,
     stdout: finalResult.results.map(r => r.stdout).flat(),

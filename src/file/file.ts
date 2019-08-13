@@ -11,7 +11,7 @@ import { run } from '../main/run'
 import { getOption } from '../options'
 import { IFile, Rgba, Size } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
-import { isDir, isFile, getFileName } from '../util/util'
+import { isDir, isFile } from '../util/fileUtil'
 import { protectFile } from './protected'
 
 /**
@@ -269,20 +269,20 @@ export class File implements IFile {
     return !!f && !!f.name && !!f.content && typeof f.constructor !== 'undefined' && !!(f as File).size && !!(f as File).infoOne
   }
 
-  public static asFile(f: IFile): File {
+  public static asFile(f: IFile) {
     return File.isFile(f) ? f : new File(f.name, f.content)
   }
 
-  public static asPath(f: string | IFile) { 
+  public static asPath(f: string | IFile) {
     return typeof f === 'string' ? f : f.name
   }
 
-  public static fromRGBAImageData(d: RGBAImageData) {
-    return new File('img.rgba', d.data, undefined, undefined, d.width, d.height)
+  public static fromRGBAImageData(d: RGBAImageData, name = 'img.rgba') {
+    return new File(name, d.data, undefined, undefined, d.width, d.height)
   }
 
-  public static fromHTMLImageData(d: ImageData): File {
-    return File.fromRGBAImageData(d)
+  public static fromHTMLImageData(d: ImageData, name = 'img.rgba') {
+    return File.fromRGBAImageData(d, name)
   }
 
   public static async fileExists(f: string | IFile) {
@@ -297,8 +297,8 @@ export interface ResolveOptions {
   name?: string
 }
 
-interface RGBAImageData { 
-  width: number, 
+interface RGBAImageData {
+  width: number,
   height: number,
-   data: Uint8ClampedArray 
-  }
+  data: Uint8ClampedArray
+}

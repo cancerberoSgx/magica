@@ -5,7 +5,6 @@ import { change } from './app/change'
 import { getInitialState } from './app/state'
 import { getStore, _setStore } from './app/store'
 import { LayoutContainer } from './ui/layoutContainer'
-import './ui/styles.css'
 
 async function main() {
   _setStore(await getInitialState())
