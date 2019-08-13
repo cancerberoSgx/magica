@@ -1,8 +1,8 @@
 import { asArray, notUndefined } from 'misc-utils-of-mine-generic'
 import { File } from '../../file/file'
 import { ExtractInfoResultImage } from '../../image/imageInfo'
+import { Size } from '../../types'
 import { TemplateHelper } from './template'
-import { Size } from '../../types';
 
 interface Options {
   file: string | File

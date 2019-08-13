@@ -16,7 +16,7 @@ export function getRgbaPixel(f: File, x: number, y: number): Rgba {
   // throw new Error('Image must be .rgba and have own height and width properties')
   // }
 }
-export function coordsToIndex(width: number, x: number, y: number){
+export function coordsToIndex(width: number, x: number, y: number) {
   return (width! * y + x) * 4
 }
 export async function getPixels(f: File): Promise<Rgba[]> {
@@ -49,12 +49,12 @@ export async function imagePixelColor(img: IFile | undefined, x: number, y: numb
   }
 }
 
-export function rgbaToString(c: Rgba): string   {
-  return `rgba(${c.r},${c.g},${c.b},${c.a})`;
+export function rgbaToString(c: Rgba): string {
+  return `rgba(${c.r},${c.g},${c.b},${c.a})`
 }
 
 export function isRgbaImage(f: File) {
-  return f.name.endsWith('rgba') && f.width && f.content instanceof Uint8ClampedArray;
+  return f.name.endsWith('rgba') && f.width && f.content instanceof Uint8ClampedArray
 }
 
 export async function colorCount(img: IFile | undefined): Promise<number | undefined> {

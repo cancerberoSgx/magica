@@ -6,8 +6,9 @@ import { getOption } from '../options'
 import { Options } from '../types'
 import { main } from './main'
 import { run } from './run'
+import { readFile, isDir, writeFile, isFile } from '../util/util';
 
-export async function isCustomCommand(c: string[], o: Partial<Options>) {
+export async function isCustomCommand(c: string[] ) {
   return c.join(' ').trim().startsWith(getOption('customCommandPrefix'))
 }
 
@@ -28,11 +29,11 @@ export interface CustomCommandContext {
   FS: FS;
   options: Partial<Options>
   files: File[]
-  pushStdout(s: string): void;
-  pushStderr(s: string): void;
+  log(...s: string[]): void;
+  error(...s: string[]): void;
   File: typeof File
   writeFile(f: File): void
-  fileExists(f: string): boolean
+  isFile(f: string): boolean
   readFile(f: string): File
   isDirectory(f: string): boolean
   run: typeof run
@@ -40,37 +41,37 @@ export interface CustomCommandContext {
 }
 
 class CustomCommandContextImpl implements CustomCommandContext {
-  pushStdout: (s: string) => void;
-
-  pushStderr: (s: string) => void;
-
-  File: typeof File;
-
-  constructor(public options: Partial<Options>, public FS: FS, public files: File[]) {
-    this.pushStdout = pushStdout
-    this.pushStderr = pushStderr
-    this.File = File
-  }
-
-  fileExists(f: string): boolean {
-    throw new Error('Method not implemented.')
-  }
-
-  readFile(f: string): File {
-    throw new Error('Method not implemented.')
-  }
-
-  isDirectory(f: string): boolean {
-    throw new Error('Method not implemented.')
-  }
-
-  writeFile(f: File) {
-    this.FS.writeFile(f.name, f.content)
-  }
 
   main = main
 
   run = run
+  
+  log= pushStdout
+
+  error= pushStderr
+
+  File: typeof File;
+
+  constructor(public options: Partial<Options>, public FS: FS, public files: File[]) {
+    this.File = File
+  }
+
+  isFile(f: string): boolean {
+    return isFile(f, this.FS)
+  }
+
+  readFile(f: string): File {
+    return readFile(f, this.FS)
+  }
+
+  isDirectory(f: string): boolean {
+    return isDir(f, this.FS)
+  }
+
+  writeFile(f: File) {
+     writeFile(f, this.FS)
+  }
+
 }
 
 export async function dispatchCustomCommand(c: string[], o: Partial<Options>, FS: FS, files: File[]): Promise<NativeResult> {

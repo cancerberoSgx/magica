@@ -3,9 +3,8 @@ require('./util/magica').installMagica() // HEADS UP needs to be called before e
 
 export { FS } from "./file/emscriptenFs"
 export { File } from './file/file'
-export { getProtectedFile, isProtectedFile, protectFile } from './file/protected'
+export { isProtectedFile, protectFile } from './file/protected'
 export * from './image/html'
-export *  from './image/html'
 export { imageBuiltIn } from './image/imageBuiltIn'
 export { imageCompare } from './image/imageCompare'
 export { imageInfo } from './image/imageInfo'

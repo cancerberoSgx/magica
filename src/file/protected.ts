@@ -1,23 +1,20 @@
-import { magickLoaded } from '../imageMagick/magickLoaded'
 import { IFile } from '../types'
-import { File } from './file'
+import { getFilePath } from '../util/util';
+
 /**
  * If string is given is assumes as the path and must exists
  */
-export function protectFile(f: string | IFile) {
-  //TODO: we should get stat and modification data to know if it's dirty
-  protectedFiles[File.asPath(f)] = true
+export function protectFile(f: string | IFile, protect=true) {
+  // console.log(protectedFiles, getFilePath(f));
+  protectedFiles[getFilePath(f)] = protect
+  // console.log(protectedFiles, getFilePath(f));
 }
-export async function getProtectedFile(f: string | IFile) {
-  const { FS } = await magickLoaded
-  //TODO: check if dirty
-  const name = File.asPath(f)
-  const content = FS.readFile(name)
-  return { name, content }
-}
+ 
 export function isProtectedFile(f: string | IFile) {
-  return protectedFiles[File.asPath(f)]
+  // console.log(protectedFiles, getFilePath(f));
+  return protectedFiles[getFilePath(f)]
 }
+
 const protectedFiles: {
   [f: string]: boolean;
 } = {}

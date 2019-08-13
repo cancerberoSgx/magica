@@ -6,6 +6,8 @@ import { IFile, Options, Result, RunOptions, RunResult } from '../types'
 import { arrayToCliOne, cliToArray, processCommand } from './command'
 import { _compileTimePreprocess, _runTimePreprocess } from './executeCommandPreprocessor'
 import { main } from './main'
+import { isCustomCommand } from './customCommand';
+import { getFileName } from '../util/util';
 
 /**
  * Has a signature compatible with main, but if `script` is given instead of `command` option then it's
@@ -24,18 +26,9 @@ import { main } from './main'
  */
 export async function run<T extends IFile = IFile>(o: RunOptions): Promise<RunResult<T>> {
   const t0 = Date.now()
-  // var scriptStartEvent: ScriptEvent = {
-  //   name: 'onScriptStart',
-  //   scriptOptions: o,
-  //   stopPropagation: false,
-  //   scriptInterrupt: false
-  // }
-  // if (o.scriptListener) {
-  //   o.scriptListener(scriptStartEvent)
-  // }
-  if (o.debug) {
-    setOptions({ debug: o.debug })
-  }
+
+  o.debug && setOptions({ debug: o.debug })
+
   const emscriptenNodeFsRoot = getOption('emscriptenNodeFsRoot')
 
   const { FS } = await magickLoaded
@@ -47,6 +40,7 @@ export async function run<T extends IFile = IFile>(o: RunOptions): Promise<RunRe
     ...o,
     inputFiles
   })
+  
   const finalResult: RunResult = {
     results: [],
     commands,
@@ -56,6 +50,7 @@ export async function run<T extends IFile = IFile>(o: RunOptions): Promise<RunRe
     error: undefined,
     returnValue: undefined
   }
+
   await serial(commands.map((command, i) => async () => {
 
     let mainOptions: Options = { ...o, command, inputFiles: inputFiles.map(File.asFile) } as any //TODO
@@ -64,32 +59,17 @@ export async function run<T extends IFile = IFile>(o: RunOptions): Promise<RunRe
 
     let result: Result = await main(mainOptions)
 
-    // var commandEndEvent: ScriptEvent = {
-    //   name: 'afterCommand',
-    //   scriptOptions: o,
-    //   commandOptions: mainOptions,
-    //   stopPropagation: false,
-    //   scriptInterrupt: false,
-    //   commandResult: result
-    // }
-    // if (o.scriptListener) {
-    //   o.scriptListener(commandEndEvent)
-    //   //TODO: stopPropagation and scriptInterrupt
-    // }
-
-    result.outputFiles .forEach(f=>{
-      f.name =   f.name.startsWith(emscriptenNodeFsRoot) ? f.name.substring(emscriptenNodeFsRoot.length + 1) : f.name
-    })
-
-    inputFiles = [...inputFiles.filter(f => !result.outputFiles.find(f2 => f2.name === f.name)),
-    ...result.outputFiles]
+    inputFiles = [
+      ...inputFiles.filter(f => !result.outputFiles.find(f2 => f2.name === f.name)),
+      ...result.outputFiles
+    ]
       .map(File.asFile)
 
     finalResult.results.push(result)
 
     finalResult.commands[i] = processCommand(mainOptions.command)
-
   }))
+  
   const r: RunResult<T> = {
     ...finalResult,
     stdout: finalResult.results.map(r => r.stdout).flat(),

@@ -1,29 +1,42 @@
-// import { basename, dirname } from 'misc-utils-of-mine-generic'
 import { FS } from '../file/emscriptenFs'
+import { File } from '../file/file';
+import { getOptions } from '../options';
+import { IFile } from '../types';
 
-// /**
-//  * dirname
-//  */
-// export function getFileDir(f: string) {
-//   const baseName = basename(f)
-//   let folderName = f.substring(0, f.length - baseName.length)
-//   if (folderName.endsWith('/')) {
-//     folderName = folderName.substring(0, folderName.length - 1)
-//   }
-//   return folderName
-// }
+export function readFile( f:string, FS: FS): File {
+  return new File(getFileName(f), FS.readFile(getFilePath(f)) );
+}
 
-export function isDir(f: string, FS: FS) {
+export function getFileName(f: string|IFile) {
+  const { emscriptenNodeFsRoot } = getOptions()
+  const path =  typeof f === 'string' ? f : f.name
+  return path.startsWith(`${emscriptenNodeFsRoot}/`) ? path.substring(`${emscriptenNodeFsRoot}/`.length, path.length) : `${  path}`;
+}
+
+/**
+ * Returns absolute path of given 
+ */
+export function getFilePath(f: string|IFile) {
+  const { emscriptenNodeFsRoot } = getOptions()
+  const path =  typeof f === 'string' ? f : f.name
+  return path.startsWith(`${emscriptenNodeFsRoot}/`) ? path : `${emscriptenNodeFsRoot}/${  path}`;
+}
+
+export function writeFile( f: IFile, FS: FS) {
+  FS.writeFile(getFilePath(f.name), f.content)
+}
+
+export function isDir(f: string|IFile, FS: FS) {
   try {
-    return FS.isDir(FS.stat(f).mode)
+    return FS.isDir(FS.stat(getFilePath(f)).mode)
   } catch (error) {
     return false
   }
 }
 
-export function isFile(f: string, FS: FS) {
+export function isFile(f: string|IFile, FS: FS) {
   try {
-    return FS.isFile(FS.stat(f).mode)
+    return FS.isFile(FS.stat(getFilePath(f)).mode)
   } catch (error) {
     return false
   }

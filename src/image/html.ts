@@ -1,6 +1,6 @@
+import { getFileExtension } from 'misc-utils-of-mine-generic'
 import { File } from '../file/file'
-import { IFile } from '../types';
-import { getFileExtension } from 'misc-utils-of-mine-generic';
+import { IFile } from '../types'
 
 export async function toDataUrl(o: File, mime?: string) {
   mime = mime || await o.mimeType()

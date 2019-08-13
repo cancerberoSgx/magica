@@ -19,7 +19,7 @@ export class LSHelper implements TemplateHelper<Options, Promise<string[]>> {
     var files = options.recursive ? listFilesRecursively(path, FS) : ls(path, FS)
     var a: string[] = asArray<any>(files).map(f => typeof f === 'string' ? f : f.path)
     if (options.stdout) {
-      a.forEach(pushStdout)
+      a.forEach(s=>pushStdout(s))
     }
     return options.noReturnValue ? [] : a
   }

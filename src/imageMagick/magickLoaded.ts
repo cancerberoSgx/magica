@@ -15,9 +15,9 @@ export const magickLoaded = new Deferred<Main>()
 
 const stdout: string[] = []
 
-export function pushStdout(s: string) {
-  debug && console.log(`>> stdout >> ${s}`)
-  stdout.push(s)
+export function pushStdout(...s: string[]) {
+  debug && console.log(`>> stdout >> ${s.join(' ')}`)
+  stdout.push(...s)
 }
 
 export function resetStdout() {
@@ -30,9 +30,9 @@ export function getStdout() {
 
 const stderr: string[] = []
 
-export function pushStderr(s: string) {
-  debug && console.log(`>> stderr >> ${s}`)
-  stderr.push(s)
+export function pushStderr(...s: string[]) {
+  debug && console.log(`>> stderr >> ${s.join(' ')}`)
+  stderr.push(...s)
 }
 
 export function resetStderr() {

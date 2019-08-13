@@ -1,4 +1,4 @@
-import { dirname, objectKeys, tryTo } from 'misc-utils-of-mine-generic'
+import { dirname, objectKeys, tryTo, notUndefined } from 'misc-utils-of-mine-generic'
 import Queue from 'p-queue'
 import { File } from '../file/file'
 import { isProtectedFile, protectFile } from '../file/protected'
@@ -7,11 +7,13 @@ import { NativeResult } from '../imageMagick/createMain'
 import { magickLoaded } from '../imageMagick/magickLoaded'
 import { getOption, getOptions, setOptions } from '../options'
 import { Options, Result } from '../types'
-import { listFilesRecursively, ls } from '../util/lsR'
+import { listFilesRecursively, ls, lsR } from '../util/lsR'
 import { mkdirp } from '../util/mkdirp'
 import { rmRf } from '../util/rmRf'
 import { processCommand } from './command'
 import { dispatchCustomCommand, isCustomCommand } from './customCommand'
+import { FS } from '../file/emscriptenFs';
+import { readFile, writeFile } from '../util/util';
 
 let queue: Queue | undefined
 
@@ -31,23 +33,24 @@ export function main(o: Partial<Options>): Promise<Result> {
 
 async function mainWasm(o: Partial<Options>): Promise<Result> {
   const t0 = Date.now()
-  // set global options that user might given
   objectKeys(getOptions())
-    .filter(k => !!o[k])
+    .filter(k => notUndefined(o[k]))
     .forEach(k => setOptions({ [k]: o[k] }))
 
   const { emscriptenNodeFsRoot, debug } = getOptions()
   const { FS, main } = await magickLoaded
   debug && console.log('main call given options: ', o)
+
   FS.chdir(emscriptenNodeFsRoot)
   const files = await File.resolve(o.inputFiles)
+  
   files.forEach(f => {
     const dirName = dirname(f.name)
     if (dirName.trim()) {
       mkdirp(dirName, p => FS.analyzePath(p).exists, FS.mkdir)
     }
     debug && console.log('FS.write', f.name)
-    FS.writeFile(f.name, f.content)
+    writeFile(f, FS)
   })
 
   const beforeTree = listFilesRecursively(emscriptenNodeFsRoot, FS)
@@ -57,7 +60,7 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
   if (o.verbose) {
     processedCommand.splice(1, 0, '-verbose')
   }
-  if (await isCustomCommand(processedCommand, o)) {
+  if (await isCustomCommand(processedCommand )) {
     returnValue = await dispatchCustomCommand(processedCommand, o, FS, files)
   } else {
     debug && console.log('main processed command:', processedCommand)
@@ -66,37 +69,38 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
     } catch (error) {
       debug && console.error('MAIN error', error)
       returnValue = {
-        stderr: [], stdout: [], error: error, returnValue: undefined
+        stderr: [], 
+        stdout: [], 
+        error, 
+        returnValue: undefined
       }
     }
   }
   var verbose = o.verbose ? tryTo(() => parseConvertVerbose(returnValue.stdout)) || [] : []
 
-  const afterTree = listFilesRecursively(emscriptenNodeFsRoot, FS)
-
-  const diffTree = afterTree.filter(f => !beforeTree.find(b => b.path === f.path))
-  const outputFiles = diffTree
-    .map(f => new File(
-      f.path.startsWith(`/${emscriptenNodeFsRoot}/`) ? f.path.substring(`/${emscriptenNodeFsRoot}/`.length) : f.path, 
-      FS.readFile(f.path)
-    ))
-    // .filter(f => !isProtectedFile(f.name))
+  const outputFiles = 
+    listFilesRecursively(emscriptenNodeFsRoot, FS)  
+    .filter(f => !beforeTree.find(b => b.path === f.path)) // tree diff
     .map(f => {
-      var v = verbose.find(v => f.name.endsWith(v.outputName))
+        const file = readFile(f.path, FS)
+      var v = verbose.find(v => file.name.endsWith(v.outputName))
       if (v) {
-        f.width = v.outputSize.width
-        f.height = v.outputSize.height
+        file.width = v.outputSize.width
+        file.height = v.outputSize.height
       }
       if (o.protectOutputFiles) {
-        protectFile(f)
+        protectFile(file)
       }
-      return f
+      return file
     })
-  const removed: string[] = []
-  ls(emscriptenNodeFsRoot, FS).filter(f => !isProtectedFile(f))
+    
+    const removed: string[] = []
+    ls(emscriptenNodeFsRoot, FS)
+    .filter(f => !isProtectedFile(f))
     .forEach(f => rmRf(f, FS, f => !isProtectedFile(f), removed))
-  o.debug && console.log('Removed files:', removed)
-  o.debug && console.log('Protected files:', ls(emscriptenNodeFsRoot, FS).map(isProtectedFile))
+    
+  o.debug && console.log(`Removed files: ${removed}\nProtected files: ${ls(emscriptenNodeFsRoot, FS).map(isProtectedFile)}`)
+  
   return {
     ...returnValue,
     outputFiles,
@@ -106,6 +110,5 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
     },
   }
 }
-
 
 

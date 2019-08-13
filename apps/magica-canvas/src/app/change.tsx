@@ -21,7 +21,7 @@ export async function change(x: number, y: number, inputFiles: File[] = []) {
     await loadHtmlCanvasElement(r.outputFiles[0] as any, getCanvasContext())
   }
   state.time = (performance.now() - t0).toFixed(2)
-  state.callCounter++;
+  state.callCounter++
   state.working = false
   getStore().setState({ ...state })
 }

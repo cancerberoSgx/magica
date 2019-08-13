@@ -1,6 +1,6 @@
 import { getGlobal } from 'misc-utils-of-mine-generic'
 import { File } from '../file/file'
-import { getProtectedFile, isProtectedFile, protectFile } from '../file/protected'
+import {  isProtectedFile, protectFile } from '../file/protected'
 import { toDataUrl } from '../image/html'
 import { imageBuiltIn } from '../image/imageBuiltIn'
 import { imageCompare } from '../image/imageCompare'
@@ -19,7 +19,7 @@ function _getMagica() {
   return {
     File, toDataUrl, imageBuiltIn, imageCompare, magickLoaded, imageInfo,
     imagePixelColor, registerCommandPreprocessor, main, cliToArray,
-    run, protectFile, isProtectedFile, getProtectedFile, addTemplateHelper,
+    run, protectFile, isProtectedFile,  addTemplateHelper,
     getOptions, setOptions, colorCount
   }
 }
@@ -32,7 +32,4 @@ export function getMagica(): Magica {
 
 export function installMagica() {
   getGlobal().Magica = _getMagica()
-  // magickLoaded.then(()=>{
-  //   getGlobal().Magica.magicaReady = true
-  // })
 }

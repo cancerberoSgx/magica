@@ -5,13 +5,13 @@ import { asArray, basename, getFileNameFromUrl, isNode, notUndefined, serial } f
 import { toDataUrl } from '../image/html'
 import { imageCompare } from '../image/imageCompare'
 import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
-import { colorCount, imagePixelColor, getPixels, coordsToIndex, rgbaToString } from '../image/imageUtil'
+import { coordsToIndex, getPixels, imagePixelColor, rgbaToString } from '../image/imageUtil'
 import { magickLoaded } from '../imageMagick/magickLoaded'
 import { run } from '../main/run'
 import { getOption } from '../options'
-import { IFile, Size, Rgba } from '../types'
+import { IFile, Rgba, Size } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
-import { isDir, isFile } from '../util/util'
+import { isDir, isFile, getFileName } from '../util/util'
 import { protectFile } from './protected'
 
 /**
@@ -33,11 +33,10 @@ export class File implements IFile {
    */
   public height?: number
   protected _info: ExtractInfoResultImage[] | undefined
-  protected _pixels?:  Rgba[];
+  protected _pixels?: Rgba[];
 
-  constructor(public readonly name: string, public readonly content: IFile['content'], 
+  constructor(public readonly name: string, public readonly content: IFile['content'],
     isProtected: boolean = false, url?: string, width?: number, height?: number) {
-    // this.isProtected = isProtected
     this.url = url
     this.width = width
     this.height = height
@@ -81,7 +80,7 @@ export class File implements IFile {
     var i = await this.infoOne()
     this.width = i.geometry ? i.geometry.width : this.width
     this.height = i.geometry ? i.geometry.height : this.height
-    return { width: this.width||0, height: this.height||0 }
+    return { width: this.width || 0, height: this.height || 0 }
   }
 
   public async widthXHeight(): Promise<string> {
@@ -98,7 +97,7 @@ export class File implements IFile {
   }
 
   public async pixel(x: number, y: number): Promise<string | undefined> {
-    if(this._pixels){
+    if (this._pixels) {
       return rgbaToString(this._pixels[coordsToIndex(this.width!, x, y)])
     }
     return await imagePixelColor(this, x, y)
@@ -106,19 +105,15 @@ export class File implements IFile {
 
   public async rgba(x: number, y: number): Promise<Rgba | undefined> {
     await this.pixelCalculate()
-    return  this._pixels![coordsToIndex(this.width!, x, y)]
+    return this._pixels![coordsToIndex(this.width!, x, y)]
   }
 
   /**
    * it will compute all pixel colors so following [pixel] and [rgba] calls will be fast
    */
-  public async pixelCalculate() {    
-    this._pixels = await getPixels(this )
+  public async pixelCalculate() {
+    this._pixels = await getPixels(this)
   }
-
-  // public colorCount(): Promise<number | undefined> {
-  //   return colorCount(this)
-  // }
 
 	/** 
    * Creates a DataUrl like `data:image/png;name=f.png;base64,` using given base64 content, mimeType and fileName. 
@@ -278,7 +273,7 @@ export class File implements IFile {
     return File.isFile(f) ? f : new File(f.name, f.content)
   }
 
-  public static asPath(f: string | IFile) {
+  public static asPath(f: string | IFile) { 
     return typeof f === 'string' ? f : f.name
   }
 
@@ -301,4 +296,9 @@ export interface ResolveOptions {
   protected?: boolean
   name?: string
 }
-interface RGBAImageData { width: number, height: number, data: Uint8ClampedArray }
+
+interface RGBAImageData { 
+  width: number, 
+  height: number,
+   data: Uint8ClampedArray 
+  }
