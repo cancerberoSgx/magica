@@ -7,7 +7,7 @@
 // import { File, run } from '../../../../dist/src';
 
 // export class CamTest2 extends AbstractComponent {
-   
+
 //   async componentDidUpdate(){
 //     const constraints = {
 //       video: true

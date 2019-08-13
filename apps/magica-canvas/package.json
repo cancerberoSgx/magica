@@ -3,17 +3,20 @@
   "description": "canvas and ImageMagick operations to see how fast it can be",
   "version": "0.0.1",
   "main": "dist/src/baseApp.js",
+  "private": true,
   "types": "dist/src/baseApp.d.ts",
   "scripts": {
     "clean": "rm -rf dist docs",
-    "start": "npm run clean && P=$PWD && cd ../../ && npm run build && cd $P && npm run build && npx parcel serve src/index.html -d docs ",
-    "copy": "mkdir -p docs ; cp -r node_modules/magica/dist/src/imageMagick/compiled/magick.wasm ../../test/assets/* docs",
+    "build-prepare": "npm run clean && P=$PWD && cd ../../ && npm run build && cd $P && npm run build",
+    "start": "npm run build-prepare && npx parcel serve src/index.html -d docs ",
+    "copy": "mkdir -p docs ; cp -r node_modules/magica/dist/src/imageMagick/compiled/magick.wasm ../../test/assets/bluebells.png docs",
     "clean-npm": "rm -rf node_modules/ package-lock.json",
     "format": "npx ts-refactor format \"**/*.ts*\" ../../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\"  ../../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
     "lint": "npm run organizeImports && npm run format",
     "build": "npm run clean && npx tsc && npm run copy",
-    "all": "npm run clean && npm run lint && npm run build"
+    "build-prod": "npm run build-prepare && npx parcel build src/index.html -d docs --no-content-hash --detailed-report --no-source-maps --public-url './' && rm -rf ../../../demos/docs/magica/canvas && mkdir -p ../../../demos/docs/magica/canvas &&  mv docs/* ../../../demos/docs/magica/canvas",
+    "all": "npm run clean && npm run lint && npm run build-prod"
   },
   "keywords": [
     "typescript"
@@ -21,7 +24,6 @@
   "author": "Sebastián Gurin",
   "license": "MIT",
   "devDependencies": {
-    "@types/file-saver": "^2.0.1",
     "@types/node": "^12.6.8",
     "@types/react": "^16.8.24",
     "@types/react-dom": "^16.8.5",
@@ -32,9 +34,7 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "file-saver": "^2.0.2",
     "magica": "file:../..",
-    "magica-examples": "file:../magica-examples",
     "misc-utils-of-mine-generic": "^0.2.15",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"

@@ -1,21 +1,22 @@
-import { File, protectFile } from 'magica'
+import { File } from 'magica'
+import { fieldArrayToObject } from '../misc'
 import { Command, commands } from './commands'
-import { fieldArrayToObject } from './misc';
-import { createInputFile } from './dispatch';
+import { createInputFile } from './dispatch'
 
 export async function getInitialState(): Promise<State> {
-  var inputFile = await createInputFile(await File.fromUrl('bluebells.png') as File);
+  var inputFile = await createInputFile(await File.fromUrl('bluebells.png') as File)
   const command = commands[0]
   const s = {
     command,
     inputFile,
     x: 0,
     y: 0,
-    onMouseMove: false,
+    onMouseMove: true,
     time: '',
     fields: fieldArrayToObject(command),
+    callCounter: 0,
     stderr: [],
-    working:false,
+    working: false,
     commandString: '',
     video: false
   } as State
@@ -26,7 +27,7 @@ export async function getInitialState(): Promise<State> {
 export interface State {
   stderr: string[];
   working: boolean;
-  fields: {[s:string]:Field}
+  fields: { [s: string]: Field }
   time: string;
   onMouseMove: boolean;
   inputFile: File;
@@ -34,11 +35,12 @@ export interface State {
   y: number
   command: Command
   commandString: string
-  video:boolean
+  video: boolean
+  callCounter: number
 }
 
 export interface Field {
   id: string
   value: string
-  type?: 'string'|'integer'|'float'
+  type?: 'string' | 'integer' | 'float'
 }

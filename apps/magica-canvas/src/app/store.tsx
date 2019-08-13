@@ -22,6 +22,7 @@ class Store extends Emitter<{ oldState: State, partial: Partial<State>, newState
 }
 
 let store: Store
+
 export function getStore() {
   return store
 }

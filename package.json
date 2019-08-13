@@ -29,7 +29,8 @@
     "docs-api": "rm -rf docs && typedoc  --ignoreCompilerErrors --theme markdown --out docs --readme none --excludeNotExported src/index.ts ",
     "docs-readme-toc": "npx markdown-toc README.md -i",
     "all": "npm run clean && npm run lint && npm run build && npm run test && npm run test-js && npm run docs",
-    "all-publish": "npm run all && git commit -a -m 'version patch' && npm version patch && npm publish"
+    "all-publish": "npm run all && git commit -a -m 'version patch' && npm version patch && npm publish",
+    "all-projects": "sh buildAllProjects.sh"
   },
   "license": "MIT",
   "dependencies": {

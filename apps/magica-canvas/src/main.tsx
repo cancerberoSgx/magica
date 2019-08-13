@@ -1,29 +1,19 @@
 import 'babel-polyfill'
 import * as React from 'react'
 import { render } from 'react-dom'
-import { change } from './change'
-import {  Layout } from './layout'
-import { getInitialState } from './state'
-import { getStore, _setStore } from './store'
-import './styles.css'
-import { Canvas } from './canvas';
+import { change } from './app/change'
+import { getInitialState } from './app/state'
+import { getStore, _setStore } from './app/store'
+import { LayoutContainer } from './ui/layoutContainer'
+import './ui/styles.css'
 
 async function main() {
   _setStore(await getInitialState())
-  render(<>
-    <table>
-      <tr>
-        <td>
-        <Canvas/>
-        </td>
-        <td>
-        <Layout />
-        </td>
-      </tr>
-    </table> 
-    </>
-  , document.getElementById('layout-container')!)
+  var container = document.createElement('div')
+  document.body.append(container)
+  render(<LayoutContainer />, container)
   await change(0, 0, [getStore().getState().inputFile])
 }
 
 main()
+

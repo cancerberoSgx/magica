@@ -1,6 +1,6 @@
 import { File, loadHtmlCanvasElement, main } from 'magica'
+import { getCanvasContext } from '../ui/canvas'
 import { getStore } from './store'
-import { getCanvasContext } from './canvas';
 
 export async function change(x: number, y: number, inputFiles: File[] = []) {
   var state = getStore().getState()
@@ -14,13 +14,14 @@ export async function change(x: number, y: number, inputFiles: File[] = []) {
     inputFiles,
     verbose: true
   })
-  if(r.outputFiles.length===0){
+  if (r.outputFiles.length === 0) {
     state.stderr = r.stderr
-  }else {
+  } else {
     state.stderr = []
     await loadHtmlCanvasElement(r.outputFiles[0] as any, getCanvasContext())
   }
   state.time = (performance.now() - t0).toFixed(2)
+  state.callCounter++;
   state.working = false
   getStore().setState({ ...state })
 }

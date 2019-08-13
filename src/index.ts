@@ -5,7 +5,7 @@ export { FS } from "./file/emscriptenFs"
 export { File } from './file/file'
 export { getProtectedFile, isProtectedFile, protectFile } from './file/protected'
 export * from './image/html'
-export { toDataUrl } from './image/html'
+export *  from './image/html'
 export { imageBuiltIn } from './image/imageBuiltIn'
 export { imageCompare } from './image/imageCompare'
 export { imageInfo } from './image/imageInfo'

@@ -1,8 +1,20 @@
 import { File } from '../file/file'
+import { IFile } from '../types';
+import { getFileExtension } from 'misc-utils-of-mine-generic';
 
 export async function toDataUrl(o: File, mime?: string) {
   mime = mime || await o.mimeType()
   return 'data:' + mime + ';' + o.name + ';base64,' + File.toBase64(o)
+}
+
+/**
+ * Unsafe synchronous operation, please use [toDataUrl]
+ */
+export function toDataUrlSync(o: IFile, mime = `image/${getFileExtension(o.name)}`) {
+  return `data:${mime};base64,${btoa(
+    (o.content as any as number[])
+      .reduce((data, byte) => data + String.fromCharCode(byte), '')
+  )}`
 }
 
 export async function loadHtmlImageElement(o: File, el?: HTMLImageElement, forceDataUrl = false): Promise<HTMLImageElement> {

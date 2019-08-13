@@ -8,11 +8,12 @@
 ## TODO / Road map
 - [ ] run(verbose: true) - propagate verbose to main() call and RunResult.
 - [x] main(verbose: true) : {..., verbose: VerboseInfo} - with output size
+- [ ] apps/magica-react - react components to different views of images and commands. 
 - [ ] implement a monaco syntax color and autocompletion like we did in cannabis
 - [ ] move exaples to its own project
 - [ ] test unicode chars with fonts 
 - [ ] performance tests in the browser
-- [ ] fix testUmdWasmLocationTest in browser test so dont break on pulish
+- [ ] fix testUmdWasmLocationTest in browser test so dont break on publish
 - [ ] concurrency node.js/CLI - if executed in different processes concurrently in the same folder, since working_tmp is the same will fail
 - [ ] do the same as mainConcurrency for run()
 - [ ] options should allow to define a different nodeJsFsRoot or emscriptenFsRoot 
@@ -20,7 +21,7 @@
   - [ ] listFormat() should parse read/write info too
 - [ ] distribute magica as esm module (< script type"module...)
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
-- [ ] try to build something similar to a real time experience with canvas and IMG cache format files being careful not to remove them. User moving mouse  affects the canvas (processed with IM)
+- [x] try to build something similar to a real time experience with canvas and IMG cache format files being careful not to remove them. User moving mouse  affects the canvas (processed with IM)
 - [ ] I should be able to make output files protected by config.
 - [ ] run() scriptListener  . finish the feature and test it or drop it
 - [ ] test mkdir -p for output files   
@@ -39,13 +40,17 @@
   - [ ] when abort use that info to build the result 
 - [ ] scripts/generateImEnum.ts we should execute our CLI to extract 
 - [ ] test -font companion:  -family, -stretch, -style, and -weight.
-- [ ] libheif tests
+- [ ] librsvg 
+  - [ ] libxml tests
+  - [ ] librsvg tests
+
 - [ ] libheif 
+  - [ ] libheif tests
 - [ ] API to manipulate pixels in memory - currently not possible with IM CLI-based API. 
   - [ ] integrate haxe-bitmap js API that currently reads RGBA-8bit raw bitmaps
     - [ ] probably need to support 16 bit depth too
   - why ? so we also contribute code there for cool algorithms and filters - and we already have a nice API defined
-  - [ ] collect all IM commads executed when npm test  . Present that as test evidense ii n a table
+  - [ ] collect all IM commands executed when npm test  . Present that as test evidence ii n a table
 
 ## WIP
 
@@ -116,7 +121,7 @@
 
 ### problems descriptions:
 
-#### a doubt about templates - do we really need two types of templates ? compile time and runtime - or just with compilet time is enough? templates:
+#### a doubt about templates - do we really need two types of templates ? compile time and runtime - or just with compiled time is enough? templates:
 
 TLDR: wr support both compile tme and tuntime templates - but in general users won't need these later. Also runtime templates require to be all the declaration in the same line of code. 
 - [x] We will try to solve all scripting problems just with templates and not implement virtual commands or extra syntax since that would not be KISS. Nevertheless static templates can not accomplish all situations, in general when you meed concrete values new commands (at runtime - not a compile time) are need - templates are evaluated at compile time (For example, I want to protect imperatively one command's output file). But still we will try to solve this only with templates  so we don't have to parse any script code. The only way to support it without virtual commands is by adding event emitter in run() to protect files when they are created if needed
@@ -138,6 +143,8 @@ var result = await run({script:`convert <%= await resolve('foo.png') -scale <%= 
 - [ ] a tool to convert ttf, ect font files to bitmaps (user can choose font size style colors shadows, background , transparency and policy to divide the glyphs  - single image vs multiple images.) etc. similar to http://kvazars.com/littera/ 
 
 # <Magick> react component
+
+* apps/magica-react
 * to show the result images of gicen input files and commands as react component. whyle the command is executed show a comrfigurable loading visual feedback. example: 
   * how to solve wewirker ? 
   * support input as urls, blobs, image elements, canvas els, or passing directly the File objects

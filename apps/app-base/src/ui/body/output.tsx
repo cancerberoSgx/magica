@@ -1,5 +1,5 @@
 import FileSaver from 'file-saver'
-import { toDataUrl } from 'magica'
+import { toDataUrlSync } from 'magica'
 import * as React from 'react'
 import { Header, Segment, TextArea } from 'semantic-ui-react'
 import { State } from '../../app/state'
@@ -22,7 +22,7 @@ export class Output extends AbstractComponent {
             var blob = new Blob([f.content])
             FileSaver.saveAs(blob, f.name)
           }}>{f.name}
-            <img src={toDataUrl(f)} />
+            <img src={toDataUrlSync(f)} />
           </a>
         )}
         <div><Header as="h4">stdout</Header>

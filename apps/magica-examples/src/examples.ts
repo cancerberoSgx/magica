@@ -751,6 +751,43 @@ convert <%= inputFiles[0].name %>  boolean_mask.miff \\
   differenceRemoveBackground.png
     `.trim(),
   },
-
+  {
+    name: 'Rippled Water Reflections',
+    description: `<a href="https://imagemagick.org/Usage/mapping/#water_ripples">See ImageMagick examples page mapping/#water_ripples</a>`,
+    tags: [ExampleTag.artistic],
+    inputFiles: ['bluebells.png'],
+    fields: [
+    ],
+    script: `
+    convert -size <%= await inputFiles[0].widthXHeight() %> gradient:  -evaluate sin 9 wave_gradient.miff
+    convert -size <%= await inputFiles[0].widthXHeight() %> gradient: \
+      ( wave_gradient.miff \
+          +clone -compose multiply -composite ) \
+      ( -clone 0 -negate -evaluate divide 2 \
+          -clone 1 -compose plus -composite ) \
+      -delete 0-1      waves_decreasing.miff
+    convert <%=inputFiles[0].name %>  waves_decreasing.miff  \
+      -background transparent -virtual-pixel transparent \
+      -shear 22x0  -compose Displace -define compose:args=12x12 -composite \
+      -flip   +level 1%  \
+      <%=inputFiles[0].name %>  +swap -append   flower_in_water.png 
+    `.trim(),
+  },
+  {
+    name: 'Color histogram math',
+    description: `<a href="http://www.imagemagick.org/Usage/color_mods/#linear">See ImageMagick examples page color_mods/#linear</a>`,
+    tags: [ExampleTag.artistic],
+    inputFiles: ['bluebells.png'],
+    fields: [
+      { id: 'gradient', value: 'blue-red' },
+      { id: 'region', value: '150x150+33+20' },
+    ],
+    script: `
+convert <%= inputFiles[0].name %> \\
+  ( +clone -crop  <%= get('region') %> -size 1x2 gradient:<%= get('gradient') %> \\
+    -fx 'v.p{0,1}+(v.p{0,0}-v.p{0,1})*u^1.3' \\
+  ) -flatten gg.png
+    `.trim(),
+  },
 
 ]
