@@ -16,6 +16,7 @@
     "lint": "npm run organizeImports && npm run format",
     "build": "npm run clean && npx tsc && npm run copy",
     "build-prod": "npm run build-prepare && npx parcel build src/index.html -d docs --no-content-hash --detailed-report --no-source-maps --public-url './' && rm -rf ../../../demos/docs/magica/canvas && mkdir -p ../../../demos/docs/magica/canvas &&  mv docs/* ../../../demos/docs/magica/canvas",
+    "build-prod-q8-no-hdri": "npm run build-prepare && npx parcel build src/index.html -d docs --no-content-hash --detailed-report --no-source-maps --public-url './' && rm -rf ../../../demos/docs/magica/canvas-q8-no-hdri && mkdir -p ../../../demos/docs/magica/canvas-q8-no-hdri &&  mv docs/* ../../../demos/docs/magica/canvas-q8-no-hdri",
     "all": "npm run clean && npm run lint && npm run build-prod"
   },
   "keywords": [
@@ -30,10 +31,12 @@
     "babel-polyfill": "^6.26.0",
     "http-server": "^0.11.1",
     "parcel": "^1.12.3",
+    "sass": "^1.22.9",
     "ts-refactor": "0.0.9",
     "typescript": "^3.5.3"
   },
   "dependencies": {
+    "bulma": "^0.7.5",
     "magica": "file:../..",
     "misc-utils-of-mine-generic": "^0.2.15",
     "react": "^16.8.6",

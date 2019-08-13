@@ -9,19 +9,13 @@ import { TimeMemory } from './timeMemory'
 export class Layout extends AbstractComponent {
 
   render() {
-    return <>
+    return <div className="content">
       <About />
-      <Input />
-      <TimeMemory />
-
       <Command />
-
       <Fields />
-
-
+      <Input /><br/>
+      <TimeMemory />
       <div >{this.state.stderr.map(s => <span>{s}</span>)}</div>
-
-
-    </>
+    </div>
   }
 }

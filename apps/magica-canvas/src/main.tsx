@@ -1,4 +1,6 @@
 import 'babel-polyfill'
+import '../node_modules/bulma/bulma.sass'
+import './ui/styles.scss'
 import * as React from 'react'
 import { render } from 'react-dom'
 import { change } from './app/change'

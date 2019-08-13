@@ -1,8 +1,8 @@
 import { File, fileUtil, magickLoaded, protectFile, run } from 'magica'
 import { array, notUndefined, randomIntBetween, serial, sleep } from 'misc-utils-of-mine-generic'
-import { fieldArrayToObject } from '../misc'
+import { fieldArrayToObject, time } from '../util/misc'
 import { CANVAS_WIDTH } from '../ui/canvas'
-import { setVideoEnable } from '../video'
+import { setVideoEnable } from '../util/video'
 import { change } from './change'
 import { commands } from './commands'
 import { Field } from './state'
@@ -72,12 +72,16 @@ export async function createInputFile(f: File) {
 }
 
 export async function warmUp(n: number) {
+  getStore().setState({warmUpTime: '', working: true})
+  var t0=performance.now()
   await sleep(1)
   var size = await getStore().getState().inputFile.size()
   await serial(array(n).map(i => async () => {
     await sleep(1);
     await change(randomIntBetween(0, size.width - 1), randomIntBetween(0, size.height - 1));
   }))
+  
+  getStore().setState({warmUpTime: time((performance.now()-t0)/n), working: false})
 }
 
 export async function handleSetVideoEnable(enabled: boolean) {

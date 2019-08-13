@@ -25,7 +25,7 @@ if [ "$SKIP_CONFIG" -eq "0" ]; then
   # LDFLAGS="$LDFLAGS"
 
   emconfigure ./configure --prefix="$PREFIX" \
-  --with-quantum-depth=16 --enable-hdri=yes \
+  --with-quantum-depth=8 --enable-hdri=no \
     --without-threads --disable-shared --disable-openmp --enable-static \
     --without-jbig --without-dps --without-fontconfig \
     --with-utilities --with-autotrace \

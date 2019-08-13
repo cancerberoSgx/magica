@@ -1,5 +1,5 @@
 import { File } from 'magica'
-import { fieldArrayToObject } from '../misc'
+import { fieldArrayToObject, getImageMagickVersion } from '../util/misc'
 import { Command, commands } from './commands'
 import { createInputFile } from './dispatch'
 
@@ -13,12 +13,14 @@ export async function getInitialState(): Promise<State> {
     y: 0,
     onMouseMove: true,
     time: '',
+    warmUpTime: '',warmUpIterations: 50,
     fields: fieldArrayToObject(command),
     callCounter: 0,
     stderr: [],
     working: false,
     commandString: '',
-    video: false
+    video: false,
+    imageMagickVersion: await getImageMagickVersion()
   } as State
   s.commandString = command.command(s)
   return s
@@ -29,6 +31,8 @@ export interface State {
   working: boolean;
   fields: { [s: string]: Field }
   time: string;
+  warmUpIterations: number;
+  warmUpTime: string;
   onMouseMove: boolean;
   inputFile: File;
   x: number
@@ -37,6 +41,7 @@ export interface State {
   commandString: string
   video: boolean
   callCounter: number
+  imageMagickVersion:string
 }
 
 export interface Field {

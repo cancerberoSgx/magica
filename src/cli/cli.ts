@@ -6,7 +6,7 @@ import { processCommand } from '../main/command'
 import { main } from '../main/main'
 import { getOptions } from '../options'
 import { CliOptions } from '../types'
-import { getFileName } from '../util/fileUtil';
+import { getFileName } from '../util/fileUtil'
 
 export async function cli(options: CliOptions) {
   preconditions(options as any)
