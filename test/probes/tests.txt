@@ -1,0 +1,43 @@
+
+
+convert <%= inputFiles[0].name%> -background none  -fill red \
+  -fuzz 11% -fill none -draw 'color 97,266 floodfill' o.png
+<% 
+var points = [{x:97, y: 266}, {x:122, y: 200}, {x:156, y: 10}, {x:184, y:8}, {x:156, y: 10}, {x:208, y: 19}, {x:200, y: 52}, {x:202, y: 73}] 
+  points.forEach((p, i)=>{ %>
+convert <%= i>0 ?('aux'+(i-1)+'.png') : inputFiles[0].name %> -background none  -fill red \
+   -fuzz 11% -fill none -draw 'color <%= p.x+','+p.y %> floodfill' aux<%= i %>.png
+<% }) %>
+convert  <%= points.map((p, i)=>`aux${i}.png`).join(' ') %> oo.gif
+
+
+```
+convert <%= inputFiles[0].name%> -fill none -fuzz 12% -draw 'color 0,0 floodfill' -flop  -draw 'color 0,0 floodfill' -flip  -draw 'color 0,0 floodfill' -flop  -draw 'color 0,0 floodfill' -flip  result.png
+
+# Detect modified pixels
+composite -compose difference picture1.jpg picture2.jpg diff.png
+# Ignore minor differences (jpeg noise)
+convert -threshold 25% diff.png diff2.png
+# Apply mask
+composite -compose CopyOpacity diff2.png picture.jpg result.png
+
+
+
+
+
+#!/bin/bash
+IMAGE=$1
+SUFFIX=$2
+echo "converting ${IMAGE}.${SUFFIX}"
+convert ${IMAGE}.${SUFFIX} \( +clone -fx 'p{10,10}' \) -compose Difference -composite -modulate 1,0   ${IMAGE}_difference.png
+convert ${IMAGE}.${SUFFIX} ${IMAGE}_difference.png -compose Copy_Opacity -composite ${IMAGE}_trans.png
+
+# At this point the entire image is too transparent, but the background is removed..
+# We will clone the image over an over, and combine them to get the image itself back with a good opacity. 
+
+for i in {1..20}
+do
+  convert ${IMAGE}_trans.png  +clone  -background none   -flatten   ${IMAGE}_trans.png
+  sleep 0.1
+done
+```
