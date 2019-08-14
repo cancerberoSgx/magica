@@ -7,10 +7,10 @@
 
 ## TODO / Road map
 - [ ] run(verbose: true) - propagate verbose to main() call and RunResult.
-- [x] main(verbose: true) : {..., verbose: VerboseInfo} - with output size
+- [ ] magick command is not available, only convert, identify - but we should be using magick not those. (or is it that we are really executing magick and what we pass are its args ? ). Research.
 - [ ] apps/magica-react - react components to different views of images and commands. 
 - [ ] implement a monaco syntax color and autocompletion like we did in cannabis
-- [ ] move exaples to its own project
+- [ ] move examples to its own project
 - [ ] test unicode chars with fonts 
 - [ ] performance tests in the browser
 - [ ] fix testUmdWasmLocationTest in browser test so dont break on publish
@@ -21,7 +21,6 @@
   - [ ] listFormat() should parse read/write info too
 - [ ] distribute magica as esm module (< script type"module...)
 - [ ] consume input image from stream (only node.js ?)and support stdin . same for output / stdout
-- [x] try to build something similar to a real time experience with canvas and IMG cache format files being careful not to remove them. User moving mouse  affects the canvas (processed with IM)
 - [ ] I should be able to make output files protected by config.
 - [ ] run() scriptListener  . finish the feature and test it or drop it
 - [ ] test mkdir -p for output files   
@@ -43,7 +42,6 @@
 - [ ] librsvg 
   - [ ] libxml tests
   - [ ] librsvg tests
-
 - [ ] libheif 
   - [ ] libheif tests
 - [ ] API to manipulate pixels in memory - currently not possible with IM CLI-based API. 
@@ -66,7 +64,10 @@
 
 
 ## DONE
+
 - [x] raw library
+- [x] main(verbose: true) : {..., verbose: VerboseInfo} - with output size
+- [x] try to build something similar to a real time experience with canvas and IMG cache format files being careful not to remove them. User moving mouse  affects the canvas (processed with IM)
 - [x] raw library tests
 - [x] lcms - -profile icc test
 - [x] lcms - -profile .icc
@@ -139,40 +140,7 @@ var result = await run({script:`convert <%= await resolve('foo.png') -scale <%= 
 
 
 ### Ideas
-
-- [ ] a tool to convert ttf, ect font files to bitmaps (user can choose font size style colors shadows, background , transparency and policy to divide the glyphs  - single image vs multiple images.) etc. similar to http://kvazars.com/littera/ 
-
-# <Magick> react component
-
-* apps/magica-react
-* to show the result images of gicen input files and commands as react component. whyle the command is executed show a comrfigurable loading visual feedback. example: 
-  * how to solve wewirker ? 
-  * support input as urls, blobs, image elements, canvas els, or passing directly the File objects
-  * how to feedback errors / stdout, ect
-<!-- ```jsx
-// example code - not recommended
-
-  const inputFiles = Promise.app(this.props.imageUrls .map(async url=>await File.fromUrl(url))) 
-  return <div>
-  Pictures: 
-    <ul>
-      { this.props.imageUrls.map(url=><li> 
-        <Magick 
-        inputFiles={this.props.inputFiles} 
-          script={`
-        convert <%= await inputAt(1) %> <%= await inputAt(1) %> 
-          `}
-        includeIndex={[1,3]}
-          />
-    </li>)}
-    </ul>
-  </div> 
- ``` -->
-
-- [ ] react components or generic html widgets that acts viewers. COnfigurable to provide different experiences:
- * Shows just the output images resulting from commandsw 
- * shows a compilete playground experience where users can upload / select input images interactively, change the command, show / filter output image files. and these components layouts.
-
+ * react components  -see apps/magica-react
 
 - [ ] https://github.com/charto/nbind/ - "easily" generate a js API accessing directly C/C++ code. Also support targeting asm.js , wasm or native. Try to make a simple API for magick++
 

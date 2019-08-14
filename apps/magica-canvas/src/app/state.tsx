@@ -20,13 +20,17 @@ export async function getInitialState(): Promise<State> {
     working: false,
     commandString: '',
     video: false,
-    imageMagickVersion: await getImageMagickVersion()
+    imageMagickVersion: await getImageMagickVersion(),
+  canvasWidth: 600,
+  canvasHeight: 600
   } as State
   s.commandString = command.command(s)
   return s
 }
 
 export interface State {
+  canvasWidth: number
+  canvasHeight: number
   stderr: string[];
   working: boolean;
   fields: { [s: string]: Field }

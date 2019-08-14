@@ -21,7 +21,6 @@
   "author": "Sebastián Gurin",
   "license": "MIT",
   "devDependencies": {
-    "@types/file-saver": "^2.0.1",
     "@types/node": "^12.6.8",
     "@types/react": "^16.8.24",
     "@types/react-dom": "^16.8.5",
@@ -32,11 +31,10 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "file-saver": "^2.0.2",
-    "magica": "file:../..",
+    "magica": "0.2.12",
     "misc-utils-of-mine-generic": "^0.2.15",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
   },
   "repository": {
     "type": "git",

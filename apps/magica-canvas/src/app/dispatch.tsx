@@ -1,6 +1,5 @@
 import { File, fileUtil, magickLoaded, protectFile, run } from 'magica'
 import { array, notUndefined, randomIntBetween, serial, sleep } from 'misc-utils-of-mine-generic'
-import { CANVAS_WIDTH } from '../ui/canvas'
 import { fieldArrayToObject, time } from '../util/misc'
 import { setVideoEnable } from '../util/video'
 import { change } from './change'
@@ -44,7 +43,6 @@ export async function handleInputFileChange(file: File) {
   getStore().setState({
     inputFile
   })
-  // getStore().getState().inputFile = inputFile!
   await change(getStore().getState().x, getStore().getState().y, [inputFile!])
 }
 
@@ -52,12 +50,10 @@ export async function createInputFile(f: File) {
   var size = await f.size()
 
   var result = await run({
-    script: `convert ${await f.sizeDepthArgs()}  ${f ? f.name : 'rose:'} -alpha set -resize ${size.width > CANVAS_WIDTH ? CANVAS_WIDTH : size.width} output.miff`,
+    script: `convert ${await f.sizeDepthArgs()}  ${f ? f.name : 'rose:'} -alpha set -resize ${Math.max(size.width, getStore().getState().canvasWidth)} output.miff`,
     inputFiles: [f],
     verbose: true
   })
-  // console.log('CMDMDMD', `convert ${await f.sizeDepthArgs()}  ${f ? f.name : 'rose:'} -alpha set -resize ${size.width > CANVAS_WIDTH ? CANVAS_WIDTH : size.width} output.miff`);
-
   if (!result.error && result.outputFiles.length === 0) {
     const { FS } = await magickLoaded
     result.outputFiles.push(fileUtil.readFile('output.miff', FS))

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "module": "commonjs",
     "lib": ["esnext", "dom"], 
     "strict": true, 
@@ -9,7 +9,6 @@
     "sourceMap": true,
     "outDir": "./dist", 
     "rootDir": ".",
-    "skipLibCheck": true,
   },
-  "include": ["src"]
+  "include": ["src", "probe"]
 }

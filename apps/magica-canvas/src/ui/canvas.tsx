@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { change } from '../app/change'
 import { dispatchCanvasMouseMove } from '../app/dispatch'
+import { getStore } from '../app/store';
 
-export const CANVAS_WIDTH = 600, CANVAS_HEIGHT = 500
-
-export const Canvas = () => <canvas id="canvas" width={CANVAS_WIDTH} height={CANVAS_HEIGHT} onMouseMove={e =>
+export const Canvas = () => <canvas id="canvas" width={getStore().getState().canvasWidth} height={getStore().getState().canvasHeight} onMouseMove={e =>
   dispatchCanvasMouseMove(e.nativeEvent.layerX, e.nativeEvent.layerY)}
   onClick={e => change(e.nativeEvent.layerX, e.nativeEvent.layerY)}></canvas>
 
