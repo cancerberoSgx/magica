@@ -16,7 +16,7 @@
 
 ▸ **rmRf**(`f`: string, `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md), `predicate`: function, `removed`: string[]): *boolean*
 
-*Defined in [util/rmRf.ts:4](https://github.com/cancerberoSgx/magica/blob/99a018b/src/util/rmRf.ts#L4)*
+*Defined in [util/rmRf.ts:5](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/util/rmRf.ts#L5)*
 
 **Parameters:**
 

@@ -1,12 +1,12 @@
 import 'babel-polyfill'
-import '../node_modules/bulma/bulma.sass'
-import './ui/styles.scss'
 import * as React from 'react'
 import { render } from 'react-dom'
+import '../node_modules/bulma/bulma.sass'
 import { change } from './app/change'
 import { getInitialState } from './app/state'
 import { getStore, _setStore } from './app/store'
 import { LayoutContainer } from './ui/layoutContainer'
+import './ui/styles.scss'
 
 async function main() {
   _setStore(await getInitialState())

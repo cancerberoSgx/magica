@@ -32,7 +32,7 @@
 
 *Implementation of [TemplateHelper](../interfaces/_main_template_template_.templatehelper.md).[name](../interfaces/_main_template_template_.templatehelper.md#name)*
 
-*Defined in [main/template/imageHelper.ts:39](https://github.com/cancerberoSgx/magica/blob/99a018b/src/main/template/imageHelper.ts#L39)*
+*Defined in [main/template/imageHelper.ts:40](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/template/imageHelper.ts#L40)*
 
 ## Methods
 
@@ -40,7 +40,7 @@
 
 ▸ **exec**(`options`: `Options`): *`Promise<number>`*
 
-*Defined in [main/template/imageHelper.ts:40](https://github.com/cancerberoSgx/magica/blob/99a018b/src/main/template/imageHelper.ts#L40)*
+*Defined in [main/template/imageHelper.ts:41](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/template/imageHelper.ts#L41)*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ ___
 
 ▸ **fnCompileTime**(`options`: `Options`): *`Promise<number>`*
 
-*Defined in [main/template/imageHelper.ts:44](https://github.com/cancerberoSgx/magica/blob/99a018b/src/main/template/imageHelper.ts#L44)*
+*Defined in [main/template/imageHelper.ts:45](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/template/imageHelper.ts#L45)*
 
 **Parameters:**
 
@@ -72,7 +72,7 @@ ___
 
 ▸ **fnRunTime**(`options`: `Options`): *`Promise<number>`*
 
-*Defined in [main/template/imageHelper.ts:47](https://github.com/cancerberoSgx/magica/blob/99a018b/src/main/template/imageHelper.ts#L47)*
+*Defined in [main/template/imageHelper.ts:48](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/template/imageHelper.ts#L48)*
 
 **Parameters:**
 

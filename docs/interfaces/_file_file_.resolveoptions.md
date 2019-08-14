@@ -21,7 +21,7 @@
 
 • **name**? : *undefined | string*
 
-*Defined in [file/file.ts:208](https://github.com/cancerberoSgx/magica/blob/99a018b/src/file/file.ts#L208)*
+*Defined in [file/file.ts:297](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/file/file.ts#L297)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 • **protected**? : *undefined | false | true*
 
-*Defined in [file/file.ts:207](https://github.com/cancerberoSgx/magica/blob/99a018b/src/file/file.ts#L207)*
+*Defined in [file/file.ts:296](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/file/file.ts#L296)*

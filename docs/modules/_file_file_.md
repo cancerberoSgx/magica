@@ -13,4 +13,3 @@
 ### Interfaces
 
 * [ResolveOptions](../interfaces/_file_file_.resolveoptions.md)
-* [Size](../interfaces/_file_file_.size.md)

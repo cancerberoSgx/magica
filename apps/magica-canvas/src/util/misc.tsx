@@ -1,6 +1,6 @@
 import { arrayToObject } from 'misc-utils-of-mine-generic'
+import { run } from '../../../../dist/src'
 import { Command } from '../app/commands'
-import { run } from '../../../../dist/src';
 
 export function fieldArrayToObject(command: Command) {
   return arrayToObject(command.fields.map(f => f.id), id => command.fields.find(f => f.id === id)!) as any
@@ -20,10 +20,10 @@ export function memoryReport() {
 }
 
 export async function getImageMagickVersion() {
-  const r = await run({script: 'convert -version'})
+  const r = await run({ script: 'convert -version' })
   return r.stdout.join('\n')
 }
 
-export function time(n:number ): string {
-  return n.toFixed(2)+' ms';
+export function time(n: number): string {
+  return n.toFixed(2) + ' ms'
 }

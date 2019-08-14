@@ -13,7 +13,7 @@ export async function getInitialState(): Promise<State> {
     y: 0,
     onMouseMove: true,
     time: '',
-    warmUpTime: '',warmUpIterations: 50,
+    warmUpTime: '', warmUpIterations: 50,
     fields: fieldArrayToObject(command),
     callCounter: 0,
     stderr: [],
@@ -41,7 +41,7 @@ export interface State {
   commandString: string
   video: boolean
   callCounter: number
-  imageMagickVersion:string
+  imageMagickVersion: string
 }
 
 export interface Field {

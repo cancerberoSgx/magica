@@ -22,8 +22,6 @@ if [ "$SKIP_CONFIG" -eq "0" ]; then
 
   autoconf
 
-  # LDFLAGS="$LDFLAGS"
-
   emconfigure ./configure --prefix="$PREFIX" \
   --with-quantum-depth=<%= quantumDepth %> --enable-hdri=<%= noHdri ? 'no' : 'yes' %> \
     --without-threads --disable-shared --disable-openmp --enable-static \

@@ -13,7 +13,7 @@ export class Layout extends AbstractComponent {
       <About />
       <Command />
       <Fields />
-      <Input /><br/>
+      <Input /><br />
       <TimeMemory />
       <div >{this.state.stderr.map(s => <span>{s}</span>)}</div>
     </div>
