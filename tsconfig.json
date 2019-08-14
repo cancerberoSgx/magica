@@ -9,8 +9,7 @@
     "sourceMap": true,
     "outDir": "./dist", 
     "declaration": true,
-    "rootDir": ".",
-    "skipLibCheck": true
+    "rootDir": "."
   },
   "include": [
     "src", "test", "test-browser"

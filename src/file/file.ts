@@ -6,12 +6,12 @@ import { toDataUrl } from '../image/html'
 import { imageCompare } from '../image/imageCompare'
 import { ExtractInfoResultImage, imageInfo } from '../image/imageInfo'
 import { coordsToIndex, getPixels, imagePixelColor, rgbaToString } from '../image/imageUtil'
-import { magickLoaded } from '../imageMagick/magickLoaded'
+import { getFS, magickLoaded } from '../imageMagick/magickLoaded'
 import { run } from '../main/run'
 import { getOption } from '../options'
 import { IFile, Rgba, Size } from '../types'
 import { arrayBufferToBase64, urlToBase64 } from '../util/base64'
-import { isDir, isFile } from '../util/fileUtil'
+import { isDir, isFile, readFile } from '../util/fileUtil'
 import { protectFile } from './protected'
 
 /**
@@ -46,8 +46,8 @@ export class File implements IFile {
   }
 
   /**
-  * Same as [info] but returning only the first image's data.
-  */
+   * Same as [info] but returning only the first image's data.
+   */
   public async infoOne(): Promise<ExtractInfoResultImage> {
     var i = await this.info()
     if (!i || !i.length) {
@@ -117,7 +117,7 @@ export class File implements IFile {
 
 	/** 
    * Creates a DataUrl like `data:image/png;name=f.png;base64,` using given base64 content, mimeType and fileName. 
-  */
+   */
   public async asDataUrl(mime?: string) {
     return File.toDataUrl(this, mime)
   }
@@ -135,6 +135,8 @@ export class File implements IFile {
   public async equals(file?: File) {
     return await imageCompare(this, file)
   }
+
+  public static equals: ((a: string | IFile, b: string | IFile) => boolean) = (a, b) => File.asPath(a) !== File.asPath(b)
 
   public async asHTMLImageData(): Promise<ImageData> {
     var d = await this.asRGBAImageData()
@@ -269,8 +271,8 @@ export class File implements IFile {
     return !!f && !!f.name && !!f.content && typeof f.constructor !== 'undefined' && !!(f as File).size && !!(f as File).infoOne
   }
 
-  public static asFile(f: IFile) {
-    return File.isFile(f) ? f : new File(f.name, f.content)
+  public static asFile(f: string | IFile) {
+    return File.isFile(f) ? f : typeof f === 'string' ? readFile(f, getFS()) : new File(f.name, f.content)
   }
 
   public static asPath(f: string | IFile) {

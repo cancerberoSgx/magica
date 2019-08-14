@@ -18,7 +18,9 @@ autoreconf
 automake --add-missing
 
 chmod a+x ./configure
-emconfigure ./configure --prefix=$PREFIX --disable-shared --enable-static PKG_CONFIG_PATH="$PKG_CONFIG_PATH"
+emconfigure ./configure --prefix=$PREFIX --disable-shared --enable-static \
+  PKG_CONFIG_PATH="$PKG_CONFIG_PATH"
+# --disable-mips-msa --disable-arm-neon --disable-powerpc-vsx --disable-shared
 testExitCode "libpng configure" $?
 
 emcmake make install  

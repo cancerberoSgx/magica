@@ -139,7 +139,8 @@ var result = await run({script:`convert <%= await resolve('foo.png') -scale <%= 
 
 
 
-### Ideas
+### crazy Ideas
+
  * react components  -see apps/magica-react
 
 - [ ] https://github.com/charto/nbind/ - "easily" generate a js API accessing directly C/C++ code. Also support targeting asm.js , wasm or native. Try to make a simple API for magick++

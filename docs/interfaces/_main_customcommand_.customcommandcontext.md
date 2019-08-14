@@ -26,7 +26,6 @@ result = await run({
 
 * [FS](_main_customcommand_.customcommandcontext.md#fs)
 * [File](_main_customcommand_.customcommandcontext.md#file)
-* [files](_main_customcommand_.customcommandcontext.md#files)
 * [main](_main_customcommand_.customcommandcontext.md#main)
 * [options](_main_customcommand_.customcommandcontext.md#options)
 * [run](_main_customcommand_.customcommandcontext.md#run)
@@ -34,6 +33,7 @@ result = await run({
 ### Methods
 
 * [error](_main_customcommand_.customcommandcontext.md#error)
+* [includeOutputFiles](_main_customcommand_.customcommandcontext.md#includeoutputfiles)
 * [isDirectory](_main_customcommand_.customcommandcontext.md#isdirectory)
 * [isFile](_main_customcommand_.customcommandcontext.md#isfile)
 * [log](_main_customcommand_.customcommandcontext.md#log)
@@ -46,7 +46,7 @@ result = await run({
 
 • **FS**: *[FS](_file_emscriptenfs_.fs.md)*
 
-*Defined in [main/customCommand.ts:29](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/customCommand.ts#L29)*
+*Defined in [main/customCommand.ts:30](https://github.com/cancerberoSgx/magica/blob/30321a6/src/main/customCommand.ts#L30)*
 
 ___
 
@@ -54,15 +54,7 @@ ___
 
 • **File**: *[File](../classes/_file_file_.file.md)*
 
-*Defined in [main/customCommand.ts:34](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/customCommand.ts#L34)*
-
-___
-
-###  files
-
-• **files**: *[File](../classes/_file_file_.file.md)[]*
-
-*Defined in [main/customCommand.ts:31](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/customCommand.ts#L31)*
+*Defined in [main/customCommand.ts:35](https://github.com/cancerberoSgx/magica/blob/30321a6/src/main/customCommand.ts#L35)*
 
 ___
 
@@ -70,7 +62,7 @@ ___
 
 • **main**: *[main](../modules/_main_main_.md#main)*
 
-*Defined in [main/customCommand.ts:40](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/customCommand.ts#L40)*
+*Defined in [main/customCommand.ts:41](https://github.com/cancerberoSgx/magica/blob/30321a6/src/main/customCommand.ts#L41)*
 
 ___
 
@@ -78,7 +70,7 @@ ___
 
 • **options**: *`Partial<Options>`*
 
-*Defined in [main/customCommand.ts:30](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/customCommand.ts#L30)*
+*Defined in [main/customCommand.ts:31](https://github.com/cancerberoSgx/magica/blob/30321a6/src/main/customCommand.ts#L31)*
 
 ___
 
@@ -86,7 +78,7 @@ ___
 
 • **run**: *[run](../modules/_main_run_.md#run)*
 
-*Defined in [main/customCommand.ts:39](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/customCommand.ts#L39)*
+*Defined in [main/customCommand.ts:40](https://github.com/cancerberoSgx/magica/blob/30321a6/src/main/customCommand.ts#L40)*
 
 ## Methods
 
@@ -94,7 +86,7 @@ ___
 
 ▸ **error**(...`s`: string[]): *void*
 
-*Defined in [main/customCommand.ts:33](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/customCommand.ts#L33)*
+*Defined in [main/customCommand.ts:34](https://github.com/cancerberoSgx/magica/blob/30321a6/src/main/customCommand.ts#L34)*
 
 **Parameters:**
 
@@ -106,11 +98,28 @@ Name | Type |
 
 ___
 
+###  includeOutputFiles
+
+▸ **includeOutputFiles**(`files`: string | [IFile](_types_.ifile.md)[], `exclude?`: undefined | false | true): *void*
+
+*Defined in [main/customCommand.ts:46](https://github.com/cancerberoSgx/magica/blob/30321a6/src/main/customCommand.ts#L46)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`files` | string \| [IFile](_types_.ifile.md)[] |
+`exclude?` | undefined \| false \| true |
+
+**Returns:** *void*
+
+___
+
 ###  isDirectory
 
 ▸ **isDirectory**(`f`: string): *boolean*
 
-*Defined in [main/customCommand.ts:38](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/customCommand.ts#L38)*
+*Defined in [main/customCommand.ts:39](https://github.com/cancerberoSgx/magica/blob/30321a6/src/main/customCommand.ts#L39)*
 
 **Parameters:**
 
@@ -126,7 +135,7 @@ ___
 
 ▸ **isFile**(`f`: string): *boolean*
 
-*Defined in [main/customCommand.ts:36](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/customCommand.ts#L36)*
+*Defined in [main/customCommand.ts:37](https://github.com/cancerberoSgx/magica/blob/30321a6/src/main/customCommand.ts#L37)*
 
 **Parameters:**
 
@@ -142,7 +151,7 @@ ___
 
 ▸ **log**(...`s`: string[]): *void*
 
-*Defined in [main/customCommand.ts:32](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/customCommand.ts#L32)*
+*Defined in [main/customCommand.ts:33](https://github.com/cancerberoSgx/magica/blob/30321a6/src/main/customCommand.ts#L33)*
 
 **Parameters:**
 
@@ -158,7 +167,7 @@ ___
 
 ▸ **readFile**(`f`: string): *[File](../classes/_file_file_.file.md)*
 
-*Defined in [main/customCommand.ts:37](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/customCommand.ts#L37)*
+*Defined in [main/customCommand.ts:38](https://github.com/cancerberoSgx/magica/blob/30321a6/src/main/customCommand.ts#L38)*
 
 **Parameters:**
 
@@ -174,7 +183,7 @@ ___
 
 ▸ **writeFile**(`f`: [File](../classes/_file_file_.file.md)): *void*
 
-*Defined in [main/customCommand.ts:35](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/main/customCommand.ts#L35)*
+*Defined in [main/customCommand.ts:36](https://github.com/cancerberoSgx/magica/blob/30321a6/src/main/customCommand.ts#L36)*
 
 **Parameters:**
 

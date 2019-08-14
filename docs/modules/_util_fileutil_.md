@@ -13,6 +13,7 @@
 * [isDir](_util_fileutil_.md#isdir)
 * [isFile](_util_fileutil_.md#isfile)
 * [readFile](_util_fileutil_.md#readfile)
+* [removeFile](_util_fileutil_.md#removefile)
 * [writeFile](_util_fileutil_.md#writefile)
 
 ## Functions
@@ -21,7 +22,7 @@
 
 ▸ **getFileName**(`f`: string | [IFile](../interfaces/_types_.ifile.md)): *string*
 
-*Defined in [util/fileUtil.ts:13](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/util/fileUtil.ts#L13)*
+*Defined in [util/fileUtil.ts:16](https://github.com/cancerberoSgx/magica/blob/30321a6/src/util/fileUtil.ts#L16)*
 
 Returns file name / path of given file relative to emscripten FS root  (in the context of emscripten FS)
 
@@ -39,7 +40,7 @@ ___
 
 ▸ **getFilePath**(`f`: string | [IFile](../interfaces/_types_.ifile.md)): *string*
 
-*Defined in [util/fileUtil.ts:22](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/util/fileUtil.ts#L22)*
+*Defined in [util/fileUtil.ts:25](https://github.com/cancerberoSgx/magica/blob/30321a6/src/util/fileUtil.ts#L25)*
 
 Returns absolute path of given file (in the context of emscripten FS)
 
@@ -57,14 +58,14 @@ ___
 
 ▸ **isDir**(`f`: string | [IFile](../interfaces/_types_.ifile.md), `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *boolean*
 
-*Defined in [util/fileUtil.ts:32](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/util/fileUtil.ts#L32)*
+*Defined in [util/fileUtil.ts:39](https://github.com/cancerberoSgx/magica/blob/30321a6/src/util/fileUtil.ts#L39)*
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`f` | string \| [IFile](../interfaces/_types_.ifile.md) |
-`FS` | [FS](../interfaces/_file_emscriptenfs_.fs.md) |
+Name | Type | Default |
+------ | ------ | ------ |
+`f` | string \| [IFile](../interfaces/_types_.ifile.md) | - |
+`FS` | [FS](../interfaces/_file_emscriptenfs_.fs.md) |  getFS() |
 
 **Returns:** *boolean*
 
@@ -74,14 +75,14 @@ ___
 
 ▸ **isFile**(`f`: string | [IFile](../interfaces/_types_.ifile.md), `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *boolean*
 
-*Defined in [util/fileUtil.ts:40](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/util/fileUtil.ts#L40)*
+*Defined in [util/fileUtil.ts:47](https://github.com/cancerberoSgx/magica/blob/30321a6/src/util/fileUtil.ts#L47)*
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`f` | string \| [IFile](../interfaces/_types_.ifile.md) |
-`FS` | [FS](../interfaces/_file_emscriptenfs_.fs.md) |
+Name | Type | Default |
+------ | ------ | ------ |
+`f` | string \| [IFile](../interfaces/_types_.ifile.md) | - |
+`FS` | [FS](../interfaces/_file_emscriptenfs_.fs.md) |  getFS() |
 
 **Returns:** *boolean*
 
@@ -89,18 +90,37 @@ ___
 
 ###  readFile
 
-▸ **readFile**(`f`: string, `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *[File](../classes/_file_file_.file.md)*
+▸ **readFile**(`f`: string | [IFile](../interfaces/_types_.ifile.md), `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *[File](../classes/_file_file_.file.md)*
 
-*Defined in [util/fileUtil.ts:6](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/util/fileUtil.ts#L6)*
+*Defined in [util/fileUtil.ts:9](https://github.com/cancerberoSgx/magica/blob/30321a6/src/util/fileUtil.ts#L9)*
+
+if given a file it ignores its contents and alwasys read again from FS
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`f` | string |
-`FS` | [FS](../interfaces/_file_emscriptenfs_.fs.md) |
+Name | Type | Default |
+------ | ------ | ------ |
+`f` | string \| [IFile](../interfaces/_types_.ifile.md) | - |
+`FS` | [FS](../interfaces/_file_emscriptenfs_.fs.md) |  getFS() |
 
 **Returns:** *[File](../classes/_file_file_.file.md)*
+
+___
+
+###  removeFile
+
+▸ **removeFile**(`f`: string | [IFile](../interfaces/_types_.ifile.md), `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *void*
+
+*Defined in [util/fileUtil.ts:35](https://github.com/cancerberoSgx/magica/blob/30321a6/src/util/fileUtil.ts#L35)*
+
+**Parameters:**
+
+Name | Type | Default |
+------ | ------ | ------ |
+`f` | string \| [IFile](../interfaces/_types_.ifile.md) | - |
+`FS` | [FS](../interfaces/_file_emscriptenfs_.fs.md) |  getFS() |
+
+**Returns:** *void*
 
 ___
 
@@ -108,13 +128,13 @@ ___
 
 ▸ **writeFile**(`f`: [IFile](../interfaces/_types_.ifile.md), `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *void*
 
-*Defined in [util/fileUtil.ts:28](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/util/fileUtil.ts#L28)*
+*Defined in [util/fileUtil.ts:31](https://github.com/cancerberoSgx/magica/blob/30321a6/src/util/fileUtil.ts#L31)*
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`f` | [IFile](../interfaces/_types_.ifile.md) |
-`FS` | [FS](../interfaces/_file_emscriptenfs_.fs.md) |
+Name | Type | Default |
+------ | ------ | ------ |
+`f` | [IFile](../interfaces/_types_.ifile.md) | - |
+`FS` | [FS](../interfaces/_file_emscriptenfs_.fs.md) |  getFS() |
 
 **Returns:** *void*

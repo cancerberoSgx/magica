@@ -21,8 +21,8 @@ export async function getInitialState(): Promise<State> {
     commandString: '',
     video: false,
     imageMagickVersion: await getImageMagickVersion(),
-  canvasWidth: 600,
-  canvasHeight: 600
+    canvasWidth: 600,
+    canvasHeight: 600
   } as State
   s.commandString = command.command(s)
   return s

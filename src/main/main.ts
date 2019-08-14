@@ -12,7 +12,6 @@ import { listFilesRecursively, ls } from '../util/lsR'
 import { mkdirp } from '../util/mkdirp'
 import { rmRf } from '../util/rmRf'
 import { processCommand } from './command'
-import { dispatchCustomCommand, isCustomCommand } from './customCommand'
 
 let queue: Queue | undefined
 
@@ -34,18 +33,18 @@ export function main(o: Partial<Options>): Promise<Result> {
   return getQueue().add(() => mainWasm(o))
 }
 
-async function mainWasm(o: Partial<Options>): Promise<Result> {
+async function mainWasm(options: Partial<Options>): Promise<Result> {
   const t0 = Date.now()
   objectKeys(getOptions())
-    .filter(k => notUndefined(o[k]))
-    .forEach(k => setOptions({ [k]: o[k] }))
+    .filter(k => notUndefined(options[k]))
+    .forEach(k => setOptions({ [k]: options[k] }))
 
   const { emscriptenNodeFsRoot, debug } = getOptions()
   const { FS, main } = await magickLoaded
-  debug && console.log('main call given options: ', o)
+  debug && console.log('main call given options: ', options)
 
   FS.chdir(emscriptenNodeFsRoot)
-  const files = await File.resolve(o.inputFiles)
+  const files = await File.resolve(options.inputFiles)
 
   files.forEach(f => {
     const dirName = dirname(f.name)
@@ -58,28 +57,36 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
 
   const beforeTree = listFilesRecursively(emscriptenNodeFsRoot, FS)
 
+  // const explicitOutputFiles:File[] =[]
   let returnValue: NativeResult
-  var processedCommand = processCommand(o.command!)
-  if (o.verbose) {
+  var processedCommand = processCommand(options.command!)
+  if (options.verbose) {
     processedCommand.splice(1, 0, '-verbose')
   }
-  if (await isCustomCommand(processedCommand)) {
-    returnValue = await dispatchCustomCommand(processedCommand, o, FS, files)
-  } else {
-    debug && console.log('main processed command:', processedCommand)
-    try {
-      returnValue = main(processedCommand)
-    } catch (error) {
-      debug && console.error('MAIN error', error)
-      returnValue = {
-        stderr: [],
-        stdout: [],
-        error,
-        returnValue: undefined
-      }
+  // if (await isCustomCommand(processedCommand)) {
+  //   const customCommandOptions: CustomCommandDispatchOptions = {
+  //     command: processedCommand, 
+  //     options, 
+  //     FS, 
+  //     files,
+  //      outputFiles: explicitOutputFiles
+  //     }
+  //   returnValue = await dispatchCustomCommand(customCommandOptions)
+  // } else {
+  debug && console.log('main processed command:', processedCommand)
+  try {
+    returnValue = main(processedCommand)
+  } catch (error) {
+    debug && console.error('MAIN error', error)
+    returnValue = {
+      stderr: [],
+      stdout: [],
+      error,
+      returnValue: undefined
     }
+    // }
   }
-  var verbose = o.verbose ? tryTo(() => parseConvertVerbose(returnValue.stdout)) || [] : []
+  var verbose = options.verbose ? tryTo(() => parseConvertVerbose(returnValue.stdout)) || [] : []
 
   const outputFiles =
     listFilesRecursively(emscriptenNodeFsRoot, FS)
@@ -93,7 +100,7 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
           file.width = v.outputSize.width
           file.height = v.outputSize.height
         }
-        if (o.protectOutputFiles) {
+        if (options.protectOutputFiles) {
           protectFile(file)
         }
         return file
@@ -104,7 +111,7 @@ async function mainWasm(o: Partial<Options>): Promise<Result> {
     .filter(f => !isProtectedFile(f))
     .forEach(f => rmRf(f, FS, f => !isProtectedFile(f), removed))
 
-  o.debug && console.log(`Removed files: ${removed}\nProtected files: ${ls(emscriptenNodeFsRoot, FS).map(isProtectedFile)}`)
+  options.debug && console.log(`Removed files: ${removed}\nProtected files: ${ls(emscriptenNodeFsRoot, FS).map(isProtectedFile)}`)
 
   return {
     ...returnValue,

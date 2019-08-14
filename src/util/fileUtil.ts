@@ -1,9 +1,12 @@
-import { FS } from '../file/emscriptenFs'
 import { File } from '../file/file'
+import { getFS } from '../imageMagick/magickLoaded'
 import { getOptions } from '../options'
 import { IFile } from '../types'
 
-export function readFile(f: string, FS: FS): File {
+/**
+ * if given a file it ignores its contents and alwasys read again from FS
+ */
+export function readFile(f: string | IFile, FS = getFS()): File {
   return new File(getFileName(f), FS.readFile(getFilePath(f)))
 }
 
@@ -25,11 +28,15 @@ export function getFilePath(f: string | IFile) {
   return path.startsWith(`${emscriptenNodeFsRoot}/`) ? path : `${emscriptenNodeFsRoot}/${path}`
 }
 
-export function writeFile(f: IFile, FS: FS) {
+export function writeFile(f: IFile, FS = getFS()) {
   FS.writeFile(getFilePath(f.name), f.content)
 }
 
-export function isDir(f: string | IFile, FS: FS) {
+export function removeFile(f: string | IFile, FS = getFS()) {
+  FS.unlink(getFilePath(getFilePath(f)))
+}
+
+export function isDir(f: string | IFile, FS = getFS()) {
   try {
     return FS.isDir(FS.stat(getFilePath(f)).mode)
   } catch (error) {
@@ -37,7 +44,7 @@ export function isDir(f: string | IFile, FS: FS) {
   }
 }
 
-export function isFile(f: string | IFile, FS: FS) {
+export function isFile(f: string | IFile, FS = getFS()) {
   try {
     return FS.isFile(FS.stat(getFilePath(f)).mode)
   } catch (error) {

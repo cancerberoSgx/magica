@@ -19,7 +19,7 @@
 
 ▸ **loadHtmlCanvasElement**(`f`: [File](../classes/_file_file_.file.md), `ctx`: `CanvasRenderingContext2D`, `dx`: number, `dy`: number, `dirtyX`: number | undefined, `dirtyY`: number | undefined, `dirtyWidth`: number | undefined, `dirtyHeight`: number | undefined): *`Promise<void>`*
 
-*Defined in [image/html.ts:31](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/image/html.ts#L31)*
+*Defined in [image/html.ts:31](https://github.com/cancerberoSgx/magica/blob/30321a6/src/image/html.ts#L31)*
 
 **Parameters:**
 
@@ -42,7 +42,7 @@ ___
 
 ▸ **loadHtmlImageElement**(`o`: [File](../classes/_file_file_.file.md), `el?`: `HTMLImageElement`, `forceDataUrl`: boolean): *`Promise<HTMLImageElement>`*
 
-*Defined in [image/html.ts:20](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/image/html.ts#L20)*
+*Defined in [image/html.ts:20](https://github.com/cancerberoSgx/magica/blob/30321a6/src/image/html.ts#L20)*
 
 **Parameters:**
 
@@ -60,7 +60,7 @@ ___
 
 ▸ **toDataUrl**(`o`: [File](../classes/_file_file_.file.md), `mime?`: undefined | string): *`Promise<string>`*
 
-*Defined in [image/html.ts:5](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/image/html.ts#L5)*
+*Defined in [image/html.ts:5](https://github.com/cancerberoSgx/magica/blob/30321a6/src/image/html.ts#L5)*
 
 **Parameters:**
 
@@ -77,7 +77,7 @@ ___
 
 ▸ **toDataUrlSync**(`o`: [IFile](../interfaces/_types_.ifile.md), `mime`: string): *string*
 
-*Defined in [image/html.ts:13](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/image/html.ts#L13)*
+*Defined in [image/html.ts:13](https://github.com/cancerberoSgx/magica/blob/30321a6/src/image/html.ts#L13)*
 
 Unsafe synchronous operation, please use [toDataUrl]
 

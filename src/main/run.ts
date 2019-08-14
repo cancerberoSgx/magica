@@ -4,6 +4,7 @@ import { magickLoaded } from '../imageMagick/magickLoaded'
 import { getOption, setOptions } from '../options'
 import { IFile, Options, Result, RunOptions, RunResult } from '../types'
 import { arrayToCliOne, cliToArray, processCommand } from './command'
+import { CustomCommandDispatchOptions, dispatchCustomCommand, isCustomCommand } from './customCommand'
 import { _compileTimePreprocess, _runTimePreprocess } from './executeCommandPreprocessor'
 import { main } from './main'
 
@@ -50,12 +51,23 @@ export async function run<T extends IFile = IFile>(o: RunOptions): Promise<RunRe
   }
 
   await serial(commands.map((command, i) => async () => {
-
-    let mainOptions: Options = { ...o, command, inputFiles: inputFiles.map(File.asFile) } as any //TODO
+    // inputFiles = inputFiles.map(File.asFile)
+    let mainOptions: Options = { ...o, command, inputFiles } as any //TODO
 
     await _runTimePreprocess(o, mainOptions, i)
-
-    let result: Result = await main(mainOptions)
+    let result: Result
+    if (await isCustomCommand(command)) {
+      const customCommandOptions: CustomCommandDispatchOptions = {
+        command,
+        options: mainOptions,
+        FS,
+        // files: inputFiles,
+        outputFiles: inputFiles
+      }
+      result = { ... await dispatchCustomCommand(customCommandOptions), outputFiles: inputFiles }
+    } else {
+      result = await main(mainOptions)
+    }
 
     inputFiles = [
       ...inputFiles.filter(f => !result.outputFiles.find(f2 => f2.name === f.name)),

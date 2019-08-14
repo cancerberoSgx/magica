@@ -1,13 +1,11 @@
 import test from 'ava'
 import fetch from 'cross-fetch'
 import { readFileSync } from 'fs'
-import { notUndefined } from 'misc-utils-of-mine-generic'
 import { rm } from 'shelljs'
-import { imageInfo, magickLoaded, protectFile, run, RunResult } from '../src'
+import { imageInfo } from '../src'
 import { File } from '../src/file/file'
 import { main } from '../src/main/main'
-import { getOption, getOptions } from '../src/options'
-import { getFilePath, isFile } from '../src/util/fileUtil'
+import { getOption } from '../src/options'
 import { filterResultStdErr } from './testUtil'
 import fileType = require('file-type')
 
@@ -109,42 +107,4 @@ test.serial('protected files are not erased', async t => {
   t.falsy(result.error)
 
 })
-
-test.serial('protectFile false to unprotect', async (t) => {
-  rm('-rf', getOptions().nodeFsLocalRoot + '/*')
-  const { FS } = await magickLoaded
-  var result: RunResult
-  var fn = (f: string) => `
-!js: c=>c.log(...c.FS.readdir('.') )
-convert rose: ${f}
-!js: c=>c.log(...c.FS.readdir('.') )
-  `.trim()
-
-  result = await run({
-    script: fn('bar1.gif'),
-    protectOutputFiles: true,
-  })
-  t.deepEqual(filterResultStdErr(result), [])
-  t.deepEqual(result.stdout.filter(notUndefined), ['bar1.gif'])
-  t.deepEqual(isFile(getFilePath('bar1.gif'), FS), true)
-
-  result = await run({
-    script: fn('bar2.gif'),
-    protectOutputFiles: true
-  })
-  t.deepEqual(filterResultStdErr(result), [])
-  t.deepEqual(result.stdout.filter(notUndefined), ['bar1.gif', 'bar1.gif', 'bar2.gif'])
-  t.deepEqual(isFile(getFilePath('bar1.gif'), FS), true)
-  t.deepEqual(isFile(getFilePath('bar2.gif'), FS), true)
-
-  protectFile(getFilePath('bar1.gif'), false)
-  protectFile(getFilePath('bar2.gif'), false)
-
-  result = await run({
-    script: fn('bar3.gif')
-  })
-  t.deepEqual(filterResultStdErr(result), [])
-  t.deepEqual(result.stdout.filter(notUndefined), ['bar1.gif', 'bar2.gif', 'bar3.gif'])
-})
-
 

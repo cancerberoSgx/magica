@@ -22,15 +22,14 @@ if [ "$SKIP_CONFIG" -eq "0" ]; then
 
   autoconf
 
-  # LDFLAGS="$LDFLAGS"
-
   emconfigure ./configure --prefix="$PREFIX" \
-    --with-quantum-depth=16 --enable-hdri=yes \
+  --with-quantum-depth=16 --enable-hdri=yes \
     --without-threads --disable-shared --disable-openmp --enable-static \
     --without-jbig --without-dps --without-fontconfig \
-    --with-utilities --with-autotrace \
+    --with-utilities --with-autotrace --enable-delegate-build   \
     --disable-docs --without-bzlib --without-magick-plus-plus \
-    --without-perl --without-x --disable-largefile --without-modules  \
+    --without-perl --without-x \
+    #--disable-largefile --without-modules  \ #these are enabled in Magick.Native
     PKG_CONFIG_PATH="$PKG_CONFIG_PATH" CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS"
 
   testExitCode "ImageMagick emconfigure" $?

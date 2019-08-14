@@ -23,7 +23,7 @@
 
 • **x**: *number*
 
-*Defined in [types.ts:201](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/types.ts#L201)*
+*Defined in [types.ts:201](https://github.com/cancerberoSgx/magica/blob/30321a6/src/types.ts#L201)*
 
 ___
 
@@ -31,4 +31,4 @@ ___
 
 • **y**: *number*
 
-*Defined in [types.ts:202](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/types.ts#L202)*
+*Defined in [types.ts:202](https://github.com/cancerberoSgx/magica/blob/30321a6/src/types.ts#L202)*

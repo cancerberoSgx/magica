@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# tests generataed .wasm files using magica test suite. 
+# tests generated .wasm files using magica test suite. It clones magica/master 
 
 source emscripten-scripts/base.sh
 

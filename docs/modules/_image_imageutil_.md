@@ -23,7 +23,7 @@
 
 ▸ **colorCount**(`img`: [IFile](../interfaces/_types_.ifile.md) | undefined): *`Promise<number | undefined>`*
 
-*Defined in [image/imageUtil.ts:60](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/image/imageUtil.ts#L60)*
+*Defined in [image/imageUtil.ts:60](https://github.com/cancerberoSgx/magica/blob/30321a6/src/image/imageUtil.ts#L60)*
 
 **Parameters:**
 
@@ -39,7 +39,7 @@ ___
 
 ▸ **coordsToIndex**(`width`: number, `x`: number, `y`: number): *number*
 
-*Defined in [image/imageUtil.ts:19](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/image/imageUtil.ts#L19)*
+*Defined in [image/imageUtil.ts:19](https://github.com/cancerberoSgx/magica/blob/30321a6/src/image/imageUtil.ts#L19)*
 
 **Parameters:**
 
@@ -57,7 +57,7 @@ ___
 
 ▸ **getPixels**(`f`: [File](../classes/_file_file_.file.md)): *`Promise<Rgba[]>`*
 
-*Defined in [image/imageUtil.ts:22](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/image/imageUtil.ts#L22)*
+*Defined in [image/imageUtil.ts:22](https://github.com/cancerberoSgx/magica/blob/30321a6/src/image/imageUtil.ts#L22)*
 
 **Parameters:**
 
@@ -73,7 +73,7 @@ ___
 
 ▸ **getRgbaPixel**(`f`: [File](../classes/_file_file_.file.md), `x`: number, `y`: number): *[Rgba](../interfaces/_types_.rgba.md)*
 
-*Defined in [image/imageUtil.ts:9](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/image/imageUtil.ts#L9)*
+*Defined in [image/imageUtil.ts:9](https://github.com/cancerberoSgx/magica/blob/30321a6/src/image/imageUtil.ts#L9)*
 
 Returns given rgba image x,y pixel. If the image is not rgba the behavior is undefined.
 
@@ -93,7 +93,7 @@ ___
 
 ▸ **imagePixelColor**(`img`: [IFile](../interfaces/_types_.ifile.md) | undefined, `x`: number, `y`: number): *`Promise<string | undefined>`*
 
-*Defined in [image/imageUtil.ts:37](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/image/imageUtil.ts#L37)*
+*Defined in [image/imageUtil.ts:37](https://github.com/cancerberoSgx/magica/blob/30321a6/src/image/imageUtil.ts#L37)*
 
 **Parameters:**
 
@@ -111,7 +111,7 @@ ___
 
 ▸ **isRgbaImage**(`f`: [File](../classes/_file_file_.file.md)): *undefined | false | true | `0`*
 
-*Defined in [image/imageUtil.ts:56](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/image/imageUtil.ts#L56)*
+*Defined in [image/imageUtil.ts:56](https://github.com/cancerberoSgx/magica/blob/30321a6/src/image/imageUtil.ts#L56)*
 
 **Parameters:**
 
@@ -127,7 +127,7 @@ ___
 
 ▸ **parseConvertVerbose**(`stdout`: string[]): *object[]*
 
-*Defined in [image/imageUtil.ts:67](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/image/imageUtil.ts#L67)*
+*Defined in [image/imageUtil.ts:67](https://github.com/cancerberoSgx/magica/blob/30321a6/src/image/imageUtil.ts#L67)*
 
 **Parameters:**
 
@@ -143,7 +143,7 @@ ___
 
 ▸ **rgbaToString**(`c`: [Rgba](../interfaces/_types_.rgba.md)): *string*
 
-*Defined in [image/imageUtil.ts:52](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/image/imageUtil.ts#L52)*
+*Defined in [image/imageUtil.ts:52](https://github.com/cancerberoSgx/magica/blob/30321a6/src/image/imageUtil.ts#L52)*
 
 **Parameters:**
 

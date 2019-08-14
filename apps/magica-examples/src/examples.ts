@@ -1,7 +1,7 @@
 export interface ExampleField {
   id: string
-  value: string|number
-  type?: 'string'|'integer'|'float'
+  value: string | number
+  type?: 'string' | 'integer' | 'float'
 }
 
 interface SampleImage {
@@ -169,7 +169,7 @@ convert  aux.png -write mpr:img +delete \\
   {
     name: 'Brightness, saturation and lightness',
     tags: [ExampleTag.color],
-    description: 'use -modulate Brightness, saturation and lightness',    
+    description: 'use -modulate Brightness, saturation and lightness',
     inputFiles: [],
     fields: [
       { id: 'brightness', value: '120' },
@@ -865,15 +865,15 @@ convert -size <%= get('size') %>x<%= get('size') %> \\
     `.trim(),
   },
 
-{
-  name: 'Grid of pixels (diamond)',
-  description: `<a href="http://www.imagemagick.org/Usage/transform/#gridding">See ImageMagick examples page transform/#gridding</a>`,
-  tags: [ExampleTag.artistic, ExampleTag.color],
-  inputFiles: ['bluebells.png'],
-  fields: [
-    { id: 'size', value: 10 },
-  ],
-  script: ` 
+  {
+    name: 'Grid of pixels (diamond)',
+    description: `<a href="http://www.imagemagick.org/Usage/transform/#gridding">See ImageMagick examples page transform/#gridding</a>`,
+    tags: [ExampleTag.artistic, ExampleTag.color],
+    inputFiles: ['bluebells.png'],
+    fields: [
+      { id: 'size', value: 10 },
+    ],
+    script: ` 
 convert -size  <%=get('size') %>x<%= get('size') %> xc: \\
   -draw 'point <%= Math.round(parseInt(get('size'))/2) %>,<%= Math.round(parseInt(get('size'))/2) %>' \\
   -morphology Erode:5 Diamond \\
@@ -882,17 +882,17 @@ convert -size  <%=get('size') %>x<%= get('size') %> xc: \\
   -size <%= await inputFiles[0].widthXHeight()%>   tile:mpr:diamond \\
   -compose Over -composite grid_diamonds.png
   `.trim(),
-},
+  },
 
-{
-  name: 'Morphological animation',
-  description: `<a href="http://www.imagemagick.org/Usage/transform/#gridding">See ImageMagick examples page transform/#gridding</a>`,
-  tags: [ExampleTag.artistic, ExampleTag.animation],
-  inputFiles: ['bluebells.png'],
-  fields: [
-    { id: 'N', value: 25 }
-  ],
-  script: ` 
+  {
+    name: 'Morphological animation',
+    description: `<a href="http://www.imagemagick.org/Usage/transform/#gridding">See ImageMagick examples page transform/#gridding</a>`,
+    tags: [ExampleTag.artistic, ExampleTag.animation],
+    inputFiles: ['bluebells.png'],
+    fields: [
+      { id: 'N', value: 25 }
+    ],
+    script: ` 
 <% 
 var N =  parseInt(get('N'))
 for(var i = 1 ; i<N; i++) {
@@ -904,11 +904,11 @@ var arr = new Array(N-1).fill(0).map((n,i)=>i+1).map(i=>"o"+i+".miff")
 %>
 convert o1.miff <%= arr .join(" ")%> <%= arr[arr.length-1] %> <%= arr.reverse().join(" ") %> o1.miff o.gif
   `.trim(),
-}
+  }
 
 
 
 
 
- 
+
 ]

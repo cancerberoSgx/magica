@@ -11,7 +11,20 @@ export interface Main {
 
 const { debug } = getOptions()
 
+let _FS: FS = null as any
+
 export const magickLoaded = new Deferred<Main>()
+
+magickLoaded.then(m => {
+  _FS = m.FS
+})
+
+export function getFS() {
+  if (!_FS) {
+    throw new Error('getFS called too soon - FS object not ready yet')
+  }
+  return _FS
+}
 
 const stdout: string[] = []
 

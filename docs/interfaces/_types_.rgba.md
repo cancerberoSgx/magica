@@ -23,7 +23,7 @@
 
 • **a**: *number*
 
-*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/types.ts#L210)*
+*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/30321a6/src/types.ts#L210)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 • **b**: *number*
 
-*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/types.ts#L210)*
+*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/30321a6/src/types.ts#L210)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 • **g**: *number*
 
-*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/types.ts#L210)*
+*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/30321a6/src/types.ts#L210)*
 
 ___
 
@@ -47,4 +47,4 @@ ___
 
 • **r**: *number*
 
-*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/c6ded1a/src/types.ts#L210)*
+*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/30321a6/src/types.ts#L210)*

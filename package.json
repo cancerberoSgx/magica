@@ -40,18 +40,18 @@
     "js-base64": "^2.5.1",
     "minimist": "^1.2.0",
     "babel-polyfill": "^6.26.0",
-    "misc-utils-of-mine-generic": "^0.2.17",
-    "p-queue": "^6.1.0"
+    "misc-utils-of-mine-generic": "^0.2.18",
+    "p-queue": "^6.1.1"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "@types/ejs": "^2.6.3",
     "@types/js-base64": "^2.3.1",
-    "@types/node": "^12.7.0",
-    "@types/puppeteer": "^1.19.0",
+    "@types/node": "^12.7.1",
+    "@types/puppeteer": "^1.19.1",
     "@types/shelljs": "^0.8.5",
     "ava": "^2.2.0",
-    "browserify": "^16.3.0",
+    "browserify": "^16.5.0",
     "coveralls": "^3.0.6",
     "file-type": "^12.1.0",
     "markdown-toc": "^1.2.0",
