@@ -2,8 +2,31 @@
   font-family: monospace;
   margin-left: 3em;
   font-size: 0.8em;
-  max-height: 3em;
-  height: 3em;
+  max-height: 50px;
+  height: 50px;
   display: block;
   overflow: scroll;
 } 
+
+#canvas {
+  border: 2px solid gray
+}
+
+.rootContainer {
+  width: 100hv;
+  height: 100hv;
+}
+.canvasContainer {
+  height: 100hv;
+  width: 50wv;
+  float: left;
+  display: inline;
+  padding: 15px;
+  background-color: #ededed;
+}
+.layoutContainer {
+  height: 100hv;
+  width: 40vw;
+  float: right;
+  display: inline
+}

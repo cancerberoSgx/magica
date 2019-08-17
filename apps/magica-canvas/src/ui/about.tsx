@@ -2,14 +2,14 @@ import * as React from 'react'
 import { AbstractComponent } from './component'
 
 export class About extends AbstractComponent {
-
   render() {
     return (
       <div>
-        <button className="button" onClick={e => document.querySelector('.modal')!.classList.add('is-active')}>About</button>
+        <div className="control">
+          <button className="button is-info" onClick={e => document.querySelector('.modal')!.classList.add('is-active')}>About</button>
+        </div>
 
-
-        <div className="modal">
+        <div className="modal is-active">
           <div className="modal-background" onClick={this.hide}></div>
           <div className="modal-card">
             <header className="modal-card-head">

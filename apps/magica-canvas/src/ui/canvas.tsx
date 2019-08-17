@@ -1,10 +1,19 @@
 import * as React from 'react'
 import { change } from '../app/change'
 import { dispatchCanvasMouseMove } from '../app/dispatch'
-import { getStore } from '../app/store'
+import { getState } from '../app/store'
 
-export const Canvas = () => <canvas id="canvas" width={getStore().getState().canvasWidth} height={getStore().getState().canvasHeight} onMouseMove={e =>
-  dispatchCanvasMouseMove(e.nativeEvent.layerX, e.nativeEvent.layerY)}
+// let canvasSize : Size
+// export function getCanvasSize() {
+//   if(!canvasSize){
+//     canvasSize = {width: window.screen.width/2, height: window.screen.height/2}
+//   }
+//   return canvasSize
+// }
+
+export const Canvas = () => <canvas id="canvas"
+  width={getState().canvasBounds.width} height={getState().canvasBounds.height}
+  onMouseMove={e => dispatchCanvasMouseMove(e.nativeEvent.layerX, e.nativeEvent.layerY)}
   onClick={e => change(e.nativeEvent.layerX, e.nativeEvent.layerY)}></canvas>
 
 let context: CanvasRenderingContext2D
@@ -15,3 +24,4 @@ export function getCanvasContext() {
   }
   return context
 }
+

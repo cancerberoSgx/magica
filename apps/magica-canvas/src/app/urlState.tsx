@@ -3,7 +3,7 @@
 // import { getStore } from './store'
 
 // export function createUrl() {
-//   var state = getStore().getState()
+//   var state = getState()
 //   const s = {
 //     example: {
 //       command: state.command,
@@ -31,7 +31,7 @@
 //     inputFiles = inputFiles.filter(notUndefined)
 //     getStore().setState({
 //       example: {
-//         ...getStore().getState().example,
+//         ...getState().example,
 //         script: state.script,
 //         fields: state.fields && state.fields.length ? state.fields : state.example.fields || [],
 //       },
@@ -40,7 +40,7 @@
 //       inputFiles: inputFiles
 //     })
 //     // await sleep(400)
-//     await setExample(getStore().getState().example)
+//     await setExample(getState().example)
 //   } else {
 
 //   }

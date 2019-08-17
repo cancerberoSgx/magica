@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "bulma": "^0.7.5",
+    "interactjs": "^1.4.0-rc.13",
     "magica": "file:../..",
     "misc-utils-of-mine-generic": "^0.2.15",
     "react": "^16.8.6",

@@ -33,7 +33,7 @@ export class TimeMemory extends AbstractComponent {
           <input className="input" type="number" value={this.state.warmUpIterations} ref={c => this.warmupInputEl = c} onChange={e => this.setState({ warmUpIterations: e.currentTarget.valueAsNumber })} />
         </div>
         <div className="control">
-          <a className="button is-info" title="I've noticed that after 90 calls some operations get much faster. This button will change the image aprox. 50 times randomly with this objective." onClick={e => warmUp(this.warmupInputEl!.valueAsNumber)}>Warm up
+          <a className="button" title="I've noticed that after 90 calls some operations get much faster. This button will change the image aprox. 50 times randomly with this objective." onClick={e => warmUp(this.warmupInputEl!.valueAsNumber)}>Warm up
     </a>
           < >{this.state.warmUpTime ? <div>Time (mean): {this.state.warmUpTime}</div> : ''}</>
         </div>

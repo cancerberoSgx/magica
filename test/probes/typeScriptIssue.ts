@@ -64,8 +64,11 @@
 
 
 
-// let r: Buffer | undefined
-// if(r && !['Q16 x86_64', 'HDRI'].find(s=> r.toString().trim().includes(s))){}
-
 
 // https://github.com/opencv/opencv/pull/15240/files
+
+// let r: Buffer | undefined = undefined
+// if(r && !['Q16 x86_64', 'HDRI'].find(s=> r.toString().trim().includes(s))){}
+// if(r){
+//   let a = r
+// }

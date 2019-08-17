@@ -26,7 +26,9 @@ let store: Store
 export function getStore() {
   return store
 }
-
-export function _setStore(s: State) {
+export function getState() {
+  return store.getState()
+}
+export function _setStore(s: State, silently = true) {
   store = new Store(s)
 }
