@@ -9,6 +9,7 @@
 ### Functions
 
 * [arrayBufferToBase64](_util_base64_.md#arraybuffertobase64)
+* [arrayBufferToString](_util_base64_.md#arraybuffertostring)
 * [base64ToUrl](_util_base64_.md#base64tourl)
 * [dataToBase64](_util_base64_.md#datatobase64)
 * [dataToUrl](_util_base64_.md#datatourl)
@@ -23,7 +24,23 @@
 
 ▸ **arrayBufferToBase64**(`buffer`: `ArrayBuffer`): *string*
 
-*Defined in [util/base64.ts:45](https://github.com/cancerberoSgx/magica/blob/30321a6/src/util/base64.ts#L45)*
+*Defined in [util/base64.ts:45](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/util/base64.ts#L45)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`buffer` | `ArrayBuffer` |
+
+**Returns:** *string*
+
+___
+
+###  arrayBufferToString
+
+▸ **arrayBufferToString**(`buffer`: `ArrayBuffer`): *string*
+
+*Defined in [util/base64.ts:50](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/util/base64.ts#L50)*
 
 **Parameters:**
 
@@ -39,7 +56,7 @@ ___
 
 ▸ **base64ToUrl**(`base64`: string, `mimeType`: string, `fileName?`: undefined | string): *string*
 
-*Defined in [util/base64.ts:14](https://github.com/cancerberoSgx/magica/blob/30321a6/src/util/base64.ts#L14)*
+*Defined in [util/base64.ts:14](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/util/base64.ts#L14)*
 
 Creates a DataUrl like `data:image/jpeg;name=hindenburg.jpg;base64,` using given base64 content, mimeType and fileName.
 
@@ -59,7 +76,7 @@ ___
 
 ▸ **dataToBase64**(`data`: string): *string*
 
-*Defined in [util/base64.ts:7](https://github.com/cancerberoSgx/magica/blob/30321a6/src/util/base64.ts#L7)*
+*Defined in [util/base64.ts:7](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/util/base64.ts#L7)*
 
 **Parameters:**
 
@@ -75,7 +92,7 @@ ___
 
 ▸ **dataToUrl**(`data`: string, `mimeType`: string, `fileName?`: undefined | string): *string*
 
-*Defined in [util/base64.ts:3](https://github.com/cancerberoSgx/magica/blob/30321a6/src/util/base64.ts#L3)*
+*Defined in [util/base64.ts:3](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/util/base64.ts#L3)*
 
 **Parameters:**
 
@@ -93,7 +110,7 @@ ___
 
 ▸ **getDataUrlFileName**(`url`: string): *string*
 
-*Defined in [util/base64.ts:38](https://github.com/cancerberoSgx/magica/blob/30321a6/src/util/base64.ts#L38)*
+*Defined in [util/base64.ts:38](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/util/base64.ts#L38)*
 
 Extracts the name of a data url like `data:image/jpeg;name=hindenburg.jpg;base64,`..., if any.
 
@@ -111,7 +128,7 @@ ___
 
 ▸ **isBase64**(`str`: string): *boolean*
 
-*Defined in [util/base64.ts:26](https://github.com/cancerberoSgx/magica/blob/30321a6/src/util/base64.ts#L26)*
+*Defined in [util/base64.ts:26](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/util/base64.ts#L26)*
 
 **Parameters:**
 
@@ -127,7 +144,7 @@ ___
 
 ▸ **urlToBase64**(`s`: string): *string*
 
-*Defined in [util/base64.ts:18](https://github.com/cancerberoSgx/magica/blob/30321a6/src/util/base64.ts#L18)*
+*Defined in [util/base64.ts:18](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/util/base64.ts#L18)*
 
 **Parameters:**
 
@@ -143,7 +160,7 @@ ___
 
 ▸ **urlToData**(`s`: string): *string*
 
-*Defined in [util/base64.ts:22](https://github.com/cancerberoSgx/magica/blob/30321a6/src/util/base64.ts#L22)*
+*Defined in [util/base64.ts:22](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/util/base64.ts#L22)*
 
 **Parameters:**
 

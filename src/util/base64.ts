@@ -43,14 +43,14 @@ export function getDataUrlFileName(url: string) {
 }
 
 export function arrayBufferToBase64(buffer: ArrayBuffer) {
-  var binary = arrayBufferToString(buffer);
+  var binary = arrayBufferToString(buffer)
   return window.btoa(binary)
 }
 
 export function arrayBufferToString(buffer: ArrayBuffer) {
-  var binary = '';
-  var bytes = [].slice.call(new Uint8Array(buffer));
-  bytes.forEach((b) => binary += String.fromCharCode(b));
-  return binary;
+  var binary = ''
+  var bytes = [].slice.call(new Uint8Array(buffer))
+  bytes.forEach((b) => binary += String.fromCharCode(b))
+  return binary
 }
 

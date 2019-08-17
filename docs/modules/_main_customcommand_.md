@@ -22,7 +22,7 @@
 
 ▸ **dispatchCustomCommand**(`o`: [CustomCommandDispatchOptions](../interfaces/_main_customcommand_.customcommanddispatchoptions.md)): *`Promise<NativeResult>`*
 
-*Defined in [main/customCommand.ts:126](https://github.com/cancerberoSgx/magica/blob/30321a6/src/main/customCommand.ts#L126)*
+*Defined in [main/customCommand.ts:126](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/customCommand.ts#L126)*
 
 **Parameters:**
 
@@ -38,7 +38,7 @@ ___
 
 ▸ **isCustomCommand**(`c`: string[]): *`Promise<boolean>`*
 
-*Defined in [main/customCommand.ts:12](https://github.com/cancerberoSgx/magica/blob/30321a6/src/main/customCommand.ts#L12)*
+*Defined in [main/customCommand.ts:12](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/customCommand.ts#L12)*
 
 **Parameters:**
 

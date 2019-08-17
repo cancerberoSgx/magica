@@ -8,4 +8,5 @@
 
 ### Interfaces
 
+* [EmscriptenModule](../interfaces/_file_emscriptenfs_.emscriptenmodule.md)
 * [FS](../interfaces/_file_emscriptenfs_.fs.md)

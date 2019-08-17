@@ -158,20 +158,20 @@ export interface EmscriptenModule {
 // declare namespace Emscripten {
 interface FileSystemType {
 }
-type EnvironmentType = "WEB" | "NODE" | "SHELL" | "WORKER";
-type ValueType = "number" | "string" | "array" | "boolean";
-type TypeCompatibleWithC = number | string | any[] | boolean;
+type EnvironmentType = "WEB" | "NODE" | "SHELL" | "WORKER"
+type ValueType = "number" | "string" | "array" | "boolean"
+type TypeCompatibleWithC = number | string | any[] | boolean
 
 type WebAssemblyImports = Array<{
   name: string;
   kind: string;
-}>;
+}>
 
 type WebAssemblyExports = Array<{
   module: string;
   name: string;
   kind: string;
-}>;
+}>
 
 interface CCallOpts {
   async?: boolean;
