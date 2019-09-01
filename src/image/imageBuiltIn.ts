@@ -1,9 +1,7 @@
-import pMap from 'p-map'
+import { serial } from 'misc-utils-of-mine-generic'
 import { main } from '../main/main'
 import { IFile } from '../types'
 import { imageInfo } from './imageInfo'
-import { serial } from 'misc-utils-of-mine-generic';
-import { async } from 'q';
 
 let builtInImages: IFile[]
 type images = 'rose:' | 'logo:' | 'wizard:' | 'granite:' | 'netscape:'
@@ -15,7 +13,7 @@ const names: images[] = ['rose:', 'logo:', 'wizard:', 'granite:', 'netscape:']
  */
 export async function imageBuiltIn(builtIn?: images): Promise<IFile[]> {
   if (!builtInImages) {
-    builtInImages = await serial(names.map(name=>async()=>{
+    builtInImages = await serial(names.map(name => async () => {
       const info = await imageInfo(name)
       const { outputFiles } = await main({ command: `convert ${name} ${`output1.${info[0].image!.format!.toLowerCase()}`}`, inputFiles: [] })
       outputFiles[0].name = name
