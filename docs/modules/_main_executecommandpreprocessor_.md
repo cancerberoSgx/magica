@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["main/executeCommandPreprocessor"](_main_executecommandpreprocessor_.md) /
+[Globals](../README.md) › ["main/executeCommandPreprocessor"](_main_executecommandpreprocessor_.md)
 
 # External module: "main/executeCommandPreprocessor"
 
@@ -16,9 +16,9 @@
 
 ###  _compileTimePreprocess
 
-▸ **_compileTimePreprocess**(`config`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<RunOptions>`*
+▸ **_compileTimePreprocess**(`config`: [RunOptions](../interfaces/_types_.runoptions.md)): *Promise‹[RunOptions](../interfaces/_types_.runoptions.md)›*
 
-*Defined in [main/executeCommandPreprocessor.ts:9](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/executeCommandPreprocessor.ts#L9)*
+*Defined in [main/executeCommandPreprocessor.ts:9](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/executeCommandPreprocessor.ts#L9)*
 
 internal - executes all registered preprocessor on given config
 
@@ -28,15 +28,15 @@ Name | Type |
 ------ | ------ |
 `config` | [RunOptions](../interfaces/_types_.runoptions.md) |
 
-**Returns:** *`Promise<RunOptions>`*
+**Returns:** *Promise‹[RunOptions](../interfaces/_types_.runoptions.md)›*
 
 ___
 
 ###  _runTimePreprocess
 
-▸ **_runTimePreprocess**(`runOptions`: [RunOptions](../interfaces/_types_.runoptions.md), `commandOptions`: [Options](../interfaces/_types_.options.md), `commandIndex`: number): *`Promise<void>`*
+▸ **_runTimePreprocess**(`runOptions`: [RunOptions](../interfaces/_types_.runoptions.md), `commandOptions`: [Options](../interfaces/_types_.options.md), `commandIndex`: number): *Promise‹void›*
 
-*Defined in [main/executeCommandPreprocessor.ts:18](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/executeCommandPreprocessor.ts#L18)*
+*Defined in [main/executeCommandPreprocessor.ts:18](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/executeCommandPreprocessor.ts#L18)*
 
 **Parameters:**
 
@@ -46,7 +46,7 @@ Name | Type |
 `commandOptions` | [Options](../interfaces/_types_.options.md) |
 `commandIndex` | number |
 
-**Returns:** *`Promise<void>`*
+**Returns:** *Promise‹void›*
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 ▸ **registerCommandPreprocessor**(`p`: [CommandPreprocessor](../interfaces/_types_.commandpreprocessor.md)): *void*
 
-*Defined in [main/executeCommandPreprocessor.ts:28](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/executeCommandPreprocessor.ts#L28)*
+*Defined in [main/executeCommandPreprocessor.ts:28](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/executeCommandPreprocessor.ts#L28)*
 
 **Parameters:**
 

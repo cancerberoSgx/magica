@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["main/template/imageHelper"](_main_template_imagehelper_.md) /
+[Globals](../README.md) › ["main/template/imageHelper"](_main_template_imagehelper_.md)
 
 # External module: "main/template/imageHelper"
 

@@ -3,7 +3,7 @@ import { getGlobal, serial } from 'misc-utils-of-mine-generic'
 import runText from './tests/runText'
 import simpleConvert from './tests/simpleConvert'
 import simpleIdentify from './tests/simpleIdentify'
-import { assert } from './testUtil';
+import { assert } from './testUtil'
 
 
 (async () => {

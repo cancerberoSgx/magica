@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["main/template/fsHelper"](../modules/_main_template_fshelper_.md) / [LSHelper](_main_template_fshelper_.lshelper.md) /
+[Globals](../README.md) › ["main/template/fsHelper"](../modules/_main_template_fshelper_.md) › [LSHelper](_main_template_fshelper_.lshelper.md)
 
 # Class: LSHelper
 
@@ -10,7 +10,7 @@
 
 ## Implements
 
-* [TemplateHelper](../interfaces/_main_template_template_.templatehelper.md)‹*`Options`*, *`Promise<string[]>`*›
+* [TemplateHelper](../interfaces/_main_template_template_.templatehelper.md)‹Options, Promise‹string[]››
 
 ## Index
 
@@ -32,52 +32,52 @@
 
 *Implementation of [TemplateHelper](../interfaces/_main_template_template_.templatehelper.md).[name](../interfaces/_main_template_template_.templatehelper.md#name)*
 
-*Defined in [main/template/fsHelper.ts:14](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/template/fsHelper.ts#L14)*
+*Defined in [main/template/fsHelper.ts:14](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/template/fsHelper.ts#L14)*
 
 ## Methods
 
 ###  exec
 
-▸ **exec**(`options`: `Options`): *`Promise<string[]>`*
+▸ **exec**(`options`: Options): *Promise‹string[]›*
 
-*Defined in [main/template/fsHelper.ts:15](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/template/fsHelper.ts#L15)*
+*Defined in [main/template/fsHelper.ts:15](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/template/fsHelper.ts#L15)*
 
 **Parameters:**
 
 Name | Type | Default |
 ------ | ------ | ------ |
-`options` | `Options` |  {} |
+`options` | Options |  {} |
 
-**Returns:** *`Promise<string[]>`*
+**Returns:** *Promise‹string[]›*
 
 ___
 
 ###  fnCompileTime
 
-▸ **fnCompileTime**(`options`: `Options`): *`Promise<string[]>`*
+▸ **fnCompileTime**(`options`: Options): *Promise‹string[]›*
 
-*Defined in [main/template/fsHelper.ts:26](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/template/fsHelper.ts#L26)*
+*Defined in [main/template/fsHelper.ts:26](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/template/fsHelper.ts#L26)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`options` | `Options` |
+`options` | Options |
 
-**Returns:** *`Promise<string[]>`*
+**Returns:** *Promise‹string[]›*
 
 ___
 
 ###  fnRunTime
 
-▸ **fnRunTime**(`options`: `Options`): *`Promise<string[]>`*
+▸ **fnRunTime**(`options`: Options): *Promise‹string[]›*
 
-*Defined in [main/template/fsHelper.ts:29](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/template/fsHelper.ts#L29)*
+*Defined in [main/template/fsHelper.ts:29](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/template/fsHelper.ts#L29)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`options` | `Options` |
+`options` | Options |
 
-**Returns:** *`Promise<string[]>`*
+**Returns:** *Promise‹string[]›*

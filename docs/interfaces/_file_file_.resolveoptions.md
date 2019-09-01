@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["file/file"](../modules/_file_file_.md) / [ResolveOptions](_file_file_.resolveoptions.md) /
+[Globals](../README.md) › ["file/file"](../modules/_file_file_.md) › [ResolveOptions](_file_file_.resolveoptions.md)
 
 # Interface: ResolveOptions
 
@@ -21,7 +21,7 @@
 
 • **name**? : *undefined | string*
 
-*Defined in [file/file.ts:299](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/file/file.ts#L299)*
+*Defined in [file/file.ts:299](https://github.com/cancerberoSgx/magica/blob/06c5192/src/file/file.ts#L299)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 • **protected**? : *undefined | false | true*
 
-*Defined in [file/file.ts:298](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/file/file.ts#L298)*
+*Defined in [file/file.ts:298](https://github.com/cancerberoSgx/magica/blob/06c5192/src/file/file.ts#L298)*

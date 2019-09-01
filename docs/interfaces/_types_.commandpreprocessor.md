@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["types"](../modules/_types_.md) / [CommandPreprocessor](_types_.commandpreprocessor.md) /
+[Globals](../README.md) › ["types"](../modules/_types_.md) › [CommandPreprocessor](_types_.commandpreprocessor.md)
 
 # Interface: CommandPreprocessor <**O, O2, RO**>
 
@@ -8,7 +8,7 @@
 
 ▪ **O**: *[RunOptions](_types_.runoptions.md)*
 
-▪ **O2**: *`O`*
+▪ **O2**: *O*
 
 ▪ **RO**: *[Options](_types_.options.md)*
 
@@ -37,38 +37,38 @@
 
 • **name**: *string*
 
-*Defined in [types.ts:188](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/types.ts#L188)*
+*Defined in [types.ts:188](https://github.com/cancerberoSgx/magica/blob/06c5192/src/types.ts#L188)*
 
 ## Methods
 
 ### `Optional` fnCompileTime
 
-▸ **fnCompileTime**(`context`: `O`): *`Promise<O2>`*
+▸ **fnCompileTime**(`context`: O): *Promise‹O2›*
 
-*Defined in [types.ts:189](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/types.ts#L189)*
+*Defined in [types.ts:189](https://github.com/cancerberoSgx/magica/blob/06c5192/src/types.ts#L189)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`context` | `O` |
+`context` | O |
 
-**Returns:** *`Promise<O2>`*
+**Returns:** *Promise‹O2›*
 
 ___
 
 ### `Optional` fnRuntime
 
-▸ **fnRuntime**(`commandOptions`: `RO`, `commandIndex`: number, `runOptions`: `O`): *`Promise<void>`*
+▸ **fnRuntime**(`commandOptions`: RO, `commandIndex`: number, `runOptions`: O): *Promise‹void›*
 
-*Defined in [types.ts:190](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/types.ts#L190)*
+*Defined in [types.ts:190](https://github.com/cancerberoSgx/magica/blob/06c5192/src/types.ts#L190)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`commandOptions` | `RO` |
+`commandOptions` | RO |
 `commandIndex` | number |
-`runOptions` | `O` |
+`runOptions` | O |
 
-**Returns:** *`Promise<void>`*
+**Returns:** *Promise‹void›*

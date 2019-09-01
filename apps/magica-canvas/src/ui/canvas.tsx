@@ -13,8 +13,8 @@ import { getState } from '../app/store'
 
 export const Canvas = () => <canvas id="canvas"
   width={getState().canvasBounds.width} height={getState().canvasBounds.height}
-  onMouseMove={e => dispatchCanvasMouseMove(e.nativeEvent.layerX, e.nativeEvent.layerY)}
-  onClick={e => change(e.nativeEvent.layerX, e.nativeEvent.layerY)}></canvas>
+  onMouseMove={e => dispatchCanvasMouseMove(e.offsetX, e.offsetY)}
+  onClick={e => change(e.offsetX, e.offsetY)}></canvas>
 
 let context: CanvasRenderingContext2D
 

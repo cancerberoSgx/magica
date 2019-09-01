@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["types"](../modules/_types_.md) / [Point](_types_.point.md) /
+[Globals](../README.md) › ["types"](../modules/_types_.md) › [Point](_types_.point.md)
 
 # Interface: Point
 
@@ -23,7 +23,7 @@
 
 • **x**: *number*
 
-*Defined in [types.ts:201](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/types.ts#L201)*
+*Defined in [types.ts:201](https://github.com/cancerberoSgx/magica/blob/06c5192/src/types.ts#L201)*
 
 ___
 
@@ -31,4 +31,4 @@ ___
 
 • **y**: *number*
 
-*Defined in [types.ts:202](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/types.ts#L202)*
+*Defined in [types.ts:202](https://github.com/cancerberoSgx/magica/blob/06c5192/src/types.ts#L202)*

@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["imageMagick/magickLoaded"](../modules/_imagemagick_magickloaded_.md) / [Main](_imagemagick_magickloaded_.main.md) /
+[Globals](../README.md) › ["imageMagick/magickLoaded"](../modules/_imagemagick_magickloaded_.md) › [Main](_imagemagick_magickloaded_.main.md)
 
 # Interface: Main
 
@@ -21,7 +21,7 @@
 
 • **FS**: *[FS](_file_emscriptenfs_.fs.md)*
 
-*Defined in [imageMagick/magickLoaded.ts:9](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/imageMagick/magickLoaded.ts#L9)*
+*Defined in [imageMagick/magickLoaded.ts:9](https://github.com/cancerberoSgx/magica/blob/06c5192/src/imageMagick/magickLoaded.ts#L9)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 • **main**: *[NativeMain](../modules/_imagemagick_createmain_.md#nativemain)*
 
-*Defined in [imageMagick/magickLoaded.ts:8](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/imageMagick/magickLoaded.ts#L8)*
+*Defined in [imageMagick/magickLoaded.ts:8](https://github.com/cancerberoSgx/magica/blob/06c5192/src/imageMagick/magickLoaded.ts#L8)*

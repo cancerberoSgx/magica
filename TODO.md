@@ -6,6 +6,7 @@
 
 
 ## TODO / Road map
+- [x] remove p-map dependency from src/image/imageBuiltIn.ts
 - [ ] run(verbose: true) - propagate verbose to main() call and RunResult.
 - [ ] magick command is not available, only convert, identify - but we should be using magick not those. (or is it that we are really executing magick and what we pass are its args ? ). Research.
 - [ ] apps/magica-react - react components to different views of images and commands. 

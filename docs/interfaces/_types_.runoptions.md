@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["types"](../modules/_types_.md) / [RunOptions](_types_.runoptions.md) /
+[Globals](../README.md) › ["types"](../modules/_types_.md) › [RunOptions](_types_.runoptions.md)
 
 # Interface: RunOptions
 
@@ -22,7 +22,7 @@
 
 • **script**? : *string | string[]*
 
-*Defined in [types.ts:165](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/types.ts#L165)*
+*Defined in [types.ts:165](https://github.com/cancerberoSgx/magica/blob/06c5192/src/types.ts#L165)*
 
 If an array of string is given each item will be executed just like main's [Options.command](_types_.options.md#command).
 

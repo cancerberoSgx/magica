@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["main/template/imageHelper"](../modules/_main_template_imagehelper_.md) / [ImageInfoHelper](_main_template_imagehelper_.imageinfohelper.md) /
+[Globals](../README.md) › ["main/template/imageHelper"](../modules/_main_template_imagehelper_.md) › [ImageInfoHelper](_main_template_imagehelper_.imageinfohelper.md)
 
 # Class: ImageInfoHelper
 
@@ -10,7 +10,7 @@
 
 ## Implements
 
-* [TemplateHelper](../interfaces/_main_template_template_.templatehelper.md)‹*`Options`*, *`Promise<ExtractInfoResultImage>`*›
+* [TemplateHelper](../interfaces/_main_template_template_.templatehelper.md)‹Options, Promise‹[ExtractInfoResultImage](../interfaces/_image_imageinfo_.extractinforesultimage.md)››
 
 ## Index
 
@@ -32,52 +32,52 @@
 
 *Implementation of [TemplateHelper](../interfaces/_main_template_template_.templatehelper.md).[name](../interfaces/_main_template_template_.templatehelper.md#name)*
 
-*Defined in [main/template/imageHelper.ts:26](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/template/imageHelper.ts#L26)*
+*Defined in [main/template/imageHelper.ts:26](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/template/imageHelper.ts#L26)*
 
 ## Methods
 
 ### `Protected` exec
 
-▸ **exec**(`options`: `Options`): *`Promise<ExtractInfoResultImage>`*
+▸ **exec**(`options`: Options): *Promise‹[ExtractInfoResultImage](../interfaces/_image_imageinfo_.extractinforesultimage.md)›*
 
-*Defined in [main/template/imageHelper.ts:27](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/template/imageHelper.ts#L27)*
+*Defined in [main/template/imageHelper.ts:27](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/template/imageHelper.ts#L27)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`options` | `Options` |
+`options` | Options |
 
-**Returns:** *`Promise<ExtractInfoResultImage>`*
+**Returns:** *Promise‹[ExtractInfoResultImage](../interfaces/_image_imageinfo_.extractinforesultimage.md)›*
 
 ___
 
 ###  fnCompileTime
 
-▸ **fnCompileTime**(`options`: `Options`): *`Promise<ExtractInfoResultImage>`*
+▸ **fnCompileTime**(`options`: Options): *Promise‹[ExtractInfoResultImage](../interfaces/_image_imageinfo_.extractinforesultimage.md)›*
 
-*Defined in [main/template/imageHelper.ts:31](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/template/imageHelper.ts#L31)*
+*Defined in [main/template/imageHelper.ts:31](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/template/imageHelper.ts#L31)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`options` | `Options` |
+`options` | Options |
 
-**Returns:** *`Promise<ExtractInfoResultImage>`*
+**Returns:** *Promise‹[ExtractInfoResultImage](../interfaces/_image_imageinfo_.extractinforesultimage.md)›*
 
 ___
 
 ###  fnRunTime
 
-▸ **fnRunTime**(`options`: `Options`): *`Promise<ExtractInfoResultImage>`*
+▸ **fnRunTime**(`options`: Options): *Promise‹[ExtractInfoResultImage](../interfaces/_image_imageinfo_.extractinforesultimage.md)›*
 
-*Defined in [main/template/imageHelper.ts:34](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/template/imageHelper.ts#L34)*
+*Defined in [main/template/imageHelper.ts:34](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/template/imageHelper.ts#L34)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`options` | `Options` |
+`options` | Options |
 
-**Returns:** *`Promise<ExtractInfoResultImage>`*
+**Returns:** *Promise‹[ExtractInfoResultImage](../interfaces/_image_imageinfo_.extractinforesultimage.md)›*

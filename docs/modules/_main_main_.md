@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["main/main"](_main_main_.md) /
+[Globals](../README.md) › ["main/main"](_main_main_.md)
 
 # External module: "main/main"
 
@@ -14,14 +14,14 @@
 
 ###  main
 
-▸ **main**(`o`: `Partial<Options>`): *`Promise<Result>`*
+▸ **main**(`o`: Partial‹[Options](../interfaces/_types_.options.md)›): *Promise‹[Result](../interfaces/_types_.result.md)›*
 
-*Defined in [main/main.ts:29](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/main.ts#L29)*
+*Defined in [main/main.ts:29](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/main.ts#L29)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`o` | `Partial<Options>` |
+`o` | Partial‹[Options](../interfaces/_types_.options.md)› |
 
-**Returns:** *`Promise<Result>`*
+**Returns:** *Promise‹[Result](../interfaces/_types_.result.md)›*

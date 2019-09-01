@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["main/customCommand"](_main_customcommand_.md) /
+[Globals](../README.md) › ["main/customCommand"](_main_customcommand_.md)
 
 # External module: "main/customCommand"
 
@@ -20,9 +20,9 @@
 
 ###  dispatchCustomCommand
 
-▸ **dispatchCustomCommand**(`o`: [CustomCommandDispatchOptions](../interfaces/_main_customcommand_.customcommanddispatchoptions.md)): *`Promise<NativeResult>`*
+▸ **dispatchCustomCommand**(`o`: [CustomCommandDispatchOptions](../interfaces/_main_customcommand_.customcommanddispatchoptions.md)): *Promise‹[NativeResult](../interfaces/_imagemagick_createmain_.nativeresult.md)›*
 
-*Defined in [main/customCommand.ts:126](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/customCommand.ts#L126)*
+*Defined in [main/customCommand.ts:126](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/customCommand.ts#L126)*
 
 **Parameters:**
 
@@ -30,15 +30,15 @@ Name | Type |
 ------ | ------ |
 `o` | [CustomCommandDispatchOptions](../interfaces/_main_customcommand_.customcommanddispatchoptions.md) |
 
-**Returns:** *`Promise<NativeResult>`*
+**Returns:** *Promise‹[NativeResult](../interfaces/_imagemagick_createmain_.nativeresult.md)›*
 
 ___
 
 ###  isCustomCommand
 
-▸ **isCustomCommand**(`c`: string[]): *`Promise<boolean>`*
+▸ **isCustomCommand**(`c`: string[]): *Promise‹boolean›*
 
-*Defined in [main/customCommand.ts:12](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/customCommand.ts#L12)*
+*Defined in [main/customCommand.ts:12](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/customCommand.ts#L12)*
 
 **Parameters:**
 
@@ -46,4 +46,4 @@ Name | Type |
 ------ | ------ |
 `c` | string[] |
 
-**Returns:** *`Promise<boolean>`*
+**Returns:** *Promise‹boolean›*

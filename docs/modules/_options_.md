@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["options"](_options_.md) /
+[Globals](../README.md) › ["options"](_options_.md)
 
 # External module: "options"
 
@@ -16,9 +16,9 @@
 
 ###  getOption
 
-▸ **getOption**<**K**>(`k`: `K`): *`Required<NativeOptions>[K]`*
+▸ **getOption**<**K**>(`k`: K): *Required<NativeOptions>[K]*
 
-*Defined in [options.ts:19](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/options.ts#L19)*
+*Defined in [options.ts:19](https://github.com/cancerberoSgx/magica/blob/06c5192/src/options.ts#L19)*
 
 **Type parameters:**
 
@@ -28,9 +28,9 @@
 
 Name | Type |
 ------ | ------ |
-`k` | `K` |
+`k` | K |
 
-**Returns:** *`Required<NativeOptions>[K]`*
+**Returns:** *Required<NativeOptions>[K]*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 ▸ **getOptions**(): *object*
 
-*Defined in [options.ts:15](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/options.ts#L15)*
+*Defined in [options.ts:15](https://github.com/cancerberoSgx/magica/blob/06c5192/src/options.ts#L15)*
 
 **Returns:** *object*
 
@@ -46,14 +46,14 @@ ___
 
 ###  setOptions
 
-▸ **setOptions**(`o`: `Partial<NativeOptions>`): *void*
+▸ **setOptions**(`o`: Partial‹[NativeOptions](../interfaces/_types_.nativeoptions.md)›): *void*
 
-*Defined in [options.ts:23](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/options.ts#L23)*
+*Defined in [options.ts:23](https://github.com/cancerberoSgx/magica/blob/06c5192/src/options.ts#L23)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`o` | `Partial<NativeOptions>` |
+`o` | Partial‹[NativeOptions](../interfaces/_types_.nativeoptions.md)› |
 
 **Returns:** *void*

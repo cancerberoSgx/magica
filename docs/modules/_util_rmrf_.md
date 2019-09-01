@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["util/rmRf"](_util_rmrf_.md) /
+[Globals](../README.md) › ["util/rmRf"](_util_rmrf_.md)
 
 # External module: "util/rmRf"
 
@@ -16,7 +16,7 @@
 
 ▸ **rmRf**(`f`: string, `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md), `predicate`: function, `removed`: string[]): *boolean*
 
-*Defined in [util/rmRf.ts:5](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/util/rmRf.ts#L5)*
+*Defined in [util/rmRf.ts:5](https://github.com/cancerberoSgx/magica/blob/06c5192/src/util/rmRf.ts#L5)*
 
 **Parameters:**
 

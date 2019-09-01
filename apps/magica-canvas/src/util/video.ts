@@ -46,11 +46,8 @@ async function resetCapture() {
   }
   imageCapture = undefined
 }
-
 let timer: any
-
 let imageCapture: any
-
 async function shot() {
   var f = await shotTakePhoto()
   return await handleInputFileChange(f)
@@ -64,8 +61,6 @@ async function shotGrabFrame() {
   b.close()
   return await File.fromHTMLImageData(data, 'f.rgba')
 }
-
-
 
 async function shotTakePhoto() {
   // console.log(imageCapture , stream, stream!.getVideoTracks());

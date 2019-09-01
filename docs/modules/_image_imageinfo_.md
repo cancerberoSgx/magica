@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["image/imageInfo"](_image_imageinfo_.md) /
+[Globals](../README.md) › ["image/imageInfo"](_image_imageinfo_.md)
 
 # External module: "image/imageInfo"
 
@@ -18,9 +18,9 @@
 
 ###  imageInfo
 
-▸ **imageInfo**(`img?`: [IFile](../interfaces/_types_.ifile.md) | string | string | [IFile](../interfaces/_types_.ifile.md)[]): *`Promise<ExtractInfoResult[]>`*
+▸ **imageInfo**(`img?`: [IFile](../interfaces/_types_.ifile.md) | string | string | [IFile](../interfaces/_types_.ifile.md)[]): *Promise‹ExtractInfoResult[]›*
 
-*Defined in [image/imageInfo.ts:11](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/image/imageInfo.ts#L11)*
+*Defined in [image/imageInfo.ts:11](https://github.com/cancerberoSgx/magica/blob/06c5192/src/image/imageInfo.ts#L11)*
 
 Execute `convert $IMG info.json` to extract image metadata. Returns the parsed info.json file contents
 
@@ -30,4 +30,4 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `img?` | [IFile](../interfaces/_types_.ifile.md) \| string \| string \| [IFile](../interfaces/_types_.ifile.md)[] | could be a string in case you want to extract information of built in images like `rose:`  |
 
-**Returns:** *`Promise<ExtractInfoResult[]>`*
+**Returns:** *Promise‹ExtractInfoResult[]›*

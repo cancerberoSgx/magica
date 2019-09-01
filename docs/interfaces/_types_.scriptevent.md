@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["types"](../modules/_types_.md) / [ScriptEvent](_types_.scriptevent.md) /
+[Globals](../README.md) › ["types"](../modules/_types_.md) › [ScriptEvent](_types_.scriptevent.md)
 
 # Interface: ScriptEvent
 
@@ -23,9 +23,9 @@
 
 ### `Optional` commandOptions
 
-• **commandOptions**? : *`Partial<Options>`*
+• **commandOptions**? : *Partial‹[Options](_types_.options.md)›*
 
-*Defined in [types.ts:131](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/types.ts#L131)*
+*Defined in [types.ts:131](https://github.com/cancerberoSgx/magica/blob/06c5192/src/types.ts#L131)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • **commandResult**? : *[Result](_types_.result.md)*
 
-*Defined in [types.ts:132](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/types.ts#L132)*
+*Defined in [types.ts:132](https://github.com/cancerberoSgx/magica/blob/06c5192/src/types.ts#L132)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • **name**: *"beforeCommand" | "afterCommand" | "onScriptStart" | "onScriptEnd"*
 
-*Defined in [types.ts:127](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/types.ts#L127)*
+*Defined in [types.ts:127](https://github.com/cancerberoSgx/magica/blob/06c5192/src/types.ts#L127)*
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 • **scriptInterrupt**: *boolean*
 
-*Defined in [types.ts:130](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/types.ts#L130)*
+*Defined in [types.ts:130](https://github.com/cancerberoSgx/magica/blob/06c5192/src/types.ts#L130)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 • **scriptOptions**: *[RunOptions](_types_.runoptions.md)*
 
-*Defined in [types.ts:129](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/types.ts#L129)*
+*Defined in [types.ts:129](https://github.com/cancerberoSgx/magica/blob/06c5192/src/types.ts#L129)*
 
 ___
 
@@ -65,4 +65,4 @@ ___
 
 • **stopPropagation**: *boolean*
 
-*Defined in [types.ts:128](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/types.ts#L128)*
+*Defined in [types.ts:128](https://github.com/cancerberoSgx/magica/blob/06c5192/src/types.ts#L128)*

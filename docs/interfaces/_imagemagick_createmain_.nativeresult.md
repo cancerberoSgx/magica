@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["imageMagick/createMain"](../modules/_imagemagick_createmain_.md) / [NativeResult](_imagemagick_createmain_.nativeresult.md) /
+[Globals](../README.md) › ["imageMagick/createMain"](../modules/_imagemagick_createmain_.md) › [NativeResult](_imagemagick_createmain_.nativeresult.md)
 
 # Interface: NativeResult
 
@@ -23,9 +23,9 @@
 
 ###  error
 
-• **error**: *`Error` | undefined*
+• **error**: *Error | undefined*
 
-*Defined in [imageMagick/createMain.ts:35](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/imageMagick/createMain.ts#L35)*
+*Defined in [imageMagick/createMain.ts:35](https://github.com/cancerberoSgx/magica/blob/06c5192/src/imageMagick/createMain.ts#L35)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • **returnValue**: *any*
 
-*Defined in [imageMagick/createMain.ts:32](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/imageMagick/createMain.ts#L32)*
+*Defined in [imageMagick/createMain.ts:32](https://github.com/cancerberoSgx/magica/blob/06c5192/src/imageMagick/createMain.ts#L32)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 • **stderr**: *string[]*
 
-*Defined in [imageMagick/createMain.ts:34](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/imageMagick/createMain.ts#L34)*
+*Defined in [imageMagick/createMain.ts:34](https://github.com/cancerberoSgx/magica/blob/06c5192/src/imageMagick/createMain.ts#L34)*
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 • **stdout**: *string[]*
 
-*Defined in [imageMagick/createMain.ts:33](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/imageMagick/createMain.ts#L33)*
+*Defined in [imageMagick/createMain.ts:33](https://github.com/cancerberoSgx/magica/blob/06c5192/src/imageMagick/createMain.ts#L33)*

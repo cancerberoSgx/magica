@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["main/run"](_main_run_.md) /
+[Globals](../README.md) › ["main/run"](_main_run_.md)
 
 # External module: "main/run"
 
@@ -15,9 +15,9 @@
 
 ###  run
 
-▸ **run**<**T**>(`o`: [RunOptions](../interfaces/_types_.runoptions.md)): *`Promise<RunResult<T>>`*
+▸ **run**<**T**>(`o`: [RunOptions](../interfaces/_types_.runoptions.md)): *Promise‹[RunResult](../interfaces/_types_.runresult.md)‹T››*
 
-*Defined in [main/run.ts:26](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/run.ts#L26)*
+*Defined in [main/run.ts:26](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/run.ts#L26)*
 
 Has a signature compatible with main, but if `script` is given instead of `command` option then it's
 interpreted as a sequence of commands that are executed serially using [main](../interfaces/_imagemagick_magickloaded_.main.md#main)
@@ -41,7 +41,7 @@ Name | Type |
 ------ | ------ |
 `o` | [RunOptions](../interfaces/_types_.runoptions.md) |
 
-**Returns:** *`Promise<RunResult<T>>`*
+**Returns:** *Promise‹[RunResult](../interfaces/_types_.runresult.md)‹T››*
 
 the result of each command execution
 
@@ -49,9 +49,9 @@ ___
 
 ###  runOne
 
-▸ **runOne**(`script`: string, `input`: [File](../classes/_file_file_.file.md) | [File](../classes/_file_file_.file.md)[]): *`Promise<IFile>`*
+▸ **runOne**(`script`: string, `input`: [File](../classes/_file_file_.file.md) | [File](../classes/_file_file_.file.md)[]): *Promise‹[IFile](../interfaces/_types_.ifile.md)›*
 
-*Defined in [main/run.ts:111](https://github.com/cancerberoSgx/magica/blob/0133e5d/src/main/run.ts#L111)*
+*Defined in [main/run.ts:111](https://github.com/cancerberoSgx/magica/blob/06c5192/src/main/run.ts#L111)*
 
 **Parameters:**
 
@@ -60,4 +60,4 @@ Name | Type | Default |
 `script` | string | - |
 `input` | [File](../classes/_file_file_.file.md) \| [File](../classes/_file_file_.file.md)[] |  [] |
 
-**Returns:** *`Promise<IFile>`*
+**Returns:** *Promise‹[IFile](../interfaces/_types_.ifile.md)›*

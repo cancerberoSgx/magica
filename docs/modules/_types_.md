@@ -1,6 +1,6 @@
-> **[magica](../README.md)**
+**[magica](../README.md)**
 
-[Globals](../README.md) / ["types"](_types_.md) /
+[Globals](../README.md) › ["types"](_types_.md)
 
 # External module: "types"
 
