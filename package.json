@@ -34,7 +34,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
     "cross-fetch": "^3.0.4",
     "ejs": "^2.6.2",
     "glob": "^7.1.4",
@@ -51,6 +50,7 @@
     "@types/puppeteer": "^1.19.1",
     "@types/shelljs": "^0.8.5",
     "ava": "^2.3.0",
+    "babel-polyfill": "^6.26.0",
     "browserify": "^16.5.0",
     "coveralls": "^3.0.6",
     "file-type": "^12.2.0",

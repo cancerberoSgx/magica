@@ -1,8 +1,7 @@
 import test from 'ava'
 import { File } from '../src'
-import { imageBuiltIn } from '../src/image/imageBuiltIn'
 import { colorCount, imagePixelColor } from '../src/image/imageUtil'
-import { listFormat } from '../src/image/support'
+import { imageBuiltIn, listFormat } from '../src/image/support'
 
 test('imagePixelColor', async t => {
   const c = await imagePixelColor(await File.fromFile('test/assets/n.png'), 20, 20)

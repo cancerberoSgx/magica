@@ -16,9 +16,11 @@ export function getRgbaPixel(f: File, x: number, y: number): Rgba {
   // throw new Error('Image must be .rgba and have own height and width properties')
   // }
 }
+
 export function coordsToIndex(width: number, x: number, y: number) {
   return (width! * y + x) * 4
 }
+
 export async function getPixels(f: File): Promise<Rgba[]> {
   var data = await f.asRGBAImageData()
   var pixels: Rgba[] = []
@@ -32,7 +34,6 @@ export async function getPixels(f: File): Promise<Rgba[]> {
   }
   return pixels
 }
-
 
 export async function imagePixelColor(img: IFile | undefined, x: number, y: number): Promise<string | undefined> {
   if (!img) { return }
@@ -69,7 +70,6 @@ export function parseConvertVerbose(stdout: string[]) {
   var r = /([^=]+)=>([^\s]+)\s+([a-zA-Z0-9]+)\s+([^=]+)=>([^\s]+)/
   // logo:=>bbb.rgba GIF 384x288 384x288+0+0
   var r2 = /([^=]+)=>([^\s]+)\s+([a-zA-Z0-9]+)\s+([^\s]+)/
-
   return stdout.map(l => r.exec(l) || r2.exec(l)).filter(notFalsy).map(m => {
     var a = m[4].split('x')
     var b = m[Math.min(m.length - 1, 6)].split('x')

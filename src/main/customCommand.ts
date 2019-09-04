@@ -29,7 +29,6 @@ export async function isCustomCommand(c: string[]) {
 export interface CustomCommandContext {
   FS: FS;
   options: Partial<Options>
-  // files: File[]
   log(...s: string[]): void;
   error(...s: string[]): void;
   File: typeof File
@@ -59,12 +58,10 @@ class CustomCommandContextImpl implements CustomCommandContext {
   File: typeof File;
   public options: Partial<Options>
   public FS: FS
-  // public files: File[]
   protected outputFiles: File[]
   constructor(o: CustomCommandDispatchOptions) {
     this.options = o.options
     this.FS = o.FS
-    // this.files = o.files
     this.outputFiles = o.outputFiles
     this.File = File
   }
@@ -93,36 +90,17 @@ class CustomCommandContextImpl implements CustomCommandContext {
     else {
       arrayUnion(this.outputFiles, files, File.equals, this.outputFiles)
     }
-    // files.forEach(f=>{
-    //   var p = getFilePath(f)
-    //   .filter(f=>getFilePath(f)===p).push(File.asFile(f))
-    // })
   }
-
-  // removeOutputFile(f:string| IFile){
-  //   var p = getFilePath(f)
-  //   const i = this.outputFiles.findIndex(f=>getFilePath(f)===p)
-  //   if(i!==-1){
-  //     this.outputFiles.splice(i, 1)
-  //   }
-  // }
 }
-// export function union<A>(a:A[],b:A[], predicate: (a:A,b:A)=>boolean = (a,b)=>a===b, output?:A[]) {
-//   var result : A[] = []
-//   for(let x of a){
-//     if(pred)
-//   }
-//   return result
-// }
 
 export interface CustomCommandDispatchOptions {
   command: string[],
   options: Partial<Options>,
   FS: FS,
-  // files: File[]
   /** can be used by custom commands to manipulate outputFiles*/
   outputFiles: File[]
 }
+
 export async function dispatchCustomCommand(o: CustomCommandDispatchOptions): Promise<NativeResult> {
   const s = o.command.slice(1).join(' ').trim()
   o.options.debug && console.log('custom command js expression: ' + s)

@@ -21,7 +21,7 @@
 
 Ƭ **Magica**: *ReturnType‹_getMagica›*
 
-*Defined in [util/magica.ts:27](https://github.com/cancerberoSgx/magica/blob/64330f2/src/util/magica.ts#L27)*
+*Defined in [util/magica.ts:26](https://github.com/cancerberoSgx/magica/blob/c127d55/src/util/magica.ts#L26)*
 
 ## Functions
 
@@ -29,7 +29,7 @@
 
 ▸ **getMagica**(): *[Magica](_util_magica_.md#magica)*
 
-*Defined in [util/magica.ts:29](https://github.com/cancerberoSgx/magica/blob/64330f2/src/util/magica.ts#L29)*
+*Defined in [util/magica.ts:28](https://github.com/cancerberoSgx/magica/blob/c127d55/src/util/magica.ts#L28)*
 
 **Returns:** *[Magica](_util_magica_.md#magica)*
 
@@ -39,6 +39,6 @@ ___
 
 ▸ **installMagica**(): *void*
 
-*Defined in [util/magica.ts:33](https://github.com/cancerberoSgx/magica/blob/64330f2/src/util/magica.ts#L33)*
+*Defined in [util/magica.ts:32](https://github.com/cancerberoSgx/magica/blob/c127d55/src/util/magica.ts#L32)*
 
 **Returns:** *void*

@@ -1,11 +1,12 @@
 ## ISSUES
 
 - [ ]  var r = await run({     script: 'convert bluebells.png output.png',     inputFiles: [await File.fromUrl('bluebells.png')],  protectOutputFiles: true   })
-- [ ]  await File.fromFile('test/assets/text2.tiff') will fail for files generated/written with this new version for some reasom - I think they are written incorrectly...
+- [ ]  await File.fromFile('test/assets/text2.tiff') will fail for files generated/written with this new version for some reason - I think they are written incorrectly...
 - [ ] errors are silently ignored - passing non existent file name
 
 
 ## TODO / Road map
+- [ ] move CLI to other project and remove dependencies.
 - [x] remove p-map dependency from src/image/imageBuiltIn.ts
 - [ ] run(verbose: true) - propagate verbose to main() call and RunResult.
 - [ ] magick command is not available, only convert, identify - but we should be using magick not those. (or is it that we are really executing magick and what we pass are its args ? ). Research.

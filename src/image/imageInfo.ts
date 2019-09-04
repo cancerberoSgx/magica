@@ -13,7 +13,6 @@ export async function imageInfo(img?: IFile | string | (IFile | string)[]): Prom
     return Promise.resolve([])
   }
   var files = await Promise.all(asArray(img).map(async img => typeof img === 'string' ? await File.resolve(img) : [img]))
-
   const r = await main({
     inputFiles: files.flat().filter(notUndefined),
     command: ['convert', ...asArray(img).map(img => typeof img === 'string' ? img : img.name), 'imgInfo.json']

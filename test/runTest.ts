@@ -29,9 +29,7 @@ test('should output files', async t => {
 
 test('should output files2', async t => {
   const result = await run({
-    script: `
-     convert logo.jpg -scale 50% 2.png
-    `,
+    script: `convert logo.jpg -scale 50% 2.png`,
     inputFiles: ['test/assets/logo.jpg']
   })
   t.deepEqual(filterResultStdErr(result), [])
