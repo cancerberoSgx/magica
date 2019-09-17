@@ -135,6 +135,13 @@ export class File implements IFile {
   public async equals(file?: File) {
     return await imageCompare(this, file)
   }
+  
+   /** 
+   * Returns base64 representation of this image in an encoded format like PNG  
+   */
+  public async asArrayBuffer() {
+    return this.content.buffer
+  }
 
   public static equals: ((a: string | IFile, b: string | IFile) => boolean) = (a, b) => File.asPath(a) !== File.asPath(b)
 
@@ -147,7 +154,10 @@ export class File implements IFile {
     var size = await this.size()
     var { outputFiles } = this.name.endsWith('.rgba') && this.width && this.height ?
       { outputFiles: [this] } :
-      await run({ script: `convert ${await this.sizeDepthArgs()} ${this.name} ${await this.sizeDepthArgs(false)} output.rgba`, inputFiles: [this] })
+      await run({ 
+        script: `convert ${await this.sizeDepthArgs()} '${this.name}[0]' ${await this.sizeDepthArgs(false)} output.rgba`, 
+        inputFiles: [this] 
+        })
     return {
       data: new Uint8ClampedArray(outputFiles[0].content.buffer),
       width: size.width,
@@ -175,11 +185,23 @@ export class File implements IFile {
   public static async fromUrl(url: string, o: RequestInit & ResolveOptions = {}) {
     try {
       const response = await fetch(url, o)
-      return new File(o.name || o.name || getFileNameFromUrl(url), new Uint8ClampedArray(await response.arrayBuffer()), o.protected, url)
+      return new File(  o.name || getFileNameFromUrl(url), new Uint8ClampedArray(await response.arrayBuffer()), o.protected, url)
     } catch (error) {
       console.error(error)
       return undefined
     }
+  }
+
+  /**
+   * Creates a File from given ArrayBuffer.
+   */
+  public static async fromArrayBuffer(b: ArrayBuffer, o: ResolveOptions = {}) {
+      const f= new File( o.name || 'unknown', new Uint8ClampedArray(b), o.protected)
+    if(!o.name){
+      const info = await f.infoOne()
+      return new File(info.format?'unammed.'+info.format.toLowerCase():'unknown', f.content, o.protected)
+    }
+    return f
   }
 
   /**
