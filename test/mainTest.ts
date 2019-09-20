@@ -1,5 +1,5 @@
 import test from 'ava'
-import { readFileSync, writeFileSync } from 'fs'
+import { readFileSync } from 'fs'
 import { basename } from 'misc-utils-of-mine-generic'
 import { File, magickLoaded } from '../src'
 import { main, mainSync } from '../src/main/main'

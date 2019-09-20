@@ -1,6 +1,4 @@
-**[magica](../README.md)**
-
-[Globals](../README.md) › ["util/lsR"](../modules/_util_lsr_.md) › [LsRVisitorFile](_util_lsr_.lsrvisitorfile.md)
+[magica](../README.md) › ["util/lsR"](../modules/_util_lsr_.md) › [LsRVisitorFile](_util_lsr_.lsrvisitorfile.md)
 
 # Interface: LsRVisitorFile
 
@@ -21,7 +19,7 @@
 
 • **isDir**: *boolean*
 
-*Defined in [util/lsR.ts:29](https://github.com/cancerberoSgx/magica/blob/c127d55/src/util/lsR.ts#L29)*
+*Defined in [util/lsR.ts:29](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/util/lsR.ts#L29)*
 
 ___
 
@@ -29,4 +27,4 @@ ___
 
 • **path**: *string*
 
-*Defined in [util/lsR.ts:28](https://github.com/cancerberoSgx/magica/blob/c127d55/src/util/lsR.ts#L28)*
+*Defined in [util/lsR.ts:28](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/util/lsR.ts#L28)*

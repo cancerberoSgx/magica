@@ -1,4 +1,4 @@
-import { Deferred, dirname, isNode , flat} from 'misc-utils-of-mine-generic'
+import { Deferred, dirname, isNode } from 'misc-utils-of-mine-generic'
 import { FS } from '../file/emscriptenFs'
 import { getOptions } from '../options'
 import { getThisBrowserScriptTagSrc, getThisBrowserScriptTagSrcParams } from '../util/magicaWasm'
@@ -12,7 +12,7 @@ export interface Main {
 const { debug } = getOptions()
 
 let _FS: FS = null as any
-let _main : NativeMain = null as any
+let _main: NativeMain = null as any
 
 export const magickLoaded = new Deferred<Main>()
 
@@ -23,7 +23,7 @@ magickLoaded.then(m => {
 
 export function getMagick() {
   return {
-    FS: getFS(), 
+    FS: getFS(),
     main: getMain()
   }
 }

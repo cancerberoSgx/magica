@@ -1,6 +1,4 @@
-**[magica](../README.md)**
-
-[Globals](../README.md) › ["file/file"](_file_file_.md)
+[magica](../README.md) › ["file/file"](_file_file_.md)
 
 # External module: "file/file"
 

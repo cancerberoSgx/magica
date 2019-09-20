@@ -1,6 +1,4 @@
-**[magica](../README.md)**
-
-[Globals](../README.md) › ["image/imageCompare"](_image_imagecompare_.md)
+[magica](../README.md) › ["image/imageCompare"](_image_imagecompare_.md)
 
 # External module: "image/imageCompare"
 
@@ -17,7 +15,7 @@
 
 ▸ **imageCompare**(`img1?`: [IFile](../interfaces/_types_.ifile.md), `img2?`: [IFile](../interfaces/_types_.ifile.md), `fuzz`: number): *Promise‹boolean›*
 
-*Defined in [image/imageCompare.ts:8](https://github.com/cancerberoSgx/magica/blob/c127d55/src/image/imageCompare.ts#L8)*
+*Defined in [image/imageCompare.ts:8](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/image/imageCompare.ts#L8)*
 
 Compare the two images and return true if they are equal visually. Optionally, a margin of error can be provided using `fuzz`
 
@@ -37,7 +35,7 @@ ___
 
 ▸ **imageCompareNumber**(`img1`: [IFile](../interfaces/_types_.ifile.md), `img2`: [IFile](../interfaces/_types_.ifile.md)): *Promise‹number›*
 
-*Defined in [image/imageCompare.ts:16](https://github.com/cancerberoSgx/magica/blob/c127d55/src/image/imageCompare.ts#L16)*
+*Defined in [image/imageCompare.ts:16](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/image/imageCompare.ts#L16)*
 
 **Parameters:**
 

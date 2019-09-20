@@ -1,6 +1,4 @@
-**[magica](../README.md)**
-
-[Globals](../README.md) › ["main/executeCommandPreprocessor"](_main_executecommandpreprocessor_.md)
+[magica](../README.md) › ["main/executeCommandPreprocessor"](_main_executecommandpreprocessor_.md)
 
 # External module: "main/executeCommandPreprocessor"
 
@@ -18,7 +16,7 @@
 
 ▸ **_compileTimePreprocess**(`config`: [RunOptions](../interfaces/_types_.runoptions.md)): *Promise‹[RunOptions](../interfaces/_types_.runoptions.md)›*
 
-*Defined in [main/executeCommandPreprocessor.ts:9](https://github.com/cancerberoSgx/magica/blob/c127d55/src/main/executeCommandPreprocessor.ts#L9)*
+*Defined in [main/executeCommandPreprocessor.ts:9](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/main/executeCommandPreprocessor.ts#L9)*
 
 internal - executes all registered preprocessor on given config
 
@@ -36,7 +34,7 @@ ___
 
 ▸ **_runTimePreprocess**(`runOptions`: [RunOptions](../interfaces/_types_.runoptions.md), `commandOptions`: [Options](../interfaces/_types_.options.md), `commandIndex`: number): *Promise‹void›*
 
-*Defined in [main/executeCommandPreprocessor.ts:18](https://github.com/cancerberoSgx/magica/blob/c127d55/src/main/executeCommandPreprocessor.ts#L18)*
+*Defined in [main/executeCommandPreprocessor.ts:18](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/main/executeCommandPreprocessor.ts#L18)*
 
 **Parameters:**
 
@@ -54,7 +52,7 @@ ___
 
 ▸ **registerCommandPreprocessor**(`p`: [CommandPreprocessor](../interfaces/_types_.commandpreprocessor.md)): *void*
 
-*Defined in [main/executeCommandPreprocessor.ts:28](https://github.com/cancerberoSgx/magica/blob/c127d55/src/main/executeCommandPreprocessor.ts#L28)*
+*Defined in [main/executeCommandPreprocessor.ts:28](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/main/executeCommandPreprocessor.ts#L28)*
 
 **Parameters:**
 

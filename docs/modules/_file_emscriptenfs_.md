@@ -1,6 +1,4 @@
-**[magica](../README.md)**
-
-[Globals](../README.md) › ["file/emscriptenFs"](_file_emscriptenfs_.md)
+[magica](../README.md) › ["file/emscriptenFs"](_file_emscriptenfs_.md)
 
 # External module: "file/emscriptenFs"
 

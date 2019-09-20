@@ -1,6 +1,4 @@
-**[magica](../README.md)**
-
-[Globals](../README.md) › ["image/html"](_image_html_.md)
+[magica](../README.md) › ["image/html"](_image_html_.md)
 
 # External module: "image/html"
 
@@ -19,7 +17,7 @@
 
 ▸ **loadHtmlCanvasElement**(`f`: [File](../classes/_file_file_.file.md), `ctx`: CanvasRenderingContext2D, `dx`: number, `dy`: number, `dirtyX`: number | undefined, `dirtyY`: number | undefined, `dirtyWidth`: number | undefined, `dirtyHeight`: number | undefined): *Promise‹void›*
 
-*Defined in [image/html.ts:31](https://github.com/cancerberoSgx/magica/blob/c127d55/src/image/html.ts#L31)*
+*Defined in [image/html.ts:31](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/image/html.ts#L31)*
 
 **Parameters:**
 
@@ -29,10 +27,10 @@ Name | Type | Default |
 `ctx` | CanvasRenderingContext2D | - |
 `dx` | number | 0 |
 `dy` | number | 0 |
-`dirtyX` | number \| undefined |  undefined |
-`dirtyY` | number \| undefined |  undefined |
-`dirtyWidth` | number \| undefined |  undefined |
-`dirtyHeight` | number \| undefined |  undefined |
+`dirtyX` | number &#124; undefined |  undefined |
+`dirtyY` | number &#124; undefined |  undefined |
+`dirtyWidth` | number &#124; undefined |  undefined |
+`dirtyHeight` | number &#124; undefined |  undefined |
 
 **Returns:** *Promise‹void›*
 
@@ -42,7 +40,7 @@ ___
 
 ▸ **loadHtmlImageElement**(`o`: [File](../classes/_file_file_.file.md), `el?`: HTMLImageElement, `forceDataUrl`: boolean): *Promise‹HTMLImageElement›*
 
-*Defined in [image/html.ts:20](https://github.com/cancerberoSgx/magica/blob/c127d55/src/image/html.ts#L20)*
+*Defined in [image/html.ts:20](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/image/html.ts#L20)*
 
 **Parameters:**
 
@@ -60,14 +58,14 @@ ___
 
 ▸ **toDataUrl**(`o`: [File](../classes/_file_file_.file.md), `mime?`: undefined | string): *Promise‹string›*
 
-*Defined in [image/html.ts:5](https://github.com/cancerberoSgx/magica/blob/c127d55/src/image/html.ts#L5)*
+*Defined in [image/html.ts:5](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/image/html.ts#L5)*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `o` | [File](../classes/_file_file_.file.md) |
-`mime?` | undefined \| string |
+`mime?` | undefined &#124; string |
 
 **Returns:** *Promise‹string›*
 
@@ -77,7 +75,7 @@ ___
 
 ▸ **toDataUrlSync**(`o`: [IFile](../interfaces/_types_.ifile.md), `mime`: string): *string*
 
-*Defined in [image/html.ts:13](https://github.com/cancerberoSgx/magica/blob/c127d55/src/image/html.ts#L13)*
+*Defined in [image/html.ts:13](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/image/html.ts#L13)*
 
 Unsafe synchronous operation, please use [toDataUrl]
 

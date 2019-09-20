@@ -1,6 +1,4 @@
-**[magica](../README.md)**
-
-[Globals](../README.md) › ["main/customCommand"](../modules/_main_customcommand_.md) › [CustomCommandDispatchOptions](_main_customcommand_.customcommanddispatchoptions.md)
+[magica](../README.md) › ["main/customCommand"](../modules/_main_customcommand_.md) › [CustomCommandDispatchOptions](_main_customcommand_.customcommanddispatchoptions.md)
 
 # Interface: CustomCommandDispatchOptions
 
@@ -23,7 +21,7 @@
 
 • **FS**: *[FS](_file_emscriptenfs_.fs.md)*
 
-*Defined in [main/customCommand.ts:99](https://github.com/cancerberoSgx/magica/blob/c127d55/src/main/customCommand.ts#L99)*
+*Defined in [main/customCommand.ts:99](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/main/customCommand.ts#L99)*
 
 ___
 
@@ -31,7 +29,7 @@ ___
 
 • **command**: *string[]*
 
-*Defined in [main/customCommand.ts:97](https://github.com/cancerberoSgx/magica/blob/c127d55/src/main/customCommand.ts#L97)*
+*Defined in [main/customCommand.ts:97](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/main/customCommand.ts#L97)*
 
 ___
 
@@ -39,7 +37,7 @@ ___
 
 • **options**: *Partial‹[Options](_types_.options.md)›*
 
-*Defined in [main/customCommand.ts:98](https://github.com/cancerberoSgx/magica/blob/c127d55/src/main/customCommand.ts#L98)*
+*Defined in [main/customCommand.ts:98](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/main/customCommand.ts#L98)*
 
 ___
 
@@ -47,6 +45,6 @@ ___
 
 • **outputFiles**: *[File](../classes/_file_file_.file.md)[]*
 
-*Defined in [main/customCommand.ts:101](https://github.com/cancerberoSgx/magica/blob/c127d55/src/main/customCommand.ts#L101)*
+*Defined in [main/customCommand.ts:101](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/main/customCommand.ts#L101)*
 
 can be used by custom commands to manipulate outputFiles

@@ -1,6 +1,4 @@
-**[magica](../README.md)**
-
-[Globals](../README.md) › ["main/template/template"](../modules/_main_template_template_.md) › [TemplateHelper](_main_template_template_.templatehelper.md)
+[magica](../README.md) › ["main/template/template"](../modules/_main_template_template_.md) › [TemplateHelper](_main_template_template_.templatehelper.md)
 
 # Interface: TemplateHelper <**O, R, RO, RR, CRO**>
 
@@ -42,7 +40,7 @@
 
 • **fnCompileTime**: *function*
 
-*Defined in [main/template/template.ts:9](https://github.com/cancerberoSgx/magica/blob/c127d55/src/main/template/template.ts#L9)*
+*Defined in [main/template/template.ts:9](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/main/template/template.ts#L9)*
 
 #### Type declaration:
 
@@ -61,7 +59,7 @@ ___
 
 • **fnRunTime**? : *undefined | function*
 
-*Defined in [main/template/template.ts:10](https://github.com/cancerberoSgx/magica/blob/c127d55/src/main/template/template.ts#L10)*
+*Defined in [main/template/template.ts:10](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/main/template/template.ts#L10)*
 
 ___
 
@@ -69,4 +67,4 @@ ___
 
 • **name**: *string*
 
-*Defined in [main/template/template.ts:8](https://github.com/cancerberoSgx/magica/blob/c127d55/src/main/template/template.ts#L8)*
+*Defined in [main/template/template.ts:8](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/main/template/template.ts#L8)*

@@ -1,6 +1,6 @@
-**[magica](README.md)**
+[magica](README.md)
 
-[Globals](README.md)
+# magica
 
 ## Index
 

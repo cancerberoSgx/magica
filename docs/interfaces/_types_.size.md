@@ -1,6 +1,4 @@
-**[magica](../README.md)**
-
-[Globals](../README.md) › ["types"](../modules/_types_.md) › [Size](_types_.size.md)
+[magica](../README.md) › ["types"](../modules/_types_.md) › [Size](_types_.size.md)
 
 # Interface: Size
 
@@ -8,7 +6,7 @@
 
 * **Size**
 
-  * [Rectangle](_types_.rectangle.md)
+  ↳ [Rectangle](_types_.rectangle.md)
 
 ## Index
 
@@ -23,7 +21,7 @@
 
 • **height**: *number*
 
-*Defined in [types.ts:197](https://github.com/cancerberoSgx/magica/blob/c127d55/src/types.ts#L197)*
+*Defined in [types.ts:197](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/types.ts#L197)*
 
 ___
 
@@ -31,4 +29,4 @@ ___
 
 • **width**: *number*
 
-*Defined in [types.ts:196](https://github.com/cancerberoSgx/magica/blob/c127d55/src/types.ts#L196)*
+*Defined in [types.ts:196](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/types.ts#L196)*

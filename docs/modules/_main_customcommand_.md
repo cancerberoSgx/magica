@@ -1,6 +1,4 @@
-**[magica](../README.md)**
-
-[Globals](../README.md) › ["main/customCommand"](_main_customcommand_.md)
+[magica](../README.md) › ["main/customCommand"](_main_customcommand_.md)
 
 # External module: "main/customCommand"
 
@@ -22,7 +20,7 @@
 
 ▸ **dispatchCustomCommand**(`o`: [CustomCommandDispatchOptions](../interfaces/_main_customcommand_.customcommanddispatchoptions.md)): *Promise‹[NativeResult](../interfaces/_imagemagick_createmain_.nativeresult.md)›*
 
-*Defined in [main/customCommand.ts:104](https://github.com/cancerberoSgx/magica/blob/c127d55/src/main/customCommand.ts#L104)*
+*Defined in [main/customCommand.ts:104](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/main/customCommand.ts#L104)*
 
 **Parameters:**
 
@@ -38,7 +36,7 @@ ___
 
 ▸ **isCustomCommand**(`c`: string[]): *Promise‹boolean›*
 
-*Defined in [main/customCommand.ts:12](https://github.com/cancerberoSgx/magica/blob/c127d55/src/main/customCommand.ts#L12)*
+*Defined in [main/customCommand.ts:12](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/main/customCommand.ts#L12)*
 
 **Parameters:**
 

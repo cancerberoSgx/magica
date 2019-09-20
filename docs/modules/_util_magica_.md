@@ -1,6 +1,4 @@
-**[magica](../README.md)**
-
-[Globals](../README.md) › ["util/magica"](_util_magica_.md)
+[magica](../README.md) › ["util/magica"](_util_magica_.md)
 
 # External module: "util/magica"
 
@@ -21,7 +19,7 @@
 
 Ƭ **Magica**: *ReturnType‹_getMagica›*
 
-*Defined in [util/magica.ts:26](https://github.com/cancerberoSgx/magica/blob/c127d55/src/util/magica.ts#L26)*
+*Defined in [util/magica.ts:26](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/util/magica.ts#L26)*
 
 ## Functions
 
@@ -29,7 +27,7 @@
 
 ▸ **getMagica**(): *[Magica](_util_magica_.md#magica)*
 
-*Defined in [util/magica.ts:28](https://github.com/cancerberoSgx/magica/blob/c127d55/src/util/magica.ts#L28)*
+*Defined in [util/magica.ts:28](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/util/magica.ts#L28)*
 
 **Returns:** *[Magica](_util_magica_.md#magica)*
 
@@ -39,6 +37,6 @@ ___
 
 ▸ **installMagica**(): *void*
 
-*Defined in [util/magica.ts:32](https://github.com/cancerberoSgx/magica/blob/c127d55/src/util/magica.ts#L32)*
+*Defined in [util/magica.ts:32](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/util/magica.ts#L32)*
 
 **Returns:** *void*

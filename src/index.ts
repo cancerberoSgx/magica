@@ -1,6 +1,6 @@
 import { flat } from 'misc-utils-of-mine-generic'
-if(typeof Array.prototype.flat==='undefined'){
-  Array.prototype.flat=function(this:any[]) {
+if (typeof Array.prototype.flat === 'undefined') {
+  Array.prototype.flat = function(this: any[]) {
     return flat(this)
   }
 }

@@ -1,10 +1,10 @@
-import { dirname, notUndefined, objectKeys, tryTo, RemoveProperties } from 'misc-utils-of-mine-generic'
+import { dirname, notUndefined, objectKeys, RemoveProperties, tryTo } from 'misc-utils-of-mine-generic'
 import Queue from 'p-queue'
 import { File } from '../file/file'
 import { isProtectedFile, protectFile } from '../file/protected'
 import { parseConvertVerbose } from '../image/imageUtil'
 import { NativeResult } from '../imageMagick/createMain'
-import { magickLoaded, getMagick } from '../imageMagick/magickLoaded'
+import { getMagick, magickLoaded } from '../imageMagick/magickLoaded'
 import { getOption, getOptions, setOptions } from '../options'
 import { Options, Result } from '../types'
 import { readFile, writeFile } from '../util/fileUtil'
@@ -46,7 +46,7 @@ export function mainSync(options: MainSyncOptions): Result {
 
   const { emscriptenNodeFsRoot, debug } = getOptions()
   debug && console.log('main call given options: ', options)
-  
+
   const { FS, main } = getMagick()
   FS.chdir(emscriptenNodeFsRoot)
 

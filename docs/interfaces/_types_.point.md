@@ -1,6 +1,4 @@
-**[magica](../README.md)**
-
-[Globals](../README.md) › ["types"](../modules/_types_.md) › [Point](_types_.point.md)
+[magica](../README.md) › ["types"](../modules/_types_.md) › [Point](_types_.point.md)
 
 # Interface: Point
 
@@ -8,7 +6,7 @@
 
 * **Point**
 
-  * [Rectangle](_types_.rectangle.md)
+  ↳ [Rectangle](_types_.rectangle.md)
 
 ## Index
 
@@ -23,7 +21,7 @@
 
 • **x**: *number*
 
-*Defined in [types.ts:201](https://github.com/cancerberoSgx/magica/blob/c127d55/src/types.ts#L201)*
+*Defined in [types.ts:201](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/types.ts#L201)*
 
 ___
 
@@ -31,4 +29,4 @@ ___
 
 • **y**: *number*
 
-*Defined in [types.ts:202](https://github.com/cancerberoSgx/magica/blob/c127d55/src/types.ts#L202)*
+*Defined in [types.ts:202](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/types.ts#L202)*

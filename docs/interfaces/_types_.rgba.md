@@ -1,6 +1,4 @@
-**[magica](../README.md)**
-
-[Globals](../README.md) › ["types"](../modules/_types_.md) › [Rgba](_types_.rgba.md)
+[magica](../README.md) › ["types"](../modules/_types_.md) › [Rgba](_types_.rgba.md)
 
 # Interface: Rgba
 
@@ -23,7 +21,7 @@
 
 • **a**: *number*
 
-*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/c127d55/src/types.ts#L210)*
+*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/types.ts#L210)*
 
 ___
 
@@ -31,7 +29,7 @@ ___
 
 • **b**: *number*
 
-*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/c127d55/src/types.ts#L210)*
+*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/types.ts#L210)*
 
 ___
 
@@ -39,7 +37,7 @@ ___
 
 • **g**: *number*
 
-*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/c127d55/src/types.ts#L210)*
+*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/types.ts#L210)*
 
 ___
 
@@ -47,4 +45,4 @@ ___
 
 • **r**: *number*
 
-*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/c127d55/src/types.ts#L210)*
+*Defined in [types.ts:210](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/types.ts#L210)*
