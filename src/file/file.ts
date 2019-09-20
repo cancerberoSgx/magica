@@ -207,7 +207,7 @@ export class File implements IFile {
   /**
    * Creates a File from given file system path. Only Node.js. 
    */
-  public static async fromFile(f: string, o: ResolveOptions = {}) {
+  public static  fromFile(f: string, o: ResolveOptions = {}) {
     if (!isNode()) {
       throw new Error('File.readFile() called in the browser.')
     }

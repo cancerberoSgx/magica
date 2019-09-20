@@ -1,3 +1,10 @@
+import { flat } from 'misc-utils-of-mine-generic'
+if(typeof Array.prototype.flat==='undefined'){
+  Array.prototype.flat=function(this:any[]) {
+    return flat(this)
+  }
+}
+
 require('./util/magicaWasm').getThisBrowserScriptTagSrc()
 require('./util/magica').installMagica() // HEADS UP needs to be called before everything else.
 
@@ -12,7 +19,7 @@ export { imageBuiltIn } from './image/support'
 export { magickLoaded } from './imageMagick/magickLoaded'
 export { cliToArray } from './main/command'
 export { registerCommandPreprocessor } from './main/executeCommandPreprocessor'
-export { main } from './main/main'
+export * from './main/main'
 export { run } from './main/run'
 export { addTemplateHelper, TemplateHelper } from './main/template/template'
 export { getOptions, setOptions } from './options'

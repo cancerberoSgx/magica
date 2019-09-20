@@ -1,10 +1,10 @@
-import { dirname, notUndefined, objectKeys, tryTo } from 'misc-utils-of-mine-generic'
+import { dirname, notUndefined, objectKeys, tryTo, RemoveProperties } from 'misc-utils-of-mine-generic'
 import Queue from 'p-queue'
 import { File } from '../file/file'
 import { isProtectedFile, protectFile } from '../file/protected'
 import { parseConvertVerbose } from '../image/imageUtil'
 import { NativeResult } from '../imageMagick/createMain'
-import { magickLoaded } from '../imageMagick/magickLoaded'
+import { magickLoaded, getMagick } from '../imageMagick/magickLoaded'
 import { getOption, getOptions, setOptions } from '../options'
 import { Options, Result } from '../types'
 import { readFile, writeFile } from '../util/fileUtil'
@@ -30,23 +30,27 @@ export function main(o: Partial<Options>): Promise<Result> {
   if (o.useNative || getOption('useNative')) {
     throw 'useNative not supported yet'
   }
-  return getQueue().add(() => mainWasm(o))
+  return getQueue().add(async () => {
+    await magickLoaded
+    return mainSync({ ...o, inputFiles: await File.resolve(o.inputFiles) })
+  })
 }
 
-async function mainWasm(options: Partial<Options>): Promise<Result> {
+export type MainSyncOptions = RemoveProperties<Partial<Options>, 'inputFiles'> & { inputFiles: File[] }
+
+export function mainSync(options: MainSyncOptions): Result {
   const t0 = Date.now()
   objectKeys(getOptions())
     .filter(k => notUndefined(options[k]))
     .forEach(k => setOptions({ [k]: options[k] }))
 
   const { emscriptenNodeFsRoot, debug } = getOptions()
-  const { FS, main } = await magickLoaded
   debug && console.log('main call given options: ', options)
-
+  
+  const { FS, main } = getMagick()
   FS.chdir(emscriptenNodeFsRoot)
-  const files = await File.resolve(options.inputFiles)
 
-  files.forEach(f => {
+  options.inputFiles.forEach(f => {
     const dirName = dirname(f.name)
     if (dirName.trim()) {
       mkdirp(dirName, p => FS.analyzePath(p).exists, FS.mkdir)
@@ -57,22 +61,11 @@ async function mainWasm(options: Partial<Options>): Promise<Result> {
 
   const beforeTree = listFilesRecursively(emscriptenNodeFsRoot, FS)
 
-  // const explicitOutputFiles:File[] =[]
   let returnValue: NativeResult
   var processedCommand = processCommand(options.command!)
   if (options.verbose) {
     processedCommand.splice(1, 0, '-verbose')
   }
-  // if (await isCustomCommand(processedCommand)) {
-  //   const customCommandOptions: CustomCommandDispatchOptions = {
-  //     command: processedCommand, 
-  //     options, 
-  //     FS, 
-  //     files,
-  //      outputFiles: explicitOutputFiles
-  //     }
-  //   returnValue = await dispatchCustomCommand(customCommandOptions)
-  // } else {
   debug && console.log('main processed command:', processedCommand)
   try {
     returnValue = main(processedCommand)
@@ -84,14 +77,11 @@ async function mainWasm(options: Partial<Options>): Promise<Result> {
       error,
       returnValue: undefined
     }
-    // }
   }
   var verbose = options.verbose ? tryTo(() => parseConvertVerbose(returnValue.stdout)) || [] : []
 
   const outputFiles =
     listFilesRecursively(emscriptenNodeFsRoot, FS)
-      // .filter(f => !isProtectedFile(f.name))
-
       .filter(f => !beforeTree.find(b => b.path === f.path)) // tree diff
       .map(f => {
         const file = readFile(f.path, FS)

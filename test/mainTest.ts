@@ -1,10 +1,28 @@
 import test from 'ava'
-import { readFileSync } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 import { basename } from 'misc-utils-of-mine-generic'
-import { File } from '../src'
-import { main } from '../src/main/main'
+import { File, magickLoaded } from '../src'
+import { main, mainSync } from '../src/main/main'
 import { filterResultStdErr } from './testUtil'
 import fileType = require('file-type')
+
+test('mainSync', async t => {
+  await magickLoaded
+  const img = 'test/assets/lenna.jpg'
+  const name = `tmp${basename(img)}`
+  const f = new File(basename(img), new Uint8ClampedArray(readFileSync(img)))
+  const command = `convert ${f.name} -rotate 33 ${name}`
+  const result = mainSync({
+    command,
+    inputFiles: [f],
+    debug: true
+  })
+  t.deepEqual(result.outputFiles.map(f => basename(f.name)), [name])
+  t.deepEqual(fileType(result.outputFiles[0].content.buffer), { ext: 'jpg', mime: 'image/jpeg' })
+  t.falsy(result.error)
+  t.deepEqual(filterResultStdErr(result), [])
+})
+
 
 test('stdout', async t => {
   const result = await main({

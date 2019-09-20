@@ -1,4 +1,4 @@
-import { Deferred, dirname, isNode } from 'misc-utils-of-mine-generic'
+import { Deferred, dirname, isNode , flat} from 'misc-utils-of-mine-generic'
 import { FS } from '../file/emscriptenFs'
 import { getOptions } from '../options'
 import { getThisBrowserScriptTagSrc, getThisBrowserScriptTagSrcParams } from '../util/magicaWasm'
@@ -12,18 +12,34 @@ export interface Main {
 const { debug } = getOptions()
 
 let _FS: FS = null as any
+let _main : NativeMain = null as any
 
 export const magickLoaded = new Deferred<Main>()
 
 magickLoaded.then(m => {
   _FS = m.FS
+  _main = m.main
 })
+
+export function getMagick() {
+  return {
+    FS: getFS(), 
+    main: getMain()
+  }
+}
 
 export function getFS() {
   if (!_FS) {
     throw new Error('getFS called too soon - FS object not ready yet')
   }
   return _FS
+}
+
+export function getMain() {
+  if (!_main) {
+    throw new Error('getMain called too soon - main function not ready yet')
+  }
+  return _main
 }
 
 const stdout: string[] = []
