@@ -21,8 +21,7 @@ jobs:
     - name: npm install --global windows-build-tools
       run: |
         npm install --global --production windows-build-tools
-      with:
-        os: windows-latest
+      continue-on-error: true
     - name: npm install && npm test
       run: |
         npm install
