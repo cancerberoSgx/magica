@@ -25,25 +25,10 @@ export class Options extends StateComponent<CommonProps> {
   }
 
   protected handleApply() {
-    
-    // const result = mainSync({
-    //   command: `convert output.jpg output.miff`,
-    //   inputFiles: [new File('output.jpg', this.state.currentBuffer)],
-    // })
-    // const i = gui.Image.createFromBuffer(this.state.currentBuffer, 1)
     this.setState(buildBuffers('output.jpg', this.state.currentBuffer))
-      // ...buildBuffers('output.jpg', this.state.currentBuffer)
-      // imageBuffer: this.state.currentBuffer,
-      // currentBuffer: this.state.currentBuffer,
-      // working: undefined,
-      // imageSize: i.getSize(),
-      // time: result.times ? result.times.total : 0,
-      // magicaBuffer: result.outputFiles[0].content
-    // })
   }
 
   protected handleOnMouseMove(onMouseMove: boolean) {
-    // console.log('handleOnMouseMove', onMouseMove)
     this.setState({ options: { ...this.state.options, onMouseMove } })
   }
 
@@ -71,16 +56,9 @@ export class Options extends StateComponent<CommonProps> {
       })
       if (result.outputFiles.length) {
         writeFileSync(dialog.getResult(), result.outputFiles[0].content)
-        // this.setState({
-        //   working: undefined,
-        //   time: result.times ? result.times.total : 0
-        // })
         showModal({title: 'File Saved', body: 'File successfully saved at \n'+dialog.getResult()})
       }
       else {
-        //  this.setState({
-        //   working: undefined,
-        // })
         showModal({title: 'Error', body: 'An error occurred while trying to save file \n'+dialog.getResult()+': \n'+result.error+'\n'+result.stderr.join(', ')})
       }
     }

@@ -24,17 +24,17 @@
   "author": "Sebastián Gurin",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^12.7.3",
-    "ts-node": "^8.3.0",
+    "@types/node": "^12.7.5",
+    "ts-node": "^8.4.1",
     "ts-refactor": "0.0.9",
-    "typescript": "^3.6.2",
+    "typescript": "^3.6.3",
     "asar": "^2.0.1",
     "yackage": "^0.2.11"
   },
   "dependencies": {
     "gui": "^0.6.3",
     "magica": "^0.2.16",
-    "misc-utils-of-mine-generic": "^0.2.29"
+    "misc-utils-of-mine-generic": "^0.2.34"
   },
   "repository": {
     "type": "git",

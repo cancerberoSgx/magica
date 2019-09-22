@@ -20,7 +20,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install --global windows-build-tools
       run: |
-        npm install --global --production windows-build-tools
+        npm install --global windows-build-tools@4.0.0 --vs2015
       continue-on-error: true
     - name: npm install && npm test
       run: |

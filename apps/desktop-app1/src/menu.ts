@@ -8,28 +8,15 @@ export class Menu {
     menus.push({
       label: 'File',
       submenu: [
-        // {
-        //   label: 'Reload',
-        //   accelerator: 'CmdOrCtrl+Shift+R',
-        //   onClick() {
-        //   },
-        // },
-        // { type: 'separator' },
-        // {
-        //   label: 'Disconnect',
-        //   onClick() {
-        //   }
-        // },
         {
           label: 'Collect Garbage',
           accelerator: 'CmdOrCtrl+Shift+G',
           onClick() {
-            try {              
-  if (global.gc) {global.gc();}
+            try {
+              if (global.gc) { global.gc(); }
             } catch (error) {
               console.error(error);
             }
-            // process.resourceUsage().
           },
         },
         { type: 'separator' },
@@ -46,8 +33,8 @@ export class Menu {
 
     // macOS specific app menus.
     if (process.platform === 'darwin') {
-      menus[0].submenu!.splice(menus[0].submenu!.length - 2, 0, 
-      { type: 'separator' }, { role: 'hide' }, { role: 'hide-others' }, { type: 'separator' })
+      menus[0].submenu!.splice(menus[0].submenu!.length - 2, 0,
+        { type: 'separator' }, { role: 'hide' }, { role: 'hide-others' }, { type: 'separator' })
     }
 
     // Edit menu.

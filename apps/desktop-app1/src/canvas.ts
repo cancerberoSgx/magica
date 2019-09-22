@@ -1,17 +1,12 @@
 import { readFileSync } from 'fs'
 import * as gui from 'gui'
 import { File, mainSync } from 'magica'
-import { StateComponent } from "./abstractComponent"
-import { State } from './state'
-import {Fn} from 'misc-utils-of-mine-generic'
-
-interface CP {
-  win: gui.Window
-}
+import { StateComponent, CommonProps } from "./abstractComponent"
+import { State } from './state' 
 
 type RP = 'currentBuffer'
 
-export class Canvas extends StateComponent<CP> {
+export class Canvas extends StateComponent<CommonProps> {
   protected view: gui.Scroll = null as any
   protected relevantProperties: RP[] = ['currentBuffer']
   protected win: gui.Window = null as any
@@ -26,13 +21,27 @@ export class Canvas extends StateComponent<CP> {
     this.canvasContainer = gui.Container.create()
     this.canvasContainer.setBackgroundColor('#ffffff');
     // this.canvasContainer.onMouseUp
-    // (this.canvasContainer.onMouseUp as gui.Signal<(self: gui.Container, event: gui.MouseEvent)=> void>).connect( (self, event) => {
+    (this.canvasContainer.onMouseUp as gui.Signal<(self: gui.Container, event: gui.MouseEvent)=> void>).connect( (self, event) => {
+      this.handleCommand(event)
+    });
     (this.canvasContainer.onMouseMove as gui.Signal<(self: gui.Container, event: gui.MouseEvent)=> void>).connect( (self, event) => {
-      console.log('handleOnMouseMove2', this.state.options.onMouseMove);
       if (!this.state.options.onMouseMove) {
         return
       }
-      const command = `convert output.miff -matte -virtual-pixel white -distort Barrel '-0.4 0.7 0.2 0.5 ${event.positionInView.x} ${event.positionInView.y}' output.jpg`
+      this.handleCommand(event)
+    });
+
+    this.view.setContentView(this.canvasContainer)
+    this.drawImage(readFileSync(this.state.image));
+    (this.canvasContainer.onDraw as gui.Signal<(self: gui.Container, painter: gui.Painter, dirty: gui.RectF)=>void>).connect((self: gui.Container, painter: gui.Painter, dirty: gui.RectF) => {
+      painter.drawCanvasFromRect(this.canvas, dirty, dirty)
+      // painter.drawImageFromRect(this.image, dirty, dirty)
+    })
+    return this.view
+  }
+
+  protected handleCommand(event: gui.MouseEvent) {
+    const command = `convert output.miff -matte -virtual-pixel white -distort Barrel '-0.4 0.7 0.2 0.5 ${event.positionInView.x} ${event.positionInView.y}' output.jpg`
       const result = mainSync({
         command,
         inputFiles: [new File('output.miff', this.state.magicaBuffer)],
@@ -42,14 +51,6 @@ export class Canvas extends StateComponent<CP> {
         working: undefined,
         time: result.times ? result.times.total : 0
       })
-    });
-    this.view.setContentView(this.canvasContainer)
-    this.drawImage(readFileSync(this.state.image));
-    (this.canvasContainer.onDraw as gui.Signal<(self: gui.Container, painter: gui.Painter, dirty: gui.RectF)=>void>).connect((self: gui.Container, painter: gui.Painter, dirty: gui.RectF) => {
-      painter.drawCanvasFromRect(this.canvas, dirty, dirty)
-      // painter.drawImageFromRect(this.image, dirty, dirty)
-    })
-    return this.view
   }
 
   drawImage(p: ArrayBuffer | ArrayBufferView) {
