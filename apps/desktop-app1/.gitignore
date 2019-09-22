@@ -1,5 +1,6 @@
 /out*
 /yode*
+/dist
 /*.zip
 /node_modules
 .cache
