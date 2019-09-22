@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/cancerberoSgx/magica.svg?branch=master)](https://travis-ci.org/cancerberoSgx/magica) 
 [![Coverage Status](https://coveralls.io/repos/github/cancerberoSgx/magica/badge.svg?branch=master)](https://coveralls.io/github/cancerberoSgx/magica?branch=master)
+[![Github Actions Workflow](https://github.com/cancerberosgx/magica/workflows/Node%20CI/badge.svg)](https://github.com/cancerberoSgx/magica/actions)
 
 # Magica
 

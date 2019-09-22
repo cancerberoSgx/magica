@@ -1,9 +1,5 @@
-import { flat } from 'misc-utils-of-mine-generic'
-if (typeof Array.prototype.flat === 'undefined') {
-  Array.prototype.flat = function(this: any[]) {
-    return flat(this)
-  }
-}
+import { flatInstallArrayPrototype } from 'misc-utils-of-mine-generic'
+flatInstallArrayPrototype()
 
 require('./util/magicaWasm').getThisBrowserScriptTagSrc()
 require('./util/magica').installMagica() // HEADS UP needs to be called before everything else.

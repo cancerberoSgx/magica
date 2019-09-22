@@ -47,3 +47,5 @@ magick-wasm
 emscripten_prefix
 ava.config-js.js
 apps
+.github
+tmp-browser-test-testUmdWasmLocation

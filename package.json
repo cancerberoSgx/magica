@@ -39,7 +39,7 @@
     "glob": "^7.1.4",
     "js-base64": "^2.5.1",
     "minimist": "^1.2.0",
-    "misc-utils-of-mine-generic": "^0.2.32",
+    "misc-utils-of-mine-generic": "^0.2.34",
     "p-queue": "^6.1.1"
   },
   "devDependencies": {
@@ -64,7 +64,7 @@
     "ts-node": "^8.4.1",
     "ts-refactor": "0.0.9",
     "typedoc": "^0.15.0",
-    "typedoc-plugin-markdown": "^2.2.4",
+    "typedoc-plugin-markdown": "^2.2.6",
     "typescript": "^3.6.3"
   },
   "keywords": [
