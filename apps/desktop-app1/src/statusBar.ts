@@ -7,8 +7,8 @@ type RP = 'working' | 'time'
 
 export class StatusBar extends StateComponent {
   protected view: gui.Container = null as any;
-  protected relevantProperties: RP[] = ['working', 'time']
-  protected working: gui.Label = null as any;
+   relevantProperties: RP[] = ['working', 'time']
+    protected working: gui.Label = null as any;
   protected time: gui.Label = null as any;
   protected memory: gui.Label = null as any;
 
@@ -28,7 +28,7 @@ export class StatusBar extends StateComponent {
     return this.view
   }
 
-  protected stateChanged(names: RP[], s: Partial<State>) {
+  stateChanged(names: RP[], s: Partial<State>) {
     s.working && this.working.setBackgroundColor('#ed2266')
     !s.working && this.working.setBackgroundColor('#ededed')
     this.working.setText(s.working || 'Idle')

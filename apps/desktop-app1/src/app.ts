@@ -15,7 +15,7 @@ export class App1 extends StateComponent<{}> {
   protected menuPanel: gui.Container = null as any
   protected bodyPanel: gui.Container = null as any
   protected sideBar: gui.Container = null as any
-  protected relevantProperties: RP[] = ['image']
+  relevantProperties: RP[] = ['image']
   protected menu: gui.Container = null as any
 
   render() {
@@ -40,12 +40,12 @@ export class App1 extends StateComponent<{}> {
     this.win.center()
     this.win.activate()
     if (!process.versions.yode) {
-      try {
+      // try {
       gui.MessageLoop.run()
-      } catch (error) {
-        console.log('Main Error', error)
-        process.exit(1)        
-      }
+      // } catch (error) {
+      //   console.log('Main Error', error)
+      //   process.exit(1)        
+      // }
       process.exit(0)
     }
   }
@@ -69,7 +69,7 @@ export class App1 extends StateComponent<{}> {
     this.win.setContentSize({ width: 600, height: 600 })
   }
 
-  protected stateChanged(names: RP[], s: Partial<State>) {
+  stateChanged(names: RP[], s: Partial<State>) {
     if (names.includes('image') && s['image']) {
       this.win.setTitle(s['image'])
     }

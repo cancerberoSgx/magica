@@ -3,18 +3,21 @@ import * as gui from 'gui'
 import { File, mainSync } from 'magica'
 import { StateComponent, CommonProps } from "./abstractComponent"
 import { State } from './state' 
+import { ImageHandler } from './imageHandler'
 
 type RP = 'currentBuffer'
 
 export class Canvas extends StateComponent<CommonProps> {
   protected view: gui.Scroll = null as any
-  protected relevantProperties: RP[] = ['currentBuffer']
+  relevantProperties: RP[] = ['currentBuffer']
   protected win: gui.Window = null as any
   protected canvas: gui.Canvas = null as any
   protected image: gui.Image = null as any
   protected canvasContainer: gui.Container  = null as any
-
+ protected handler : ImageHandler = null as any
+  
   render() {
+    this.handler = new ImageHandler(this.props.win)
     this.view = gui.Scroll.create()
     this.view.setStyle({ flex: 1, flexGrow: 1, width: '100%', height: '100%', flexDirection: 'column' })
     this.view.setBackgroundColor('#ffffff')
@@ -22,13 +25,13 @@ export class Canvas extends StateComponent<CommonProps> {
     this.canvasContainer.setBackgroundColor('#ffffff');
     // this.canvasContainer.onMouseUp
     (this.canvasContainer.onMouseUp as gui.Signal<(self: gui.Container, event: gui.MouseEvent)=> void>).connect( (self, event) => {
-      this.handleCommand(event)
+      this.handler.handleCommand(event)
     });
     (this.canvasContainer.onMouseMove as gui.Signal<(self: gui.Container, event: gui.MouseEvent)=> void>).connect( (self, event) => {
       if (!this.state.options.onMouseMove) {
         return
       }
-      this.handleCommand(event)
+      this.handler.handleCommand(event)
     });
 
     this.view.setContentView(this.canvasContainer)
@@ -38,19 +41,6 @@ export class Canvas extends StateComponent<CommonProps> {
       // painter.drawImageFromRect(this.image, dirty, dirty)
     })
     return this.view
-  }
-
-  protected handleCommand(event: gui.MouseEvent) {
-    const command = `convert output.miff -matte -virtual-pixel white -distort Barrel '-0.4 0.7 0.2 0.5 ${event.positionInView.x} ${event.positionInView.y}' output.jpg`
-      const result = mainSync({
-        command,
-        inputFiles: [new File('output.miff', this.state.magicaBuffer)],
-      })
-      this.setState({
-        currentBuffer: result.outputFiles[0].content,
-        working: undefined,
-        time: result.times ? result.times.total : 0
-      })
   }
 
   drawImage(p: ArrayBuffer | ArrayBufferView) {
@@ -65,7 +55,7 @@ export class Canvas extends StateComponent<CommonProps> {
     this.canvasContainer.schedulePaint() // TODO: scheduleRectPaint - only scroll viewport
   }
 
-  protected stateChanged(names: RP[], s: Partial<State>) {
+  stateChanged(names: RP[], s: Partial<State>) {
     this.drawImage(s.currentBuffer!) 
   }
 }

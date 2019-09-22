@@ -1,7 +1,8 @@
 import { readFileSync } from 'fs'
 import { Image } from 'gui'
-import { File, mainSync } from 'magica'
+import { File, mainSync, magickLoaded } from 'magica'
 import { basename } from 'path'
+import { Fn } from 'misc-utils-of-mine-generic';
 
 export function buildBuffers(image: string, content?: ArrayBufferView) {
   const s = {
@@ -22,11 +23,12 @@ export function buildBuffers(image: string, content?: ArrayBufferView) {
   };
 }
 
-import { magickLoaded } from 'magica'
-
-export async function loadLibraries() {
+export async function loadLibraries(f?: Fn) {
   try {
+    // console.log('hello1');    
     await magickLoaded
+    // console.log('hello2');    
+    f && f()
   } catch (error) {
     console.error(error)
   }

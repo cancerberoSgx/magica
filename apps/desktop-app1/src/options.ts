@@ -6,62 +6,25 @@ import { basename } from 'path'
 import { StateComponent, CommonProps } from "./abstractComponent"
 import { buildBuffers } from "./imageUtil"
 import { showModal } from './guiUtil'
+import { ImageHandler } from './imageHandler'
 
 export class Options extends StateComponent<CommonProps> {
   protected view: gui.Browser = null as any;
-
+  protected handler : ImageHandler = null as any
+  
   render() {
+    this.handler = new ImageHandler(this.props.win)
     this.view = gui.Browser.create({})
     this.view.setStyle({ width: '100%', height: '100%', flex: 1 })
     this.view.setBindingName('app1')
-    this.view.addBinding('handleRotate', value => this.handleRotate(value))
-    this.view.addBinding('handleOpen', () => this.handleOpen())
-    this.view.addBinding('handleSave', () => this.handleSave())
-    this.view.addBinding('handleApply', () => this.handleApply())
-    this.view.addBinding('handleResize', (width, height) => this.handleResize(width, height))
-    this.view.addBinding('handleOnMouseMove', value => this.handleOnMouseMove(value))
+    this.view.addBinding('handleRotate', value => this.handler.handleRotate(value))
+    this.view.addBinding('handleOpen', () => this.handler.handleOpen())
+    this.view.addBinding('handleSave', () => this.handler.handleSave())
+    this.view.addBinding('handleApply', () => this.handler.handleApply())
+    this.view.addBinding('handleResize', (width, height) => this.handler.handleResize(width, height))
+    this.view.addBinding('handleOnMouseMove', value => this.handler.handleOnMouseMove(value))
     this.renderOptions()
     return this.view
-  }
-
-  protected handleApply() {
-    this.setState(buildBuffers('output.jpg', this.state.currentBuffer))
-  }
-
-  protected handleOnMouseMove(onMouseMove: boolean) {
-    this.setState({ options: { ...this.state.options, onMouseMove } })
-  }
-
-  protected handleOpen(): void {
-    const dialog = gui.FileOpenDialog.create()
-    dialog.setOptions(gui.FileDialog.optionShowHidden)
-    dialog.setFilters([
-      { description: 'Images', extensions: knownSupportedReadWriteImageFormats },
-    ])
-    if (dialog.runForWindow(this.props.win)) {
-      this.setState(buildBuffers(dialog.getResult()))
-    }
-  }
-
-  protected handleSave(): void {
-    const dialog = gui.FileSaveDialog.create()
-    dialog.setOptions(gui.FileDialog.optionShowHidden)
-    dialog.setFilters([
-      { description: 'Images', extensions: knownSupportedReadWriteImageFormats },
-    ])
-    if (dialog.runForWindow(this.props.win)) {
-      const result = mainSync({
-        command: `convert output.miff '${basename(dialog.getResult())}'`,
-        inputFiles: [new File('output.miff', this.state.magicaBuffer)],
-      })
-      if (result.outputFiles.length) {
-        writeFileSync(dialog.getResult(), result.outputFiles[0].content)
-        showModal({title: 'File Saved', body: 'File successfully saved at \n'+dialog.getResult()})
-      }
-      else {
-        showModal({title: 'Error', body: 'An error occurred while trying to save file \n'+dialog.getResult()+': \n'+result.error+'\n'+result.stderr.join(', ')})
-      }
-    }
   }
 
   protected renderOptions() {
@@ -81,34 +44,5 @@ Height:<br/>
 `
     this.view.loadHTML(html, 'http://localhost')
   }
-
-  protected handleRotate(value = int(0, 360)) {
-    const result = mainSync({
-      command: `convert output.miff -virtual-pixel white -rotate ${value} output.jpg`,
-      inputFiles: [new File('output.miff', this.state.magicaBuffer)],
-    })
-    const i = gui.Image.createFromBuffer(result.outputFiles[0].content, 1);
-    this.setState({
-      currentBuffer: result.outputFiles[0].content,
-      working: undefined,
-      time: result.times ? result.times.total : 0,
-      imageSize: i && i.getSize() || this.state.imageSize
-    })
-  }
-
-  protected handleResize(width: number, height: number) {
-    const result = mainSync({
-      command: `convert output.miff -virtual-pixel white -scale !${width || this.state.imageSize.width}x${height || this.state.imageSize.height} output.jpg`,
-      inputFiles: [new File('output.miff', this.state.magicaBuffer)],
-    })
-    this.setState({
-      currentBuffer: result.outputFiles[0].content,
-      working: undefined,
-      time: result.times ? result.times.total : 0,
-      imageSize: {
-        width: width || this.state.imageSize.width,
-        height: height || this.state.imageSize.height
-      }
-    })
-  }
+ 
 }
