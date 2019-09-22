@@ -28,7 +28,7 @@ export class Canvas extends StateComponent<CommonProps> {
       this.handler.handleCommand(event)
     });
     (this.canvasContainer.onMouseMove as gui.Signal<(self: gui.Container, event: gui.MouseEvent)=> void>).connect( (self, event) => {
-      if (!this.state.options.onMouseMove) {
+      if (!this.state.onMouseMove) {
         return
       }
       this.handler.handleCommand(event)

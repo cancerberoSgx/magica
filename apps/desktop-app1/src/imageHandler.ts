@@ -1,13 +1,13 @@
 import { writeFileSync } from 'fs'
 import * as gui from 'gui'
 import { File, knownSupportedReadWriteImageFormats, mainSync } from 'magica'
-import { int } from 'misc-utils-of-mine-generic'
+import { int, arrayToObject } from 'misc-utils-of-mine-generic'
 import { basename } from 'path'
 import { StateComponent, CommonProps } from "./abstractComponent"
 import { buildBuffers } from "./imageUtil"
 import { showModal } from './guiUtil'
 import { setState, getState } from './store'
-import { State } from './state'
+import { State, Field } from './state'
 
 export class ImageHandler  {
   protected state:  State
@@ -21,7 +21,7 @@ export class ImageHandler  {
   }
 
   handleOnMouseMove(onMouseMove: boolean) {
-    setState({ options: { ...this.state.options, onMouseMove } })
+    setState({onMouseMove})
   }
 
   handleOpen(): void {
@@ -57,7 +57,13 @@ export class ImageHandler  {
   }
 
   handleCommand(event: gui.MouseEvent) {
-    const command = `convert output.miff -matte -virtual-pixel white -distort Barrel '-0.4 0.7 0.2 0.5 ${event.positionInView.x} ${event.positionInView.y}' output.jpg`
+    const c = this.state.commands.find(c=>c.name===this.state.command)
+    if(!c){return}
+    const context = {...event.positionInView, fields: arrayToObject(c.fields.map(f=>f.id), f=>c.fields.find(f2=>f2.id===f )) as {[s:string]:Field}, inputFile: 'output.miff', outputFile: 'output.jpg'}
+    
+    const command = c.command(context)
+    console.log(context, command);
+    // const command = `convert output.miff -matte -virtual-pixel white -distort Barrel '${this.state.fields['a'].} 0.7 0.2 0.5 ${event.positionInView.x} ${event.positionInView.y}' output.jpg`
       const result = mainSync({
         command,
         inputFiles: [new File('output.miff', this.state.magicaBuffer)],
@@ -69,7 +75,7 @@ export class ImageHandler  {
       })
   }
 
-  handleRotate(value = int(0, 360)) {
+  handleRotate(value:  number) {
     const result = mainSync({
       command: `convert output.miff -virtual-pixel white -rotate ${value} output.jpg`,
       inputFiles: [new File('output.miff', this.state.magicaBuffer)],
@@ -79,7 +85,8 @@ export class ImageHandler  {
       currentBuffer: result.outputFiles[0].content,
       working: undefined,
       time: result.times ? result.times.total : 0,
-      imageSize: i && i.getSize() || this.state.imageSize
+      imageSize: i && i.getSize() || this.state.imageSize,
+      imageRotate: value,
     })
   }
 

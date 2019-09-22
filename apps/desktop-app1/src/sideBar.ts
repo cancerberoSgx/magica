@@ -12,7 +12,7 @@ export class SideBar extends StateComponent {
   render() {
     this.view = gui.Container.create()
     this.view.setStyle({
-      width: 160, height: '100%', flexDirection: 'column', alignContent: "baseline"
+      width: '30%',minWidth: 190, height: '100%', flexDirection: 'column', alignContent: "baseline"
     })
     this.options = new Options({ win: this.props.win })
     this.view.addChildView(this.options.render())

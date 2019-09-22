@@ -4,10 +4,14 @@ export interface State {
   working?: string
   image: string
   imageSize: { width: number, height: number }
+  imageRotate: number
   currentBuffer: ArrayBufferView
   imageBuffer: ArrayBufferView
   magicaBuffer: ArrayBufferView
-  options: Options
+  onMouseMove: boolean
+  commands: Command[]
+  command: string
+  fields: Field[]
   time: number
 }
 
@@ -17,11 +21,5 @@ export interface Field {
   type?: 'string' | 'integer' | 'float'
 }
 
-interface Options {
-  onMouseMove: boolean
-  commands: Command[]
-  command: string
-  fields: Field[]
-}
 
 

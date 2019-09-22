@@ -40,12 +40,7 @@ export class App1 extends StateComponent<{}> {
     this.win.center()
     this.win.activate()
     if (!process.versions.yode) {
-      // try {
       gui.MessageLoop.run()
-      // } catch (error) {
-      //   console.log('Main Error', error)
-      //   process.exit(1)        
-      // }
       process.exit(0)
     }
   }

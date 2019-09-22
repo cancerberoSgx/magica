@@ -23,12 +23,9 @@ export function buildBuffers(image: string, content?: ArrayBufferView) {
   };
 }
 
-export async function loadLibraries(f?: Fn) {
+export async function loadLibraries( ) {
   try {
-    // console.log('hello1');    
     await magickLoaded
-    // console.log('hello2');    
-    f && f()
   } catch (error) {
     console.error(error)
   }

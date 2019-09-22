@@ -16,20 +16,23 @@ export function _setState(s: State) {
 }
 
 export function setState(s: Partial<State>) {
+  Object.assign(state, s || {});
   stateListeners.forEach(l => {
       const names = objectKeys(s).filter(n => l.relevantProperties.includes(n))
       const filtered = arrayToObject(names, a => (s as any)[a])
       l.stateChanged(names, filtered as any)
     })
-  Object.assign(state, s || {});
 }
+
 export function addStatelistener(l:StateListener){
   stateListeners.push(l)
 }
+
 export interface StateListener< AS extends State = State, RS extends keyof Partial<AS> = keyof Partial<AS> > {
   relevantProperties: RS[]
   stateChanged(names: RS[], s: Pick<AS, RS>): void 
 }
+
 const stateListeners: StateListener[] = []
 
 export function getInitialState(): State {
@@ -37,12 +40,11 @@ export function getInitialState(): State {
     ...buildBuffers(realpathSync(join(__dirname, 'lenna.jpg')) ),
     time: 0,
     working: 'Processing...',
-    options: {
+    imageRotate: 0,
       command: commands[0].name,
       onMouseMove: false,
       fields: [],
       commands: commands
-    }
   };
 }
 
