@@ -13,7 +13,8 @@
     "copy": "cp src/lenna.jpg dist/src/",
     "all": "npm run clean   && npm run lint && npm run build && npm test  ",
     "package-mac": "  npm run build && npx yackage --app-dir $PWD  dist  out-mac ",
-    "package-linux": "  npm run build  && npx yackage --app-dir $PWD   dist  out-linux   "
+    "package-linux": "  npm run build  && npx yackage --app-dir $PWD   dist  out-linux   ",
+    "package-win": "  npm run build  && npx yackage --platform win --arch x64 --app-dir $PWD   dist  out-win   "
   },
   "keywords": [
     "typescript",
