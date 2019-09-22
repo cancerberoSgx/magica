@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/src/main.js",
   "scripts": {
-    "clean": "rm -rf dist docs tmp_server_fs working_tmp out-* *.zip",
+    "clean": "rm -rf dist docs tmp_server_fs working_tmp out-* *.zip magica-desktop-app1*",
     "test": "npm run build && npx ava --serial --concurrency 1 --config ava.config.js",
     "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",

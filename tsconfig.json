@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
     "lib": ["esnext", "dom"], 
@@ -15,6 +15,6 @@
     "src", "test", "test-browser"
   ],
   "exclude": [
-    "node_modules", "dist", "test-browser-outdir", "tmp_umd-bundle-test-out"
+    "node_modules", "dist", "test-browser-outdir", "tmp_umd-bundle-test-out", "test-browser-outdir*", 
   ]
 }
