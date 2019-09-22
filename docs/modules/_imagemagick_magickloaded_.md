@@ -31,7 +31,7 @@
 
 • **magickLoaded**: *Deferred‹[Main](../interfaces/_imagemagick_magickloaded_.main.md), any›* =  new Deferred<Main>()
 
-*Defined in [imageMagick/magickLoaded.ts:17](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/imageMagick/magickLoaded.ts#L17)*
+*Defined in [imageMagick/magickLoaded.ts:17](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/imageMagick/magickLoaded.ts#L17)*
 
 ## Functions
 
@@ -39,7 +39,7 @@
 
 ▸ **getFS**(): *[FS](../interfaces/_file_emscriptenfs_.fs.md)*
 
-*Defined in [imageMagick/magickLoaded.ts:31](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/imageMagick/magickLoaded.ts#L31)*
+*Defined in [imageMagick/magickLoaded.ts:31](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/imageMagick/magickLoaded.ts#L31)*
 
 **Returns:** *[FS](../interfaces/_file_emscriptenfs_.fs.md)*
 
@@ -49,7 +49,7 @@ ___
 
 ▸ **getMagick**(): *object*
 
-*Defined in [imageMagick/magickLoaded.ts:24](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/imageMagick/magickLoaded.ts#L24)*
+*Defined in [imageMagick/magickLoaded.ts:24](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/imageMagick/magickLoaded.ts#L24)*
 
 **Returns:** *object*
 
@@ -59,7 +59,7 @@ ___
 
 ▸ **getMain**(): *function*
 
-*Defined in [imageMagick/magickLoaded.ts:38](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/imageMagick/magickLoaded.ts#L38)*
+*Defined in [imageMagick/magickLoaded.ts:38](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/imageMagick/magickLoaded.ts#L38)*
 
 **Returns:** *function*
 
@@ -77,7 +77,7 @@ ___
 
 ▸ **getStderr**(): *string[]*
 
-*Defined in [imageMagick/magickLoaded.ts:71](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/imageMagick/magickLoaded.ts#L71)*
+*Defined in [imageMagick/magickLoaded.ts:71](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/imageMagick/magickLoaded.ts#L71)*
 
 **Returns:** *string[]*
 
@@ -87,7 +87,7 @@ ___
 
 ▸ **getStdout**(): *string[]*
 
-*Defined in [imageMagick/magickLoaded.ts:56](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/imageMagick/magickLoaded.ts#L56)*
+*Defined in [imageMagick/magickLoaded.ts:56](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/imageMagick/magickLoaded.ts#L56)*
 
 **Returns:** *string[]*
 
@@ -97,7 +97,7 @@ ___
 
 ▸ **moduleLocateFile**(`path`: string, `prefix`: string): *string*
 
-*Defined in [imageMagick/magickLoaded.ts:77](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/imageMagick/magickLoaded.ts#L77)*
+*Defined in [imageMagick/magickLoaded.ts:77](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/imageMagick/magickLoaded.ts#L77)*
 
 **Parameters:**
 
@@ -114,7 +114,7 @@ ___
 
 ▸ **pushStderr**(...`s`: string[]): *void*
 
-*Defined in [imageMagick/magickLoaded.ts:62](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/imageMagick/magickLoaded.ts#L62)*
+*Defined in [imageMagick/magickLoaded.ts:62](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/imageMagick/magickLoaded.ts#L62)*
 
 **Parameters:**
 
@@ -130,7 +130,7 @@ ___
 
 ▸ **pushStdout**(...`s`: string[]): *void*
 
-*Defined in [imageMagick/magickLoaded.ts:47](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/imageMagick/magickLoaded.ts#L47)*
+*Defined in [imageMagick/magickLoaded.ts:47](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/imageMagick/magickLoaded.ts#L47)*
 
 **Parameters:**
 
@@ -146,7 +146,7 @@ ___
 
 ▸ **resetStderr**(): *void*
 
-*Defined in [imageMagick/magickLoaded.ts:67](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/imageMagick/magickLoaded.ts#L67)*
+*Defined in [imageMagick/magickLoaded.ts:67](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/imageMagick/magickLoaded.ts#L67)*
 
 **Returns:** *void*
 
@@ -156,6 +156,6 @@ ___
 
 ▸ **resetStdout**(): *void*
 
-*Defined in [imageMagick/magickLoaded.ts:52](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/imageMagick/magickLoaded.ts#L52)*
+*Defined in [imageMagick/magickLoaded.ts:52](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/imageMagick/magickLoaded.ts#L52)*
 
 **Returns:** *void*

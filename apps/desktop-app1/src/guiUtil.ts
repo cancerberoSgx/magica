@@ -1,13 +1,20 @@
 import { View, Label, Window, Container, Button } from 'gui';
 import { gunzip } from 'zlib';
+import { State } from './state';
 
 interface ShowModalOptions {
   body: View|string
-  title?: string
+  title: string
+  closeIn?: number
+  state: State
 }
 export function showModal(o:ShowModalOptions) {
       const p = Container.create()
       p.setStyle({ flexGrow: 1, flex: 1, flexDirection: 'column' })
+      if(o.state){
+        p.setBackgroundColor(o.state.theme.bg)
+        p.setColor(o.state.theme.fg)
+      }
       // p.setStyle({flex: 1})
   const body = typeof o.body==='string' ? Label.create(o.body) : o.body
   body.setStyle({ flexGrow: 1, flex: 1, flexDirection: 'column' })
@@ -15,17 +22,17 @@ export function showModal(o:ShowModalOptions) {
   const w = Window.create({frame: true, showTrafficLights: true})
   w.setContentView(p)
   w.setTitle(o.title||'Modal')
-  body.onKeyUp = (self, event)=>{
-    console.log(event.key, event);
+  // body.onKeyUp = (self, event)=>{
+    // console.log(event.key, event);
     // event.key==='ESC'
-  }
-  p.onKeyUp = (self, event)=>{
-    console.log(event.key, event);
+  // }
+  // p.onKeyUp = (self, event)=>{
+    // console.log(event.key, event);
     // event.key==='ESC'
-  }
-  w.getContentView().onKeyDown = (s,e)=>{
-     console.log(e.key, e);
-  }
+  // }
+  // w.getContentView().onKeyDown = (s,e)=>{
+  //    console.log(e.key, e);
+  // }
     //  const w = gui.Window.create({frame: true, showTrafficLights: true})
       w.setAlwaysOnTop(true)
       w.setContentSize({width: 400, height: 200})
@@ -40,5 +47,6 @@ export function showModal(o:ShowModalOptions) {
       w.center()
       w.activate() 
 
+  o.closeIn && setTimeout(()=>w.close(), o.closeIn);
 
 }

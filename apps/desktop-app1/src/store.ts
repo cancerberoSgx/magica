@@ -1,10 +1,10 @@
 import { commands } from './commands'
-import { State } from './state'
-import { buildBuffers } from './imageUtil'
+import { State, VirtualPixel } from './state'
 import { realpathSync } from 'fs';
 import { join } from 'path';
 import { objectKeys, arrayToObject } from 'misc-utils-of-mine-generic';
 import { lightTheme } from './styles';
+import { buildBuffers } from './imageUtil';
 
 let state: State = null as any
 
@@ -36,17 +36,21 @@ export interface StateListener<AS extends State = State, RS extends keyof Partia
 
 const stateListeners: StateListener[] = []
 
-export function getInitialState(): State {
+export async function getInitialState(): Promise<State> {
   return {
-    ...buildBuffers(realpathSync(join(__dirname, 'lenna.jpg'))),
+    ...await buildBuffers(realpathSync(join(__dirname, 'lenna.jpg')), undefined, 1),
     time: 0,
     working: 'Processing...',
     imageRotate: 0,
     command: commands[0].name,
-    onMouseMove: false,
     fields: commands[0].fields,
     commands: commands,
-theme: lightTheme
+    onMouseMove: false,
+    theme: lightTheme,
+    scaleFactor: 1,
+    autoApply: false,
+    virtualPixel: VirtualPixel.White,
+    outputFormat: 'jpg'
   };
 }
 

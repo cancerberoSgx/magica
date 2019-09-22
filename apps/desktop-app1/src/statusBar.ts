@@ -3,7 +3,7 @@ import { printMs } from 'misc-utils-of-mine-generic'
 import { StateComponent } from './abstractComponent'
 import { State } from './state'
 
-type RP = 'working' | 'time'|'theme'
+type RP = 'working' | 'time' | 'theme'
 
 export class StatusBar extends StateComponent {
   protected view: gui.Container = null as any;
@@ -14,15 +14,15 @@ export class StatusBar extends StateComponent {
 
   render() {
     this.view = gui.Container.create()
-    this.view.setStyle({ width: '100%', minHeight: 44, flex: 1, alignContent: 'baseline', flexDirection: 'row' })
+    this.view.setStyle({ width: '100%', height: 24, flex: 1, alignContent: 'baseline', flexDirection: 'row' })
     this.working = gui.Label.create(this.state.working || '')
-    this.working.setStyle({ flexDirection: 'column' })
+    this.working.setStyle({ flexDirection: 'column', marginRight: 6, width: 160  })
     this.view.addChildView(this.working)
     this.time = gui.Label.create(printMs(this.state.time) || '')
-    this.time.setStyle({ flexDirection: 'column' })
+    this.time.setStyle({ flexDirection: 'column', marginRight: 6 })
     this.view.addChildView(this.time)
     this.memory = gui.Label.create((process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2) + ' mb')
-    this.memory.setStyle({ flexDirection: 'column' })
+    this.memory.setStyle({ flexDirection: 'column', marginRight: 6 })
     this.view.addChildView(this.memory)
     this.stateChanged([], {})
     return this.view
@@ -34,11 +34,11 @@ export class StatusBar extends StateComponent {
     this.working.setText(s.working || 'Idle')
     this.time.setText(printMs(this.state.time) || '')
     this.memory.setText((process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2) + ' mb')
-    if(s.theme){
-this.time.setBackgroundColor(this.state.theme.bg)
-this.time.setColor(this.state.theme.fg)
-this.memory.setBackgroundColor(this.state.theme.bg)
-this.memory.setColor(this.state.theme.fg)
+    if (s.theme) {
+      this.time.setBackgroundColor(this.state.theme.bg)
+      this.time.setColor(this.state.theme.fg)
+      this.memory.setBackgroundColor(this.state.theme.bg)
+      this.memory.setColor(this.state.theme.fg)
     }
   }
 }

@@ -19,7 +19,7 @@
 
 Ƭ **MainSyncOptions**: *RemoveProperties‹Partial‹[Options](../interfaces/_types_.options.md)›, "inputFiles"› & object*
 
-*Defined in [main/main.ts:39](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/main/main.ts#L39)*
+*Defined in [main/main.ts:39](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/main/main.ts#L39)*
 
 ## Functions
 
@@ -27,7 +27,7 @@
 
 ▸ **main**(`o`: Partial‹[Options](../interfaces/_types_.options.md)›): *Promise‹[Result](../interfaces/_types_.result.md)›*
 
-*Defined in [main/main.ts:29](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/main/main.ts#L29)*
+*Defined in [main/main.ts:29](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/main/main.ts#L29)*
 
 **Parameters:**
 
@@ -43,7 +43,7 @@ ___
 
 ▸ **mainSync**(`options`: [MainSyncOptions](_main_main_.md#mainsyncoptions)): *[Result](../interfaces/_types_.result.md)*
 
-*Defined in [main/main.ts:41](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/main/main.ts#L41)*
+*Defined in [main/main.ts:41](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/main/main.ts#L41)*
 
 **Parameters:**
 

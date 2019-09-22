@@ -14,8 +14,10 @@ export class SideBar extends StateComponent {
   render() {
     this.view = gui.Container.create()
     this.view.setStyle({
-      width: '30%',minWidth: 190, height: '100%', flexDirection: 'column', alignContent: "baseline"
+      width: '30%',minWidth: 140, maxWidth: 230, height: '100%', flexDirection: 'column', alignContent: "baseline", flex: 1, flexGrow: 1,
     })
+    // this.view.o
+    // this.view.releaseCapture
 //     this.darkTheme = gui.Button.create({type: 'checkbox', title: 'Dark Theme'})
 //     this.view.addChildView(this.darkTheme )
 // this.darkTheme.setStyle({flex: 1 , flexShrink: 1 ,flexDirection: 'row'  })
@@ -23,9 +25,9 @@ export class SideBar extends StateComponent {
     this.options = new Options({ win: this.props.win })
     this.view.addChildView(this.options.render())
     // this.view.setBackgroundColor('#ededed')
-    this.view.setStyle({
-      width: this.view.getPreferredSize().width
-    })
+    // this.view.setStyle({
+    //   width: this.view.getPreferredSize().width
+    // })
     return this.view
   }
 }

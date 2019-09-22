@@ -1,13 +1,13 @@
-import { asArray, basename, isString, pathJoin, flatInstallArrayPrototype } from 'misc-utils-of-mine-generic'
-flatInstallArrayPrototype()
-
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { sync as glob } from 'glob'
+import { asArray, basename, flatInstallArrayPrototype, isString, pathJoin } from 'misc-utils-of-mine-generic'
 import { processCommand } from '../main/command'
 import { main } from '../main/main'
 import { getOptions } from '../options'
 import { CliOptions } from '../types'
 import { getFileName } from '../util/fileUtil'
+flatInstallArrayPrototype()
+
 
 export async function cli(options: CliOptions) {
   preconditions(options as any)

@@ -15,7 +15,7 @@
 
 ▸ **isProtectedFile**(`f`: string | [IFile](../interfaces/_types_.ifile.md)): *boolean*
 
-*Defined in [file/protected.ts:13](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/file/protected.ts#L13)*
+*Defined in [file/protected.ts:13](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/file/protected.ts#L13)*
 
 **Parameters:**
 
@@ -31,7 +31,7 @@ ___
 
 ▸ **protectFile**(`f`: string | [IFile](../interfaces/_types_.ifile.md), `protect`: boolean): *void*
 
-*Defined in [file/protected.ts:7](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/file/protected.ts#L7)*
+*Defined in [file/protected.ts:7](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/file/protected.ts#L7)*
 
 If string is given is assumes as the path and must exists
 

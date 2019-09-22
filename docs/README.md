@@ -15,6 +15,7 @@
 * ["image/imageUtil"](modules/_image_imageutil_.md)
 * ["image/support"](modules/_image_support_.md)
 * ["imageMagick/createMain"](modules/_imagemagick_createmain_.md)
+* ["imageMagick/imLists"](modules/_imagemagick_imlists_.md)
 * ["imageMagick/magickLoaded"](modules/_imagemagick_magickloaded_.md)
 * ["index"](modules/_index_.md)
 * ["main/command"](modules/_main_command_.md)

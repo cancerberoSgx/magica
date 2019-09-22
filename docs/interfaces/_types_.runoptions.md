@@ -20,7 +20,7 @@
 
 • **script**? : *string | string[]*
 
-*Defined in [types.ts:165](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/types.ts#L165)*
+*Defined in [types.ts:165](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/types.ts#L165)*
 
 If an array of string is given each item will be executed just like main's [Options.command](_types_.options.md#command).
 

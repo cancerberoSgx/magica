@@ -26,7 +26,7 @@
   'mat',
 ]
 
-*Defined in [image/support.ts:96](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/image/support.ts#L96)*
+*Defined in [image/support.ts:96](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/image/support.ts#L96)*
 
 list of image formats that are known to be supported by wasm-imagemagick but only for read operation. See `spec/formatSpec.ts`
 
@@ -54,7 +54,7 @@ ___
   // 'rgb', // fails because  MustSpecifyImageSize `to_rotate.rgb'
 ]
 
-*Defined in [image/support.ts:63](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/image/support.ts#L63)*
+*Defined in [image/support.ts:63](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/image/support.ts#L63)*
 
 List of image formats that are known to be supported by wasm-imagemagick both for read and write. See `spec/formatSpec.ts`.
 
@@ -71,7 +71,7 @@ ___
   'djvu', // converted from png using online tool
 ]
 
-*Defined in [image/support.ts:86](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/image/support.ts#L86)*
+*Defined in [image/support.ts:86](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/image/support.ts#L86)*
 
 List of image formats that are known to be supported by wasm-imagemagick but only for write operation. See `spec/formatSpec.ts`
 
@@ -81,7 +81,7 @@ List of image formats that are known to be supported by wasm-imagemagick but onl
 
 ▸ **getConfigureFolders**(): *Promise‹string[]›*
 
-*Defined in [image/support.ts:6](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/image/support.ts#L6)*
+*Defined in [image/support.ts:6](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/image/support.ts#L6)*
 
 **Returns:** *Promise‹string[]›*
 
@@ -91,7 +91,7 @@ ___
 
 ▸ **imageBuiltIn**(`builtIn?`: images): *Promise‹[IFile](../interfaces/_types_.ifile.md)[]›*
 
-*Defined in [image/support.ts:108](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/image/support.ts#L108)*
+*Defined in [image/support.ts:108](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/image/support.ts#L108)*
 
 Gets ImageMagick built-in images like `rose:`, `logo:`, etc in the form of [File](../interfaces/_main_customcommand_.customcommandcontext.md#file)s.
 
@@ -109,7 +109,7 @@ ___
 
 ▸ **listConfigure**(): *Promise‹ListConfigure›*
 
-*Defined in [image/support.ts:26](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/image/support.ts#L26)*
+*Defined in [image/support.ts:26](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/image/support.ts#L26)*
 
 returns the output of part of the information returned in `convert -list configure`, parsed.
 
@@ -121,6 +121,6 @@ ___
 
 ▸ **listFormat**(): *Promise‹Format[]›*
 
-*Defined in [image/support.ts:44](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/image/support.ts#L44)*
+*Defined in [image/support.ts:44](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/image/support.ts#L44)*
 
 **Returns:** *Promise‹Format[]›*

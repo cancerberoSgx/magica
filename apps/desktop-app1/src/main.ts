@@ -24,7 +24,7 @@ async function main() {
   MessageLoop.postTask(async () => {
     await loadLibraries()
     win.close()
-    _setState(getInitialState())
+    _setState(await getInitialState())
     const app = new App1({})
     app.render()
     app.start()

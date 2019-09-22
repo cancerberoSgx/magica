@@ -37,15 +37,18 @@ Easy to setup and use, ImageMagick Node.js and Browser API and Command Line Inte
 
  * [Magica Playground](https://cancerberosgx.github.io/demos/magica/playground/) (WIP) - Playground with LOTS of ImageMagick script examples to experiment with, edit and share by url.
  * [Magica Canvas](https://cancerberosgx.github.io/demos/magica/canvas/) (WIP) - Renders transformations in canvas as fast as possible to show that for images width<1000px it's instantaneous. See transformations happen on mouse move, and on streaming video. [https://cancerberosgx.github.io/demos/magica/images/magica-canvas-demo.mp4](Demo video)
+ * [Desktop sample application](https://github.com/cancerberoSgx/magica/tree/master/apps/desktop-app1) . Use https://libyue.com for cross platform native GUI.
  
 ## Summary
 
  * JavaScript API for Node.js and Browser
  * Command line interface which supports simple straightforwards translation between ImageMagick utilities command line interface (like `convert` command).
  * Easy/Quick setup, no emscripten build needed.
- * Includes ImageMagick emscripten WASM build using its own tools, and also from other parties, like [wasm-imagemagick](https://github.com/KnicKnic/WASM-ImageMagick). 
- * So no build is necessary. Just `npm install` and you are ready to go.
-
+ * Includes ImageMagick WebAssembly bundle (wasm - see sub project [magick-wasm](https://github.com/cancerberoSgx/magica/tree/master/magick-wasm). It's also compatible with IM COmmand line utilities based API such as [wasm-imagemagick](https://github.com/KnicKnic/WASM-ImageMagick). 
+    * So no build is necessary. Just `npm install` and you are ready to go, both in node.js and the browser. 
+ * Supports most of ImageMagick delegate libraries, such as gif, png, tiff, jpg, webp, fonts ttf/otf, raw, pdf, fftw, lcms, cypher, openjpeg, jp2, jpc (jpeg 2000), lcms (.icc profiles) and a lot more.
+ * Speed and memory consumption are acceptable for images below 1000x1000. Then a resize could take .5 or more...
+ * Supports all ImageMagick Command line Utilities such as convert, identify, montage, stc
 ## Status
  
  * See [TODO.md](TODO.md) for progress, supported features / libraries ported , things not supported yet and and roadmap.

@@ -34,7 +34,7 @@
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[error](_imagemagick_createmain_.nativeresult.md#error)*
 
-*Defined in [imageMagick/createMain.ts:35](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/imageMagick/createMain.ts#L35)*
+*Defined in [imageMagick/createMain.ts:35](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/imageMagick/createMain.ts#L35)*
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 • **outputFiles**: *T[]*
 
-*Defined in [types.ts:102](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/types.ts#L102)*
+*Defined in [types.ts:102](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/types.ts#L102)*
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[returnValue](_imagemagick_createmain_.nativeresult.md#returnvalue)*
 
-*Defined in [imageMagick/createMain.ts:32](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/imageMagick/createMain.ts#L32)*
+*Defined in [imageMagick/createMain.ts:32](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/imageMagick/createMain.ts#L32)*
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[stderr](_imagemagick_createmain_.nativeresult.md#stderr)*
 
-*Defined in [imageMagick/createMain.ts:34](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/imageMagick/createMain.ts#L34)*
+*Defined in [imageMagick/createMain.ts:34](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/imageMagick/createMain.ts#L34)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 *Inherited from [NativeResult](_imagemagick_createmain_.nativeresult.md).[stdout](_imagemagick_createmain_.nativeresult.md#stdout)*
 
-*Defined in [imageMagick/createMain.ts:33](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/imageMagick/createMain.ts#L33)*
+*Defined in [imageMagick/createMain.ts:33](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/imageMagick/createMain.ts#L33)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 • **times**? : *undefined | object*
 
-*Defined in [types.ts:103](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/types.ts#L103)*
+*Defined in [types.ts:103](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/types.ts#L103)*
 
 ___
 
@@ -88,4 +88,4 @@ ___
 
 • **verbose**? : *VerboseInfo[]*
 
-*Defined in [types.ts:104](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/types.ts#L104)*
+*Defined in [types.ts:104](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/types.ts#L104)*

@@ -41,12 +41,14 @@ export class App1 extends StateComponent<{}> {
     this.win.activate()
     if (!process.versions.yode) {
       gui.MessageLoop.run()
-      process.exit(0)
+      // process.exit(0)
+       this.win.close()
     }
   }
 
   protected createWindow() {
     this.content = gui.Container.create()
+       this.content.setMouseDownCanMoveWindow(false)
     this.content.setBackgroundColor(this.state.theme.bg)
     this.content.setColor(this.state.theme.fg)
     this.content.setStyle({ flexGrow: 1, flex: 1, flexDirection: 'column' })

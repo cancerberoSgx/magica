@@ -20,7 +20,7 @@
 
 ▸ **getFileName**(`f`: string | [IFile](../interfaces/_types_.ifile.md)): *string*
 
-*Defined in [util/fileUtil.ts:16](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/util/fileUtil.ts#L16)*
+*Defined in [util/fileUtil.ts:16](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/util/fileUtil.ts#L16)*
 
 Returns file name / path of given file relative to emscripten FS root  (in the context of emscripten FS)
 
@@ -38,7 +38,7 @@ ___
 
 ▸ **getFilePath**(`f`: string | [IFile](../interfaces/_types_.ifile.md)): *string*
 
-*Defined in [util/fileUtil.ts:25](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/util/fileUtil.ts#L25)*
+*Defined in [util/fileUtil.ts:25](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/util/fileUtil.ts#L25)*
 
 Returns absolute path of given file (in the context of emscripten FS)
 
@@ -56,7 +56,7 @@ ___
 
 ▸ **isDir**(`f`: string | [IFile](../interfaces/_types_.ifile.md), `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *boolean*
 
-*Defined in [util/fileUtil.ts:39](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/util/fileUtil.ts#L39)*
+*Defined in [util/fileUtil.ts:39](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/util/fileUtil.ts#L39)*
 
 **Parameters:**
 
@@ -73,7 +73,7 @@ ___
 
 ▸ **isFile**(`f`: string | [IFile](../interfaces/_types_.ifile.md), `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *boolean*
 
-*Defined in [util/fileUtil.ts:47](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/util/fileUtil.ts#L47)*
+*Defined in [util/fileUtil.ts:47](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/util/fileUtil.ts#L47)*
 
 **Parameters:**
 
@@ -90,7 +90,7 @@ ___
 
 ▸ **readFile**(`f`: string | [IFile](../interfaces/_types_.ifile.md), `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *[File](../classes/_file_file_.file.md)*
 
-*Defined in [util/fileUtil.ts:9](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/util/fileUtil.ts#L9)*
+*Defined in [util/fileUtil.ts:9](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/util/fileUtil.ts#L9)*
 
 if given a file it ignores its contents and alwasys read again from FS
 
@@ -109,7 +109,7 @@ ___
 
 ▸ **removeFile**(`f`: string | [IFile](../interfaces/_types_.ifile.md), `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *void*
 
-*Defined in [util/fileUtil.ts:35](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/util/fileUtil.ts#L35)*
+*Defined in [util/fileUtil.ts:35](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/util/fileUtil.ts#L35)*
 
 **Parameters:**
 
@@ -126,7 +126,7 @@ ___
 
 ▸ **writeFile**(`f`: [IFile](../interfaces/_types_.ifile.md), `FS`: [FS](../interfaces/_file_emscriptenfs_.fs.md)): *void*
 
-*Defined in [util/fileUtil.ts:31](https://github.com/cancerberoSgx/magica/blob/8fb28f9/src/util/fileUtil.ts#L31)*
+*Defined in [util/fileUtil.ts:31](https://github.com/cancerberoSgx/magica/blob/19bf60b/src/util/fileUtil.ts#L31)*
 
 **Parameters:**
 
