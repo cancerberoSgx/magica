@@ -61,27 +61,36 @@ export class Options extends StateComponent<CommonProps> {
 
 <button onClick="app1.handleApply()" ${this.state.autoApply ? 'disabled' : ''}>Apply</button> 
 
-  <br/>
   <label><input id="autoApply" type="checkbox" ${this.state.autoApply ? 'checked' : ''} onchange="app1.setState({autoApply: this.checked})">Auto Apply</label>
 
-<br/>
-<label>Width:<br>
-<input step="20" id="width" type="number" min="1" value="${this.state.imageSize.width}" onchange="app1.handleResize(this.valueAsNumber, undefined)"></label>
-
-<br/>
-<label>Height:<br><input step="10" id="height" type="number" min="1" value="${this.state.imageSize.height}" onchange="app1.handleResize(undefined, this.valueAsNumber)"></label>
-
-<br/>
-<label>Rotate:<br/><input id="rotate" type="range" value="${this.state.imageRotate}" onchange="app1.handleRotate(this.valueAsNumber)" min="0" max="360"></label>
-<div id="rotateLabel">${this.state.imageRotate} degrees</div> 
+<section>
+  <h5>Bounds</h5>
+  <label>Width:<br>
+  <input step="20" id="width" type="number" min="1" value="${this.state.imageSize.width}" onchange="app1.handleResize(this.valueAsNumber, undefined)"></label>
+  <br/>
+  <label>Height:<br><input step="10" id="height" type="number" min="1" value="${this.state.imageSize.height}" onchange="app1.handleResize(undefined, this.valueAsNumber)"></label>
+  <br/>
+  <label>Offset X:<br>
+  <input step="20" id="offsetX" type="number" min="1" value="${this.state.imageOffset.x}" onchange="app1.handleTranslate(this.valueAsNumber, undefined)"></label>
+  <br/>
+  <label>Offset Y:<br><input step="10" id="offsetY" type="number" min="1" value="${this.state.imageOffset.y}" onchange="app1.handleTranslate(undefined, this.valueAsNumber)"></label>
+</section>
 
 <section>
+  <h5>Rotate</h5>
+  <label>Rotate:<br/><input id="rotate" type="range" value="${this.state.imageRotate}" onchange="app1.handleRotate(this.valueAsNumber)" min="0" max="360"></label>
+  <div id="rotateLabel">${this.state.imageRotate} degrees</div> 
+   <label>Gravity:<br/><select>${['Top Left', 'Center', ]}</select></label>
+    <br/>
+  <label><input id="rotatePreserveSize" type="checkbox" ${this.state.rotatePreserveSize ? 'checked' : ''} onchange="app1.setState({rotatePreserveSize: this.checked})">Preserve Size</label>
+</section>
+
+<section>
+  <h5>Region Effects</h5>
   <label>Commands: <br/><select onchange="app1.handleCommandChange(this.value)">${this.state.commands.map(c => `<option selected="${this.state.command === c.name}" value="${c.name}">${c.name}</option>`).join('\n    ')}
   </select></label>
-
   <br/>
-  <label><input id="onMouseMove" type="checkbox" ${this.state.onMouseMove ? 'checked' : ''} onchange="app1.handleOnMouseMove(this.checked)">On Mouse Move</label>
- 
+  <label><input id="onMouseMove" type="checkbox" ${this.state.onMouseMove ? 'checked' : ''} onchange="app1.handleOnMouseMove(this.checked)">On Mouse Move</label> 
   <div id="commandFields"></div>
 </section>
 

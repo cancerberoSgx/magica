@@ -1,10 +1,11 @@
 import { commands } from './commands'
-import { State, VirtualPixel } from './state'
+import { State } from './state'
 import { realpathSync } from 'fs';
 import { join } from 'path';
 import { objectKeys, arrayToObject } from 'misc-utils-of-mine-generic';
 import { lightTheme } from './styles';
 import { buildBuffers } from './imageUtil';
+import {imList} from 'magica'
 
 let state: State = null as any
 
@@ -49,8 +50,11 @@ export async function getInitialState(): Promise<State> {
     theme: lightTheme,
     scaleFactor: 1,
     autoApply: false,
-    virtualPixel: VirtualPixel.White,
-    outputFormat: 'jpg'
+    virtualPixel: imList.VirtualPixel.White,
+    outputFormat: 'jpg',
+    imageOffset: {x: 0, y: 0},
+    gravity: imList.Gravity.Center,
+    rotatePreserveSize: true
   };
 }
 

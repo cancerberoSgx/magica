@@ -1,11 +1,13 @@
 import { Command } from './commands'
 import {Styles} from './styles'
+import {imList} from 'magica'
 
 export interface State {
   working?: string
   outputFormat: string
   image: string
   imageSize: { width: number, height: number }
+  imageOffset: {x: number, y: number}
   imageRotate: number
   currentBuffer: ArrayBufferView
   imageBuffer: ArrayBufferView
@@ -18,7 +20,9 @@ export interface State {
  theme: Styles
  scaleFactor: number
  autoApply: boolean
- virtualPixel: VirtualPixel 
+ virtualPixel: imList.VirtualPixel 
+ gravity: imList.Gravity 
+ rotatePreserveSize: boolean
 }
 
 export interface Field {
@@ -26,26 +30,3 @@ export interface Field {
   value: string
   type?: 'string' | 'number'
 }
-
-
-
-
-
-  export enum VirtualPixel {
-    'Background' = 'Background',
-    'Black' = 'Black',
-    'CheckerTile' = 'CheckerTile',
-    'Dither' = 'Dither',
-    'Edge' = 'Edge',
-    'Gray' = 'Gray',
-    'HorizontalTile' = 'HorizontalTile',
-    'HorizontalTileEdge' = 'HorizontalTileEdge',
-    'Mirror' = 'Mirror',
-    'None' = 'None',
-    'Random' = 'Random',
-    'Tile' = 'Tile',
-    'Transparent' = 'Transparent',
-    'VerticalTile' = 'VerticalTile',
-    'VerticalTileEdge' = 'VerticalTileEdge',
-    'White' = 'White'
-  }

@@ -7,6 +7,7 @@ import { showModal } from './guiUtil'
 import { setState, getState } from './store'
 import { State, Field } from './state'
 import { buildBuffers, getImageSize } from './imageUtil'
+import { Command, buildCommand } from './commands'
 
 const OUTPUT_FILE_NAME = 'output.png'
 
@@ -68,19 +69,15 @@ async   handleSave() {
   }
 
  async  handleCommand(event: gui.MouseEvent) {
-     setState({
-      working: 'Processing...',
-    })
-    await sleep(2)
+    //  setState({
+    //   working: 'Processing...',
+    // })
+    // await sleep(2)
     const c = this.state.commands.find(c => c.name === this.state.command)
     if (!c) { return }
-    const context = {
-      ...event.positionInView,
-      fields: arrayToObject(getState().fields.map(f => f.id), f => getState().fields.find(f2 => f2.id === f)) as { [s: string]: Field },
-      inputFile: 'output.miff',
-      outputFile: `${OUTPUT_FILE_NAME}`
-    }
-    const command = c.command(context)
+    const command = buildCommand(event.positionInView, c, this.state)
+    // console.log(command);
+    
     const result = mainSync({
       command,
       inputFiles: [new File('output.miff', this.state.magicaBuffer)],
@@ -135,52 +132,5 @@ async   handleRotate(value: number) {
     })
   }
 
-//   async   buildBuffers(image: string=`${OUTPUT_FILE_NAME}`, content?: ArrayBufferView, scaleFactor=1) {
-//                setState({
-//       working: 'Processing...',
-//     })
-//     await sleep(2)
-//   const buffer = typeof content === 'undefined' ? new Uint8ClampedArray(readFileSync(image)) : new Uint8ClampedArray(content.buffer)
-//   const s = {
-//     image,
-//     currentBuffer: buffer,
-//     imageBuffer:  buffer
-//   };
-//   const result = mainSync({
-//     verbose: true,
-//     command: `convert '${basename(image)}' output.miff`,
-//     inputFiles: [new File(basename(image), s.imageBuffer)]
-//   });
-
-// const imageSize = this.getImageSize(result, scaleFactor) 
-//         //  setState({working: undefined})
-//   return {
-//     ...s,
-//     magicaBuffer: result.outputFiles[0].content,
-//     working: undefined,
-//     // imageSize: result.verbose && result.verbose.length ? (result.verbose[0].outputSize||result.verbose[0].inputSize) :( getImageSize(s.imageBuffer) ||getState().imageSize || { width: 400, height: 400 })
-//     imageSize
-//     }
-// }
-
-//  getImageSize(imageBufferOrResult: ArrayBufferView|Result, scaleFactor=1){
-//   let  imageSize : gui.SizeF
-//   if(!ArrayBuffer.isView(imageBufferOrResult) && imageBufferOrResult.verbose && imageBufferOrResult.verbose.length &&imageBufferOrResult.verbose[0].outputSize && imageBufferOrResult.verbose[0].outputSize.height && imageBufferOrResult.verbose[0].outputSize.width) {
-//     imageSize= {width: imageBufferOrResult.verbose[0].outputSize.width, height: imageBufferOrResult.verbose[0].outputSize.height}
-//       imageSize= {width: imageSize.width*scaleFactor, height: imageSize.height*scaleFactor}
-//   }
-//   else {
-//   const b = ArrayBuffer.isView(imageBufferOrResult) ? imageBufferOrResult : imageBufferOrResult.outputFiles[0].content
-//   const i = gui.Image.createFromBuffer(b, scaleFactor);
-//    const iz = i && i.getSize()
-//    if((iz && iz.width && iz.height)){
-//      imageSize = iz
-//    }else {
-//      imageSize = getState().imageSize || { width: 400, height: 400 }
-//     imageSize= {width: imageSize.width*scaleFactor, height: imageSize.height*scaleFactor}
-//    }
-//   }
-//   return  imageSize
-// }
-
 }
+
