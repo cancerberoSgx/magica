@@ -62,7 +62,7 @@ export class App1 extends StateComponent<{}> {
     this.content.addChildView(this.menuPanel)
     this.content.addChildView(this.bodyPanel)
     this.win = gui.Window.create({})
-    this.win.setTitleVisible(true)
+    process.platform !== 'darwin' && this.win.setTitleVisible(true)
     this.win.setTitle('Hello there!')
     this.win.setContentView(this.content)
     this.win.onClose = function() { gui.MessageLoop.quit() }
