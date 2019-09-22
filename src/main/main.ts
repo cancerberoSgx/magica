@@ -43,13 +43,10 @@ export function mainSync(options: MainSyncOptions): Result {
   objectKeys(getOptions())
     .filter(k => notUndefined(options[k]))
     .forEach(k => setOptions({ [k]: options[k] }))
-
   const { emscriptenNodeFsRoot, debug } = getOptions()
   debug && console.log('main call given options: ', options)
-
   const { FS, main } = getMagick()
   FS.chdir(emscriptenNodeFsRoot)
-
   options.inputFiles.forEach(f => {
     const dirName = dirname(f.name)
     if (dirName.trim()) {
@@ -58,9 +55,7 @@ export function mainSync(options: MainSyncOptions): Result {
     debug && console.log('FS.write', f.name)
     writeFile(f, FS)
   })
-
   const beforeTree = listFilesRecursively(emscriptenNodeFsRoot, FS)
-
   let returnValue: NativeResult
   var processedCommand = processCommand(options.command!)
   if (options.verbose) {
@@ -79,7 +74,6 @@ export function mainSync(options: MainSyncOptions): Result {
     }
   }
   var verbose = options.verbose ? tryTo(() => parseConvertVerbose(returnValue.stdout)) || [] : []
-
   const outputFiles =
     listFilesRecursively(emscriptenNodeFsRoot, FS)
       .filter(f => !beforeTree.find(b => b.path === f.path)) // tree diff
@@ -95,14 +89,11 @@ export function mainSync(options: MainSyncOptions): Result {
         }
         return file
       })
-
   const removed: string[] = []
   ls(emscriptenNodeFsRoot, FS)
     .filter(f => !isProtectedFile(f))
     .forEach(f => rmRf(f, FS, f => !isProtectedFile(f), removed))
-
   options.debug && console.log(`Removed files: ${removed}\nProtected files: ${ls(emscriptenNodeFsRoot, FS).map(isProtectedFile)}`)
-
   return {
     ...returnValue,
     outputFiles,

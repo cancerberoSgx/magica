@@ -1,0 +1,43 @@
+{
+  "name": "magica-desktop-app1",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/src/main.js",
+  "scripts": {
+    "clean": "rm -rf dist docs tmp_server_fs working_tmp",
+    "test": "npm run build && npx ava --serial --concurrency 1 --config ava.config.js",
+    "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
+    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
+    "lint": " npm run organizeImports && npm run format",
+    "build": "npm run clean && npx tsc && npm run copy",
+    "copy": "cp src/lenna.jpg dist/src/",
+    "all": "npm run clean   && npm run lint && npm run build && npm test  ",
+    "package": "rm -rf out-* *.zip &&  npm run build  && npx yackage --app-dir $PWD --platform linux dist  out-linux &&  npx yackage --app-dir $PWD  dist  out-mac "
+  },
+  "keywords": [
+    "typescript",
+    "imageMagick",
+    "image processing"
+  ],
+  "author": "Sebastián Gurin",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^12.7.3",
+    "ts-node": "^8.3.0",
+    "ts-refactor": "0.0.9",
+    "typescript": "^3.6.2",
+    "yackage": "^0.2.11"
+  },
+  "dependencies": {
+    "gui": "^0.6.3",
+    "magica": "^0.2.16",
+    "misc-utils-of-mine-generic": "^0.2.29"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cancerberoSgx/magica.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cancerberoSgx/magica"
+  }
+}

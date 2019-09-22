@@ -1,4 +1,5 @@
 magica
+/node_modules
 native-magick
 tmp
 emscripten_prefix

@@ -1,0 +1,16 @@
+/out*
+/yode*
+/*.zip
+/node_modules
+.cache
+docs
+.DS_Store
+*.tgz
+*.zip
+.nyc_output
+coverage
+/package
+.vscode
+/tmp*
+bkps
+working_tmp
