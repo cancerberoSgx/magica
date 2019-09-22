@@ -320,7 +320,7 @@
 //          * 
 //          * This method is blocking that it does not return until the drag session is finished or cancelled. During the call a nested UI message loop will run and other events will still be emitted.
 //          * 
-//          * Note that on macOS certain views may have IsMouseDownCanMoveWindow defaulting to true, which will prevent drag session to start. Make sure to call SetMouseDownCanMoveWindow(false) for drag sources.
+//          * Note that on macOS certain views may have `isMouseDownCanMoveWindow` defaulting to true, which will prevent drag session to start. Make sure to call `SetMouseDownCanMoveWindow(false)` for drag sources.
 //          * @param data  An array of [ClipboardData] that will be passed to drop target.
 //          * @param operations  Must be one or more of [DragOperation] masks, indicates which drag operations are supported.
 //          */
@@ -611,11 +611,27 @@
 //     }
 
 //     export class Canvas {
+//         /**
+//          * Create a new canvas with specified size and scale factor.
+//          */
 //         static create(size: SizeF, scaleFactor: number): Canvas;
+//         /**
+//          * Create a new canvas with size using default scale factor.
+//          * This is strongly discouraged for using, since it does not work well with multi-monitor setup. Only use it when you do not care about per-monitor DPI.
+//          */
 //         static createForMainScreen(size: SizeF): Canvas;
 //         protected constructor();
+//         /**
+//          * Return the Painter that can be used to draw on the canvas.
+//          */
 //         getPainter(): Painter;
+//         /**
+//          * Return the scale factor of the canvas.
+//          */
 //         getScaleFactor(): number;
+//         /**
+//          * Return the DIP size of canvas.
+//          */
 //         getSize(): SizeF;
 //     }
 
@@ -645,24 +661,64 @@
 //         setText(text: string): void;
 //     }
 
+//   type EventMember<T extends (...args: any [])=>any> = Signal<T> | T;
+
 //     export class Container extends View {
+//         /**
+//          * Create a new container view.
+//          */
 //         static create(): Container;
 //         protected constructor();
+//         /**
+//          * Append a child view to the container.
+//          * 
+//          * This method will silently fail if the view already has a parent.
+//          */
 //         addChildView(view: View): void;
+//         /**
+//          * Add a child view to the container at index.
+//          * 
+//          * This method will silently fail if the view already has a parent. 
+//          */
 //         addChildViewAt(view: View, index: number): void;
+//         /**
+//          * Return the child view at index.
+//          * 
+//          * This method will silently fail if the index is out of range.
+//          */
 //         childAt(index: number): View;
+//         /**
+//          * Return the count of children in the container.
+//          */
 //         childCount(): number;
+//         /**
+//          * Return the minimum height to show all child of the view for the width.
+//          */
 //         getPreferredHeightForWidth(width: number): number;
+//         /**
+//          * Get the minimum size to show all children of the view. 
+//          * 
+//          * Note that if the view is using a flex-wrap: wrap style, this method might return a extremely wide/high size since it does not know the best width/height to show the children.
+//          */
 //         getPreferredSize(): SizeF;
+//         /**
+//          * Return the minimum width to show all child of the view for the height.
+//          */
 //         getPreferredWidthForHeight(height: number): number;
 //         /**
 //          * Emitted when button the operating system or application requests to draw a portion of the view.
-//          * @param self 
+//          * 
+//          * The call must be synchronous. Calling given painter asynchronously ehavior is undefined.
 //          * @param painter The drawing context of the view.
 //          * @param dirty  The area in the view to draw on.
 //          */
-//         onDraw:  Signal<(self: this, painter: Painter, dirty: RectF)=>void> | ((self: this, painter: Painter, dirty: RectF)=>void)
+//         onDraw: EventMember<(self: this, painter: Painter, dirty: RectF) => void>
 //         // onDraw(self: this, painter: Painter, dirty: RectF): void;
+//         /**
+//          * Remove a child view from this container.
+//          * 
+//          * This method will silently fail if the view is not a child of the container.
+//          */
 //         removeChildView(view: View): void;
 //     }
 
@@ -671,13 +727,34 @@
 //         static createWithType(type: CursorType): Cursor;
 //     }
 
+//     /**
+//      * Single-line text input view.
+//      */
 //     export class Entry extends View {
+//         /**
+//          * Create a normal Entry
+//          */
 //         static create(): Entry;
+//         /**
+//          * Create an Entry with type.
+//          */
 //         static createType(type: EntryType): Entry;
 //         protected constructor();
+//         /**
+//          * Return currently displayed text.
+//          */
 //         getText(): string;
-//         onActivate(self: this): void;
-//         onTextChange(self: this): void;
+//         /**
+//          * Emitted when user has pressed Enter in the view.
+//          */
+//         onActivate: EventMember<(self: this) => void>
+//         /**
+//          * Emitted when user has changed text.
+//          */
+//         onTextChange: EventMember<(self: this) => void>;
+//         /**
+//          * Change the text in the view.
+//          */
 //         setText(text: string): void;
 //     }
 
@@ -762,10 +839,20 @@
 //         setText(text: string): void;
 //         setVAlign(align: TextAlign): void;
 //     }
-
+//     /**
+//      * This class does system GUI toolkit intializations, and provides APIs around native GUI toolkit's application lifetime APIs. You should not use this API when integrating Yue into existing GUI apps.
+//      * 
+//      * When using this class, you must create Lifetime before creating State.
+//      */
 //     export class Lifetime {
-//         onActivate(): void;
-//         onReady(): void;
+//         /**
+//          * MacOs only. Emitted when received applicationShouldHandleReopen notification and there is no visible windows. This usually happens when the app is activated by Finder, or user clicks on the dock icon.
+//          */
+//         onActivate: EventMember<()=>void>
+//         /**
+//          * MacOs only. Emitted when received applicationDidFinishLaunching notification.
+//          */
+//         onReady: EventMember<()=>void>
 //     }
 
 //     export interface MenuItemOptions {
@@ -825,9 +912,24 @@
 //         static postDelayedTask(ms: number, task: Function): void;
 //     }
 
+//     /**
+//      * The Painter class can not be created by user, its instance can only be recevied in drawing events or via the Canvas class.
+//      */
 //     export class Painter {
+//       /**
+//        * Add an arc to the path which is centered at point with radius starting at sa angle and ending at ea angle going in clockwise direction.
+//        * @param point Arc's center.
+//        * @param radius Arc's radius.
+//        * @param sa The angle at which the arc starts, measured clockwise from the positive x axis and expressed in radians.
+//        * @param ea  The angle at which the arc ends, measured clockwise from the positive x axis and expressed in radians.
+//        */
 //         arc(point: PointF, radius: number, sa: number, ea: number): void;
 //         beginPath(): void;
+//         /**
+//          * Add a cubic Bézier curve to current path.
+//          * 
+//          * The first two points are control points and the third one is the end point. The starting point is the last point in the current path.
+//          */
 //         bezierCurveTo(cp1: PointF, cp2: PointF, ep: PointF): void;
 //         clip(): void;
 //         /**
@@ -839,6 +941,11 @@
 //          */
 //         setFillColor(color: ColorArg): void;
 //         clipRect(rect: RectF): void;
+//         /**
+//          * Close current path and move current point to the start of current path.
+//          * 
+//          * A straight line will be drew from current point to the start.
+//          */
 //         closePath(): void;
 //         drawCanvas(canvas: Canvas, rect: RectF): void;
 //         drawCanvasFromRect(canvas: Canvas, src: RectF, dest: RectF): void;
@@ -851,8 +958,14 @@
 //         measureText(text: string, width: number, attributes: TextAttributes): void;
 //         moveTo(point: PointF): void;
 //         rect(rect: RectF): void;
+//         /**
+//          * Restore the most recently saved state.
+//          */
 //         restore(): void;
 //         rotate(angle: number): void;
+//         /**
+//          * Save the entire state of the painter.
+//          */
 //         save(): void;
 //         scale(scale: Vector2dF): void;
 //         setColor(color: ColorArg): void;
@@ -1027,12 +1140,24 @@
 //     }
 
 //     export class Window {
+//         /**
+//          * Create a new window with options.
+//          */
 //         static create(options: WindowOptions): Window;
 //         protected constructor();
 //         activate(): void;
 //         addChildWindow(window: Window): void;
+//         /**
+//          * Move the window to the center of the screen.
+//          */
 //         center(): void;
+//         /**
+//          * Request to close the window.
+//          */
 //         close(): void;
+//         /**
+//          * Move the focus away from the window.
+//          */
 //         deactivate(): void;
 //         getBounds(): RectF;
 //         getChildWindows(): Window[];
@@ -1042,10 +1167,19 @@
 //         getMenuBar(): MenuBar;
 //         getParentWindow(): Window;
 //         getTitle(): string;
-//         getToolbar(toolbar: Toolbar): void;
+//         /**
+//          * MacOs only. Set the window toolbar.
+//          */
+//         getToolbar(): Toolbar;
+//         /**
+//          * Return whether window has a native frame.
+//          */
 //         hasFrame(): boolean;
 //         hasShadow(): boolean;
 //         isActive(): void;
+//         /**
+//          * Return whether window is always above other normal windows.
+//          */
 //         isAlwaysOnTop(): boolean;
 //         isFullscreen(): boolean;
 //         isFullSizeContentView(): boolean;
@@ -1056,8 +1190,14 @@
 //         isMovable(): boolean;
 //         isResizeable(): boolean;
 //         isTitleVisible(): boolean;
+//         /**
+//          * Return whether window is transparent.
+//          */
 //         isTransparent(): boolean;
 //         isVisible(): boolean;
+//         /**
+//          * Maximize the window.
+//          */
 //         maximize(): void;
 //         minimize(): void;
 //         onBlur(self: this): void;
@@ -1065,14 +1205,29 @@
 //         onFocus(self: this): void;
 //         removeChildWindow(window: Window): void;
 //         restore(): void;
+//         /**
+//          * Make the window always show above other normal windows.
+//          */
 //         setAlwaysOnTop(isAlwaysOnTop: boolean): void;
 //         setBackgroundColor(color: ColorArg): void;
 //         setBounds(bounds: RectF): void;
 //         setContentSize(size: SizeF): void;
+//         /**
+//          * Set the minimum and maximum content sizes of the window.
+//          * 
+//          * Passing an empty size means no constraint.
+//          * @param minsize  Minimum content size.
+//          * @param maxsize  Maximum content size.
+//          */
 //         setContentSizeConstraints(minsize: SizeF, maxsize: SizeF): void;
 //         setContentView(view: View): void;
 //         setFullscreen(isFullscreen: boolean): void;
 //         setFullSizeContentView(full: boolean): void;
+//         /**
+//          * Set whether window should have shadow.
+//          * 
+//          * Depending on platform, this may not work.
+//          */
 //         setHasShadow(hasShadow: boolean): void;
 //         setMaximizable(isMaximizable: boolean): void;
 //         setMenuBar(menubar: MenuBar): void;
@@ -1082,9 +1237,21 @@
 //         setSizeConstrains(minsize: SizeF, maxsize: SizeF): void;
 //         setTitle(title: string): void;
 //         setTitleVisible(visible: boolean): void;
+//         /**
+//          * MacOs only. Set the window toolbar.
+//          */
 //         setToolbar(toolbar: Toolbar): void;
+//         /**
+//          * Show/hide the window.
+//          */
 //         setVisible(isVisible: boolean): void;
+//         /**
+//          * Called when user requests to close the window, should return whether the window can be closed.
+//          */
 //         shouldClose(self: this): boolean;
+//         /**
+//          * Unmaximize the window.
+//          */
 //         unmaximize(): void;
 //     }
 
@@ -1186,6 +1353,11 @@
 
 //     export type EntryType = "normal" | "password";
 
+//     /**
+//      * Represent possible event types. EventType is an enum with following values: 'unknown'| 'mouseDown'| 'mouseUp'| 'mouseMove'| 'mouseEnter'| 'mouseLeave'| 'keyDown'
+//      */
+//     export type EventType = 'unknown'| 'mouseDown'| 'mouseUp'| 'mouseMove'| 'mouseEnter'| 'mouseLeave'| 'keyDown'
+
 //     export class Event {
 //         static maskAlt: number;
 //         static maskControl: number;
@@ -1193,7 +1365,7 @@
 //         static maskShift: number;
 //         modifiers: number;
 //         timestamp: number;
-//         type: any; // TODO - docs 404 error
+//         type: EventType;
 //         isAltPressed(): boolean;
 //         isControlPressed(): boolean;
 //         isMetaPressed(): boolean;
@@ -1206,6 +1378,7 @@
 //     }
 
 //     export type FontStyle = "normal" | "italic";
+
 //     export type FontWeight =
 //         "thin" |
 //         "extra-light" |
@@ -1216,12 +1389,23 @@
 //         "bold" |
 //         "extra-bold" |
 //         "black";
+
 //     export type KeyboardCode = string;
 
 //     export class KeyEvent extends Event {
 //         key: KeyboardCode;
 //     }
 
+//     /**
+//      * Preset defaults for common menu items.
+//      * 
+//      * For common menu items like Copy and Paste, manually implementing them for all platforms is very boring work. You can instead specify a role for a menu item, and Yue will automatically set labels, accelerators and actions for the menu item.
+//      * 
+//      * This type is a string with following possible values:"copy", "cut", "paste", "select-all", "undo", "redo". 
+//      * 
+//      * On macOS following values are also available: "about", "hide", "hide-others", "unhide", "help", "window"
+
+//      */
 //     export type MenuItemRole =
 //         "copy" |
 //         "cut" |
@@ -1237,6 +1421,9 @@
 //         "window" |
 //         "services";
 
+//     /**
+//      * Represent possible Menuitem types.
+//      */
 //     export type MenuItemType =
 //         "label" |
 //         "checkbox" |
@@ -1262,12 +1449,39 @@
 //     export type TableColumnType = "text" | "edit" | "custom";
 //     export type TextAlign = "start" | "center" | "end";
 
+//     /**
+//      * By default text is drew at top-left corner using system font and color.
+//      */
 //     export interface TextAttributes {
+//         /**
+//          * Horizontal text align, default is to the start of layout.
+//          */
 //         align?: TextAlign;
+//         /**
+//          * Text color, default is system UI text color.
+//          */
 //         color?: ColorArg;
+//         /**
+//          * Whether to show ellipsis (...) at the end of the last visible line if the text doesn't fit into the bounds specified, default is false.
+//          * 
+//          * The text is broken at the boundary of the last character.
+//          * 
+//          * On Linux, ellipsis does not have effect if wrap is false.
+//          */
 //         ellipsis?: boolean;
+//         /**
+//          * Font for drawing text, default is system UI font.
+//          */
 //         font?: Font;
+//         /**
+//          * Vertical text align, default is to the start of layout.
+//          */
 //         valign?: TextAlign;
+//         /**
+//          * Whether to wrap lines, default is true.
+//          * 
+//          * Lines are wrapped at word boundaries.
+//          */
 //         wrap?: boolean;
 //     }
 

@@ -1,12 +1,15 @@
 import * as gui from 'gui'
+import { ImageHandler } from './imageHandler'
 
 export class Menu {
   menu: gui.MenuBar
+  handler: ImageHandler
 
-  constructor() {
+  constructor(win: gui.Window) {
     const menus: gui.MenuItemOptions[] = []
+    this.handler = new ImageHandler(win)
     menus.push({
-      label: 'File',
+      // label: 'File',
       submenu: [
         {
           label: 'Collect Garbage',
@@ -31,11 +34,28 @@ export class Menu {
       ],
     })
 
-    // macOS specific app menus.
-    if (process.platform === 'darwin') {
-      menus[0].submenu!.splice(menus[0].submenu!.length - 2, 0,
-        { type: 'separator' }, { role: 'hide' }, { role: 'hide-others' }, { type: 'separator' })
-    }
+    // // macOS specific app menus.
+    // if (process.platform === 'darwin') {
+    //   menus[0].submenu!.splice(menus[0].submenu!.length - 2, 0,
+    //     { type: 'separator' }, { role: 'hide' }, { role: 'hide-others' }, { type: 'separator' })
+    // }
+    
+menus.push({
+      label: 'File',
+      submenu: [
+        {
+          label: 'Open',
+          accelerator: 'CmdOrCtrl+O',
+          onClick: () =>  this.handler.handleOpen(),
+        },
+        { type: 'separator' },
+        {
+          label: 'Save as...',
+          accelerator: 'CmdOrCtrl+S',
+            onClick: () =>  this.handler.handleSave(),
+        },
+      ],
+    })
 
     // Edit menu.
     menus.push({

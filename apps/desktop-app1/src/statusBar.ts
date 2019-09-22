@@ -3,12 +3,12 @@ import { printMs } from 'misc-utils-of-mine-generic'
 import { StateComponent } from './abstractComponent'
 import { State } from './state'
 
-type RP = 'working' | 'time'
+type RP = 'working' | 'time'|'theme'
 
 export class StatusBar extends StateComponent {
   protected view: gui.Container = null as any;
-   relevantProperties: RP[] = ['working', 'time']
-    protected working: gui.Label = null as any;
+  relevantProperties: RP[] = ['working', 'time', 'theme']
+  protected working: gui.Label = null as any;
   protected time: gui.Label = null as any;
   protected memory: gui.Label = null as any;
 
@@ -30,9 +30,15 @@ export class StatusBar extends StateComponent {
 
   stateChanged(names: RP[], s: Partial<State>) {
     s.working && this.working.setBackgroundColor('#ed2266')
-    !s.working && this.working.setBackgroundColor('#ededed')
+    !s.working && this.working.setBackgroundColor(this.state.theme.bg)
     this.working.setText(s.working || 'Idle')
-    this.working.setText(printMs(this.state.time) || '')
+    this.time.setText(printMs(this.state.time) || '')
     this.memory.setText((process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2) + ' mb')
+    if(s.theme){
+this.time.setBackgroundColor(this.state.theme.bg)
+this.time.setColor(this.state.theme.fg)
+this.memory.setBackgroundColor(this.state.theme.bg)
+this.memory.setColor(this.state.theme.fg)
+    }
   }
 }

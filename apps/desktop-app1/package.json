@@ -33,7 +33,7 @@
     "yackage": "^0.2.11"
   },
   "dependencies": {
-    "gui": "^0.6.3",
+    "gui": "github:cancerberoSgx/node-gui",
     "magica": "^0.2.16",
     "misc-utils-of-mine-generic": "^0.2.34",
     "threads": "^1.0.0-beta.6"

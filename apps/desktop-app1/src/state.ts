@@ -1,5 +1,5 @@
 import { Command } from './commands'
-
+import {Styles} from './styles'
 export interface State {
   working?: string
   image: string
@@ -13,12 +13,13 @@ export interface State {
   command: string
   fields: Field[]
   time: number
+ theme: Styles
 }
 
 export interface Field {
   id: string
   value: string
-  type?: 'string' | 'integer' | 'float'
+  type?: 'string' | 'number'
 }
 
 

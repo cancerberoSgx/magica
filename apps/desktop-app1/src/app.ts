@@ -6,7 +6,7 @@ import { SideBar } from './sideBar'
 import { State } from './state'
 import { StatusBar } from './statusBar'
 
-type RP = 'image'
+type RP = 'image'|'theme'
 
 export class App1 extends StateComponent<{}> {
   protected win: gui.Window = null as any
@@ -15,7 +15,7 @@ export class App1 extends StateComponent<{}> {
   protected menuPanel: gui.Container = null as any
   protected bodyPanel: gui.Container = null as any
   protected sideBar: gui.Container = null as any
-  relevantProperties: RP[] = ['image']
+  relevantProperties: RP[] = ['image', 'theme']
   protected menu: gui.Container = null as any
 
   render() {
@@ -26,7 +26,7 @@ export class App1 extends StateComponent<{}> {
     this.bodyPanel.addChildView(this.sideBar)
     this.canvas = new Canvas({ win: this.win })
     this.bodyPanel.addChildView(this.canvas.render())
-    const menubar = new Menu()
+    const menubar = new Menu(this.win)
     if (process.platform !== 'darwin') {
       this.win.setMenuBar(menubar.menu)
     }
@@ -47,26 +47,33 @@ export class App1 extends StateComponent<{}> {
 
   protected createWindow() {
     this.content = gui.Container.create()
-    this.content.setBackgroundColor('#ffffff')
+    this.content.setBackgroundColor(this.state.theme.bg)
+    this.content.setColor(this.state.theme.fg)
     this.content.setStyle({ flexGrow: 1, flex: 1, flexDirection: 'column' })
     this.menuPanel = gui.Container.create()
     this.menuPanel.setStyle({ width: '100%', flex: 0, height: 40, flexDirection: 'row' })
     this.bodyPanel = gui.Container.create()
     this.bodyPanel.setStyle({ width: '100%', flex: 1, height: '100%', flexGrow: 1, flexDirection: 'row' })
-    this.bodyPanel.setBackgroundColor('#ffffff')
+    // this.bodyPanel.setBackgroundColor('#ffffff')
     this.content.addChildView(this.menuPanel)
     this.content.addChildView(this.bodyPanel)
-    this.win = gui.Window.create({})
-    process.platform !== 'darwin' && this.win.setTitleVisible(true)
-    this.win.setTitle('Hello there!')
+    this.win = gui.Window.create({frame: true, transparent: false, showTrafficLights: true})
+    // process.platform !== 'darwin' && this.win.setTitleVisible(true)
+    this.win.setTitle('Magica')
+    // this.win.setBackgroundColor('#ffffff')
     this.win.setContentView(this.content)
-    this.win.onClose = function() { gui.MessageLoop.quit() }
+    this.win.onClose = function() { gui.MessageLoop.quit(); process.exit(0) }
     this.win.setContentSize({ width: 600, height: 600 })
+    // this.win.maximize()
   }
 
   stateChanged(names: RP[], s: Partial<State>) {
     if (names.includes('image') && s['image']) {
       this.win.setTitle(s['image'])
+    }
+    if(names.includes('theme')){    
+      this.content.setBackgroundColor(this.state.theme.bg)
+      this.content.setColor(this.state.theme.fg)
     }
   }
 }
