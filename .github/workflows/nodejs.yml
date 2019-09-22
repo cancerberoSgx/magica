@@ -18,8 +18,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-      run: npm install --global --production windows-build-tools
+        
     - name: npm install && npm test
-      run: npm install && npm test
+      run: |
+        npm install --global --production windows-build-tools
+        npm install && npm test
       env:
         CI: true
