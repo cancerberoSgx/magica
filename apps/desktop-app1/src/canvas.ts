@@ -17,7 +17,7 @@ export class Canvas extends StateComponent<CommonProps> {
   protected canvasContainer: gui.Container  = null as any
  protected handler : ImageHandler = null as any
  protected off: gui.Vector2dF = null as any
-  protected drawing=false
+  // protected drawing=false
   
   render() {
     this.handler = new ImageHandler(this.props.win)
@@ -42,13 +42,13 @@ export class Canvas extends StateComponent<CommonProps> {
     this.view.setContentView(this.canvasContainer)
     this.drawImage(this.state.currentBuffer);
      this.canvasContainer.onDraw = (self: gui.Container, p: gui.Painter, dirty: gui.RectF) => {
-      if(this.drawing ){
-        return
-      }
-      this.drawing=true
+      // if(this.drawing ){
+      //   return
+      // }
+      // this.drawing=true
       p.drawImageFromRect(this.image, dirty, dirty) 
       // p.drawImage(this.image, {x: 0, y: 0, ...this.state.imageSize}) 
-      this.drawing=false
+      // this.drawing=false
     }
 
     return this.view

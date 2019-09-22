@@ -1,5 +1,5 @@
 import { randomIntBetween, arrayToObject } from 'misc-utils-of-mine-generic'
-import { Field, State } from './state'
+import { State } from './state'
 
 interface Context {
   inputFile: string
@@ -11,23 +11,28 @@ interface Context {
 
 export interface Command {
   name: string
-  command: (state: State&Context) => string
+  command: (state: State & Context) => string
   fields: Field[]
 }
 
+export interface Field {
+  id: string
+  value: string
+  type?: 'string' | 'number' | 'color'
+}
 
-export function buildCommand(pos: {x: number, y: number}, c:  Command, state: State) {
-  const context  = {
+export function buildCommand(pos: { x: number, y: number }, c: Command, state: State) {
+  const context = {
     ...state,
     ...pos,
     fieldMap: arrayToObject(state.fields.map(f => f.id), f => state.fields.find(f2 => f2.id === f)) as {
       [s: string]: Field;
     },
     inputFile: 'output.miff',
-    outputFile: `output.${state.outputFormat}`
-  };
-    const command = c.command(context);
-    return command;
+    outputFile: `output.${state.renderedFormat}`
+  }
+  const command = c.command(context);
+  return command;
 }
 
 export const commands: Command[] = [
@@ -35,62 +40,62 @@ export const commands: Command[] = [
   {
     name: 'barrel',
     command: state => `convert ${state.inputFile} -matte -virtual-pixel ${state.virtualPixel} -distort Barrel '${[state.fieldMap['a'].value, state.fieldMap['b'].value, state.fieldMap['c'].value, state.fieldMap['d'].value, state.x, state.y].join(' ')}' ${state.outputFile}`,
-    fields: [{ id: 'a', value: '-0.4' }, { id: 'b', value: '0.7' }, { id: 'c', value: '0.2' }, { id: 'd', value: '0.5' }]
+    fields: [{ id: 'a', value: '-0.4', type: 'number' }, { id: 'b', value: '0.7', type: 'number' }, { id: 'c', value: '0.2', type: 'number' }, { id: 'd', value: '0.5', type: 'number' }]
   },
   {
     name: 'implode',
     command: state => `convert ${state.inputFile} ( +clone -crop ${state.fieldMap['size'].value}x${state.fieldMap['size'].value}+${state.x - Math.round(parseInt(state.fieldMap['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fieldMap['size'].value) / 2)} -implode  ${state.fieldMap['implode'].value} ) -flatten ${state.outputFile}`,
-    fields: [{ id: 'implode', value: '2' }, { id: 'size', value: '180' }]
+    fields: [{ id: 'implode', value: '2', type: 'number' }, { id: 'size', value: '180', type: 'number' }]
   },
   {
     name: 'explode',
     command: state => `convert ${state.inputFile} ( +clone -crop ${state.fieldMap['size'].value}x${state.fieldMap['size'].value}+${state.x - Math.round(parseInt(state.fieldMap['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fieldMap['size'].value) / 2)} -implode  ${state.fieldMap['implode'].value} ) -flatten ${state.outputFile}`,
-    fields: [{ id: 'implode', value: '-2' }, { id: 'size', value: '180' }]
+    fields: [{ id: 'implode', value: '-2', type: 'number' }, { id: 'size', value: '180', type: 'number' }]
   },
   {
     name: 'swirl',
     command: state => `convert ${state.inputFile} ( +clone -crop ${state.fieldMap['size'].value}x${state.fieldMap['size'].value}+${state.x - Math.round(parseInt(state.fieldMap['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fieldMap['size'].value) / 2)} -swirl  ${state.fieldMap['swirl'].value} ) -flatten ${state.outputFile}`,
-    fields: [{ id: 'swirl', value: '244' }, { id: 'size', value: '180' }]
+    fields: [{ id: 'swirl', value: '244', type: 'number' }, { id: 'size', value: '180', type: 'number' }]
   },
   {
     name: 'scale',
     command: state => `convert ${state.inputFile} ( +clone -crop ${state.fieldMap['size'].value}x${state.fieldMap['size'].value}+${state.x - Math.round(parseInt(state.fieldMap['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fieldMap['size'].value) / 2)} +repage  -distort ScaleRotateTranslate '${state.fieldMap['scale'].value}  0'  -geometry +${state.x - Math.round(parseInt(state.fieldMap['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fieldMap['size'].value) / 2)} ) -composite  ${state.outputFile}`,
-    fields: [{ id: 'scale', value: '3' }, { id: 'size', value: '80' }]
+    fields: [{ id: 'scale', value: '3', type: 'number' }, { id: 'size', value: '80', type: 'number' }]
   },
   {
     name: 'wave',
     command: state => `convert ${state.inputFile} ( +clone -crop ${state.fieldMap['size'].value}x${state.fieldMap['size'].value}+${state.x - Math.round(parseInt(state.fieldMap['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fieldMap['size'].value) / 2)} -background none -wave  ${state.fieldMap['wave'].value} ) -flatten ${state.outputFile}`,
-    fields: [{ id: 'wave', value: '10x64' }, { id: 'size', value: '180' }]
+    fields: [{ id: 'wave', value: '10x64' }, { id: 'size', value: '180', type: 'number' }]
   },
   {
     name: 'blur',
     command: state => `convert ${state.inputFile} ( +clone -crop ${state.fieldMap['size'].value}x${state.fieldMap['size'].value}+${state.x - Math.round(parseInt(state.fieldMap['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fieldMap['size'].value) / 2)}  -blur  ${state.fieldMap['blur'].value} ) -flatten ${state.outputFile}`,
-    fields: [{ id: 'blur', value: '4x2' }, { id: 'size', value: '180' }]
+    fields: [{ id: 'blur', value: '4x2' }, { id: 'size', value: '180', type: 'number' }]
   },
   {
     name: 'spread',
     command: state => `convert ${state.inputFile} ( +clone -crop ${state.fieldMap['size'].value}x${state.fieldMap['size'].value}+${state.x - Math.round(parseInt(state.fieldMap['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fieldMap['size'].value) / 2)} -spread  ${state.fieldMap['spread'].value} ) -flatten ${state.outputFile}`,
-    fields: [{ id: 'spread', value: '5' }, { id: 'size', value: '180' }]
+    fields: [{ id: 'spread', value: '5', type: 'number' }, { id: 'size', value: '180', type: 'number' }]
   },
   {
     name: 'color histogram',
     command: state => `convert ${state.inputFile} ( +clone -crop ${state.fieldMap['size'].value}x${state.fieldMap['size'].value}+${state.x - Math.round(parseInt(state.fieldMap['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fieldMap['size'].value) / 2)} -size 1x2  gradient:blue-red -fx  'v.p{0,1}+(v.p{0,0}-v.p{0,1})*u^${state.fieldMap['factor'].value}' ) -flatten ${state.outputFile}`,
-    fields: [{ id: 'factor', value: '1.3' }, { id: 'size', value: '50' }]
+    fields: [{ id: 'factor', value: '1.3', type: 'number' }, { id: 'size', value: '50', type: 'number' }]
   },
   {
     name: 'sepia',
     command: state => `convert ${state.inputFile} ( +clone -crop ${state.fieldMap['size'].value}x${state.fieldMap['size'].value}+${state.x - Math.round(parseInt(state.fieldMap['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fieldMap['size'].value) / 2)}   -color-matrix ' 0.393 0.769 0.189    0.349 0.686 0.168    0.272 0.534 0.131  ' ) -flatten ${state.outputFile}`,
-    fields: [{ id: 'size', value: '180' }]
+    fields: [{ id: 'size', value: '180', type: 'number' }]
   },
   {
     name: 'vignette',
-    command: state => `convert ${state.inputFile} ( +clone -crop ${state.fieldMap['size'].value}x${state.fieldMap['size'].value}+${state.x - Math.round(parseInt(state.fieldMap['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fieldMap['size'].value) / 2)} -background black -vignette ${state.fieldMap['vignette'].value} ) -flatten ${state.outputFile}`,
-    fields: [{ id: 'vignette', value: '0x13' }, { id: 'size', value: '180' }]
+    command: state => `convert ${state.inputFile} ( +clone -crop ${state.fieldMap['size'].value}x${state.fieldMap['size'].value}+${state.x - Math.round(parseInt(state.fieldMap['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fieldMap['size'].value) / 2)} -background ${state.fieldMap['background'].value} -vignette ${state.fieldMap['vignette'].value} ) -flatten ${state.outputFile}`,
+    fields: [{ id: 'vignette', value: '0x13' }, { id: 'size', value: '180', type: 'number' }, { id: 'background', value: '#000000', type: 'color' }]
   },
   {
     name: 'charcoal',
     command: state => `convert ${state.inputFile} ( +clone -crop ${state.fieldMap['size'].value}x${state.fieldMap['size'].value}+${state.x - Math.round(parseInt(state.fieldMap['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fieldMap['size'].value) / 2)} -alpha remove -charcoal ${state.fieldMap['charcoal'].value} -fill ${state.fieldMap['fill'].value}  -tint 80% ) -flatten ${state.outputFile}`,
-    fields: [{ id: 'charcoal', value: '4' }, { id: 'fill', value: 'red' }, { id: 'size', value: '130' }]
+    fields: [{ id: 'charcoal', value: '4', type: 'number' }, { id: 'fill', value: '#ff0000', type: 'color' }, { id: 'size', value: '130', type: 'number' }]
   },
   {
     name: 'emboss',
@@ -116,18 +121,9 @@ export const commands: Command[] = [
   },
   {
     name: 'grid',
-    // command: state => `
-    // convert ${state.inputFile} ( +clone -crop ${state.fields['size'].value}x${state.fields['size'].value}+${state.x - Math.round(parseInt(state.fields['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fields['size'].value) / 2)}  -size ${state.fields['point'].value}x${state.fields['point'].value}  xc: -draw 'circle ${Math.round(parseInt(state.fields['point'].value) / 2)},${Math.round(parseInt(state.fields['point'].value) / 2)} 1,${Math.round(parseInt(state.fields['point'].value) / 2)}'     -write mpr:block +delete ${state.inputFile} -size ${state.inputFile.width}x${state.inputFile.height} tile:mpr:block +swap -compose screen -composite ) -flatten ${state.outputFile}`,
     command: state => `convert  -size ${state.fieldMap['point'].value}x${state.fieldMap['point'].value}  xc: -draw 'circle ${Math.round(parseInt(state.fieldMap['point'].value) / 2)},${Math.round(parseInt(state.fieldMap['point'].value) / 2)} 1,${Math.round(parseInt(state.fieldMap['point'].value) / 2)}'     -write mpr:block +delete   ${state.inputFile} -crop ${state.fieldMap['size'].value}x${state.fieldMap['size'].value}+${state.x - Math.round(parseInt(state.fieldMap['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fieldMap['size'].value) / 2)}  tile:mpr:block  +swap -compose screen -composite   -flatten ${state.outputFile}`,
-
-
     fields: [{ id: 'point', value: '10' }, { id: 'size', value: '100' }]
   },
-  // convert -size <%= get('size') %>x<%= get('size') %> \\
-  // xc: -draw 'circle <%= get('size')/2 %>,<%= get('size')/2 %> 1,<%= get('size')/2 %>'   -write mpr:block +delete \\
-  // <%=inputFiles[0].name%> -size <%= await inputFiles[0].widthXHeight()%> tile:mpr:block \\
-  // +swap -compose screen -composite grid_blocks.png
-
   {
     name: 'modulate',
     command: state => `convert ${state.inputFile} ( +clone -crop ${state.fieldMap['size'].value}x${state.fieldMap['size'].value}+${state.x - Math.round(parseInt(state.fieldMap['size'].value) / 2)}+${state.y - Math.round(parseInt(state.fieldMap['size'].value) / 2)}   -modulate ${state.fieldMap['brightness'].value},${state.fieldMap['saturation'].value},100 ) -flatten  ${state.outputFile}`,

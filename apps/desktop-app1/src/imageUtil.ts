@@ -3,6 +3,8 @@ import { Image, SizeF } from 'gui'
 import { File, mainSync, magickLoaded, Result } from 'magica'
 import { basename } from 'path'
 import { getState } from './store';
+import { showModal } from './guiUtil';
+import { State } from './state';
 
 export async function buildBuffers(image: string, content?: ArrayBufferView, scaleFactor=1) {
     //         if (dialog.runForWindow(this.win)) {
@@ -56,5 +58,12 @@ export async function loadLibraries( ) {
     await magickLoaded
   } catch (error) {
     console.error(error)
+  }
+}
+
+export function checkError(result:Result, state: State) {
+  if(!result.outputFiles.length||result.error) {
+    showModal({title: 'Error', body: 'Error in ImageMagick command. '+result.error+'\n'+result.stderr.join('\n'), state})
+  return true
   }
 }

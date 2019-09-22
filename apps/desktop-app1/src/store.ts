@@ -51,10 +51,11 @@ export async function getInitialState(): Promise<State> {
     scaleFactor: 1,
     autoApply: false,
     virtualPixel: imList.VirtualPixel.White,
-    outputFormat: 'jpg',
+    renderedFormat: 'jpg',
     imageOffset: {x: 0, y: 0},
     gravity: imList.Gravity.Center,
-    rotatePreserveSize: true
+    rotatePreserveSize: true,
+    padding: {x: 0, y: 0}
   };
 }
 

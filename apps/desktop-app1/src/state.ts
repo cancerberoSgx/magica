@@ -1,13 +1,14 @@
-import { Command } from './commands'
+import { Command, Field } from './commands'
 import {Styles} from './styles'
 import {imList} from 'magica'
 
 export interface State {
   working?: string
-  outputFormat: string
+  renderedFormat: string
   image: string
   imageSize: { width: number, height: number }
   imageOffset: {x: number, y: number}
+  padding: {x: number, y: number}
   imageRotate: number
   currentBuffer: ArrayBufferView
   imageBuffer: ArrayBufferView
@@ -23,10 +24,4 @@ export interface State {
  virtualPixel: imList.VirtualPixel 
  gravity: imList.Gravity 
  rotatePreserveSize: boolean
-}
-
-export interface Field {
-  id: string
-  value: string
-  type?: 'string' | 'number'
 }
