@@ -1,6 +1,6 @@
 {
   "name": "video-capture",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Super portable, fast webcam capture library for node.js. TypeScript/JavaScript easy to use API. Uses puppeteer headless browser to capture webcam video (audio/desktop recording, etc) and stream back to node.js frame by frame in plain image data for optimal speed. (or optionally encoded as jpg/png)",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
