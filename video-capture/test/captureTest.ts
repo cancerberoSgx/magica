@@ -8,7 +8,7 @@ test.cb('addFrameListener single ', t => {
     t.deepEqual([frame.width, frame.height, frame.data.length], [480, 360, 691200])
     t.end()
   })
-  c.initialize().then(() => c.start())
+  c.start()
 })
 
 test.cb('addFrameListener multiple ', t => {
@@ -19,7 +19,6 @@ test.cb('addFrameListener multiple ', t => {
   })
   c.addFrameListener(frame => {
     i++
-    // console.log('frame', i++);
     t.deepEqual([frame.width, frame.height, frame.data.length], [200, 200, 160000])
     if (i > 50) {
       console.log(i, 'frames', printMs(Date.now() - t0))
@@ -31,6 +30,18 @@ test.cb('addFrameListener multiple ', t => {
     t0 = Date.now()
     c.start()
   })
+})
+
+test('users requesting frames instead notifications', async t => {
+  const c = new VideoCapture({
+    width: 100, height: 100, port: 8083
+  })
+  await c.initialize()
+  const f = await c.readFrame()
+  const f2 = await c.readFrame()
+  t.deepEqual([f.width, f.height, f.data.length], [100, 100, 40000])
+  t.deepEqual([f2.width, f2.height, f2.data.length], [100, 100, 40000])
+  t.true(f !== f2)
 })
 
 

@@ -1,5 +1,4 @@
 import { Server } from 'http'
-import Jimp from 'jimp'
 import { checkThrow, mergeRecursive, sleep } from 'misc-utils-of-mine-generic'
 import puppeteer, { LaunchOptions } from 'puppeteer'
 import { reject } from 'q'
@@ -31,6 +30,7 @@ export class VideoCapture {
   protected browser?: puppeteer.Browser
   protected page?: puppeteer.Page
   protected capturing = false
+  protected initialized = false
 
   constructor(protected o: CaptureOptions = {}) {
     this.captureLoop = this.captureLoop.bind(this)
@@ -43,11 +43,11 @@ export class VideoCapture {
     this.listeners.push(listener)
   }
 
-  encodeFrame(data: ImageData, mime: string) {
-    //TODO: probably is faster to use canvas API to encode frames directly instead first as data - if users wants ust encoded then do that.
-    const j = new Jimp(data)
-    return j.getBufferAsync(mime)
-  }
+  // encodeFrame(data: ImageData, mime: string) {
+  //   //TODO: probably is faster to use canvas API to encode frames directly instead first as data - if users wants ust encoded then do that.
+  //   const j = new Jimp(data)
+  //   return j.getBufferAsync(mime)
+  // }
 
   protected async _postFrame(width: number, height: number, data: number[]) {
     const imageData = {
@@ -57,7 +57,9 @@ export class VideoCapture {
       height
     }
     this.notifyListeners(imageData)
+    this.lastFrame = imageData
   }
+  protected lastFrame?: ImageData
 
   /**
    * Given callback can be called to stop video capture (turns camera off)
@@ -85,6 +87,10 @@ export class VideoCapture {
    * Starts capture. It resolved when the camera starts capturing or rejects if any error.
    */
   async  start() {
+    if (this.capturing) {
+      throw new Error('Already capturing')
+    }
+    await this.initialize()
     this.capturing = true
     await this.captureLoop()
   }
@@ -92,12 +98,16 @@ export class VideoCapture {
   /**
    * starts servers, browser and media streams / canvas / video in the DOM. 
    * 
-   * This is separated on purpose so capturing can be measured independently of initialization.
+   * It's not neccesary to call this method - it will be called automatically. Separated on purpose so capturing can be measured independently of initialization.
    */
   async initialize() {
+    if (this.initialized) {
+      return
+    }
     await this.launch()
     await this.page!.exposeFunction('postFrame', this._postFrame)
     await this.initializeMedia()
+    this.initialized = true
   }
 
   protected async launch() {
@@ -129,12 +139,22 @@ export class VideoCapture {
   }
 
   protected async captureFrame() {
+    //TODO. perhaps is faster to do the capture loop all together inside the DOM, instead calling evaluate() on each iteration?
     await this.page!.evaluate(async () => {
       (window as any).canvas!.getContext('2d')!.drawImage((window as any).video, 0, 0, (window as any).canvas.width, (window as any).canvas.height)
       const data = (window as any).canvas!.getContext('2d')!.getImageData(0, 0, (window as any).canvas.width, (window as any).canvas.height)
       await (window as any).postFrame(data.width, data.height, Array.from(data.data.values()))
     })
   }
+
+  public async readFrame() {
+    const lastFrame = this.lastFrame
+    await this.captureFrame()
+    await sleep(1)
+    checkThrow(this.lastFrame && lastFrame !== this.lastFrame, 'Expected to have a new frame')
+    return this.lastFrame!
+  }
+
 
   protected async captureLoop() {
     if (this.capturing) {
@@ -148,8 +168,8 @@ export class VideoCapture {
   }
 
   protected async initializeMedia() {
-    const constraints = {      
-...{
+    const constraints = {
+      ...{
         audio: false,
         video: true
       },
@@ -162,7 +182,8 @@ export class VideoCapture {
         (window as any).canvas.width = width;
         (window as any).canvas.height = height
 
-        navigator.mediaDevices.getUserMedia(JSON.parse(constraints) as MediaStreamConstraints) // TODO: do we really need to serialize constrains ? 
+        navigator.mediaDevices.getUserMedia(JSON.parse(constraints) as MediaStreamConstraints)
+          // TODO: do we really need to serialize constrains ? 
           .then(stream => {
             (window as any).video.srcObject = stream
             resolve(stream)
