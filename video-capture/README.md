@@ -1,4 +1,4 @@
-# node-video-capture
+# camera-capture
 
 ## Contents
 
@@ -62,7 +62,7 @@ I didn't found any library that provides an interface to capture webcam video so
 ## Install
 
 ```sh
-npm install video-capture puppeteer
+npm install camera-capture puppeteer
 ```
 
 (puppeteer is a peer dependency you must install it by yourself)
@@ -72,7 +72,7 @@ npm install video-capture puppeteer
 ### Managed frame read
 
 ```js
-import {VideoCapture} from 'video-capture'
+import {VideoCapture} from 'camera-capture'
 const c = new VideoCapture()
 c.addFrameListener(frame => {  // frame is an ImageData : {width: 480, height: 360, data: UIntArray}
   // use a library or render the image data to a surface... - 
@@ -85,7 +85,7 @@ console.log('Capturing camera');
 ### Manual frame read
 
 ```js
-import {VideoCapture} from 'video-capture'
+import {VideoCapture} from 'camera-capture'
 const c = new VideoCapture({
   width: 100, height: 100, port: 8083
 })
