@@ -96,6 +96,21 @@ const f = await c.readFrame()  // read the current frame (f is an ImageData)
 const f2 = await c.readFrame()  // take another shot
 ```
 
+## Encoded Frames
+```js
+import {VideoCapture} from 'camera-capture'
+const c = new VideoCapture({ mime: 'image/png'})
+await c.initialize()
+const f = await c.readFrame() // PNG as configured
+writeFileSync('tmp.png', f.data)
+const f2 = await c.readFrame('image/jpeg')  //JPG
+writeFileSync('tmp.jpg', f.data)
+const f3 = await c.readFrame('image/webp')  //JPG
+writeFileSync('tmp.webp', f.data)
+const f4 = await c.readFrame('rgba')  //raw image data (as default)
+writeFileSync('tmp.webp', f.data)
+```
+
 ## Command line
 
 TODO - TBD

@@ -57,7 +57,7 @@ export class VideoCapture {
       height
     }
     this.notifyListeners(imageData)
-    // this.lastFrame = imageData
+    this.lastFrame = imageData //HEADS UP - readFrame needs this to pass frae to the user - we can't 
   }
 
   /**

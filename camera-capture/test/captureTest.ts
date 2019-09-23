@@ -3,6 +3,7 @@ import { printMs } from 'misc-utils-of-mine-generic'
 import { VideoCapture } from '../src/capture'
 import fileTypes from 'file-type'
 import fileType from 'file-type'
+import { writeFileSync } from 'fs'
 
 test.serial.cb('addFrameListener single ', t => {
   const c = new VideoCapture({ port: 8082, width: 480, height: 360 })
@@ -47,14 +48,21 @@ test.serial('users requesting frames instead notifications', async t => {
 
 test.serial('encoded frames', async t => {
   const c = new VideoCapture({
-    width: 100, height: 100, port: 8084
+    width: 100, height: 100, port: 8084, mime: 'image/png'
   })
   await c.initialize()
-  const f = await c.readFrame('image/png')
+  const f = await c.readFrame()
   t.deepEqual(fileType(f.data), {ext:'png', mime: 'image/png'})
+  writeFileSync('tmp.png', f.data)
+  const f1 = await c.readFrame('image/png')
+  t.deepEqual(fileType(f1.data), {ext:'png', mime: 'image/png'})
+  writeFileSync('tmp1.png', f1.data)
   const f2 = await c.readFrame('image/jpeg')
   t.deepEqual(fileType(f2.data),  {ext:'jpg', mime: 'image/jpeg'})
+  writeFileSync('tmp.jpg', f2.data)
+  const f3 = await c.readFrame('image/webp')
+  t.deepEqual(fileType(f3.data),  {ext:'webp', mime: 'image/webp'})
+  writeFileSync('tmp.webp', f3.data)
 })
-
 
 test.todo('pause, resume, stop')

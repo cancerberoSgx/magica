@@ -5,7 +5,7 @@
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "scripts": {
-    "test": "npm run build && npx ava --serial --concurrency 1 --config ava.config.js && npm run test-js",
+    "test": "npm run build && npx ava --serial --concurrency 1 --config ava.config.js",
     "prepare": "npm run build",
     "test-js": "npm run build && cp src/index.html dist/src/index.html && npx ava --serial --concurrency 1 --config ava.config-js.js",
     "clean": "rm -rf tmp* dist test-browser-outdir working_tmp",
