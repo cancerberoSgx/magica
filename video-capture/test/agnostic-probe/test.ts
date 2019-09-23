@@ -1,11 +1,10 @@
-import puppeteer from 'puppeteer'
-import { sleep } from 'misc-utils-of-mine-generic'
 import Jimp from 'jimp'
+import { sleep } from 'misc-utils-of-mine-generic'
+import puppeteer from 'puppeteer'
 import { staticServer } from '../../src/staticServer'
 
 async function test() {
   const server = await staticServer(__dirname, 8080)
-  // await sleep(1111)
   const browser = await puppeteer.launch({ headless: true, args: ['--disable-web-security', '--allow-file-access', '--use-fake-ui-for-media-stream'] })
   const page = await browser.newPage()
   page.on('console', e => {
@@ -16,13 +15,13 @@ async function test() {
   })
   await page.goto('http://127.0.0.1:8080/test3.html')
   await sleep(1000)
-await page.evaluate(()=>{
-  const d = document.createElement('div')
-  d.innerHTML=`
+  await page.evaluate(() => {
+    const d = document.createElement('div')
+    d.innerHTML = `
   <video playsinline autoplay></video>
   <canvas></canvas>`
-  document.body.append(d)
-})
+    document.body.append(d)
+  })
   await page.exposeFunction('postFrame', async (width, height, data: number[]) => {
     const imageData = {
       data: new Uint8ClampedArray(data),
@@ -39,12 +38,12 @@ await page.evaluate(()=>{
     return new Promise(resolve => {
       const video = document.querySelector('video')!
       const canvas = document.querySelector('canvas')!
-      canvas.width = 480;
-      canvas.height = 360;
+      canvas.width = 480
+      canvas.height = 360
       const constraints = {
         audio: false,
         video: true
-      };
+      }
       navigator.mediaDevices.getUserMedia(constraints)
         .then(stream => { console.log('READDD'); video.srcObject = stream; resolve() })
         .catch(error => console.log('navigator.MediaDevices.getUserMedia error: ', error.message, error.name))

@@ -62,3 +62,4 @@ import
 ## TODO / Road map
 
 - [ ] investigate why/how to pass the buffer / vide directly without transforming it to number[]
+- [ ] probably for frames a generator / or observable is more appropriate than even listeners.
