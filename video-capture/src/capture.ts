@@ -43,12 +43,6 @@ export class VideoCapture {
     this.listeners.push(listener)
   }
 
-  // encodeFrame(data: ImageData, mime: string) {
-  //   //TODO: probably is faster to use canvas API to encode frames directly instead first as data - if users wants ust encoded then do that.
-  //   const j = new Jimp(data)
-  //   return j.getBufferAsync(mime)
-  // }
-
   protected async _postFrame(width: number, height: number, data: number[]) {
     const imageData = {
       // TODO: investigate why/how to pass the buffer / vide directly without transforming it to number[]
@@ -140,6 +134,7 @@ export class VideoCapture {
 
   protected async captureFrame() {
     //TODO. perhaps is faster to do the capture loop all together inside the DOM, instead calling evaluate() on each iteration?
+     //TODO: probably is faster to use canvas API to encode frames directly instead first as data - if users wants ust encoded then do that.
     await this.page!.evaluate(async () => {
       (window as any).canvas!.getContext('2d')!.drawImage((window as any).video, 0, 0, (window as any).canvas.width, (window as any).canvas.height)
       const data = (window as any).canvas!.getContext('2d')!.getImageData(0, 0, (window as any).canvas.width, (window as any).canvas.height)
@@ -154,7 +149,6 @@ export class VideoCapture {
     checkThrow(this.lastFrame && lastFrame !== this.lastFrame, 'Expected to have a new frame')
     return this.lastFrame!
   }
-
 
   protected async captureLoop() {
     if (this.capturing) {

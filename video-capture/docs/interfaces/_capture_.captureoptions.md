@@ -24,7 +24,7 @@
 
 • **constrains**? : *MediaStreamConstraints*
 
-*Defined in [capture.ts:12](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L12)*
+*Defined in [capture.ts:12](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L12)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • **fps**? : *undefined | number*
 
-*Defined in [capture.ts:16](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L16)*
+*Defined in [capture.ts:16](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L16)*
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • **height**? : *undefined | number*
 
-*Defined in [capture.ts:15](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L15)*
+*Defined in [capture.ts:15](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L15)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • **port**? : *undefined | number*
 
-*Defined in [capture.ts:10](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L10)*
+*Defined in [capture.ts:10](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L10)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **puppeteerOptions**? : *LaunchOptions*
 
-*Defined in [capture.ts:11](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L11)*
+*Defined in [capture.ts:11](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L11)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 • **shots**? : *undefined | number*
 
-*Defined in [capture.ts:13](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L13)*
+*Defined in [capture.ts:13](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L13)*
 
 ___
 
@@ -72,4 +72,4 @@ ___
 
 • **width**? : *undefined | number*
 
-*Defined in [capture.ts:14](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L14)*
+*Defined in [capture.ts:14](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L14)*

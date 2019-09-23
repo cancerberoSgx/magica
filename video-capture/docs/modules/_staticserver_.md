@@ -14,7 +14,7 @@
 
 ▸ **staticServer**(`basePath`: string, `port`: number, `onFound`: Fn, `onNotFound`: Fn): *Promise‹Server›*
 
-*Defined in [staticServer.ts:6](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/staticServer.ts#L6)*
+*Defined in [staticServer.ts:6](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/staticServer.ts#L6)*
 
 **Parameters:**
 

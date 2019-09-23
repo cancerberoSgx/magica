@@ -5,13 +5,13 @@
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "scripts": {
-    "test": "npm run build && npx ava --serial --concurrency 1 --config ava.config.js ",
+    "test": "npm run build && npx ava --serial --concurrency 1 --config ava.config.js && npm run test-js",
     "prepare": "npm run build",
-     "test-js": "npm run build && cp src/index.html dist/src/index.html && npx ava --serial --concurrency 1 --config ava.config-js.js",
-    "clean": "rm -rf tmp* dist test-browser-outdir working_tmp",   
+    "test-js": "npm run build && cp src/index.html dist/src/index.html && npx ava --serial --concurrency 1 --config ava.config-js.js",
+    "clean": "rm -rf tmp* dist test-browser-outdir working_tmp",
     "build": "npm run clean && npx tsc  ",
-    "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" \"test-browser/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
-    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\" \"test-browser/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
+    "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
+    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
     "lint": "npm run organizeImports && npm run format",
     "docs": "npm run docs-readme-toc && npm run docs-api",
     "docs-api": "rm -rf docs && typedoc  --ignoreCompilerErrors --theme markdown --out docs --readme none --excludeNotExported src/index.ts ",
@@ -49,7 +49,7 @@
     "email": "sebastigurin@gmail.com",
     "url": "http://sgurin.com"
   },
-  "homepage": "https://www.npmjs.com/package/magica",
+  "homepage": "https://www.npmjs.com/package/video-capture",
   "repository": {
     "type": "git",
     "url": "https://github.com/cancerberoSgx/magica.git"

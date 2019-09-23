@@ -4,29 +4,32 @@
 
 <!-- toc -->
 
-- [Motivation](#motivation)
-- [Playground & demos](#playground--demos)
+- [What / WHy ?](#what--why-)
 - [Summary](#summary)
+- [Playground & demos](#playground--demos)
+- [Summary](#summary-1)
+- [Design summary](#design-summary)
 - [Status](#status)
 - [Install](#install)
 - [JavaScript API](#javascript-api)
   * [Managed frame read](#managed-frame-read)
-  * [Read frames manually](#read-frames-manually)
+  * [Manual frame read](#manual-frame-read)
 - [Command line](#command-line)
 - [Reference API](#reference-api)
 - [TODO / Road map](#todo--road-map)
+  * [low priority](#low-priority)
 
 <!-- tocstop -->
+
+## What / WHy ?
 
 After searching for an easy to use portable library to access the webcam directly from node.js I didn't found a library that works in windows, macOs and linux, without native dependencies that users need ot manually install (or even so, they won't work). 
 
 This library solves the problem with an easy approach. Use headless browser to capture the video,  draw in canvas and post the image data from there to the Node.js side using page.exposeFunction() and without almost any encode since the image data is passed as array buffer. 
 
-## Motivation 
+## Summary 
 
- * Use puppeteer (which is google chrome headless browser) to capture camera video. Expose frames as fast as possible. 
- * not focused on encoding more than the ones supported by the browser
- * API based on raw image data - users responsible of compose an output video with ffmpeg, imagemagick, opencv, etc-  not a priority for this project yet
+
 
 ## Playground & demos
 
@@ -46,9 +49,15 @@ I didn't found any library that provides an interface to capture webcam video so
  * Optionally the frames can be encoded as in jpg/png or even a video created . 
  + Also provides simple filtering API.
 
+## Design summary
+
+ * Use puppeteer (which is google chrome headless browser) to capture camera video. Expose frames as fast as possible. 
+ * not focused on encoding more than the ones supported by the browser
+ * API based on raw image data - users responsible of compose an output video with ffmpeg, imagemagick, opencv, etc. Format encoding is not the objective of this project
+
 ## Status
  
- * just born - a prototype working - just designing an API now
+ * just born - working APIs to read frames as ImageData. About, 30 frames per second (size  600x400)
  
 ## Install
 
@@ -56,7 +65,7 @@ I didn't found any library that provides an interface to capture webcam video so
 npm install video-capture puppeteer
 ```
 
-(puppeteer is a peer dependency you must install by yourself)
+(puppeteer is a peer dependency you must install it by yourself)
 
 ## JavaScript API
 
@@ -73,7 +82,7 @@ await c.start()
 console.log('Capturing camera');
 ```
 
-### Read frames manually
+### Manual frame read
 
 ```js
 import {VideoCapture} from 'video-capture'
@@ -104,6 +113,7 @@ TODO - TBD
 - [ ] CLI
 - [ ] real world example: native app
 - [ ] encode in browser supported formats (png, jpg)
+- [ ] do we really need to serialize constrains ? 
 - [x] listener API managed  loop
 - [x] API docs
 - [x] add api docs descriptions to class, options and
@@ -115,4 +125,4 @@ TODO - TBD
 - [ ] record web page - browser / page screenshot utility
 - [ ]  sound/ audio ? 
 - [ ]  geo location (get the coords) ? (need https?)
-- [ ] 
+- [ ]

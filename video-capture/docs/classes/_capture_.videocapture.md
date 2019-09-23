@@ -45,7 +45,7 @@
 
 \+ **new VideoCapture**(`o`: [CaptureOptions](../interfaces/_capture_.captureoptions.md)): *[VideoCapture](_capture_.videocapture.md)*
 
-*Defined in [capture.ts:33](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L33)*
+*Defined in [capture.ts:33](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L33)*
 
 **Parameters:**
 
@@ -61,7 +61,7 @@ Name | Type | Default |
 
 • **browser**? : *puppeteer.Browser*
 
-*Defined in [capture.ts:30](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L30)*
+*Defined in [capture.ts:30](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L30)*
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 • **capturing**: *boolean* = false
 
-*Defined in [capture.ts:32](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L32)*
+*Defined in [capture.ts:32](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L32)*
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 • **initialized**: *boolean* = false
 
-*Defined in [capture.ts:33](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L33)*
+*Defined in [capture.ts:33](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L33)*
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 • **lastFrame**? : *ImageData*
 
-*Defined in [capture.ts:62](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L62)*
+*Defined in [capture.ts:56](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L56)*
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 • **listeners**: *Listener[]* =  []
 
-*Defined in [capture.ts:40](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L40)*
+*Defined in [capture.ts:40](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L40)*
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 • **o**: *[CaptureOptions](../interfaces/_capture_.captureoptions.md)*
 
-*Defined in [capture.ts:35](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L35)*
+*Defined in [capture.ts:35](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L35)*
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 • **page**? : *puppeteer.Page*
 
-*Defined in [capture.ts:31](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L31)*
+*Defined in [capture.ts:31](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L31)*
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 • **server**? : *Server*
 
-*Defined in [capture.ts:29](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L29)*
+*Defined in [capture.ts:29](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L29)*
 
 ## Methods
 
@@ -125,7 +125,7 @@ ___
 
 ▸ **_postFrame**(`width`: number, `height`: number, `data`: number[]): *Promise‹void›*
 
-*Defined in [capture.ts:52](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L52)*
+*Defined in [capture.ts:46](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L46)*
 
 **Parameters:**
 
@@ -143,7 +143,7 @@ ___
 
 ▸ **addFrameListener**(`listener`: Listener): *void*
 
-*Defined in [capture.ts:42](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L42)*
+*Defined in [capture.ts:42](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L42)*
 
 **Parameters:**
 
@@ -159,7 +159,7 @@ ___
 
 ▸ **captureFrame**(): *Promise‹void›*
 
-*Defined in [capture.ts:141](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L141)*
+*Defined in [capture.ts:135](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L135)*
 
 **Returns:** *Promise‹void›*
 
@@ -169,7 +169,7 @@ ___
 
 ▸ **captureLoop**(): *Promise‹void›*
 
-*Defined in [capture.ts:159](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L159)*
+*Defined in [capture.ts:153](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L153)*
 
 **Returns:** *Promise‹void›*
 
@@ -179,7 +179,7 @@ ___
 
 ▸ **initialize**(): *Promise‹void›*
 
-*Defined in [capture.ts:103](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L103)*
+*Defined in [capture.ts:97](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L97)*
 
 starts servers, browser and media streams / canvas / video in the DOM.
 
@@ -193,7 +193,7 @@ ___
 
 ▸ **initializeMedia**(): *Promise‹void›*
 
-*Defined in [capture.ts:170](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L170)*
+*Defined in [capture.ts:164](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L164)*
 
 **Returns:** *Promise‹void›*
 
@@ -203,7 +203,7 @@ ___
 
 ▸ **launch**(): *Promise‹void›*
 
-*Defined in [capture.ts:113](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L113)*
+*Defined in [capture.ts:107](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L107)*
 
 **Returns:** *Promise‹void›*
 
@@ -213,7 +213,7 @@ ___
 
 ▸ **notifyListeners**(`d`: ImageData): *void*
 
-*Defined in [capture.ts:82](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L82)*
+*Defined in [capture.ts:76](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L76)*
 
 **Parameters:**
 
@@ -229,7 +229,7 @@ ___
 
 ▸ **pause**(): *Promise‹void›*
 
-*Defined in [capture.ts:74](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L74)*
+*Defined in [capture.ts:68](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L68)*
 
 **Returns:** *Promise‹void›*
 
@@ -239,7 +239,7 @@ ___
 
 ▸ **readFrame**(): *Promise‹ImageData›*
 
-*Defined in [capture.ts:150](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L150)*
+*Defined in [capture.ts:145](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L145)*
 
 **Returns:** *Promise‹ImageData›*
 
@@ -249,7 +249,7 @@ ___
 
 ▸ **resume**(): *Promise‹void›*
 
-*Defined in [capture.ts:78](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L78)*
+*Defined in [capture.ts:72](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L72)*
 
 **Returns:** *Promise‹void›*
 
@@ -259,7 +259,7 @@ ___
 
 ▸ **start**(): *Promise‹void›*
 
-*Defined in [capture.ts:89](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L89)*
+*Defined in [capture.ts:83](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L83)*
 
 Starts capture. It resolved when the camera starts capturing or rejects if any error.
 
@@ -271,7 +271,7 @@ ___
 
 ▸ **stop**(): *Promise‹void›*
 
-*Defined in [capture.ts:67](https://github.com/cancerberoSgx/magica/blob/40c8595/video-capture/src/capture.ts#L67)*
+*Defined in [capture.ts:61](https://github.com/cancerberoSgx/magica/blob/df88de8/video-capture/src/capture.ts#L61)*
 
 Given callback can be called to stop video capture (turns camera off)
 
