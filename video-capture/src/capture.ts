@@ -1,12 +1,12 @@
 import { staticServer } from './staticServer'
 import puppeteer, { LaunchOptions } from 'puppeteer'
 import { mergeRecursive, sleep, checkThrow } from 'misc-utils-of-mine-generic'
-import Jimp from 'jimp/*'
+import Jimp from 'jimp'
 import { Server } from 'http'
 import { reject } from 'q'
 
 type V = void | Promise<void>
-// type SupportedFormats = 'image/png'|
+
 export interface CaptureOptions {
   port?: number
   puppeteerOptions?: LaunchOptions
@@ -18,6 +18,7 @@ export interface CaptureOptions {
 }
 
 type Listener = (data: ImageData) => V
+
 interface ImageData {
   width: number
   height: number
@@ -31,7 +32,7 @@ export class VideoCapture {
   protected page?: puppeteer.Page
   protected capturing=false
 
-  constructor(protected o: CaptureOptions){
+  constructor(protected o: CaptureOptions = {}){
     this.captureLoop = this.captureLoop.bind(this)
     this._postFrame = this._postFrame.bind(this)
   }
@@ -48,7 +49,7 @@ this.listeners.push( listener)
     return j.getBufferAsync(mime)
   }
 
-  async _postFrame(width: number, height: number, data: number[]) {
+ protected async _postFrame(width: number, height: number, data: number[]) {
     const imageData = {
       // TODO: investigate why/how to pass the buffer / vide directly without transforming it to number[]
       data: new Uint8ClampedArray(data),
@@ -90,11 +91,27 @@ protected notifyListeners(d:ImageData){
  * Starts capture. It resolved when the camera starts capturing or rejects if any error.
  */
 async  start(){
-  this. server = await staticServer(__dirname, 8080)
+  this.capturing=true
+ await this.captureLoop()
+}
+
+/**
+ * starts servers, browser and media streams / canvas / video in the DOM. 
+ * 
+ * This is separated on purpose so capturing can be measured independently of initialization.
+ */
+  async initialize() {
+    await this.launch();
+      await this.page!.exposeFunction('postFrame', this._postFrame);
+        await this.initializeMedia();
+  }
+
+ protected async launch() {
+    this. server = await staticServer(__dirname, this.o.port||8080)
   // await sleep(1111)
   this. browser = await puppeteer.launch(mergeRecursive(
     {
-      ...Jimp, 
+      ...{}, 
       ...this.o.puppeteerOptions
       }, 
   { 
@@ -117,15 +134,7 @@ await this.page.evaluate(()=>{
   <canvas></canvas>`
   document.body.append(d)
 })
-
-  await this.page.exposeFunction('postFrame', this._postFrame)
-
-
-await this.initializeMedia()
-  // await sleep(1000)
-await this.captureFrame()
- 
-}
+  }
 
 protected async captureFrame() {
     await this.page!.evaluate(async () => {
@@ -139,7 +148,10 @@ protected async captureFrame() {
 
 protected async captureLoop(){
     if(this.capturing){
-
+      await this.captureFrame()
+      //TODO: support fps like opencv
+      await sleep(1)
+      await this.captureLoop()
     } else {
       // TODO: something here ?
     }
