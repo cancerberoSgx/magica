@@ -1,0 +1,45 @@
+{
+  "name": "camera-capture-demo",
+  "version": "0.0.2",
+  "private": true,
+  "description": "Super portable, fast webcam capture library for node.js. TypeScript/JavaScript easy to use API. Uses puppeteer headless browser to capture webcam video (audio/desktop recording, etc) and stream back to node.js frame by frame in plain image data for optimal speed. (or optionally encoded as jpg/png)",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "clean": "rm -rf tmp* dist test-browser-outdir working_tmp",
+    "build": "npm run clean && npx tsc && cp src/n.png dist/src ",
+    "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
+    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
+    "lint": "npm run organizeImports && npm run format",
+    "all": "npm run clean && npm run lint && npm run build && npm run test && npm run test-js && npm run docs"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "camera-capture": "file:../camera-capture",
+    "gui": "github:cancerberosgx/node-gui",
+    "jimp": "^0.8.4",
+    "misc-utils-of-mine-generic": "^0.2.34",
+    "puppeteer": "^1.20.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.5",
+    "markdown-toc": "^1.2.0",
+    "ts-node": "^8.4.1",
+    "ts-refactor": "0.0.9",
+    "typescript": "^3.6.3",
+    "yackage": "^0.2.11"
+  },
+  "author": {
+    "name": "Sebastian Gurin",
+    "email": "sebastigurin@gmail.com",
+    "url": "http://sgurin.com"
+  },
+  "homepage": "https://www.npmjs.com/package/camera-capture",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cancerberoSgx/magica.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cancerberoSgx/magica"
+  }
+}
