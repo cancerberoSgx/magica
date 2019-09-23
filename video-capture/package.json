@@ -1,0 +1,60 @@
+{
+  "name": "video-capture",
+  "version": "0.0.1",
+  "description": "Super portable, fast webcam capture library for node.js. TypeScript/JavaScript easy to use API. Uses puppeteer headless browser to capture webcam video (audio/desktop recording, etc) and stream back to node.js frame by frame in plain image data for optimal speed. (or optionally encoded as jpg/png)",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "test": "npm run build && npx ava --serial --concurrency 1 --config ava.config.js && npm run test-browser",
+    "prepare": "npm run build",
+    "clean": "rm -rf tmp* dist test-browser-outdir working_tmp",
+    "build": "npm run clean && npx tsc && npm run copy ",
+    "copy": "exit 0",
+    "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" \"test-browser/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
+    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\" \"test-browser/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
+    "lint": "npm run organizeImports && npm run format",
+    "docs": "npm run docs-readme-toc && npm run docs-api",
+    "docs-api": "rm -rf docs && typedoc  --ignoreCompilerErrors --theme markdown --out docs --readme none --excludeNotExported src/index.ts ",
+    "docs-readme-toc": "npx markdown-toc README.md -i",
+    "all": "npm run clean && npm run lint && npm run build && npm run test && npm run test-js && npm run docs",
+    "all-publish": "npm run all && git commit -a -m 'version patch' && npm version patch && npm publish"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "misc-utils-of-mine-generic": "^0.2.34"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.5",
+    "@types/puppeteer": "^1.19.1",
+    "ava": "^2.4.0",
+    "jimp": "^0.8.4",
+    "markdown-toc": "^1.2.0",
+    "puppeteer": "^1.20.0",
+    "ts-node": "^8.4.1",
+    "ts-refactor": "0.0.9",
+    "typedoc": "^0.15.0",
+    "typedoc-plugin-markdown": "^2.2.6",
+    "typescript": "^3.6.3"
+  },
+  "peerDependencies": {
+    "puppeteer": "^1.20.0"
+  },
+  "keywords": [
+    "Node.js",
+    "camera",
+    "webcam"
+  ],
+  "author": {
+    "name": "Sebastian Gurin",
+    "email": "sebastigurin@gmail.com",
+    "url": "http://sgurin.com"
+  },
+  "homepage": "https://www.npmjs.com/package/magica",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cancerberoSgx/magica.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cancerberoSgx/magica"
+  }
+}

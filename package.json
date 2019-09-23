@@ -54,6 +54,7 @@
     "browserify": "^16.5.0",
     "coveralls": "^3.0.6",
     "file-type": "^12.3.0",
+    "jimp": "^0.8.4",
     "markdown-toc": "^1.2.0",
     "nyc": "^14.1.1",
     "parcel": "^1.12.3",

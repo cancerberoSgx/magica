@@ -54,6 +54,10 @@ menus.push({
           accelerator: 'CmdOrCtrl+O',
           onClick: () =>  this.handler.handleOpen(),
         },
+                {
+          label: 'Capture camera...',
+          onClick: () =>  this.handler.captureCamera(),
+        },
         { type: 'separator' },
         {
           label: 'Save as...',

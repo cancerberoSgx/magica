@@ -9,8 +9,79 @@ import { State } from './state'
 import { buildBuffers, getImageSize, checkError } from './imageUtil'
 import { Command, buildCommand } from './commands'
 
-
+let Webcam:any
 export class ImageHandler {
+  async captureCamera() {
+
+var NodeWebcam = require( "node-webcam" );
+var opts = {
+    //Picture related
+    width: 640,
+    height: 480,
+    quality: 100,
+    //Delay in seconds to take shot
+    //if the platform supports miliseconds
+    //use a float (0.1)
+    //Currently only on windows
+
+    delay: 0,
+    //Save shots in memory
+    saveShots: true,
+    // [jpeg, png] support varies
+    // Webcam.OutputTypes
+    output: "jpeg",
+    //Which camera to use
+    //Use Webcam.list() for results
+    //false for default device
+
+    device: false,
+    // [location, buffer, base64]
+    // Webcam.CallbackReturnTypes
+    callbackReturn: "buffer",
+    //Logging
+    verbose: false
+};
+    if(!Webcam){
+
+Webcam = NodeWebcam.create( opts );
+    }
+   
+
+      // function capture(): Promise<ArrayBufferView>{
+         
+//         return new Promise(resolve=>{
+
+// // Webcam.capture( "", ( err:any, data:Buffer )=> {
+//   Webcam.getShot(undefined, opts, ( err:any, data:Buffer )=> {
+//     console.log('last', err, data);
+//     resolve(data)
+// } );
+//         })
+//       }
+       Webcam.capture( 'tmp',  async ( err:any, data:Buffer )=> {
+          console.log('capture', err, data);
+ setState(await this.buildBuffers(data))
+           Webcam.getShot( async ( err:any, data:Buffer )=> {
+    console.log('last', err, data);
+    setState(await this.buildBuffers(data))
+//     // resolve(data)
+} );
+
+
+            // setState(await this.buildBuffers(await capture()))
+      // await sleep(0)
+    
+      //     for (let i = 0; i <100; i++) {
+      // setState(await this.buildBuffers(await capture()))
+      // await sleep(0)
+// this.buildBuffers(data)
+    // }
+
+         })
+
+   
+
+  }
   protected state: State
 
   constructor(protected win: gui.Window) {
