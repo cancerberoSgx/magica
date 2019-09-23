@@ -3,8 +3,11 @@ import { checkThrow, mergeRecursive, sleep } from 'misc-utils-of-mine-generic'
 import puppeteer, { LaunchOptions } from 'puppeteer'
 import { reject } from 'q'
 import { staticServer } from './staticServer'
+import { canvasToArrayBuffer } from './browser'
 
 type V = void | Promise<void>
+
+export type SupportedFormats = 'image/png' | 'image/jpeg' | 'image/webp' | 'rgba'
 
 export interface CaptureOptions {
   port?: number
@@ -14,7 +17,7 @@ export interface CaptureOptions {
   width?: number,
   height?: number
   fps?: number
-  mime?:SupportedFormats
+  mime?: SupportedFormats
 }
 
 type Listener = (data: ImageData) => V
@@ -32,15 +35,15 @@ export class VideoCapture {
   protected page?: puppeteer.Page
   protected capturing = false
   protected initialized = false
+  protected lastFrame?: ImageData
+  protected listeners: Listener[] = []
 
   constructor(protected o: CaptureOptions = {}) {
     this.captureLoop = this.captureLoop.bind(this)
     this._postFrame = this._postFrame.bind(this)
-    this.o.width=this.o.width||400
-    this.o.height=this.o.height||300
+    this.o.width = this.o.width || 400
+    this.o.height = this.o.height || 300
   }
-
-  protected listeners: Listener[] = []
 
   addFrameListener(listener: Listener): void {
     this.listeners.push(listener)
@@ -54,9 +57,8 @@ export class VideoCapture {
       height
     }
     this.notifyListeners(imageData)
-    this.lastFrame = imageData
+    // this.lastFrame = imageData
   }
-  protected lastFrame?: ImageData
 
   /**
    * Given callback can be called to stop video capture (turns camera off)
@@ -69,10 +71,12 @@ export class VideoCapture {
   }
 
   async pause() {
+    checkThrow(this.server && this.browser, 'Expected started before calling stop()')
     this.capturing = false
   }
 
   async resume() {
+    checkThrow(this.server && this.browser, 'Expected started before calling stop()')
     this.capturing = true
   }
 
@@ -135,32 +139,29 @@ export class VideoCapture {
     })
   }
 
-  protected async captureFrame(mime:SupportedFormats =this.o.mime||'rgba') {
+  protected async captureFrame(mime: SupportedFormats = this.o.mime || 'rgba') {
     //TODO. perhaps is faster to do the capture loop all together inside the DOM, instead calling evaluate() on each iteration?
-     //TODO: probably is faster to use canvas API to encode frames directly instead first as data - if users wants ust encoded then do that.
-    await this.page!.evaluate(async (mime:SupportedFormats='rgba', width: number, height: number) => {
-      const canvas =  (window as any).canvas as HTMLCanvasElement
-      const video =  (window as any).video as HTMLVideoElement
+    //TODO: probably is faster to use canvas API to encode frames directly instead first as data - if users wants ust encoded then do that.
+    await this.page!.evaluate(async (mime: SupportedFormats = 'rgba', width: number, height: number) => {
+      const canvas = (window as any).canvas as HTMLCanvasElement
+      const video = (window as any).video as HTMLVideoElement
       canvas.getContext('2d')!.drawImage(video, 0, 0, canvas.width, canvas.height)
-      if( mime==='rgba'){
-      const data = canvas.getContext('2d')!.getImageData(0, 0, canvas.width, canvas.height)
-      await (window as any).postFrame(data.width, data.height, Array.from(data.data.values()))
+      if (mime === 'rgba') {
+        const data = canvas.getContext('2d')!.getImageData(0, 0, canvas.width, canvas.height)
+        await (window as any).postFrame(data.width, data.height, Array.from(data.data.values()))
       } else {
-        canvas.toBlob(async d=>{
-          if(d){
-            const r = new FileReader()
-            r.readAsArrayBuffer(d)
-            const ab = r.result
-            if(ab){
-               await (window as any).postFrame(width, height, Array.from(new Uint8ClampedArray(ab as ArrayBuffer)))
-            }
-          }
-        }, mime)
+        const data = await (window as any).canvasToArrayBuffer(canvas, mime)
+        if (data) {
+          await (window as any).postFrame(width, height, Array.from(new Uint8ClampedArray(data)))
+        } else {
+          // TODO: warning
+        }
       }
+      return ''
     }, mime, this.o.width!, this.o.height!)
   }
 
-  public async readFrame(mime:SupportedFormats=this.o.mime||'rgba') {
+  public async readFrame(mime: SupportedFormats = this.o.mime || 'rgba') {
     // const lastFrame = this.lastFrame
     await this.captureFrame(mime)
     await sleep(0)
@@ -187,12 +188,13 @@ export class VideoCapture {
       },
       ...this.o.constrains
     }
-    await this.page!.evaluate((width, height, constraints) => {
+    await this.page!.evaluate((width, height, constraints, canvasToArrayBufferS) => {
       return new Promise(resolve => {
         (window as any).video = document.querySelector('video')!;
-          (window as any).canvas = document.querySelector('canvas')!;
+        (window as any).canvas = document.querySelector('canvas')!;
         (window as any).canvas.width = width;
-
+        (window as any).canvas.height = height;
+        (window as any).canvasToArrayBuffer = eval(`(${canvasToArrayBufferS})`)
         navigator.mediaDevices.getUserMedia(JSON.parse(constraints) as MediaStreamConstraints)
           // TODO: do we really need to serialize constrains ? 
           .then(stream => {
@@ -205,8 +207,7 @@ export class VideoCapture {
           }
           )
       })
-    }, this.o.width || 480, this.o.height || 360, JSON.stringify(constraints))
+    }, this.o.width || 480, this.o.height || 360, JSON.stringify(constraints), canvasToArrayBuffer.toString())
   }
 }
 
-type SupportedFormats =  'image/png'|'image/jpeg'|'rgba'

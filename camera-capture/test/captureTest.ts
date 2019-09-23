@@ -4,8 +4,8 @@ import { VideoCapture } from '../src/capture'
 import fileTypes from 'file-type'
 import fileType from 'file-type'
 
-test.cb('addFrameListener single ', t => {
-  const c = new VideoCapture({ port: 8082 })
+test.serial.cb('addFrameListener single ', t => {
+  const c = new VideoCapture({ port: 8082, width: 480, height: 360 })
   c.addFrameListener(frame => {
     t.deepEqual([frame.width, frame.height, frame.data.length], [480, 360, 691200])
     t.end()
@@ -13,7 +13,7 @@ test.cb('addFrameListener single ', t => {
   c.start()
 })
 
-test.cb('addFrameListener multiple ', t => {
+test.serial.cb('addFrameListener multiple ', t => {
   let t0 = Infinity
   let t1 = Date.now()
   let i = 0
@@ -24,8 +24,6 @@ test.cb('addFrameListener multiple ', t => {
     i++
     t.deepEqual([frame.width, frame.height, frame.data.length], [200, 200, 160000])
     if (i > 50) {
-      // console.log(i, 'frames', printMs(Date.now() - t0))
-      // console.log('total', printMs(Date.now() - t1))
       t.end()
     }
   })
@@ -35,7 +33,7 @@ test.cb('addFrameListener multiple ', t => {
   })
 })
 
-test('users requesting frames instead notifications', async t => {
+test.serial('users requesting frames instead notifications', async t => {
   const c = new VideoCapture({
     width: 100, height: 100, port: 8083
   })
@@ -47,9 +45,9 @@ test('users requesting frames instead notifications', async t => {
   t.true(f !== f2)
 })
 
-test.only('encoded frames', async t => {
+test.serial('encoded frames', async t => {
   const c = new VideoCapture({
-    width: 100, height: 100, port: 8083
+    width: 100, height: 100, port: 8084
   })
   await c.initialize()
   const f = await c.readFrame('image/png')
@@ -57,5 +55,6 @@ test.only('encoded frames', async t => {
   const f2 = await c.readFrame('image/jpeg')
   t.deepEqual(fileType(f2.data),  {ext:'jpg', mime: 'image/jpeg'})
 })
+
+
 test.todo('pause, resume, stop')
-test.todo('encode')
