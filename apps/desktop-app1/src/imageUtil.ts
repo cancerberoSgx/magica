@@ -3,7 +3,7 @@ import { Image, SizeF } from 'gui'
 import { File, mainSync, magickLoaded, Result } from 'magica'
 import { basename } from 'path'
 import { getState } from './store';
-import { showModal } from './guiUtil';
+import { showModal } from "./showModal";
 import { State } from './state';
 
 export async function buildBuffers(image: string, content?: ArrayBufferView, scaleFactor=1) {

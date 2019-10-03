@@ -1,0 +1,53 @@
+{
+  "name": "app-base",
+  "version": "0.0.1",
+  "private": true,
+  "main": "dist/src/baseApp.js",
+  "types": "dist/src/baseApp.d.ts",
+  "scripts": {
+    "clean": "rm -rf dist docs",
+    "start": " npm run build   && npx parcel serve src/static/index.html -d docs --no-source-maps",
+    "copy": "mkdir -p docs ; cp -r node_modules/magica/dist/src/imageMagick/compiled/magick.wasm ../../test/assets/* src/static/*.png node_modules/mirada/dist/src/opencv.js docs",
+    "clean-npm": "rm -rf node_modules/ package-lock.json",
+    "format": "npx ts-refactor format \"**/*.ts*\" ../../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
+    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\"  ../../formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
+    "lint": "npm run organizeImports && npm run format",
+    "build": "npm run clean && npx tsc && npm run copy",
+    "all": "npm run clean && npm run lint && npm run build"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "Sebastián Gurin",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/file-saver": "^2.0.1",
+    "@types/node": "^12.6.8",
+    "@types/react": "^16.8.24",
+    "@types/react-dom": "^16.8.5",
+    "babel-polyfill": "^6.26.0",
+    "http-server": "^0.11.1",
+    "parcel": "^1.12.3",
+    "ts-refactor": "0.0.9",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "file-saver": "^2.0.2",
+    "magica": "file:../..",
+    "magica-examples": "file:../magica-examples",
+    "mirada": "0.0.15",
+    "misc-utils-of-mine-generic": "^0.2.15",
+    "ojos": "file:../../../mirada/ojos",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.87.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cancerberoSgx/magica.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cancerberoSgx/magica"
+  }
+}

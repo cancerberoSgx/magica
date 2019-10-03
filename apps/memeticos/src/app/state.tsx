@@ -5,6 +5,7 @@ export interface State {
   example: Example
   inputFiles: File[]
   examples: Example[];
+  librariesReady: boolean
   result: RunResult | undefined
   script: string
   working: boolean
@@ -40,6 +41,7 @@ export async function getInitialState(app: AppOptions): Promise<State> {
     working: false,
     showAllResultsOutput: true,
     fields: [],
+    librariesReady: false,
     app
   }
 }

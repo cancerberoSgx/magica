@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer/'
 import { ok } from 'assert'
 import fetch from 'cross-fetch'
 import { existsSync, readFileSync } from 'fs'
@@ -224,7 +225,8 @@ export class File implements IFile {
    * but not for images or other binary file content. 
    */
   public static asString(f: IFile) {
-    return String.fromCharCode.apply(null, f.content as any)
+    return Buffer.from(f.content.buffer).toString('utf-8')
+    // return String.fromCharCode.apply(null, f.content as any)
   }
 
   /** 

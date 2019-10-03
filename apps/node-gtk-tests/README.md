@@ -1,0 +1,1 @@
+https://bazaar.launchpad.net/~smoke-gobject-devs/smoke-gobject/trunk/view/head:/tools/gsmokegen/cppgenerator.cpp

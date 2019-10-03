@@ -1,0 +1,36 @@
+{
+  "name": "fbtest",
+  "version": "0.0.3",
+  "description": "tes https://developers.facebook.comt",
+  "private": true,
+  "scripts": {
+    "build": "npm run clean&& npx parcel build src/index.html -d app --no-content-hash --detailed-report --no-minify --public-url './' && npm run copy  ",
+    "copy": "exit 0  ",
+    "start": "mkdir -p dist app  && npm run copy &&  cp app/*.worker.js dist && npx parcel start --no-hmr --open --no-source-maps --no-autoinstall src/index.html",
+    "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
+    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
+    "lint": " npm run organizeImports && npm run format",
+    "clean": "rm -rf dist app",
+    "all": "npm run clean && npm run lint && npm run build",
+    "build-push": "npm run build &&  git commit -a -m fb && git push"
+  },
+  "keywords": [],
+  "author": "Sebastian Gurin",
+  "license": "MIT",
+  "dependencies": {
+    "misc-utils-of-mine-generic": "^0.2.31",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "@types/facebook-js-sdk": "^3.3.0",
+    "@types/node": "^12.7.5",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "babel-polyfill": "^6.26.0",
+    "parcel": "^1.12.3",
+    "ts-refactor": "0.0.9",
+    "typescript": "^3.6.3"
+  },
+  "repository": ""
+}

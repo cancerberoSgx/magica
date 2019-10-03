@@ -34,10 +34,10 @@
   },
   "license": "MIT",
   "dependencies": {
+    "buffer": "^5.4.3",
     "cross-fetch": "^3.0.4",
     "ejs": "^2.7.1",
     "glob": "^7.1.4",
-    "js-base64": "^2.5.1",
     "minimist": "^1.2.0",
     "misc-utils-of-mine-generic": "^0.2.34",
     "p-queue": "^6.1.1"
