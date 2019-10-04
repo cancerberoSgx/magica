@@ -8,8 +8,10 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "rootDir": ".",
+    "skipLibCheck": true,
     "allowJs": true,
     "outDir": "dist"
   },
-  "include": ["src", "test"]
+  "include": ["src", "test"],
+  "exclude": ["node_modules", "dist"]
 }

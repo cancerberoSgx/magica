@@ -1,5 +1,5 @@
 const gi = require('node-gtk')
-Gtk = gi.require('Gtk', '3.0')
+const Gtk = gi.require('Gtk', '3.0')
 
 gi.startLoop()
 Gtk.init()
@@ -11,7 +11,14 @@ win.on('destroy', () => Gtk.mainQuit())
 win.on('delete-event', () => false)
 
 win.setDefaultSize(200, 80)
-win.add(new Gtk.Label({ label: 'Hello Gtk+' }))
+const l = new Gtk.Label({ label: 'Hello Gtk+' })
+win.add(l)
+
+const b = new Gtk.Button()
+console.log(b.alwaysShowImage, b['always-show-image']);
+console.log(Object.keys(b));
+
+win.add(b)
 
 win.showAll()
 Gtk.main()

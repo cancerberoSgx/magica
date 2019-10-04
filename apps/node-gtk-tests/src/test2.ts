@@ -9,7 +9,7 @@ const inspect = require('./inspect') as {infos: any[], parseNamespace: any}
 // const gtk = inspect.parseNamespace('Gtk')
 // debugger
 // console.log(Object.keys(gtk).map(i=>([i, gtk[i]._ns])))
-
+ 
 // let s = inspect.infos
 // .filter(i => i.infoType === 'function')
 // .map(f=>inspect.format(f))
