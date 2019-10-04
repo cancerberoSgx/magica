@@ -64,10 +64,10 @@ export interface Type extends Parsed {
   // _info: {},
   // _type: number,
   // _ns: string,
+  _size: number;
   infoType: string;
   _tag: number;
   type: string;
-  size: number;
   // type: string;
   isPointer: boolean;
 }
@@ -90,6 +90,8 @@ export interface Function extends Entity {
 export interface Field extends Entity {
   readable: boolean;
   type: FieldType;
+  _size: number;
+_offset: number
   writable: boolean; //TODO: field.callback
 }
 export interface FieldType extends Type {

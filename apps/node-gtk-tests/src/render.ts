@@ -41,66 +41,74 @@ type gfloat = number
 
 ${Object.keys(options.target).map(n => `
 export namespace ${n} {
-${options.target[n].map(renderNode).join('\n ')}
+${options.target[n].map(renderNode as any).join('\n ')}
 }
 `).join('\n\n')}
   `
 }
 
-function visit(o: Entity, f: (n: Entity) => void, visited: Entity[] =[]) {
-  _visit(o);
-  o.interfaces=o.interfaces || []
-  o.interfaces.forEach(i => {
-    visit(i, f, o.interfaces)
-    i.iface_struct && visit(i.iface_struct, f)
-  });
-  o.prerequisites = o.prerequisites || []
-   o.prerequisites.forEach(p => {
-    visit(p, f, o.prerequisites)
-  });
-  // o.interfaces =o.interfaces || []
-  // o.interfaces .forEach(p => {
-  //   visit(p, f, visited)
-  // });
-  o.fields=o.fields || []
-  o.fields.forEach(p => {
-    visit(p, f, visited)
-    p.type.callback && visit(p.type.callback, f, o.fields)
-  });
-  o.methods=o.methods || []
-  o.methods.forEach(p => {
-    visit(p, f,  o.methods)
-  })
-  function _visit(n: Entity) {
-    if (!n) return
-    if (!n.name || !n.type || !n.type._ns || !n.type.type || !['interface', 'object', 'type', 'callback'].find(i => n.type.type.startsWith(i))) {
-      return
-    }
-    const k = {
-      name: n.name, type: n.type.type, ns: n.type._ns
-    }
-    if (!visited.find(i => JSON.stringify(i) === JSON.stringify(k))) {
-      !visited ? f(n) : visited.push(n)
-     visited.push(n)
-    }
-  }
-}
+// function visit(o: Entity, f: (n: Entity) => void, visited: Entity[] =[]) {
+//   _visit(o);
+//   o.interfaces=o.interfaces || []
+//   o.interfaces.forEach(i => {
+//     visit(i, f, o.interfaces)
+//     i.iface_struct && visit(i.iface_struct, f)
+//   });
+//   o.prerequisites = o.prerequisites || []
+//    o.prerequisites.forEach(p => {
+//     visit(p, f, o.prerequisites)
+//   });
+//   // o.interfaces =o.interfaces || []
+//   // o.interfaces .forEach(p => {
+//   //   visit(p, f, visited)
+//   // });
+//   o.fields=o.fields || []
+//   o.fields.forEach(p => {
+//     visit(p, f, visited)
+//     p.type.callback && visit(p.type.callback, f, o.fields)
+//   });
+//   o.methods=o.methods || []
+//   o.methods.forEach(p => {
+//     visit(p, f,  o.methods)
+//   })
+//   function _visit(n: Entity) {
+//     if (!n) return
+//     if (!n.name || !n.type || !n.type._ns || !n.type.typeName || !['interface', 'object', 'type', 'callback'].find(i => n.type.typeName.startsWith(i))) {
+//       return
+//     }
+//     const k = {
+//       name: n.name, type: n.type.typeName, ns: n.type._ns
+//     }
+//     if (!visited.find(i => JSON.stringify(i) === JSON.stringify(k))) {
+//       !visited ? f(n) : visited.push(n)
+//      visited.push(n)
+//     }
+//   }
+// }
 
-export function renderNode(o: Parsed) {
+export function renderNode(o: Entity) {
+  const prefix = `
+// ${printType(o)+' - '+(o.name&&o.type&&o.type.typeName)+' - '+o._ns}
+  `
+  let s = ''
   // if (o.infoType === 'object') {
   //   return renderClass(o as ParsedObject)
   // }
     if (o.infoType === 'interface') {
-    return renderInterface(o as any)
+    s= renderInterface(o as any)
   }
-  // if (o.infoType === 'field') {
-  //   return renderObject(o as ParsedObject)
-  // }
+  if (o.infoType === 'field') {
+    s= renderObject(o as ParsedObject)
+  }
   if (o.infoType === 'object') {
-    return renderObject(o as any)
+    s= renderObject(o as any)
   }
+  return `
+${prefix}
+${s}
+  `
       //@ts-ignore
-  return 'notImpl: any '+o.name+'-'+o.typeName+' - '+o._type+'- '+o.infoType+'- '+o.type+'-'+o._ns+'-'+printType(o)+'-'
+  // return 'notImpl: '+printType(o)+' - '+(o.name&&o.type&&o.typeName.typeName)+' - '+o._ns
   // console.warn('NOT IMPL', o);
 
 }
@@ -162,7 +170,7 @@ ${o.writable?'':'readonly: '}${camelCase(o.name)}: ${printType(o)}
 
 function printType(p: Entity) {
       //@ts-ignore
-      const t = p.type&&p.type.type||p.typeName
+      const t = p.type&&p.type.typeName||p.typeName
       if(!t){return 'any'}
   const s =  t.substring(0,1).match(/[A-Z]/) ?`${p.type&&p.type._ns||p._ns}.${t}`:`${t}`
   const a = s.split('.') // object.Width, enum.Bar, etc

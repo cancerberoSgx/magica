@@ -15,7 +15,7 @@ nodeGtk.startLoop();
 
 const GI = nodeGtk._GIRepository as any
 
-function def(obj:any, name:string, data:any) {
+function def<T, K extends keyof T>(obj:T, name:K, data:typeof obj[K]) {
   // obj[name] = data
   Object.defineProperty(obj, name, {
       enumerable: false,
@@ -146,7 +146,7 @@ function BaseInfo<T extends Parsed = Parsed>(this: T, info: GiInfo)  {
   def(this, '_type', getInfoType(info)); 
   def(this, '_ns', namespace(info));
   this.infoType = GI.info_type_to_string(this._type);
-  if (this._type != GI.InfoType.TYPE)
+  if (this._type != GI.InfoType.TYPEName)
     this.name = name(info);
   if (isDeprecated(info))
     this.isDeprecated = true
@@ -159,13 +159,12 @@ function TypeInfo(this: Type, info: GiInfo) {
   BaseInfo.call(this, info)
   def(this, '_tag', getTag(info));
   // currentParsedNamespaceDependencies.push(this)
-  // this.typeName = nodegtk._c.GetTypeName(info);
   if (this._tag == GI.TypeTag.ARRAY) {
     this.typeName = tag_string(this._tag);
     this.array_type = GI.ArrayType[GI.type_info_get_array_type(info)];
     this.zero_terminated = GI.type_info_is_zero_terminated(info);
     this.fixed_size = GI.type_info_get_array_fixed_size(info);
-    this.size = nodeGtk._c.GetTypeSize(info);
+    this._size = nodeGtk._c.GetTypeSize(info) as number;
     const isPointer = GI.type_info_is_pointer(info)
     if (isPointer)
       this.isPointer = isPointer
@@ -199,10 +198,16 @@ function TypeInfo(this: Type, info: GiInfo) {
       //@ts-ignore
       this.callback = new FunctionInfo(interf)
     }
-  }
+  } 
   else {
+    // getty
+  //     //@ts-ignore
+  // this.typeName2 = gtype(info);
+  //     //@ts-ignore
+  // this.typeName3 = type_string(getInfoType(info));
+
     this.typeName = tag_string(this._tag);
-    this.size = nodeGtk._c.GetTypeSize(info);
+    this._size = nodeGtk._c.GetTypeSize(info);
     const isPointer = GI.type_info_is_pointer(info)
     if (isPointer)
       this.isPointer = isPointer
@@ -225,21 +230,21 @@ function PropInfo(this: Property, info: GiInfo) {
   def(this, '_flags', GI.property_info_get_flags(info));
   def(this, '_typeInfo', GI.property_info_get_type(info));
   def(this, '_tag', getTag(info));
-  if (this._tag == GI.InfoType.INTERFACE) {
+  // if (this._tag == GI.InfoType.INTERFACE) {
       //@ts-ignore
   this.type = new TypeInfo(this._typeInfo);
-  } else {
-  this.type = tag_string(this._tag);
-  }
+  // } else {
+  // this.type = tag_string(this._tag);
+  // }
   const transfer = GI.property_info_get_ownership_transfer(info);
   this.transfer = GI.Transfer[transfer];
 }
+      // @ts-ignore
 
 function FieldInfo(this: Field, info: GiInfo) {
-      //@ts-ignore
   BaseInfo.call(this, info)
   def(this, '_flags', GI.field_info_get_flags(info));
-  def(this, '_offset', GI.field_info_get_offset(info));
+  def (this, '_offset', GI.field_info_get_offset(info) as number);
   def(this, '_size', GI.field_info_get_size(info));
   def(this, '_typeInfo', GI.field_info_get_type(info));
   def(this, '_tag', getTag(info));
@@ -648,9 +653,9 @@ export function extractObjects(ns:string, ver?:string) {
 }
 
 export function formatType(type: Type) : string{
-  if (type.type === 'array')
+  if (type.typeName === 'array')
     return formatType(type.elementType) + '[]'
-  if (type.type === 'glist' || type.type === 'gslist')
+  if (type.typeName === 'glist' || type.typeName === 'gslist')
     return formatType(type.elementType) + '[]'
-  return type.type
+  return type.typeName
 }

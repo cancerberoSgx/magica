@@ -4,8 +4,10 @@ import { objectKeys } from 'misc-utils-of-mine-generic';
 import { extractObjects } from '../src/inspect'
 
 
-const namesPace = 'Gtk'
+// const namesPace = 'Gtk'
 const {library} =extractObjects('Gtk')
+// console.log(JSON.stringify(library[0], null, 2))
+// process.exit(0)
 // console.log(objectKeys(gtk));
 
 // let fnInfos2 = inspect.infos.find(i => i.infoType === 'object' && i.name==='Button')//.slice(0, 10)
@@ -14,16 +16,18 @@ const {library} =extractObjects('Gtk')
 //  writeFileSync('tmp.json', JSON.stringify(fnInfos2, null, 2))
 
 // const t = parseNamespace['Button']
-const s= `
-type interface = any
-type utf8 = string
-type gboolean = boolean
-type gfloat = number
+// const s= `
+// type interface = any
+// type utf8 = string
+// type gboolean = boolean
+// type gfloat = number
 
-export namespace ${namesPace} {
-  ${library.map( renderNode).join('\n\n')}
-}
-`
+// export namespace ${namesPace} {
+//   ${library.map( renderNode).join('\n\n')}
+// }
+// `
 
   // ${renderNode(t)}
 writeFileSync('tmp.ts', render({target: {Gtk: library}}))
+
+writeFileSync('tmp.json', JSON.stringify(library[0], null, 2))
