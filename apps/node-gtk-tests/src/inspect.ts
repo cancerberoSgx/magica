@@ -24,11 +24,18 @@ function def(obj:any, name:string, data:any) {
   });
 }
 
-const name = (info: GiInfo) => GI.BaseInfo_get_name.call(info);
+function name (info: GiInfo) { 
+  // console.log(JSON.stringify(info) , `name`)
+  return GI.BaseInfo_get_name.call(info);
+}
 const namespace = (info: GiInfo) => GI.BaseInfo_get_namespace.call(info);
 const getInfoType = (info: GiInfo) => GI.BaseInfo_get_type.call(info);
 const type_string = (infotype: number) => GI.info_type_to_string(infotype);
-const tag = (type_info: GiInfo) => GI.type_info_get_tag(type_info);
+function getTag(type_info: GiInfo) {
+  // console.log(JSON.stringify(type_info) , `GiInfo`)
+
+  return GI.type_info_get_tag(type_info);
+}
 const tag_string = (type_tag: number) => GI.type_tag_to_string(type_tag);
 const isDeprecated = (info: GiInfo) => GI.BaseInfo_is_deprecated.call(info)
 
@@ -150,7 +157,7 @@ function BaseInfo<T extends Parsed = Parsed>(this: T, info: GiInfo)  {
 
 function TypeInfo(this: Type, info: GiInfo) {
   BaseInfo.call(this, info)
-  def(this, '_tag', tag(info));
+  def(this, '_tag', getTag(info));
   // currentParsedNamespaceDependencies.push(this)
   // this.typeName = nodegtk._c.GetTypeName(info);
   if (this._tag == GI.TypeTag.ARRAY) {
@@ -217,13 +224,13 @@ function PropInfo(this: Property, info: GiInfo) {
   BaseInfo.call(this  , info)
   def(this, '_flags', GI.property_info_get_flags(info));
   def(this, '_typeInfo', GI.property_info_get_type(info));
-  def(this, '_tag', tag(info));
-  // if (this._tag == GI.InfoType.INTERFACE) {
+  def(this, '_tag', getTag(info));
+  if (this._tag == GI.InfoType.INTERFACE) {
       //@ts-ignore
   this.type = new TypeInfo(this._typeInfo);
-  // } else {
-  // this.type = tag_string(this._tag);
-  // }
+  } else {
+  this.type = tag_string(this._tag);
+  }
   const transfer = GI.property_info_get_ownership_transfer(info);
   this.transfer = GI.Transfer[transfer];
 }
@@ -235,7 +242,7 @@ function FieldInfo(this: Field, info: GiInfo) {
   def(this, '_offset', GI.field_info_get_offset(info));
   def(this, '_size', GI.field_info_get_size(info));
   def(this, '_typeInfo', GI.field_info_get_type(info));
-  def(this, '_tag', tag(info));
+  def(this, '_tag', getTag(info));
   // if (this._tag == GI.TypeTag.INTERFACE) {
   // const gtype = GI.registered_type_info_get_g_type(this._type);
       //@ts-ignore
@@ -391,7 +398,7 @@ function ArgInfo(this: Argument, info: GiInfo) {
       //@ts-ignore
   BaseInfo.call(this, info)
   def(this, '_typeInfo', GI.arg_info_get_type(info));
-  def(this, '_tag', tag(info));
+  def(this, '_tag', getTag(info));
   this.tag = tag_string(this._tag);
       //@ts-ignore
   this.type = new TypeInfo(this._typeInfo);
@@ -439,7 +446,7 @@ function CallableInfo(this: Function, info: GiInfo) {
   const return_type = GI.callable_info_get_return_type(info);
       //@ts-ignore
   this.return_type = new TypeInfo(return_type);
-  this.return_tag = tag_string(tag(return_type));
+  this.return_tag = tag_string(getTag(return_type));
   const mayReturnNull = GI.callable_info_may_return_null(info);
   if (mayReturnNull) this.mayReturnNull = true;
   const skipReturn = GI.callable_info_skip_return(info)
@@ -540,7 +547,7 @@ function getInfo(info: GiInfo): Parsed|undefined {
   return new BaseInfo(info)
 }
 
-function getLibs() {
+export function getLibs() {
   let paths:string[][] =
     GI.Repository_get_search_path()
       .map((p:string) =>  readdirSync(p));
@@ -551,7 +558,7 @@ function getLibs() {
   return files;
 }
 
-function formatName(info: GiInfo|string) {
+ function formatName(info: GiInfo|string) {
   let name = ''
   let current:GiInfo|string = info
   while (current) {
@@ -563,19 +570,11 @@ function formatName(info: GiInfo|string) {
   return name
 }
 
-function formatFunction(fn: Function) {
+ function formatFunction(fn: Function) {
   return {
     args: (fn.args || []).map(a => ({ name: a.name, type: formatType(a.type), direction: a.direction })),
     returnType: formatType(fn.return_type)
   }
-}
-
-function formatType(type: Type) : string{
-  if (type.type === 'array')
-    return formatType(type.elementType) + '[]'
-  if (type.type === 'glist' || type.type === 'gslist')
-    return formatType(type.elementType) + '[]'
-  return type.type
 }
 
 function format(i: GiInfo) {
@@ -615,7 +614,6 @@ function format(i: GiInfo) {
     }
     else {
       console.warn('Not impl', i.infoType);
-
       // const parent = formatName(i.parent||'NULL')
       return {
         ...b
@@ -632,29 +630,27 @@ function format(i: GiInfo) {
   }
 }
 
-function parseNamespace(ns:string, ver:string) {
+export function extractObjects(ns:string, ver?:string) {
 // currentParsedNamespaceDependencies.length=0
-  const library = Object.create(null);
+  const library : Parsed[]= []
   const repo = GI.Repository_get_default();
-  if (!GI._isLoaded(ns, ver))
+  if (!nodeGtk._isLoaded(ns, ver))
     GI.Repository_require.call(repo, ns, ver, 0);
   const nInfos = GI.Repository_get_n_infos.call(repo, ns);
   for (let i = 0;i < nInfos;i++) {
     const info = GI.Repository_get_info.call(repo, ns, i);
     const baseinfo = getInfo(info);
-    const basename = name(info);
-    library[basename] = baseinfo;
+    // const basename = name(info);
+    baseinfo && library.push({name:name(info), ...baseinfo})
   }
   return {library}
   // return Object.values(m).map(format);
 }
 
-module.exports = {
-  parseNamespace,
-  format,
-  // infos,
-  // formatName,
-  // formatFunction,
-  // formatType,
-  // format
-};
+export function formatType(type: Type) : string{
+  if (type.type === 'array')
+    return formatType(type.elementType) + '[]'
+  if (type.type === 'glist' || type.type === 'gslist')
+    return formatType(type.elementType) + '[]'
+  return type.type
+}

@@ -4,11 +4,12 @@ import camelCase from 'lodash.camelcase'
 
 
 export interface RenderOptions {
-  /**
-   * If given it will render only this Node and its dependencies. If not given it will render all Entities found in given namespace. 
-   */
-  target?: Entity
-  all: { [a: string]: any }
+  // /**
+  //  * If given it will render only this Node and its dependencies. If not given it will render all Entities found in given namespace. 
+  //  */
+  // target?: Entity[]
+  target: { [a: string]: Parsed[] }
+  // ns:string
 }
 
 /**
@@ -18,15 +19,15 @@ export function render(options: RenderOptions) {
   // if(!options.target){throw 'target mandatory '}
   // console.log(options.target.name);
   
-  const ns: { [s: string]: Entity[] } = {}
-  const a: Entity[] = []//[[options.target._ns]]
+  // const ns: { [s: string]: Entity[] } = {}
+  // const a: Entity[] = []//[[options.target._ns]]
   
-  // all
-  visit(options.target!, n => {
-    console.log( n.name);
-    ns[n._ns] = ns[n._ns] || []    
-    n.infoType==='object' && ns[n._ns].push(n)
-  }, a)
+  // // all
+  // visit(options.target, n => {
+  //   console.log( n.name);
+  //   ns[n._ns] = ns[n._ns] || []    
+  //   n.infoType==='object' && ns[n._ns].push(n)
+  // }, a)
 
 // writeFileSync('tmpttt.txt', JSON.stringify(ns, null, 2))
   
@@ -38,9 +39,9 @@ type utf8 = string
 type gboolean = boolean
 type gfloat = number
 
-${Object.keys(ns).map(n => `
+${Object.keys(options.target).map(n => `
 export namespace ${n} {
-${ns[n].map(p => renderNode(p)).join('\n ')}
+${options.target[n].map(renderNode).join('\n ')}
 }
 `).join('\n\n')}
   `

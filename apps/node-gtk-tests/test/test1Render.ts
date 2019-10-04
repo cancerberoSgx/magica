@@ -1,8 +1,11 @@
-import { renderNode } from '../src/render'
+import { renderNode, render } from '../src/render'
 import {writeFileSync} from 'fs'
 import { objectKeys } from 'misc-utils-of-mine-generic';
-const inspect = require('../src/inspect') as {infos: any[], parseNamespace: any}
-const {namespace, dependencies} = inspect.parseNamespace('Gtk')
+import { extractObjects } from '../src/inspect'
+
+
+const namesPace = 'Gtk'
+const {library} =extractObjects('Gtk')
 // console.log(objectKeys(gtk));
 
 // let fnInfos2 = inspect.infos.find(i => i.infoType === 'object' && i.name==='Button')//.slice(0, 10)
@@ -10,17 +13,17 @@ const {namespace, dependencies} = inspect.parseNamespace('Gtk')
 // debugger
 //  writeFileSync('tmp.json', JSON.stringify(fnInfos2, null, 2))
 
-const t = namespace['Button']
+// const t = parseNamespace['Button']
 const s= `
 type interface = any
 type utf8 = string
 type gboolean = boolean
 type gfloat = number
 
-export namespace ${t._ns} {
-  ${renderNode(t)}
-  ${dependencies.map( renderNode).join('\n\n')}
+export namespace ${namesPace} {
+  ${library.map( renderNode).join('\n\n')}
 }
 `
 
-writeFileSync('tmp.ts', s)
+  // ${renderNode(t)}
+writeFileSync('tmp.ts', render({target: {Gtk: library}}))
