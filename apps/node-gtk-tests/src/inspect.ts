@@ -1,12 +1,21 @@
-const { array } = require('misc-utils-of-mine-generic')
-const nodegtk = require('node-gtk');
-nodegtk.startLoop();
+import { GiInfo as GiInfoNative}  from 'node-gtk'
+import { Type, Parsed, ParsedBase, Function, Vfunc, Constant, Property, Argument, Field, Struct, Enum, Interface, ParsedObject, Entity, Signal } from "./typeGenerationTypes";
+// import * as nodeGtk from './gobjectTypes'
+import { array } from  'misc-utils-of-mine-generic'
+import { readdirSync } from 'fs';
+import * as nodeGtk from 'node-gtk'
+ 
+ interface GiInfo extends GiInfoNative {
+    parent: GiInfo|string
+    name: GiInfo|string
+    infoType: 'function'|'interface'|'object'
+ }
+ 
+nodeGtk.startLoop();
 
-// const infos = []
+const GI = nodeGtk._GIRepository as any
 
-const GI = nodegtk._GIRepository;
-
-function def(obj, name, data) {
+function def(obj:any, name:string, data:any) {
   // obj[name] = data
   Object.defineProperty(obj, name, {
       enumerable: false,
@@ -15,33 +24,33 @@ function def(obj, name, data) {
   });
 }
 
-const name = (info) => GI.BaseInfo_get_name.call(info);
-const namespace = (info) => GI.BaseInfo_get_namespace.call(info);
-const getInfoType = (info) => GI.BaseInfo_get_type.call(info);
-const type_string = (infotype) => GI.info_type_to_string(infotype);
-const tag = (type_info) => GI.type_info_get_tag(type_info);
-const tag_string = (type_tag) => GI.type_tag_to_string(type_tag);
-const isDeprecated = (info) => GI.BaseInfo_is_deprecated.call(info)
+const name = (info: GiInfo) => GI.BaseInfo_get_name.call(info);
+const namespace = (info: GiInfo) => GI.BaseInfo_get_namespace.call(info);
+const getInfoType = (info: GiInfo) => GI.BaseInfo_get_type.call(info);
+const type_string = (infotype: number) => GI.info_type_to_string(infotype);
+const tag = (type_info: GiInfo) => GI.type_info_get_tag(type_info);
+const tag_string = (type_tag: number) => GI.type_tag_to_string(type_tag);
+const isDeprecated = (info: GiInfo) => GI.BaseInfo_is_deprecated.call(info)
 
-function gtype(info) {
+function gtype(info: GiInfo) {
   const type_name = GI.registered_type_info_get_type_name(info);
   if (!type_name)
     return null;
   return GI.registered_type_info_get_g_type(info);
 }
 
-function isNoArgsConstructor(info) {
+function isNoArgsConstructor(info: GiInfo) {
   const flags = GI.function_info_get_flags(info)
   return ((flags & GI.FunctionInfoFlags.IS_CONSTRUCTOR) != 0
-    && GI.callable_info_get_n_args(info) == 0)
+    && GI.callable_info_get_n_args(info ) == 0)
 }
 
-function isConstructor(info) {
+function isConstructor(info: GiInfo) {
   const flags = GI.function_info_get_flags(info)
   return (flags & GI.FunctionInfoFlags.IS_CONSTRUCTOR) != 0
 }
 
-function findBoxedConstructor(info) {
+function findBoxedConstructor(info: GiInfo): Function |undefined{
   //TODO: multiple constructor signatures!
   const type = getInfoType(info)
   let result = null
@@ -102,11 +111,30 @@ function findBoxedConstructor(info) {
     }
   }
   if (result)
+      //@ts-ignore
+
     return new FunctionInfo(result)
-  return null
 }
 
-function BaseInfo(info) {
+// class BaseInfo {
+//   _info: GiInfo;
+//   _type: any;
+//   _ns: any;
+//   infoType: any;
+//   name: any;
+//   isDeprecated: boolean=false;
+//   constructor(info: GiInfo){
+//     this._info = info
+//     this._type = getInfoType(info)
+//     this._ns = namespace(info) 
+//     this.infoType = GI.info_type_to_string(this._type);
+//   if (this._type != GI.InfoType.TYPE)
+//     this.name = name(info);
+//   if (isDeprecated(info))
+//     this.isDeprecated = true
+//   }
+// }
+function BaseInfo<T extends Parsed = Parsed>(this: T, info: GiInfo)  {
   def(this, '_info', info);
   def(this, '_type', getInfoType(info)); 
   def(this, '_ns', namespace(info));
@@ -118,71 +146,80 @@ function BaseInfo(info) {
   // infos.push(this)
 }
 
-function TypeInfo(info) {
+// const currentParsedNamespaceDependencies: Parsed[] = []// TypeInfo[]
+
+function TypeInfo(this: Type, info: GiInfo) {
   BaseInfo.call(this, info)
   def(this, '_tag', tag(info));
+  // currentParsedNamespaceDependencies.push(this)
   // this.typeName = nodegtk._c.GetTypeName(info);
   if (this._tag == GI.TypeTag.ARRAY) {
-    this.type = tag_string(this._tag);
+    this.typeName = tag_string(this._tag);
     this.array_type = GI.ArrayType[GI.type_info_get_array_type(info)];
     this.zero_terminated = GI.type_info_is_zero_terminated(info);
     this.fixed_size = GI.type_info_get_array_fixed_size(info);
-    this.size = nodegtk._c.GetTypeSize(info);
+    this.size = nodeGtk._c.GetTypeSize(info);
     const isPointer = GI.type_info_is_pointer(info)
     if (isPointer)
       this.isPointer = isPointer
+      //@ts-ignore
     this.elementType = new TypeInfo(GI.type_info_get_param_type(info, 0));
   }
   else if (this._tag == GI.TypeTag.GLIST || this._tag == GI.TypeTag.GSLIST) {
-    this.type = tag_string(this._tag);
+    this.typeName = tag_string(this._tag);
     const isPointer = GI.type_info_is_pointer(info)
     if (isPointer)
       this.isPointer = isPointer
+      //@ts-ignore
     this.elementType = new TypeInfo(GI.type_info_get_param_type(info, 0));
   }
   else if (this._tag == GI.TypeTag.GHASH) {
-    this.type = tag_string(this._tag);
+    this.typeName = tag_string(this._tag);
     const isPointer = GI.type_info_is_pointer(info)
     if (isPointer)
       this.isPointer = isPointer
+      //@ts-ignore
     this.elementType = new TypeInfo(GI.type_info_get_param_type(info, 0));
   }
   else if (this._tag == GI.TypeTag.INTERFACE) {
     const interf = GI.type_info_get_interface(info)
     const infoType = GI.BaseInfo_get_type.call(interf)
-    this.type = type_string(infoType) + '.' + name(interf)
+    this.typeName = type_string(infoType) + '.' + name(interf)
     const isPointer = GI.type_info_is_pointer(info)
     if (isPointer)
       this.isPointer = isPointer
     if (infoType === GI.InfoType.CALLBACK) {
-      this.callback = new FunctionInfo(interf, this)
+      //@ts-ignore
+      this.callback = new FunctionInfo(interf)
     }
   }
   else {
-    this.type = tag_string(this._tag);
-    this.size = nodegtk._c.GetTypeSize(info);
+    this.typeName = tag_string(this._tag);
+    this.size = nodeGtk._c.GetTypeSize(info);
     const isPointer = GI.type_info_is_pointer(info)
     if (isPointer)
       this.isPointer = isPointer
   }
 }
 
-function ConstantInfo(info) {
+function ConstantInfo(this: Constant,info: GiInfo) {
   BaseInfo.call(this, info)
-  this.value = nodegtk._c.GetConstantValue(info);
+  this.value = nodeGtk._c.GetConstantValue(info);
 }
 
-function ValueInfo(info) {
+function ValueInfo(this: Constant, info: GiInfo) {
   BaseInfo.call(this, info)
   this.value = GI.value_info_get_value(info)
 }
 
-function PropInfo(info) {
-  BaseInfo.call(this, info)
+function PropInfo(this: Property, info: GiInfo) {
+      //@ts-ignore
+  BaseInfo.call(this  , info)
   def(this, '_flags', GI.property_info_get_flags(info));
   def(this, '_typeInfo', GI.property_info_get_type(info));
-  def(this, '_tag', tag(this._typeInfo));
+  def(this, '_tag', tag(info));
   // if (this._tag == GI.InfoType.INTERFACE) {
+      //@ts-ignore
   this.type = new TypeInfo(this._typeInfo);
   // } else {
   // this.type = tag_string(this._tag);
@@ -191,15 +228,17 @@ function PropInfo(info) {
   this.transfer = GI.Transfer[transfer];
 }
 
-function FieldInfo(info) {
+function FieldInfo(this: Field, info: GiInfo) {
+      //@ts-ignore
   BaseInfo.call(this, info)
   def(this, '_flags', GI.field_info_get_flags(info));
   def(this, '_offset', GI.field_info_get_offset(info));
   def(this, '_size', GI.field_info_get_size(info));
   def(this, '_typeInfo', GI.field_info_get_type(info));
-  def(this, '_tag', tag(this._typeInfo));
+  def(this, '_tag', tag(info));
   // if (this._tag == GI.TypeTag.INTERFACE) {
   // const gtype = GI.registered_type_info_get_g_type(this._type);
+      //@ts-ignore
   this.type = new TypeInfo(this._typeInfo);
   // } else {
   // this.type = tag_string(this._tag);
@@ -212,72 +251,82 @@ function FieldInfo(info) {
     this.writable = false;
 }
 
-function StructInfo(info) {
+function StructInfo(this: Struct, info: GiInfo) {
+      //@ts-ignore
   BaseInfo.call(this, info)
   this.gtype = gtype(info);
   this.size = GI.struct_info_get_size(info);
   this.alignment = GI.struct_info_get_alignment(info);
   this.is_gtype_struct = GI.struct_info_is_gtype_struct(this._info)
   this.is_foreign = GI.struct_info_is_foreign(this._info)
-  this.constructor = findBoxedConstructor(info, this)
+  this.constructor = findBoxedConstructor(info)
   this.methods = array(GI.struct_info_get_n_methods(info))
     .map(i => GI.struct_info_get_method(info, i))
-    .map(m => new FunctionInfo(m, this))
+      //@ts-ignore
+    .map(m => new FunctionInfo(m))
   this.fields = array(GI.struct_info_get_n_fields(info))
     .map(i => GI.struct_info_get_field(info, i))
-    .map(field => new FieldInfo(field, this))
+      //@ts-ignore
+    .map(field => new FieldInfo(field))
 }
 
-function UnionInfo(info) {
+function UnionInfo(this: Struct,info: GiInfo) {
+      //@ts-ignore
   BaseInfo.call(this, info)
   this.gtype = gtype(info);
   this.size = GI.union_info_get_size(info);
   this.alignment = GI.union_info_get_alignment(info);
   let is_discriminated = GI.union_info_is_discriminated(info);
   if (is_discriminated) {
+      //@ts-ignore
     this.discriminator_type = new TypeInfo(GI.union_info_get_discriminator_type(info));
-    this.discriminator_offset = GI.union_info_get_discriminator_offset(info);
+    this.discriminator_type = GI.union_info_get_discriminator_offset(info);
   }
-  this.constructor = findBoxedConstructor(info, this)
+  this.constructor = findBoxedConstructor(info)
   this.methods = array(GI.union_info_get_n_methods(info))
     .map(i => GI.union_info_get_method(info, i))
-    .map(m => new FunctionInfo(m, this))
+      //@ts-ignore
+    .map(m => new FunctionInfo(m))
   this.fields = array(GI.union_info_get_n_fields(info))
     .map(i => GI.union_info_get_field(info, i))
-    .map(field => ({
-      ...new FieldInfo(field, this),
-      discriminator: nodegtk._c.GetConstantValue(GI.union_info_get_discriminator(info, i))
+    .map((field, i) => ({
+      //@ts-ignore
+      ...new FieldInfo(field),
+      discriminator: nodeGtk._c.GetConstantValue(GI.union_info_get_discriminator(info, i))
     }))
 }
 
-function EnumInfo(info) {
+function EnumInfo(this: Enum, info: GiInfo) {
+      //@ts-ignore
   BaseInfo.call(this, info)
   this.gtype = gtype(info);
   this.values = array(GI.enum_info_get_n_values(info))
     .map(i => GI.enum_info_get_value(info, i))
-    .map(n => ({ name: name(n), ...new ValueInfo(n, this) }))
+      //@ts-ignore
+    .map(n => ({ name: name(n), ...new ValueInfo(n) }))
   this.methods = array(GI.enum_info_get_n_methods(info))
     .map(i => GI.enum_info_get_method(info, i))
-    .map(n => ({ name: name(n), ...new FunctionInfo(n, this) }))
+      //@ts-ignore
+    .map(n => ({ name: name(n), ...new FunctionInfo(n) }))
 }
 
-function InterfaceInfo(info) {
-  // console.log('INNNNTT', info);
-  
+function InterfaceInfo(this: Interface, info: GiInfo) {
+      //@ts-ignore
   BaseInfo.call(this, info)
   this.gtype = gtype(info);
   const structInfo = GI.interface_info_get_iface_struct(info)
   if (structInfo !== null)
+      //@ts-ignore
     this.iface_struct = new StructInfo(structInfo);
   this.prerequisites = array(GI.interface_info_get_n_prerequisites(info))
     .map(i => GI.interface_info_get_prerequisite(info, i))
-    .map(n => getInfo(n))
+    .map(n => getInfo(n)) as any
   this.properties = array(GI.interface_info_get_n_properties(info))
     .map(i => GI.interface_info_get_property(info, i))
-    .map(n => getInfo(n))
+    .map(n => getInfo(n)) as any
   this.methods = array(GI.interface_info_get_n_methods(info))
     .map(i => GI.interface_info_get_method(info, i))
-    .map(n => getInfo(n))
+    .map(n => getInfo(n)) as any
   this.signals = array(GI.interface_info_get_n_signals(info))
     .map(i => GI.interface_info_get_signal(info, i))
     // .map(n => ({
@@ -285,14 +334,15 @@ function InterfaceInfo(info) {
     // }))
   this.vfuncs = array(GI.interface_info_get_n_vfuncs(info))
     .map(i => GI.interface_info_get_vfunc(info, i))
-    .map(n => ({ ...n }))
+    // .map(n => ({ ...n }))
   this.constants = array(GI.interface_info_get_n_constants(info))
     .map(i => GI.interface_info_get_constant(info, i))
     // .map(i => ({ ...n, name: name(i) }))
   // buildParentInfo(this, info);
 }
 
-function ObjectInfo(info) {
+function ObjectInfo(this: ParsedObject,info: GiInfo) {
+      //@ts-ignore
   BaseInfo.call(this, info)
   this.gtype = gtype(info);
   buildParentInfo(this, info);
@@ -301,32 +351,32 @@ function ObjectInfo(info) {
   // 
   this.properties = array(GI.object_info_get_n_properties(info))
     .map(i => GI.object_info_get_property(info, i))
-    .map(n => getInfo(n, this))
+    .map(n => getInfo(n)) as any
   this.constants = array(GI.object_info_get_n_constants(info))
     .map(i => GI.object_info_get_constant(info, i))
-    .map(n => getInfo(n, this))
+    .map(n => getInfo(n)) as any
   this.interfaces = array(GI.object_info_get_n_interfaces(info))
     .map(i => GI.object_info_get_interface(info, i))
+      //@ts-ignore
     .map(n => new InterfaceInfo(n) )
   this.methods = array(GI.object_info_get_n_methods(info))
     .map(i => GI.object_info_get_method(info, i))
     // .map(n=>new FunctionInfo(n, this))
+      //@ts-ignore
     .map(n => ({ name: name(n), ...new FunctionInfo(n) }))
   this.signals = array(GI.object_info_get_n_signals(info))
     .map(i => GI.object_info_get_signal(info, i))
-    .map(n => ({ name: name(n), ...getInfo(n, this) }))
+    .map(n => ({ name: name(n), ...getInfo(n) })) as any
   this.vfuncs = array(GI.object_info_get_n_vfuncs(info))
     .map(i => GI.object_info_get_vfunc(info, i))
     .map(n => ({ name: name(n), ...n }))
 }
 
-function buildParentInfo(self, info) {
+function buildParentInfo(self: any, info: GiInfo) {
   if(!info){
     def(self, '_parent', {})
     return 
   }
-  // console.log(JSON.stringify(info));
-  
   const parentInfo = GI.object_info_get_parent(info);
   if (parentInfo) {
     def(self, '_parent', {
@@ -337,11 +387,13 @@ function buildParentInfo(self, info) {
   }
 }
 
-function ArgInfo(info) {
+function ArgInfo(this: Argument, info: GiInfo) {
+      //@ts-ignore
   BaseInfo.call(this, info)
   def(this, '_typeInfo', GI.arg_info_get_type(info));
-  def(this, '_tag', tag(this._typeInfo));
+  def(this, '_tag', tag(info));
   this.tag = tag_string(this._tag);
+      //@ts-ignore
   this.type = new TypeInfo(this._typeInfo);
   this.name = name(info);
   this.direction = GI.Direction[GI.arg_info_get_direction(info)];
@@ -363,10 +415,12 @@ function ArgInfo(info) {
     this.lengthPos = length_pos
 }
 
-function CallableInfo(info) {
+function CallableInfo(this: Function, info: GiInfo) {
+      //@ts-ignore
   BaseInfo.call(this, info)
   this.args = array(GI.callable_info_get_n_args(info))
-    .map(i => new ArgInfo(GI.callable_info_get_arg(info, i), this))
+      //@ts-ignore
+    .map(i => new ArgInfo(GI.callable_info_get_arg(info, i)))
   // .map(n => ({ name: name(n), ...getInfo(n, this) , 
   // ...getInfo(n, this).lengthPos !== undefined ? { isArrayLength: true } : {}
   // )
@@ -383,6 +437,7 @@ function CallableInfo(info) {
   const transfer = GI.callable_info_get_caller_owns(info);
   this.transfer = GI.Transfer[transfer];
   const return_type = GI.callable_info_get_return_type(info);
+      //@ts-ignore
   this.return_type = new TypeInfo(return_type);
   this.return_tag = tag_string(tag(return_type));
   const mayReturnNull = GI.callable_info_may_return_null(info);
@@ -393,122 +448,129 @@ function CallableInfo(info) {
   if (canThrow) this.canThrow = true
 }
 
-function SignalInfo(info) {
+function SignalInfo(this: Signal, info: GiInfo) {
   BaseInfo.call(this, info)
+      //@ts-ignore
   CallableInfo.call(this, info);
   def(this, '_flags', GI.signal_info_get_flags(info));
 }
 
-function VFuncInfo(info) {
+function VFuncInfo(this: Vfunc , info: GiInfo) {
   BaseInfo.call(this, info)
+      //@ts-ignore
   CallableInfo.call(this, info);
   const invoker = GI.vfunc_info_get_invoker(info);
   if (invoker)
-    this.invoker = new FunctionInfo(invoker, this);
+      //@ts-ignore
+    this.invoker = new FunctionInfo(invoker);
   const signal = GI.vfunc_info_get_invoker(info);
   if (signal)
-    this.signal = new SignalInfo(signal, this);
+      //@ts-ignore
+    this.signal = new SignalInfo(signal);
 }
 
-function FunctionInfo(info) {
+function FunctionInfo(this: Function, info: GiInfo): Function|undefined  {
+      //@ts-ignore
   BaseInfo.call(this, info)
   CallableInfo.call(this, info);
   if (this.infoType === 'callback')
     return
   this.symbol = GI.function_info_get_symbol(info)
   def(this, '_flags', GI.function_info_get_flags(info));
-  this.isMethod = this._flags & GI.FunctionInfoFlags.IS_METHOD !== 0
-  this.isConstructor = this._flags & GI.FunctionInfoFlags.IS_CONSTRUCTOR !== 0
-  this.isGetter = this._flags & GI.FunctionInfoFlags.IS_GETTER !== 0
-  this.isSetter = this._flags & GI.FunctionInfoFlags.IS_SETTER !== 0
+  this.isMethod = (this._flags & GI.FunctionInfoFlags.IS_METHOD) !== 0
+  this.isConstructor = (this._flags & GI.FunctionInfoFlags.IS_CONSTRUCTOR) !== 0
+  this.isGetter = (this._flags & GI.FunctionInfoFlags.IS_GETTER) !== 0
+  this.isSetter = (this._flags & GI.FunctionInfoFlags.IS_SETTER) !== 0
+  return this
 }
 
-function parseNamespace(ns, ver) {
-  const m = Object.create(null);
-  const repo = GI.Repository_get_default();
-  if (!nodegtk._isLoaded(ns, ver))
-    GI.Repository_require.call(repo, ns, ver, 0);
-  const nInfos = GI.Repository_get_n_infos.call(repo, ns);
-  for (let i = 0;i < nInfos;i++) {
-    const info = GI.Repository_get_info.call(repo, ns, i);
-    const baseinfo = getInfo(info, ns);
-    const basename = name(info);
-    m[basename] = baseinfo;
-  }
-  return m
-  // return Object.values(m).map(format);
-}
-
-function getInfo(info) {
+function getInfo(info: GiInfo): Parsed|undefined {
   switch (getInfoType(info)) {
     case GI.InfoType.INVALID:
-      return null;
+      return undefined;
     case GI.InfoType.CALLBACK:
     case GI.InfoType.FUNCTION:
+      //@ts-ignore
       return new FunctionInfo(info)
     case GI.InfoType.OBJECT:
+      //@ts-ignore
       return new ObjectInfo(info)
     case GI.InfoType.ENUM:
     case GI.InfoType.FLAGS:
+      //@ts-ignore
       return new EnumInfo(info)
     case GI.InfoType.BOXED:
     case GI.InfoType.STRUCT:
+      //@ts-ignore
       return new StructInfo(info)
     case GI.InfoType.UNION:
+      //@ts-ignore
       return new UnionInfo(info)
     case GI.InfoType.INTERFACE:
+      //@ts-ignore
       return new InterfaceInfo(info)
     case GI.InfoType.CONSTANT:
+      //@ts-ignore
       return new ConstantInfo(info)
     case GI.InfoType.FIELD:
+      //@ts-ignore
       return new FieldInfo(info)
     case GI.InfoType.PROPERTY:
+      //@ts-ignore
       return new PropInfo(info)
     case GI.InfoType.ARG:
+      //@ts-ignore
       return new ArgInfo(info)
     case GI.InfoType.TYPE:
+      //@ts-ignore
       return new TypeInfo(info)
     case GI.InfoType.VALUE:
+      //@ts-ignore
       return new ValueInfo(info)
     case GI.InfoType.SIGNAL:
+      //@ts-ignore
       return new SignalInfo(info)
     case GI.InfoType.VFUNC:
+      //@ts-ignore
       return new VFuncInfo(info)
     case GI.InfoType.UNRESOLVED:
       return undefined;
   }
+      //@ts-ignore
   return new BaseInfo(info)
 }
 
 function getLibs() {
-  let paths =
+  let paths:string[][] =
     GI.Repository_get_search_path()
-      .map(p => require('fs').readdirSync(p));
-  let files = [].concat(...paths)
+      .map((p:string) =>  readdirSync(p));
+  let files = paths.flat()
     .filter(f => f.endsWith('.typelib'))
     .map(f => f.replace(/\.typelib/, ''))
     .map(f => [f].concat(f.split('-')));
   return files;
 }
 
-function formatName(info) {
+function formatName(info: GiInfo|string) {
   let name = ''
-  let current = info
+  let current:GiInfo|string = info
   while (current) {
+      //@ts-ignore
     name = (current.name || current) + (name ? '.' + name : '')
+      //@ts-ignore
     current = current.parent
   }
   return name
 }
 
-function formatFunction(fn) {
+function formatFunction(fn: Function) {
   return {
     args: (fn.args || []).map(a => ({ name: a.name, type: formatType(a.type), direction: a.direction })),
     returnType: formatType(fn.return_type)
   }
 }
 
-function formatType(type) {
+function formatType(type: Type) : string{
   if (type.type === 'array')
     return formatType(type.elementType) + '[]'
   if (type.type === 'glist' || type.type === 'gslist')
@@ -516,32 +578,38 @@ function formatType(type) {
   return type.type
 }
 
-function format(i) {
+function format(i: GiInfo) {
   try {
     const b = {
-      type: getInfoType(i.infoType),
-      typeString: type_string(i.infoType),
+      //@ts-ignore
+      typeName: getInfoType(i.infoType as any),//TODO
+      //@ts-ignore
+      typeString: type_string(i.infoType as any),//TODO
       name: formatName(i.name || 'NULL'),
-      parent: formatName(i.parent || 'NULL'),
+      parent: formatName(i.parent || 'NULL'),//TODO
       ns: namespace(i),
     }
     // return formatName(i.name || 'NULL')
     if (i.infoType === 'function') {
       return {
         ...b,
+      //@ts-ignore
         ...formatFunction(i)
       }
     }
     if (i.infoType === 'interface') {
       return {
         ...b,
+      //@ts-ignore
         methods: Object.values(i.methods || {}).map(formatFunction),
       }
     }
     if (i.infoType === 'object') {
       return {
         ...b,
+      //@ts-ignore
         ...new InterfaceInfo(i),
+      //@ts-ignore
         methods: Object.values(i.methods || {}).map(formatFunction)
       }
     }
@@ -564,12 +632,29 @@ function format(i) {
   }
 }
 
+function parseNamespace(ns:string, ver:string) {
+// currentParsedNamespaceDependencies.length=0
+  const library = Object.create(null);
+  const repo = GI.Repository_get_default();
+  if (!GI._isLoaded(ns, ver))
+    GI.Repository_require.call(repo, ns, ver, 0);
+  const nInfos = GI.Repository_get_n_infos.call(repo, ns);
+  for (let i = 0;i < nInfos;i++) {
+    const info = GI.Repository_get_info.call(repo, ns, i);
+    const baseinfo = getInfo(info);
+    const basename = name(info);
+    library[basename] = baseinfo;
+  }
+  return {library}
+  // return Object.values(m).map(format);
+}
+
 module.exports = {
   parseNamespace,
-  getLibs,
+  format,
   // infos,
-  formatName,
-  formatFunction,
-  formatType,
-  format
+  // formatName,
+  // formatFunction,
+  // formatType,
+  // format
 };

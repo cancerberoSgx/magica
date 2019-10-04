@@ -1,5 +1,5 @@
-const inspect = require('../inspect')
-const gtk = inspect.parseNamespace('Gtk')
+const inspect = require('../../src/inspect')
+const {namespace, dependencies} = inspect.parseNamespace('Gtk')
 
 // debugger
 // console.log(gt);
@@ -10,6 +10,6 @@ const gtk = inspect.parseNamespace('Gtk')
 // let fnInfos = inspect.infos.filter(i => i.infoType === 'object')
 // // debugger
 // fnInfos.forEach(f => console.log(inspect.formatFunction(f)))
-require('fs').writeFileSync('tmp-interface.json', JSON.stringify( gtk , null, 2))
+require('fs').writeFileSync('tmp-interface.json', JSON.stringify( namespace.map(d=>d.name), null, 2))
 
 // require('fs').writeFileSync('tmp-interface.json', JSON.stringify(Object.values(gtk).filter(i=>i.infoType==='interface').map(inspect.format), null, 2))

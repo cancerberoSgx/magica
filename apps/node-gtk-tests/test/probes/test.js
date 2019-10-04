@@ -5,7 +5,6 @@ gi.startLoop()
 Gtk.init()
 
 const win = new Gtk.Window()
-// console.log(win.listProperties());
 debugger
 win.on('destroy', () => Gtk.mainQuit())
 win.on('delete-event', () => false)
