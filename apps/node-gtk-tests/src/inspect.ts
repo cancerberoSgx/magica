@@ -1,8 +1,10 @@
+//@ts-ignore
 import { GiInfo as GiInfoNative}  from 'node-gtk'
 import { Type, Parsed, ParsedBase, Function, Vfunc, Constant, Property, Argument, Field, Struct, Enum, Interface, ParsedObject, Entity, Signal } from "./typeGenerationTypes";
 // import * as nodeGtk from './gobjectTypes'
 import { array } from  'misc-utils-of-mine-generic'
 import { readdirSync } from 'fs';
+//@ts-ignore
 import * as nodeGtk from 'node-gtk'
  
  interface GiInfo extends GiInfoNative {

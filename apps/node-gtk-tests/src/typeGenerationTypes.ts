@@ -1,4 +1,5 @@
 import { TODO } from 'misc-utils-of-mine-generic'
+//@ts-ignore
 import { GiInfo  } from 'node-gtk'
 
 export interface ParsedBase {
@@ -11,6 +12,7 @@ export interface Parsed extends ParsedBase {
   // _info: Info;
   // _type: number;
   infoType: string;
+  gtype: number;
   _flags: number;
   is_gtype_struct: boolean;
   is_foreign: boolean;
@@ -28,11 +30,10 @@ export interface Parent extends ParsedBase {
 export interface Entity extends Parsed {
   prerequisites: Prerequisite[];
   properties: Property[];
-  gtype: any;
   methods: Function[];
   type: Type;
   fields: Field[];
-  constructor: TODO;
+  // constructor: TODO;
   interfaces: Interface[];
   signals: Signal[];
   vfuncs: Vfunc[];
@@ -40,6 +41,9 @@ export interface Entity extends Parsed {
   _typeInfo: GiInfo;
   transfer: string;
   _parent: Parent;
+
+  return_tag: any;
+  return_type: Type;
 }
 export interface Prerequisite extends Entity {
 }
@@ -75,13 +79,12 @@ export interface Function extends Entity {
   canThrow: boolean;
   skipReturn: boolean;
   mayReturnNull: boolean;
-  return_tag: any;
-  return_type: Type;
   n_args: 0;
+    symbol: string;
   writable: boolean; //TODO: field.callback
   args: Argument[];
   // TODO: add as a global function too.!
-  symbol: string;
+
   isMethod: boolean;
   isConstructor: boolean;
   isGetter: boolean;

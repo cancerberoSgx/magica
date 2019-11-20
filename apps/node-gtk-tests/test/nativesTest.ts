@@ -2,7 +2,7 @@ import test from 'ava'
   const nodegtk = require('node-gtk');
 
 test('node-gtk publics & GObject', async t => {
-  const Gtk = nodegtk.require('Gtk', '3.0')
+  const Gtk = nodegtk.require('Gtk')
   const GObject = nodegtk.require('GObject')
   nodegtk.startLoop();
   Gtk.init()

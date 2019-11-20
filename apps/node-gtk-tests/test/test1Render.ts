@@ -1,11 +1,13 @@
 import { renderNode, render } from '../src/render'
 import {writeFileSync} from 'fs'
 import { objectKeys } from 'misc-utils-of-mine-generic';
-import { extractObjects } from '../src/inspect'
+import { extractObjects, getLibs } from '../src/inspect'
 
+
+console.log(getLibs());
 
 // const namesPace = 'Gtk'
-const {library} =extractObjects('Gtk')
+const {library} =extractObjects('Gtk' )
 // console.log(JSON.stringify(library[0], null, 2))
 // process.exit(0)
 // console.log(objectKeys(gtk));
