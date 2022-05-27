@@ -1,0 +1,497 @@
+#!/bin/bash
+# 
+# Developed by Fred Weinhaus 4/14/2008 .......... revised 1/17/2022
+#
+# ------------------------------------------------------------------------------
+# 
+# Licensing:
+# 
+# Copyright © Fred Weinhaus
+# 
+# My scripts are available free of charge for non-commercial use, ONLY.
+# 
+# For use of my scripts in commercial (for-profit) environments or 
+# non-free applications, please contact me (Fred Weinhaus) for 
+# licensing arrangements. My email address is fmw at alink dot net.
+# 
+# If you: 1) redistribute, 2) incorporate any of these scripts into other 
+# free applications or 3) reprogram them in another scripting language, 
+# then you must contact me for permission, especially if the result might 
+# be used in a commercial or for-profit environment.
+# 
+# My scripts are also subject, in a subordinate manner, to the ImageMagick 
+# license, which can be found at: http://www.imagemagick.org/script/license.php
+# 
+# ------------------------------------------------------------------------------
+# 
+####
+#
+# USAGE: fisheye [-i ifov] [-o ofov] [-t type] [-f format] [-c xc,yc] [-r radius] [-a angle] [-m vpmethod] [-v vpcolor] [-b bgcolor] infile outfile
+# USAGE: fisheye [-h or -help]
+# 
+# OPTIONS:
+# 
+# -i      ifov           input (perspective) image field of view in degrees;
+#                        float; 0<ifov<180; default=120
+# -o      ofov           output (fisheye) image field of view in degrees;
+#                        float; 0<ifov<=180; default=180
+# -t      type           type of fisheye lens; linear, equalarea, 
+#                        orthographic, stereographic; default=linear
+# -f      format         format of fisheye lens image; circular or fullframe;
+#                        default=circular
+# -c      xc,yc          coordinates in the perspective image to make the 
+#                        center of the fisheye view; float; 
+#                        default=center of perspective image
+# -r      radius         radius of fisheye area in output image; float;
+#                        radius>0; default=min(width,height)/2
+# -a      angle          angle of rotation (clockwise) for the fisheye image;
+#                        float; 0<=angle<360; default=0
+# -m      vpmethod       vp is the virtual-pixel method; default=black
+# -v      vpcolor        vpcolor is the color for the case when 
+#                        -virtual-pixel=background; this is where parts 
+#                        of the fisheye circle map outside image; 
+#                        use none for transparent; default=black
+# -b      bgcolor        bgcolor is the color for the area outside the 
+#                        circle of the fisheye area; 
+#                        use none for transparent; default=black
+# 
+###
+# 
+# NAME: FISHEYE 
+# 
+# PURPOSE: To apply a fisheye distortion to an image.
+# 
+# DESCRIPTION: FISHEYE is designed to transform a normal perspective 
+# image into a fisheye view.
+# 
+# 
+# ARGUMENTS: 
+# 
+# -i ifov ... IFOV is the input perspective image field of view in
+# degrees. Values are floats in the range 0<ifov<180. The default is to
+# use 120 degrees both vertically and horizontally. The value for ifov
+# relative to the ofov determines the proportional amount of the fisheye
+# area that will be filled. Note that in comparison, a value of 48.8
+# degrees corresponds to a diagonal field of view from a 35 mm camera
+# (film size 36mm x 24mm) with a 50mm focal length lens, i.e. a "normal"
+# view. Similarly, when the image diagonal is equal to the focal length of
+# the camera, the field of view is about 53.1 degrees. Although the
+# default value is perhaps not appropriate to a normal perspective image,
+# this will enlarge the amount of area filled in the fisheye result and
+# thereby produce a significant fisheye distortion.
+# 
+# -o ofov ... OFOV is the output fisheye image field of view in degrees. A 
+# value of 180 will produce a hemispherical fisheye image within the 
+# circular area. A smaller value will produce less curvature of the circular 
+# area corresponding to less distortion. Values are floats in the range 
+# 0<ifov<=180. The default is 180 degrees for a full hemisphere.
+# 
+# -t type ... TYPE is the type of fisheye lens. The choices are: linear 
+# (equidistant), equalarea (equisolid), orthographic and stereographic. 
+# The default is linear.
+# 
+# -f format ... FORMAT is the format of the fisheye lens image. The choices are: 
+# circular (image fills a circle that spans the minimum of the width or height) 
+# or fullframe (image spans a circle that spans the diagonal dimension). The 
+# default is circular.
+# 
+# -c xc,yc ... XC,YC are the pixel coordinates in the input perspective  
+# image that are desired to be the center of the fisheye image. The
+# default values are the center of the input perspective image. Values  
+# are non-negative floats.
+# 
+# -r radius ... RADIUS is the radius of the fisheye circular area in the 
+# output image. Values are floats greater than zero. The default is half the 
+# minimum value between the input image width and height. This parameter 
+# controls the scaling of the fisheye result. The default produces -f 
+# circular. If radius is set equal to half the diagonal dimension of the image, 
+# the result will be the same as specifying -f fullframe. A value for radius 
+# that is smaller than half the minimum of the width and height will produce a 
+# smaller circular area.
+# 
+# -a angle ... ANGLE is the clockwise positive rotation angle for the output 
+# fisheye image relative to the orientation of the perspective image. Values 
+# are non-negative floats in range 0<=angle<360. The default is 0.
+# 
+# -m vpmethod ... VPMETHOD is the virtual-pixel method to use. Any valid IM 
+# virtual-pixel may be used. The default is black.
+# 
+# -v vpcolor ... VPCOLOR is the virtual-pixel color to use when vp=background. 
+# This color is used to fill the fisheye circle where no image shows. Use "none" 
+# for transparent. The default is black.
+# 
+# -b bgcolor ... BGCOLOR is the color to use to fill the area around the fisheye
+# circular area. Use "none" for transparent. The default is black.
+# 
+# See the following references for definitions and mathematical details of each 
+# type of fisheye lens: 
+# http://en.wikipedia.org/wiki/Fisheye_lens
+# http://www.bobatkins.com/photography/technical/field_of_view.html
+# 
+# CAVEAT: No guarantee that this script will work on all platforms, 
+# nor that trapping of inconsistent parameters is complete and 
+# foolproof. Use At Your Own Risk. 
+# 
+######
+# 
+
+# set default values
+ifov=120					# fisheye field of view (aperture) in degrees
+ofov=180					# perspective field of view (aperture) in degrees
+xc=""						# center of fisheye area
+yc=""						# center of fisheye area
+rad=""						# radius of fisheye area (default produces circular format)
+ang=0						# image rotation angle in degrees clockwise
+type="linear"				# linear, equalarea, orthographic, stereographic
+format="circular"			# circular, fullframe
+vpm="black"					# virtual pixel method
+vpc="black"					# virtual pixel color
+bgc="black"					# background color or "image"
+
+# set directory for temporary files
+dir="."    # suggestions are dir="." or dir="/tmp"
+
+# set up functions to report Usage and Usage with Description
+PROGNAME=`type $0 | awk '{print $3}'`  # search for executable on path
+PROGDIR=`dirname $PROGNAME`            # extract directory of program
+PROGNAME=`basename $PROGNAME`          # base name of program
+usage1() 
+	{
+	echo >&2 ""
+	echo >&2 "$PROGNAME:" "$@"
+	sed >&2 -e '1,/^####/d;  /^###/g;  /^#/!q;  s/^#//;  s/^ //;  4,$p' "$PROGDIR/$PROGNAME"
+	}
+usage2() 
+	{
+	echo >&2 ""
+	echo >&2 "$PROGNAME:" "$@"
+	sed >&2 -e '1,/^####/d;  /^######/g;  /^#/!q;  s/^#*//;  s/^ //;  4,$p' "$PROGDIR/$PROGNAME"
+	}
+
+
+# function to report error messages
+errMsg()
+	{
+	echo ""
+	echo $1
+	echo ""
+	usage1
+	exit 1
+	}
+
+
+# function to test for minus at start of value of second part of option 1 or 2
+checkMinus()
+	{
+	test=`echo "$1" | grep -c '^-.*$'`   # returns 1 if match; 0 otherwise
+    [ $test -eq 1 ] && errMsg "$errorMsg"
+	}
+
+# test for correct number of arguments and get values
+if [ $# -eq 0 ]
+	then
+	# help information
+   echo ""
+   usage2
+   exit 0
+elif [ $# -gt 22 ]
+	then
+	errMsg "--- TOO MANY ARGUMENTS WERE PROVIDED ---"
+else
+	while [ $# -gt 0 ]
+		do
+			# get parameter values
+			case "$1" in
+		  -h|-help)    # help information
+					   echo ""
+					   usage2
+					   exit 0
+					   ;;
+				-i)    # get ifov
+					   shift  # to get the next parameter
+					   # test if parameter starts with minus sign 
+					   errorMsg="--- INVALID IFOV SPECIFICATION ---"
+					   checkMinus "$1"
+					   ifov=`expr "$1" : '\([.0-9]*\)'`
+					   [ "$ifov" = "" ] && errMsg "--- IFOV=$ifov MUST BE A NON-NEGATIVE FLOAT ---"
+					   ifovtestA=`echo "$ifov <= 0" | bc`
+					   ifovtestB=`echo "$ifov >= 180" | bc`
+					   [ $ifovtestA -eq 1 -o $ifovtestB -eq 1 ] && errMsg "--- IFOV=$ifov MUST BE A FLOAT GREATER THAN 0 AND LESS THAN 180 ---"
+					   ;;
+				-o)    # get ofov
+					   shift  # to get the next parameter
+					   # test if parameter starts with minus sign 
+					   errorMsg="--- INVALID OFOV SPECIFICATION ---"
+					   checkMinus "$1"
+					   ofov=`expr "$1" : '\([.0-9]*\)'`
+					   [ "$ofov" = "" ] && errMsg "--- IFOV=$ofov MUST BE A NON-NEGATIVE FLOAT ---"
+					   ofovtestA=`echo "$ofov <= 0" | bc`
+					   ofovtestB=`echo "$ofov > 180" | bc`
+					   [ $ofovtestA -eq 1 -o $ofovtestB -eq 1 ] && errMsg "--- OFOV=$ofov MUST BE A FLOAT GREATER THAN 0 AND LESS THAN OR EQUAL 180 ---"
+					   ;;
+				-t)    # get  type
+					   shift  # to get the next parameter
+					   # test if parameter starts with minus sign 
+					   errorMsg="--- INVALID TYPE SPECIFICATION ---"
+					   checkMinus "$1"
+					   type="$1"
+					   [ "$type" != "linear" -a "$type" != "equalarea" -a "$type" != "orthographic" -a "$type" != "stereographic" ] && errMsg "--- INVALID TYPE VALUE ---"
+					   ;;
+				-f)    # get  format
+					   shift  # to get the next parameter
+					   # test if parameter starts with minus sign 
+					   errorMsg="--- INVALID FORMAT SPECIFICATION ---"
+					   checkMinus "$1"
+					   format="$1"
+					   [ "$format" != "circular" -a "$format" != "fullframe" ] && errMsg "--- INVALID TYPE VALUE ---"
+					   ;;
+				-c)    # get coords
+					   shift  # to get the next parameter
+					   # test if parameter starts with minus sign 
+					   errorMsg="--- INVALID COORDS SPECIFICATION ---"
+					   checkMinus "$1"
+					   test=`echo "$1" | tr "," " " | wc -w`
+					   [ $test -eq 1 -o $test -gt 2 ] && errMsg "--- INCORRECT NUMBER OF COORDINATES SUPPLIED ---"
+					   coords=`expr "$1" : '\([.0-9]*,[.0-9]*\)'`
+					   [ "$coords" = "" ] && errMsg "--- COORDS=$coords MUST BE A PAIR OF NON-NEGATIVE FLOATS SEPARATED BY A COMMA ---"
+					   coords="$1,"
+		   			   xc=`echo "$coords" | cut -d, -f1`
+		   			   yc=`echo "$coords" | cut -d, -f2`
+					   ;;
+				-r)    # get rad
+					   shift  # to get the next parameter
+					   # test if parameter starts with minus sign 
+					   errorMsg="--- INVALID RADIUS SPECIFICATION ---"
+					   checkMinus "$1"
+					   rad=`expr "$1" : '\([.0-9]*\)'`
+					   [ "$rad" = "" ] && errMsg "--- RADIUS=$rad MUST BE A NON-NEGATIVE FLOAT ---"
+					   radtestA=`echo "$rad <= 0" | bc`
+					   [ $radtestA -eq 1 ] && errMsg "--- RADIUS=$rad MUST BE A FLOAT GREATER THAN 0 ---"
+					   ;;
+				-a)    # get ang
+					   shift  # to get the next parameter
+					   # test if parameter starts with minus sign 
+					   errorMsg="--- INVALID ANGLE SPECIFICATION ---"
+					   checkMinus "$1"
+					   ang=`expr "$1" : '\([.0-9]*\)'`
+					   [ "$ang" = "" ] && errMsg "--- ANGLE=$ang MUST BE A NON-NEGATIVE FLOAT ---"
+					   angtestA=`echo "$ang < 0" | bc`
+					   angtestB=`echo "$ang >= 360" | bc`
+					   [ $angtestA -eq 1 -o $angtestB -eq 1 ] && errMsg "--- ANGLE=$ang MUST BE A FLOAT GREATER THAN OR EQUAL TO 0 AND LESS THAN 360 ---"
+					   ;;
+				-m)    # get  vpmethod
+					   shift  # to get the next parameter
+					   # test if parameter starts with minus sign 
+					   errorMsg="--- INVALID VIRTUAL-PIXEL SPECIFICATION ---"
+					   checkMinus "$1"
+					   vpm="$1"
+					   ;;
+				-v)    # get  vpcolor
+					   shift  # to get the next parameter
+					   # test if parameter starts with minus sign 
+					   errorMsg="--- INVALID VIRTUAL-PIXEL BACKGROUND COLOR SPECIFICATION ---"
+					   checkMinus "$1"
+					   vpc="$1"
+					   ;;
+				-b)    # get  bgcolor
+					   shift  # to get the next parameter
+					   # test if parameter starts with minus sign 
+					   errorMsg="--- INVALID BACKGROUND COLOR SPECIFICATION ---"
+					   checkMinus "$1"
+					   bgc="$1"
+					   ;;
+				 -)    # STDIN and end of arguments
+					   break
+					   ;;
+				-*)    # any other - argument
+					   errMsg "--- UNKNOWN OPTION ---"
+					   ;;
+		     	 *)    # end of arguments
+					   break
+					   ;;
+			esac
+			shift   # next option
+	done
+	#
+	# get infile and outfile
+	infile="$1"
+	outfile="$2"
+fi
+
+# test that infile provided
+[ "$infile" = "" ] && errMsg "NO INPUT FILE SPECIFIED"
+
+# test that outfile provided
+[ "$outfile" = "" ] && errMsg "NO OUTPUT FILE SPECIFIED"
+
+tmpA="$dir/fisheye_$$.mpc"
+tmpB="$dir/fisheye_$$.cache"
+# trap "rm -f $tmpA $tmpB;" 0
+# trap "rm -f $tmpA $tmpB; exit 1" 1 2 3 15
+# trap "rm -f $tmpA $tmpB; exit 1" ERR
+
+# get im_version
+im_version=`convert -list configure | \
+	sed '/^LIB_VERSION_NUMBER */!d; s//,/;  s/,/,0/g;  s/,0*\([0-9][0-9]\)/\1/g' | head -n 1`
+
+if [ "$im_version" -ge "07000000" ]; then
+	identifying="magick identify"
+else
+	identifying="identify"
+fi
+
+if convert -quiet "$infile" +repage "$tmpA"
+	then
+	width=`$identifying -format %w $tmpA`
+	height=`$identifying -format %h $tmpA`
+	
+	# compute dimension depending upon format
+	if [ "$format" = "circular" ]
+		then
+		dim=`convert xc: -format "%[fx:min($width,$height)]" info:`
+	elif [ "$format" = "fullframe" ]
+		then
+		dim=`convert xc: -format "%[fx:hypot($width,$height)]" info:`
+	fi
+	[ "$rad" != "" ] && dim=`convert xc: -format "%[fx:2*$rad]" info:`
+	dim2=`convert xc: -format "%[fx:$dim/2]" info:`
+
+
+	# compute half-widths
+	w2=`convert xc: -format "%[fx:($width-1)/2]" info:`
+	h2=`convert xc: -format "%[fx:($height-1)/2]" info:`
+	
+	# compute center of image
+	if [ "$xc" = "" ]
+		then
+		xcd=$w2
+		xcs=$xcd
+	else
+		xcd=$w2
+		xcs=$xc
+	fi
+	if [ "$yc" = "" ]
+		then
+		ycd=$h2
+		ycs=$ycd
+	else
+		ycd=$h2
+		ycs=$yc
+	fi
+
+	# compute input (perspective) focal length
+	# phi=fov/2; r=N/2
+	# r/f=tan(phi); f=r/tan(phi); f= (N/2)/tan((fov/2)*(pi/180)) = N/(2*tan(fov*pi/360))
+	ifoc=`convert xc: -format "%[fx:$dim/(2*tan($ifov*pi/360))]" info:`
+	
+	# compute sin(ang) and cos(ang)
+	[ "$ang" != "0" -a "$ang" != "0.0" ] && cosang=`convert xc: -format "%[fx:cos($ang*pi/180)]" info:`
+	[ "$ang" != "0" -a "$ang" != "0.0" ] && sinang=`convert xc: -format "%[fx:sin($ang*pi/180)]" info:`
+	else
+		errMsg "--- FILE $infile DOES NOT EXIST OR IS NOT AN ORDINARY FILE, NOT READABLE OR HAS ZERO SIZE ---"
+fi
+
+# Pertinent equations:
+# note phi=fov/2; fov=field of view (aperture)
+# note r=N/2; N=min(width,height)
+# perspective: r=f*tan(phi); f=r/tan(phi); f=(N/2)/tan((fov/2)*(pi/180))=N/(2*tan(fov*pi/360))
+# linear: r=f*phi; f=r/phi; f=(N/2)/((fov/2)*(pi/180))=N*180/(fov*pi)
+# equalarea: r=2*f*sin(phi/2); f=(r/2)/sin(phi/2); f=(N/4)/(sin((fov/4)*(pi/180)))=N/(4*sin(fov*pi/720))
+# orthographic: r=f*sin(phi); f=r/sin(phi); f=(N/2)/sin((fov/2)*(pi/180))=N/(2*sin(fov*pi/360))
+# stereographic: r=2*f*tan(phi/2); f=(r/2)/tan(phi/2); f=(N/4)/(tan((fov/4)*(pi/180)))=N/(4*tan(fov*pi/720))
+
+im_version=`convert -list configure | \
+	sed '/^LIB_VERSION_NUMBER */!d;  s//,/;  s/,/,0/g;  s/,0*\([0-9][0-9]\)/\1/g' | head -n 1`
+
+# define transform terms"
+
+# get rd (and theta unused) in output (destination) from i,j
+xd="xd=i-$xcd;"
+yd="yd=j-$ycd;"
+if [ "$im_version" -ge "06030600" ]
+	then 
+	rd="rd=hypot(xd,yd);"
+else
+	rd="rd=sqrt(xd^2+yd^2);"
+fi
+: ' unused - see notes below
+if [ "$ang" != "0" -a "$ang" != "0.0" ]
+	then
+	theta="theta=atan2(yd,xd)-$ang;"
+else
+	theta="theta=atan2(yd,xd);"
+fi
+'
+
+# convert rd to phi according to type of fisheye
+# phi is now a reserved word in fx since Oct, 2011
+# so change phi to phiang
+if [ "$type" = "linear" ]
+	then
+	ofocinv=`convert xc: -format "%[fx:($ofov*pi)/($dim*180)]" info:`
+	phiang="phiang=$ofocinv*rd;"
+elif [ "$type" = "equalarea" ]
+	then
+	#note ofoc2inv rather than ofocinv to save computations
+	ofoc2inv=`convert xc: -format "%[fx:2*sin($ofov*pi/720)/$dim]" info:`
+	phiang="phiang=2*asin($ofoc2inv*rd);"
+elif [ "$type" = "orthographic" ]
+	then
+	ofocinv=`convert xc: -format "%[fx:2*sin($ofov*pi/360)/$dim]" info:`
+	phiang="phiang=asin($ofocinv*rd);"
+elif [ "$type" = "stereographic" ]
+	then
+	#note ofoc2inv rather than ofocinv to save computations
+	ofoc2inv=`convert xc: -format "%[fx:2*tan($ofov*pi/720)/$dim]" info:`
+	phiang="phiang=2*atan($ofoc2inv*rd);"
+fi
+
+#compute radius from perspective equation and phi
+rr="rr=$ifoc*tan(phiang);"
+
+# convert rr (and theta unused due to shortcut) to x,y in input (source)
+# allow optional final image rotation
+if [ "$ang" != "0" -a "$ang" != "0.0" ]
+	then
+	# use slower method when want rotation
+	# this is slow: 2m32s (128x128)
+#	xs="xs=rr*cos(theta)+$xcs;"
+#	ys="ys=rr*sin(theta)+$ycs;"
+	# this is a bit faster and avoids theta: 1m23s  (128x128)
+	xs="xs=(rd?rr/rd:0)*xd*$cosang + (rd?rr/rd:0)*yd*$sinang + $xcs;"
+	ys="ys=-(rd?rr/rd:0)*xd*$sinang + (rd?rr/rd:0)*yd*$cosang + $ycs;"
+else
+	# more efficient (by about 2x) to do this as avoids theta (but prevents rotation)
+	# cos(theta)=xd/rd; sin(theta)=yd/rd
+	# this is faster: 1m12s (128x128)
+	xs="xs=(rd?rr/rd:0)*xd+$xcs;"
+	ys="ys=(rd?rr/rd:0)*yd+$ycs;"
+fi
+
+if [ "$vpm" = "transparent" -o "$vpc" = "none" -o "$bgc" = "none" ]
+	then
+	# create alpha channel
+	virtual="-matte -channel RGBA -virtual-pixel $vpm -background $vpc"
+else
+	virtual="-virtual-pixel $vpm -background $vpc"
+fi
+
+
+# process image
+A=""
+A="${A}convert $tmpA $virtual -monitor -fx "
+A="${A}\"$xd $yd $rd $phiang $rr $xs $ys (rd>$dim2)?$bgc:u.p{xs,ys}\" "
+A="${A}\"$outfile\" "
+echo $A
+
+	convert $tmpA $virtual -monitor -fx \
+		"$xd $yd $rd $phiang $rr $xs $ys (rd>$dim2)?$bgc:u.p{xs,ys}" \
+		"$outfile"
+exit 0
+
+# examples
+
+# sh fisheye -o 180 -i 120 -t equalarea -f circular -m gray mandril.jpeg mandril_fisheye.jpeg
+# gives: 
+# convert ./fisheye_4921.mpc -virtual-pixel gray -background black -monitor -fx "xd=i-63.5; yd=j-63.5; rd=hypot(xd,yd); phiang=2*asin(0.0110485*rd); rr=36.9504*tan(phiang); xs=(rd?rr/rd:0)*xd+63.5; ys=(rd?rr/rd:0)*yd+63.5; (rd>64)?black:u.p{xs,ys}" "mandril_fisheye.jpeg"
+

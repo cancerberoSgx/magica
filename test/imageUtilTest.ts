@@ -1,7 +1,8 @@
 import test from 'ava'
-import { File } from '../src'
+import { File, main, run } from '../src'
 import { colorCount, imagePixelColor } from '../src/image/imageUtil'
 import { imageBuiltIn, listFormat } from '../src/image/support'
+import { arrayBufferToString } from '../src/util/base64'
 
 test('imagePixelColor', async t => {
   const c = await imagePixelColor(await File.fromFile('test/assets/n.png'), 20, 20)
@@ -30,5 +31,24 @@ test('listFormat', async t => {
   const c = await listFormat()
   t.truthy(c.find(f => f.name.includes('GIF')))
 })
+
+// test('seba', async t =>{
+//   // const r = await run({
+//   //   command: `convert n.png -format %[pixel:p{2,2}] info:`,    
+//   //   inputFiles: [File.fromFile('test/assets/n.png')],
+//   // })
+//   // console.log('sebaaa');
+  
+//   const r = await main({
+//     inputFiles: [File.fromFile('test/assets/n.png')],
+//     command: `convert n.png -format "%[pixel:p{2,2}]\\\\n" info:`,
+//     // verbose: true
+//   })
+  
+//   // console.log(r.stdout.join(''));
+//   console.log('HELLO', r.stdout)//arrayBufferToString(r.outputFiles[0].content.buffer));
+  
+  
+// })
 
 

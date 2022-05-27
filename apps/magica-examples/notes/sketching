@@ -1,0 +1,238 @@
+#!/bin/bash
+#
+# Developed by Fred Weinhaus 6/27/2017 .......... revised 6/27/2017
+#
+# ------------------------------------------------------------------------------
+# 
+# Licensing:
+# 
+# Copyright © Fred Weinhaus
+# 
+# My scripts are available free of charge for non-commercial use, ONLY.
+# 
+# For use of my scripts in commercial (for-profit) environments or 
+# non-free applications, please contact me (Fred Weinhaus) for 
+# licensing arrangements. My email address is fmw at alink dot net.
+# 
+# If you: 1) redistribute, 2) incorporate any of these scripts into other 
+# free applications or 3) reprogram them in another scripting language, 
+# then you must contact me for permission, especially if the result might 
+# be used in a commercial or for-profit environment.
+# 
+# My scripts are also subject, in a subordinate manner, to the ImageMagick 
+# license, which can be found at: http://www.imagemagick.org/script/license.php
+# 
+# ------------------------------------------------------------------------------
+# 
+####
+#
+# USAGE: sketching [-d detail] [-e edge] [-c coloring] [-s saturation] infile outfile
+# USAGE: sketching [-h|-help]
+#
+# OPTIONS:
+#
+# -d     detail         image detail; float>=0; default=3
+# -e     edge           edge thickness; integer>0; default=1    
+# -c     coloring       image coloring; float>=0; default=1
+# -s     saturation     color saturation; integer>=0; default=100 (no change).
+#
+###
+#
+# NAME: SKETCHING
+# 
+# PURPOSE: To apply a sketch-like effect to an image.
+# 
+# DESCRIPTION: SKETCHING applies a variety of sketch-like effects to an image.
+# 
+# OPTIONS: 
+# 
+# -d detail ... DETAIL enhancement in image. Values are floats>=0. The default=3
+# 
+# -e edge ... EDGE thickness. Values are integers>0. The default=1.
+#     
+# -c coloring ... image COLORING. Values are floats>=0. The default=1.
+# 
+# -s saturation ... color SATURATION. Values are integer>=0. The default=100 (no change).
+# 
+# Reference: 
+# http://www.photoshopessentials.com/photo-effects/photo-to-sketch/
+# 
+# CAVEAT: No guarantee that this script will work on all platforms, 
+# nor that trapping of inconsistent parameters is complete and 
+# foolproof. Use At Your Own Risk. 
+# 
+######
+#
+
+# set default values
+detail=3
+edge=1
+coloring=1
+saturation=0
+
+
+# set directory for temporary files
+dir="."    # suggestions are dir="." or dir="/tmp"
+
+# set up functions to report Usage and Usage with Description
+PROGNAME=`type $0 | awk '{print $3}'`  # search for executable on path
+PROGDIR=`dirname $PROGNAME`            # extract directory of program
+PROGNAME=`basename $PROGNAME`          # base name of program
+usage1() 
+	{
+	echo >&2 ""
+	echo >&2 "$PROGNAME:" "$@"
+	sed >&2 -e '1,/^####/d;  /^###/g;  /^#/!q;  s/^#//;  s/^ //;  4,$p' "$PROGDIR/$PROGNAME"
+	}
+usage2() 
+	{
+	echo >&2 ""
+	echo >&2 "$PROGNAME:" "$@"
+	sed >&2 -e '1,/^####/d;  /^######/g;  /^#/!q;  s/^#*//;  s/^ //;  4,$p' "$PROGDIR/$PROGNAME"
+	}
+
+
+# function to report error messages
+errMsg()
+	{
+	echo ""
+	echo $1
+	echo ""
+	usage1
+	exit 1
+	}
+
+
+# function to test for minus at start of value of second part of option 1 or 2
+checkMinus()
+	{
+	test=`echo "$1" | grep -c '^-.*$'`   # returns 1 if match; 0 otherwise
+    [ $test -eq 1 ] && errMsg "$errorMsg"
+	}
+
+# test for correct number of arguments and get values
+if [ $# -eq 0 ]
+	then
+	# help information
+   echo ""
+   usage2
+   exit 0
+elif [ $# -gt 10 ]
+	then
+	errMsg "--- TOO MANY ARGUMENTS WERE PROVIDED ---"
+else
+	while [ $# -gt 0 ]
+		do
+			# get parameter values
+			case "$1" in
+		     -help)    # help information
+					   echo ""
+					   usage2
+					   exit 0
+					   ;;
+				-d)    # get detail
+					   shift  # to get the next parameter
+					   # test if parameter starts with minus sign 
+					   errorMsg="--- INVALID DETAIL SPECIFICATION ---"
+					   checkMinus "$1"
+					   detail=`expr "$1" : '\([.0-9]*\)'`
+					   [ "$detail" = "" ] && errMsg "--- DETAIL=$detail MUST BE A NON-NEGATIVE FLOAT ---"
+					   ;;
+				-e)    # get edge
+					   shift  # to get the next parameter
+					   # test if parameter starts with minus sign 
+					   errorMsg="--- INVALID EDGE SPECIFICATION ---"
+					   checkMinus "$1"
+					   edge=`expr "$1" : '\([0-9]*\)'`
+					   [ "$edge" = "" ] && errMsg "--- EDGE=$edge MUST BE A NON-NEGATIVE INTEGER ---"
+					   test1=`echo "$edge <= 0" | bc`
+					   [ $test1 -eq 1 ] && errMsg "--- EDGE=$edge MUST BE GREATER THAN 0 ---"
+					   ;;
+				-c)    # get coloring
+					   shift  # to get the next parameter
+					   # test if parameter starts with minus sign 
+					   errorMsg="--- INVALID COLORING SPECIFICATION ---"
+					   checkMinus "$1"
+					   coloring=`expr "$1" : '\([.0-9]*\)'`
+					   [ "$coloring" = "" ] && errMsg "--- COLORING=$coloring MUST BE A NON-NEGATIVE FLOAT ---"
+					   ;;
+				-s)    # get saturation
+					   shift  # to get the next parameter
+					   # test if parameter starts with minus sign 
+					   errorMsg="--- INVALID SATURATION SPECIFICATION ---"
+					   checkMinus "$1"
+					   saturation=`expr "$1" : '\([0-9]*\)'`
+					   [ "$saturation" = "" ] && errMsg "--- SATURATION=$saturation MUST BE A NON-NEGATIVE INTEGER ---"
+					   ;;
+				 -)    # STDIN and end of arguments
+					   break
+					   ;;
+				-*)    # any other - argument
+					   errMsg "--- UNKNOWN OPTION ---"
+					   ;;
+		     	 *)    # end of arguments
+					   break
+					   ;;
+			esac
+			shift   # next option
+	done
+	#
+	# get infile and outfile
+	infile="$1"
+	outfile="$2"
+fi
+
+# test that infile provided
+[ "$infile" = "" ] && errMsg "NO INPUT FILE SPECIFIED"
+
+# test that outfile provided
+[ "$outfile" = "" ] && errMsg "NO OUTPUT FILE SPECIFIED"
+
+
+# set up temporaries
+tmpA1="$dir/sketching_1_$$.mpc"
+tmpA2="$dir/sketching_1_$$.cache"
+trap "rm -f $tmpA1 $tmpA2;" 0
+trap "rm -f $tmpA1 $tmpA2; exit 1" 1 2 3 15
+
+# read the input image into the temporary cached image and test if valid
+convert -quiet -regard-warnings "$infile" +repage "$tmpA1" ||
+	errMsg "--- 1 FILE $infile DOES NOT EXIST OR IS NOT AN ORDINARY FILE, NOT READABLE OR HAS ZERO size  ---"
+
+# set up for detail
+if [ "$detail" != "1" ]; then
+	detailing="-evaluate pow $detail"
+else
+	detailing=""
+fi
+
+# set up for coloring
+if [ "$coloring" != "1" ]; then
+	colorizing="-evaluate pow $coloring"
+else
+	colorizing=""
+fi
+
+# set up for saturation
+if [ "$saturation" != "100" ]; then
+	saturating="-modulate 100,$saturation,100"
+else
+	saturating=""
+fi
+
+# set up for edge
+edge=$((2*edge+1))
+
+convert $tmpA1 \
+\( -clone 0 -colorspace gray \) \
+\( -clone 1 -negate -statistic minimum ${edge}x${edge} $colorizing \) \
+\( -clone 1 -clone 2 -compose color_dodge -composite $detailing \) \
+-delete 1-2 +swap -compose screen -composite $saturating "$outfile"
+
+exit 0
+
+
+
+
+
+

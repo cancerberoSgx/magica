@@ -1,63 +1,5 @@
-export interface ExampleField {
-  id: string
-  value: string | number
-  type?: 'string' | 'integer' | 'float'
-}
-
-interface SampleImage {
-  type: 'animation' | 'color'
-  path: string
-}
-
-let _sampleImages: SampleImage[] = []
-
-export function sampleImages(images?: SampleImage[]) {
-  _sampleImages = images || _sampleImages
-  return _sampleImages
-}
-
-export enum ExampleTag {
-  animation = 'animation',
-  info = 'info',
-  drawing = 'drawing',
-  gradient = 'gradient',
-  color = 'color',
-  montage = 'montage',
-  format = 'format',
-  distort = 'distort',
-  text = 'text',
-  artistic = 'artistic',
-  simple = 'simple'
-}
-
-export interface Example {
-  tags: any[],
-  script: string,
-  name: string
-  description: string;
-  inputFiles: string[]
-  fields?: ExampleField[]
-}
-
-const fieldsText = [
-  { id: 'text', value: 'Hello World 1234' },
-  { id: 'stroke', value: 'black' },
-  { id: 'strokewidth', value: '2' },
-  { id: 'fill', value: 'white' },
-  { id: 'pointSize', value: '68' }
-]
-
-const fieldsShadow = [
-  { id: 'shadowColor', value: 'navy' },
-  { id: 'shadow', value: '120x5+5+4' },
-]
-
-const fieldsTextCommand = `
-  -stroke <%= get('stroke') %> -strokewidth <%= get('strokewidth') %> \\
-  -fill <%= get('fill') %> -pointsize <%= get('pointSize') %> 'label:<%= get('text') %>'
-  `.trim()
-
-const fieldsShadowCommand = `-background <%= get('shadowColor') %> -shadow <%= get('shadow') %>`
+import { fieldsText, fieldsShadow, fieldsTextCommand, fieldsShadowCommand } from "./common"
+import { Example, ExampleTag } from "./types"
 
 export const examples: () => Example[] = () => [
 
@@ -886,7 +828,7 @@ convert -size  <%=get('size') %>x<%= get('size') %> xc: \\
 
   {
     name: 'Morphological animation',
-    description: `<a href="http://www.imagemagick.org/Usage/transform/#gridding">See ImageMagick examples page transform/#gridding</a>`,
+    description: `Warning: slow. <a href="http://www.imagemagick.org/Usage/transform/#gridding">See ImageMagick examples page transform/#gridding</a>`,
     tags: [ExampleTag.artistic, ExampleTag.animation],
     inputFiles: ['bluebells.png'],
     fields: [
@@ -904,10 +846,24 @@ var arr = new Array(N-1).fill(0).map((n,i)=>i+1).map(i=>"o"+i+".miff")
 %>
 convert o1.miff <%= arr .join(" ")%> <%= arr[arr.length-1] %> <%= arr.reverse().join(" ") %> o1.miff o.gif
   `.trim(),
-  }
+  },
 
 
-
+  {
+    name: 'Morphological animation',
+    description: `Warning: slow. <a href="http://www.imagemagick.org/Usage/transform/#gridding">See ImageMagick examples page transform/#gridding</a>`,
+    tags: [ExampleTag.artistic, ExampleTag.animation],
+    inputFiles: ['bluebells.png'],
+    fields: [
+      { id: 'N', value: 25 }
+    ],
+    script: ` 
+      convert <%= inputFiles[0].name %> ( -clone 0 -clone 0 -compose screen -composite -alpha set ) \\
+      ( -clone 1 -blur 0x<%= get('blur') %> -alpha set -channel a -evaluate set <%= get('opacity') %>% +channel ) \\
+      -delete 0 -compose multiply -composite \\
+      out.png
+  `.trim(),
+  },
 
 
 

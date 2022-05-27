@@ -7,6 +7,7 @@
 
 ## TODO / Road map
 - [ ] move CLI to other project and remove dependencies.
+- [ ] besides tools to obtain pixel color/height, add others to obtain pixel lightness, hue, strength, see bottom of http://www.fmwconcepts.com/imagemagick/colorglow/index.php
 - [ ] imList - convert -list auto generated enum. 
 - [x] remove p-map dependency from src/image/imageBuiltIn.ts
 - [ ] run(verbose: true) - propagate verbose to main() call and RunResult.

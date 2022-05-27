@@ -3,3 +3,4 @@ magica
 native-magick
 tmp
 emscripten_prefix
+/dist
