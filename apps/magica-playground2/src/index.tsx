@@ -1,9 +1,9 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { BulmaTest } from './bulmaTest'
-import { PresetsSection } from './presets'
+import { BulmaTest } from './bulmaTest/bulmaTest'
 import { initialState, initState, useAppState } from './state'
 import './styles.css'
+import { MagicaTest1 } from './magicaTest1'
 
 const Main: React.FC = () => {
   const [appState, setAppState] = React.useState(initialState)
@@ -12,9 +12,8 @@ const Main: React.FC = () => {
 }
 
 const Body = () => {
-  const { state, setState } = useAppState()
   return <>
-    <PresetsSection />
+    <MagicaTest1/>
     <BulmaTest/>
   </>
 }

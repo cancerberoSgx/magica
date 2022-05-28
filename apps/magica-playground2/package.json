@@ -16,9 +16,9 @@
   "author": "Sebastián Gurin",
   "license": "MIT",
   "devDependencies": {
+    "@babel/preset-env": "7.13.8",
     "@types/node": "^14.0.27",
     "@types/react": "^17.0.34",
-    "@babel/preset-env": "7.13.8",
     "parcel": "^1.12.3",
     "sass": "^1.52.1",
     "ts-node": "^10.1.0",
@@ -28,6 +28,7 @@
     "bulma": "^0.9.4",
     "magica": "file:../..",
     "magica-examples": "file:../magica-examples",
+    "misc-utils-of-mine-generic": "^0.2.42",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   }
