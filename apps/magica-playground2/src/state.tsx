@@ -25,6 +25,7 @@ let _setState: (s: AppState) => void
 export const useAppState = () => {
   return { state, setState }
 }
+
 const setState = (s?: AppState) => {
   state = {...(s||state)}
   _setState(state)

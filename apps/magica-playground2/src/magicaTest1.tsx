@@ -3,6 +3,8 @@ import { File, run } from 'magica';
 import { useAppState } from './state';
 import { callRun } from './worker/workerAccess';
 
+export const IMAGE_URL1 = 'https://i.imgur.com/FVKBIJ7.png'
+
 export const MagicaTest1 = props => {
   const { state, setState } = useAppState();
   return <div>
@@ -13,7 +15,7 @@ export const MagicaTest1 = props => {
       console.log(r);
 
       setState({ ...state, inputFiles });
-    }} placeholder='https://i.imgur.com/FVKBIJ7.png' />
+    }} placeholder={IMAGE_URL1} />
     <br /><br />
     <input type="file" placeholder='foo.jpg' onChange={async (e) => {
       var inputFiles = await File.fromHtmlFileInputElement(e.currentTarget);

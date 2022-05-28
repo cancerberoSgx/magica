@@ -1,9 +1,10 @@
 import { RunOptions, RunResult } from 'magica'
 import { Deferred, unique } from 'misc-utils-of-mine-generic'
+import { ExampleFields } from '../editor/exampleEditor'
 
 let pending: { magicaId: string, deferred: Deferred<RunResult | undefined> }[] = []
 
-export async function callRun(o: RunOptions & { fields: { [k: string]: string | number | undefined } }): Promise<RunResult | undefined> {
+export async function callRun(o: RunOptions & { fields: ExampleFields }): Promise<RunResult | undefined> {
   const magicaId = unique()
   const deferred = new Deferred<RunResult | undefined>()
   pending.push({ magicaId, deferred })
