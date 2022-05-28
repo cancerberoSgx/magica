@@ -13,3 +13,4 @@ log2.txt
 test-browser-outdir
 playground
 /tmp*
+.parcel-cache

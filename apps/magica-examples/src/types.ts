@@ -1,7 +1,17 @@
+export interface Example {
+  tags: string[];
+  script: string;
+  name: string;
+  description: string;
+  inputFiles: string[];
+  fields?: ExampleField[];
+}
+
 export interface ExampleField {
   id: string;
   value: string | number;
   type?: 'string' | 'integer' | 'float';
+  description?: string
 }
 
 export interface SampleImage {
@@ -21,13 +31,4 @@ export enum ExampleTag {
   text = 'text',
   artistic = 'artistic',
   simple = 'simple'
-}
-
-export interface Example {
-  tags: ExampleTag[];
-  script: string;
-  name: string;
-  description: string;
-  inputFiles: string[];
-  fields?: ExampleField[];
 }

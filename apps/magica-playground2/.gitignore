@@ -1,0 +1,7 @@
+/node_modules
+/dist
+.cache
+.DS_Store
+*.tgz
+.nyc_output
+.parcel-cache

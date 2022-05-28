@@ -1,0 +1,34 @@
+{
+  "name": "magica-playground2",
+  "version": "0.0.1",
+  "description": "magica playground version 2",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "prepare": "npm run build",
+    "clean": "rm -fr dist/",
+    "build-ts": "tsc",
+    "build": "npm run clean && npm run build-ts",
+    "start": "mkdir dist; npm run cp-wasm; parcel src/index.html",
+    "cp-wasm": "cp node_modules/magica/src/imageMagick/compiled/magick.wasm dist",
+    "start-all": "cd ..; npm run build; cd playground; npm run build && npm start"
+  },
+  "author": "Sebastián Gurin",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^14.0.27",
+    "@types/react": "^17.0.34",
+    "@babel/preset-env": "7.13.8",
+    "parcel": "^1.12.3",
+    "sass": "^1.52.1",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "bulma": "^0.9.4",
+    "magica": "file:../..",
+    "magica-examples": "file:../magica-examples",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}

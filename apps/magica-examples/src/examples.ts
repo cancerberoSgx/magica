@@ -850,12 +850,16 @@ convert o1.miff <%= arr .join(" ")%> <%= arr[arr.length-1] %> <%= arr.reverse().
 
 
   {
-    name: 'Morphological animation',
-    description: `Warning: slow. <a href="http://www.imagemagick.org/Usage/transform/#gridding">See ImageMagick examples page transform/#gridding</a>`,
+    name: 'Orton effect',
+    description: `Applies an Orton (sandwich) effect to an image. References: 
+    <a href="http://www.bernskiold.com/2011/06/06/applying-orton-effect-photos/">applying-orton-effect-photos/</a>, 
+    <a href="http://peterh111.wordpress.com/2010/12/11/the-easy-guide-to-creating-the-orton-effect/">the-easy-guide-to-creating-the-orton-effect</a>, 
+    <a href="http://pcin.net/update/2006/11/01/the-orton-effect-digital-photography-tip-of-the-week/">the-orton-effect-digital-photography-tip-of-the-week</a>`,
     tags: [ExampleTag.artistic, ExampleTag.animation],
     inputFiles: ['bluebells.png'],
     fields: [
-      { id: 'N', value: 25 }
+      { id: 'blur', value: 6, type: 'integer' },
+      { id: 'opacity', value: 80, type: 'integer' },
     ],
     script: ` 
       convert <%= inputFiles[0].name %> ( -clone 0 -clone 0 -compose screen -composite -alpha set ) \\

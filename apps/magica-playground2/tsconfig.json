@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "lib": [
+      "ES2019",
+      "dom"
+    ],
+    "noImplicitAny": false,
+    "sourceMap": false,
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "jsx": "react",
+    "esModuleInterop": false,
+    // "paths": {
+    //   "html-meta-generator":[".."]
+    // }
+  },
+  "compileOnSave": false,
+  "include": [
+    "src"
+  ]
+}
