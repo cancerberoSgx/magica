@@ -15,6 +15,9 @@ interface ExampleEditorChangeEvent {
 }
 
 export const ExampleEditor = (props: ExampleEditorProps) => {
+  if(!props.example) {
+    return <div></div>
+  }
   props.example.fields = props.example.fields || []
   const initialValues = {};
   props.example.fields.forEach(f => {

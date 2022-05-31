@@ -4,7 +4,9 @@ import { ExampleFields } from '../editor/exampleEditor'
 
 let pending: { magicaId: string, deferred: Deferred<RunResult | undefined> }[] = []
 
-export async function callRun(o: RunOptions & { fields: ExampleFields }): Promise<RunResult | undefined> {
+export type RunConfig = RunOptions & { fields: ExampleFields }
+
+export async function callRun(o: RunConfig): Promise<RunResult | undefined> {
   const magicaId = unique()
   const deferred = new Deferred<RunResult | undefined>()
   pending.push({ magicaId, deferred })

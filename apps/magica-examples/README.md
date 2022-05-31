@@ -11,5 +11,9 @@ Oriented to UIs that want to run these examples configuring them in a UI
 
 other effects:
 
- * orton effect seems to be straight forward: http://www.fmwconcepts.com/imagemagick/ortoneffect/index.php see at the bottom
-
+ * complex: http://www.fmwconcepts.com/imagemagick/stainedglass/index.php
+ * simpple: http://www.fmwconcepts.com/imagemagick/lichtenstein/index.php
+ * simple: http://www.fmwconcepts.com/imagemagick/softlight/index.php
+ * simple: http://www.fmwconcepts.com/imagemagick/furrowed/index.php
+ * complex: http://www.fmwconcepts.com/imagemagick/cartoon/index.php
+ * complex: http://www.fmwconcepts.com/imagemagick/fisheye/index.php

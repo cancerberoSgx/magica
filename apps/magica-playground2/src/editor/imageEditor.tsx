@@ -4,20 +4,27 @@
 import { examples } from 'magica-examples';
 import * as React from 'react';
 import { useState } from 'react';
-import { IMAGE_URL1 } from '../magicaTest1';
+import { IMAGE_URL1 } from '../probes/magicaTest1';
 import { relativeCoords } from '../util';
 
-interface ImageFieldEditor {
+interface ImageFieldEditor<T extends Point|Color = Point> {
   imageSource: string
   type?: 'point-coords'|'point-color'|'rectangle-coords' 
-  onChange: (e: ImageEditorChangeEvent) => any
+  onChange: (e: ImageEditorChangeEvent<T>) => any
 }
 
-interface ImageEditorChangeEvent<T = {x: number, y: number}> {
+interface Point {
+  x: number
+  y: number
+}
+
+type Color = string
+
+interface ImageEditorChangeEvent<T extends Point|Color = Point> {
   result: T
 }
 
-export const ImageEditor = (props: ImageFieldEditor) => {
+export const ImageEditor = <T extends Point|Color = Point>(props: ImageFieldEditor<T>) => {
   const [active, setActive] = useState(false)
 
   return <div>
@@ -30,25 +37,27 @@ export const ImageEditor = (props: ImageFieldEditor) => {
       <div className="modal-content">
         <h2>Click the image to select a point</h2>
         <img src={props.imageSource} onClick={e=>{
-          //TODO: support types point-color, etc - right now only point coords
-          props.onChange({result: relativeCoords(e)})
+          const imageCoords = relativeCoords(e)
+          if(!props.type||props.type==='point-coords') {
+            props.onChange({result: imageCoords as any})
+          } else {
+            throw new Error('not implemented')
+          }
           setActive(false)
         }}></img>
+        <p>TODO: Accept/cancel buttons. let user see what's selecting and then let them accept</p>
       </div>
       <button className="modal-close is-large" aria-label="close" onClick={e=>{
         setActive(false)
       }}></button>
     </div>
 
+
   </div>
 }
 
 export const ImageEditorTest = (props) => {
-  const example = examples().find(e => e.name === 'Orton effect')
   return <div>
-    <button onClick={e => {
-
-    }}>Edit image</button>
     <ImageEditor imageSource={IMAGE_URL1} onChange={e => {
       console.log('change', e); 
     }} />

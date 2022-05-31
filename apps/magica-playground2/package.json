@@ -9,8 +9,8 @@
     "clean": "rm -fr dist/",
     "build-ts": "tsc",
     "build": "npm run clean && npm run build-ts",
-    "start": "mkdir dist; npm run cp-wasm; parcel src/index.html",
-    "cp-wasm": "cp node_modules/magica/src/imageMagick/compiled/magick.wasm dist",
+    "start": "npm run copy; parcel src/index.html",
+    "copy": "mkdir dist; cp -r node_modules/magica/src/imageMagick/compiled/magick.wasm src/assets/* dist",
     "start-all": "cd ..; npm run build; cd playground; npm run build && npm start"
   },
   "author": "Sebastián Gurin",

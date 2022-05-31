@@ -24,7 +24,7 @@ export const FieldEditor = (props: FieldEditorProps) => {
       }} />
     </label>
   } else {
-    <label>
+    return <label>
       {props.field.id}
       <input type="text" value={value} onChange={e => {
         setValue(e.target.value)

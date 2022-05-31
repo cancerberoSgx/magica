@@ -9,7 +9,7 @@ export const examples: () => Example[] = () => [
     tags: [ExampleTag.simple],
     inputFiles: ['bluebells.png'],
     fields: [
-      { id: 'angle', value: '23' },
+      { id: 'angle', value: '23', type: 'float' },
       { id: 'scale', value: '123%' },
     ],
     script: `
