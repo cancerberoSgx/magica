@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Example, ExampleField, examples } from 'magica-examples'
+import { Example, ExampleFields, examples } from 'magica-examples'
 import { FieldEditor } from './fieldEditor';
 
 interface ExampleEditorProps {
@@ -8,7 +8,6 @@ interface ExampleEditorProps {
   onChange: (e: ExampleEditorChangeEvent) => any
 }
 
-export type ExampleFields = { [k: string]: string | number | undefined }
 
 interface ExampleEditorChangeEvent {
   newValues: ExampleFields

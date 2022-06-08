@@ -14,7 +14,7 @@ export function createMain(Module: any, FS: FS): NativeMain {
       returnValue = Module.callMain(...args)
       debug && console.log('after Module.callMain', returnValue)
     } catch (ex) {
-      debug && console.error((ex))
+      debug && console.error('ERROR :', ex)
       error = ex
     }
     return {

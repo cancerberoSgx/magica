@@ -32,3 +32,5 @@ export enum ExampleTag {
   artistic = 'artistic',
   simple = 'simple'
 }
+
+export type ExampleFields = { [k: string]: string | number | undefined }

@@ -180,6 +180,15 @@ export class File implements IFile {
     return await toDataUrl(file, mime)
   }
 
+  /** 
+   * Creates an object (blob) and returns its Url. 
+   * This method is much faster than toDataUrl/asDataUrl but user must take care of calling URL.revokeObjectURL to free memory if discarding files.
+    */
+   public asObjectUrl() {
+    const blob = new Blob([this.content])
+    return URL.createObjectURL(blob)
+  }
+
   /**
    * Creates a File from given url. In Node.js urls must be absolute!. 
    */

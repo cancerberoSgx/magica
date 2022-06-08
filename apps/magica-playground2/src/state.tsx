@@ -1,8 +1,7 @@
 // cheap global store, this is root component state which uses initState wile the other components use state and setState
 
 import {File} from 'magica'
-import { Example, examples } from 'magica-examples'
-import { ExampleFields } from './editor/exampleEditor'
+import { Example, examples, ExampleFields } from 'magica-examples'
 import { getExampleFields } from './util'
 
 export interface AppState {
@@ -12,6 +11,11 @@ export interface AppState {
   outputFiles: string[]
   inputFilesDataUrls: string[]
   examples: Example[]
+  execution: ExecutionState
+}
+interface ExecutionState {
+  status: 'loading'|'idle'
+  time: number
 }
 
 const defaultExample = examples()[0]
@@ -22,7 +26,11 @@ export const initialState: AppState = {
   outputFiles: [],
   examples: examples(),
   selectedExample: defaultExample,
-  fields: getExampleFields(defaultExample)
+  fields: getExampleFields(defaultExample),
+  execution: {
+    status: 'idle',
+    time: 0
+  },
 }
 
 let state: AppState

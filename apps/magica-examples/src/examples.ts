@@ -114,8 +114,8 @@ convert  aux.png -write mpr:img +delete \\
     description: 'use -modulate Brightness, saturation and lightness',
     inputFiles: [],
     fields: [
-      { id: 'brightness', value: '120' },
-      { id: 'saturation', value: '80' },
+      { id: 'brightness', value: '120', type: 'integer' },
+      { id: 'saturation', value: '80' , type: 'integer' },
     ],
     script: `
 convert <%= inputFiles[0].name%> -modulate <%= get('brightness') %>,<%= get('saturation') %>,100 %>  oo.png
@@ -598,6 +598,7 @@ convert sparse_source.gif  ( +clone -resize 50% )  ( +clone -resize 50% )  ( +cl
     name: 'Hourglass Distortion Map',
     description: `<a href="https://imagemagick.org/Usage/mapping/#hourglass">See ImageMagick examples page mapping/#hourglass</a>`,
     tags: [ExampleTag.distort],
+    // TODO: fields
     inputFiles: ['bluebells.png'],
     script: `
 convert -size 100x100 xc:  -channel G \\
@@ -668,6 +669,7 @@ convert -size 100x100 xc: +noise Random -channel R -threshold 1% \\
     name: 'Montage polaroid',
     tags: [ExampleTag.montage],
     description: `Example of the command montage: <a href="https://imagemagick.org/Usage/montage/#overlap">See ImageMagick examples page montage/#overlap</a>`,
+    //TODO: params
     inputFiles: ['helvetica.ttf', 'whale4.jpg', 'photo.tiff', 'bridge.psd'],
     script: `
 montage -size 400x400 null: \\
@@ -710,6 +712,7 @@ convert -size 200x200 xc: +noise Random -separate \\
   {
     name: 'Warping local region',
     description: `<a href="https://imagemagick.org/Usage/masking/#region_warping">See ImageMagick examples page masking/#region_warping</a>`,
+    //TODO: fields
     inputFiles: ['bluebells.png'],
     script: `
 convert -size 600x70 xc:darkred \\
@@ -758,6 +761,7 @@ convert <%= inputFiles[0].name %>  boolean_mask.miff \\
     tags: [ExampleTag.artistic],
     inputFiles: ['bluebells.png'],
     fields: [
+      //TODO
     ],
     script: `
     convert -size <%= await inputFiles[0].widthXHeight() %> gradient:  -evaluate sin 9 wave_gradient.miff
@@ -855,7 +859,7 @@ convert o1.miff <%= arr .join(" ")%> <%= arr[arr.length-1] %> <%= arr.reverse().
     <a href="http://www.bernskiold.com/2011/06/06/applying-orton-effect-photos/">applying-orton-effect-photos/</a>, 
     <a href="http://peterh111.wordpress.com/2010/12/11/the-easy-guide-to-creating-the-orton-effect/">the-easy-guide-to-creating-the-orton-effect</a>, 
     <a href="http://pcin.net/update/2006/11/01/the-orton-effect-digital-photography-tip-of-the-week/">the-orton-effect-digital-photography-tip-of-the-week</a>`,
-    tags: [ExampleTag.artistic, ExampleTag.animation],
+    tags: [ExampleTag.artistic],
     inputFiles: ['bluebells.png'],
     fields: [
       { id: 'blur', value: 6, type: 'integer' },
@@ -869,6 +873,23 @@ convert o1.miff <%= arr .join(" ")%> <%= arr[arr.length-1] %> <%= arr.reverse().
   `.trim(),
   },
 
+
+  {
+    name: 'Tile',
+    description: `tiles given image`,
+    tags: [ExampleTag.artistic],
+    inputFiles: ['bluebells.png'],
+    fields: [
+      { id: 'width', value: 600, type: 'integer' },
+      { id: 'height', value: 600, type: 'integer' },
+    ],
+    script: ` 
+    convert <%= inputFiles[0].name %> -virtual-pixel tile \\
+      -filter point -set option:distort:viewport <%=get('width')%>x<%=get('height')%> -distort SRT 0 \\
+      tmp_tile_out.png
+  `.trim(),
+  },
+  
 
 
 ]

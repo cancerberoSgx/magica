@@ -1,7 +1,5 @@
 import { IFile, File } from "magica";
-import { Example } from "magica-examples";
-import { ExampleFields } from "./editor/exampleEditor";
-import { AppState } from "./state";
+import { Example, ExampleFields } from "magica-examples";
 
 /** gets mouse events coords relative to element that has the listener installed */
 export function relativeCoords ( event ) {

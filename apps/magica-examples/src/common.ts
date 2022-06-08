@@ -1,4 +1,4 @@
-import { SampleImage, ExampleField } from "./types";
+import { SampleImage, ExampleField, Example, ExampleFields } from "./types";
 
 export const fieldsText: ExampleField[] = [
   { id: 'text', value: 'Hello World 1234' },
@@ -25,4 +25,12 @@ let _sampleImages: SampleImage[] = [];
 export function sampleImages(images?: SampleImage[]) {
   _sampleImages = images || _sampleImages;
   return _sampleImages;
+}
+
+export function getExampleFields(e: Example): ExampleFields {
+  const fields: ExampleFields = {};
+  (e.fields||[]).forEach(f=>{
+    fields[f.id] = f.value
+  })
+  return fields
 }

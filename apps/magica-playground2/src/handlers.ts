@@ -1,9 +1,8 @@
 import { useAppState } from "./state";
 import { File, run } from 'magica'
 import { fileToDataUrl, getExampleFields } from "./util";
-import { Example } from "magica-examples";
+import { Example, ExampleFields } from "magica-examples";
 import { callRun, RunConfig } from "./worker/workerAccess";
-import { ExampleFields } from "./editor/exampleEditor";
 
 export async function setInputFiles(inputFiles: File[]) {
   const [state, setState] = useAppState()
@@ -13,7 +12,7 @@ export async function setInputFiles(inputFiles: File[]) {
 
 export async function setSelectedExample(selectedExample: Example) {
   const [state, setState] = useAppState()
-  const fields = getExampleFields(state.selectedExample)
+  const fields = getExampleFields(selectedExample)
   setState({ ...state, selectedExample, fields })
   await execute()
 }
@@ -31,16 +30,17 @@ export async function execute() {
     inputFiles: state.inputFiles,
     script: state.selectedExample.script
   }
+  console.log('execute', runConfig);
   console.time('run')
   const r = await callRun(runConfig)
   console.timeEnd('run')
 
+  console.error('empty outputFiles, stdout', r.stdout, ', stderr', r.stderr, ', error', r.error);
+
   discardOutputFiles()
 
-  console.time('fileToDataUrl')
   // const outputFiles = [await fileToDataUrl(r.outputFiles[0])];
-  const outputFiles = [URL.createObjectURL(new Blob([r.outputFiles[0].content]))];
-  console.timeEnd('fileToDataUrl')
+  const outputFiles = [URL.createObjectURL(new Blob([r.outputFiles[0].content]))]
 
   setState({ ...state, outputFiles })
 }

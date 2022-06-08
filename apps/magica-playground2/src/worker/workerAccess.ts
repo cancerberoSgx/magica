@@ -1,6 +1,6 @@
 import { RunOptions, RunResult } from 'magica'
 import { Deferred, unique } from 'misc-utils-of-mine-generic'
-import { ExampleFields } from '../editor/exampleEditor'
+import { ExampleFields } from 'magica-examples'
 
 let pending: { magicaId: string, deferred: Deferred<RunResult | undefined> }[] = []
 
