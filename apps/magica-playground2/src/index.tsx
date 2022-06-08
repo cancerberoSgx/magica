@@ -10,6 +10,7 @@ import { ExamplesSelectionTest } from './ui/exampleSelection'
 import { File } from 'magica'
 import { setInputFiles } from './handlers'
 import { MainLayout } from './ui/mainLayout'
+import { DropDown } from './probes/DropDown'
 
 const Main: React.FC = () => {
   const [appState, setAppState] = React.useState(initialState)
@@ -19,6 +20,7 @@ const Main: React.FC = () => {
 
 const Body = () => {
   return <>
+    {/* <DropDown/> */}
     <MainLayout/>
     {/* <ExamplesSelectionTest/>
     <ImageEditorTest />
@@ -31,6 +33,9 @@ const Body = () => {
 
 ReactDOM.render(<Main />, document.getElementById('root'));
 
-File.fromUrl('bluebells.png').then(file=>{
-  setInputFiles([file])
+Promise.all([
+  'bluebells.png',
+  'PoetsenOne-Regular.otf'
+].map(file=>File.fromUrl(file))).then(files=>{
+  setInputFiles(files)
 })

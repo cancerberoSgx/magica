@@ -5,14 +5,16 @@ import { execute, setFields, setSelectedExample } from '../handlers';
 import { NavBar } from '../probes/NavBar';
 import { AppState, useAppState } from '../state';
 import { CodeEditor } from './codeEditor';
+import { ExampleInformation } from './exampleInformation';
 import { ExampleSelection } from './exampleSelection';
+import { ExecutedCommands } from './executedCommands';
+import { ExecutionResult } from './executionResult';
 import { InputImages } from './inputImages';
 import { OutputImages } from './outputImages';
 
 export const MainLayout = (props) => {
   const [state, setState] = useAppState()
-  const box = { border: '1px solid pink', height: '200px' }
-
+  
   return <>
   <NavBar/>
   <div className="columns">
@@ -25,6 +27,8 @@ export const MainLayout = (props) => {
         <ExampleSelection onChange={e=>{
           setSelectedExample(e.selection)
         }} />
+    <ExampleInformation/>
+
       </div>
   </div>
   <div className="columns">
@@ -39,7 +43,9 @@ export const MainLayout = (props) => {
         } } />
       <button className="button is-primary is-small" onClick={e=>execute()}>Apply</button>
       <h4>Code:</h4>
-      <CodeEditor value={state.selectedExample.script}/>
+      <CodeEditor  />
+      <ExecutedCommands />
+      <ExecutionResult />
     </div>
   </div>
   </>

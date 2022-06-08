@@ -43,7 +43,7 @@ convert photo.tiff photo_info.json
     ],
     script: `
 convert -swirl <%= get('swirl') %> -wave <%= get('wave') %> -scale <%= get('scale') %> -rotate <%= get('rotate') %> \\
-   -background <%= get('background') %> -set delay <%= get('delay') %> challenge.gif foo22.gif
+   -background <%= get('background') %> -set delay <%= get('delay') %> <%= inputFiles[0].name%> foo22.gif
     `.trim()
   },
 

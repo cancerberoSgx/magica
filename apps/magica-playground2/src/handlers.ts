@@ -6,8 +6,10 @@ import { callRun, RunConfig } from "./worker/workerAccess";
 
 export async function setInputFiles(inputFiles: File[]) {
   const [state, setState] = useAppState()
-  const inputFilesDataUrls = await Promise.all(inputFiles.map(f => fileToDataUrl(f)))
-  setState({ ...state, inputFiles, inputFilesDataUrls })
+  // const inputFilesDataUrls = await Promise.all(inputFiles.map(f => fileToDataUrl(f)))
+  setState({ ...state, inputFiles,
+    //  inputFilesDataUrls
+     })
 }
 
 export async function setSelectedExample(selectedExample: Example) {
@@ -25,6 +27,10 @@ export async function setFields(fields: ExampleFields) {
 
 export async function execute() {
   const [state, setState] = useAppState()
+  // let inputFiles = state.inputFiles
+  // if(state.selectedExample.inputFiles?.length) {
+  //   inputFiles.push()
+  // }
   const runConfig: RunConfig = {
     fields: state.fields,
     inputFiles: state.inputFiles,
@@ -32,17 +38,23 @@ export async function execute() {
   }
   console.log('execute', runConfig);
   console.time('run')
-  const r = await callRun(runConfig)
+  const executionResults = await callRun(runConfig)
+  console.log('executionResults', executionResults);
+  
   console.timeEnd('run')
-
-  console.error('empty outputFiles, stdout', r.stdout, ', stderr', r.stderr, ', error', r.error);
 
   discardOutputFiles()
 
   // const outputFiles = [await fileToDataUrl(r.outputFiles[0])];
-  const outputFiles = [URL.createObjectURL(new Blob([r.outputFiles[0].content]))]
+  const outputFiles = [URL.createObjectURL(new Blob([executionResults.outputFiles[0]?.content]))]
 
-  setState({ ...state, outputFiles })
+  setState({ ...state, outputFiles, executionResults })
+}
+
+export function setScript(script: string) {
+  const [state, setState] = useAppState()
+  state.selectedExample.script = script
+  setState({...state})
 }
 
 function discardOutputFiles() {

@@ -13,7 +13,7 @@ export const ExampleSelection = (props: ExampleSelectionProps) => {
   const [state, setState] = useAppState()
 
   return <div>
-    <select defaultValue={examples.name} onChange={e => {
+    <select className="select" defaultValue={examples.name} onChange={e => {
       const selection= state.examples.find(example => example.name === e.target.value)
       props.onChange({selection})
     }}>
@@ -22,6 +22,7 @@ export const ExampleSelection = (props: ExampleSelectionProps) => {
         value={example.name}>{example.name}</option>
       )}
     </select>
+
   </div>
 }
 
@@ -33,3 +34,5 @@ export const ExamplesSelectionTest = (props) => {
     }}/>
   </div>
 }
+
+
