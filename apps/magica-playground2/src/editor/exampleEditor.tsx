@@ -26,8 +26,8 @@ export const ExampleEditor = (props: ExampleEditorProps) => {
 
   return <div>
     {props.example.fields.map(field =>
-      <div>
-        <FieldEditor key={field.id} field={field} onChange={e => {
+      <div key={field.id} >
+        <FieldEditor field={field} onChange={e => {
           const newValues = { ...values, [field.id]: e.newValue }
           setValues(newValues)
           props.onChange({ newValues })

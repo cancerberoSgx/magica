@@ -14,40 +14,40 @@ import { OutputImages } from './outputImages';
 
 export const MainLayout = (props) => {
   const [state, setState] = useAppState()
-  
+
   return <>
-  <NavBar/>
-  <div className="columns">
-    <div className="column is-two-thirds">
+    <NavBar />
+    <div className="columns">
+      <div className="column is-two-thirds">
         <h3>Input Images</h3>
         <InputImages />
-    </div>
-    <div className="column">
+      </div>
+      <div className="column">
         <h3>Effects</h3>
-        <ExampleSelection onChange={e=>{
+        <ExampleSelection onChange={e => {
           setSelectedExample(e.selection)
         }} />
-    <ExampleInformation/>
-
-      </div>
-  </div>
-  <div className="columns">
-    <div className="column is-two-thirds">
-        <h3>Output</h3>
-        <OutputImages/>
-    </div>
-    <div className="column">
-      <ExampleEditor example={state.selectedExample} onChange={e=> {
+        <ExampleInformation />
+        <ExampleEditor example={state.selectedExample} onChange={e => {
           console.log('editor changed', e);
           setFields(e.newValues)
-        } } />
-      <button className="button is-primary is-small" onClick={e=>execute()}>Apply</button>
-      <h4>Code:</h4>
-      <CodeEditor  />
-      <ExecutedCommands />
-      <ExecutionResult />
+        }} />
+        <button className="button is-primary is-small" onClick={e => execute()}>Apply</button>
+      </div>
     </div>
-  </div>
+    <div className="columns">
+      <div className="column is-two-thirds">
+        <h3>Output</h3>
+        <OutputImages />
+      </div>
+      <div className="column">
+
+        <h4>Code:</h4>
+        <CodeEditor />
+        <ExecutedCommands />
+        <ExecutionResult />
+      </div>
+    </div>
   </>
 }
 

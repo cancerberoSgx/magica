@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "bulma": "^0.9.4",
+    "file-saver": "^2.0.5",
     "magica": "file:../..",
     "magica-examples": "file:../magica-examples",
     "misc-utils-of-mine-generic": "^0.2.42",

@@ -185,8 +185,13 @@ export class File implements IFile {
    * This method is much faster than toDataUrl/asDataUrl but user must take care of calling URL.revokeObjectURL to free memory if discarding files.
     */
    public asObjectUrl() {
-    const blob = new Blob([this.content])
+    const blob = this.asBlob()
     return URL.createObjectURL(blob)
+  }
+
+  /** returns this file as HTML blob */
+  public asBlob() {
+    return new Blob([this.content]) // TODO: cache blob?
   }
 
   /**
