@@ -15,15 +15,6 @@
   },
   "author": "Sebastián Gurin",
   "license": "MIT",
-  "devDependencies": {
-    "@babel/preset-env": "7.13.8",
-    "@types/node": "^14.0.27",
-    "@types/react": "^17.0.34",
-    "parcel": "^1.12.3",
-    "sass": "^1.52.1",
-    "ts-node": "^10.1.0",
-    "typescript": "^4.3.5"
-  },
   "dependencies": {
     "bulma": "^0.9.4",
     "file-saver": "^2.0.5",
@@ -32,5 +23,14 @@
     "misc-utils-of-mine-generic": "^0.2.42",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "7.13.8",
+    "@types/node": "^14.0.27",
+    "@types/react": "^17.0.34",
+    "parcel": "^1.12.3",
+    "sass": "^1.52.1",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
   }
 }

@@ -25,14 +25,16 @@ export const FieldEditor = (props: FieldEditorProps) => {
     // </label>
 
     return <div className="field">
-      <label className="label">{props.field.id}</label>
-      
-      <span className="icon-text">
+
+<span className="icon-text">
   <span className="icon">
     <i className="fas fa-home"></i>
   </span>
-  <span>Home</span>
+  <label className="label">{props.field.id}</label>
 </span>
+
+      
+      
 
       <div className="control has-icons-left has-icons-right">
         <input className="input" type="number" value={value} placeholder={value + ''}
