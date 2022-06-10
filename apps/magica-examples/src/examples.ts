@@ -4,13 +4,13 @@ import { Example, ExampleTag } from "./types"
 export const examples: () => Example[] = () => [
 
   {
-    name: 'Hello world',
-    description: 'Simple example that transform built in rose: image',
+    name: 'Rotate & Translate',
+    description: 'Simple example of rotate and translate transformations',
     tags: [ExampleTag.simple],
     inputFiles: ['bluebells.png'],
     fields: [
-      { id: 'angle', value: '23', type: 'float' },
-      { id: 'scale', value: '123%' },
+      { id: 'angle', value: '23', type: 'float', description: 'Angle in degrees to rotate' },
+      { id: 'scale', value: '123%', description: 'Scale percentage, less than 100% will decrease and more than 100% will increase image size' },
     ],
     script: `
       convert <%= inputFiles[0].name %> -rotate <%= get('angle') %> -scale <%= get('scale') %> foo.gif
@@ -57,7 +57,7 @@ convert -swirl <%= get('swirl') %> -wave <%= get('wave') %> -scale <%= get('scal
       ...fieldsShadow
     ],
     script: `
-convert -font PoetsenOne-Regular.otf -background none \\
+convert -background none \\
   ${fieldsTextCommand} \\
   -trim ( +clone ${fieldsShadowCommand} ) +swap \\
   -background none -layers merge +repage shadow_a.png
@@ -98,11 +98,11 @@ convert  aux.png -write mpr:img +delete \\
     ],
     script: `
   convert -size 400x400 -gravity center -background none \\
-    -font PoetsenOne-Regular.otf  ${fieldsTextCommand}   \\
+    ${fieldsTextCommand}   \\
     -alpha Extract -blur 0x1 -shade 121x12 -fuzz 0% -fill none -draw 'color 1,1 floodfill' shade_heart.png
   
   convert -size 400x400 -gravity center -background none \\
-    -font PoetsenOne-Regular.otf  ${fieldsTextCommand}   \\
+    ${fieldsTextCommand}   \\
     -alpha Extract -blur 0x1 -shade 11x112 -fuzz 0% -fill none -draw 'color 1,1 floodfill' shade_heart2.png
    
 `.trim()
@@ -132,7 +132,7 @@ convert <%= inputFiles[0].name%> -modulate <%= get('brightness') %>,<%= get('sat
       ...fieldsText
     ],
     script: `
-    convert -font PoetsenOne-Regular.otf ${fieldsTextCommand} TEXT:lowlevelTestScript.js LICENSE.jpg
+    convert ${fieldsTextCommand} TEXT:lowlevelTestScript.js LICENSE.jpg
 `.trim()
   },
 
@@ -163,18 +163,17 @@ convert differenceRemoveBackground.miff  \\
   },
 
   {
-    name: 'Poligonize photo artistic',
+    name: 'Poligonize photo artistic', // seba
     description: `With some parameters a WIP effect that kind of poligonize an image. The size the initial image before polar distorting, basically sets the number of rays that will be produced`,
     inputFiles: ['bluebells.png'],
     tags: [ExampleTag.artistic, ExampleTag.color],
     fields: [
-      { id: 'speed', value: '2' },
-      { id: 'intensity', value: '9' },
-      { id: 'width', value: '14' },
-      { id: 'height', value: '21' },
+      { id: 'speed', value: '2', type: 'integer' },
+      { id: 'intensity', value: '9', type: 'integer' },
+      { id: 'width', value: '14', type: 'integer' },
+      { id: 'height', value: '21', type: 'integer' },
     ],
     script: `
-convert <%=inputFiles[0].name %> original.png
 convert <%=inputFiles[0].name %> \\
   -resize <%= 100/get('speed') %>% -blur 0x1 -colorspace YIQ -monitor \\
   -mean-shift <%= get('width') %>x<%= get('height') %>+<%= get('intensity') %>% +monitor \\
@@ -258,7 +257,7 @@ convert -size 150x150 xc: +noise random \\
 
 
   {
-    name: 'glitter_tiles tile',
+    name: 'glitter_tiles tile', // seba
     description: `<a href="https://www.imagemagick.org/Usage/anim_mods/#glitter_tiles">See ImageMagick examples page anim_mods/#glitter_tiles</a>`,
     tags: [ExampleTag.animation, ExampleTag.artistic],
     fields: [
@@ -556,7 +555,7 @@ convert <%= inputFiles.map(f=>f.name) %> histogram:histogram.gif
   },
 
   {
-    name: 'Film Strip Animation',
+    name: 'Film Strip Animation', // seba
     description: `Drawing, distorting and composing to archive a nice "film strip" like animation`,
     tags: [ExampleTag.animation, ExampleTag.distort],
     inputFiles: ['bluebells.png'],
@@ -595,7 +594,7 @@ convert sparse_source.gif  ( +clone -resize 50% )  ( +clone -resize 50% )  ( +cl
   },
 
   {
-    name: 'Hourglass Distortion Map',
+    name: 'Hourglass Distortion Map', // seba TODO fields
     description: `<a href="https://imagemagick.org/Usage/mapping/#hourglass">See ImageMagick examples page mapping/#hourglass</a>`,
     tags: [ExampleTag.distort],
     // TODO: fields

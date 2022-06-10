@@ -1,13 +1,14 @@
 import * as React from 'react';
+import { Status } from './status';
 
 
 export const NavBar = props => <nav className="navbar" role="navigation" aria-label="main navigation">
   <div className="navbar-brand">
-    <h1>
-      <a className="navbar-item" href="https://github.com/cancerberoSgx/magica">
-        Magica playground 2
-      </a>
-    </h1>
+    {/* <h1> */}
+    <a style={{ fontSize: '0.9em', backgroundColor: 'black', color: 'white', lineHeight: '0.7em' }} className="navbar-item" href="https://github.com/cancerberoSgx/magica">
+      Magica <br />playground 2
+    </a>
+    {/* </h1> */}
 
     <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample"
       onClick={e => {
@@ -19,6 +20,7 @@ export const NavBar = props => <nav className="navbar" role="navigation" aria-la
     </a>
   </div>
 
+
   <div id="navbarBasicExample" className="navbar-menu">
     <div className="navbar-start">
       <a className="navbar-item">
@@ -29,7 +31,7 @@ export const NavBar = props => <nav className="navbar" role="navigation" aria-la
         Documentation
       </a>
 
-      <div className="navbar-item has-dropdown is-hoverable">
+      {/* <div className="navbar-item has-dropdown is-hoverable">
         <a className="navbar-link"
           onClick={e => {
             document.getElementById('navBarMore').classList.toggle('is-active');
@@ -52,7 +54,7 @@ export const NavBar = props => <nav className="navbar" role="navigation" aria-la
             Report an issue
           </a>
         </div>
-      </div>
+      </div> */}
     </div>
 
     {/* <div className="navbar-end">
@@ -68,4 +70,9 @@ export const NavBar = props => <nav className="navbar" role="navigation" aria-la
       </div>
     </div> */}
   </div>
+
+  <div className="navbar-start">
+    <Status className="navbar-item" />
+  </div>
+
 </nav>;

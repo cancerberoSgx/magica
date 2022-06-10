@@ -14,7 +14,10 @@ export async function callRun(o: RunConfig): Promise<RunResult | undefined> {
   return await deferred
 }
 
+//@ts-ignore
+// let worker = new Worker(new URL('./worker.ts'))
 let worker = new Worker('./worker.ts')
+
 
 worker.onmessage = async e => {
   const i = pending.findIndex(p => p.magicaId === e.data.magicaId)

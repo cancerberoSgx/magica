@@ -20,3 +20,10 @@ export function getExampleFields(e: Example): ExampleFields {
   })
   return fields
 }
+
+export function capitalize(s: string) {
+  if(!s){
+    return ''
+  }
+  return s.substring(0, 1).toUpperCase() + s.substring(1, s.length  )
+}

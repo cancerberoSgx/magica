@@ -2,7 +2,7 @@ import { examples } from 'magica-examples';
 import * as React from 'react';
 import { ExampleEditor } from '../editor/exampleEditor';
 import { execute, setFields, setSelectedExample } from '../handlers';
-import { NavBar } from '../probes/NavBar';
+import { NavBar } from './navBar';
 import { AppState, useAppState } from '../state';
 import { CodeEditor } from './codeEditor';
 import { ExampleInformation } from './exampleInformation';
@@ -27,7 +27,9 @@ export const MainLayout = (props) => {
         <ExampleSelection onChange={e => {
           setSelectedExample(e.selection)
         }} />
-        <ExampleInformation />
+        {/* <ExampleInformation /> */}
+        <hr/>
+        {/* <h6>Fields</h6> */}
         <ExampleEditor example={state.selectedExample} onChange={e => {
           console.log('editor changed', e);
           setFields(e.newValues)

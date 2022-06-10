@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Example, ExampleFields, examples } from 'magica-examples'
 import { FieldEditor } from './fieldEditor';
+import { getExamples } from '../examples/examples';
 
 interface ExampleEditorProps {
   example: Example
@@ -38,7 +39,7 @@ export const ExampleEditor = (props: ExampleEditorProps) => {
 }
 
 export const ExampleEditorTest = (props) => {
-  const example = examples().find(e => e.name === 'Orton effect')
+  const example = getExamples().find(e => e.name === 'Orton effect')
   return <div>
     Example editor
     <ExampleEditor example={example} onChange={e => {

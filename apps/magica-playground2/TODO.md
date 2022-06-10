@@ -8,7 +8,9 @@ TODO:
  * command timing ui
 
  * worker status ui
-
+ * when example is selected load its suggested inputFiles and leave them at pos 0 so the example works ok.
+ * the color editor should allow to pick a color by selecting in the image
+ * the point editor should allow to pick the coords by selecting in the image
 
 DONE: 
  * ExampleInformation: description & tags

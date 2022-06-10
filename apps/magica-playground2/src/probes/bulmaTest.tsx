@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { DropDown } from './DropDown'
-import { NavBar } from './NavBar'
+import { NavBar } from '../ui/navBar'
 
 export const BulmaTest = props => {
 

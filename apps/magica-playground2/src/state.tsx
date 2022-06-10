@@ -2,6 +2,7 @@
 
 import {File, RunResult} from 'magica'
 import { Example, examples, ExampleFields } from 'magica-examples'
+import { getExamples } from './examples/examples'
 import { getExampleFields } from './util'
 
 export interface AppState {
@@ -17,17 +18,17 @@ export interface AppState {
 }
 
 interface ExecutionState {
-  status: 'loading'|'idle'
+  status: 'working'|'idle'
   time: number
 }
 
-const defaultExample = examples()[0]
+const defaultExample = getExamples()[0]
 
 export const initialState: AppState = {
   inputFiles: [],
   // inputFilesDataUrls: [],
   outputFiles: [],
-  examples: examples(),
+  examples: getExamples(),
   selectedExample: defaultExample,
   fields: getExampleFields(defaultExample),
   execution: {

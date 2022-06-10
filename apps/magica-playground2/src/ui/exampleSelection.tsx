@@ -2,6 +2,8 @@ import { Example, examples } from 'magica-examples';
 import * as React from 'react';
 import { setSelectedExample } from '../handlers';
 import { useAppState } from '../state';
+import { ExampleInformation } from './exampleInformation';
+import { Tip } from './tip';
 
 interface ExampleSelectionEvent {
   selection: Example
@@ -12,8 +14,8 @@ interface ExampleSelectionProps {
 export const ExampleSelection = (props: ExampleSelectionProps) => {
   const [state, setState] = useAppState()
 
-  return <div>
-    <select className="select" defaultValue={examples.name} onChange={e => {
+  return <div className="field has-addons">
+    <select className="select" defaultValue={state.selectedExample.name} onChange={e => {
       const selection= state.examples.find(example => example.name === e.target.value)
       props.onChange({selection})
     }}>
@@ -23,6 +25,11 @@ export const ExampleSelection = (props: ExampleSelectionProps) => {
       )}
     </select>
 
+    <div className="control">
+        <Tip className="is-right">
+          <ExampleInformation/>
+          </Tip>
+      </div>
   </div>
 }
 

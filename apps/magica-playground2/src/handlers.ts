@@ -38,6 +38,8 @@ export async function execute() {
   }
   console.log('execute', runConfig);
   console.time('run')
+  const t0 = Date.now()
+  setState({ ...state, execution: {...state.execution, status: 'working'} })
   const executionResults = await callRun(runConfig)
   console.log('executionResults', executionResults);
   
@@ -48,7 +50,7 @@ export async function execute() {
   // const outputFiles = [await fileToDataUrl(r.outputFiles[0])];
   const outputFiles = [URL.createObjectURL(new Blob([executionResults.outputFiles[0]?.content]))]
 
-  setState({ ...state, outputFiles, executionResults })
+  setState({ ...state, outputFiles, executionResults, execution: {...state.execution, time: Date.now()-t0, status: 'idle'} })
 }
 
 export function setScript(script: string) {

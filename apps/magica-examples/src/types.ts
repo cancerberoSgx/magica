@@ -10,7 +10,7 @@ export interface Example {
 export interface ExampleField {
   id: string;
   value: string | number;
-  type?: 'string' | 'integer' | 'float';
+  type?: 'string' | 'integer' | 'float' | 'color' | 'point' |'font';
   description?: string
 }
 
