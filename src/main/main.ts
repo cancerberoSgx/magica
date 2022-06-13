@@ -69,6 +69,7 @@ export function mainSync(options: MainSyncOptions): Result {
     returnValue = {
       stderr: [],
       stdout: [],
+      // @ts-ignore
       error,
       returnValue: undefined
     }

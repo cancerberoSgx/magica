@@ -1,9 +1,9 @@
+import { ExampleField } from 'magica-examples';
 import * as React from 'react';
 import { useState } from 'react';
-import { ExampleField, examples } from 'magica-examples'
-import { capitalize } from '../util';
-import { Tip } from '../ui/tip';
 import { playgroundExamples } from '../examples/examples';
+import { Tip } from '../ui/tip';
+import { capitalize } from '../util';
 
 interface FieldEditorProps {
   field: ExampleField
@@ -20,7 +20,7 @@ export const FieldEditor = (props: FieldEditorProps) => {
   if (['integer', 'float'].includes(props.field.type)) {
     return <div className="field has-addons">
       <label className="label">{capitalize(props.field.id)}</label>
-       :&nbsp;
+      :&nbsp;
       <div className="control">
         <input className="input is-small" type="number" value={value} placeholder={value + ''}
           onChange={e => {
@@ -30,33 +30,50 @@ export const FieldEditor = (props: FieldEditorProps) => {
           }} />
       </div>
       <div className="control">
-      <Tip className="is-right">Hello world</Tip>
+        {props.field.description && <Tip className="is-right">{props.field.description}</Tip>}
       </div>
     </div>
-
-  } else {
+  }
+  else if (['select'].includes(props.field.type)) {
     return <div className="field has-addons">
       <label className="label">{capitalize(props.field.id)}</label>
-       :&nbsp;
+      :&nbsp;
       <div className="control">
-        <input className="input is-small" type="text" value={value} placeholder={value + ''}
-         onChange={e => {
-          setValue(e.target.value)
-          props.onChange({ newValue: e.target.value })
-        }} />
+        <div className="select is-small">
+          <select onChange={e=>{
+            const newValue = e.target.value
+            console.log(newValue)
+            setValue(newValue)
+            props.onChange({ newValue })
+          }}>
+            {(props.field.options || []).map(option =>
+              <option value={option} selected={option===value}>{option}</option>)
+            }
+          </select>
+        </div>
       </div>
       <div className="control">
-        <Tip className="is-right">Hello world</Tip>
+        {props.field.description && <Tip className="is-right">{props.field.description}</Tip>}
+      </div>
+    </div>
+  }
+
+  else {
+    return <div className="field has-addons">
+      <label className="label">{capitalize(props.field.id)}</label>
+      :&nbsp;
+      <div className="control">
+        <input className="input is-small" type="text" value={value} placeholder={value + ''}
+          onChange={e => {
+            setValue(e.target.value)
+            props.onChange({ newValue: e.target.value })
+          }} />
+      </div>
+      <div className="control">
+        {props.field.description && <Tip className="is-right">{props.field.description}</Tip>}
       </div>
     </div>
 
-    // return <label>
-    //   {props.field.id}
-    //   <input type="text" value={value} onChange={e => {
-    //     setValue(e.target.value)
-    //     props.onChange({ newValue: e.target.value })
-    //   }} />
-    // </label>
   }
 }
 

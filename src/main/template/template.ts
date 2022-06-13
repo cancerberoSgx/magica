@@ -4,8 +4,21 @@ import { arrayToCliOne, processCommand } from '../command'
 import { LSHelper } from './fsHelper'
 import { HeightHelper, ImageInfoHelper, SizeHelper, WidthHelper } from './imageHelper'
 
+/**
+ * template definition.
+ * 
+ * Supports two different template evaluation moments:
+ * 
+ *  * compile time: which are evaluated at compile time, for example, `await size({file: inputFiles[0]})`
+ *  * run time: when the template call depends on run time variables, like: `await size({file: tmpFile1})`
+ * 
+ * Signatures totally defined between template and caller. It means that for ex if template returns a promise is responsibility of the caller to await for it.
+ */
 export interface TemplateHelper<O = any, R = any, RO = any, RR = any, CRO extends RunOptions = RunOptions> {
   name: string
+  /**
+   * @returns the output template expression calling this helper
+   */
   fnCompileTime: (this: TemplateHelper & { options: CRO }, options: O) => R
   fnRunTime?: (options: RO) => RR
 }

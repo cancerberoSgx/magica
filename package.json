@@ -8,11 +8,11 @@
     "magica": "bin/magica.js"
   },
   "scripts": {
-    "test": "npm run build && npx ava --serial --concurrency 1 --config ava.config.js && npm run test-browser",
-    "test-js": "npm run build && npx ava --serial --concurrency 1 --config ava.config-js.js",
-    "test-watch": "ava -w",
+    "test": "npm run build && npx ava --verbose --serial --concurrency 1 --config ava.config.js && npm run test-browser",
+    "test-js": "npm run build && npx ava --verbose --serial --concurrency 1 --config ava.config-js.js",
+    "test-watch": "ava --verbose  -w",
     "test-debug": "node --inspect-brk node_modules/ava/cli.js --serial",
-    "test-browser": " npx ava --serial --concurrency 1 test-browser/*Test.ts",
+    "test-browser": " npx ava --verbose --serial --concurrency 1 test-browser/*Test.ts",
     "build-node-magick": "cat src/imageMagick/magickPrefix.js > src/imageMagick/compiled/nodeMagick.js && echo '' >> src/imageMagick/compiled/nodeMagick.js && cat src/imageMagick/compiled/magick.js >> src/imageMagick/compiled/nodeMagick.js",
     "coverage": "npx nyc --nycrc-path nyc.config.js npm test",
     "prepare": "npm run build",

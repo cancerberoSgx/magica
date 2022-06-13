@@ -25,6 +25,6 @@ export function Image(props: Props) {
       e.preventDefault()
       FileSaver.saveAs(props.file.asBlob(), props.file.name)      
     }}>{props.file.name}</a></div>
-    <img src={props.file.asObjectUrl()} />
+    <img style={{maxWidth: '30%'}} src={props.file.asObjectUrl()} />
     </div>
 }

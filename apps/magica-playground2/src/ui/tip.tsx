@@ -1,7 +1,4 @@
 import * as React from 'react';
-import { useAppState } from '../state';
-import { File } from 'magica'
-import * as FileSaver from 'file-saver'
 
 interface Props {
   // text: string
@@ -12,20 +9,23 @@ interface Props {
 
 /** TODO: an image component with options for: save-as, replace, rename, and collection options as: delete, duplicate */
 export function Tip(props: Props) {
+  const [visible, setVisible] = React.useState(false)
   return (
-    <div className="dropdown is-right is-down">
+    <div className={`dropdown is-right is-down ${visible ? 'is-active' : ''}`}>
 
       <span className={`icon dropdown-trigger ${props.className || ''}`} style={{ cursor: 'pointer' }}
         onClick={e => {
-          e.currentTarget.parentElement.classList.toggle('is-active')
+          // e.currentTarget.parentElement.classList.toggle('is-active')
+          setVisible(!visible)
         }}>
         <i className={`fas ${props.icon || 'fa-question-circle'}`}></i>
       </span>
 
       <div className="dropdown-menu" role="menu">
         <div className="dropdown-content">
-          <div className="dropdown-item">
+          <div className="dropdown-item" onClick={()=>setVisible(false)}>
             {props.children}
+            {/* <button onClick={()=>setVisible(false)}>Close</button> */}
           </div>
         </div>
       </div>

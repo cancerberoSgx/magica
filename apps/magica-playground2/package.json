@@ -10,10 +10,7 @@
     "build-ts": "tsc",
     "build": "npm run clean && npm run build-ts",
     "start": "npm run copy; parcel src/index.html",
-    "copy": "mkdir dist; cp -r node_modules/magica/src/imageMagick/compiled/magick.wasm src/assets/* dist",
-    "format": "npx ts-refactor format \"src/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
-    "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\" \"test-browser/**/*.ts*\"  ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
-    "lint": "npm run organizeImports && npm run format"
+    "copy": "mkdir dist; cp -r node_modules/magica/src/imageMagick/compiled/magick.wasm src/assets/* dist"
   },
   "author": "Sebastián Gurin",
   "license": "MIT",
@@ -33,7 +30,6 @@
     "parcel": "^1.12.3",
     "sass": "^1.52.3",
     "ts-node": "^10.8.1",
-    "ts-refactor": "0.0.11",
     "typescript": "^4.7.3"
   }
 }

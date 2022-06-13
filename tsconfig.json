@@ -10,7 +10,8 @@
     "outDir": "./dist", 
     "declaration": true,
     "rootDir": ".",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noImplicitAny": false
   },
   "include": [
     "src", "test", "test-browser"

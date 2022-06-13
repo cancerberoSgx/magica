@@ -82,6 +82,7 @@ export function cliToArray(cliCommand: string): string[][] {
     const line = lines[i]
     if (line[line.length - 1] !== '\\') {
       currentCommand = currentCommand.concat(line)
+      //@ts-ignore
       result.push(currentCommand)
       currentCommand = []
     }

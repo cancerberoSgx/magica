@@ -4,6 +4,8 @@
 import { fieldsShadowCommand } from "magica-examples";
 import { fieldsTextCommand } from "magica-examples";
 import { ExampleTag, Example, fieldsText, fieldsShadow } from "magica-examples";
+import { enumKeys } from "misc-utils-of-mine-generic";
+import {imList} from 'magica'
 
 export const playgroundExamples: Example[] = [
 
@@ -57,6 +59,63 @@ convert -font PoetsenOne-Regular.otf -background none \\
   -background none -layers merge +repage shadow_a.png
 `.trim()
   },
+
+
+
+  {
+    name: 'Color quantization',
+    description: `Reduce the total number of colors. https://legacy.imagemagick.org/Usage/quantize/#handling`,
+    tags: [ExampleTag.color],
+    inputFiles: ['bluebells.png'],
+    //TODO: add -posterize levels https://legacy.imagemagick.org/script/command-line-options.php#posterize
+    fields: [
+      { id: 'colors', value: 16, type: 'integer', description: 'the number of colors' },
+      { id: 'quantize', value: 'none', type: 'select', options: ['none', ...enumKeys(imList.Colorspace)], description: 'defines the colorspace used to sort out and reduce the number of colors' },
+      // TODO: for dither use -define last paragraph https://legacy.imagemagick.org/script/command-line-options.php#dither
+      { id: 'dither', value: 'none', type: 'select', options: [...enumKeys(imList.Dither)], description: 'Apply a Riemersma or Floyd-Steinberg error diffusion dither to images when general color reduction' },
+    ],
+    script: ` 
+    <% 
+let quantize = get('quantize') != 'none' ? '-quantize '+ get('quantize') : ''
+let dither = get('dither') != 'none' ? '-dither '+ get('dither') : '+dither'
+%>
+!js: c=>c.log('<%= quantize %>')
+convert <%= inputFiles[0].name %> <%= quantize %> <%= dither %> -colors  <%= get('colors') %> \
+  tmp_tile_out.png
+  `.trim(),
+  },
+  
+
+  /*
+  color quantization tool https://legacy.imagemagick.org/Usage/quantize/#handling
+
+  -quantize RGB CMY sRGB GRAY \
+              XYZ LAB LUV  \
+              HSL HSB HWB  \
+              YIQ YUV OHTA ; do \
+     convert colorwheel.png   -quantize $S 
+
+     you can do that by using the special "-quantize" color space setting of 'transparent'.
+
+
+     convert -list dither
+None
+FloydSteinberg
+Riemersma
+
+-colors  integer
+
+
+ -colors 2 
+ 
+ -colorspace gray
+ convert -list colorspace, 
+ CIELab CMY CMYK Gray HCL HCLp HSB HSI HSL HSV HWB Lab LCH LCHab LCHuv LinearGray LMS Log Luv OHTA Rec601YCbCr Rec709YCbCr RGB scRGB sRGB Transparent xyY XYZ YCbCr YDbDr YCC YIQ YPbPr YUV
+
+  */
+
+
+ 
   
 //   {
 //     name: 'Animated gif transformation',
