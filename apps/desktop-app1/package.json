@@ -34,7 +34,7 @@
     "yackage": "^0.2.11"
   },
   "dependencies": {
-    "file-type": "^12.3.0",
+    "file-type": "^16.5.4",
     "gui": "github:cancerberoSgx/node-gui",
     "magica": "^0.2.17",
     "misc-utils-of-mine-generic": "^0.2.34",
