@@ -36,7 +36,7 @@ Easy to setup and use, ImageMagick Node.js and Browser API and Command Line Inte
 ## Playground & demos
 
  * [Magica Playground](https://cancerberosgx.github.io/demos/magica/playground/) (WIP) - Playground with LOTS of ImageMagick script examples to experiment with, edit and share by url.
- * [Magica Canvas](https://cancerberosgx.github.io/demos/magica/canvas/) (WIP) - Renders transformations in canvas as fast as possible to show that for images width<1000px it's instantaneous. See transformations happen on mouse move, and on streaming video. [https://cancerberosgx.github.io/demos/magica/images/magica-canvas-demo.mp4](Demo video)
+ * [Magica Canvas](https://cancerberosgx.github.io/demos/magica/canvas/) (WIP) - Renders transformations in canvas as fast as possible to show that for images width<1000px it's instantaneous. See transformations happen on mouse move, and on streaming video. ([Demo video](https://cancerberosgx.github.io/demos/magica/images/magica-canvas-demo.mp4))
  * [Desktop sample application](https://github.com/cancerberoSgx/magica/tree/master/apps/desktop-app1) . Use https://libyue.com for cross platform native GUI.
  
 ## Summary
