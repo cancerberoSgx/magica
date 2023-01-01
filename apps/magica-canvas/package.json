@@ -30,7 +30,7 @@
     "@types/react-dom": "^16.8.5",
     "babel-polyfill": "^6.26.0",
     "http-server": "^0.11.1",
-    "parcel": "^1.12.3",
+    "parcel": "^2.8.2",
     "sass": "^1.22.9",
     "ts-refactor": "0.0.9",
     "typescript": "^3.5.3"
