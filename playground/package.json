@@ -27,7 +27,7 @@
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.5",
     "babel-polyfill": "^6.26.0",
-    "http-server": "^0.11.1",
+    "http-server": "^14.1.1",
     "parcel": "^1.12.3",
     "ts-refactor": "0.0.9",
     "typescript": "^3.5.3"
